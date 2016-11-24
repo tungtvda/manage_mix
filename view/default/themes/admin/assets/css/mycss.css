@@ -1,0 +1,43 @@
+
+.btn-white.btn-create {
+    background: #4DAB58 !important;
+    color: #ffffff !important;
+    border-radius: 2px;
+}
+.btn.btn-hover-white:hover, .btn.btn-hover-white:focus{
+    background: green !important;
+    color: #ffffff !important;
+    border-radius: 2px;
+}
+
+.btn-white.btn-create-new-tab{
+    background: #3f96d4!important;
+    color: #ffffff !important;
+    border-radius: 2px;
+}
+.btn.btn-create-new-tab:hover, .btn.btn-create-new-tab:focus{
+    background: #1d6fa6!important;
+    color: #ffffff !important;
+    border-radius: 2px;
+}
+
+.btn-white.btn-refresh{
+    background: #9585bf!important;
+    color: #ffffff !important;
+    border-radius: 2px;
+}
+.btn.btn-refresh:hover, .btn-refresh:focus{
+    background: #7461aa!important;
+    color: #ffffff !important;
+    border-radius: 2px;
+}
+.even{
+    background: rgba(95, 44, 70, 0.1);;
+}
+.table-hover>tbody>tr:hover
+{
+    background-color: #dff0d8;
+}
+.btn-action-gird{
+    padding: 6px 6px;
+}

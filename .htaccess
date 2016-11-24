@@ -1,0 +1,11 @@
+#php_value upload_max_filesize 40M
+#php_value post_max_size 42M
+#Options +FollowSymLinks
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^.kzone.vn
+ErrorDocument 404 /404.php
+RewriteRule ^(.*)$ http://radio.kzone.vn/$1 [R=permanent,L]
+RewriteRule ^admin controller/admin/index.php
+RewriteRule ^login controller/admin/login.php
+
+

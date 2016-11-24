@@ -1,0 +1,54 @@
+#php_value upload_max_filesize 40M
+#php_value post_max_size 42M
+#Options +FollowSymLinks
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^.kzone.vn
+ErrorDocument 404 /404.php
+RewriteRule ^(.*)$ http://radio.kzone.vn/$1 [R=permanent,L]
+RewriteRule ^admin controller/admin/index.php
+RewriteRule ^login controller/admin/login.php
+
+RewriteRule ^combo/$ controller/default/danhmucthucdon.php
+RewriteRule ^combo/orderby-([a-zA-Z0-9_-]+)$ controller/default/danhmucthucdon.php?orderby=$1
+RewriteRule ^combo/orderby-([a-zA-Z0-9_-]+)/page-([0-9]+)$ controller/default/danhmucthucdon.php?orderby=$1&page=$2
+RewriteRule ^alacarte/$ controller/default/danhmucthucdon.php
+RewriteRule ^alacarte/orderby-([a-zA-Z0-9_-]+)$ controller/default/danhmucthucdon.php?orderby=$1
+RewriteRule ^alacarte/orderby-([a-zA-Z0-9_-]+)/page-([0-9]+)$ controller/default/danhmucthucdon.php?orderby=$1&page=$2
+RewriteRule ^set-menu/$ controller/default/danhmucthucdon.php
+RewriteRule ^set-menu/orderby-([a-zA-Z0-9_-]+)$ controller/default/danhmucthucdon.php?orderby=$1
+RewriteRule ^set-menu/orderby-([a-zA-Z0-9_-]+)/page-([0-9]+)$ controller/default/danhmucthucdon.php?orderby=$1&page=$2
+RewriteRule ^drink/$ controller/default/danhmucthucdon.php
+RewriteRule ^drink/orderby-([a-zA-Z0-9_-]+)$ controller/default/danhmucthucdon.php?orderby=$1
+RewriteRule ^drink/orderby-([a-zA-Z0-9_-]+)/page-([0-9]+)$ controller/default/danhmucthucdon.php?orderby=$1&page=$2
+RewriteRule ^thuc-don/$ controller/default/danhmucthucdon.php
+RewriteRule ^thuc-don/orderby-([a-zA-Z0-9_-]+)$ controller/default/danhmucthucdon.php?orderby=$1
+RewriteRule ^thuc-don/orderby-([a-zA-Z0-9_-]+)/page-([0-9]+)$ controller/default/danhmucthucdon.php?orderby=$1&page=$2
+
+RewriteRule ^thuc-don/([a-zA-Z0-9_-]+)/$ controller/default/danhmucthucdon.php?Id=$1
+RewriteRule ^thuc-don/([a-zA-Z0-9_-]+)/orderby-([a-zA-Z0-9_-]+)$ controller/default/danhmucthucdon.php?Id=$1&orderby=$2
+RewriteRule ^thuc-don/([a-zA-Z0-9_-]+)/orderby-([a-zA-Z0-9_-]+)/page-([0-9]+)$ controller/default/danhmucthucdon.php?Id=$1&orderby=$2&page=$3
+
+RewriteRule ^(.*).html$ controller/default/chitietsanpham.php?Id=$1
+RewriteRule ^like/([0-9]+)/$ controller/default/ajaxlike.php?Id=$1
+RewriteRule ^cart/([0-9]+)/$ controller/default/ajaxcart.php?Id=$1
+
+RewriteRule ^cam-nang/$ controller/default/danhmuccamnang.php
+RewriteRule ^cam-nang/page-([0-9]+)$ controller/default/danhmuccamnang.php?page=$1
+RewriteRule ^cam-nang/([a-zA-Z0-9_-]+)/$ controller/default/danhmuccamnang.php?Id=$1
+RewriteRule ^cam-nang/([a-zA-Z0-9_-]+)/page-([0-9]+)$ controller/default/danhmuccamnang.php?Id=$1&page=$2
+RewriteRule ^cam-nang/(.*).html$ controller/default/chitietsanpham.php?Id=$1
+
+RewriteRule ^gioi-thieu/$ controller/default/gioithieu.php
+
+RewriteRule ^tuyen-dung/$ controller/default/tuyendung.php
+RewriteRule ^tuyen-dung/page-([0-9]+)$ controller/default/tuyendung.php?page=$1
+RewriteRule ^tuyen-dung/(.*).html$ controller/default/chitietsanpham.php?Id=$1
+
+RewriteRule ^lien-he/$ controller/default/lienhe.php
+RewriteRule ^tim-kiem/orderby-([a-zA-Z0-9_-]+)/giatri-(.*)$ controller/default/timkiem.php?orderby=$1&giatri=$2
+
+RewriteRule ^gio-hang/$ controller/default/giohang.php
+RewriteRule ^checkout/$ controller/default/checkout.php
+RewriteRule ^xoa-gio-hang/([0-9]+)$ controller/default/delete_giohang.php?Id=$1
+
+

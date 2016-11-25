@@ -10,6 +10,18 @@ if(!defined('SITE_NAME'))
     require_once '../../config.php';
 }
 require_once DIR.'/controller/default/public.php';
+if(isset($_POST['login'])&&isset($_POST['username_login'])&&isset($_POST['password_login']))
+{
+    $username=_returnPostParamSecurity('username_login');
+    $password=_returnPostParamSecurity('password_login');
+    if($username==''||$password==''){
+        echo '<script>alert("Bạn vui lòng điền đầy đủ thông tin đăng nhập")</script>';
+    }
+    else{
+        echo $username;
+    }
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

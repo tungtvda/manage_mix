@@ -7,10 +7,10 @@
     <ul class="breadcrumb">
         <li>
             <i class="ace-icon fa fa-home home-icon"></i>
-            <a href="{!! url('admin') !!}">Home</a>
+            <a href="<?php echo SITE_NAME?>">Home</a>
         </li>
 
-        {!! $breadcrumbs !!}
+        <?php echo $url_bread?>
     </ul><!-- /.breadcrumb -->
 
     <div class="nav-search" id="nav-search">

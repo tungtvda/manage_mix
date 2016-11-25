@@ -9,5 +9,6 @@ require_once DIR.'/view/default/public.php';
 function view_breadcrumb($data=array())
 {
     $asign=array();
+    $url_bread=$data['breadcrumbs'];
     require_once DIR . '/view/default/template/breadcrumb.php';
 }

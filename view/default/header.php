@@ -8,6 +8,6 @@
 require_once DIR.'/view/default/public.php';
 function view_header($data=array())
 {
-    $asign=array();
+    $title=$data['title'];
     require_once DIR . '/view/default/template/header.php';
 }

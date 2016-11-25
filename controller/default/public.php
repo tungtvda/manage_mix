@@ -22,9 +22,9 @@ foreach ($array_files as $filename) {
         require_once $path;
     }
 }
-function show_header($title,$description,$keyword,$data1=array())
+function show_header($data1=array())
 {
-    $data=array();
+    $data=$data1;
     view_header($data);
 }
 function show_header2($title,$description,$keyword,$data1=array())
@@ -52,7 +52,7 @@ function  show_left($data1=array())
 }
 function  show_breadcrumb($data1=array())
 {
-    $data=array();
+    $data=$data1;
     view_breadcrumb($data);
 }
 function  show_navigation($data1=array())
@@ -123,5 +123,10 @@ function show_footer($data1=array())
 {
     $data=array();
     view_footer($data);
+}
+function show_script_table($data1=array())
+{
+    $data=array();
+    view_script_table($data);
 }
 

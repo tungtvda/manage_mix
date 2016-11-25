@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta charset="utf-8" />
-    <title>Tables - Ace Admin</title>
+    <title><?php echo $title?></title>
 
     <meta name="description" content="Static &amp; Dynamic Tables" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -40,9 +40,29 @@
 
     <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
 
-    <!--[if lte IE 8]>
+
     <script src="<?php echo SITE_NAME?>/view/default/themes/admin/assets/js/html5shiv.min.js"></script>
     <script src="<?php echo SITE_NAME?>/view/default/themes/admin/assets/js/respond.min.js"></script>
-    <![endif]-->
+    <script type="text/javascript">
+        var sitename='<?php echo SITE_NAME?>';
+    </script>
+    <script type="text/javascript" src="<?php echo SITE_NAME?>/view/default/themes/admin/assets/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript">
+        function openKcEditor(output) {
+            var T_Tungtv = document.getElementsByName(output);
+            var Tungtv = T_Tungtv[0];
+            window.KCFinder = {
+                callBack: function (url) {
+                    window.KCFinder = null;
+                    Tungtv.value = url;
+                }
+            };
+            window.open('<?php echo SITE_NAME?>/view/default/themes/admin/assets/kcfinder/browse.php?type=images&dir=images/public',
+                'kcfinder_image', 'status=0, toolbar=0, location=0, menubar=0, ' +
+            'directories=0, resizable=1, scrollbars=0, width=800, height=600'
+        );
+        }
+        ;
+    </script>
 </head>
 

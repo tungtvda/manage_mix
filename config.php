@@ -12,8 +12,10 @@ define('DB_PASSWORD','');
 define('DB_NAME','manage_mix');
 define('CACHE',false);
 define('DATETIME_FORMAT',"y-m-d H:i:s");
+define('DATETIME_FORMAT_VN',"d-m-y H:i:s");
 define('PRIVATE_KEY','hoidinhnvbk');
 session_start();
 require_once DIR.'/common/minifi.output.php';
 ob_start("minify_output");
-
+require_once DIR . '/common/redict.php';
+require_once DIR.'/function/function.php';

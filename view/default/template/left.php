@@ -25,10 +25,9 @@
         </button>
 
         <div class="navbar-header pull-left">
-            <a href="index.html" class="navbar-brand">
+            <a href="<?php echo SITE_NAME?>" class="navbar-brand">
                 <small>
-                    <i class="fa fa-leaf"></i>
-                    Tungtv Admin
+                    <img style="height: 22px;" src="<?php echo SITE_NAME?>/view/default/themes/images/logo.png">
                 </small>
             </a>
         </div>

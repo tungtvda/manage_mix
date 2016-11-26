@@ -318,7 +318,7 @@
                         <li class="divider"></li>
 
                         <li>
-                            <a href="#">
+                            <a href="<?php echo SITE_NAME?>/dang-xuat.html">
                                 <i class="ace-icon fa fa-power-off"></i>
                                 Logout
                             </a>

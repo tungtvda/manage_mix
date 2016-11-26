@@ -10,6 +10,10 @@ if(!defined('SITE_NAME'))
     require_once '../../config.php';
 }
 require_once DIR.'/controller/default/public.php';
+require_once DIR . '/common/class.phpmailer.php';
+require_once(DIR . "/common/Mail.php");
+require_once DIR.'/model/userService.php';
+require_once(DIR."/common/hash_pass.php");
 if(isset($_POST['login'])&&isset($_POST['username_login'])&&isset($_POST['password_login']))
 {
     $username=_returnPostParamSecurity('username_login');
@@ -18,9 +22,123 @@ if(isset($_POST['login'])&&isset($_POST['username_login'])&&isset($_POST['passwo
         echo '<script>alert("Bạn vui lòng điền đầy đủ thông tin đăng nhập")</script>';
     }
     else{
-        echo $username;
+        $Pass=hash_pass($password);
+        $dk="(user_name='".$username."' or user_email='".$username."') and password='".$Pass."' and status=1";
+        $data_check=user_getByTop('1',$dk,'');
+        if(count($data_check)==0){
+            echo '<script>alert("Đăng nhập thất bại!. Bạn vui lòng kiểm tra lại thông tin đăng nhập")</script>';
+        }
+        else{
+            $id=$data_check[0]->id;
+            $user_role=$data_check[0]->user_role;
+            $login_two_steps=$data_check[0]->login_two_steps;
+            $user_email=$data_check[0]->user_email;
+            $user_role=$data_check[0]->user_role;
+            $user_permison_action=$data_check[0]->permison_action;
+            $user_permison_form=$data_check[0]->permison_form;
+            $user_permison_module=$data_check[0]->permison_module;
+            $user_update=new user();
+            $user_update->id=$id;
+            if($login_two_steps==1){
+                $rand_string=_returnRandString(15);
+                $user_update->code_login=$rand_string;
+                $_SESSION['show_email']=$user_email;
+                $_SESSION['show_id']=$id;
+                user_update_code_login($user_update);
+                $subject = "Mã đăng nhập vào hệ thống MIXTOURIST";
+                $message='';
+                $message .='<div style="float: left; width: 100%">
+                            <p>Mã đăng nhập: <span style="color: #132fff; font-weight: bold"> '.$rand_string.'</span></p>
+                            <p>Bạn hãy nhập mã xác nhận '.$rand_string.' để đăng nhập được vào hệ thống</p>
+                        </div>';
+                SendMail($user_email, $message, $subject);
+                redict(SITE_NAME.'/xac-nhan.html');
+            }
+            else{
+                $data_arr=array(
+                    'user_id'=>$id,
+                    'user_role'=>$user_role,
+                    'user_permison_action'=>$user_permison_action,
+                    'user_permison_form'=>$user_permison_form,
+                    'user_permison_module'=>$user_permison_module
+                );
+                _returnLogin($data_arr,$user_update);
+//
+            }
+        }
     }
 
+}
+if(isset($_POST['dangky_name'])&&isset($_POST['email_dangky'])&&isset($_POST['username_dangky'])&&isset($_POST['password_dangky'])&&isset($_POST['confirm_password_dangky'])){
+    $email=_returnPostParamSecurity('email_dangky');
+    $username_dk=_returnPostParamSecurity('username_dangky');
+    $password_dk=_returnPostParamSecurity('password_dangky');
+    $confirm_password=_returnPostParamSecurity('confirm_password_dangky');
+    if($email==''||$username_dk==''||$password_dk==''||$confirm_password==''){
+        echo '<script>alert("Bạn vui lòng điền đầy đủ thông tin đăng ký")</script>';
+    }
+    else{
+        if($password_dk!=$confirm_password){
+            echo '<script>alert("Hai mật khẩu không khớp")</script>';
+        }
+        else{
+
+            $dangky = new user();
+            $dangky->user_name=$username_dk;
+            $dangky->user_email=$email;
+            $Pass=hash_pass($password_dk);
+            $dangky->password=$Pass;
+            $dangky->created=_returnGetDateTime();
+            $dangky->login_two_steps=1;
+            user_insert($dangky);
+            $subject = "Thông báo đăng ký tài khoản tại hệ thống quản ký MIXTOURIST";
+            $message='';
+            $message .='<div style="float: left; width: 100%">
+                            <p>Xin chào: <span style="color: #132fff; font-weight: bold"> '.$username_dk.'</span>!</p>
+                            <p>Cảm ơn bạn đã đăng ký tại hệ thống quản trị MIXTOURIST, bạn vui lòng đợi hệ thống của chúng tôi xác nhận tài khoản của bạn, Xin cảm ơn!</p>
+                            <p>Email: <span style="color: #132fff; font-weight: bold">'.$email.'</span>,</p>
+                            <p>Username: <span style="color: #132fff; font-weight: bold">'.$username_dk.'</span>,</p>
+                            <p>Ngày gửi: <span style="color: #132fff; font-weight: bold">'._returnGetDateTime().'</span>,</p>
+                        </div>';
+            SendMail($email, $message, $subject);
+            $email='';
+            $username_dk='';
+            echo "<script>alert('Bạn đã đăng ký thành công, vui lòng đợi chúng tôi xác nhận tài khoản của bạn, xin cảm ơn!')</script>";
+        }
+    }
+}
+if(isset($_POST['send_forgot'])&&isset($_POST['email_forgot'])){
+    $email_forgot=_returnPostParamSecurity('email_forgot');
+    if($email_forgot==''){
+        echo '<script>alert("Bạn vui lòng điền email của bạn, chúng tôi sẽ hướng dẫn bạn đổi lại mật khẩu")</script>';
+    }
+    else{
+        $dk="user_email='".$email_forgot."' and status=1";
+        $data_check=user_getByTop('1',$dk,'');
+        if(count($data_check)==0){
+            echo '<script>alert("Bạn vui lòng kiểm tra lại email")</script>';
+        }
+        else{
+            $rand_string=_returnRandString(15);
+            $user_update=new user();
+            $user_update->id=$data_check[0]->id;
+            $user_update->code_login=$rand_string;
+            user_update_code_login($user_update);
+            $rand_string_param1=_returnRandString(1999);
+            $rand_string_param2=_returnRandString(1999);
+            $rand_string_param3=_returnRandString(1999);
+            $link=SITE_NAME.'/doi-mat-khau-login/'.$rand_string_param1.'/'.$rand_string.'/'.$rand_string_param2.'/'.$data_check[0]->id.'/'.$rand_string_param3.'/';
+            $subject = "Hướng đãn đổi mật khẩu";
+            $message='';
+            $message .='<div style="float: left; width: 100%">
+
+                            <p>Bạn vui lòng clik  <b><a href="'.$link.'">vào đây</a></b> để thực hiện đổi mật khẩu </p>
+                        </div>';
+            SendMail($email_forgot, $message, $subject);
+            echo "<script>alert('Hệ thống đã gửi hướng dẫn về email của bạn, vui lòng kiểm tra email và làm theo hướng dẫn')</script>";
+        }
+
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -82,7 +200,7 @@ if(isset($_POST['login'])&&isset($_POST['username_login'])&&isset($_POST['passwo
                             <div class="widget-body">
                                 <div class="widget-main">
                                     <h6 style="font-size: 13px" class="header blue lighter bigger">
-                                        <i class="ace-icon fa fa-coffee green"></i>
+                                        <i class="ace-icon fa fa-user-md green"></i>
                                         Vui lòng nhập đầy đủ thông tin đăng nhập
                                     </h6>
 
@@ -165,25 +283,25 @@ if(isset($_POST['login'])&&isset($_POST['username_login'])&&isset($_POST['passwo
                                 <div class="widget-main">
                                     <h4 class="header red lighter bigger">
                                         <i class="ace-icon fa fa-key"></i>
-                                        Retrieve Password
+                                        Quên mật khẩu
                                     </h4>
 
                                     <div class="space-6"></div>
                                     <p>
-                                        Enter your email and to receive instructions
+                                        Nhập email của bạn và nhận được hướng dẫn
                                     </p>
 
-                                    <form>
+                                    <form action="" method="post">
                                         <fieldset>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="email" class="form-control" placeholder="Email" />
+															<input type="email" required name="email_forgot" class="form-control" placeholder="Email" />
 															<i class="ace-icon fa fa-envelope"></i>
 														</span>
                                             </label>
 
                                             <div class="clearfix">
-                                                <button type="button" class="width-35 pull-right btn btn-sm btn-danger">
+                                                <button type="submit" name="send_forgot" class="width-35 pull-right btn btn-sm btn-danger">
                                                     <i class="ace-icon fa fa-lightbulb-o"></i>
                                                     <span class="bigger-110">Send Me!</span>
                                                 </button>
@@ -194,7 +312,7 @@ if(isset($_POST['login'])&&isset($_POST['username_login'])&&isset($_POST['passwo
 
                                 <div class="toolbar center">
                                     <a href="#" data-target="#login-box" class="back-to-login-link">
-                                        Back to login
+                                        Đăng nhập
                                         <i class="ace-icon fa fa-arrow-right"></i>
                                     </a>
                                 </div>
@@ -206,60 +324,50 @@ if(isset($_POST['login'])&&isset($_POST['username_login'])&&isset($_POST['passwo
                                 <div class="widget-main">
                                     <h4 class="header green lighter bigger">
                                         <i class="ace-icon fa fa-users blue"></i>
-                                        New User Registration
+                                        Đăng ký tài khoản mới
                                     </h4>
 
                                     <div class="space-6"></div>
-                                    <p> Enter your details to begin: </p>
+                                    <p> Nhập chi tiết của bạn để bắt đầu: </p>
 
-                                    <form>
+                                    <form action="" method="post">
                                         <fieldset>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="email" class="form-control" placeholder="Email" />
+															<input type="email" name="email_dangky" required class="form-control" placeholder="Email" value="<?php if(isset($email)) echo $email?>" />
 															<i class="ace-icon fa fa-envelope"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="Username" />
+															<input type="text" name="username_dangky" required class="form-control" value="<?php if(isset($username_dk)) echo $username_dk?>" placeholder="Tên đăng nhập" />
 															<i class="ace-icon fa fa-user"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="Password" />
+															<input type="password" name="password_dangky" required class="form-control" placeholder="Mật khẩu" />
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="Repeat password" />
+															<input type="password" name="confirm_password_dangky" required class="form-control" placeholder="Xác nhận mật khẩu" />
 															<i class="ace-icon fa fa-retweet"></i>
 														</span>
                                             </label>
 
-                                            <label class="block">
-                                                <input type="checkbox" class="ace" />
-														<span class="lbl">
-															I accept the
-															<a href="#">User Agreement</a>
-														</span>
-                                            </label>
-
-                                            <div class="space-24"></div>
-
                                             <div class="clearfix">
                                                 <button type="reset" class="width-30 pull-left btn btn-sm">
                                                     <i class="ace-icon fa fa-refresh"></i>
-                                                    <span class="bigger-110">Reset</span>
+                                                    <span class="bigger-110">Hủy</span>
                                                 </button>
 
-                                                <button type="button" class="width-65 pull-right btn btn-sm btn-success">
-                                                    <span class="bigger-110">Register</span>
+                                                <button type="submit" name="dangky_name" class="width-65 pull-right btn btn-sm btn-success">
+                                                    <span class="bigger-110">Đăng ký</span>
 
                                                     <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
                                                 </button>
@@ -271,7 +379,7 @@ if(isset($_POST['login'])&&isset($_POST['username_login'])&&isset($_POST['passwo
                                 <div class="toolbar center">
                                     <a href="#" data-target="#login-box" class="back-to-login-link">
                                         <i class="ace-icon fa fa-arrow-left"></i>
-                                        Back to login
+                                        Đăng nhập
                                     </a>
                                 </div>
                             </div><!-- /.widget-body -->

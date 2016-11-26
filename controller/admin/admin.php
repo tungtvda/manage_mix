@@ -3,10 +3,8 @@ require_once '../../config.php';
 require_once DIR.'/model/adminService.php';
 require_once DIR.'/view/admin/admin.php';
 require_once DIR.'/common/messenger.php';
-require_once(DIR."/common/hash_pass.php");
 $data=array();
 $insert=true;
-returnCountData();
 if(isset($_SESSION["Admin"]))
 {
     if(isset($_GET["action"])&&isset($_GET["Id"]))
@@ -58,35 +56,24 @@ if(isset($_SESSION["Admin"]))
     }
     if(isset($_POST["TenDangNhap"])&&isset($_POST["Full_name"])&&isset($_POST["MatKhau"]))
     {
-        $array=$_POST;
-        if(!isset($array['Id']))
-            $array['Id']='0';
-        if(!isset($array['TenDangNhap']))
-            $array['TenDangNhap']='0';
-        if(!isset($array['Full_name']))
-            $array['Full_name']='0';
-        if(!isset($array['MatKhau']))
-            $array['MatKhau']='0';
-        $new_obj=new admin($array);
+       $array=$_POST;
+       if(!isset($array['Id']))
+       $array['Id']='0';
+       if(!isset($array['TenDangNhap']))
+       $array['TenDangNhap']='0';
+       if(!isset($array['Full_name']))
+       $array['Full_name']='0';
+       if(!isset($array['MatKhau']))
+       $array['MatKhau']='0';
+      $new_obj=new admin($array);
         if($insert)
         {
-            $new_obj->MatKhau=hash_pass($_POST["MatKhau"]);
             admin_insert($new_obj);
             header('Location: '.SITE_NAME.'/controller/admin/admin.php');
         }
         else
         {
             $new_obj->Id=$_GET["Id"];
-            $data['kiemtra']=admin_getById($_GET["Id"]);
-            if($data['kiemtra'][0]->MatKhau==$_POST["MatKhau"])
-            {
-                $new_obj->MatKhau=$data['kiemtra'][0]->MatKhau;
-            }
-            else
-            {
-                $new_obj->MatKhau=hash_pass($_POST["MatKhau"]);
-            }
-
             admin_update($new_obj);
             $insert=false;
             header('Location: '.SITE_NAME.'/controller/admin/admin.php');
@@ -101,5 +88,5 @@ if(isset($_SESSION["Admin"]))
 }
 else
 {
-    header('location: '.SITE_NAME);
+     header('location: '.SITE_NAME);
 }

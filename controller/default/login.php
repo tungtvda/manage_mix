@@ -82,28 +82,51 @@ if(isset($_POST['dangky_name'])&&isset($_POST['email_dangky'])&&isset($_POST['us
             echo '<script>alert("Hai mật khẩu không khớp")</script>';
         }
         else{
+            $dk_check_username="user_name='".$username_dk."'";
+            $dk_check_email="user_email ='".$email."'";
+            $data_check_exist_name=user_getByTop('',$dk_check_username,'id desc');
+            $data_check_exist_email=user_getByTop('',$dk_check_email,'id desc');
+            if(count($data_check_exist_name)>0||count($data_check_exist_email)>0){
+                if(count($data_check_exist_name)>0&&count($data_check_exist_email)>0)
+                {
+                    echo "<script>alert('Username và email đã tồn tại trong hệ thống, vui lòng điền lại thông tin khác')</script>";
+                }
+                else{
+                    if(count($data_check_exist_name)>0)
+                    {
+                        echo "<script>alert('Username đã tồn tại trong hệ thống, vui lòng điền lại thông tin khác')</script>";
+                    }
+                    else{
+                        echo "<script>alert('Email đã tồn tại trong hệ thống, vui lòng điền lại thông tin khác')</script>";
+                    }
+                }
 
-            $dangky = new user();
-            $dangky->user_name=$username_dk;
-            $dangky->user_email=$email;
-            $Pass=hash_pass($password_dk);
-            $dangky->password=$Pass;
-            $dangky->created=_returnGetDateTime();
-            $dangky->login_two_steps=1;
-            user_insert($dangky);
-            $subject = "Thông báo đăng ký tài khoản tại hệ thống quản ký MIXTOURIST";
-            $message='';
-            $message .='<div style="float: left; width: 100%">
+            }
+            else{
+                $dangky = new user();
+                $dangky->user_name=$username_dk;
+                $dangky->user_email=$email;
+                $Pass=hash_pass($password_dk);
+                $dangky->password=$Pass;
+                $dangky->created=_returnGetDateTime();
+                $dangky->login_two_steps=1;
+                user_insert($dangky);
+                $subject = "Thông báo đăng ký tài khoản tại hệ thống quản ký MIXTOURIST";
+                $message='';
+                $message .='<div style="float: left; width: 100%">
                             <p>Xin chào: <span style="color: #132fff; font-weight: bold"> '.$username_dk.'</span>!</p>
                             <p>Cảm ơn bạn đã đăng ký tại hệ thống quản trị MIXTOURIST, bạn vui lòng đợi hệ thống của chúng tôi xác nhận tài khoản của bạn, Xin cảm ơn!</p>
                             <p>Email: <span style="color: #132fff; font-weight: bold">'.$email.'</span>,</p>
                             <p>Username: <span style="color: #132fff; font-weight: bold">'.$username_dk.'</span>,</p>
                             <p>Ngày gửi: <span style="color: #132fff; font-weight: bold">'._returnGetDateTime().'</span>,</p>
                         </div>';
-            SendMail($email, $message, $subject);
-            $email='';
-            $username_dk='';
-            echo "<script>alert('Bạn đã đăng ký thành công, vui lòng đợi chúng tôi xác nhận tài khoản của bạn, xin cảm ơn!')</script>";
+                SendMail($email, $message, $subject);
+                $email='';
+                $username_dk='';
+                echo "<script>alert('Bạn đã đăng ký thành công, vui lòng đợi chúng tôi xác nhận tài khoản của bạn, xin cảm ơn!')</script>";
+            }
+
+
         }
     }
 }
@@ -173,11 +196,13 @@ if(isset($_POST['send_forgot'])&&isset($_POST['email_forgot'])){
 
 
     <link rel="stylesheet" href="<?php echo SITE_NAME?>/view/default/themes/admin/assets/css/ace-ie.min.css" />
+    <link rel="stylesheet" href="<?php echo SITE_NAME?>/view/default/themes/admin/css/login.css" />
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
     <script src="<?php echo SITE_NAME?>/view/default/themes/admin/assets/js/html5shiv.min.js"></script>
     <script src="<?php echo SITE_NAME?>/view/default/themes/admin/assets/js/respond.min.js"></script>
+
 </head>
 
 <body style="background:url('<?php echo SITE_NAME?>/view/default/themes/images/square.gif')" class="login-layout">
@@ -334,42 +359,51 @@ if(isset($_POST['send_forgot'])&&isset($_POST['email_forgot'])){
                                         <fieldset>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="email" name="email_dangky" required class="form-control" placeholder="Email" value="<?php if(isset($email)) echo $email?>" />
+															<input type="email" id="email_dangky" name="email_dangky" required class="form-control" placeholder="Email" value="<?php if(isset($email)) echo $email?>" />
 															<i class="ace-icon fa fa-envelope"></i>
 														</span>
+                                                <input type="password" id="check_show_email" hidden value="0">
+                                                <span hidden id="mess_email_dang_ky" style="color: red; font-size: 13px">Email đã tồn tại trong hệ thống</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" name="username_dangky" required class="form-control" value="<?php if(isset($username_dk)) echo $username_dk?>" placeholder="Tên đăng nhập" />
+															<input type="text" id="username_dangky" name="username_dangky" required class="form-control" value="<?php if(isset($username_dk)) echo $username_dk?>" placeholder="Tên đăng nhập" />
 															<i class="ace-icon fa fa-user"></i>
 														</span>
+                                                <input type="password" id="check_show_username" hidden value="0">
+                                                <span hidden id="mess_username_dang_ky" style="color: red; font-size: 13px">Username đã tồn tại trong hệ thống</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" name="password_dangky" required class="form-control" placeholder="Mật khẩu" />
+															<input type="password" id="password_dangky" name="password_dangky" required class="form-control" placeholder="Mật khẩu" />
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
+                                                <input type="password" id="check_show_pass" hidden value="0">
+                                                <span  id="power_pass" style="font-size: 13px"></span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" name="confirm_password_dangky" required class="form-control" placeholder="Xác nhận mật khẩu" />
+															<input type="password" id="confirm_password_dangky" name="confirm_password_dangky" required class="form-control" placeholder="Xác nhận mật khẩu" />
 															<i class="ace-icon fa fa-retweet"></i>
 														</span>
+                                                <span hidden id="mess_confirm_password_dangky" style="color: red; font-size: 13px">Hai mật khẩu không khớp</span>
                                             </label>
 
                                             <div class="clearfix">
-                                                <button type="reset" class="width-30 pull-left btn btn-sm">
+                                                <input type="password" id="site_name" hidden value="<?php echo SITE_NAME?>">
+
+                                                <button id="reset_login" type="reset" class="width-30 pull-left btn btn-sm">
                                                     <i class="ace-icon fa fa-refresh"></i>
                                                     <span class="bigger-110">Hủy</span>
                                                 </button>
 
-                                                <button type="submit" name="dangky_name" class="width-65 pull-right btn btn-sm btn-success">
+                                                <button type="submit" id="dangky_name" name="dangky_name" class="width-65 pull-right btn btn-sm btn-success">
                                                     <span class="bigger-110">Đăng ký</span>
 
-                                                    <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+                                                    <i class="ace-icon fa fa-sign-in icon-on-right"></i>
                                                 </button>
                                             </div>
                                         </fieldset>
@@ -458,6 +492,7 @@ if(isset($_POST['send_forgot'])&&isset($_POST['email_forgot'])){
 
     });
 </script>
+<script src="<?php echo SITE_NAME?>/view/default/themes/admin/js/login.js"></script>
 </body>
 </html>
 

@@ -6249,8 +6249,8 @@ button.btn:active {
 }
 
 .btn-success, .btn-success:focus {
-    background-color: #87b87f !important;
-    border-color: #87b87f
+    background-color: #00aeef !important;
+    border-color: #00aeef;
 }
 
 .btn-success:hover, .btn-success:active, .open > .btn-success.dropdown-toggle {
@@ -13302,7 +13302,7 @@ th .lbl:only-child, td .lbl:only-child {
 }
 
 .login-box .toolbar {
-    background: #4a96d9;;
+    background: #00aeef;;;
     border-top: 2px solid #597597
 }
 
@@ -13337,8 +13337,8 @@ th .lbl:only-child, td .lbl:only-child {
 }
 
 .signup-box .toolbar {
-    background: #76B774;
-    border-top: 2px solid #759759;
+    background: #00aeef;
+    border-top: 2px solid #00aeef;
     padding: 9px 18px
 }
 

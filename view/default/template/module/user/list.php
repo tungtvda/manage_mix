@@ -7,6 +7,7 @@
  */
 ?>
 <div class="page-header">
+    <input hidden value="<?php echo SITE_NAME?>" id="url_input">
     <h1>
         Users
         <small>
@@ -87,18 +88,13 @@
                                     <span class="lbl"></span>
                                 </label>
                             </th>
-                            <th>Name</th>
+                            <th>#</th>
+                            <th>Họ tên</th>
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Gender</th>
                             <th>Status</th>
-                            <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1" aria-label="
 
-															Update
-														: activate to sort column ascending">
-                                <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
-                                Update
-                            </th>
                             <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1" aria-label="
 
 															Update
@@ -106,98 +102,117 @@
                                 <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
                                 Created
                             </th>
+                            <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1" aria-label="
+
+															Update
+														: activate to sort column ascending">
+                                <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+                                Update
+                            </th>
                             <th >Action</th>
 
                         </tr>
                         </thead>
+                        <form action="" method="post">
+                            <tbody>
+                            <?php if(count($list)>0){?>
+                                <?php $dem=1;?>
+                                <?php foreach($list as $row){?>
+                                    <tr>
+                                        <td class="center">
+                                            <label class="pos-rel">
+                                                <input type="checkbox" class="ace click_check_list" value="<?php echo $row->id?>" />
+                                                <span class="lbl"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <?php echo $dem;?>
+                                        </td>
+                                        <td>
+                                            <a href="<?php echo SITE_NAME?>/nhan-vien/chi-tiet/<?php echo $row->id?>"><?php echo $row->name?></a>
+                                        </td>
+                                        <td><?php echo $row->user_email?></td>
+                                        <td><?php echo $row->phone?></td>
+                                        <td>
+                                            <span hidden><?php echo (int)$row->gender?></span>
+                                            <?php if($row->gender==0) echo ' <i style="font-size: 20px;" class="fa fa-male"></i>'?>
+                                            <?php if($row->gender==1) echo ' <i style="font-size: 20px; color: #ec008c" class="fa fa-female"></i>'?>
+                                        </td>
+                                        <td>
+                                            <span hidden><?php echo (int)$row->status?></span>
+                                            <label>
+                                                <input <?php if($row->status) echo 'checked'?> id="checkbox_status_<?php echo $row->id?>" countid="<?php echo $row->id?>" name_record="<?php echo $row->name?>" table="user" field="status"  class="ace ace-switch ace-switch-7 checkbox_status" type="checkbox">
+                                                <span class="lbl"></span>
+                                            </label>
+                                        </td>
+                                        <td><?php echo _returnDateFormatConvert($row->created)?></td>
+                                        <td><?php echo _returnDateFormatConvert($row->updated)?></td>
+                                        <td>
+                                            <div class="hidden-sm hidden-xs action-buttons">
+                                                <a class="blue" href="#" title="View popup">
+                                                    <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                                                </a>
+                                                <a class="" href="#">
+                                                    <i class="ace-icon glyphicon glyphicon-edit"></i>
+                                                </a>
+                                                <a title="Sửa tab mới" class="green" href="<?php echo SITE_NAME?>/nhan-vien/sua/<?php echo $row->id?>">
+                                                    <i class="ace-icon fa fa-pencil bigger-130"></i>
+                                                </a>
 
-                        <tbody>
-                        <tr>
-                            <td class="center">
-                                <label class="pos-rel">
-                                    <input type="checkbox" class="ace click_check_list" />
-                                    <span class="lbl"></span>
-                                </label>
-                            </td>
 
-                            <td>
-                                <a href="#">{!! $data['name'] !!}</a>
-                            </td>
-                            <td>{!! $data['email'] !!}</td>
-                            <td>{!! $data['phone'] !!}</td>
-                            <td>{!! $data['gender'] !!}</td>
-                            <td>
-                                <span hidden>{!! $data['status'] !!}</span>
-                                <label>
-                                    <input name="switch-field-1" class="ace ace-switch ace-switch-3 value-list-check-user"
-                                           {{ $data['status']==1 ? 'checked' : '' }} value="{!! $data['status'] !!}"
-                                    type="checkbox">
-                                    <span class="lbl"></span>
-                                </label>
-                            </td>
-                            <td>{!! $data['updated_at'] !!}</td>
-                            <td>{!! $data['created_at'] !!}</td>
-                            <td>
-                                <div class="hidden-sm hidden-xs action-buttons">
-                                    <a class="blue" href="#">
-                                        <i class="ace-icon fa fa-search-plus bigger-130"></i>
-                                    </a>
+                                                <a title="Xóa" class="red delete_record" href="javascript:void()" deleteid="<?php echo $row->id?>" name_record_delete="<?php echo $row->name?>" url_delete="<?php echo SITE_NAME?>/nhan-vien/xoa/">
+                                                    <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                                                </a>
+                                            </div>
 
-                                    <a class="green" href="#">
-                                        <i class="ace-icon fa fa-pencil bigger-130"></i>
-                                    </a>
-                                    <a class="" href="#">
-                                        <i class="ace-icon glyphicon glyphicon-edit"></i>
-                                    </a>
+                                            <div class="hidden-md hidden-lg">
+                                                <div class="inline pos-rel">
+                                                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                                                        <i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+                                                    </button>
 
-                                    <a class="red" href="#">
-                                        <i class="ace-icon fa fa-trash-o bigger-130"></i>
-                                    </a>
-                                </div>
-
-                                <div class="hidden-md hidden-lg">
-                                    <div class="inline pos-rel">
-                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
-                                            <i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
-                                        </button>
-
-                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-                                            <li>
-                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                                        <li>
+                                                            <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
 																				<span class="blue">
 																					<i class="ace-icon fa fa-search-plus bigger-120"></i>
 																				</span>
-                                                </a>
-                                            </li>
+                                                            </a>
+                                                        </li>
 
-                                            <li>
-                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                        <li>
+                                                            <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
 																				<span class="green">
 																					<i class="ace-icon fa fa-pencil bigger-120"></i>
 																				</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
 																				<span class="">
 																					<i class="ace-icon glyphicon glyphicon-edit  bigger-120"></i>
 																				</span>
-                                                </a>
-                                            </li>
+                                                            </a>
+                                                        </li>
 
-                                            <li>
-                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                        <li>
+                                                            <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
 																				<span class="red">
 																					<i class="ace-icon fa fa-trash-o bigger-120"></i>
 																				</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <?php $dem++;?>
+                                <?php }?>
+                            <?php }?>
+                            </tbody>
+                        </form>
+
                     </table>
                 </div>
                 <div class="hr hr-18 dotted hr-double"></div>
@@ -209,21 +224,18 @@
 
                     <ul class="dropdown-menu dropdown-danger">
                         <li>
-                            <a href="">Edit</a>
+                            <a class="edit_function" href="javascript:void(0)">Chỉnh sửa</a>
                         </li>
 
                         <li>
-                            <a href="">Delete</a>
+                            <a class="delete_function" href="javascript:void(0)">Xóa</a>
                         </li>
 
-                        <li>
-                            <a href="">Something else here</a>
-                        </li>
 
                         <li class="divider"></li>
 
                         <li>
-                            <a href="">Separated link</a>
+                            <a href="<?php echo SITE_NAME?>/nhan-vien/them-moi/">Thêm</a>
                         </li>
                     </ul>
                 </div>

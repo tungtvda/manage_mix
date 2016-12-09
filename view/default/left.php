@@ -9,5 +9,7 @@ require_once DIR.'/view/default/public.php';
 function view_left($data=array())
 {
     $asign=array();
+    $user_active = ($data['active'] == 'user') ? 'active open' : '';
+    $user_active_sub = ($data['active_sub'] == 'user_list') ? 'active' : '';
     require_once DIR . '/view/default/template/left.php';
 }

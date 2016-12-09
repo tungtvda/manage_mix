@@ -104,3 +104,7 @@ function user_update_password($obj)
 {
     return exe_query("update user set password='$obj->password' where id=$obj->id",'user');
 }
+function user_update_status($obj)
+{
+    return exe_query("update user set status='$obj->status' where id=$obj->id",'user');
+}

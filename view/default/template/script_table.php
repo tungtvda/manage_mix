@@ -1,6 +1,5 @@
 
 <?php
-$count=7;
 if(!isset($count)) {
     $count=0;
     $count_show=0;

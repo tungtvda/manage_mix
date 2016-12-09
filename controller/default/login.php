@@ -23,48 +23,55 @@ if(isset($_POST['login'])&&isset($_POST['username_login'])&&isset($_POST['passwo
     }
     else{
         $Pass=hash_pass($password);
-        $dk="(user_name='".$username."' or user_email='".$username."') and password='".$Pass."' and status=1";
+        $dk="(user_name='".$username."' or user_email='".$username."') and password='".$Pass."'";
         $data_check=user_getByTop('1',$dk,'');
         if(count($data_check)==0){
             echo '<script>alert("Đăng nhập thất bại!. Bạn vui lòng kiểm tra lại thông tin đăng nhập")</script>';
         }
         else{
-            $id=$data_check[0]->id;
-            $user_role=$data_check[0]->user_role;
-            $login_two_steps=$data_check[0]->login_two_steps;
-            $user_email=$data_check[0]->user_email;
-            $user_role=$data_check[0]->user_role;
-            $user_permison_action=$data_check[0]->permison_action;
-            $user_permison_form=$data_check[0]->permison_form;
-            $user_permison_module=$data_check[0]->permison_module;
-            $user_update=new user();
-            $user_update->id=$id;
-            if($login_two_steps==1){
-                $rand_string=_returnRandString(15);
-                $user_update->code_login=$rand_string;
-                $_SESSION['show_email']=$user_email;
-                $_SESSION['show_id']=$id;
-                user_update_code_login($user_update);
-                $subject = "Mã đăng nhập vào hệ thống MIXTOURIST";
-                $message='';
-                $message .='<div style="float: left; width: 100%">
+            if($data_check[0]->status==0)
+            {
+                echo '<script>alert("Đăng nhập thất bại!. Tài khoản của bạn hiện chưa được kích hoạt")</script>';
+            }
+            else{
+                $id=$data_check[0]->id;
+                $user_role=$data_check[0]->user_role;
+                $login_two_steps=$data_check[0]->login_two_steps;
+                $user_email=$data_check[0]->user_email;
+                $user_role=$data_check[0]->user_role;
+                $user_permison_action=$data_check[0]->permison_action;
+                $user_permison_form=$data_check[0]->permison_form;
+                $user_permison_module=$data_check[0]->permison_module;
+                $user_update=new user();
+                $user_update->id=$id;
+                if($login_two_steps==1){
+                    $rand_string=_returnRandString(15);
+                    $user_update->code_login=$rand_string;
+                    $_SESSION['show_email']=$user_email;
+                    $_SESSION['show_id']=$id;
+                    user_update_code_login($user_update);
+                    $subject = "Mã đăng nhập vào hệ thống MIXTOURIST";
+                    $message='';
+                    $message .='<div style="float: left; width: 100%">
                             <p>Mã đăng nhập: <span style="color: #132fff; font-weight: bold"> '.$rand_string.'</span></p>
                             <p>Bạn hãy nhập mã xác nhận '.$rand_string.' để đăng nhập được vào hệ thống</p>
                         </div>';
-                SendMail($user_email, $message, $subject);
-                redict(SITE_NAME.'/xac-nhan.html');
-            }
-            else{
-                $data_arr=array(
-                    'user_id'=>$id,
-                    'user_role'=>$user_role,
-                    'user_permison_action'=>$user_permison_action,
-                    'user_permison_form'=>$user_permison_form,
-                    'user_permison_module'=>$user_permison_module
-                );
-                _returnLogin($data_arr,$user_update);
+                    SendMail($user_email, $message, $subject);
+                    redict(SITE_NAME.'/xac-nhan.html');
+                }
+                else{
+                    $data_arr=array(
+                        'user_id'=>$id,
+                        'user_role'=>$user_role,
+                        'user_permison_action'=>$user_permison_action,
+                        'user_permison_form'=>$user_permison_form,
+                        'user_permison_module'=>$user_permison_module
+                    );
+                    _returnLogin($data_arr,$user_update);
 //
+                }
             }
+
         }
     }
 

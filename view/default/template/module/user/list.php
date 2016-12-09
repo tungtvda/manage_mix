@@ -224,7 +224,7 @@
 
                     <ul class="dropdown-menu dropdown-danger">
                         <li>
-                            <a class="edit_function" href="javascript:void(0)">Chỉnh sửa</a>
+                            <a class="edit_function" href="javascript:void(0)">Sửa</a>
                         </li>
 
                         <li>

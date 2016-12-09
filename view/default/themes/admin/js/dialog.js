@@ -61,7 +61,7 @@ var lnv = lnv || {};
                 '<div class="lnv-mask"></div>' +
                 '<div class="lnv-dialog">' +
                 '<div style=";font-size: 17px;color: #669fc7;padding: 6px " class="lnv-dialog-hd widget-header-confirm">'+this.cfg.iconBtnText+' <strong class="lnv-dialog-title">' + this.cfg.title + '</strong></div>' +
-                '<div style="text-align: justify; padding-top: 5px;    padding-bottom: 5px;" class="lnv-dialog-bd alert-info">' + this.cfg.content + '</div>' +
+                '<div style="padding-top: 5px;    padding-bottom: 5px;" class="lnv-dialog-bd alert-info">' + this.cfg.content + '</div>' +
                 '<div style="text-align: center" class="lnv-dialog-ft">' + footerContent + '</div>' +
                 '</div>' +
                 '</div>');

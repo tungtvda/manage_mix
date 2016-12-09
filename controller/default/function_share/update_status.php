@@ -11,6 +11,7 @@ if (isset($_GET['id']) && isset($_GET['table']) && isset($_GET['field']) && isse
 
         $file_model = $table . 'Service.php';
         require_once DIR . '/model/' . $file_model;
+
         $function_id = $table . '_getById';
         $data_check = $function_id($id);
         if (count($data_check) > 0) {

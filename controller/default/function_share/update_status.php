@@ -1,6 +1,6 @@
 <?php
 if (!defined('DIR')) require_once '../../../config.php';
-
+_returnCheckPermison(0,0);
 if (isset($_GET['id']) && isset($_GET['table']) && isset($_GET['field']) && isset($_GET['status'])) {
     $id = _returnGetParamSecurity('id');
     $table = _returnGetParamSecurity('table');

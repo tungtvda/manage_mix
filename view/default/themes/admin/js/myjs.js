@@ -13,8 +13,8 @@ jQuery(function ($) {
         var link = url + '/update-status/';
         var field_check = "checkbox_status_" + idSelect;
         lnv.confirm({
-            title: 'Xác nhận cập nhật trạng thái nhân viên',
-            content: 'Bạn chắc chắn rằng muốn cập nhật trạng thái của nhân viên </br><b>"'+name_record+'"</b>',
+            title: 'Xác nhận cập nhật trạng thái',
+            content: 'Bạn chắc chắn rằng muốn cập nhật trạng thái của </br><b>"'+name_record+'"</b>',
             confirmBtnText: 'Ok',
             iconBtnText:'<i style="color: #669fc7;" class="ace-icon fa fa-check"></i>',
             confirmHandler: function () {
@@ -77,12 +77,25 @@ jQuery(function ($) {
         var url_delete = $(this).attr('url_delete');
         var name_record_delete=$(this).attr('name_record_delete');
         lnv.confirm({
-            title: 'Xác nhận xóa nhân viên',
-            content: 'Bạn chắc chắn rằng muốn xóa nhân viên </br><b>"'+name_record_delete+'"</b>',
+            title: 'Xác nhận xóa bản ghi',
+            content: 'Bạn chắc chắn rằng muốn xóa bản ghi </br><b>"'+name_record_delete+'"</b>',
             confirmBtnText: 'Ok',
             iconBtnText:'<i style="color: #669fc7;" class="ace-icon fa fa-check"></i>',
             confirmHandler: function () {
-                window.location.replace(url_delete+deleteid);
+                if(deleteid==''||url_delete==''||name_record_delete==''){
+                    lnv.alert({
+                        title: 'Lỗi',
+                        content: 'Các thông tin xóa không hợp lệ',
+                        alertBtnText: 'Ok',
+                        iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                        alertHandler: function () {
+
+                        }
+                    });
+                }
+                else{
+                    window.location.replace(url_delete+deleteid);
+                }
             },
             cancelBtnText: 'Cancel',
             cancelHandler: function () {

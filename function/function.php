@@ -5,7 +5,7 @@
  * Date: 11/24/2016
  * Time: 4:21 PM
  */
-//require_once DIR.'/model/userService.php';
+require_once DIR.'/model/userService.php';
 
 function _returnCheckPermison($module_id=0,$form_id=0){
     // Kiểm tra có tồn tại user không

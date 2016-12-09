@@ -23,6 +23,9 @@ function _returnCheckPermison($module_id=0,$form_id=0){
     if(strtotime($currentDate) > strtotime($date_check)) {
         redict(_returnLinkDangNhap());
     }
+    $user_update=new user();
+    $user_update->time_token=_returnGetDateTime();
+    user_update_time_login($user_update);
     // kiểm tra quyền có phải là super admin
     if($_SESSION['user_role']==1){
         return true;
@@ -156,5 +159,11 @@ function _returnLogin($data_arr,$user_update){
     if(isset($_SESSION['show_id'])){
         unset($_SESSION['show_id']);
     }
-    redict(SITE_NAME);
+    if(isset($_SESSION["link_redict"])){
+        redict($_SESSION["link_redict"]);
+    }
+    else{
+        redict(SITE_NAME);
+    }
+
 }

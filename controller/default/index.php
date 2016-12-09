@@ -17,7 +17,7 @@ $data['breadcrumbs']=$url_bread;
 $data['title']='Hệ thống quản lý MIXTOURIST';
 
 show_header($data);
-show_left($data);
+show_left($data,'user');
 show_breadcrumb($data);
 show_navigation($data);
 show_index($data);

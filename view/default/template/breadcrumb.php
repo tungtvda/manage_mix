@@ -7,7 +7,7 @@
     <ul class="breadcrumb">
         <li>
             <i class="ace-icon fa fa-home home-icon"></i>
-            <a href="<?php echo SITE_NAME?>">Home</a>
+            <a href="<?php echo SITE_NAME?>">Trang chủ</a>
         </li>
 
         <?php echo $url_bread?>

@@ -64,5 +64,6 @@
         }
         ;
     </script>
+    <link href="<?php echo SITE_NAME?>/view/default/themes/admin/css/dialog.css" rel="stylesheet" type="text/css">
 </head>
 

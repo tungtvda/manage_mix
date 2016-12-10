@@ -24,6 +24,7 @@ function _returnCheckPermison($module_id=0,$form_id=0){
         redict(_returnLinkDangNhap());
     }
     $user_update=new user();
+    $user_update->id=$_SESSION['user_id'];
     $user_update->time_token=_returnGetDateTime();
     user_update_time_login($user_update);
     // kiểm tra quyền có phải là super admin
@@ -152,6 +153,7 @@ function _returnLogin($data_arr,$user_update){
     $_SESSION['user_permison_form']=$data_arr['user_permison_form'];
     $_SESSION['user_permison_module']=$data_arr['user_permison_module'];
     $user_update->time_token=_returnGetDateTime();
+    $user_update->id=$data_arr['user_id'];
     user_update_time_login($user_update);
     if(isset($_SESSION['show_email'])){
         unset($_SESSION['show_email']);

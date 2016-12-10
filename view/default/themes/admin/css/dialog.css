@@ -8,8 +8,8 @@
     /*width: 320px;*/
     top: 50%;
     left: 50%;
-    /*-webkit-transform: translate(-50%, -50%);*/
-    /*transform: translate(-50%, -50%);*/
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
     background-color: #FAFAFC;
     /*text-align: center;*/
     border-radius: 3px;

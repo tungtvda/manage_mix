@@ -101,8 +101,6 @@ jQuery(function ($) {
             cancelHandler: function () {
             }
         })
-
-
     });
 
 

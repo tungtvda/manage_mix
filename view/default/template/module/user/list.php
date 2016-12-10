@@ -147,21 +147,24 @@
                                         </td>
                                         <td><?php echo _returnDateFormatConvert($row->created)?></td>
                                         <td><?php echo _returnDateFormatConvert($row->updated)?></td>
+
                                         <td>
                                             <div class="hidden-sm hidden-xs action-buttons">
-                                                <a class="blue" href="#" title="View popup">
+                                                <a class="blue" href="#"  title="View popup">
                                                     <i class="ace-icon fa fa-search-plus bigger-130"></i>
                                                 </a>
-                                                <a class="" href="#">
+                                                <a class="" href="#" title="Sửa popup">
                                                     <i class="ace-icon glyphicon glyphicon-edit"></i>
                                                 </a>
                                                 <a title="Sửa tab mới" class="green" href="<?php echo SITE_NAME?>/nhan-vien/sua/<?php echo $row->id?>">
                                                     <i class="ace-icon fa fa-pencil bigger-130"></i>
                                                 </a>
 
-
-                                                <a title="Xóa" class="red delete_record" href="javascript:void()" deleteid="<?php echo $row->id?>" name_record_delete="<?php echo $row->name?>" url_delete="<?php echo SITE_NAME?>/nhan-vien/xoa/">
+                                                <a title="Xóa"  class="red delete_record" href="javascript:void(0)" deleteid="<?php echo $row->id?>" name_record_delete="<?php echo $row->name?>" url_delete="<?php echo SITE_NAME?>/nhan-vien/xoa/">
                                                     <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                                                </a>
+                                                <a title="Phân quyền" class="blue" href="<?php echo SITE_NAME?>/nhan-vien/phan-quyen/<?php echo $row->id?>">
+                                                    <i class="ace-icon fa fa-cogs bigger-130"></i>
                                                 </a>
                                             </div>
 
@@ -188,7 +191,7 @@
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                            <a href="#" class="tooltip-success" data-rel="tooltip" title="Chỉnh sửa">
 																				<span class="">
 																					<i class="ace-icon glyphicon glyphicon-edit  bigger-120"></i>
 																				</span>
@@ -196,9 +199,16 @@
                                                         </li>
 
                                                         <li>
-                                                            <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                            <a href="javascript:void(0)" deleteid="<?php echo $row->id?>" name_record_delete="<?php echo $row->name?>" url_delete="<?php echo SITE_NAME?>/nhan-vien/xoa/" class="tooltip-error delete_record"  title="Xóa">
 																				<span class="red">
 																					<i class="ace-icon fa fa-trash-o bigger-120"></i>
+																				</span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+																				<span class="green">
+																					<i class="ace-icon fa fa-cogs bigger-120"></i>
 																				</span>
                                                             </a>
                                                         </li>
@@ -231,7 +241,6 @@
                             <a class="delete_function" href="javascript:void(0)">Xóa</a>
                         </li>
 
-
                         <li class="divider"></li>
 
                         <li>
@@ -243,124 +252,132 @@
         </div>
 
 
-        <div id="modal-form" class="modal" tabindex="-1">
+        <div  id="modal-form" class="modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="blue bigger">Please fill the following form fields</h4>
+                        <h4 class="blue bigger">Tạo mới nhân viên</h4>
                     </div>
+                    <form action="" method="post" enctype="multipart/form-data">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-xs-12 col-sm-4 col-md-4">
+                                        <div id="preview">
+                                            <img class="img-responsive" src="<?php echo SITE_NAME?>/view/default/themes/images/no-image.jpg">
+                                        </div>
 
-                    <div class="modal-body">
+                                        <input name="image" type="file" id="id-input-file-2"/>
+                                        <input id="button" type="submit" value="Upload">
+                                    </div>
 
-                        <div class="row">
+                                </div>
 
-                            <div class="col-xs-12 col-sm-5">
-                                <div class="space"></div>
 
-                                <input type="file" />
+                                <div class="col-xs-12 col-sm-7">
+                                    <div class="form-group">
+                                        <label for="form-field-select-3">Location</label>
+
+                                        <div>
+                                            <select class="chosen-select" data-placeholder="Choose a Country...">
+                                                <option value="">&nbsp;</option>
+                                                <option value="AL">Alabama</option>
+                                                <option value="AK">Alaska</option>
+                                                <option value="AZ">Arizona</option>
+                                                <option value="AR">Arkansas</option>
+                                                <option value="CA">California</option>
+                                                <option value="CO">Colorado</option>
+                                                <option value="CT">Connecticut</option>
+                                                <option value="DE">Delaware</option>
+                                                <option value="FL">Florida</option>
+                                                <option value="GA">Georgia</option>
+                                                <option value="HI">Hawaii</option>
+                                                <option value="ID">Idaho</option>
+                                                <option value="IL">Illinois</option>
+                                                <option value="IN">Indiana</option>
+                                                <option value="IA">Iowa</option>
+                                                <option value="KS">Kansas</option>
+                                                <option value="KY">Kentucky</option>
+                                                <option value="LA">Louisiana</option>
+                                                <option value="ME">Maine</option>
+                                                <option value="MD">Maryland</option>
+                                                <option value="MA">Massachusetts</option>
+                                                <option value="MI">Michigan</option>
+                                                <option value="MN">Minnesota</option>
+                                                <option value="MS">Mississippi</option>
+                                                <option value="MO">Missouri</option>
+                                                <option value="MT">Montana</option>
+                                                <option value="NE">Nebraska</option>
+                                                <option value="NV">Nevada</option>
+                                                <option value="NH">New Hampshire</option>
+                                                <option value="NJ">New Jersey</option>
+                                                <option value="NM">New Mexico</option>
+                                                <option value="NY">New York</option>
+                                                <option value="NC">North Carolina</option>
+                                                <option value="ND">North Dakota</option>
+                                                <option value="OH">Ohio</option>
+                                                <option value="OK">Oklahoma</option>
+                                                <option value="OR">Oregon</option>
+                                                <option value="PA">Pennsylvania</option>
+                                                <option value="RI">Rhode Island</option>
+                                                <option value="SC">South Carolina</option>
+                                                <option value="SD">South Dakota</option>
+                                                <option value="TN">Tennessee</option>
+                                                <option value="TX">Texas</option>
+                                                <option value="UT">Utah</option>
+                                                <option value="VT">Vermont</option>
+                                                <option value="VA">Virginia</option>
+                                                <option value="WA">Washington</option>
+                                                <option value="WV">West Virginia</option>
+                                                <option value="WI">Wisconsin</option>
+                                                <option value="WY">Wyoming</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="space-4"></div>
+
+                                    <div class="form-group">
+                                        <label for="form-field-username">Username</label>
+
+                                        <div>
+                                            <input type="text" id="form-field-username" placeholder="Username" value="alexdoe" />
+                                        </div>
+                                    </div>
+
+                                    <div class="space-4"></div>
+
+                                    <div class="form-group">
+                                        <label for="form-field-first">Name</label>
+
+                                        <div>
+                                            <input type="text" id="form-field-first" placeholder="First Name" value="Alex" />
+                                            <input type="text" id="form-field-last" placeholder="Last Name" value="Doe" />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="col-xs-12 col-sm-7">
-                                <div class="form-group">
-                                    <label for="form-field-select-3">Location</label>
-
-                                    <div>
-                                        <select class="chosen-select" data-placeholder="Choose a Country...">
-                                            <option value="">&nbsp;</option>
-                                            <option value="AL">Alabama</option>
-                                            <option value="AK">Alaska</option>
-                                            <option value="AZ">Arizona</option>
-                                            <option value="AR">Arkansas</option>
-                                            <option value="CA">California</option>
-                                            <option value="CO">Colorado</option>
-                                            <option value="CT">Connecticut</option>
-                                            <option value="DE">Delaware</option>
-                                            <option value="FL">Florida</option>
-                                            <option value="GA">Georgia</option>
-                                            <option value="HI">Hawaii</option>
-                                            <option value="ID">Idaho</option>
-                                            <option value="IL">Illinois</option>
-                                            <option value="IN">Indiana</option>
-                                            <option value="IA">Iowa</option>
-                                            <option value="KS">Kansas</option>
-                                            <option value="KY">Kentucky</option>
-                                            <option value="LA">Louisiana</option>
-                                            <option value="ME">Maine</option>
-                                            <option value="MD">Maryland</option>
-                                            <option value="MA">Massachusetts</option>
-                                            <option value="MI">Michigan</option>
-                                            <option value="MN">Minnesota</option>
-                                            <option value="MS">Mississippi</option>
-                                            <option value="MO">Missouri</option>
-                                            <option value="MT">Montana</option>
-                                            <option value="NE">Nebraska</option>
-                                            <option value="NV">Nevada</option>
-                                            <option value="NH">New Hampshire</option>
-                                            <option value="NJ">New Jersey</option>
-                                            <option value="NM">New Mexico</option>
-                                            <option value="NY">New York</option>
-                                            <option value="NC">North Carolina</option>
-                                            <option value="ND">North Dakota</option>
-                                            <option value="OH">Ohio</option>
-                                            <option value="OK">Oklahoma</option>
-                                            <option value="OR">Oregon</option>
-                                            <option value="PA">Pennsylvania</option>
-                                            <option value="RI">Rhode Island</option>
-                                            <option value="SC">South Carolina</option>
-                                            <option value="SD">South Dakota</option>
-                                            <option value="TN">Tennessee</option>
-                                            <option value="TX">Texas</option>
-                                            <option value="UT">Utah</option>
-                                            <option value="VT">Vermont</option>
-                                            <option value="VA">Virginia</option>
-                                            <option value="WA">Washington</option>
-                                            <option value="WV">West Virginia</option>
-                                            <option value="WI">Wisconsin</option>
-                                            <option value="WY">Wyoming</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="space-4"></div>
-
-                                <div class="form-group">
-                                    <label for="form-field-username">Username</label>
-
-                                    <div>
-                                        <input type="text" id="form-field-username" placeholder="Username" value="alexdoe" />
-                                    </div>
-                                </div>
-
-                                <div class="space-4"></div>
-
-                                <div class="form-group">
-                                    <label for="form-field-first">Name</label>
-
-                                    <div>
-                                        <input type="text" id="form-field-first" placeholder="First Name" value="Alex" />
-                                        <input type="text" id="form-field-last" placeholder="Last Name" value="Doe" />
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
-                    </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-sm" data-dismiss="modal">
+                                <i class="ace-icon fa fa-times"></i>
+                                Cancel
+                            </button>
 
-                    <div class="modal-footer">
-                        <button class="btn btn-sm" data-dismiss="modal">
-                            <i class="ace-icon fa fa-times"></i>
-                            Cancel
-                        </button>
+                            <button class="btn btn-sm btn-primary">
+                                <i class="ace-icon fa fa-check"></i>
+                                Save
+                            </button>
+                        </div>
+                    </form>
 
-                        <button class="btn btn-sm btn-primary">
-                            <i class="ace-icon fa fa-check"></i>
-                            Save
-                        </button>
-                    </div>
                 </div>
             </div>
         </div><!-- PAGE CONTENT ENDS -->
     </div><!-- /.col -->
 
 </div><!-- /.row -->
+

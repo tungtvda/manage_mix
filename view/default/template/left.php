@@ -371,8 +371,8 @@
         </div><!-- /.sidebar-shortcuts -->
 
         <ul class="nav nav-list">
-            <li class="">
-                <a href="index.html">
+            <li class="<?php echo $trangchu_active?>">
+                <a  href="<?php echo SITE_NAME?>">
                     <i class="menu-icon fa fa-tachometer"></i>
                     <span class="menu-text"> Dashboard </span>
                 </a>

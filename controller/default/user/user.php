@@ -18,7 +18,10 @@ $data['breadcrumbs']=$url_bread;
 $data['title']='Danh sách nhân viên';
 $count=8;
 $data['list']=user_getByTop('','','updated asc');
-
+if(isset($_FILES['image'])){
+    print_r($_FILES['image']);
+    exit;
+}
 show_header($data);
 show_left($data,'user','user_list');
 show_breadcrumb($data);

@@ -22,5 +22,4 @@ show_breadcrumb($data);
 show_navigation($data);
 show_index($data);
 show_footer($data);
-show_footer($data);
 show_script_table($data);

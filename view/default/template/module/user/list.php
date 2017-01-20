@@ -9,11 +9,7 @@
 <div class="page-header">
     <input hidden value="<?php echo SITE_NAME?>" id="url_input">
     <h1>
-        Users
-        <small>
-            <i class="ace-icon fa fa-angle-double-right"></i>
-            List users
-        </small>
+        Danh sách nhân viên
     </h1>
 
 </div><!-- /.page-header -->

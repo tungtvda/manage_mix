@@ -42,7 +42,7 @@
                             </div>
                             <div class="easyui-panel" style="padding:5px">
                                 <form action="" method="post">
-                                    <ul id="tt" class="easyui-tree" data-options="url:'tree_data1.json',method:'get',animate:true,checkbox:true"></ul>
+                                    <ul id="tt" class="easyui-tree" data-options="url:'<?php echo SITE_NAME?>/tree_data1.json',method:'get',animate:true,checkbox:true"></ul>
                                     <input type="submit" value="test">
                                 </form>
 

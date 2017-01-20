@@ -5,10 +5,6 @@ function view_index($data)
 {
     $ft = new FastTemplate(DIR . '/view/admin/templates');
     $ft->assign('USER-NAME', isset($data['username']) ? $data['username'] : '');
-    $ft->assign('count_contact',$_SESSION['contact']);
-    $ft->assign('count_booking',$_SESSION['booking_table']);
-    $ft->assign('count_dangky',$_SESSION['dangky_email']);
-    $ft->assign('count_danhgia',$_SESSION['danhgia_thucdon']);
     $ft->define('header', 'header.tpl');
     $ft->define('body', 'body.tpl');
     $ft->define('footer', 'footer.tpl');

@@ -15,4 +15,5 @@ RewriteRule ^doi-mat-khau-login/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]
 RewriteRule ^nhan-vien/$ controller/default/user/user.php
 RewriteRule ^update-status/$ controller/default/function_share/update_status.php
 RewriteRule ^nhan-vien/xoa/([0-9]+)$ controller/default/user/user_delete.php
+RewriteRule ^nhan-vien/phan-quyen/([0-9]+)$ controller/default/user/phanquyen.php?id=$1
 

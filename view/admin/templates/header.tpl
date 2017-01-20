@@ -76,32 +76,13 @@
                 <li class="nav-header">Main Navigation</li>
                 <li class="{kichhoat}"><a href="{SITE-NAME}/admin"><span class="icon-align-justify"></span> Dashboard</a></li>
                 <li class="{kichhoat_admin}" ><a href="{SITE-NAME}/controller/admin/admin.php"><span class="icon-user"></span> Tài khoản quản trị</a></li>
-                <li class="{kichhoat_config}"><a href="{SITE-NAME}/controller/admin/config.php"><span class=" icon-wrench"></span> Cấu hình hệ thống</a></li>
-                <li class="{kichhoat_dathang}"><a href="{SITE-NAME}/controller/admin/booking_table.php"><span class="icon-shopping-cart"></span> Đặt Bàn <span style="color: red; float: right">{count_booking}</span></a></li>
-                <li class="{kichhoat_lienhe}"><a href="{SITE-NAME}/controller/admin/contact.php"><span class="icon-envelope"></span> Liên hệ <span style="color: red; float: right">{count_contact}</span></a></li>
-                <li class="{kichhoat_dangky}"><a href="{SITE-NAME}/controller/admin/dangky_email.php"><span class="icon-envelope"></span> Đăng ký email <span style="color: red; float: right">{count_dangky}</span></a></li>
-                <li class="{kichhoat_danhgia}"><a href="{SITE-NAME}/controller/admin/danhgia.php"><span class="icon-envelope"></span> Đánh giá thực đơn <span style="color: red; float: right">{count_danhgia}</span></a></li>
-
-                <li class="dropdown {kichhoat_thucdon}" ><a href="#"><span class=" icon-plane"></span> Thực đơn</a>
+                <li class="dropdown {kichhoat_thucdon}" ><a href="#"><span class="icon-wrench"></span> Phân quyền module</a>
                     <ul>
-                        <li><a href="{SITE-NAME}/controller/admin/danhmuc1.php">Danh mục 1</a></li>
-                        <li><a href="{SITE-NAME}/controller/admin/danhmuc2.php">Danh mục 2</a></li>
-                        <li><a href="{SITE-NAME}/controller/admin/sanpham.php">Danh sách thực đơn </a></li>
+                        <li><a href="{SITE-NAME}/controller/admin/permison_module.php">Quyền module</a></li>
+                        <li><a href="{SITE-NAME}/controller/admin/permison_form.php">Quyền form</a></li>
+                        <li><a href="{SITE-NAME}/controller/admin/permison_action.php">Quyền action</a></li>
                     </ul>
-                </li>
-                <li class="dropdown {kichhoat_tintuc}"><a href="#"><span class=" icon-edit"></span> Cẩm nang</a>
-                    <ul>
-                        <li><a href="{SITE-NAME}/controller/admin/danhmuc_tintuc.php">Danh mục</a></li>
-                        <li><a href="{SITE-NAME}/controller/admin/news.php">Danh sách </a></li>
-                    </ul>
-                </li>
 
-                <li class="{kichhoat_tuyendung}"><a href="{SITE-NAME}/controller/admin/tuyendung.php"><span class="icon-facetime-video"></span> Tuyển dụng </a></li>
-                <li class="{kichhoat_gioithieu}"><a href="{SITE-NAME}/controller/admin/info.php"><span class="icon-facetime-video"></span> Giới thiệu</a></li>
-                <li class="{kichhoat_slide}"><a href="{SITE-NAME}/controller/admin/slide.php"><span class="icon-film"></span> Slide</a></li>
-                <li class="{kichhoat_menu}"><a href="{SITE-NAME}/controller/admin/menu.php"><span class="icon-th-list"></span> Cấu hình menu</a></li>
-                <li class="{kichhoat_mangxahoi}"><a href="{SITE-NAME}/controller/admin/social.php"><span class=" iconfa-facebook"></span> Mạng xã hội</a></li>
-                <li class="{kichhoat_ykien}"><a href="{SITE-NAME}/controller/admin/ykien.php"><span class="icon-comment"></span> Ý kiến khách hàng</a></li>
             </ul>
         </div>
         <!--leftmenu-->

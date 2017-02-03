@@ -28,4 +28,4 @@ show_breadcrumb($data);
 show_navigation($data);
 show_user_phanquyen($data);
 show_footer($data);
-show_script_table($data);
+//show_script_table($data);

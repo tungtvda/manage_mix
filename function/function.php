@@ -149,6 +149,7 @@ function _returnRandString( $length ) {
 function _returnLogin($data_arr,$user_update){
     $_SESSION["user_id"]=$data_arr['user_id'];
     $_SESSION["user_role"]=$data_arr['user_role'];
+    $_SESSION["user_name"]=$data_arr['user_name'];
     $_SESSION['user_permison_action']=$data_arr['user_permison_action'];
     $_SESSION['user_permison_form']=$data_arr['user_permison_form'];
     $_SESSION['user_permison_module']=$data_arr['user_permison_module'];

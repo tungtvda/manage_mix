@@ -102,6 +102,33 @@ jQuery(function ($) {
             }
         })
     });
+    $('.easyui-linkbutton').on('click', function () {
+        var nodes = $('#tt').tree('getChecked');
+        var test=JSON.stringify($('#tt').tree('getChecked'));
+        console.log(nodes);
+        $.ajax({
+            method: "GET",
+            url: 'http://localhost/manage_mix/update-phan-quyen',
+            data: "id=" + test,
+            success: function (response) {
 
+            }
+        });
+                                    //$.ajax({
+                                    //    "url": 'http://localhost/manage_mix/update-phan-quyen',
+                                    //    "method": 'POST',
+                                    //    "processData": false, // Don't process the files
+                                    //    "contentType": false,
+                                    //    "dataType": "json",
+                                    //    "data": nodes, // $form.serialize()
+                                    //    error: function (xhr, status, error) {
+                                    //    }
+                                    //})
+//                                    var s = '';
+//                                    for(var i=0; i<nodes.length; i++){
+//                                        if (s != '') s += ',';
+//                                        s += nodes[i].text;
+//                                    }
+    });
 
 });

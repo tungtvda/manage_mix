@@ -38,6 +38,7 @@ if(isset($_POST['login'])&&isset($_POST['username_login'])&&isset($_POST['passwo
                 $user_role=$data_check[0]->user_role;
                 $login_two_steps=$data_check[0]->login_two_steps;
                 $user_email=$data_check[0]->user_email;
+                $user_name=$data_check[0]->name;
                 $user_role=$data_check[0]->user_role;
                 $user_permison_action=$data_check[0]->permison_action;
                 $user_permison_form=$data_check[0]->permison_form;
@@ -63,6 +64,7 @@ if(isset($_POST['login'])&&isset($_POST['username_login'])&&isset($_POST['passwo
                     $data_arr=array(
                         'user_id'=>$id,
                         'user_role'=>$user_role,
+                        'user_name'=>$user_name,
                         'user_permison_action'=>$user_permison_action,
                         'user_permison_form'=>$user_permison_form,
                         'user_permison_module'=>$user_permison_module

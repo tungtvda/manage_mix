@@ -16,4 +16,6 @@ RewriteRule ^nhan-vien/$ controller/default/user/user.php
 RewriteRule ^update-status/$ controller/default/function_share/update_status.php
 RewriteRule ^nhan-vien/xoa/([0-9]+)$ controller/default/user/user_delete.php
 RewriteRule ^nhan-vien/phan-quyen/([0-9]+)$ controller/default/user/phanquyen.php?id=$1
+RewriteRule ^tree-phan-quyen$ controller/default/user/tree.php
+RewriteRule ^update-phan-quyen$ controller/default/user/phanquyen_update.php
 

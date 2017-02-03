@@ -159,7 +159,7 @@
                                                 <a title="Xóa"  class="red delete_record" href="javascript:void(0)" deleteid="<?php echo $row->id?>" name_record_delete="<?php echo $row->name?>" url_delete="<?php echo SITE_NAME?>/nhan-vien/xoa/">
                                                     <i class="ace-icon fa fa-trash-o bigger-130"></i>
                                                 </a>
-                                                <a title="Phân quyền" class="blue" href="<?php echo SITE_NAME?>/nhan-vien/phan-quyen/<?php echo $row->id?>">
+                                                <a title="Phân quyền" class="blue" href="<?php echo SITE_NAME?>/nhan-vien/phan-quyen?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
                                                     <i class="ace-icon fa fa-cogs bigger-130"></i>
                                                 </a>
                                             </div>

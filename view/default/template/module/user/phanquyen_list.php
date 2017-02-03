@@ -23,7 +23,7 @@
                 <div class="widget-box widget-color-blue2">
                     <div class="widget-body">
                         <div class="widget-main padding-8">
-
+                            <input hidden value="<?php echo $user_id?>" id="id_user_hidden">
                             <div style="margin:20px 0;">
                                 <a href="javascript:void(0)" class="easyui-linkbutton btn btn-white  btn-create-new-tab btn-create-new-tab-hover"> <i class="ace-icon fa fa-edit bigger-120 "></i> Cập nhật quyền</a>
                             </div>
@@ -33,7 +33,7 @@
                             </div>
                             <div class="easyui-panel" style="padding:5px">
                                 <form action="" method="post">
-                                    <ul id="tt" class="easyui-tree" data-options="url:'<?php echo SITE_NAME?>/tree-phan-quyen',method:'get',animate:true,checkbox:true"></ul>
+                                    <ul id="tt" class="easyui-tree" data-options="url:'<?php echo SITE_NAME?>/tree-phan-quyen?id=<?php echo $user_id?>',method:'get',animate:true,checkbox:true"></ul>
                                 </form>
 
                             </div>

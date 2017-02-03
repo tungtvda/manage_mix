@@ -11,8 +11,10 @@ if(!defined('SITE_NAME'))
 }
 require_once DIR.'/controller/default/public.php';
 require_once DIR.'/function/function.php';
+
+ $id_user=_return_mc_decrypt(_returnGetParamSecurity('id'), ENCRYPTION_KEY);
 _returnCheckExitUser();
-$data_user=user_getById($_SESSION['user_id']);
+$data_user=user_getById($id_user);
 if(count($data_user)==0)
 {
     redict(_returnLinkDangNhap());

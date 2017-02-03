@@ -10,6 +10,7 @@ require_once DIR . '/common/cls_fast_template.php';
 function show_user_phanquyen($data = array())
 {
     $asign = array();
+    $user_id=$data['id_user'];
     require_once DIR . '/view/default/template/module/user/phanquyen_list.php';
 }
 

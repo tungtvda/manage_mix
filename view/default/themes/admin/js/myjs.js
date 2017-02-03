@@ -105,11 +105,14 @@ jQuery(function ($) {
     $('.easyui-linkbutton').on('click', function () {
         var nodes = $('#tt').tree('getChecked');
         var test=JSON.stringify($('#tt').tree('getChecked'));
-        console.log(nodes);
+        id = $('#id_user_hidden').val();
         $.ajax({
-            method: "GET",
+            method: "POST",
             url: 'http://localhost/manage_mix/update-phan-quyen',
-            data: "id=" + test,
+            data : { // Danh sách các thuộc tính sẽ gửi đi
+                value : test,
+                id: id
+            },
             success: function (response) {
 
             }

@@ -108,3 +108,7 @@ function user_update_status($obj)
 {
     return exe_query("update user set status='$obj->status' where id=$obj->id",'user');
 }
+function user_update_quyen($obj)
+{
+    return exe_query("update user set permison_module='$obj->permison_module', permison_form='$obj->permison_form',permison_action='$obj->permison_action' where id=$obj->id",'user');
+}

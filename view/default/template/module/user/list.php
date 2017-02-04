@@ -7,7 +7,7 @@
  */
 ?>
 <div class="page-header">
-    <input hidden value="<?php echo SITE_NAME?>" id="url_input">
+
     <h1>
         Danh sách nhân viên
     </h1>

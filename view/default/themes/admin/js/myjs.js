@@ -13,10 +13,10 @@ jQuery(function ($) {
         var link = url + '/update-status/';
         var field_check = "checkbox_status_" + idSelect;
         lnv.confirm({
-            title: 'Xác nhận cập nhật trạng thái',
-            content: 'Bạn chắc chắn rằng muốn cập nhật trạng thái của </br><b>"'+name_record+'"</b>',
+            title: '<label class="orange">Xác nhận cập nhật trạng thái</label>',
+            content: 'Bạn chắc chắn rằng muốn cập nhật trạng thái của </br><b>"'+name_record+'"</b> ?',
             confirmBtnText: 'Ok',
-            iconBtnText:'<i style="color: #669fc7;" class="ace-icon fa fa-check"></i>',
+            iconBtnText:'<i style="color: #669fc7;" class="ace-icon fa fa-question orange"></i>',
             confirmHandler: function () {
                 if(idSelect==''||table==''||field==''||name_record==''||link==''){
                     lnv.alert({
@@ -105,16 +105,39 @@ jQuery(function ($) {
     $('.easyui-linkbutton').on('click', function () {
         var nodes = $('#tt').tree('getChecked');
         var test=JSON.stringify($('#tt').tree('getChecked'));
+        var url = $('#url_input').val();
+        var link = url + '/update-phan-quyen';
         id = $('#id_user_hidden').val();
         $.ajax({
             method: "POST",
-            url: 'http://localhost/manage_mix/update-phan-quyen',
+            url: link,
             data : { // Danh sách các thuộc tính sẽ gửi đi
                 value : test,
                 id: id
             },
             success: function (response) {
+                if (response != 1) {
+                    lnv.alert({
+                        title: '<label class="red">Lỗi</label>',
+                        content: response,
+                        alertBtnText: 'Ok',
+                        iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                        alertHandler: function () {
 
+                        }
+                    });
+                }
+                else{
+                    lnv.alert({
+                        title: '<label class="green">Thông báo</label>',
+                        content: 'Cập nhật quyền thành công',
+                        alertBtnText: 'Ok',
+                        iconBtnText:'<i style="color: red;" class="ace-icon fa fa-check green"></i>',
+                        alertHandler: function () {
+
+                        }
+                    });
+                }
             }
         });
                                     //$.ajax({

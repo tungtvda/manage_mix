@@ -6,13 +6,16 @@
     z-index: 13;
     width: 85%;
     /*width: 320px;*/
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    top: 40%;
+    left: 0;
+    right: 0;
+    /*-webkit-transform: translate(-50%, -50%);*/
+    /*transform: translate(-50%, -50%);*/
     background-color: #FAFAFC;
     /*text-align: center;*/
-    border-radius: 3px;
+    /*border-radius: 3px;*/
+    float: left;
+    margin: auto;
 }
 .widget-header-confirm{
     background-image: linear-gradient(to bottom,#fff 0,#eee 100%);

@@ -21,7 +21,7 @@ _returnCheckPermison(0,0);
 $_SESSION['link_redict']='http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 $url_bread='<li class="active">Nhân viên</li>';
 $data['breadcrumbs']=$url_bread;
-$data['title']='Danh sách nhân viên';
+$data['title']='Phân quyền tài khoản người dùng';
 $count=8;
 $data['list']=user_getByTop('','','updated asc');
 if(isset($_FILES['image'])){

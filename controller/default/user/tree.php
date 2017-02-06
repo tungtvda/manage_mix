@@ -19,24 +19,27 @@ if(count($data_user)==0)
 {
     redict(_returnLinkDangNhap());
 }
-
+$checked_cha=false;
+if($data_user[0]->user_role==1){
+    $checked_cha=true;
+}
 $permison_module=explode(',',$data_user[0]->permison_module);
 $permison_form=explode(',',$data_user[0]->permison_form);
 $permison_action=explode(',',$data_user[0]->permison_action);
 
 
-$data_permison_module=permison_module_getByTop('','id!=1','position asc');
+$data_permison_module=permison_module_getByTop('','id!=1 and status=1','position asc');
 $arr_module=array();
 if(count($data_permison_module)>0){
     foreach($data_permison_module as $row_module){
         $check_exit_action=0;
-        $data_permison_form=permison_form_getByTop('','id!=1 and module_id='.$row_module->id,'position asc');
+        $data_permison_form=permison_form_getByTop('','id!=1 and status=1 and module_id='.$row_module->id,'position asc');
         $arr_form=array();
         if(count($data_permison_form)>0)
         {
             foreach($data_permison_form as $row_form){
                 $arr_action=array();
-                $data_permison_action=permison_action_getByTop('','form_id='.$row_form->id,'position desc');
+                $data_permison_action=permison_action_getByTop('',' status=1 and form_id='.$row_form->id,'position asc');
                 if(count($data_permison_action)>0)
                 {
                     foreach($data_permison_action as $row_action){
@@ -80,7 +83,7 @@ if(count($data_permison_module)>0){
                 array_push($arr_form,$item_form);
             }
         }else{
-            $data_permison_action=permison_action_getByTop('','module_id='.$row_module->id,'position desc');
+            $data_permison_action=permison_action_getByTop('','status=1 and module_id='.$row_module->id,'position asc');
             if(count($data_permison_action)>0)
             {
                 $check_exit_action=1;
@@ -129,6 +132,7 @@ if(count($data_permison_module)>0){
             "children"=>$children_module,
             "check_module"=>$row_module->id,
             "check_form"=>'',
+            "checked"=>$checked_cha,
         );
 
         array_push($arr_module,$item_module);

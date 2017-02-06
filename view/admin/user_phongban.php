@@ -1,7 +1,7 @@
 <?php
 require_once DIR.'/common/paging.php';
 require_once DIR.'/common/cls_fast_template.php';
-function view_permison_form($data)
+function view_user_phongban($data)
 {
     $ft=new FastTemplate(DIR.'/view/admin/templates');
     $ft->define('header','header.tpl');
@@ -15,7 +15,7 @@ function view_permison_form($data)
     $ft->assign('TABLE-HEADER',showTableHeader());
     $ft->assign('PAGING',showPaging($data['count_paging'],20,$data['page']));
     $ft->assign('TABLE-BODY',showTableBody($data['table_body']));
-    $ft->assign('TABLE-NAME','permison_form');
+    $ft->assign('TABLE-NAME','user_phongban');
     $ft->assign('CONTENT-BOX-LEFT',isset($data['content_box_left'])?$data['content_box_left']:'');
     $ft->assign('CONTENT-BOX-RIGHT',isset($data['content_box_right'])?$data['content_box_right']:' ');
     $ft->assign('NOTIFICATION',isset($data['notification'])?$data['notification']:' ');
@@ -29,7 +29,7 @@ function view_permison_form($data)
 //
 function showTableHeader()
 {
-    return '<th>id</th><th>module_id</th><th>name</th><th>url</th><th>action_count</th><th>dk_count</th><th>active</th><th>status</th><th>position</th>';
+    return '<th>id</th><th>name</th><th>position</th><th>description</th>';
 }
 //
 function showTableBody($data)
@@ -39,14 +39,9 @@ function showTableBody($data)
     {
         $TableBody.="<tr><td><input type=\"checkbox\" name=\"check_".$obj->id."\"/></td>";
         $TableBody.="<td>".$obj->id."</td>";
-        $TableBody.="<td>".$obj->module_id."</td>";
         $TableBody.="<td>".$obj->name."</td>";
-        $TableBody.="<td>".$obj->url."</td>";
-        $TableBody.="<td>".$obj->action_count."</td>";
-        $TableBody.="<td>".$obj->dk_count."</td>";
-        $TableBody.="<td>".$obj->active."</td>";
-        $TableBody.="<td>".$obj->status."</td>";
         $TableBody.="<td>".$obj->position."</td>";
+        $TableBody.="<td>".$obj->description."</td>";
         $TableBody.="<td><a href=\"?action=edit&id=".$obj->id."\" title=\"Edit\"><img src=\"".SITE_NAME."/view/admin/Themes/images/pencil.png\" alt=\"Edit\"></a>";
         $TableBody.="<a href=\"?action=delete&id=".$obj->id."\" title=\"Delete\" onClick=\"return confirm('Bạn có chắc chắc muốn xóa?')\"><img src=\"".SITE_NAME."/view/admin/Themes/images/cross.png\" alt=\"Delete\"></a> ";
         $TableBody.="</td>";
@@ -58,22 +53,8 @@ function showTableBody($data)
 function showFrom($form,$ListKey=array())
 {
     $str_from='';
-    $str_from.='<p><label>module_id</label>';
-    $str_from.='<select name="module_id">';
-    if(isset($ListKey['module_id']))
-    {
-        foreach($ListKey['module_id'] as $key)
-        {
-            $str_from.='<option value="'.$key->id.'" '.(($form!=false)?(($form->module_id==$key->id)?'selected':''):'').'>'.$key->name.'</option>';
-        }
-    }
-    $str_from.='</select></p>';
     $str_from.='<p><label>name</label><input class="text-input small-input" type="text"  name="name" value="'.(($form!=false)?$form->name:'').'" /></p>';
-    $str_from.='<p><label>url</label><input class="text-input small-input" type="text"  name="url" value="'.(($form!=false)?$form->url:'').'" /></p>';
-    $str_from.='<p><label>action_count</label><input class="text-input small-input" type="text"  name="action_count" value="'.(($form!=false)?$form->action_count:'').'" /></p>';
-    $str_from.='<p><label>dk_count</label><input class="text-input small-input" type="text"  name="dk_count" value="'.(($form!=false)?$form->dk_count:'').'" /></p>';
-    $str_from.='<p><label>active</label><input class="text-input small-input" type="text"  name="active" value="'.(($form!=false)?$form->active:'').'" /></p>';
-    $str_from.='<p><label>status</label><input  type="checkbox"  name="status" value="1" '.(($form!=false)?(($form->status=='1')?'checked':''):'').' /></p>';
     $str_from.='<p><label>position</label><input class="text-input small-input" type="text"  name="position" value="'.(($form!=false)?$form->position:'').'" /></p>';
+    $str_from.='<p><label>description</label><input class="text-input small-input" type="text"  name="description" value="'.(($form!=false)?$form->description:'').'" /></p>';
     return $str_from;
 }

@@ -156,5 +156,16 @@ jQuery(function ($) {
 //                                        s += nodes[i].text;
 //                                    }
     });
+    $('body').on('click','.fa-angle-double-left', function () {
+        $( "#sidebar" ).addClass("menu-min");
+        $( "#sidebar-toggle-icon" ).removeClass("fa-angle-double-left");
+        $( "#sidebar-toggle-icon" ).addClass("fa-angle-double-right");
+    });
 
+    $('body').on('click','.fa-angle-double-right',function(){
+        $( "#sidebar" ).removeClass("menu-min");
+        $( "#sidebar-toggle-icon" ).removeClass("fa-angle-double-right");
+        $( "#sidebar-toggle-icon" ).addClass("fa-angle-double-left");
+
+    });
 });

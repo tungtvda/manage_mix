@@ -56,7 +56,7 @@ if(isset($_SESSION["Admin"]))
             header('Location: '.SITE_NAME.'/controller/admin/permison_form.php');
         }
     }
-    if(isset($_POST["module_id"])&&isset($_POST["name"])&&isset($_POST["url"])&&isset($_POST["position"]))
+    if(isset($_POST["module_id"])&&isset($_POST["name"])&&isset($_POST["url"])&&isset($_POST["action_count"])&&isset($_POST["dk_count"])&&isset($_POST["active"])&&isset($_POST["position"]))
     {
        $array=$_POST;
        if(!isset($array['id']))
@@ -67,6 +67,12 @@ if(isset($_SESSION["Admin"]))
        $array['name']='0';
        if(!isset($array['url']))
        $array['url']='0';
+       if(!isset($array['action_count']))
+       $array['action_count']='0';
+       if(!isset($array['dk_count']))
+       $array['dk_count']='0';
+       if(!isset($array['active']))
+       $array['active']='0';
        if(!isset($array['status']))
        $array['status']='0';
        if(!isset($array['position']))

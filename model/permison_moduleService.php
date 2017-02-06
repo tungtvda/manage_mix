@@ -62,17 +62,17 @@ function permison_module_getByPaging($CurrentPage, $PageSize,$Order,$where)
 //
 function permison_module_getByPagingReplace($CurrentPage, $PageSize,$Order,$where)
 {
-   return permison_module_Get("SELECT permison_module.id, permison_module.name, permison_module.url, permison_module.status, permison_module.position FROM  permison_module ".(($where!='')?(' where '.$where):'')." Order By ".$Order." Limit ".(($CurrentPage-1)*$PageSize)." , ".$PageSize);
+   return permison_module_Get("SELECT permison_module.id, permison_module.name, permison_module.icon, permison_module.url, permison_module.action_count, permison_module.dk_count, permison_module.active, permison_module.status, permison_module.position FROM  permison_module ".(($where!='')?(' where '.$where):'')." Order By ".$Order." Limit ".(($CurrentPage-1)*$PageSize)." , ".$PageSize);
 }
 //
 function permison_module_insert($obj)
 {
-    return exe_query("insert into permison_module (name,url,status,position) values ('$obj->name','$obj->url','$obj->status','$obj->position')",'permison_module');
+    return exe_query("insert into permison_module (name,icon,url,action_count,dk_count,active,status,position) values ('$obj->name','$obj->icon','$obj->url','$obj->action_count','$obj->dk_count','$obj->active','$obj->status','$obj->position')",'permison_module');
 }
 //
 function permison_module_update($obj)
 {
-    return exe_query("update permison_module set name='$obj->name',url='$obj->url',status='$obj->status',position='$obj->position' where id=$obj->id",'permison_module');
+    return exe_query("update permison_module set name='$obj->name',icon='$obj->icon',url='$obj->url',action_count='$obj->action_count',dk_count='$obj->dk_count',active='$obj->active',status='$obj->status',position='$obj->position' where id=$obj->id",'permison_module');
 }
 //
 function permison_module_delete($obj)

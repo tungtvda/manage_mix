@@ -82,7 +82,9 @@
                         <li><a href="{SITE-NAME}/controller/admin/permison_form.php">Quyền form</a></li>
                         <li><a href="{SITE-NAME}/controller/admin/permison_action.php">Quyền action</a></li>
                     </ul>
-
+                </li>
+                <li class="{kichhoat_chucvu_nhanvien}" ><a href="{SITE-NAME}/controller/admin/user_chucvu.php"><span class="icon-user"></span> Chức vụ nhân viên</a></li>
+                <li class="{kichhoat_phongban_nhanvien}" ><a href="{SITE-NAME}/controller/admin/user_phongban.php"><span class="icon-user"></span> Phòng ban nhân viên</a></li>
             </ul>
         </div>
         <!--leftmenu-->

@@ -11,7 +11,7 @@ if(!defined('SITE_NAME'))
 }
 require_once DIR.'/controller/default/public.php';
 $data=array();
-_returnCheckPermison(0,0);
+_returnCheckPermison(5,0);
 $url_bread='<li><a href="">Trang chủ</a></li><li class="active">List</li>';
 $data['breadcrumbs']=$url_bread;
 $data['title']='Hệ thống quản lý MIXTOURIST';

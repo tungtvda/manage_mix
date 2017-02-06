@@ -29,7 +29,7 @@ function view_permison_module($data)
 //
 function showTableHeader()
 {
-    return '<th>id</th><th>name</th><th>url</th><th>status</th><th>position</th>';
+    return '<th>id</th><th>name</th><th>icon</th><th>url</th><th>action_count</th><th>dk_count</th><th>active</th><th>status</th><th>position</th>';
 }
 //
 function showTableBody($data)
@@ -40,7 +40,11 @@ function showTableBody($data)
         $TableBody.="<tr><td><input type=\"checkbox\" name=\"check_".$obj->id."\"/></td>";
         $TableBody.="<td>".$obj->id."</td>";
         $TableBody.="<td>".$obj->name."</td>";
+        $TableBody.="<td>".$obj->icon."</td>";
         $TableBody.="<td>".$obj->url."</td>";
+        $TableBody.="<td>".$obj->action_count."</td>";
+        $TableBody.="<td>".$obj->dk_count."</td>";
+        $TableBody.="<td>".$obj->active."</td>";
         $TableBody.="<td>".$obj->status."</td>";
         $TableBody.="<td>".$obj->position."</td>";
         $TableBody.="<td><a href=\"?action=edit&id=".$obj->id."\" title=\"Edit\"><img src=\"".SITE_NAME."/view/admin/Themes/images/pencil.png\" alt=\"Edit\"></a>";
@@ -55,8 +59,12 @@ function showFrom($form,$ListKey=array())
 {
     $str_from='';
     $str_from.='<p><label>name</label><input class="text-input small-input" type="text"  name="name" value="'.(($form!=false)?$form->name:'').'" /></p>';
+    $str_from.='<p><label>icon</label><input class="text-input small-input" type="text"  name="icon" value="'.(($form!=false)?$form->icon:'').'" /></p>';
     $str_from.='<p><label>url</label><input class="text-input small-input" type="text"  name="url" value="'.(($form!=false)?$form->url:'').'" /></p>';
-    $str_from.='<p><label>status</label><input class="text-input small-input" type="text"  name="status" value="'.(($form!=false)?$form->status:'').'" /></p>';
+    $str_from.='<p><label>action_count</label><input class="text-input small-input" type="text"  name="action_count" value="'.(($form!=false)?$form->action_count:'').'" /></p>';
+    $str_from.='<p><label>dk_count</label><input class="text-input small-input" type="text"  name="dk_count" value="'.(($form!=false)?$form->dk_count:'').'" /></p>';
+    $str_from.='<p><label>active</label><input class="text-input small-input" type="text"  name="active" value="'.(($form!=false)?$form->active:'').'" /></p>';
+    $str_from.='<p><label>status</label><input  type="checkbox"  name="status" value="1" '.(($form!=false)?(($form->status=='1')?'checked':''):'').' /></p>';
     $str_from.='<p><label>position</label><input class="text-input small-input" type="text"  name="position" value="'.(($form!=false)?$form->position:'').'" /></p>';
     return $str_from;
 }

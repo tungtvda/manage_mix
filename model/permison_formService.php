@@ -62,17 +62,17 @@ function permison_form_getByPaging($CurrentPage, $PageSize,$Order,$where)
 //
 function permison_form_getByPagingReplace($CurrentPage, $PageSize,$Order,$where)
 {
-   return permison_form_Get("SELECT permison_form.id, permison_module.name as module_id, permison_form.name, permison_form.url, permison_form.status, permison_form.position FROM  permison_form, permison_module where permison_module.id=permison_form.module_id  ".(($where!='')?(' and '.$where):'')." Order By ".$Order." Limit ".(($CurrentPage-1)*$PageSize)." , ".$PageSize);
+   return permison_form_Get("SELECT permison_form.id, permison_module.name as module_id, permison_form.name, permison_form.url, permison_form.action_count, permison_form.dk_count, permison_form.active, permison_form.status, permison_form.position FROM  permison_form, permison_module where permison_module.id=permison_form.module_id  ".(($where!='')?(' and '.$where):'')." Order By ".$Order." Limit ".(($CurrentPage-1)*$PageSize)." , ".$PageSize);
 }
 //
 function permison_form_insert($obj)
 {
-    return exe_query("insert into permison_form (module_id,name,url,status,position) values ('$obj->module_id','$obj->name','$obj->url','$obj->status','$obj->position')",'permison_form');
+    return exe_query("insert into permison_form (module_id,name,url,action_count,dk_count,active,status,position) values ('$obj->module_id','$obj->name','$obj->url','$obj->action_count','$obj->dk_count','$obj->active','$obj->status','$obj->position')",'permison_form');
 }
 //
 function permison_form_update($obj)
 {
-    return exe_query("update permison_form set module_id='$obj->module_id',name='$obj->name',url='$obj->url',status='$obj->status',position='$obj->position' where id=$obj->id",'permison_form');
+    return exe_query("update permison_form set module_id='$obj->module_id',name='$obj->name',url='$obj->url',action_count='$obj->action_count',dk_count='$obj->dk_count',active='$obj->active',status='$obj->status',position='$obj->position' where id=$obj->id",'permison_form');
 }
 //
 function permison_form_delete($obj)

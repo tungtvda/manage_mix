@@ -17,17 +17,14 @@ if(!isset($_GET['id'])||$_GET['id']=='')
 
 $data=array();
 $data['id_user']=_returnGetParamSecurity('id');
-_returnCheckPermison(0,0);
+_returnCheckPermison(3,2);
+if(_returnCheckAction(4)==0){
+    redict(_returnLinkDangNhap());
+}
 $_SESSION['link_redict']='http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 $url_bread='<li class="active">Nhân viên</li>';
 $data['breadcrumbs']=$url_bread;
 $data['title']='Phân quyền tài khoản người dùng';
-$count=8;
-$data['list']=user_getByTop('','','updated asc');
-if(isset($_FILES['image'])){
-    print_r($_FILES['image']);
-    exit;
-}
 show_header($data);
 show_left($data,'user','user_list');
 show_breadcrumb($data);

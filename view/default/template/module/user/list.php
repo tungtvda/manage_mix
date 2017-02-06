@@ -20,44 +20,47 @@
             <div class="col-xs-12">
                 <div class="clearfix">
                     <div class="col-md-6 col-sm-6 col-xs-12 pink" style="padding-left: 0px">
-                        <a href="#modal-form" role="button"  data-toggle="modal" class="green btn btn-white btn-create btn-hover-white">
-                            <i class="ace-icon fa fa-plus bigger-120 "></i>
-                            Create popup
-                            <i class="ace-icon fa fa-external-link"></i>
-                        </a>
-                        <a href="" class="btn btn-white  btn-create-new-tab btn-create-new-tab-hover" >
-                            <i class="ace-icon fa fa-plus bigger-120 "></i>
-                            Create new tab
-                            <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-                        </a>
-                        <a href="" class="btn btn-white  btn-refresh" >
+                        <?php if (_returnCheckAction(1) == 1) { ?>
+                            <a href="#modal-form" role="button" data-toggle="modal"
+                               class="green btn btn-white btn-create btn-hover-white">
+                                <i class="ace-icon fa fa-plus bigger-120 "></i>
+                                Create popup
+                                <i class="ace-icon fa fa-external-link"></i>
+                            </a>
+                            <a href="<?php echo SITE_NAME ?>/nhan-vien/them-moi" class="btn btn-white  btn-create-new-tab btn-create-new-tab-hover">
+                                <i class="ace-icon fa fa-plus bigger-120 "></i>
+                                Create new tab
+                                <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+                            </a>
+                        <?php } ?>
+                        <a href="" class="btn btn-white  btn-refresh">
                             <i class="ace-icon fa fa-refresh"></i>
                             Refresh
                         </a>
                         <div class="btn-group">
-                            <button data-toggle="dropdown" class="btn btn-sm btn-danger dropdown-toggle btn-action-gird" aria-expanded="false">
+                            <button data-toggle="dropdown" class="btn btn-sm btn-danger dropdown-toggle btn-action-gird"
+                                    aria-expanded="false">
                                 Action
                                 <i class="ace-icon fa fa-angle-down icon-on-right"></i>
                             </button>
 
                             <ul class="dropdown-menu dropdown-danger">
-                                <li>
-                                    <a href="">Edit</a>
-                                </li>
-
-                                <li>
-                                    <a href="">Delete</a>
-                                </li>
-
-                                <li>
-                                    <a href="">Something else here</a>
-                                </li>
-
+                                <?php if (_returnCheckAction(2) == 1) { ?>
+                                    <li>
+                                        <a class="edit_function" href="<?php echo SITE_NAME ?>/nhan-vien/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">Sửa</a>
+                                    </li>
+                                <?php } ?>
+                                <?php if (_returnCheckAction(3) == 1) { ?>
+                                    <li>
+                                        <a class="delete_function" href="<?php echo SITE_NAME ?>/nhan-vien/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">Xóa</a>
+                                    </li>
+                                <?php } ?>
                                 <li class="divider"></li>
-
-                                <li>
-                                    <a href="">Separated link</a>
-                                </li>
+                                <?php if (_returnCheckAction(1) == 1) { ?>
+                                    <li>
+                                        <a href="<?php echo SITE_NAME ?>/nhan-vien/them-moi">Thêm</a>
+                                    </li>
+                                <?php } ?>
                             </ul>
                         </div>
                     </div>
@@ -80,7 +83,7 @@
                         <tr>
                             <th class="center">
                                 <label class="pos-rel">
-                                    <input type="checkbox" class="ace" />
+                                    <input type="checkbox" class="ace"/>
                                     <span class="lbl"></span>
                                 </label>
                             </th>
@@ -91,131 +94,163 @@
                             <th>Gender</th>
                             <th>Status</th>
 
-                            <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1" aria-label="
+                            <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1"
+                                aria-label="
 
 															Update
 														: activate to sort column ascending">
                                 <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
                                 Created
                             </th>
-                            <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1" aria-label="
+                            <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1"
+                                aria-label="
 
 															Update
 														: activate to sort column ascending">
                                 <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
                                 Update
                             </th>
-                            <th >Action</th>
+                            <th>Action</th>
 
                         </tr>
                         </thead>
                         <form action="" method="post">
                             <tbody>
-                            <?php if(count($list)>0){?>
-                                <?php $dem=1;?>
-                                <?php foreach($list as $row){?>
+                            <?php if (count($list) > 0 && _returnCheckAction(5) == 1) { ?>
+                                <?php $dem = 1; ?>
+                                <?php foreach ($list as $row) { ?>
                                     <tr>
                                         <td class="center">
                                             <label class="pos-rel">
-                                                <input type="checkbox" class="ace click_check_list" value="<?php echo $row->id?>" />
+                                                <input type="checkbox" class="ace click_check_list"
+                                                       value="<?php echo $row->id ?>"/>
                                                 <span class="lbl"></span>
                                             </label>
                                         </td>
                                         <td>
-                                            <?php echo $dem;?>
+                                            <?php echo $dem; ?>
                                         </td>
                                         <td>
-                                            <a href="<?php echo SITE_NAME?>/nhan-vien/chi-tiet/<?php echo $row->id?>"><?php echo $row->name?></a>
+                                            <a href="<?php echo SITE_NAME ?>/nhan-vien/chi-tiet?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"><?php echo $row->name ?></a>
                                         </td>
-                                        <td><?php echo $row->user_email?></td>
-                                        <td><?php echo $row->phone?></td>
+                                        <td><?php echo $row->user_email ?></td>
+                                        <td><?php echo $row->phone ?></td>
                                         <td>
-                                            <span hidden><?php echo (int)$row->gender?></span>
-                                            <?php if($row->gender==0) echo ' <i style="font-size: 20px;" class="fa fa-male"></i>'?>
-                                            <?php if($row->gender==1) echo ' <i style="font-size: 20px; color: #ec008c" class="fa fa-female"></i>'?>
+                                            <span hidden><?php echo (int)$row->gender ?></span>
+                                            <?php if ($row->gender == 0) echo ' <i style="font-size: 20px;" class="fa fa-male"></i>' ?>
+                                            <?php if ($row->gender == 1) echo ' <i style="font-size: 20px; color: #ec008c" class="fa fa-female"></i>' ?>
                                         </td>
                                         <td>
-                                            <span hidden><?php echo (int)$row->status?></span>
+                                            <span hidden><?php echo (int)$row->status ?></span>
                                             <label>
-                                                <input <?php if($row->status) echo 'checked'?> id="checkbox_status_<?php echo $row->id?>" countid="<?php echo $row->id?>" name_record="<?php echo $row->name?>" table="user" field="status"  class="ace ace-switch ace-switch-7 checkbox_status" type="checkbox">
+                                                <input <?php if ($row->status) echo 'checked' ?>
+                                                    id="checkbox_status_<?php echo $row->id ?>"
+                                                    countid="<?php echo $row->id ?>"
+                                                    name_record="<?php echo $row->name ?>" table="user" field="status"
+                                                    class="ace ace-switch ace-switch-7 checkbox_status" type="checkbox">
                                                 <span class="lbl"></span>
                                             </label>
                                         </td>
-                                        <td><?php echo _returnDateFormatConvert($row->created)?></td>
-                                        <td><?php echo _returnDateFormatConvert($row->updated)?></td>
+                                        <td><?php echo _returnDateFormatConvert($row->created) ?></td>
+                                        <td><?php echo _returnDateFormatConvert($row->updated) ?></td>
 
                                         <td>
                                             <div class="hidden-sm hidden-xs action-buttons">
-                                                <a class="blue" href="#"  title="View popup">
-                                                    <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                                                <a class="blue" href="<?php echo SITE_NAME ?>/nhan-vien/chi-tiet?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>" title="Chi tiết">
+                                                    <i class="ace-icon fa fa-eye-slash bigger-130"></i>
                                                 </a>
-                                                <a class="" href="#" title="Sửa popup">
-                                                    <i class="ace-icon glyphicon glyphicon-edit"></i>
-                                                </a>
-                                                <a title="Sửa tab mới" class="green" href="<?php echo SITE_NAME?>/nhan-vien/sua/<?php echo $row->id?>">
-                                                    <i class="ace-icon fa fa-pencil bigger-130"></i>
-                                                </a>
+                                                <?php if (_returnCheckAction(2) == 1) { ?>
+                                                    <a class="" href="#" title="Sửa popup">
+                                                        <i class="ace-icon glyphicon glyphicon-edit"></i>
+                                                    </a>
 
-                                                <a title="Xóa"  class="red delete_record" href="javascript:void(0)" deleteid="<?php echo $row->id?>" name_record_delete="<?php echo $row->name?>" url_delete="<?php echo SITE_NAME?>/nhan-vien/xoa/">
-                                                    <i class="ace-icon fa fa-trash-o bigger-130"></i>
-                                                </a>
-                                                <a title="Phân quyền" class="blue" href="<?php echo SITE_NAME?>/nhan-vien/phan-quyen?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
-                                                    <i class="ace-icon fa fa-cogs bigger-130"></i>
-                                                </a>
+                                                    <a title="Sửa tab mới" class="green"
+                                                       href="<?php echo SITE_NAME ?>/nhan-vien/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
+                                                        <i class="ace-icon fa fa-pencil bigger-130"></i>
+                                                    </a>
+                                                <?php } ?>
+                                                <?php if (_returnCheckAction(3) == 1) { ?>
+                                                    <a title="Xóa" class="red delete_record" href="javascript:void(0)"
+                                                       deleteid="<?php echo $row->id ?>"
+                                                       name_record_delete="<?php echo $row->name ?>"
+                                                       url_delete="<?php echo SITE_NAME ?>/nhan-vien/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
+                                                        <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                                                    </a>
+                                                <?php } ?>
+                                                <?php if (_returnCheckAction(4) == 1) { ?>
+                                                    <a title="Phân quyền" class="blue"
+                                                       href="<?php echo SITE_NAME ?>/nhan-vien/phan-quyen?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
+                                                        <i class="ace-icon fa fa-cogs bigger-130"></i>
+                                                    </a>
+                                                <?php } ?>
                                             </div>
 
                                             <div class="hidden-md hidden-lg">
                                                 <div class="inline pos-rel">
-                                                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                                                    <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                            data-toggle="dropdown" data-position="auto">
                                                         <i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
                                                     </button>
 
                                                     <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
                                                         <li>
-                                                            <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                            <a href="#" class="tooltip-info" data-rel="tooltip"
+                                                               title="View">
 																				<span class="blue">
 																					<i class="ace-icon fa fa-search-plus bigger-120"></i>
 																				</span>
                                                             </a>
                                                         </li>
-
-                                                        <li>
-                                                            <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                        <?php if (_returnCheckAction(2) == 1) { ?>
+                                                            <li>
+                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
+                                                                   title="Sửa popup">
 																				<span class="green">
 																					<i class="ace-icon fa fa-pencil bigger-120"></i>
 																				</span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" class="tooltip-success" data-rel="tooltip" title="Chỉnh sửa">
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="<?php echo SITE_NAME ?>/nhan-vien/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                                   class="tooltip-success" data-rel="tooltip"
+                                                                   title="Sửa tab mới">
 																				<span class="">
 																					<i class="ace-icon glyphicon glyphicon-edit  bigger-120"></i>
 																				</span>
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a href="javascript:void(0)" deleteid="<?php echo $row->id?>" name_record_delete="<?php echo $row->name?>" url_delete="<?php echo SITE_NAME?>/nhan-vien/xoa/" class="tooltip-error delete_record"  title="Xóa">
+                                                                </a>
+                                                            </li>
+                                                        <?php } ?>
+                                                        <?php if (_returnCheckAction(3) == 1) { ?>
+                                                            <li>
+                                                                <a href="javascript:void(0)"
+                                                                   deleteid="<?php echo $row->id ?>"
+                                                                   name_record_delete="<?php echo $row->name ?>"
+                                                                   url_delete="<?php echo SITE_NAME ?>/nhan-vien/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                                   class="tooltip-error delete_record" title="Xóa">
 																				<span class="red">
 																					<i class="ace-icon fa fa-trash-o bigger-120"></i>
 																				</span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-																				<span class="green">
+                                                                </a>
+                                                            </li>
+                                                        <?php } ?>
+                                                        <?php if (_returnCheckAction(4) == 1) { ?>
+                                                            <li>
+                                                                <a href="#" class="tooltip-success " data-rel="tooltip"
+                                                                   title="Phân quyền">
+																				<span class="blue">
 																					<i class="ace-icon fa fa-cogs bigger-120"></i>
 																				</span>
-                                                            </a>
-                                                        </li>
+                                                                </a>
+                                                            </li>
+                                                        <?php } ?>
                                                     </ul>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
-                                    <?php $dem++;?>
-                                <?php }?>
-                            <?php }?>
+                                    <?php $dem++; ?>
+                                <?php } ?>
+                            <?php } ?>
                             </tbody>
                         </form>
 
@@ -223,32 +258,36 @@
                 </div>
                 <div class="hr hr-18 dotted hr-double"></div>
                 <div class="btn-groupn col-md-12" style="padding-left: 0px">
-                    <button data-toggle="dropdown" class="btn btn-sm btn-danger dropdown-toggle btn-action-gird" aria-expanded="false">
+                    <button data-toggle="dropdown" class="btn btn-sm btn-danger dropdown-toggle btn-action-gird"
+                            aria-expanded="false">
                         Action
                         <i class="ace-icon fa fa-angle-down icon-on-right"></i>
                     </button>
 
                     <ul class="dropdown-menu dropdown-danger">
+                        <?php if (_returnCheckAction(2) == 1) { ?>
                         <li>
-                            <a class="edit_function" href="javascript:void(0)">Sửa</a>
+                            <a class="edit_function" href="<?php echo SITE_NAME ?>/nhan-vien/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">Sửa</a>
                         </li>
-
+                        <?php } ?>
+                        <?php if (_returnCheckAction(3) == 1) { ?>
                         <li>
-                            <a class="delete_function" href="javascript:void(0)">Xóa</a>
+                            <a class="delete_function" href="<?php echo SITE_NAME ?>/nhan-vien/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">Xóa</a>
                         </li>
-
+                        <?php } ?>
                         <li class="divider"></li>
-
+                        <?php if (_returnCheckAction(1) == 1) { ?>
                         <li>
-                            <a href="<?php echo SITE_NAME?>/nhan-vien/them-moi/">Thêm</a>
+                            <a href="<?php echo SITE_NAME ?>/nhan-vien/them-moi">Thêm</a>
                         </li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>
         </div>
 
 
-        <div  id="modal-form" class="modal" tabindex="-1">
+        <div id="modal-form" class="modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -261,7 +300,8 @@
                                 <div class="form-group">
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <div id="preview">
-                                            <img class="img-responsive" src="<?php echo SITE_NAME?>/view/default/themes/images/no-image.jpg">
+                                            <img class="img-responsive"
+                                                 src="<?php echo SITE_NAME ?>/view/default/themes/images/no-image.jpg">
                                         </div>
 
                                         <input name="image" type="file" id="id-input-file-2"/>
@@ -338,7 +378,8 @@
                                         <label for="form-field-username">Username</label>
 
                                         <div>
-                                            <input type="text" id="form-field-username" placeholder="Username" value="alexdoe" />
+                                            <input type="text" id="form-field-username" placeholder="Username"
+                                                   value="alexdoe"/>
                                         </div>
                                     </div>
 
@@ -348,8 +389,10 @@
                                         <label for="form-field-first">Name</label>
 
                                         <div>
-                                            <input type="text" id="form-field-first" placeholder="First Name" value="Alex" />
-                                            <input type="text" id="form-field-last" placeholder="Last Name" value="Doe" />
+                                            <input type="text" id="form-field-first" placeholder="First Name"
+                                                   value="Alex"/>
+                                            <input type="text" id="form-field-last" placeholder="Last Name"
+                                                   value="Doe"/>
                                         </div>
                                     </div>
                                 </div>

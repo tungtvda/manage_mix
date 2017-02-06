@@ -36,7 +36,7 @@
 </a>
 </div>
 
-
+<!--<script src="--><?php //echo SITE_NAME?><!--/view/default/themes/admin/assets/js/jquery-2.1.4.min.js"></script>-->
 <script src="<?php echo SITE_NAME?>/view/default/themes/admin/assets/js/jquery.2.1.1.min.js"></script>
 <script src="<?php echo SITE_NAME?>/view/default/themes/admin/assets/js/jquery.1.11.1.min.js"></script>
 

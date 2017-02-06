@@ -7,7 +7,7 @@
  */
 require_once DIR.'/model/userService.php';
 
-function _returnCheckPermison($module_id=0,$form_id=0){
+function _returnCheckPermison($module_id=0,$form_id=0, $action_id=0){
     // Kiểm tra có tồn tại user không
     _returnCheckExitUser();
     // Lấy thông tin user
@@ -28,7 +28,7 @@ function _returnCheckPermison($module_id=0,$form_id=0){
     $user_update->time_token=_returnGetDateTime();
     user_update_time_login($user_update);
     // kiểm tra quyền có phải là super admin
-    if($_SESSION['user_role']==1){
+    if($data_user[0]->user_role==1){
         return true;
     }
     $permison_module=explode(',',$data_user[0]->permison_module);
@@ -47,10 +47,51 @@ function _returnCheckPermison($module_id=0,$form_id=0){
             return true;
         }
     }
+
+
+
     $_SESSION['user_permison_action']=$permison_action;
     return true;
 
 }
+
+function _returnCheckAction($action_id=0){
+    // Kiểm tra có tồn tại user không
+    _returnCheckExitUser();
+    // Lấy thông tin user
+    $data_user=user_getById($_SESSION['user_id']);
+    if(count($data_user)==0)
+    {
+        redict(_returnLinkDangNhap());
+    }
+    // kiểm tra thời gian đăng nhập
+    $date_compare =$data_user[0]->time_token;
+    $date_check= date('Y-m-d H:i:s', strtotime('+15 minute', strtotime($date_compare)));
+    $currentDate=_returnGetDateTime();
+    if(strtotime($currentDate) > strtotime($date_check)) {
+        redict(_returnLinkDangNhap());
+    }
+    $user_update=new user();
+    $user_update->id=$_SESSION['user_id'];
+    $user_update->time_token=_returnGetDateTime();
+    user_update_time_login($user_update);
+    // kiểm tra quyền có phải là super admin
+    if($data_user[0]->user_role==1){
+        return true;
+    }
+    $permison_action=explode(',',$data_user[0]->permison_action);
+    if($action_id!=0){
+        if(!in_array($action_id,$permison_action)){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+    return true;
+
+}
+
 function _returnCheckPermisonAction($action_id=0){
     _returnCheckExitUser();
     if($action_id==0){
@@ -218,4 +259,46 @@ function _return_mc_decrypt($decrypt, $key) {
     $decoded=base64_decode($decoded);
     $decoded=base64_decode($decoded);
     return $decoded;
+}
+function _returnQuyen($stt){
+    _returnCheckExitUser();
+    $id=$_SESSION['user_id'];
+    $data_user=user_getById($id);
+    if(count($data_user)==0)
+    {
+        redict(_returnLinkDangNhap());
+    }
+    if($data_user[0]->user_role==1)
+    {
+        return array();
+    }
+    else{
+        if($stt==1)
+        {
+            $permison_module=explode(',',$data_user[0]->permison_module);
+            return $permison_module;
+        }
+        else{
+            if($stt==2)
+            {
+                $permison_form=explode(',',$data_user[0]->permison_form);
+                return $permison_form;
+            }else{
+                if($stt==2)
+                {
+                    $permison_action=explode(',',$data_user[0]->permison_action);
+                    return $permison_action;
+                }
+                else{
+                    return array('error');
+                }
+            }
+
+        }
+    }
+
+
+
+
+
 }

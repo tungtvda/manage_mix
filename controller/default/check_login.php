@@ -14,16 +14,22 @@ require_once DIR.'/model/userService.php';
 
 if(isset($_GET['value'])&&isset($_GET['key']))
 {
-    $value=_returnGetParamSecurity('value');
-    $key=_returnGetParamSecurity('key');
-    $dk=$key."='".$value."'";
-    $data_check=user_getByTop('1',$dk,'');
-    if(count($data_check)==0){
-        echo 1;
+    $value=trim(_returnGetParamSecurity('value'));
+    if($value!=''){
+        $key=_returnGetParamSecurity('key');
+        $dk=$key."='".$value."'";
+        $data_check=user_getByTop('1',$dk,'');
+        if(count($data_check)==0){
+            echo 1;
+        }
+        else{
+            echo 0;
+        }
     }
     else{
-       echo 0;
+        echo 'Bạn vui lòng không nhập khoàng trắng trước và sau mã nhân viên';
     }
+
 }
 else{
     echo 0;

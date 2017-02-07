@@ -168,4 +168,40 @@ jQuery(function ($) {
         $( "#sidebar-toggle-icon" ).addClass("fa-angle-double-left");
 
     });
+
+    $("#user_code").on("keyup", function () {
+        var site_name =$('#url_input').val();
+
+        var value = $(this).val();
+        link = site_name + '/check-ton-tai-code.html';
+        $(this).addClass("input-error");
+        $("#user_code_error" ).removeClass("error-color");
+        $("#user_code_error" ).addClass("success-color");
+        $('#user_code_error').html('check');
+        $('#user_code_error').show();
+        //var key = "user_email";
+        //$.ajax({
+        //    method: "GET",
+        //    url: link,
+        //    data: "value=" + value + '&key=' + key,
+        //    success: function (response) {
+        //        if (response == 1) {
+        //            $('#mess_email_dang_ky').hide();
+        //            $('#check_show_email').val(1);
+        //            if (check_show_username == 1&&check_show_pass == 1) {
+        //                $('#dangky_name').show();
+        //            }
+        //            else {
+        //                $('#dangky_name').hide();
+        //            }
+        //        }
+        //        else {
+        //            $('#mess_email_dang_ky').show();
+        //            $('#check_show_email').val(0);
+        //            $('#dangky_name').hide();
+        //        }
+        //    }
+        //});
+    });
+    $('i').ggtooltip();
 });

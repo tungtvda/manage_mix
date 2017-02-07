@@ -81,6 +81,7 @@
 <script src="<?php echo SITE_NAME?>/view/default/themes/admin/assets/js/myjs.js"></script>
 <script src="<?php echo SITE_NAME?>/view/default/themes/admin/js/dialog.js"></script>
 <script src="<?php echo SITE_NAME?>/view/default/themes/admin/js/myjs.js"></script>
+<script src="<?php echo SITE_NAME?>/view/default/themes/admin/js/ggtooltip.js"></script>
 <script type="text/javascript" src="<?php echo SITE_NAME?>/view/default/themes/admin/js/jquery.easyui.min.js"></script>
 
 

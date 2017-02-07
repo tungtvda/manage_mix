@@ -50,3 +50,29 @@
     box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, .2);
     overflow: hidden;
 }
+.hidden_icon{
+    display: none;
+}
+.width_100{
+    width: 100%;
+}
+.width_70{
+    width: 70%;
+}
+.icon-right{
+    right: 3px;
+    left: auto !important;
+}
+.error-color{
+    color: #D68273 !important;
+}
+.error-color-size{
+    font-size: 13px;
+}
+.success-color{
+    color: #8BAD4C !important;
+}
+.input-error{
+    border-color: #f2a696 !important;
+    color: #D68273 !important;
+}

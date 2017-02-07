@@ -10021,6 +10021,7 @@ input.ace + .lbl.padding-0::before {
 .ace-file-multiple .ace-file-container {
     position: relative;
     height: auto;
+    /*height: 260px;*/
     border: 1px dashed #aaa;
     border-radius: 4px;
     text-align: center

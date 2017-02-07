@@ -33,6 +33,7 @@
 
     <!-- my style-->
     <link rel="stylesheet" href="<?php echo SITE_NAME?>/view/default/themes/admin/assets/css/mycss.css" />
+    <link rel="stylesheet" href="<?php echo SITE_NAME?>/view/default/themes/admin/css/ggtooltip.css" />
     <!-- inline styles related to this page -->
 
     <!-- ace settings handler -->

@@ -18,7 +18,7 @@
         <form class="form-horizontal" id="submit_form" role="form" action="" method="post" enctype="multipart/form-data">
 
 
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="widget-box">
                 <div class="widget-header">
                     <h4 class="widget-title">Hình ảnh đại diện</h4>
@@ -60,7 +60,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-8">
+        <div class="col-sm-9">
             <div class="widget-box">
 
                 <div class="widget-header">
@@ -109,11 +109,12 @@
                                             <option value="Mrs">Ms</option>
 
                                         </select>
-											<span class="input-icon " style="width: 68.9%;">
-												<input name="name" type="text" id="form-field-icon-1" class="width_100" required>
+											<span class="input-icon " style="width: 68%;">
+												<input name="name" type="text" id="name_user" class="width_100" required>
 												<i class="ace-icon fa fa-user blue"></i>
-                                                <i  class="ace-icon fa fa-times-circle icon-right error-color " data-toggle="ggtooltip" data-title="Bạn vui lòng chọn danh xưng và nhập tên" data-trigger="hover" data-placement="bottom" data-backcolor="red" data-textcolor="#ffffff" title=""></i>
+                                                <i id="name_user_error_icon" style="display: none"  class="ace-icon fa fa-times-circle icon-right error-color " data-toggle="ggtooltip" data-title="" data-trigger="hover" data-placement="bottom" data-backcolor="red" data-textcolor="#ffffff" title=""></i>
 											</span>
+                                        <label class="error-color  error-color-size" id="name_user_error"></label>
                                     </div>
                                 </div>
                             </div>

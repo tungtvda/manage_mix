@@ -80,8 +80,13 @@ function show_banner($data1=array())
 
 function show_footer($data1=array())
 {
-    $data=array();
+    $data=$data1;
     view_footer($data);
+}
+function show_valid_form($data1=array())
+{
+    $data=$data1;
+    view_valid_form($data);
 }
 function show_script_table($data1=array(),$count=5)
 {

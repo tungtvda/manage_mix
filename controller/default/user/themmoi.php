@@ -22,7 +22,7 @@ $_SESSION['link_redict']='http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']
 $url_bread='<li class="active">Thêm nhân viên</li>';
 $data['breadcrumbs']=$url_bread;
 $data['title']='Thêm nhân viên';
-
+$data['module_valid']="user";
 $count=8;
 show_header($data);
 show_left($data,'user','user_list');
@@ -30,6 +30,7 @@ show_breadcrumb($data);
 show_navigation($data);
 show_user_themmoi($data);
 show_footer($data);
+show_valid_form($data);
 show_script_form($data);
 if(isset($_FILES['avatar'])){
 //    print_r($_FILES['avatar']);

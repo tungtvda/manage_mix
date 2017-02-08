@@ -64,7 +64,7 @@
     left: auto !important;
 }
 .error-color{
-    color: #D68273 !important;
+    color: #ff2b05 !important
 }
 .error-color-size{
     font-size: 13px;
@@ -74,5 +74,20 @@
 }
 .input-error{
     border-color: #f2a696 !important;
-    color: #D68273 !important;
+    color: #ff2b05 !important;
+}
+.error_pass{
+    color: red;
+}
+.success_pass{
+    color: green;
+}
+.medium_pass{
+    color: #1b85ff;
+}
+.medium_pass{
+    color: #1b85ff;
+}
+.weak_pass{
+    color: #ff8300;
 }

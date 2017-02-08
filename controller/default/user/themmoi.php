@@ -10,7 +10,7 @@ if(!defined('SITE_NAME'))
     require_once '../../../config.php';
 }
 require_once DIR.'/controller/default/public.php';
-
+require_once DIR.'/common/locdautiengviet.php';
 $data=array();
 
 _returnCheckPermison(3,2);
@@ -32,9 +32,24 @@ show_user_themmoi($data);
 show_footer($data);
 show_valid_form($data);
 show_script_form($data);
+if(isset($_POST['user_code'])&&isset($_POST['full_name'])&&isset($_POST['birthday'])&&isset($_POST['email_user'])&&isset($_POST['address_user'])&&isset($_POST['user_name'])&&isset($_POST['password'])&&isset($_POST['password_confirm'])){
+     $user_code=_returnPostParamSecurity('user_code');
+     $full_name=_returnPostParamSecurity('full_name');
+     $mr=_returnPostParamSecurity('mr');
+     $input_birthday=_returnPostParamSecurity('birthday');
+     $email_user=_returnPostParamSecurity('email_user');
+     $user_name=_returnPostParamSecurity('user_name');
+     $address_user=_returnPostParamSecurity('address_user');
+     $password=_returnPostParamSecurity('password');
+     $password_confirm=_returnPostParamSecurity('password_confirm');
+
+
+}
 if(isset($_FILES['avatar'])){
 //    print_r($_FILES['avatar']);
-    $target_dir = _returnFolderRoot()."/view/default/themes/uploads/";
+    $folder=LocDau($email_user);
+     $target_dir = _returnFolderRoot()."/view/default/themes/uploads/".$folder.'/';
+    _returnmakedirs($target_dir, $mode=0777);
     $target_file = $target_dir . basename($_FILES["avatar"]["name"]);
     $uploadOk = 1;
     $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);

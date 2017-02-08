@@ -304,5 +304,8 @@ function _returnQuyen($stt)
 }
 function _returnFolderRoot()
 {
-    return $_SERVER['DOCUMENT_ROOT'].'/manage_mix/';
+    return $_SERVER['DOCUMENT_ROOT'].'/manage_mix';
+}
+function _returnmakedirs($dirpath, $mode=0777) {
+    return is_dir($dirpath) || mkdir($dirpath, $mode, true);
 }

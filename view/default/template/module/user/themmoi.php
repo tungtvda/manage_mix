@@ -37,7 +37,7 @@
                     <div class="widget-main">
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <input name="avatar" multiple="" type="file" id="id-input-file-3" />
+                                <input name="avatar" class="valid" multiple="" type="file" id="id-input-file-3" />
                             </div>
                         </div>
                         <style>
@@ -53,7 +53,7 @@
                             }
                         </style>
                         <label>
-                            <input type="checkbox" name="file-format" id="id-file-format" class="ace" checked="checked" />
+                            <input type="checkbox"  name="file-format" id="id-file-format" class="ace valid" checked="checked" />
                             <span class="lbl"> Chỉ cho chép upload hình ảnh</span>
                         </label>
                     </div>
@@ -84,12 +84,12 @@
                                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Mã nhân viên <span style="color: red">*</span></label>
                                     <div class="col-sm-9">
 											<span class="input-icon width_100">
-												<input name="user_code"  type="text" id="user_code" class="width_100" required>
+												<input name="user_code"  type="text" id="input_user_code" class="width_100" required>
 												<i class="ace-icon fa fa-qrcode blue"></i>
                                                 <i  id="user_code_error_icon" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " data-toggle="ggtooltip" data-title="" data-trigger="hover" data-placement="bottom" data-backcolor="red" data-textcolor="#ffffff" title=""></i>
-                                                <i id="user_code_success_icon" style="display: none" class="ace-icon fa fa-check-circle icon-right success-color" data-toggle="ggtooltip" data-title="" data-trigger="hover" data-placement="bottom" data-backcolor="green" data-textcolor="#000000" title=""></i>
+                                                <i id="user_code_success_icon" style="display: none" class="ace-icon fa fa-check-circle icon-right success-color" data-toggle="ggtooltip" data-title="" data-trigger="hover" data-placement="bottom" data-backcolor="green" data-textcolor="#000000" title="Mã nhân viên hợp lệ"></i>
 											</span>
-                                        <label class="error-color  error-color-size" id="user_code_error"></label>
+                                        <label style="display: none" class="error-color  error-color-size" id="error_user_code">Bạn vui lòng nhập mã nhân viên</label>
                                     </div>
                                 </div>
                             </div>
@@ -107,14 +107,13 @@
                                             <option value="Mr">Mr</option>
                                             <option value="Mrs">Mrs</option>
                                             <option value="Mrs">Ms</option>
-
                                         </select>
 											<span class="input-icon " style="width: 68%;">
-												<input name="name" type="text" id="name_user" class="width_100" required>
+												<input name="full_name" type="text" id="input_full_name" class="width_100" required>
 												<i class="ace-icon fa fa-user blue"></i>
                                                 <i id="name_user_error_icon" style="display: none"  class="ace-icon fa fa-times-circle icon-right error-color " data-toggle="ggtooltip" data-title="" data-trigger="hover" data-placement="bottom" data-backcolor="red" data-textcolor="#ffffff" title=""></i>
 											</span>
-                                        <label class="error-color  error-color-size" id="name_user_error"></label>
+                                        <label style="display: none" class="error-color  error-color-size" id="error_full_name">Bạn vui lòng nhập tên nhân viên</label>
                                     </div>
                                 </div>
                             </div>
@@ -122,15 +121,17 @@
                             <div class="space-4"></div>
                         <div class="row">
                             <div class="col-sm-6">
-                                <div class="form-group">
+                                <div class="form-group" >
                                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Ngày sinh <span style="color: red">*</span></label>
                                     <div class="col-sm-9">
-                                        <div class="input-group">
-                                            <input class="form-control date-picker" id="id-date-picker-1" name="birthday" required type="text" data-date-format="dd-mm-yyyy">
-																	<span class="input-group-addon">
+                                        <div class="input-group" style="">
+                                            <input class="form-control date-picker width_100" id="input_birthday" name="birthday" required type="text" data-date-format="dd-mm-yyyy">
+																	<span   class="input-group-addon date_icon">
 																		<i class="fa fa-calendar bigger-110"></i>
 																	</span>
+
                                         </div>
+                                        <label  style="display: none" class="error-color  error-color-size" id="error_birthday">Bạn vui lòng chọn ngày sinh</label>
                                     </div>
                                 </div>
                             </div>
@@ -139,11 +140,12 @@
                                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Email <span style="color: red">*</span></label>
                                     <div class="col-sm-9">
 											<span class="input-icon width_100">
-												<input name="user_email" type="email" id="form-field-icon-1" class="width_100" required>
+												<input name="email_user" type="email" id="input_email_user" class="width_100" required>
 												<i class="ace-icon fa fa-envelope blue"></i>
-                                                <i style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Bạn vui lòng nhập email"></i>
-                                                <i style="display: none" class="ace-icon fa fa-check-circle icon-right success-color" title="Email hợp lệ"></i>
+                                                <i id="email_user_error_icon" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Bạn vui lòng kiểm tra lại email"></i>
+                                                <i id="email_user_success_icon" style="display: none" class="ace-icon fa fa-check-circle icon-right success-color" title="Email hợp lệ"></i>
 											</span>
+                                        <label  style="display: none" class="error-color  error-color-size" id="error_email_user">Bạn vui lòng nhập email</label>
                                     </div>
                                 </div>
                             </div>
@@ -155,10 +157,11 @@
                                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Địa chỉ <span style="color: red">*</span></label>
                                     <div class="col-sm-9">
                                       <span class="input-icon width_100">
-												<input name="address" type="text" id="form-field-icon-1" class="width_100" required>
+												<input name="address_user" type="text" id="input_address_user" class="width_100" required>
 												<i class="ace-icon fa fa-map-marker blue"></i>
-                                                <i style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Bạn vui lòng nhập địa chỉ"></i>
+                                                <i id="error_icon_address_user" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Bạn vui lòng nhập địa chỉ"></i>
 											</span>
+                                        <label  style="display: none" class="error-color  error-color-size" id="error_address_user">Bạn vui lòng nhập địa chỉ</label>
                                     </div>
                                 </div>
                             </div>
@@ -167,11 +170,12 @@
                                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tên đăng nhập <span style="color: red">*</span></label>
                                     <div class="col-sm-9">
 											<span class="input-icon width_100">
-												<input name="user_name" type="text" id="form-field-icon-1" class="width_100" required>
+												<input name="user_name" type="text" id="input_user_name" class="width_100" required>
 												<i class="ace-icon fa fa-user blue"></i>
-                                                <i style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Bạn vui lòng nhập tên đăng nhập"></i>
-                                                <i style="display: none" class="ace-icon fa fa-check-circle icon-right success-color" title="Tên đăng nhập hợp lệ"></i>
+                                                <i id="error_icon_user_name" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Bạn vui lòng kiểm tra tên đăng nhập"></i>
+                                                <i id="success_icon_user_name" style="display: none" class="ace-icon fa fa-check-circle icon-right success-color" title="Tên đăng nhập hợp lệ"></i>
 											</span>
+                                        <label  style="display: none" class="error-color  error-color-size" id="error_user_name">Bạn vui lòng điền tên đăng nhập</label>
                                     </div>
                                 </div>
                             </div>
@@ -183,10 +187,11 @@
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Mật khẩu <span style="color: red">*</span></label>
                                 <div class="col-sm-9">
                                       <span class="input-icon width_100">
-												<input name="password" type="password" id="form-field-icon-1" class="width_100" required>
+												<input name="password" type="password" id="input_password" class="width_100" required>
 												<i class="ace-icon fa fa-key blue"></i>
-                                                <i style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Bạn vui lòng nhập địa chỉ"></i>
+                                                <i id="error_icon_user_pass" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Bạn vui lòng nhập địa chỉ"></i>
 											</span>
+                                    <label  style="display: none" class="error-color  error-color-size" id="error_password">Bạn vui lòng nhập mật khẩu</label>
                                 </div>
                             </div>
                         </div>
@@ -195,11 +200,11 @@
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Xác nhận mật khẩu <span style="color: red">*</span></label>
                                 <div class="col-sm-9">
 											<span class="input-icon width_100">
-												<input name="password_confirm" type="password" id="form-field-icon-1" class="width_100" required>
+												<input name="password_confirm" type="password" id="input_password_confirm" class="width_100" required>
 												<i class="ace-icon fa fa-key blue"></i>
-                                                <i style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Bạn vui lòng nhập tên đăng nhập"></i>
-                                                <i style="display: none" class="ace-icon fa fa-check-circle icon-right success-color" title="Tên đăng nhập hợp lệ"></i>
+                                                <i id="error_icon_user_pass_con" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title=""></i>
 											</span>
+                                    <label  style="display: none" class="error-color  error-color-size" id="error_password_confirm">Bạn vui lòng xác nhận mật khẩu</label>
                                 </div>
                             </div>
                         </div>
@@ -209,7 +214,7 @@
 
                             <div class="clearfix">
                                 <div class=" col-md-12" style="text-align: right">
-                                    <button class="btn btn-info" type="submit">
+                                    <button class="btn btn-info" type="button" id="submit_form_action">
                                         <i class="ace-icon fa fa-check bigger-110"></i>
                                         Submit
                                     </button>
@@ -222,7 +227,7 @@
                                 </div>
                             </div>
 
-                            <div class="hr hr-24"></div>
+                            <div style="margin-bottom: 11px" class="hr hr-24"></div>
 
                     </div>
                 </div>

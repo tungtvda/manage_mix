@@ -127,7 +127,7 @@ if(isset($_POST['dangky_name'])&&isset($_POST['email_dangky'])&&isset($_POST['us
                             <p>Cảm ơn bạn đã đăng ký tại hệ thống quản trị MIXTOURIST, bạn vui lòng đợi hệ thống của chúng tôi xác nhận tài khoản của bạn, Xin cảm ơn!</p>
                             <p>Email: <span style="color: #132fff; font-weight: bold">'.$email.'</span>,</p>
                             <p>Username: <span style="color: #132fff; font-weight: bold">'.$username_dk.'</span>,</p>
-                            <p>Ngày gửi: <span style="color: #132fff; font-weight: bold">'._returnGetDateTime().'</span>,</p>
+                            <p>Ngày gửi: <span style="color: #132fff; font-weight: bold">'.date("Y-m-d H:i:s", strtotime(_returnGetDateTime())).'</span>,</p>
                         </div>';
                 SendMail($email, $message, $subject);
                 $email='';

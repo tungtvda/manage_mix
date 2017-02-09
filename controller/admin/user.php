@@ -151,6 +151,12 @@ if(isset($_SESSION["Admin"]))
        $array['time_token']='0';
        if(!isset($array['updated']))
        $array['updated']='0';
+
+        if(!isset($array['updated_by']))
+            $array['updated_by']='0';
+        if(!isset($array['created_by']))
+            $array['created_by']='0';
+
       $new_obj=new user($array);
         if($insert)
         {

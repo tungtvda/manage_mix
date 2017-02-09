@@ -72,6 +72,85 @@ jQuery(function ($) {
 
 
     });
+    $('.checkbox_user_role').on('click', function () {
+        var status = 0;
+        if ($(this).is(":checked")) {
+            status = 1;
+        }
+
+        var idSelect = $(this).attr('countid');
+        var table = $(this).attr('table');
+        var field = $(this).attr('field');
+        var name_record=$(this).attr('name_record');
+        var link = url + '/update-status/';
+        var field_check = "checkbox_user_role_" + idSelect;
+        lnv.confirm({
+            title: '<label class="orange">Xác nhận trở thành admin hệ thống</label>',
+            content: 'Bạn chắc chắn rằng muốn người dùng </br><b>"'+name_record+'"</b> trở thành admin hệ thống?',
+            confirmBtnText: 'Ok',
+            iconBtnText:'<i style="color: #669fc7;" class="ace-icon fa fa-question orange"></i>',
+            confirmHandler: function () {
+                if(idSelect==''||table==''||field==''||name_record==''||link==''){
+                    lnv.alert({
+                        title: 'Lỗi',
+                        content: 'Các thông tin cập nhật không hợp lệ',
+                        alertBtnText: 'Ok',
+                        iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                        alertHandler: function () {
+
+                        }
+                    });
+                }
+                else{
+                    $.ajax({
+                        method: "GET",
+                        url: link,
+                        data: "id=" + idSelect + '&table=' + table + '&field=' + field + '&status=' + status +'&action=user_update_role',
+                        success: function (response) {
+                            if (response != 1) {
+                                lnv.alert({
+                                    title: 'Lỗi',
+                                    content: response,
+                                    alertBtnText: 'Ok',
+                                    iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                                    alertHandler: function () {
+
+                                    }
+                                });
+                                if(status==0){
+                                    document.getElementById(field_check).checked = true;
+                                }
+                                else{
+                                    document.getElementById(field_check).checked = false;
+                                }
+                            }
+                            else{
+                                if(status==0){
+                                    $("#user-md-active-"+idSelect).removeClass("active-user-role");
+                                }
+                                else{
+                                    $("#user-md-active-"+idSelect).addClass("active-user-role");
+                                }
+                            }
+                        }
+                    });
+                }
+
+            },
+            cancelBtnText: 'Cancel',
+            cancelHandler: function () {
+                if(status==0){
+                    document.getElementById(field_check).checked = true;
+
+                }
+                else{
+                    document.getElementById(field_check).checked = false;
+                }
+            }
+        })
+
+
+    });
     $('.delete_record').on('click', function () {
         var deleteid = $(this).attr('deleteid');
         var url_delete = $(this).attr('url_delete');
@@ -168,7 +247,43 @@ jQuery(function ($) {
         $( "#sidebar-toggle-icon" ).addClass("fa-angle-double-left");
 
     });
+    $('body').on('click','.delete_function', function () {
+        var lenght = $('.click_check_list:checked').length;
+        if (lenght == 0) {
+            lnv.alert({
+                title: 'Lỗi',
+                content: 'Bạn vui lòng chọn bạn ghi',
+                alertBtnText: 'Ok',
+                iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                alertHandler: function () {
 
+                }
+            });
+        }
+        else{
+            lnv.confirm({
+                title: 'Xác nhận xóa bản ghi',
+                content: 'Bạn chắc chắn rằng muốn xóa những bản ghi đã được check',
+                confirmBtnText: 'Ok',
+                iconBtnText:'<i style="color: #669fc7;" class="ace-icon fa fa-check"></i>',
+                confirmHandler: function () {
+                    $("#form_submit_delete").submit();
+                },
+                cancelBtnText: 'Cancel',
+                cancelHandler: function () {
+                }
+            })
+        }
+
+    });
     //$('i').ggtooltip();
 });
 
+var loadFile = function(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+        var output = document.getElementById('show_img_upload');
+        output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+};

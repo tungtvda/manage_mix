@@ -27,7 +27,8 @@
                                 Create popup
                                 <i class="ace-icon fa fa-external-link"></i>
                             </a>
-                            <a href="<?php echo SITE_NAME ?>/nhan-vien/them-moi" class="btn btn-white  btn-create-new-tab btn-create-new-tab-hover">
+                            <a href="<?php echo SITE_NAME ?>/nhan-vien/them-moi"
+                               class="btn btn-white  btn-create-new-tab btn-create-new-tab-hover">
                                 <i class="ace-icon fa fa-plus bigger-120 "></i>
                                 Create new tab
                                 <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
@@ -47,12 +48,14 @@
                             <ul class="dropdown-menu dropdown-danger">
                                 <?php if (_returnCheckAction(2) == 1) { ?>
                                     <li>
-                                        <a class="edit_function" href="<?php echo SITE_NAME ?>/nhan-vien/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">Sửa</a>
+                                        <a class="edit_function"
+                                           href="javascript:void()">Sửa</a>
                                     </li>
                                 <?php } ?>
                                 <?php if (_returnCheckAction(3) == 1) { ?>
                                     <li>
-                                        <a class="delete_function" href="<?php echo SITE_NAME ?>/nhan-vien/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">Xóa</a>
+                                        <a class="delete_function"
+                                           href="javascript:void()">Xóa</a>
                                     </li>
                                 <?php } ?>
                                 <li class="divider"></li>
@@ -78,6 +81,7 @@
 
                 <!-- div.dataTables_borderWrap -->
                 <div>
+                    <form action="" method="post" id="form_submit_delete">
                     <table id="dynamic-table" class="table table-striped table-bordered table-hover table-responsive">
                         <thead>
                         <tr>
@@ -89,19 +93,20 @@
                             </th>
                             <th>#</th>
                             <th>Họ tên</th>
+                            <th>Avatar</th>
                             <th>Email</th>
                             <th>Phone</th>
-                            <th>Gender</th>
+                            <th>Admin</th>
                             <th>Status</th>
 
-                            <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1"
+                            <!--<th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1"
                                 aria-label="
 
 															Update
 														: activate to sort column ascending">
                                 <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
                                 Created
-                            </th>
+                            </th>-->
                             <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1"
                                 aria-label="
 
@@ -114,7 +119,7 @@
 
                         </tr>
                         </thead>
-                        <form action="" method="post">
+
                             <tbody>
                             <?php if (count($list) > 0 && _returnCheckAction(5) == 1) { ?>
                                 <?php $dem = 1; ?>
@@ -122,23 +127,43 @@
                                     <tr>
                                         <td class="center">
                                             <label class="pos-rel">
-                                                <input type="checkbox" class="ace click_check_list"
-                                                       value="<?php echo $row->id ?>"/>
+                                                <input type="checkbox" class="ace click_check_list" id="check_<?php echo $dem ?>" name="check_box_action[]"
+                                                       value="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"/>
                                                 <span class="lbl"></span>
                                             </label>
                                         </td>
-                                        <td>
+                                        <td style="text-align: center">
                                             <?php echo $dem; ?>
                                         </td>
                                         <td>
                                             <a href="<?php echo SITE_NAME ?>/nhan-vien/chi-tiet?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"><?php echo $row->name ?></a>
                                         </td>
+                                        <td style="text-align: center">
+                                            <?php
+                                            if ($row->avatar == '') {
+                                                $link_ava = SITE_NAME . '/view/default/themes/images/no-avatar.png';
+                                            } else {
+                                                $link_ava = SITE_NAME . $row->avatar;
+                                            }
+                                            ?>
+                                            <img title="<?php echo $row->name ?>" style="width: 50px"
+                                                 src="<?php echo $link_ava ?>"><label
+                                                style="display: none"><?php echo $row->name ?></label>
+                                        </td>
                                         <td><?php echo $row->user_email ?></td>
                                         <td><?php echo $row->phone ?></td>
-                                        <td>
-                                            <span hidden><?php echo (int)$row->gender ?></span>
-                                            <?php if ($row->gender == 0) echo ' <i style="font-size: 20px;" class="fa fa-male"></i>' ?>
-                                            <?php if ($row->gender == 1) echo ' <i style="font-size: 20px; color: #ec008c" class="fa fa-female"></i>' ?>
+                                        <td >
+                                            <span hidden><?php echo (int)$row->user_role ?></span>
+                                            <?php if ($row->user_role == 0) echo '<i id="user-md-active-'.$row->id.'" style="font-size: 20px;" class="fa fa-user-md"></i>' ?>
+                                            <?php if ($row->user_role == 1) echo ' <i id="user-md-active-'.$row->id.'" style="font-size: 20px;" class="fa fa-user-md active-user-role"></i>' ?>
+                                            <label>
+                                                <input <?php if ($row->user_role) echo 'checked' ?>
+                                                    id="checkbox_user_role_<?php echo $row->id ?>"
+                                                    countid="<?php echo $row->id ?>"
+                                                    name_record="<?php echo $row->name ?>" table="user" field="user_role"
+                                                    class="ace ace-switch ace-switch-7 checkbox_user_role" type="checkbox">
+                                                <span class="lbl"></span>
+                                            </label>
                                         </td>
                                         <td>
                                             <span hidden><?php echo (int)$row->status ?></span>
@@ -151,12 +176,15 @@
                                                 <span class="lbl"></span>
                                             </label>
                                         </td>
-                                        <td><?php echo _returnDateFormatConvert($row->created) ?></td>
+                                        <!--                                        <td>-->
+                                        <?php //echo _returnDateFormatConvert($row->created) ?><!--</td>-->
                                         <td><?php echo _returnDateFormatConvert($row->updated) ?></td>
 
                                         <td>
                                             <div class="hidden-sm hidden-xs action-buttons">
-                                                <a class="blue" href="<?php echo SITE_NAME ?>/nhan-vien/chi-tiet?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>" title="Chi tiết">
+                                                <a class="blue"
+                                                   href="<?php echo SITE_NAME ?>/nhan-vien/chi-tiet?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                   title="Chi tiết">
                                                     <i class="ace-icon fa fa-eye-slash bigger-130"></i>
                                                 </a>
                                                 <?php if (_returnCheckAction(2) == 1) { ?>
@@ -252,9 +280,10 @@
                                 <?php } ?>
                             <?php } ?>
                             </tbody>
-                        </form>
+
 
                     </table>
+                    </form>
                 </div>
                 <div class="hr hr-18 dotted hr-double"></div>
                 <div class="btn-groupn col-md-12" style="padding-left: 0px">
@@ -266,20 +295,22 @@
 
                     <ul class="dropdown-menu dropdown-danger">
                         <?php if (_returnCheckAction(2) == 1) { ?>
-                        <li>
-                            <a class="edit_function" href="<?php echo SITE_NAME ?>/nhan-vien/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">Sửa</a>
-                        </li>
+                            <li>
+                                <a class="edit_function"
+                                   href="javascript:void()">Sửa</a>
+                            </li>
                         <?php } ?>
                         <?php if (_returnCheckAction(3) == 1) { ?>
-                        <li>
-                            <a class="delete_function" href="<?php echo SITE_NAME ?>/nhan-vien/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">Xóa</a>
-                        </li>
+                            <li>
+                                <a class="delete_function"
+                                   href="javascript:void()">Xóa</a>
+                            </li>
                         <?php } ?>
                         <li class="divider"></li>
                         <?php if (_returnCheckAction(1) == 1) { ?>
-                        <li>
-                            <a href="<?php echo SITE_NAME ?>/nhan-vien/them-moi">Thêm</a>
-                        </li>
+                            <li>
+                                <a href="<?php echo SITE_NAME ?>/nhan-vien/them-moi">Thêm</a>
+                            </li>
                         <?php } ?>
                     </ul>
                 </div>
@@ -287,112 +318,222 @@
         </div>
 
 
-        <div id="modal-form" class="modal" tabindex="-1">
+        <div  id="modal-form" class="modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="blue bigger">Tạo mới nhân viên</h4>
                     </div>
-                    <form action="" method="post" enctype="multipart/form-data">
+                    <form id="submit_form" role="form" action="" method="post" enctype="multipart/form-data">
                         <div class="modal-body">
                             <div class="row">
-                                <div class="form-group">
-                                    <div class="col-xs-12 col-sm-4 col-md-4">
+                                <div class="col-xs-12 col-sm-4 col-md-4">
+                                    <div class="form-group">
                                         <div id="preview">
-                                            <img class="img-responsive"
+                                            <img id="show_img_upload" class="img-responsive" no-avatar="<?php echo SITE_NAME ?>/view/default/themes/images/no-image.jpg"
                                                  src="<?php echo SITE_NAME ?>/view/default/themes/images/no-image.jpg">
                                         </div>
-
-                                        <input name="image" type="file" id="id-input-file-2"/>
-                                        <input id="button" type="submit" value="Upload">
+                                        <input accept="image/*" name="avatar" type="file" id="id-input-file-2" onchange="loadFile(event)" />
                                     </div>
-
                                 </div>
 
+                                <div class="col-xs-12 col-sm-8">
+                                    <div class="form-group" style="float: left; width: 100%">
 
-                                <div class="col-xs-12 col-sm-7">
-                                    <div class="form-group">
-                                        <label for="form-field-select-3">Location</label>
 
+                                        <div style="float: left;width: 66%" >
+                                            <label for="form-field-select-3">Mã nhân viên <span style="color: red">*</span></label>
+                                           <span class="input-icon width_100">
+												<input name="user_code" type="text" id="input_user_code"
+                                                       class="width_100" required>
+												<i class="ace-icon fa fa-qrcode blue"></i>
+                                                <i id="user_code_error_icon" style="display: none"
+                                                   class="ace-icon fa fa-times-circle icon-right error-color "
+                                                   data-toggle="ggtooltip" data-title="" data-trigger="hover"
+                                                   data-placement="bottom" data-backcolor="red" data-textcolor="#ffffff"
+                                                   title=""></i>
+                                                <i id="user_code_success_icon" style="display: none"
+                                                   class="ace-icon fa fa-check-circle icon-right success-color"
+                                                   data-toggle="ggtooltip" data-title="" data-trigger="hover"
+                                                   data-placement="bottom" data-backcolor="green"
+                                                   data-textcolor="#000000" title="Mã nhân viên hợp lệ"></i>
+											</span>
+                                            <label style="display: none" class="error-color  error-color-size"
+                                                   id="error_user_code">Bạn vui lòng nhập mã nhân viên</label>
+                                        </div>
+                                        <div style="float: left;width: 33%; text-align: center" >
+                                            <label for="form-field-select-3">Admin hệ thống</label>
+                                            <label>
+                                                <input name="user_role" class="ace ace-switch ace-switch-6" type="checkbox">
+                                                <span class="lbl"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="space-4"></div>
+
+                                    <div class="form-group" style="float: left; width: 100%">
+                                        <label for="form-field-select-3">Họ tên <span
+                                                style="color: red">*</span></label>
                                         <div>
-                                            <select class="chosen-select" data-placeholder="Choose a Country...">
-                                                <option value="">&nbsp;</option>
-                                                <option value="AL">Alabama</option>
-                                                <option value="AK">Alaska</option>
-                                                <option value="AZ">Arizona</option>
-                                                <option value="AR">Arkansas</option>
-                                                <option value="CA">California</option>
-                                                <option value="CO">Colorado</option>
-                                                <option value="CT">Connecticut</option>
-                                                <option value="DE">Delaware</option>
-                                                <option value="FL">Florida</option>
-                                                <option value="GA">Georgia</option>
-                                                <option value="HI">Hawaii</option>
-                                                <option value="ID">Idaho</option>
-                                                <option value="IL">Illinois</option>
-                                                <option value="IN">Indiana</option>
-                                                <option value="IA">Iowa</option>
-                                                <option value="KS">Kansas</option>
-                                                <option value="KY">Kentucky</option>
-                                                <option value="LA">Louisiana</option>
-                                                <option value="ME">Maine</option>
-                                                <option value="MD">Maryland</option>
-                                                <option value="MA">Massachusetts</option>
-                                                <option value="MI">Michigan</option>
-                                                <option value="MN">Minnesota</option>
-                                                <option value="MS">Mississippi</option>
-                                                <option value="MO">Missouri</option>
-                                                <option value="MT">Montana</option>
-                                                <option value="NE">Nebraska</option>
-                                                <option value="NV">Nevada</option>
-                                                <option value="NH">New Hampshire</option>
-                                                <option value="NJ">New Jersey</option>
-                                                <option value="NM">New Mexico</option>
-                                                <option value="NY">New York</option>
-                                                <option value="NC">North Carolina</option>
-                                                <option value="ND">North Dakota</option>
-                                                <option value="OH">Ohio</option>
-                                                <option value="OK">Oklahoma</option>
-                                                <option value="OR">Oregon</option>
-                                                <option value="PA">Pennsylvania</option>
-                                                <option value="RI">Rhode Island</option>
-                                                <option value="SC">South Carolina</option>
-                                                <option value="SD">South Dakota</option>
-                                                <option value="TN">Tennessee</option>
-                                                <option value="TX">Texas</option>
-                                                <option value="UT">Utah</option>
-                                                <option value="VT">Vermont</option>
-                                                <option value="VA">Virginia</option>
-                                                <option value="WA">Washington</option>
-                                                <option value="WV">West Virginia</option>
-                                                <option value="WI">Wisconsin</option>
-                                                <option value="WY">Wyoming</option>
+                                            <style>
+                                                .chosen-single{
+                                                    width: 100% !important;
+                                                    border: 1px solid #d5d5d5 !important;
+                                                    height: 34px !important;
+                                                }
+                                               #form_field_select_3_chosen{
+                                                    width: 96% !important;
+
+                                                }
+                                            </style>
+                                            <div style="float: left;width: 33%;" >
+                                            <select name="mr" class="chosen-select form-control"
+                                                    id="form-field-select-3" data-placeholder="Danh xưng ..."
+                                                    style="display: none;width: 10px">
+                                                <option value=""></option>
+                                                <option value="Mr">Mr</option>
+                                                <option value="Mrs">Mrs</option>
+                                                <option value="Mrs">Ms</option>
                                             </select>
+                                            </div>
+                                            <div style="float: left;width: 66%" >
+											<span class="input-icon " style="width: 100%" >
+												<input name="full_name" type="text" id="input_full_name"
+                                                       class="width_100" required>
+												<i class="ace-icon fa fa-user blue"></i>
+                                                <i id="name_user_error_icon" style="display: none"
+                                                   class="ace-icon fa fa-times-circle icon-right error-color "
+                                                   data-toggle="ggtooltip" data-title="" data-trigger="hover"
+                                                   data-placement="bottom" data-backcolor="red" data-textcolor="#ffffff"
+                                                   title=""></i>
+											</span>
+                                            <label style="display: none" class="error-color  error-color-size"
+                                                   id="error_full_name">Bạn vui lòng nhập tên nhân viên</label>
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="space-4"></div>
 
-                                    <div class="form-group">
-                                        <label for="form-field-username">Username</label>
+                                    <div class="form-group" style="float: left; width: 100%">
+                                        <label for="form-field-select-3">Ngày sinh <span
+                                                style="color: red">*</span></label>
+                                        <div class="input-group" style="">
+                                            <input class="form-control date-picker width_100" id="input_birthday"
+                                                   name="birthday" required type="text" data-date-format="dd-mm-yyyy">
+																	<span class="input-group-addon date_icon">
+																		<i class="fa fa-calendar bigger-110"></i>
+																	</span>
 
-                                        <div>
-                                            <input type="text" id="form-field-username" placeholder="Username"
-                                                   value="alexdoe"/>
                                         </div>
+                                        <label style="display: none" class="error-color  error-color-size"
+                                               id="error_birthday">Bạn vui lòng chọn ngày sinh</label>
                                     </div>
-
                                     <div class="space-4"></div>
 
-                                    <div class="form-group">
-                                        <label for="form-field-first">Name</label>
 
-                                        <div>
-                                            <input type="text" id="form-field-first" placeholder="First Name"
-                                                   value="Alex"/>
-                                            <input type="text" id="form-field-last" placeholder="Last Name"
-                                                   value="Doe"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div style="float: left; width: 100%">
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <label for="form-field-select-3">Email <span
+                                                    style="color: red">*</span></label>
+                                            <div>
+                                           <span class="input-icon width_100">
+												<input name="email_user" type="email" id="input_email_user"
+                                                       class="width_100" required>
+												<i class="ace-icon fa fa-envelope blue"></i>
+                                                <i id="email_user_error_icon" style="display: none"
+                                                   class="ace-icon fa fa-times-circle icon-right error-color "
+                                                   title="Bạn vui lòng kiểm tra lại email"></i>
+                                                <i id="email_user_success_icon" style="display: none"
+                                                   class="ace-icon fa fa-check-circle icon-right success-color"
+                                                   title="Email hợp lệ"></i>
+											</span>
+                                                <label style="display: none" class="error-color  error-color-size"
+                                                       id="error_email_user">Bạn vui lòng nhập email</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <label for="form-field-select-3">Địa chỉ <span
+                                                    style="color: red">*</span></label>
+                                            <div>
+                                            <span class="input-icon width_100">
+												<input name="address_user" type="text" id="input_address_user" class="width_100" required>
+												<i class="ace-icon fa fa-map-marker blue"></i>
+                                                <i id="error_icon_address_user" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Bạn vui lòng nhập địa chỉ"></i>
+											</span>
+                                                <label  style="display: none" class="error-color  error-color-size" id="error_address_user">Bạn vui lòng nhập địa chỉ</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="float: left; width: 100%">
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <label for="form-field-select-3">Tên đăng nhập <span
+                                                    style="color: red">*</span></label>
+                                            <div>
+                                          <span class="input-icon width_100">
+												<input name="user_name" type="text" id="input_user_name" class="width_100" required>
+												<i class="ace-icon fa fa-user blue"></i>
+                                                <i id="error_icon_user_name" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Bạn vui lòng kiểm tra tên đăng nhập"></i>
+                                                <i id="success_icon_user_name" style="display: none" class="ace-icon fa fa-check-circle icon-right success-color" title="Tên đăng nhập hợp lệ"></i>
+											</span>
+                                                <label  style="display: none" class="error-color  error-color-size" id="error_user_name">Bạn vui lòng điền tên đăng nhập</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <label for="form-field-select-3">Số điện thoại <span
+                                                    style="color: red">*</span></label>
+                                            <div>
+                                          <span class="input-icon width_100">
+												<input name="user_phone" type="text" id="input_user_phone" class="width_100" required>
+												<i class="ace-icon fa fa-user blue"></i>
+                                                <i id="error_icon_user_phone" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Bạn vui lòng điền số điện thoại"></i>
+
+											</span>
+                                                <label  style="display: none" class="error-color  error-color-size" id="error_user_phone">Bạn vui lòng điền số điện thoại</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="float: left; width: 100%">
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <label for="form-field-select-3">Mật khẩu <span
+                                                    style="color: red">*</span></label>
+                                            <div>
+                                         <span class="input-icon width_100">
+												<input name="password" type="password" id="input_password" class="width_100" required>
+												<i class="ace-icon fa fa-key blue"></i>
+                                                <i id="error_icon_user_pass" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Bạn vui lòng nhập địa chỉ"></i>
+											</span>
+                                                <label  style="display: none" class="error-color  error-color-size" id="error_password">Bạn vui lòng nhập mật khẩu</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <label for="form-field-select-3">Xác nhận mật khẩu <span
+                                                    style="color: red">*</span></label>
+                                            <div>
+                                         <span class="input-icon width_100">
+											<span class="input-icon width_100">
+												<input name="password_confirm" type="password" id="input_password_confirm" class="width_100" required>
+												<i class="ace-icon fa fa-key blue"></i>
+                                                <i id="error_icon_user_pass_con" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title=""></i>
+											</span>
+                                    <label  style="display: none" class="error-color  error-color-size" id="error_password_confirm">Bạn vui lòng xác nhận mật khẩu</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -401,14 +542,13 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button class="btn btn-sm" data-dismiss="modal">
-                                <i class="ace-icon fa fa-times"></i>
-                                Cancel
-                            </button>
-
-                            <button class="btn btn-sm btn-primary">
+                            <button class="btn btn-sm btn-primary" id="submit_form_action" type="button">
                                 <i class="ace-icon fa fa-check"></i>
                                 Save
+                            </button>
+                            <button type="reset" class="btn btn-sm" data-dismiss="modal">
+                                <i class="ace-icon fa fa-times"></i>
+                                Cancel
                             </button>
                         </div>
                     </form>
@@ -420,3 +560,8 @@
 
 </div><!-- /.row -->
 
+<style>
+    .form-group {
+        margin-bottom: 8px;
+    }
+</style>

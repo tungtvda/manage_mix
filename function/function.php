@@ -6,6 +6,9 @@
  * Time: 4:21 PM
  */
 require_once DIR . '/model/userService.php';
+require_once DIR . '/common/class.phpmailer.php';
+require_once(DIR . "/common/Mail.php");
+require_once(DIR."/common/hash_pass.php");
 
 function _returnCheckPermison($module_id = 0, $form_id = 0, $action_id = 0)
 {
@@ -310,7 +313,7 @@ function _returnmakedirs($dirpath, $mode=0777) {
     return is_dir($dirpath) || mkdir($dirpath, $mode, true);
 }
 function _returnUploadImg($target_dir, $file_name, $link_img){
-    if (isset($_FILES[$file_name])) {
+    if (isset($_FILES[$file_name])&&$_FILES[$file_name]["name"]!='') {
         //    print_r($_FILES['avatar']);
         _returnmakedirs($target_dir, $mode = 0777);
         $temp = explode(".", $_FILES[$file_name]["name"]);
@@ -365,5 +368,133 @@ function _returnUploadImg($target_dir, $file_name, $link_img){
     }
     else{
         return 0;
+    }
+}
+
+function _returnCreateUser($check_redict){
+    if (isset($_POST['user_code']) && isset($_POST['full_name']) && isset($_POST['birthday']) && isset($_POST['email_user']) && isset($_POST['address_user']) && isset($_POST['user_name']) && isset($_POST['password']) && isset($_POST['password_confirm'])) {
+        $user_code = _returnPostParamSecurity('user_code');
+        $full_name = _returnPostParamSecurity('full_name');
+        $mr = _returnPostParamSecurity('mr');
+        $input_birthday = _returnPostParamSecurity('birthday');
+        $email_user = _returnPostParamSecurity('email_user');
+        $user_name = _returnPostParamSecurity('user_name');
+        $address_user = _returnPostParamSecurity('address_user');
+        $password = _returnPostParamSecurity('password');
+        $password_confirm = _returnPostParamSecurity('password_confirm');
+        $phone = _returnPostParamSecurity('user_phone');
+        $user_role = _returnPostParamSecurity('user_role');
+        if($user_role==="on"||$user_role===1)
+        {
+            $user_role=1;
+        }
+        else{
+            $user_role=0;
+        }
+        $avatar='';
+        if ($user_code != "" && $full_name != '' && $input_birthday != '' && $email_user != '' && $user_name != '' && $password != '' && $password_confirm != '') {
+            if($password!=$password_confirm){
+                echo '<script>alert("Hai mật khẩu không khớp")</script>';
+            }else{
+                $dk_check_user="user_name='".$user_name."'";
+                $dk_check_user.="or user_email ='".$email_user."'";
+                $dk_check_user.=" or user_email ='".$user_code."'";
+                $data_check_exist_user=user_getByTop('',$dk_check_user,'id desc');
+                if(count($data_check_exist_user)>0)
+                {
+                    if($check_redict==1)
+                    {
+                        echo "<script>alert('Mã nhân viên, tên đăng nhập, email đã tồn tại trong hệ thống, vui lòng điền lại thông tin khác')</script>";
+                    }
+                    else{
+                        return 'Mã nhân viên, tên đăng nhập, email đã tồn tại trong hệ thống, vui lòng điền lại thông tin khác';
+                    }
+                }else{
+                    $folder = LocDau($email_user);
+                    $target_dir = _returnFolderRoot() . "/view/default/themes/uploads/" . $folder . '/';
+                     $avatar=_returnUploadImg($target_dir, 'avatar',"/view/default/themes/uploads/" . $folder . '/');
+                    if($avatar===0)
+                    {
+                        $avatar='';
+                    }
+                    $dangky = new user();
+                    $dangky->name=$full_name;
+                    $dangky->user_code=$user_code;
+                    $dangky->user_name=$user_name;
+                    $dangky->mr=$mr;
+                    $dangky->birthday=date("Y-m-d", strtotime($input_birthday));
+                    $dangky->user_email=$email_user;
+                    $dangky->address=$address_user;
+                    $Pass=hash_pass($password);
+                    $dangky->password=$Pass;
+                    $dangky->created=_returnGetDateTime();
+                    $dangky->updated=_returnGetDateTime();
+                    $dangky->login_two_steps=0;
+                    $dangky->avatar=$avatar;
+                    $dangky->status=1;
+                    $dangky->phone=$phone;
+                    $dangky->user_role=$user_role;
+                    $dangky->created_by=$_SESSION['user_id'];
+                    user_insert($dangky);
+                    $subject = "Thông báo đăng ký tài khoản tại hệ thống quản lý MIXTOURIST";
+                    $message='';
+                    if($mr=='')
+                    {
+                        $name_full_mer=$full_name;
+                    }else{
+                        $name_full_mer=$mr.'.'.$full_name;
+                    }
+
+                    $message .='<div style="float: left; width: 100%">
+                            <p>Xin chào: <span style="color: #132fff; font-weight: bold"> '.$name_full_mer.'</span>!</p>
+                            <p>Chúng tôi đã tạo thành công tài khoản của bạn, giờ đây bạn có thể truy cập và sử dụng hệ thống quản lý MIXTOURIST</p>
+                            <p>Link đăng nhập: <span style="color: #132fff; font-weight: bold">'.SITE_NAME.'/dang-nhap.html</span>,</p>
+                            <p>Mã nhân viên: <span style="color: #132fff; font-weight: bold">'.$user_code.'</span>,</p>
+                            <p>Email: <span style="color: #132fff; font-weight: bold">'.$email_user.'</span>,</p>
+                            <p>Username: <span style="color: #132fff; font-weight: bold">'.$user_name.'</span>,</p>
+                            <p>Mật khẩu: <span style="color: #132fff; font-weight: bold">'.$password.'</span>,</p>
+                            <p>Ngày sinh: <span style="color: #132fff; font-weight: bold">'.$input_birthday.'</span>,</p>
+                            <p>Địa chỉ: <span style="color: #132fff; font-weight: bold">'.$address_user.'</span>,</p>
+                            <p>Ngày gửi: <span style="color: #132fff; font-weight: bold">'.date("d-m-Y H:i:s", strtotime(_returnGetDateTime())).'</span>,</p>
+                        </div>';
+                    SendMail($email_user, $message, $subject);
+                    if($check_redict==1)
+                    {
+                        redict(SITE_NAME.'/nhan-vien/');
+                    }
+                    else{
+                        return 1;
+                    }
+
+                }
+            }
+        }else{
+            if($check_redict==1)
+            {
+                echo '<script>alert("Bạn vui lòng điền đầy đủ thông tin đăng ký")</script>';
+            }
+            else{
+                return 'Bạn vui lòng điền đầy đủ thông tin đăng ký';
+            }
+
+        }
+    }
+}
+
+function _deleteSubmitForm($model, $action_delete){
+    if(isset($_POST['check_box_action'])){
+        $check_box_action=$_POST['check_box_action'];
+        if(count($check_box_action)>0){
+            foreach($check_box_action as $val){
+                $id=_return_mc_decrypt($val, ENCRYPTION_KEY);
+                $data=$model.'_getById'.($id);
+                if(count($data)>0)
+                {
+                    $new_obj= new $model();
+                    $new_obj->id=$id;
+                    $action_delete($new_obj);
+                }
+            }
+        }
     }
 }

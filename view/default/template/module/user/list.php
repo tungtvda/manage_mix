@@ -154,14 +154,14 @@
                                         <td><?php echo $row->phone ?></td>
                                         <td >
                                             <span hidden><?php echo (int)$row->user_role ?></span>
-                                            <?php if ($row->user_role == 0) echo '<i id="user-md-active-'.$row->id.'" style="font-size: 20px;" class="fa fa-user-md"></i>' ?>
-                                            <?php if ($row->user_role == 1) echo ' <i id="user-md-active-'.$row->id.'" style="font-size: 20px;" class="fa fa-user-md active-user-role"></i>' ?>
+                                            <?php if ($row->user_role == 0) echo '<i id="user-md-active-'.$row->id.'" style="font-size: 20px;" class="fa fa-user-md hidden-xs"></i>' ?>
+                                            <?php if ($row->user_role == 1) echo ' <i id="user-md-active-'.$row->id.'" style="font-size: 20px;" class="fa fa-user-md active-user-role hidden-xs"></i>' ?>
                                             <label>
                                                 <input <?php if ($row->user_role) echo 'checked' ?>
                                                     id="checkbox_user_role_<?php echo $row->id ?>"
                                                     countid="<?php echo $row->id ?>"
                                                     name_record="<?php echo $row->name ?>" table="user" field="user_role"
-                                                    class="ace ace-switch ace-switch-7 checkbox_user_role" type="checkbox">
+                                                    class=" ace ace-switch ace-switch-7 checkbox_user_role" type="checkbox">
                                                 <span class="lbl"></span>
                                             </label>
                                         </td>
@@ -317,7 +317,11 @@
             </div>
         </div>
 
-
+        <style>
+            .modal-backdrop{
+                height: 800px !important;
+            }
+        </style>
         <div  id="modal-form" class="modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">

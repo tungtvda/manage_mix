@@ -103,5 +103,7 @@ function showFrom($form,$ListKey=array())
     $str_from.='<p><label>token_code</label><input class="text-input small-input" type="text"  name="token_code" value="'.(($form!=false)?$form->token_code:'').'" /></p>';
     $str_from.='<p><label>time_token</label><input class="text-input small-input" type="text"  name="time_token" value="'.(($form!=false)?$form->time_token:'').'" /></p>';
     $str_from.='<p><label>updated</label><input class="text-input small-input" type="text"  name="updated" value="'.(($form!=false)?$form->updated:'').'" /></p>';
+    $str_from.='<p><label>updated_by</label><input class="text-input small-input" type="text"  name="updated_by" value="'.(($form!=false)?$form->updated_by:'').'" /></p>';
+    $str_from.='<p><label>created_by</label><input class="text-input small-input" type="text"  name="created_by" value="'.(($form!=false)?$form->created_by:'').'" /></p>';
     return $str_from;
 }

@@ -37,7 +37,7 @@
                     <div class="widget-main">
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <input name="avatar" class="valid" multiple="" type="file" id="id-input-file-3" />
+                                <input accept="image/*" name="avatar" class="valid" multiple="" type="file" id="id-input-file-3" />
                             </div>
                         </div>
                         <style>
@@ -83,14 +83,21 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Mã nhân viên <span style="color: red">*</span></label>
                                     <div class="col-sm-9">
-											<span class="input-icon width_100">
-												<input name="user_code"  type="text" id="input_user_code" class="width_100" required>
+											<span style="width: 60%" class="input-icon width_100">
+												<input  name="user_code"  type="text" id="input_user_code" class="width_100" required>
 												<i class="ace-icon fa fa-qrcode blue"></i>
                                                 <i  id="user_code_error_icon" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " data-toggle="ggtooltip" data-title="" data-trigger="hover" data-placement="bottom" data-backcolor="red" data-textcolor="#ffffff" title=""></i>
                                                 <i id="user_code_success_icon" style="display: none" class="ace-icon fa fa-check-circle icon-right success-color" data-toggle="ggtooltip" data-title="" data-trigger="hover" data-placement="bottom" data-backcolor="green" data-textcolor="#000000" title="Mã nhân viên hợp lệ"></i>
 											</span>
                                         <label style="display: none" class="error-color  error-color-size" id="error_user_code">Bạn vui lòng nhập mã nhân viên</label>
+
+                                        <label class="" >
+                                            <input name="user_role" type="checkbox" class="ace input-lg">
+                                            <span class="lbl bigger-120"> Admin hệ thống</span>
+                                        </label>
+
                                     </div>
+
                                 </div>
                             </div>
                             <div class="col-sm-6">

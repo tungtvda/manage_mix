@@ -17,15 +17,16 @@ $url_bread='<li class="active">Nhân viên</li>';
 $data['breadcrumbs']=$url_bread;
 $data['title']='Danh sách nhân viên';
 $count=8;
-$data['list']=user_getByTop('','','updated asc');
-if(isset($_FILES['image'])){
-    print_r($_FILES['image']);
-    exit;
-}
+_deleteSubmitForm('user', 'user_delete');
+$data['list']=user_getByTop('','','updated desc');
+$data['module_valid'] = "user";
 show_header($data);
 show_left($data,'user','user_list');
 show_breadcrumb($data);
 show_navigation($data);
 show_user_list($data);
 show_footer($data);
+show_valid_form($data);
+_returnCreateUser(1);
+
 show_script_table($data,$count);

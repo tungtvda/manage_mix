@@ -99,5 +99,17 @@ function view_left($data=array())
             }
         }
     }
+    if(count($data['user_left'])==0)
+    {
+        redict(_returnLinkDangNhap());
+    }
+    $name_user=$data['user_left'][0]->name;
+    if($data['user_left'][0]->avatar=="")
+    {
+        $avatar=SITE_NAME.'/view/default/themes/images/no-avatar.png';
+    }
+    else{
+        $avatar=SITE_NAME.$data['user_left'][0]->avatar;
+    }
     require_once DIR . '/view/default/template/left.php';
 }

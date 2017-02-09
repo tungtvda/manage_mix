@@ -42,6 +42,14 @@ jQuery(function ($) {
         checkAddressUser();
     });
 
+    // check address
+    $('body').on("input",'#input_user_phone', function () {
+        checkPhoneUser();
+    });
+    $('body').on("keyup",'#input_user_phone', function () {
+        checkPhoneUser();
+    });
+
 
     // check address
     $('body').on("input",'#input_user_name', function () {
@@ -70,7 +78,7 @@ jQuery(function ($) {
             var form_data=$("#submit_form").serializeArray();
             var error_free=true;
             for (var input in form_data){
-                if(form_data[input]['name']!="mr"&&form_data[input]['name']!="file-format"&&form_data[input]['name']!="avatar")
+                if(form_data[input]['name']!="mr"&&form_data[input]['name']!="file-format"&&form_data[input]['name']!="avatar"&&form_data[input]['name']!="user_role")
                 {
                     var element=$("#input_"+form_data[input]['name']);
                     var error=$("#error_"+form_data[input]['name']);
@@ -90,6 +98,40 @@ jQuery(function ($) {
 
     //$('i').ggtooltip();
 });
+
+//check địa chỉ nhân viên
+function checkPhoneUser(){
+    var value = $("#input_user_phone").val();
+    if(value==''){
+        var mess='Bạn vui lòng nhập số điện thoại';
+        showHiddenPhoneUser(0,mess);
+    }else{
+        var mess='';
+        showHiddenPhoneUser(1,mess);
+    }
+}
+function showHiddenPhoneUser(res,mess){
+    var error_user_phone=$("#error_user_phone" );
+    if (res == 1) {
+        error_user_phone.hide();
+        $('#error_icon_user_phone').hide();
+        $('#input_user_phone').removeClass("input-error").addClass("valid");
+    }
+    else {
+        if(res!=0)
+        {
+            mess=res;
+        }
+        $('#error_icon_user_phone').show();
+        $('#input_user_phone').addClass("input-error").removeClass("valid");
+        error_user_phone.removeClass("success-color");
+        error_user_phone.addClass("error-color");
+        error_user_phone.html(mess);
+        error_user_phone.show();
+    }
+}
+
+
 // check pass confirm
 function checkUserPasswordConfirm(){
     var error_password_confirm=$("#error_password_confirm" );
@@ -262,7 +304,6 @@ function checkUserName(){
 
 
 //check địa chỉ nhân viên
-// check name user
 function checkAddressUser(){
     var value = $("#input_address_user").val();
     if(value==''){

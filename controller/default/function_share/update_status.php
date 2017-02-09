@@ -18,7 +18,13 @@ if (isset($_GET['id']) && isset($_GET['table']) && isset($_GET['field']) && isse
             $new = new $table($data_check);
             $new->id = $id;
             $new->$field = $status;
-            $function_update = $table . '_update_status';
+            if(isset($_GET['action'])&&$_GET['action']!='')
+            {
+                $function_update =_returnGetParamSecurity('action');
+            }
+            else{
+                $function_update = $table . '_update_status';
+            }
             $function_update($new);
             echo 1;
         } else {

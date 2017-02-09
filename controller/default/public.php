@@ -5,8 +5,6 @@
  * Date: 11/20/14
  * Time: 11:00 AM
  */
-require_once DIR . '/common/class.phpmailer.php';
-require_once(DIR . "/common/Mail.php");
 $array_files=scandir(DIR.'/model');
 foreach ($array_files as $filename) {
     $path = DIR.'/model/' . $filename;
@@ -34,6 +32,7 @@ function  show_left($data1=array(),$active='trangchu',$active_sub='trangchu')
     $data['active']=$active;
     $data['active_sub']=$active_sub;
     $data['data_permison_module']=permison_module_getByTop('','id!=1 and status=1','position asc');
+    $data['user_left']=user_getById($_SESSION['user_id']);
     view_left($data);
 }
 function  show_breadcrumb($data1=array())

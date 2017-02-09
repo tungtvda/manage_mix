@@ -291,10 +291,10 @@
 
                 <li class="light-blue">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        <img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo" />
+                        <img class="nav-user-photo" src="<?php echo $avatar?>" alt="<?php echo $name_user?>" />
 								<span class="user-info">
 									<small>Welcome,</small>
-									Jason
+                                    <?php echo $name_user?>
 								</span>
 
                         <i class="ace-icon fa fa-caret-down"></i>

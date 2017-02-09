@@ -84,9 +84,16 @@ jQuery(function ($) {
         var name_record=$(this).attr('name_record');
         var link = url + '/update-status/';
         var field_check = "checkbox_user_role_" + idSelect;
+        if(status==1)
+        {
+            var mess='Bạn chắc chắn rằng muốn người dùng </br><b>"'+name_record+'"</b> trở thành admin hệ thống?'
+        }
+        else{
+            var mess='Bạn chắc chắn rằng muốn hủy quyền admin của người dùng </br><b>"'+name_record+'"</b>?'
+        }
         lnv.confirm({
             title: '<label class="orange">Xác nhận trở thành admin hệ thống</label>',
-            content: 'Bạn chắc chắn rằng muốn người dùng </br><b>"'+name_record+'"</b> trở thành admin hệ thống?',
+            content: mess,
             confirmBtnText: 'Ok',
             iconBtnText:'<i style="color: #669fc7;" class="ace-icon fa fa-question orange"></i>',
             confirmHandler: function () {

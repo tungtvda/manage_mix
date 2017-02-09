@@ -93,7 +93,7 @@
 
                                         <label class="" >
                                             <input name="user_role" type="checkbox" class="ace input-lg">
-                                            <span class="lbl bigger-120"> Admin hệ thống</span>
+                                            <span class="lbl bigger-120" style="font-size: 14px !important;"> Admin hệ thống</span>
                                         </label>
 
                                     </div>

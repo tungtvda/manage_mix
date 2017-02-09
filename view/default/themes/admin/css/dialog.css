@@ -3,7 +3,7 @@
 
 .lnv-dialog {
     position: fixed;
-    z-index: 13;
+    z-index: 1111;
     width: 85%;
     /*width: 320px;*/
     top: 40%;
@@ -149,6 +149,7 @@
     top: 0;
     left: 0;
     background: rgba(0, 0, 0, 0.6);
+    z-index: 1111;
 }
 
 .lnv-mask-transparent {

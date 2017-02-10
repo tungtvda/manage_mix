@@ -96,9 +96,130 @@ jQuery(function ($) {
 
     });
 
+    $('body').on("click",'.view_popup_detail', function () {
+        var Id = $(this).attr("countid");
+        var name = $(this).attr("name_record");
+        $( "#title_form" ).html('Chỉnh sửa nhân viên "<b>'+name+'</b>"');
+        resetForm("#submit_form");
+        $( "#input_check_edit" ).val('edit');
+        if(Id!=''){
+            jQuery.post(url+"/get-detail-ajax/",
+                {
+                    id: Id,
+                    table:'user'
+                }
+                )
+                .done(function (data) {
+                    if(data!=0)
+                    {
+                        var obj = jQuery.parseJSON(data);
+                        if(obj.avatar!=''){
+                            var output = document.getElementById('show_img_upload');
+                            output.src = url+obj.avatar;
+                        }
+                        if(obj.user_code!=''){
+                            $('#input_user_code').val(obj.user_code);
+                            $('#input_user_code').removeClass("input-error").addClass("valid");
+                        }
+                        else{
+                            $('#input_user_code').addClass("input-error").removeClass("valid");
+                        }
+
+                        if(obj.user_role==1)
+                        {
+                            $("#input_user_role").prop('checked', true);
+                        }else{
+                            $("#input_user_role").prop('checked', false);
+                        }
+                        if(obj.name!=''){
+                            $('#input_full_name').val(obj.name);
+                            $('#input_full_name').removeClass("input-error").addClass("valid");
+                        }
+                        else{
+                            $('#input_full_name').addClass("input-error").removeClass("valid");
+                        }
+                        var mr=obj.mr;
+                        if(mr!='')
+                        {
+                            $(".chosen-default span").html(mr);
+                            //$('.mr_user option').each(function() {
+                            //
+                            //    if($(this).val() == mr) {
+                            //        $(this).prop("selected", true);
+                            //    }
+                            //});
+                        }
+                        if(obj.birthday!=''){
+                            $('#input_birthday').val(obj.birthday);
+                            $('#input_birthday').removeClass("input-error").addClass("valid");
+                        }
+                        else{
+                            $('#input_birthday').addClass("input-error").removeClass("valid");
+                        }
+                        if(obj.user_email!=''){
+                            $('#input_email_user').val(obj.user_email);
+                            $('#input_email_user').removeClass("input-error").addClass("valid");
+                        }
+                        else{
+                            $('#input_email_user').addClass("input-error").removeClass("valid");
+                        }
+                        if(obj.address!=''){
+                            $('#input_address_user').val(obj.address);
+                            $('#input_address_user').removeClass("input-error").addClass("valid");
+                        }
+                        else{
+                            $('#input_address_user').addClass("input-error").removeClass("valid");
+                        }
+                        if(obj.user_name!=''){
+                            $('#input_user_name').val(obj.user_name);
+                            $('#input_user_name').removeClass("input-error").addClass("valid");
+                        }
+                        else{
+                            $('#input_user_name').addClass("input-error").removeClass("valid");
+                        }
+                        if(obj.phone!=''){
+                            $('#input_user_phone').val(obj.phone);
+                            $('#input_user_phone').removeClass("input-error").addClass("valid");
+                        }
+                        else{
+                            $('#input_user_phone').addClass("input-error").removeClass("valid");
+                        }
+
+
+                        $('#input_password').val('code');
+                        $('#input_password').removeClass("input-error").addClass("valid");
+                        $('#input_password_confirm').val('code');
+                        $('#input_password_confirm').removeClass("input-error").addClass("valid");
+                        $('#hidden_edit_pass').hide();
+                        $('#input_id_edit').val(Id);
+                        //$('.mr_user').val(mr).prop('selected', true);
+                        //$(".chosen-default span").val(mr);
+
+                    }
+                });
+        }
+        else{
+            alert('Ban không thể xem chi tiết nhân viên');
+        }
+    });
+    $('body').on("click",'#reset_form_popup', function () {
+        $( "#input_check_edit" ).val('add');
+        resetForm("#submit_form");
+    });
+    $('body').on("click",'#create_popup', function () {
+        $('#hidden_edit_pass').show();
+        $( "#input_check_edit" ).val('add');
+        $( "#title_form" ).html('Tạo mới nhân viên');
+        resetForm("#submit_form");
+    });
+
+
     //$('i').ggtooltip();
 });
 
+function resetForm(form){
+    $(form).trigger('reset');
+}
 //check địa chỉ nhân viên
 function checkPhoneUser(){
     var value = $("#input_user_phone").val();
@@ -285,6 +406,9 @@ function showHiddenUserName(res,mess){
 function checkUserName(){
     var value = $("#input_user_name").val();
     var link = url + '/check-login.html';
+    var input_check_edit=$("#input_check_edit").val();
+    if(input_check_edit=='add')
+    {
     if(value!=''){
         $.ajax({
             method: "GET",
@@ -299,7 +423,7 @@ function checkUserName(){
     else{
         var mess='Bạn vui lòng điền tên đăng nhập';
         showHiddenUserName(0,mess);
-    }
+    }}
 }
 
 
@@ -362,6 +486,9 @@ function showHiddenUserEmail(res,mess){
 function checkEmailUser(){
     var value = $("#input_email_user").val();
     var link = url + '/check-login.html';
+    var input_check_edit=$("#input_check_edit").val();
+    if(input_check_edit=='add')
+    {
     if(value!=''){
         var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         var is_email=re.test(value);
@@ -384,7 +511,7 @@ function checkEmailUser(){
     else{
         var mess='Bạn vui lòng nhập email';
         showHiddenUserEmail(0,mess);
-    }
+    }}
 }
 
 
@@ -463,21 +590,26 @@ function showHiddenUserCode(res,mess){
 function ajaxCheckUserCode(){
     var value = $("#input_user_code").val();
     var link = url + '/check-login.html';
-    if(value!=''){
-        $.ajax({
-            method: "GET",
-            url: link,
-            data: "value=" + value + '&key=user_code',
-            success: function (response) {
-                var mess='Mã nhân viên "'+value+'" đã tồn tại trong hệ thống';
-                showHiddenUserCode(response,mess);
-            }
-        });
+    var input_check_edit=$("#input_check_edit").val();
+    if(input_check_edit=='add')
+    {
+        if(value!=''){
+            $.ajax({
+                method: "GET",
+                url: link,
+                data: "value=" + value + '&key=user_code',
+                success: function (response) {
+                    var mess='Mã nhân viên "'+value+'" đã tồn tại trong hệ thống';
+                    showHiddenUserCode(response,mess);
+                }
+            });
+        }
+        else{
+            var mess='Bạn vui lòng nhập mã nhân viên';
+            showHiddenUserCode(0,mess);
+        }
     }
-    else{
-        var mess='Bạn vui lòng nhập mã nhân viên';
-        showHiddenUserCode(0,mess);
-    }
+
 }
 
 // check name user

@@ -32,7 +32,7 @@
                         </a>
                     </div>
                 </div>
-
+                <input hidden id="input_check_edit" class="valid" value="add">
                 <div class="widget-body">
                     <div class="widget-main">
                         <div class="form-group">
@@ -89,13 +89,15 @@
                                                 <i  id="user_code_error_icon" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " data-toggle="ggtooltip" data-title="" data-trigger="hover" data-placement="bottom" data-backcolor="red" data-textcolor="#ffffff" title=""></i>
                                                 <i id="user_code_success_icon" style="display: none" class="ace-icon fa fa-check-circle icon-right success-color" data-toggle="ggtooltip" data-title="" data-trigger="hover" data-placement="bottom" data-backcolor="green" data-textcolor="#000000" title="Mã nhân viên hợp lệ"></i>
 											</span>
-                                        <label style="display: none" class="error-color  error-color-size" id="error_user_code">Bạn vui lòng nhập mã nhân viên</label>
-
-                                        <label class="" >
+                                        <label class="inline">
                                             <input name="user_role" type="checkbox" class="ace input-lg">
-                                            <span class="lbl bigger-120" style="font-size: 14px !important;"> Admin hệ thống</span>
+                                            <span class="lbl"> Admin hệ thống</span>
                                         </label>
-
+<!--                                        <label class="" >-->
+<!--                                            <input name="user_role" type="checkbox" class="ace input-lg">-->
+<!--                                            <span class="lbl bigger-120" style="font-size: 14px !important;"> Admin hệ thống</span>-->
+<!--                                        </label>-->
+                                        <label style="display: none" class="error-color  error-color-size" id="error_user_code">Bạn vui lòng nhập mã nhân viên</label>
                                     </div>
 
                                 </div>
@@ -113,7 +115,7 @@
                                             <option value=""></option>
                                             <option value="Mr">Mr</option>
                                             <option value="Mrs">Mrs</option>
-                                            <option value="Mrs">Ms</option>
+                                            <option value="Ms">Ms</option>
                                         </select>
 											<span class="input-icon " style="width: 68%;">
 												<input name="full_name" type="text" id="input_full_name" class="width_100" required>

@@ -283,6 +283,9 @@ jQuery(function ($) {
         }
 
     });
+
+
+
     //$('i').ggtooltip();
 });
 

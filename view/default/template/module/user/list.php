@@ -21,7 +21,7 @@
                 <div class="clearfix">
                     <div class="col-md-6 col-sm-6 col-xs-12 pink" style="padding-left: 0px">
                         <?php if (_returnCheckAction(1) == 1) { ?>
-                            <a href="#modal-form" role="button" data-toggle="modal"
+                            <a href="#modal-form" role="button" data-toggle="modal" id="create_popup"
                                class="green btn btn-white btn-create btn-hover-white">
                                 <i class="ace-icon fa fa-plus bigger-120 "></i>
                                 Create popup
@@ -182,8 +182,8 @@
 
                                         <td>
                                             <div class="hidden-sm hidden-xs action-buttons">
-                                                <a class="blue"
-                                                   href="<?php echo SITE_NAME ?>/nhan-vien/chi-tiet?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                <a class="blue view_popup_detail" role="button" name_record="<?php echo $row->name ?>" data-toggle="modal" table="user" countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                   href="#modal-form"
                                                    title="Chi tiết">
                                                     <i class="ace-icon fa fa-eye-slash bigger-130"></i>
                                                 </a>
@@ -319,7 +319,7 @@
 
         <style>
             .modal-backdrop{
-                height: 800px !important;
+                height: 1000px !important;
             }
         </style>
         <div  id="modal-form" class="modal" tabindex="-1">
@@ -327,9 +327,11 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="blue bigger">Tạo mới nhân viên</h4>
+                        <h4 class="blue bigger" id="title_form">Tạo mới nhân viên</h4>
+
                     </div>
                     <form id="submit_form" role="form" action="" method="post" enctype="multipart/form-data">
+
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-4 col-md-4">
@@ -341,7 +343,8 @@
                                         <input accept="image/*" name="avatar" type="file" id="id-input-file-2" onchange="loadFile(event)" />
                                     </div>
                                 </div>
-
+                                <input class="valid" hidden name="check_edit" id="input_check_edit" value="">
+                                <input class="valid" hidden name="id_edit" id="input_id_edit" value="">
                                 <div class="col-xs-12 col-sm-8">
                                     <div class="form-group" style="float: left; width: 100%">
 
@@ -349,7 +352,7 @@
                                         <div style="float: left;width: 66%" >
                                             <label for="form-field-select-3">Mã nhân viên <span style="color: red">*</span></label>
                                            <span class="input-icon width_100">
-												<input name="user_code" type="text" id="input_user_code"
+												<input readonly name="user_code" type="text" id="input_user_code"
                                                        class="width_100" required>
 												<i class="ace-icon fa fa-qrcode blue"></i>
                                                 <i id="user_code_error_icon" style="display: none"
@@ -369,7 +372,7 @@
                                         <div style="float: left;width: 33%; text-align: center" >
                                             <label for="form-field-select-3">Admin hệ thống</label>
                                             <label>
-                                                <input name="user_role" class="ace ace-switch ace-switch-6" type="checkbox">
+                                                <input id="input_user_role" name="user_role" class="ace ace-switch ace-switch-6" type="checkbox">
                                                 <span class="lbl"></span>
                                             </label>
                                         </div>
@@ -393,13 +396,13 @@
                                                 }
                                             </style>
                                             <div style="float: left;width: 33%;" >
-                                            <select name="mr" class="chosen-select form-control"
+                                            <select name="mr" class="chosen-select form-control mr_user"
                                                     id="form-field-select-3" data-placeholder="Danh xưng ..."
                                                     style="display: none;width: 10px">
                                                 <option value=""></option>
                                                 <option value="Mr">Mr</option>
                                                 <option value="Mrs">Mrs</option>
-                                                <option value="Mrs">Ms</option>
+                                                <option value="Ms">Ms</option>
                                             </select>
                                             </div>
                                             <div style="float: left;width: 66%" >
@@ -448,7 +451,7 @@
                                                     style="color: red">*</span></label>
                                             <div>
                                            <span class="input-icon width_100">
-												<input name="email_user" type="email" id="input_email_user"
+												<input readonly name="email_user" type="email" id="input_email_user"
                                                        class="width_100" required>
 												<i class="ace-icon fa fa-envelope blue"></i>
                                                 <i id="email_user_error_icon" style="display: none"
@@ -485,7 +488,7 @@
                                                     style="color: red">*</span></label>
                                             <div>
                                           <span class="input-icon width_100">
-												<input name="user_name" type="text" id="input_user_name" class="width_100" required>
+												<input readonly name="user_name" type="text" id="input_user_name" class="width_100" required>
 												<i class="ace-icon fa fa-user blue"></i>
                                                 <i id="error_icon_user_name" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Bạn vui lòng kiểm tra tên đăng nhập"></i>
                                                 <i id="success_icon_user_name" style="display: none" class="ace-icon fa fa-check-circle icon-right success-color" title="Tên đăng nhập hợp lệ"></i>
@@ -510,14 +513,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div style="float: left; width: 100%">
+                                <div style="float: left; width: 100%" id="hidden_edit_pass">
                                     <div class="col-xs-12 col-sm-6 col-md-6">
                                         <div class="form-group">
                                             <label for="form-field-select-3">Mật khẩu <span
                                                     style="color: red">*</span></label>
                                             <div>
                                          <span class="input-icon width_100">
-												<input name="password" type="password" id="input_password" class="width_100" required>
+												<input readonly name="password" type="password" id="input_password" class="width_100" required>
 												<i class="ace-icon fa fa-key blue"></i>
                                                 <i id="error_icon_user_pass" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Bạn vui lòng nhập địa chỉ"></i>
 											</span>
@@ -532,7 +535,7 @@
                                             <div>
                                          <span class="input-icon width_100">
 											<span class="input-icon width_100">
-												<input name="password_confirm" type="password" id="input_password_confirm" class="width_100" required>
+												<input readonly name="password_confirm" type="password" id="input_password_confirm" class="width_100" required>
 												<i class="ace-icon fa fa-key blue"></i>
                                                 <i id="error_icon_user_pass_con" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title=""></i>
 											</span>
@@ -550,7 +553,7 @@
                                 <i class="ace-icon fa fa-check"></i>
                                 Save
                             </button>
-                            <button type="reset" class="btn btn-sm" data-dismiss="modal">
+                            <button type="reset" class="btn btn-sm" data-dismiss="modal" id="reset_form_popup">
                                 <i class="ace-icon fa fa-times"></i>
                                 Cancel
                             </button>

@@ -48,8 +48,7 @@
                             <ul class="dropdown-menu dropdown-danger">
                                 <?php if (_returnCheckAction(2) == 1) { ?>
                                     <li>
-                                        <a class="edit_function"
-                                           href="javascript:void()">Sửa</a>
+                                        <a href="#modal-form"  role="button"  data-toggle="modal" class="edit_function">Sửa</a>
                                     </li>
                                 <?php } ?>
                                 <?php if (_returnCheckAction(3) == 1) { ?>
@@ -127,7 +126,7 @@
                                     <tr>
                                         <td class="center">
                                             <label class="pos-rel">
-                                                <input type="checkbox" class="ace click_check_list" id="check_<?php echo $dem ?>" name="check_box_action[]"
+                                                <input type="checkbox" class="ace click_check_list" name_record="<?php echo $row->name ?>" id="check_<?php echo $dem ?>" name="check_box_action[]"
                                                        value="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"/>
                                                 <span class="lbl"></span>
                                             </label>
@@ -188,9 +187,9 @@
                                                     <i class="ace-icon fa fa-eye-slash bigger-130"></i>
                                                 </a>
                                                 <?php if (_returnCheckAction(2) == 1) { ?>
-                                                    <a class="" href="#" title="Sửa popup">
-                                                        <i class="ace-icon glyphicon glyphicon-edit"></i>
-                                                    </a>
+<!--                                                    <a class="" href="#" title="Sửa popup">-->
+<!--                                                        <i class="ace-icon glyphicon glyphicon-edit"></i>-->
+<!--                                                    </a>-->
 
                                                     <a title="Sửa tab mới" class="green"
                                                        href="<?php echo SITE_NAME ?>/nhan-vien/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
@@ -222,11 +221,10 @@
 
                                                     <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
                                                         <li>
-                                                            <a href="#" class="tooltip-info" data-rel="tooltip"
-                                                               title="View">
-																				<span class="blue">
-																					<i class="ace-icon fa fa-search-plus bigger-120"></i>
-																				</span>
+                                                            <a class="blue view_popup_detail" role="button" name_record="<?php echo $row->name ?>" data-toggle="modal" table="user" countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                               href="#modal-form"
+                                                               title="Chi tiết">
+                                                                <i class="ace-icon fa fa-eye-slash bigger-130"></i>
                                                             </a>
                                                         </li>
                                                         <?php if (_returnCheckAction(2) == 1) { ?>
@@ -296,8 +294,7 @@
                     <ul class="dropdown-menu dropdown-danger">
                         <?php if (_returnCheckAction(2) == 1) { ?>
                             <li>
-                                <a class="edit_function"
-                                   href="javascript:void()">Sửa</a>
+                                <a href="#modal-form"  role="button"  data-toggle="modal" class="edit_function">Sửa</a>
                             </li>
                         <?php } ?>
                         <?php if (_returnCheckAction(3) == 1) { ?>

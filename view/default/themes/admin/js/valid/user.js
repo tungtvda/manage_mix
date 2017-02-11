@@ -97,110 +97,14 @@ jQuery(function ($) {
     });
 
     $('body').on("click",'.view_popup_detail', function () {
+        document.getElementById("input_user_code").readOnly = true;
+        document.getElementById("input_email_user").readOnly = true;
+        document.getElementById("input_user_name").readOnly = true;
+        document.getElementById("input_password").readOnly = true;
+        document.getElementById("input_password_confirm").readOnly = true;
         var Id = $(this).attr("countid");
         var name = $(this).attr("name_record");
-        $( "#title_form" ).html('Chỉnh sửa nhân viên "<b>'+name+'</b>"');
-        resetForm("#submit_form");
-        $( "#input_check_edit" ).val('edit');
-        if(Id!=''){
-            jQuery.post(url+"/get-detail-ajax/",
-                {
-                    id: Id,
-                    table:'user'
-                }
-                )
-                .done(function (data) {
-                    if(data!=0)
-                    {
-                        var obj = jQuery.parseJSON(data);
-                        if(obj.avatar!=''){
-                            var output = document.getElementById('show_img_upload');
-                            output.src = url+obj.avatar;
-                        }
-                        if(obj.user_code!=''){
-                            $('#input_user_code').val(obj.user_code);
-                            $('#input_user_code').removeClass("input-error").addClass("valid");
-                        }
-                        else{
-                            $('#input_user_code').addClass("input-error").removeClass("valid");
-                        }
-
-                        if(obj.user_role==1)
-                        {
-                            $("#input_user_role").prop('checked', true);
-                        }else{
-                            $("#input_user_role").prop('checked', false);
-                        }
-                        if(obj.name!=''){
-                            $('#input_full_name').val(obj.name);
-                            $('#input_full_name').removeClass("input-error").addClass("valid");
-                        }
-                        else{
-                            $('#input_full_name').addClass("input-error").removeClass("valid");
-                        }
-                        var mr=obj.mr;
-                        if(mr!='')
-                        {
-                            $(".chosen-default span").html(mr);
-                            //$('.mr_user option').each(function() {
-                            //
-                            //    if($(this).val() == mr) {
-                            //        $(this).prop("selected", true);
-                            //    }
-                            //});
-                        }
-                        if(obj.birthday!=''){
-                            $('#input_birthday').val(obj.birthday);
-                            $('#input_birthday').removeClass("input-error").addClass("valid");
-                        }
-                        else{
-                            $('#input_birthday').addClass("input-error").removeClass("valid");
-                        }
-                        if(obj.user_email!=''){
-                            $('#input_email_user').val(obj.user_email);
-                            $('#input_email_user').removeClass("input-error").addClass("valid");
-                        }
-                        else{
-                            $('#input_email_user').addClass("input-error").removeClass("valid");
-                        }
-                        if(obj.address!=''){
-                            $('#input_address_user').val(obj.address);
-                            $('#input_address_user').removeClass("input-error").addClass("valid");
-                        }
-                        else{
-                            $('#input_address_user').addClass("input-error").removeClass("valid");
-                        }
-                        if(obj.user_name!=''){
-                            $('#input_user_name').val(obj.user_name);
-                            $('#input_user_name').removeClass("input-error").addClass("valid");
-                        }
-                        else{
-                            $('#input_user_name').addClass("input-error").removeClass("valid");
-                        }
-                        if(obj.phone!=''){
-                            $('#input_user_phone').val(obj.phone);
-                            $('#input_user_phone').removeClass("input-error").addClass("valid");
-                        }
-                        else{
-                            $('#input_user_phone').addClass("input-error").removeClass("valid");
-                        }
-
-
-                        $('#input_password').val('code');
-                        $('#input_password').removeClass("input-error").addClass("valid");
-                        $('#input_password_confirm').val('code');
-                        $('#input_password_confirm').removeClass("input-error").addClass("valid");
-                        $('#hidden_edit_pass').hide();
-                        $('#input_id_edit').val(Id);
-                        //$('.mr_user').val(mr).prop('selected', true);
-                        //$(".chosen-default span").val(mr);
-
-                    }
-                });
-        }
-        else{
-            alert('Ban không thể xem chi tiết nhân viên');
-        }
+        show_edit_nhanvien(Id,name);
     });
     $('body').on("click",'#reset_form_popup', function () {
         $( "#input_check_edit" ).val('add');
@@ -210,13 +114,163 @@ jQuery(function ($) {
         $('#hidden_edit_pass').show();
         $( "#input_check_edit" ).val('add');
         $( "#title_form" ).html('Tạo mới nhân viên');
+        var output = document.getElementById('show_img_upload');
+        output.src = url+'/view/default/themes/images/no-image.jpg';
+        document.getElementById("input_user_code").readOnly = false;
+        document.getElementById("input_email_user").readOnly = false;
+        document.getElementById("input_user_name").readOnly = false;
+        document.getElementById("input_password").readOnly = false;
+        document.getElementById("input_password_confirm").readOnly = false;
         resetForm("#submit_form");
+    });
+
+    $('body').on('click','.edit_function', function () {
+        document.getElementById("input_user_code").readOnly = true;
+        document.getElementById("input_email_user").readOnly = true;
+        document.getElementById("input_user_name").readOnly = true;
+        document.getElementById("input_password").readOnly = true;
+        document.getElementById("input_password_confirm").readOnly = true;
+        var lenght = $('.click_check_list:checked').length;
+        if (lenght == 0) {
+            lnv.alert({
+                title: 'Lỗi',
+                content: 'Bạn vui lòng chọn bản ghi',
+                alertBtnText: 'Ok',
+                iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                alertHandler: function () {
+                    $('#modal-form').modal('hide');
+                }
+            });
+        }else{
+            if(lenght>1)
+            {
+                lnv.alert({
+                    title: 'Lỗi',
+                    content: 'Bạn chỉ được chọn một bản ghi',
+                    alertBtnText: 'Ok',
+                    iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                    alertHandler: function () {
+                        $('#modal-form').modal('hide');
+                    }
+                });
+            }else{
+                $('.click_check_list:checked').each(function() {
+                    var Id = $(this).attr("value");
+                    var name = $(this).attr("name_record");
+                    show_edit_nhanvien(Id,name)
+                });
+            }
+        }
     });
 
 
     //$('i').ggtooltip();
 });
 
+function show_edit_nhanvien(Id,name){
+    $( "#title_form" ).html('Chỉnh sửa nhân viên "<b>'+name+'</b>"');
+    resetForm("#submit_form");
+    $( "#input_check_edit" ).val('edit');
+    if(Id!=''){
+        jQuery.post(url+"/get-detail-ajax/",
+            {
+                id: Id,
+                table:'user'
+            }
+            )
+            .done(function (data) {
+                if(data!=0)
+                {
+                    var obj = jQuery.parseJSON(data);
+                    if(obj.avatar!=''){
+                        var output = document.getElementById('show_img_upload');
+                        output.src = url+obj.avatar;
+                    }
+                    if(obj.user_code!=''){
+                        $('#input_user_code').val(obj.user_code);
+                        $('#input_user_code').removeClass("input-error").addClass("valid");
+                    }
+                    else{
+                        $('#input_user_code').addClass("input-error").removeClass("valid");
+                    }
+
+                    if(obj.user_role==1)
+                    {
+                        $("#input_user_role").prop('checked', true);
+                    }else{
+                        $("#input_user_role").prop('checked', false);
+                    }
+                    if(obj.name!=''){
+                        $('#input_full_name').val(obj.name);
+                        $('#input_full_name').removeClass("input-error").addClass("valid");
+                    }
+                    else{
+                        $('#input_full_name').addClass("input-error").removeClass("valid");
+                    }
+                    var mr=obj.mr;
+                    if(mr!='')
+                    {
+                        $(".chosen-default span").html(mr);
+                        //$('.mr_user option').each(function() {
+                        //
+                        //    if($(this).val() == mr) {
+                        //        $(this).prop("selected", true);
+                        //    }
+                        //});
+                    }
+                    if(obj.birthday!=''){
+                        $('#input_birthday').val(obj.birthday);
+                        $('#input_birthday').removeClass("input-error").addClass("valid");
+                    }
+                    else{
+                        $('#input_birthday').addClass("input-error").removeClass("valid");
+                    }
+                    if(obj.user_email!=''){
+                        $('#input_email_user').val(obj.user_email);
+                        $('#input_email_user').removeClass("input-error").addClass("valid");
+                    }
+                    else{
+                        $('#input_email_user').addClass("input-error").removeClass("valid");
+                    }
+                    if(obj.address!=''){
+                        $('#input_address_user').val(obj.address);
+                        $('#input_address_user').removeClass("input-error").addClass("valid");
+                    }
+                    else{
+                        $('#input_address_user').addClass("input-error").removeClass("valid");
+                    }
+                    if(obj.user_name!=''){
+                        $('#input_user_name').val(obj.user_name);
+                        $('#input_user_name').removeClass("input-error").addClass("valid");
+                    }
+                    else{
+                        $('#input_user_name').addClass("input-error").removeClass("valid");
+                    }
+                    if(obj.phone!=''){
+                        $('#input_user_phone').val(obj.phone);
+                        $('#input_user_phone').removeClass("input-error").addClass("valid");
+                    }
+                    else{
+                        $('#input_user_phone').addClass("input-error").removeClass("valid");
+                    }
+
+
+                    $('#input_password').val('code');
+                    $('#input_password').removeClass("input-error").addClass("valid");
+                    $('#input_password_confirm').val('code');
+                    $('#input_password_confirm').removeClass("input-error").addClass("valid");
+                    $('#hidden_edit_pass').hide();
+                    $('#input_id_edit').val(Id);
+                    //$('.mr_user').val(mr).prop('selected', true);
+                    //$(".chosen-default span").val(mr);
+
+                }
+            });
+    }
+    else{
+        alert('Ban không thể xem chi tiết nhân viên');
+    }
+}
 function resetForm(form){
     $(form).trigger('reset');
 }

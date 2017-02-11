@@ -97,7 +97,7 @@ else{
                     "sButtonClass": "btn btn-white btn-primary  btn-bold",
                     "sButtonText": "<i class='fa fa-print bigger-110 grey'></i>",
 
-                    "sMessage": "<div class='navbar navbar-default'><div class='navbar-header pull-left'><a class='navbar-brand' href='#'><small>Optional Navbar &amp; Text</small></a></div></div>",
+                    "sMessage": "<div class='navbar navbar-default'><div class='navbar-header pull-left'><a class='navbar-brand' href='#'><small><?php echo $title_print?></small></a></div></div>",
 
                     "sInfo": "<h3 class='no-margin-top'>Print view</h3>\
 									  <p>Please use your browser's print function to\

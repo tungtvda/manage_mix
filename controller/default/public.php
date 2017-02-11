@@ -90,6 +90,7 @@ function show_valid_form($data1=array())
 function show_script_table($data1=array(),$count=5)
 {
     $data=array();
+    $data=$data1;
     $data['count']=$count;
     view_script_table($data);
 }

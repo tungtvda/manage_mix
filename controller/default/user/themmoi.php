@@ -32,6 +32,7 @@ show_breadcrumb($data);
 show_navigation($data);
 show_user_themmoi($data);
 show_footer($data);
+_returnCreateUser(1);
 show_valid_form($data);
 show_script_form($data);
-_returnCreateUser(1);
+

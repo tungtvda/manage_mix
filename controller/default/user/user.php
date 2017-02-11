@@ -17,6 +17,7 @@ $url_bread='<li class="active">Nhân viên</li>';
 $data['breadcrumbs']=$url_bread;
 $data['title']='Danh sách nhân viên';
 $count=8;
+_returnCreateUser(1);
 _deleteSubmitForm('user', 'user_delete');
 $data['list']=user_getByTop('','','updated desc');
 $data['module_valid'] = "user";
@@ -28,6 +29,4 @@ show_navigation($data);
 show_user_list($data);
 show_footer($data);
 show_valid_form($data);
-_returnCreateUser(1);
-
 show_script_table($data,$count);

@@ -392,6 +392,7 @@ function _returnCreateUser($check_redict){
             $user_role=0;
         }
         $avatar='';
+
         if ($user_code != "" && $full_name != '' && $input_birthday != '' && $email_user != '' && $user_name != '' && $password != '' && $password_confirm != '') {
             if(isset($_POST['check_edit'])&&isset($_POST['id_edit'])&&$_POST['check_edit']==="edit"&&$_POST['id_edit']!='')
             {
@@ -410,16 +411,17 @@ function _returnCreateUser($check_redict){
                     $new_obj->updated=_returnGetDateTime();
                     $new_obj->id=$id;
                     user_update($new_obj);
-                    if($check_redict==1)
-                    {
-                        redict(SITE_NAME.'/nhan-vien/');
-                    }
-                    else{
-                        return 1;
-                    }
+//                    if($check_redict==1)
+//                    {
+//                        redict(SITE_NAME.'/nhan-vien/');
+//                    }
+//                    else{
+//                        return 1;
+//                    }
                 }
             }
             else{
+
                 if($password!=$password_confirm){
                     echo '<script>alert("Hai mật khẩu không khớp")</script>';
                 }else{
@@ -462,7 +464,10 @@ function _returnCreateUser($check_redict){
                         $dangky->phone=$phone;
                         $dangky->user_role=$user_role;
                         $dangky->created_by=$_SESSION['user_id'];
+
                         user_insert($dangky);
+                        print_r($dangky);
+                        exit;
                         $subject = "Thông báo đăng ký tài khoản tại hệ thống quản lý MIXTOURIST";
                         $message='';
                         if($mr=='')

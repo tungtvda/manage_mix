@@ -135,7 +135,7 @@
                                             <?php echo $dem; ?>
                                         </td>
                                         <td>
-                                            <a href="<?php echo SITE_NAME ?>/nhan-vien/chi-tiet?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"><?php echo $row->name ?></a>
+                                            <a href="<?php echo SITE_NAME ?>/nhan-vien/chi-tiet?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"><?php echo $row->name.' - '.$row->user_code ?></a>
                                         </td>
                                         <td style="text-align: center">
                                             <?php
@@ -155,6 +155,7 @@
                                             <span hidden><?php echo (int)$row->user_role ?></span>
                                             <?php if ($row->user_role == 0) echo '<i id="user-md-active-'.$row->id.'" style="font-size: 20px;" class="fa fa-user-md hidden-xs"></i>' ?>
                                             <?php if ($row->user_role == 1) echo ' <i id="user-md-active-'.$row->id.'" style="font-size: 20px;" class="fa fa-user-md active-user-role hidden-xs"></i>' ?>
+                                            <?php if (_returnCheckAction(2) == 1) { ?>
                                             <label>
                                                 <input <?php if ($row->user_role) echo 'checked' ?>
                                                     id="checkbox_user_role_<?php echo $row->id ?>"
@@ -163,10 +164,13 @@
                                                     class=" ace ace-switch ace-switch-7 checkbox_user_role" type="checkbox">
                                                 <span class="lbl"></span>
                                             </label>
+                                        <?php }?>
                                         </td>
                                         <td>
                                             <span hidden><?php echo (int)$row->status ?></span>
+                                    <?php if (_returnCheckAction(2) == 1) { ?>
                                             <label>
+
                                                 <input <?php if ($row->status) echo 'checked' ?>
                                                     id="checkbox_status_<?php echo $row->id ?>"
                                                     countid="<?php echo $row->id ?>"
@@ -174,6 +178,10 @@
                                                     class="ace ace-switch ace-switch-7 checkbox_status" type="checkbox">
                                                 <span class="lbl"></span>
                                             </label>
+                                    <?php }else{?>
+                                        <?php if ($row->status == 0) echo '<i  style="font-size: 20px;" class="fa fa-check-square-o "></i>' ?>
+                                        <?php if ($row->status == 1) echo ' <i  style="font-size: 20px;color:green" class="fa fa-check-square-o "></i>' ?>
+                                        <?php }?>
                                         </td>
                                         <!--                                        <td>-->
                                         <?php //echo _returnDateFormatConvert($row->created) ?><!--</td>-->
@@ -181,12 +189,13 @@
 
                                         <td>
                                             <div class="hidden-sm hidden-xs action-buttons">
-                                                <a class="blue view_popup_detail" role="button" name_record="<?php echo $row->name ?>" data-toggle="modal" table="user" countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
-                                                   href="#modal-form"
-                                                   title="Chi tiết">
-                                                    <i class="ace-icon fa fa-eye-slash bigger-130"></i>
-                                                </a>
+
                                                 <?php if (_returnCheckAction(2) == 1) { ?>
+                                                    <a class="blue view_popup_detail" role="button" name_record="<?php echo $row->name ?>" data-toggle="modal" table="user" countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                       href="#modal-form"
+                                                       title="Chi tiết">
+                                                        <i class="ace-icon fa fa-eye-slash bigger-130"></i>
+                                                    </a>
 <!--                                                    <a class="" href="#" title="Sửa popup">-->
 <!--                                                        <i class="ace-icon glyphicon glyphicon-edit"></i>-->
 <!--                                                    </a>-->
@@ -220,14 +229,15 @@
                                                     </button>
 
                                                     <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-                                                        <li>
-                                                            <a class="blue view_popup_detail" role="button" name_record="<?php echo $row->name ?>" data-toggle="modal" table="user" countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
-                                                               href="#modal-form"
-                                                               title="Chi tiết">
-                                                                <i class="ace-icon fa fa-eye-slash bigger-130"></i>
-                                                            </a>
-                                                        </li>
+
                                                         <?php if (_returnCheckAction(2) == 1) { ?>
+                                                            <li>
+                                                                <a class="blue view_popup_detail" role="button" name_record="<?php echo $row->name ?>" data-toggle="modal" table="user" countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                                   href="#modal-form"
+                                                                   title="Chi tiết">
+                                                                    <i class="ace-icon fa fa-eye-slash bigger-130"></i>
+                                                                </a>
+                                                            </li>
                                                             <li>
                                                                 <a href="#" class="tooltip-success" data-rel="tooltip"
                                                                    title="Sửa popup">

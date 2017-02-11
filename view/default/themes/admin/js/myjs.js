@@ -259,7 +259,7 @@ jQuery(function ($) {
         if (lenght == 0) {
             lnv.alert({
                 title: 'Lỗi',
-                content: 'Bạn vui lòng chọn bạn ghi',
+                content: 'Bạn vui lòng chọn bản ghi',
                 alertBtnText: 'Ok',
                 iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
                 alertHandler: function () {

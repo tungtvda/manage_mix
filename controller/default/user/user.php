@@ -20,6 +20,7 @@ $count=8;
 _deleteSubmitForm('user', 'user_delete');
 $data['list']=user_getByTop('','','updated desc');
 $data['module_valid'] = "user";
+$data['title_print'] = "Danh sách nhân viên";
 show_header($data);
 show_left($data,'user','user_list');
 show_breadcrumb($data);

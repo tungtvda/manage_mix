@@ -112,8 +112,6 @@ jQuery(function ($) {
     });
     $('body').on("click",'#create_popup', function () {
         $('#hidden_edit_pass').show();
-        $( "#input_check_edit" ).val('add');
-        $( "#title_form" ).html('Tạo mới nhân viên');
         var output = document.getElementById('show_img_upload');
         output.src = url+'/view/default/themes/images/no-image.jpg';
         document.getElementById("input_user_code").readOnly = false;
@@ -122,6 +120,8 @@ jQuery(function ($) {
         document.getElementById("input_password").readOnly = false;
         document.getElementById("input_password_confirm").readOnly = false;
         resetForm("#submit_form");
+        $( "#input_check_edit" ).val('add');
+        $( "#title_form" ).html('Tạo mới nhân viên');
     });
 
     $('body').on('click','.edit_function', function () {

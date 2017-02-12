@@ -406,18 +406,24 @@ function _returnCreateUser($check_redict){
                     $new_obj->birthday=date("Y-m-d", strtotime($input_birthday));
                     $new_obj->address=$address_user;
                     $new_obj->user_role=$user_role;
-                    $new_obj->phone=$phone;
-                    $new_obj->mr=$mr;
+                    if($phone!="")
+                    {
+                        $new_obj->phone=$phone;
+                    }
+                    if($mr!=''){
+                        $new_obj->mr=$mr;
+                    }
+
                     $new_obj->updated=_returnGetDateTime();
                     $new_obj->id=$id;
                     user_update($new_obj);
-//                    if($check_redict==1)
-//                    {
-//                        redict(SITE_NAME.'/nhan-vien/');
-//                    }
-//                    else{
-//                        return 1;
-//                    }
+                    if($check_redict==1)
+                    {
+                        redict(SITE_NAME.'/nhan-vien/');
+                    }
+                    else{
+                        return 1;
+                    }
                 }
             }
             else{
@@ -530,5 +536,12 @@ function _deleteSubmitForm($model, $action_delete){
                 }
             }
         }
+    }
+}
+function _returnDataEditAdd($data,$field){
+    if(isset($data[0]->$field)){
+        return $data[0]->$field;
+    }else{
+        return '';
     }
 }

@@ -511,7 +511,7 @@
                                             <div>
                                           <span class="input-icon width_100">
 												<input name="user_phone" type="text" id="input_user_phone" class="width_100" required>
-												<i class="ace-icon fa fa-user blue"></i>
+												<i class="ace-icon fa fa-mobile blue"></i>
                                                 <i id="error_icon_user_phone" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Bạn vui lòng điền số điện thoại"></i>
 
 											</span>

@@ -17,6 +17,7 @@ RewriteRule ^update-status/$ controller/default/function_share/update_status.php
 RewriteRule ^get-detail-ajax/$ controller/default/function_share/get_detail.php
 RewriteRule ^nhan-vien/xoa$ controller/default/user/delete.php
 RewriteRule ^nhan-vien/them-moi controller/default/user/themmoi.php
+RewriteRule ^nhan-vien/sua controller/default/user/themmoi.php
 RewriteRule ^nhan-vien/phan-quyen$ controller/default/user/phanquyen.php
 RewriteRule ^tree-phan-quyen$ controller/default/user/tree.php
 RewriteRule ^update-phan-quyen$ controller/default/user/phanquyen_update.php

@@ -253,7 +253,8 @@ function show_edit_nhanvien(Id,name){
                     else{
                         $('#input_user_phone').addClass("input-error").removeClass("valid");
                     }
-
+                    $('#input_user_ngay_lam_viec').val(obj.ngay_lam_viec);
+                    $('#input_user_ngay_chinh_thuc').val(obj.ngay_chinh_thuc);
 
                     $('#input_password').val('code');
                     $('#input_password').removeClass("input-error").addClass("valid");

@@ -21,4 +21,5 @@ RewriteRule ^nhan-vien/sua controller/default/user/themmoi.php
 RewriteRule ^nhan-vien/phan-quyen$ controller/default/user/phanquyen.php
 RewriteRule ^tree-phan-quyen$ controller/default/user/tree.php
 RewriteRule ^update-phan-quyen$ controller/default/user/phanquyen_update.php
+RewriteRule ^nhan-vien/profile.html$ controller/default/user/hoso.php
 

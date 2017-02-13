@@ -83,6 +83,8 @@ function show_user_themmoi($data = array())
             $valid_phone="";
         }
     }
+    $ngay_lam_viec=_returnDataEditAdd($data['data_user'],'ngay_lam_viec');
+    $ngay_chinh_thuc=_returnDataEditAdd($data['data_user'],'ngay_chinh_thuc');
 
 
     require_once DIR . '/view/default/template/module/user/themmoi.php';

@@ -11,7 +11,8 @@ function show_user_hoso($data = array())
 {
     $asign = array();
     $title=$data['title'];
-    $id=_returnDataEditAdd($data['data_user'],'id');
+
+    $id_xac_minh=$id=_returnDataEditAdd($data['data_user'],'id');
     if($id!=''){
         $id=_return_mc_encrypt($id, ENCRYPTION_KEY);
     }
@@ -201,6 +202,21 @@ function show_user_hoso($data = array())
         $open_bank_name="Chi nhánh: ".$open_bank;
     }
 
+    $created=_returnDataEditAdd($data['data_user'],'created');
+    if($created!='0000-00-00 00:00:00'){
+        $created= date("Y-m-d h:m:s", strtotime($created));
+    }
+    $note=_returnDataEditAdd($data['data_user'],'note');
+    $login_two_steps=_returnDataEditAdd($data['data_user'],'login_two_steps');
+    if($login_two_steps==1){
+        $check_xacminh='checked';
+        $mess_xacminh='Chức năng đăng nhập 2 bước đã được kích hoạt';
+        $color_xacminh='blue';
+    }else{
+        $check_xacminh='';
+        $mess_xacminh='Kích hoạt chức năng đăng nhập 2 bước';
+        $color_xacminh='';
+    }
     require_once DIR . '/view/default/template/module/user/hoso.php';
 }
 

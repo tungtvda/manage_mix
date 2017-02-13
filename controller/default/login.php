@@ -172,6 +172,11 @@ if(isset($_POST['send_forgot'])&&isset($_POST['email_forgot'])){
 
     }
 }
+if(isset($_SESSION['mess_login']))
+{
+    $mess=$_SESSION['mess_login'];
+    unset($_SESSION['mess_login']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -224,7 +229,11 @@ if(isset($_POST['send_forgot'])&&isset($_POST['email_forgot'])){
                         <h1>
                             <img  src="<?php echo SITE_NAME?>/view/default/themes/images/logo.png">
                         </h1>
-
+                        <?php if(isset($mess)&&$mess!=''){?>
+                        <h5 style="color:#DD5A43!important;" id="id-company-text"><span class="badge badge-transparent tooltip-error" title="" data-original-title="2 Important Events">
+									<i class="ace-icon fa fa-exclamation-triangle red bigger-130"></i>
+								</span> <?php echo $mess.', Bạn vui lòng liên hệ với ADMIN để được hỗ trợ'?></h5>
+                        <?php } ?>
                     </div>
 
                     <div class="space-6"></div>

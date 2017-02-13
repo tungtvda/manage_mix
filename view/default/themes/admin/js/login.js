@@ -236,7 +236,7 @@ jQuery(function ($) {
         var okRegex = new RegExp("(?=.{6,}).*", "g");
         if (okRegex.test(password_dangky) === false) {
             // If ok regex doesn't match the password
-            $('#power_pass').removeClass().addClass('error_pass').html('Mật khẩu tối thiểu 6 ký tự.');
+            //$('#power_pass').removeClass().addClass('error_pass').html('Mật khẩu tối thiểu 6 ký tự.');
             $('#check_show_pass').val(0);
             $('#dangky_name').hide();
 
@@ -265,7 +265,7 @@ jQuery(function ($) {
         var okRegex = new RegExp("(?=.{6,}).*", "g");
         if (okRegex.test(password_dangky) === false) {
             // If ok regex doesn't match the password
-            $('#power_pass').removeClass().addClass('error_pass').html('Mật khẩu tối thiểu 6 ký tự.');
+            //$('#power_pass').removeClass().addClass('error_pass').html('Mật khẩu tối thiểu 6 ký tự.');
             $('#check_show_pass').val(0);
             $('#dangky_name').hide();
 

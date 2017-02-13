@@ -388,6 +388,9 @@ function _returnCreateUser($check_redict){
         $password_confirm = _returnPostParamSecurity('password_confirm');
         $phone = _returnPostParamSecurity('user_phone');
         $user_role = _returnPostParamSecurity('user_role');
+
+        $ngay_lam_viec = _returnPostParamSecurity('user_ngay_lam_viec');
+        $ngay_chinh_thuc = _returnPostParamSecurity('user_ngay_chinh_thuc');
         if($user_role==="on"||$user_role===1)
         {
             $user_role=1;
@@ -410,6 +413,12 @@ function _returnCreateUser($check_redict){
                     $new_obj->birthday=date("Y-m-d", strtotime($input_birthday));
                     $new_obj->address=$address_user;
                     $new_obj->user_role=$user_role;
+                    if($ngay_lam_viec!=''){
+                        $new_obj->ngay_lam_viec=date("Y-m-d", strtotime($ngay_lam_viec));
+                    }
+                    if($ngay_chinh_thuc!=''){
+                        $new_obj->ngay_chinh_thuc=date("Y-m-d", strtotime($ngay_chinh_thuc));
+                    }
                     if($phone!="")
                     {
                         $new_obj->phone=$phone;
@@ -475,6 +484,12 @@ function _returnCreateUser($check_redict){
                         $dangky->user_role=$user_role;
                         $dangky->created_by=$_SESSION['user_id'];
                         $dangky->login_two_steps=1;
+                        if($ngay_lam_viec!=''){
+                            $dangky->ngay_lam_viec=date("Y-m-d", strtotime($ngay_lam_viec));
+                        }
+                        if($ngay_chinh_thuc!=''){
+                            $dangky->ngay_chinh_thuc=date("Y-m-d", strtotime($ngay_chinh_thuc));
+                        }
                         user_insert($dangky);
                         $subject = "Thông báo đăng ký tài khoản tại hệ thống quản lý MIXTOURIST";
                         $message='';

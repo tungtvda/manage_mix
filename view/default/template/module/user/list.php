@@ -520,6 +520,34 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div style="float: left; width: 100%">
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <div class="form-group" style="float: left; width: 100%">
+                                            <label for="form-field-select-3">Ngày làm việc </label>
+                                            <div class="input-group" style="">
+                                                <input class="form-control date-picker width_100 valid" id="input_user_ngay_lam_viec"
+                                                       name="user_ngay_lam_viec" required type="text" data-date-format="dd-mm-yyyy">
+																	<span class="input-group-addon date_icon">
+																		<i class="fa fa-calendar bigger-110"></i>
+																	</span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <div class="form-group" style="float: left; width: 100%">
+                                            <label for="form-field-select-3">Ngày chính thức </label>
+                                            <div class="input-group" style="">
+                                                <input class="form-control date-picker width_100 valid" id="input_user_ngay_chinh_thuc"
+                                                       name="user_ngay_chinh_thuc" required type="text" data-date-format="dd-mm-yyyy">
+																	<span class="input-group-addon date_icon">
+																		<i class="fa fa-calendar bigger-110"></i>
+																	</span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div style="float: left; width: 100%" id="hidden_edit_pass">
                                     <div class="col-xs-12 col-sm-6 col-md-6">
                                         <div class="form-group">

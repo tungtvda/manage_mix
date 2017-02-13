@@ -151,6 +151,14 @@ if(isset($_SESSION["Admin"]))
        $array['time_token']='0';
        if(!isset($array['updated']))
        $array['updated']='0';
+        if(!isset($array['skype']))
+            $array['skype']='0';
+        if(!isset($array['facebook']))
+            $array['facebook']='0';
+        if(!isset($array['ngay_lam_viec']))
+            $array['ngay_lam_viec']='0';
+        if(!isset($array['ngay_chinh_thuc']))
+            $array['ngay_chinh_thuc']='0';
 
         if(!isset($array['updated_by']))
             $array['updated_by']='0';

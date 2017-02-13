@@ -97,3 +97,6 @@
 .modal-header {
     padding: 10px 15px;
 }
+.show_edit{
+    display: none;
+}

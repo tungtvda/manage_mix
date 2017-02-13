@@ -34,8 +34,7 @@
 
 
                 </div>
-                <input class="valid" hidden name="check_edit" id="input_check_edit" value="<?php echo $action_name ?>">
-                <input class="valid" hidden name="id_edit" id="input_id_edit" value="<?php echo $id ?>">
+
                 <div class="widget-body">
                     <div class="widget-main">
                         <?php if($action==1){?>
@@ -90,7 +89,8 @@
                         </a>
                     </div>
                 </div>
-
+                <input class="valid" hidden name="check_edit" id="input_check_edit" value="<?php echo $action_name ?>">
+                <input class="valid" hidden name="id_edit" id="input_id_edit" value="<?php echo $id ?>">
                 <div class="widget-body">
                     <div class="widget-main">
                             <div class="row">
@@ -204,6 +204,38 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group" >
+                                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Ngày làm việc </label>
+                                    <div class="col-sm-9">
+                                        <div class="input-group" style="">
+                                            <input value="<?php echo $ngay_lam_viec?>" class="form-control date-picker width_100 valid" id="input_user_ngay_lam_viec" name="user_ngay_lam_viec" required type="text" data-date-format="dd-mm-yyyy">
+																	<span   class="input-group-addon date_icon">
+																		<i class="fa fa-calendar bigger-110"></i>
+																	</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Ngày chính thức</label>
+                                    <div class="col-sm-9">
+                                        <div class="input-group" style="">
+                                            <input value="<?php echo $ngay_chinh_thuc?>" class="form-control date-picker width_100 valid" id="input_user_ngay_chinh_thuc" name="user_ngay_chinh_thuc" required type="text" data-date-format="dd-mm-yyyy">
+																	<span   class="input-group-addon date_icon">
+																		<i class="fa fa-calendar bigger-110"></i>
+																	</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
                             <div class="row">
                             <div class="space-4"></div>
                                 <div <?php echo $show_phone?> class="col-sm-6">

@@ -283,6 +283,113 @@ jQuery(function ($) {
         }
 
     });
+    $('body').on('click','.tab_list', function () {
+        var id=$(this).attr('href');
+        $('.tab_content').removeClass('active');
+       //$('.tab_content').hide();
+        $('#'+id).addClass('active');
+    });
+    $('body').on('click','#xac_minh_2_buoc', function () {
+        var status = 0;
+        if ($(this).is(":checked")) {
+            status = 1;
+        }
+
+        var idSelect = $(this).attr('countid');
+        var table = $(this).attr('table');
+        var field = $(this).attr('field');
+        var name_record=$(this).attr('name_record');
+        var link = url + '/update-status/';
+        if(status==1)
+        {
+            var mess='Bạn chắc chắn muốn kích hoạt chức năng đăng nhập 2 bước?';
+            var mess_res="Kích hoạt thành công";
+            var mess_er="Kích hoạt thất bại";
+            var class_mes='blue';
+            var mess_lable=' Chức năng đăng nhập 2 bước đã được kích hoạt';
+        }
+        else{
+            var mess='Bạn chắc chắn muốn hủy bỏ chức năng đăng nhập 2 bước ?';
+            var mess_res="Hủy bỏ thành công";
+            var mess_er="Hủy bỏ thất bại";
+            var class_mes='';
+            var mess_lable=' Kích hoạt chức năng đăng nhập 2 bước';
+        }
+        lnv.confirm({
+            title: '<label class="orange">Xác nhận đăng nhập 2 bước</label>',
+            content: mess,
+            confirmBtnText: 'Ok',
+            iconBtnText:'<i style="color: #669fc7;" class="ace-icon fa fa-question orange"></i>',
+            confirmHandler: function () {
+                if(idSelect==''||table==''||field==''||name_record==''||link==''){
+                    lnv.alert({
+                        title: 'Lỗi',
+                        content: mess_er,
+                        alertBtnText: 'Ok',
+                        iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                        alertHandler: function () {
+                            if(status==0){
+                                document.getElementById('xac_minh_2_buoc').checked = true;
+
+                            }
+                            else{
+                                document.getElementById('xac_minh_2_buoc').checked = false;
+                            }
+                        }
+                    });
+                }
+                else{
+                    $.ajax({
+                        method: "GET",
+                        url: link,
+                        data: "id=" + idSelect + '&table=' + table + '&field=' + field + '&status=' + status +'&action=user_update_login_two_steps',
+                        success: function (response) {
+                            if (response != 1) {
+                                lnv.alert({
+                                    title: 'Lỗi',
+                                    content: response,
+                                    alertBtnText: 'Ok',
+                                    iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                                    alertHandler: function () {
+                                        if(status==0){
+                                            document.getElementById('xac_minh_2_buoc').checked = true;
+
+                                        }
+                                        else{
+                                            document.getElementById('xac_minh_2_buoc').checked = false;
+                                        }
+                                    }
+                                });
+                            }
+                            else{
+                                $('#mess_xacminh').html(mess_lable);
+                                if(status==1)
+                                {
+                                    $('#mess_xacminh').addClass('blue');
+                                }
+                                else{
+                                    $('#mess_xacminh').removeClass('blue');
+                                }
+                            }
+                        }
+                    });
+                }
+
+            },
+            cancelBtnText: 'Cancel',
+            cancelHandler: function () {
+                if(status==0){
+                    document.getElementById('xac_minh_2_buoc').checked = true;
+
+                }
+                else{
+                    document.getElementById('xac_minh_2_buoc').checked = false;
+                }
+            }
+        })
+
+
+    });
 
 // Select all tabs
 //    $('.nav-tabs a').click(function(){

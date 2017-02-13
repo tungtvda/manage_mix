@@ -116,3 +116,7 @@ function user_update_role($obj)
 {
     return exe_query("update user set user_role='$obj->user_role' where id=$obj->id",'user');
 }
+function user_update_login_two_steps($obj)
+{
+    return exe_query("update user set login_two_steps='$obj->login_two_steps' where id=$obj->id",'user');
+}

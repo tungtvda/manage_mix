@@ -38,11 +38,11 @@ function _returnCheckPermison($module_id = 0, $form_id = 0, $action_id = 0)
     $permison_form = explode(',', $data_user[0]->permison_form);
     $permison_action = explode(',', $data_user[0]->permison_action);
     if (!in_array($module_id, $permison_module) || $module_id == 0) {
-        redict(_returnLinkDangNhap());
+        redict(_returnLinkDangNhap('Bạn không có quyền truy cập vào hệ thống'));
     }
     if ($form_id != 0) {
         if (!in_array($form_id, $permison_form)) {
-            redict(_returnLinkDangNhap());
+            redict(_returnLinkDangNhap('Bạn không có quyền truy cập vào hệ thống'));
         } else {
             return true;
         }
@@ -94,10 +94,10 @@ function _returnCheckPermisonAction($action_id = 0)
 {
     _returnCheckExitUser();
     if ($action_id == 0) {
-        redict(_returnLinkDangNhap());
+        redict(_returnLinkDangNhap('Bạn không có quyền truy cập vào hệ thống'));
     }
     if (!in_array($action_id, $_SESSION['user_permison_action'])) {
-        redict(_returnLinkDangNhap());
+        redict(_returnLinkDangNhap('Bạn không có quyền truy cập vào hệ thống'));
     }
     return true;
 }
@@ -109,8 +109,12 @@ function _returnCheckExitUser()
     }
 }
 
-function _returnLinkDangNhap()
+function _returnLinkDangNhap($mess='')
 {
+    if($mess!='')
+    {
+        $_SESSION['mess_login']=$mess;
+    }
     return SITE_NAME . '/dang-nhap.html';
 }
 
@@ -470,10 +474,8 @@ function _returnCreateUser($check_redict){
                         $dangky->phone=$phone;
                         $dangky->user_role=$user_role;
                         $dangky->created_by=$_SESSION['user_id'];
-
+                        $dangky->login_two_steps=1;
                         user_insert($dangky);
-                        print_r($dangky);
-                        exit;
                         $subject = "Thông báo đăng ký tài khoản tại hệ thống quản lý MIXTOURIST";
                         $message='';
                         if($mr=='')

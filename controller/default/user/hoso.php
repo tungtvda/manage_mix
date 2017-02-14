@@ -34,5 +34,6 @@ show_breadcrumb($data);
 show_navigation($data);
 show_user_hoso($data);
 show_footer($data);
+//show_script_edit_user($data);
 show_valid_form($data);
 show_script_form($data);

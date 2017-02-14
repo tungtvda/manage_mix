@@ -163,9 +163,208 @@ jQuery(function ($) {
         }
     });
 
+    $('body').on("input",'#input_password_old', function () {
+        checkUserPasswordOldConfirm();
+    });
+    $('body').on("keyup",'#input_password_old', function () {
+        checkUserPasswordOldConfirm();
+    });
 
+    $('body').on("click",'#submit_pass_action', function () {
+        var form_data=$("#submit_chang_pass").serializeArray();
+        var error_free=true;
+        for (var input in form_data){
+            var element=$("#input_"+form_data[input]['name']);
+            var error=$("#error_"+form_data[input]['name']);
+            var valid=element.hasClass("valid");
+            if (valid==false){
+                element.addClass("input-error").removeClass("valid");
+                error.show();
+                error_free=false
+            }
+        }
+        if (error_free!=false){
+            var pass_old=$("#input_password_old").val();
+            var pass=$("#input_password").val();
+            var pass_confirm=$("#input_password_confirm").val();
+            if(pass_old!=''&&pass!=""&&pass_confirm!=""){
+                var link = url + '/nhan-vien/update-pass';
+                $.ajax({
+                    method: "POST",
+                    url: link,
+                    data : { // Danh sách các thuộc tính sẽ gửi đi
+                        pass_old : pass_old,
+                        pass: pass,
+                        pass_confirm: pass_confirm
+                    },
+                    success: function (response) {
+                        if (response != 1) {
+                            lnv.alert({
+                                title: '<label class="red">Lỗi</label>',
+                                content: response,
+                                alertBtnText: 'Ok',
+                                iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                                alertHandler: function () {
+
+                                }
+                            });
+                        }
+                        else{
+                            lnv.alert({
+                                title: '<label class="green">Thông báo</label>',
+                                content: 'Cập nhật quyền thành công',
+                                alertBtnText: 'Ok',
+                                iconBtnText:'<i style="color: red;" class="ace-icon fa fa-check green"></i>',
+                                alertHandler: function () {
+
+                                }
+                            });
+                            lnv.confirm({
+                                title: '<label class="green">Thông báo</label>',
+                                content: 'Cập nhật quyền thành công, bạn có muốn đăng xuất ra khỏi hệ thống?',
+                                confirmBtnText: 'Ok',
+                                iconBtnText:'<i style="color: #669fc7;" class="ace-icon fa fa-check"></i>',
+                                confirmHandler: function () {
+                                    window.location=url+"/dang-nhap.html";
+                                },
+                                cancelBtnText: 'Cancel',
+                                cancelHandler: function () {
+                                    document.getElementById("submit_chang_pass").reset();
+                                    $('#error_password').hide();
+                                }
+                            })
+                        }
+                    }
+                });
+            }else{
+                if(pass_old==''){
+                    var mess="Bạn vui lòng nhập mật khẩu cũ";
+                    showHiddenPasswordOldUser(0,mess)
+                }
+                if(pass==''){
+                    var mess="Bạn vui lòng nhập mật khẩu mới";
+                    showHiddenPasswordUser(0,mess);
+                }
+                if(pass_confirm==''){
+                    var mess="Bạn vui lòng xác nhận mật khẩu";
+                    showHiddenPasswordConfirmUser(0,mess)
+                }
+            }
+        }
+
+    });
+
+    $('body').on("click",'#next_edit_user', function () {
+      var stt=$('.steps .active').attr('data-step');
+      if(stt<4){
+          var stt_before=parseInt(stt)+1;
+          $('#step_edit_'+stt).removeClass('active');
+          $('#step_edit_'+stt_before).addClass('active');
+
+          $('#step_tab_'+stt).removeClass('active');
+          $('#step_tab_'+stt).addClass('complete');
+          $('#step_tab_'+stt).attr('complete_value','complete');
+
+          //$('#step_tab_'+stt_before).removeClass();
+          $('#step_tab_'+stt_before).addClass('active');
+          if(stt_before>1){
+              $( "#prev_edit_user" ).prop( "disabled", false );
+          }
+      }
+        else{
+
+      }
+    });
+    $('body').on("click",'#prev_edit_user', function () {
+        var stt=$('.step-content .active').attr('data-step');
+        if(stt>1){
+            var stt_after=parseInt(stt)-1;
+            $('#step_edit_'+stt).removeClass('active');
+            $('#step_edit_'+stt_after).addClass('active');
+            $('#step_edit_'+stt_after).removeClass('complete');
+
+            $('#step_tab_'+stt).removeClass('active');
+            $('#step_tab_'+stt).removeClass('complete');
+            $('#step_tab_'+stt_after).removeClass('complete');
+            $('#step_tab_'+stt_after).addClass('active');
+            if(stt==2){
+                $( "#prev_edit_user" ).prop( "disabled", true );
+            }
+        }
+        else{
+            $( "#prev_edit_user" ).prop( "disabled", true );
+            $('#step_tab_'+stt).addClass('active');
+            $('#step_tab_'+stt).removeClass('complete');
+        }
+    });
+    $('body').on("click",'.hidden_tab_step', function () {
+        var complete=$(this).attr('complete_value');
+        if(complete==="complete"){
+            var stt=$(this).attr('data-step');
+            $(this).attr('complete_value','');
+            $('#step_tab_'+stt).removeClass('complete');
+            $('#step_tab_'+stt).addClass('active');
+            $('#step_edit_'+stt).addClass('active');
+            var stt_before=parseInt(stt)+1;
+            for(var i=stt_before; i<=4; i++){
+                $('#step_tab_'+i).removeClass('complete');
+                $('#step_tab_'+i).removeClass('active');
+                $('#step_tab_'+i).attr('complete_value','');
+                $('#step_edit_'+i).removeClass('active');
+            }
+        }
+    });
     //$('i').ggtooltip();
 });
+function checkUserPasswordOldConfirm(){
+    var value = $("#input_password_old").val();
+    var link = url + '/nhan-vien/check-pass-old';
+    if(value!=''){
+        $.ajax({
+            method: "GET",
+            url: link,
+            data: "value=" + value,
+            success: function (response) {
+                if (response != 1) {
+                    var mess="Mật khẩu cũ không chính xác";
+                    showHiddenPasswordOldUser(0,mess)
+                }
+                else{
+                    var mess="";
+                    showHiddenPasswordOldUser(1,mess)
+                }
+            }
+        });
+    }
+    else{
+        var mess="Bạn vui lòng nhập mật khẩu cũ";
+        showHiddenPasswordOldUser(0,mess)
+    }
+
+}
+function showHiddenPasswordOldUser(res,mess){
+    var error_password_old=$("#error_password_old" );
+    if (res == 1) {
+        error_password_old.hide();
+        $('#error_icon_user_password_old').hide();
+        $('#user_password_old_success_icon').show();
+        $('#input_password_old').removeClass("input-error").addClass("valid");
+    }
+    else {
+        if(res!=0)
+        {
+            mess=res;
+        }
+        $('#error_icon_user_password_old').show();
+        $('#user_password_old_success_icon').hide();
+        $('#input_password_old').addClass("input-error").removeClass("valid");
+        error_password_old.removeClass("success-color");
+        error_password_old.addClass("error-color");
+        error_password_old.html(mess);
+        error_password_old.show();
+    }
+}
+
 
 function show_edit_nhanvien(Id,name){
     $( "#title_form" ).html('Chỉnh sửa nhân viên "<b>'+name+'</b>"');

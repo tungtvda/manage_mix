@@ -23,5 +23,5 @@ RewriteRule ^nhan-vien/check-pass-old$ controller/default/user/check_pass_old.ph
 RewriteRule ^nhan-vien/update-pass$ controller/default/user/update_pass.php
 RewriteRule ^tree-phan-quyen$ controller/default/user/tree.php
 RewriteRule ^update-phan-quyen$ controller/default/user/phanquyen_update.php
-RewriteRule ^nhan-vien/profile.html$ controller/default/user/hoso.php
+RewriteRule ^profile.html$ controller/default/user/hoso.php
 

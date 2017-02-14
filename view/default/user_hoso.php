@@ -78,7 +78,7 @@ function show_user_hoso($data = array())
     $ngay_lam_viec=_returnDataEditAdd($data['data_user'],'ngay_lam_viec');
     $ngay_chinh_thuc=_returnDataEditAdd($data['data_user'],'ngay_chinh_thuc');
 
-    $gender=_returnDataEditAdd($data['data_user'],'gender');
+    $gender_edit=$gender=_returnDataEditAdd($data['data_user'],'gender');
     if($gender==1){
         $gender="<i class=\"fa fa-male\" style=\"font-size: 16px;color:#1b6aaa;\" title='Nam'></i>";
     }

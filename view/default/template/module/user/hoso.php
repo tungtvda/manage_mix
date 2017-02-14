@@ -41,7 +41,7 @@
                 </li>
 
                 <li>
-                    <a data-toggle="tab" href="capnhap" data-target="draft" class="tab_list">
+                    <a data-toggle="tab" href="capnhaphoso" data-target="draft" class="tab_list">
                         <i class="green ace-icon fa fa-pencil bigger-130"></i>
                         <span class="bigger-110">Cập nhật hồ sơ</span>
                     </a>
@@ -98,15 +98,11 @@
                             <div class="col-xs-12 col-sm-3 center">
                                 <div>
 												<span class="profile-picture">
-													<img id="show_img_upload"
-                                                         class="editable img-responsive editable-click editable-empty"
-                                                         title="<?php echo $name ?>" alt="<?php echo $name ?>"
-                                                         src="<?php echo $avatar ?>">
+													<img
+                                                        class="editable img-responsive editable-click editable-empty"
+                                                        title="<?php echo $name ?>" alt="<?php echo $name ?>"
+                                                        src="<?php echo $avatar ?>">
 												</span>
-                                    <input accept="image/*" name="avatar" type="file" id="id-input-file-2"
-                                           onchange="loadFile(event)"/>
-
-
                                     <div class="space-4"></div>
 
                                     <div class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">
@@ -224,43 +220,6 @@
                                                 <div class="profile-info-value">
                                                     <span
                                                         class="editable editable-click hidden_edit"><?php echo $user_code ?></span>
-                                                    <div class="show_edit">
-                                                        <div style="float: left;width: 66%">
-                                                            <label for="form-field-select-3">Mã nhân viên <span
-                                                                    style="color: red">*</span></label>
-                                               <span class="input-icon width_100">
-                                                    <input readonly name="user_code" type="text" id="input_user_code"
-                                                           value="<?php echo $user_code ?>"
-                                                           class="width_100 <?php echo $valid_user_code ?>" required>
-                                                    <i class="ace-icon fa fa-qrcode blue"></i>
-                                                    <i id="user_code_error_icon" style="display: none"
-                                                       class="ace-icon fa fa-times-circle icon-right error-color "
-                                                       data-toggle="ggtooltip" data-title="" data-trigger="hover"
-                                                       data-placement="bottom" data-backcolor="red"
-                                                       data-textcolor="#ffffff"
-                                                       title=""></i>
-                                                    <i id="user_code_success_icon" style="display: none"
-                                                       class="ace-icon fa fa-check-circle icon-right success-color"
-                                                       data-toggle="ggtooltip" data-title="" data-trigger="hover"
-                                                       data-placement="bottom" data-backcolor="green"
-                                                       data-textcolor="#000000" title="Mã nhân viên hợp lệ"></i>
-                                                </span>
-                                                            <label style="display: none"
-                                                                   class="error-color  error-color-size"
-                                                                   id="error_user_code">Bạn vui lòng nhập mã nhân
-                                                                viên</label>
-                                                        </div>
-                                                        <div style="float: left;width: 33%; text-align: center">
-                                                            <label for="form-field-select-3">Admin hệ thống</label>
-                                                            <label>
-                                                                <input <?php echo $user_role ?> id="input_user_role"
-                                                                                                name="user_role"
-                                                                                                class="ace ace-switch ace-switch-6"
-                                                                                                type="checkbox">
-                                                                <span class="lbl"></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
 
@@ -270,50 +229,7 @@
                                                 <div class="profile-info-value form-group">
                                                     <span
                                                         class="editable editable-click hidden_edit"><?php echo $name_show ?></span>
-                                                    <div class="show_edit">
-                                                        <style>
-                                                            .chosen-single {
-                                                                width: 100% !important;
-                                                                border: 1px solid #d5d5d5 !important;
-                                                                height: 34px !important;
-                                                            }
 
-                                                            #form_field_select_3_chosen {
-                                                                width: 26% !important;
-
-                                                            }
-                                                        </style>
-
-                                                        <select name="mr" class="chosen-select form-control mr_user"
-                                                                id="form-field-select-3"
-                                                                data-placeholder="Danh xưng ..."
-                                                                style="display: none;width: 10px">
-                                                            <option value=""></option>
-                                                            <option <?php if ($mr == "Mr") echo "selected" ?>
-                                                                value="Mr">Mr
-                                                            </option>
-                                                            <option <?php if ($mr == "Mrs") echo "selected" ?>
-                                                                value="Mrs">Mrs
-                                                            </option>
-                                                            <option <?php if ($mr == "Ms") echo "selected" ?>
-                                                                value="Ms">Ms
-                                                            </option>
-                                                        </select>
-                                                    <span class="input-icon width_100" style="width: 73%">
-                                                  <input value="<?php echo $name ?>" name="full_name" type="text"
-                                                         id="input_full_name"
-                                                         class="width_100 <?php echo $valid_name ?>" required>
-												<i class="ace-icon fa fa-user blue"></i>
-                                                <i id="name_user_error_icon" style="display: none"
-                                                   class="ace-icon fa fa-times-circle icon-right error-color "
-                                                   data-toggle="ggtooltip" data-title="" data-trigger="hover"
-                                                   data-placement="bottom" data-backcolor="red" data-textcolor="#ffffff"
-                                                   title=""></i>
-                                                </span>
-                                                        <label class="error-color  error-color-size"
-                                                               id="error_full_name">Bạn vui lòng nhập tên nhân
-                                                            viên</label>
-                                                    </div>
 
                                                 </div>
                                             </div>
@@ -325,21 +241,6 @@
                                                 <div class="profile-info-value">
                                                     <span
                                                         class="editable editable-click hidden_edit"><?php echo $birthday ?></span>
-                                                    <div class="show_edit">
-                                                        <div class="input-group" style="">
-                                                            <input value="<?php echo $birthday ?>"
-                                                                   class="form-control date-picker width_100 <?php echo $valid_birthday ?>"
-                                                                   id="input_birthday" name="birthday" required
-                                                                   type="text" data-date-format="dd-mm-yyyy">
-																	<span class="input-group-addon date_icon">
-																		<i class="fa fa-calendar bigger-110"></i>
-																	</span>
-
-                                                        </div>
-                                                        <label style="display: none"
-                                                               class="error-color  error-color-size"
-                                                               id="error_birthday">Bạn vui lòng chọn ngày sinh</label>
-                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="profile-info-row">
@@ -348,21 +249,6 @@
                                                 <div class="profile-info-value">
                                                     <span
                                                         class="editable editable-click hidden_edit"><?php echo $gender ?></span>
-                                                    <div class="show_edit">
-                                                        <div class="input-group" style="">
-                                                            <input value="<?php echo $birthday ?>"
-                                                                   class="form-control date-picker width_100 <?php echo $valid_birthday ?>"
-                                                                   id="input_birthday" name="birthday" required
-                                                                   type="text" data-date-format="dd-mm-yyyy">
-																	<span class="input-group-addon date_icon">
-																		<i class="fa fa-calendar bigger-110"></i>
-																	</span>
-
-                                                        </div>
-                                                        <label style="display: none"
-                                                               class="error-color  error-color-size"
-                                                               id="error_birthday">Bạn vui lòng chọn ngày sinh</label>
-                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="profile-info-row">
@@ -630,7 +516,7 @@
                     <div class="widget-body">
                         <style>
                             .widget-main.padding-24 {
-                                 padding: 0px;
+                                padding: 0px;
                             }
                         </style>
                         <div class="widget-main padding-24">
@@ -645,48 +531,70 @@
                                     <div class="col-xs-12 col-sm-12 col-md-12 row">
                                         <form action="" method="post" id="submit_chang_pass">
                                             <div class="form-group">
-                                                <label for="form-field-select-3">Mật khẩu cũ <span style="color: red">*</span></label>
+                                                <label for="form-field-select-3">Mật khẩu cũ <span
+                                                        style="color: red">*</span></label>
                                                 <div>
-                                         <span class="input-icon width_100">
-												<input name="password_old" type="password" id="input_password_old" class="width_100" required="">
+                                            <span class="input-icon width_100">
+												<input name="password_old" type="password" id="input_password_old"
+                                                       class="width_100" required="">
 												<i class="ace-icon fa fa-key blue"></i>
-                                                <i id="error_icon_user_pass_old" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Mật khẩu không đúng"></i>
+                                                <i id="user_password_old_success_icon" style="display: none"
+                                                   class="ace-icon fa fa-check-circle icon-right success-color"
+                                                   data-toggle="ggtooltip" data-title="" data-trigger="hover"
+                                                   data-placement="bottom" data-backcolor="green"
+                                                   data-textcolor="#000000" title="Mật khẩu hợp hệ"></i>
+                                                <i id="error_icon_user_password_old" style="display: none"
+                                                   class="ace-icon fa fa-times-circle icon-right error-color "
+                                                   title="Vui lòng check lại mật khẩu cũ"></i>
 											</span>
-                                                    <label style="display: none" class="error-color  error-color-size" id="error_password_old">Mật khẩu không đúng</label>
+                                                    <label style="display: none" class="error-color  error-color-size"
+                                                           id="error_password_old">Mật khẩu không đúng</label>
                                                 </div>
                                             </div>
                                             <div class="space-10"></div>
                                             <div class="form-group">
-                                                <label for="form-field-select-3">Mật khẩu mới <span style="color: red">*</span></label>
+                                                <label for="form-field-select-3">Mật khẩu mới <span
+                                                        style="color: red">*</span></label>
                                                 <div>
                                          <span class="input-icon width_100">
-												<input name="password" type="password" id="input_password" class="width_100" required="">
+												<input name="password" type="password" id="input_password"
+                                                       class="width_100" required="">
 												<i class="ace-icon fa fa-key blue"></i>
-                                                <i id="error_icon_user_pass" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Bạn vui lòng nhập địa chỉ"></i>
+                                                <i id="error_icon_user_pass" style="display: none"
+                                                   class="ace-icon fa fa-times-circle icon-right error-color "
+                                                   title="Bạn vui lòng nhập địa chỉ"></i>
 											</span>
-                                                    <label style="display: none" class="error-color  error-color-size" id="error_password">Bạn vui lòng nhập mật khẩu</label>
+                                                    <label style="display: none" class="error-color  error-color-size"
+                                                           id="error_password">Bạn vui lòng nhập mật khẩu</label>
                                                 </div>
                                             </div>
                                             <div class="space-10"></div>
                                             <div class="form-group">
-                                                <label for="form-field-select-3">Xác nhận mật khẩu mới <span style="color: red">*</span></label>
+                                                <label for="form-field-select-3">Xác nhận mật khẩu mới <span
+                                                        style="color: red">*</span></label>
                                                 <div>
                                          <span class="input-icon width_100">
 											<span class="input-icon width_100">
-												<input name="password_confirm" type="password" id="input_password_confirm" class="width_100" required="">
+												<input name="password_confirm" type="password"
+                                                       id="input_password_confirm" class="width_100" required="">
 												<i class="ace-icon fa fa-key blue"></i>
-                                                <i id="error_icon_user_pass_con" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title=""></i>
+                                                <i id="error_icon_user_pass_con" style="display: none"
+                                                   class="ace-icon fa fa-times-circle icon-right error-color "
+                                                   title=""></i>
 											</span>
-                                    <label style="display: none" class="error-color  error-color-size" id="error_password_confirm">Bạn vui lòng xác nhận mật khẩu</label>
+                                    <label style="display: none" class="error-color  error-color-size"
+                                           id="error_password_confirm">Bạn vui lòng xác nhận mật khẩu</label>
                                             </span></div>
                                             </div>
                                             <div class="space-10"></div>
                                             <div class="modal-footer">
-                                                <button class="btn btn-sm btn-primary" id="submit_form_action" type="button">
+                                                <button class="btn btn-sm btn-primary" id="submit_pass_action"
+                                                        type="button">
                                                     <i class="ace-icon fa fa-check"></i>
                                                     Save
                                                 </button>
-                                                <button type="reset" class="btn btn-sm" data-dismiss="modal" id="reset_form_popup">
+                                                <button type="reset" class="btn btn-sm" data-dismiss="modal"
+                                                        id="reset_form_popup">
                                                     <i class="ace-icon fa fa-times"></i>
                                                     Cancel
                                                 </button>
@@ -709,45 +617,56 @@
                                         <div class="space-6"></div>
                                         <div class="form-group">
                                             <label class="block">
-                                                <input id="xac_minh_2_buoc" <?php echo $check_xacminh?> countid="<?php echo $id_xac_minh?>" table="user" field="login_two_steps"  name_record="<?php echo $name?>" name="form-field-checkbox" type="checkbox" class="ace input-lg">
-                                                <span id="mess_xacminh" class="lbl bigger-120 <?php echo $color_xacminh?>"> <?php echo $mess_xacminh?></span>
+                                                <input id="xac_minh_2_buoc" <?php echo $check_xacminh ?>
+                                                       countid="<?php echo $id_xac_minh ?>" table="user"
+                                                       field="login_two_steps" name_record="<?php echo $name ?>"
+                                                       name="form-field-checkbox" type="checkbox" class="ace input-lg">
+                                                <span id="mess_xacminh"
+                                                      class="lbl bigger-120 <?php echo $color_xacminh ?>"> <?php echo $mess_xacminh ?></span>
                                             </label>
                                         </div>
                                         <div class="space-6"></div>
                                         <div class="well">
-                                           <p>Mỗi khi bạn đăng nhập vào Tài khoản Mixtourist của mình, bạn sẽ cần mật khẩu và mã xác minh.</p>
+                                            <p>Mỗi khi bạn đăng nhập vào Tài khoản Mixtourist của mình, bạn sẽ cần mật
+                                                khẩu và mã xác minh.</p>
                                             <div class="space-8"></div>
                                             <div class="media search-media">
                                                 <div class="media-left">
                                                     <a>
-                                                        <img class="media-object" data-src="holder.js/72x72" alt="" src="<?php echo SITE_NAME?>/view/default/themes/images/email-security.png" data-holder-rendered="true" style="width: 95px; ">
+                                                        <img class="media-object" data-src="holder.js/72x72" alt=""
+                                                             src="<?php echo SITE_NAME ?>/view/default/themes/images/email-security.png"
+                                                             data-holder-rendered="true" style="width: 95px; ">
                                                     </a>
                                                 </div>
 
                                                 <div class="media-body">
                                                     <div>
                                                         <h4 class="media-heading">
-                                                            <a  class="blue">Thêm lớp bảo mật bổ xung</a>
+                                                            <a class="blue">Thêm lớp bảo mật bổ xung</a>
                                                         </h4>
                                                     </div>
-                                                    <p>Nhập mật khẩu và mã xác minh duy nhất được gửi đến email đăng ký của bạn.</p>
+                                                    <p>Nhập mật khẩu và mã xác minh duy nhất được gửi đến email đăng ký
+                                                        của bạn.</p>
                                                 </div>
                                             </div>
                                             <div class="space-6"></div>
                                             <div class="media search-media">
                                                 <div class="media-left">
-                                                    <a >
-                                                        <img class="media-object" data-src="holder.js/72x72" alt="" src="<?php echo SITE_NAME?>/view/default/themes/images/hacker.png" data-holder-rendered="true" style="width: 95px; ">
+                                                    <a>
+                                                        <img class="media-object" data-src="holder.js/72x72" alt=""
+                                                             src="<?php echo SITE_NAME ?>/view/default/themes/images/hacker.png"
+                                                             data-holder-rendered="true" style="width: 95px; ">
                                                     </a>
                                                 </div>
 
                                                 <div class="media-body">
                                                     <div>
                                                         <h4 class="media-heading">
-                                                            <a  class="red">Tránh những kẻ xấu ra</a>
+                                                            <a class="red">Tránh những kẻ xấu ra</a>
                                                         </h4>
                                                     </div>
-                                                    <p>Kể cả nếu ai đó lấy được mật khẩu của bạn thì cũng sẽ không đủ để đăng nhập vào tài khoản của bạn.</p>
+                                                    <p>Kể cả nếu ai đó lấy được mật khẩu của bạn thì cũng sẽ không đủ để
+                                                        đăng nhập vào tài khoản của bạn.</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -762,6 +681,471 @@
 
                 </div>
             </div>
+
+            <div id="capnhaphoso" class="tab-pane tab_content">
+                <div class="col-xs-12">
+                    <!-- PAGE CONTENT BEGINS -->
+                    <div class="hr dotted"></div>
+                    <div class="widget-body">
+                        <div class="widget-main">
+                            <div id="fuelux-wizard-container">
+                                <div>
+                                    <ul class="steps">
+                                        <li id="step_tab_1" data-step="1" class="active hidden_tab_step"
+                                            complete_value="">
+                                            <span class="step">1</span>
+                                            <span class="title">Ảnh đại diện</span>
+                                        </li>
+
+                                        <li id="step_tab_2" data-step="2" class="hidden_tab_step" complete_value="">
+                                            <span class="step ">2</span>
+                                            <span class="title">Thông tin đăng nhập</span>
+                                        </li>
+
+                                        <li id="step_tab_3" data-step="3" class="hidden_tab_step" complete_value="">
+                                            <span class="step">3</span>
+                                            <span class="title">Thông tin liên hệ</span>
+                                        </li>
+
+                                        <li id="step_tab_4" data-step="4" class="hidden_tab_step" complete_value="">
+                                            <span class="step">4</span>
+                                            <span class="title">Thông tin khác</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <hr/>
+                                <style>
+                                    .step-content .step-pane.active {
+                                        display: block;
+                                        float: left;
+                                        width: 100%;
+                                    }
+
+                                    #preview img {
+                                        margin: auto;
+                                    }
+                                </style>
+
+                                <div class="step-content pos-rel">
+                                    <div class="step-pane active" data-step="1" id="step_edit_1">
+                                        <div class="col-md-4 col-sm-4 col-xs-12 hidden-xs">
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <div style="margin: auto" class="widget-box">
+                                                <div class="widget-header">
+                                                    <h4 class="widget-title">Hình ảnh đại diện</h4>
+
+                                                    <div class="widget-toolbar">
+                                                        <a href="#" data-action="collapse">
+                                                            <i class="ace-icon fa fa-chevron-up"></i>
+                                                        </a>
+                                                        <a href="#" data-action="close">
+                                                            <i class="ace-icon fa fa-times"></i>
+                                                        </a>
+                                                    </div>
+
+
+                                                </div>
+
+                                                <div class="widget-body">
+                                                    <div class="widget-main">
+                                                        <div class="form-group">
+                                                            <div id="preview">
+                                                                <img id="show_img_upload" class="img-responsive"
+                                                                     no-avatar="<?php echo SITE_NAME ?>/view/default/themes/images/no-image.jpg"
+                                                                     src="<?php echo $avatar ?>">
+                                                            </div>
+                                                            <div class="space-6"></div>
+                                                            <input accept="image/*" name="avatar" type="file"
+                                                                   id="id-input-file-2" onchange="loadFile(event)"/>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12 hidden-xs">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="step-pane" id="step_edit_2" data-step="2">
+                                        <div style="margin: auto; float: left;width: 100%" class="widget-box">
+                                            <div class="widget-header">
+                                                <h4 class="widget-title">Thông tin đăng nhập</h4>
+
+                                                <div class="widget-toolbar">
+                                                    <a href="#" data-action="collapse">
+                                                        <i class="ace-icon fa fa-chevron-up"></i>
+                                                    </a>
+                                                    <a href="#" data-action="close">
+                                                        <i class="ace-icon fa fa-times"></i>
+                                                    </a>
+                                                </div>
+
+
+                                            </div>
+
+                                            <div class="widget-body">
+                                                <div class="widget-main">
+                                                    <div class="col-xs-12 col-sm-6">
+                                                        <div class="profile-user-info profile-user-info-striped">
+                                                            <div class="profile-info-row">
+                                                                <div class="profile-info-name">Mã nhân viên <span
+                                                                        style="color: red">*</span></div>
+
+                                                                <div class="profile-info-value">
+
+
+                                               <span class="input-icon width_100">
+                                                    <input readonly name="user_code" type="text" id="input_user_code"
+                                                           value="<?php echo $user_code ?>"
+                                                           class="width_100 <?php echo $valid_user_code ?>" required>
+                                                    <i class="ace-icon fa fa-qrcode blue"></i>
+                                                    <i id="user_code_error_icon" style="display: none"
+                                                       class="ace-icon fa fa-times-circle icon-right error-color "
+                                                       data-toggle="ggtooltip" data-title="" data-trigger="hover"
+                                                       data-placement="bottom" data-backcolor="red"
+                                                       data-textcolor="#ffffff"
+                                                       title=""></i>
+                                                    <i id="user_code_success_icon" style="display: none"
+                                                       class="ace-icon fa fa-check-circle icon-right success-color"
+                                                       data-toggle="ggtooltip" data-title="" data-trigger="hover"
+                                                       data-placement="bottom" data-backcolor="green"
+                                                       data-textcolor="#000000" title="Mã nhân viên hợp lệ"></i>
+                                                </span>
+                                                                    <label style="display: none"
+                                                                           class="error-color  error-color-size"
+                                                                           id="error_user_code">Bạn vui lòng nhập mã
+                                                                        nhân
+                                                                        viên</label>
+
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="profile-info-row">
+                                                                <div class="profile-info-name"> Họ tên</div>
+
+                                                                <div class="profile-info-value form-group">
+                                                                    <div>
+                                                                        <style>
+                                                                            .chosen-single {
+                                                                                width: 100% !important;
+                                                                                border: 1px solid #d5d5d5 !important;
+                                                                                height: 34px !important;
+                                                                            }
+
+                                                                            #form_field_select_3_chosen {
+                                                                                width: 26% !important;
+
+                                                                            }
+                                                                        </style>
+
+                                                                        <select name="mr"
+                                                                                class="chosen-select form-control mr_user"
+                                                                                id="form-field-select-3"
+                                                                                data-placeholder="Danh xưng ..."
+                                                                                style="display: none;width: 10px">
+                                                                            <option value=""></option>
+                                                                            <option <?php if ($mr == "Mr") echo "selected" ?>
+                                                                                value="Mr">Mr
+                                                                            </option>
+                                                                            <option <?php if ($mr == "Mrs") echo "selected" ?>
+                                                                                value="Mrs">Mrs
+                                                                            </option>
+                                                                            <option <?php if ($mr == "Ms") echo "selected" ?>
+                                                                                value="Ms">Ms
+                                                                            </option>
+                                                                        </select>
+                                                    <span class="input-icon width_100" style="width: 73%">
+                                                  <input value="<?php echo $name ?>" name="full_name" type="text"
+                                                         id="input_full_name"
+                                                         class="width_100 <?php echo $valid_name ?>" required>
+												<i class="ace-icon fa fa-user blue"></i>
+                                                <i id="name_user_error_icon" style="display: none"
+                                                   class="ace-icon fa fa-times-circle icon-right error-color "
+                                                   data-toggle="ggtooltip" data-title="" data-trigger="hover"
+                                                   data-placement="bottom" data-backcolor="red" data-textcolor="#ffffff"
+                                                   title=""></i>
+                                                </span>
+                                                                        <label style="display: none"
+                                                                               class="error-color  error-color-size"
+                                                                               id="error_full_name">Bạn vui lòng nhập
+                                                                            tên nhân
+                                                                            viên</label>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="profile-info-row">
+                                                                <div class="profile-info-name"> Ngày sinh</div>
+
+                                                                <div class="profile-info-value">
+                                                                    <div>
+                                                                        <div class="input-group" style="">
+                                                                            <input value="<?php echo $birthday ?>"
+                                                                                   class="form-control date-picker width_100 <?php echo $valid_birthday ?>"
+                                                                                   id="input_birthday" name="birthday"
+                                                                                   required
+                                                                                   type="text"
+                                                                                   data-date-format="dd-mm-yyyy">
+																	<span class="input-group-addon date_icon">
+																		<i class="fa fa-calendar bigger-110"></i>
+																	</span>
+
+                                                                        </div>
+                                                                        <label style="display: none"
+                                                                               class="error-color  error-color-size"
+                                                                               id="error_birthday">Bạn vui lòng chọn
+                                                                            ngày sinh</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="profile-info-row">
+                                                                <div class="profile-info-name"> Giới tính</div>
+
+                                                                <div class="profile-info-value">
+                                                                    <select name="gender"
+                                                                            class="chosen-select form-control"
+                                                                            id="form-field-select-3"
+                                                                            data-placeholder="Giới tính ..."
+                                                                            style="display: none;width: 10px">-->
+                                                                        <option <?php if ($gender_edit == 0) echo "selected" ?>
+                                                                            value="Ms">Chưa xác định
+                                                                        </option>
+                                                                        <option <?php if ($gender_edit == 1) echo "selected" ?>
+                                                                            value="Mr">Nam
+                                                                        </option>
+                                                                        <option <?php if ($gender_edit == 2) echo "selected" ?>
+                                                                            value="Mrs">Nữ
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="profile-info-row">
+                                                                <div class="profile-info-name"> Quyền admin</div>
+
+                                                                <div class="profile-info-value">
+                                                                    <label>
+                                                                        <input <?php echo $user_role ?>
+                                                                            id="input_user_role"
+                                                                            name="user_role"
+                                                                            class="ace ace-switch ace-switch-6"
+                                                                            type="checkbox">
+                                                                        <span class="lbl"></span>
+                                                                    </label>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="profile-info-row">
+                                                                <div class="profile-info-name"> Tên đăng nhập</div>
+
+                                                                <div class="profile-info-value">
+                                                   	<span class="input-icon width_100">
+												<input value="<?php echo $user_name?>" name="user_name" type="text"  id="input_user_name" class="width_100 <?php echo $valid_user_name?>" required>
+												<i class="ace-icon fa fa-user blue"></i>
+                                                <i id="error_icon_user_name" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Bạn vui lòng kiểm tra tên đăng nhập"></i>
+                                                <i id="success_icon_user_name" style="display: none" class="ace-icon fa fa-check-circle icon-right success-color" title="Tên đăng nhập hợp lệ"></i>
+											</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="profile-info-row">
+                                                                <div class="profile-info-name"> Email</div>
+
+                                                                <div class="profile-info-value">
+                                                    <span class="input-icon width_100">
+												<input value="<?php echo $user_email?>" name="email_user" readonly type="email" id="input_email_user" class="width_100 <?php echo $valid_email?>" required>
+												<i class="ace-icon fa fa-envelope blue"></i>
+                                                <i id="email_user_error_icon" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Bạn vui lòng kiểm tra lại email"></i>
+                                                <i id="email_user_success_icon" style="display: none" class="ace-icon fa fa-check-circle icon-right success-color" title="Email hợp lệ"></i>
+											</span>
+                                                                    <label  style="display: none" class="error-color  error-color-size" id="error_email_user">Bạn vui lòng nhập email</label>
+                                                                </div>
+                                                            </div>
+
+
+
+                                                        </div>
+
+                                                        <div class="space-6"></div>
+
+
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6">
+                                                        <div class="profile-user-info profile-user-info-striped">
+                                                            <div class="profile-info-row">
+                                                                <div class="profile-info-name">Ngày làm việc <span
+                                                                        style="color: red"></span></div>
+
+                                                                <div class="profile-info-value">
+
+
+                                               <span class="input-icon width_100">
+                                                    <input readonly name="ngay_lam_viec" type="text" id="input_ngay_lam_viec"
+                                                           value="<?php echo $ngay_lam_viec ?>"
+                                                           class="width_100 valid" required>
+                                                    <i class="ace-icon fa fa-calendar blue"></i>
+                                                </span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="profile-info-row">
+                                                                <div class="profile-info-name"> Ngày chính thức</div>
+
+                                                                <div class="profile-info-value form-group">
+
+
+
+
+                                                    <span class="input-icon width_100">
+                                                  <input value="<?php echo $ngay_chinh_thuc ?>" name="ngay_chinh_thuc" type="text"
+                                                         id="input_ngay_chinh_thuc"
+                                                         class="width_100 valid" >
+												 <i class="ace-icon fa fa-calendar blue"></i>
+
+                                                </span>
+                                                                    </div>
+
+
+                                                            </div>
+
+
+                                                            <div class="profile-info-row">
+                                                                <div class="profile-info-name"> Ngày sinh</div>
+
+                                                                <div class="profile-info-value">
+                                                                    <div>
+                                                                        <div class="input-group" style="">
+                                                                            <input value="<?php echo $birthday ?>"
+                                                                                   class="form-control date-picker width_100 <?php echo $valid_birthday ?>"
+                                                                                   id="input_birthday" name="birthday"
+                                                                                   required
+                                                                                   type="text"
+                                                                                   data-date-format="dd-mm-yyyy">
+																	<span class="input-group-addon date_icon">
+																		<i class="fa fa-calendar bigger-110"></i>
+																	</span>
+
+                                                                        </div>
+                                                                        <label style="display: none"
+                                                                               class="error-color  error-color-size"
+                                                                               id="error_birthday">Bạn vui lòng chọn
+                                                                            ngày sinh</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="profile-info-row">
+                                                                <div class="profile-info-name"> Giới tính</div>
+
+                                                                <div class="profile-info-value">
+                                                                    <select name="gender"
+                                                                            class="chosen-select form-control"
+                                                                            id="form-field-select-3"
+                                                                            data-placeholder="Giới tính ..."
+                                                                            style="display: none;width: 10px">-->
+                                                                        <option <?php if ($gender_edit == 0) echo "selected" ?>
+                                                                            value="Ms">Chưa xác định
+                                                                        </option>
+                                                                        <option <?php if ($gender_edit == 1) echo "selected" ?>
+                                                                            value="Mr">Nam
+                                                                        </option>
+                                                                        <option <?php if ($gender_edit == 2) echo "selected" ?>
+                                                                            value="Mrs">Nữ
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="profile-info-row">
+                                                                <div class="profile-info-name"> Quyền admin</div>
+
+                                                                <div class="profile-info-value">
+                                                                    <label>
+                                                                        <input <?php echo $user_role ?>
+                                                                            id="input_user_role"
+                                                                            name="user_role"
+                                                                            class="ace ace-switch ace-switch-6"
+                                                                            type="checkbox">
+                                                                        <span class="lbl"></span>
+                                                                    </label>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="profile-info-row">
+                                                                <div class="profile-info-name"> Tên đăng nhập</div>
+
+                                                                <div class="profile-info-value">
+                                                   	<span class="input-icon width_100">
+												<input value="<?php echo $user_name?>" name="user_name" type="text"  id="input_user_name" class="width_100 <?php echo $valid_user_name?>" required>
+												<i class="ace-icon fa fa-user blue"></i>
+                                                <i id="error_icon_user_name" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Bạn vui lòng kiểm tra tên đăng nhập"></i>
+                                                <i id="success_icon_user_name" style="display: none" class="ace-icon fa fa-check-circle icon-right success-color" title="Tên đăng nhập hợp lệ"></i>
+											</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="profile-info-row">
+                                                                <div class="profile-info-name"> Email</div>
+
+                                                                <div class="profile-info-value">
+                                                    <span class="input-icon width_100">
+												<input value="<?php echo $user_email?>" name="email_user" readonly type="email" id="input_email_user" class="width_100 <?php echo $valid_email?>" required>
+												<i class="ace-icon fa fa-envelope blue"></i>
+                                                <i id="email_user_error_icon" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Bạn vui lòng kiểm tra lại email"></i>
+                                                <i id="email_user_success_icon" style="display: none" class="ace-icon fa fa-check-circle icon-right success-color" title="Email hợp lệ"></i>
+											</span>
+                                                                    <label  style="display: none" class="error-color  error-color-size" id="error_email_user">Bạn vui lòng nhập email</label>
+                                                                </div>
+                                                            </div>
+
+
+
+                                                        </div>
+
+                                                        <div class="space-6"></div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="step-pane" id="step_edit_3" data-step="3">
+                                        <div class="center">
+                                            <h3 class="blue lighter">This is step 3</h3>
+                                        </div>
+                                    </div>
+
+                                    <div class="step-pane" id="step_edit_4" data-step="4">
+                                        <div class="center">
+                                            <h3 class="green">Congrats!</h3>
+                                            Your product is ready to ship! Click finish to continue!
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr/>
+                            <div class="wizard-actions">
+                                <button class="btn btn-prev" disabled="disabled" id="prev_edit_user">
+                                    <i class="ace-icon fa fa-arrow-left"></i>
+                                    Prev
+                                </button>
+
+                                <button class="btn btn-success btn-next" id="next_edit_user" data-last="Finish">
+                                    Next
+                                    <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+                                </button>
+                            </div>
+                        </div><!-- /.widget-main -->
+                    </div><!-- /.widget-body -->
+                </div>
+            </div>
+
         </div><!-- /.tab-content -->
     </div><!-- /.tabbable -->
 </div><!-- /.col -->

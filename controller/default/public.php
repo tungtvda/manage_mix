@@ -87,6 +87,11 @@ function show_valid_form($data1=array())
     $data=$data1;
     view_valid_form($data);
 }
+function show_script_edit_user($data1=array())
+{
+    $data=array();
+    view_script_edit_user($data);
+}
 function show_script_table($data1=array(),$count=5)
 {
     $data=array();

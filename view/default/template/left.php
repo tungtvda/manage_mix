@@ -309,7 +309,7 @@
                         </li>
 
                         <li>
-                            <a href="profile.html">
+                            <a href="<?php echo SITE_NAME?>/profile.html">
                                 <i class="ace-icon fa fa-user"></i>
                                 Profile
                             </a>

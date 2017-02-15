@@ -132,6 +132,7 @@ function show_user_hoso($data = array())
     if(count($data_chuc_vu)>0){
         $chuc_vu_name=$data_chuc_vu[0]->name;
     }
+    $data_list_chucvu=user_chucvu_getByTop('','','position asc');
 
     $phong_ban=_returnDataEditAdd($data['data_user'],'phong_ban');
     $data_phong_ban=user_phongban_getById($phong_ban);
@@ -139,6 +140,8 @@ function show_user_hoso($data = array())
     if(count($data_phong_ban)>0){
         $phong_ban_name=$data_phong_ban[0]->name;
     }
+    $data_list_phongban=user_phongban_getByTop('','','position asc');
+
     $guides=_returnDataEditAdd($data['data_user'],'guides');
     $guides_check="";
     if($guides==1)
@@ -165,6 +168,9 @@ function show_user_hoso($data = array())
                $cmnd_name.=" - Nơi cấp: ".$issued_by_cmnd;
            }
        }
+        else{
+            $date_range_cmnd='';
+        }
 
     }
 
@@ -176,12 +182,18 @@ function show_user_hoso($data = array())
     if($issued_by_passport!=''){
         $number_passport_name.=" Nơi cấp: ".$issued_by_passport;
     }
+    if($expiration_date_passport!="0000-00-00"){
+    }else{
+        $expiration_date_passport='';
+    }
     $date_range_passport_name='';
     if($date_range_passport!="0000-00-00"){
         $date_range_passport_name.='Ngày cấp: '.date("Y-m-d", strtotime($date_range_passport));
         if($expiration_date_passport!="0000-00-00"){
             $date_range_passport_name.=' - Ngày hết hạn: '.date("Y-m-d", strtotime($expiration_date_passport));
         }
+    }else{
+        $date_range_passport='';
     }
 
     $ngon_ngu=_returnDataEditAdd($data['data_user'],'language');

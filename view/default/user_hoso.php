@@ -96,12 +96,17 @@ function show_user_hoso($data = array())
     if(count($data_dantoc)>0){
         $dan_toc_name=$data_dantoc[0]->name;
     }
+    $data_list_dantoc=dan_toc_getByTop('','','name asc');
+
+
     $ton_giao=_returnDataEditAdd($data['data_user'],'religion');
     $data_ton_giao=ton_giao_getById($ton_giao);
     $ton_giao_name='';
     if(count($data_ton_giao)>0){
         $ton_giao_name=$data_ton_giao[0]->name;
     }
+    $data_list_tongiao=ton_giao_getByTop('','','name asc');
+
     $ho_khau_tt=_returnDataEditAdd($data['data_user'],'ho_khau_tt');
 
     $hon_nhan=_returnDataEditAdd($data['data_user'],'hon_nhan');
@@ -126,6 +131,8 @@ function show_user_hoso($data = array())
     if(count($data_bang_cap)>0){
         $bang_cap_name=$data_bang_cap[0]->name;
     }
+    $data_list_bang_cap=bang_cap_getByTop('','','name asc');
+
     $chuc_vu=_returnDataEditAdd($data['data_user'],'chuc_vu');
     $data_chuc_vu=user_chucvu_getById($chuc_vu);
     $chuc_vu_name='';

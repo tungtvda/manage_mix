@@ -1378,13 +1378,43 @@
                                                             </div>
 
                                                             <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Ngân hàng </div>
+                                                                <div class="profile-info-name"> Tài khoản ngân hàng </div>
 
                                                                 <div class="profile-info-value">
                                                                     <div>
                                                                         <span class="input-icon width_100">
 												<input value="<?php echo $account_number_bank ?>" name="account_number_bank" type="text"
                                                        id="input_account_number_bank"
+                                                       class="width_100 valid" required>
+												<i class="ace-icon fa fa-qrcode blue"></i>
+
+											</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="profile-info-row">
+                                                                <div class="profile-info-name"> Ngân hàng </div>
+
+                                                                <div class="profile-info-value">
+                                                                    <div>
+                                                                        <span class="input-icon width_100">
+												<input value="<?php echo $bank ?>" name="bank" type="text"
+                                                       id="input_bank"
+                                                       class="width_100 valid" required>
+												<i class="ace-icon fa fa-qrcode blue"></i>
+
+											</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="profile-info-row">
+                                                                <div class="profile-info-name"> Chi nhánh </div>
+
+                                                                <div class="profile-info-value">
+                                                                    <div>
+                                                                        <span class="input-icon width_100">
+												<input value="<?php echo $open_bank ?>" name="open_bank" type="text"
+                                                       id="input_open_bank"
                                                        class="width_100 valid" required>
 												<i class="ace-icon fa fa-qrcode blue"></i>
 
@@ -1402,27 +1432,75 @@
                                                     <div class="col-xs-12 col-sm-6">
                                                         <div class="profile-user-info profile-user-info-striped">
                                                             <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Skype</div>
+                                                                <div class="profile-info-name"> Dân tộc</div>
 
                                                                 <div class="profile-info-value">
-                                                                    <span class="input-icon width_100">
-												                        <input name="skype" type="text" id="input_skype"
-                                                                               class="width_100 valid"
-                                                                               value="<?php echo $skype ?>">
-                                                                         <i class="ace-icon fa fa-skype blue"></i>
-											                            </span>
+                                                                    <select name="dan_toc"
+                                                                            class="chosen-select form-control valid"
+                                                                            id="form-field-select-3"
+                                                                            data-placeholder="Dân tộc ..."
+                                                                            style="display: none;width: 10px">
+                                                                        <?php if (count($data_list_dantoc) > 0) { ?>
+                                                                            <?php foreach ($data_list_dantoc as $row_dantoc) { ?>
+                                                                                <option <?php if ($row_dantoc->id == $dan_toc) echo "selected" ?>
+                                                                                    value="<?php echo $row_dantoc->id ?>"><?php echo $row_dantoc->name ?>
+                                                                                </option>
+                                                                            <?php } ?>
+                                                                        <?php } ?>
+                                                                    </select>
                                                                 </div>
                                                             </div>
                                                             <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Facebook</div>
+                                                                <div class="profile-info-name"> Tôn giáo</div>
 
                                                                 <div class="profile-info-value">
-                                                                    <span class="input-icon width_100">
-												                        <input name="skype" type="text" id="input_skype"
-                                                                               class="width_100 valid"
-                                                                               value="<?php echo $face ?>">
-                                                                         <i class="ace-icon fa fa-facebook blue"></i>
-											                            </span>
+                                                                    <select name="ton_giao"
+                                                                            class="chosen-select form-control valid"
+                                                                            id="form-field-select-3"
+                                                                            data-placeholder="Tôn giáo ..."
+                                                                            style="display: none;width: 10px">
+                                                                        <?php if (count($data_list_tongiao) > 0) { ?>
+                                                                            <?php foreach ($data_list_tongiao as $row_tongiao) { ?>
+                                                                                <option <?php if ($row_tongiao->id == $ton_giao) echo "selected" ?>
+                                                                                    value="<?php echo $row_tongiao->id ?>"><?php echo $row_tongiao->name ?>
+                                                                                </option>
+                                                                            <?php } ?>
+                                                                        <?php } ?>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="profile-info-row">
+                                                                <div class="profile-info-name"> Hộ khẩu TT </div>
+
+                                                                <div class="profile-info-value">
+                                                                    <div>
+                                                                        <span class="input-icon width_100">
+												<input value="<?php echo $ho_khau_tt ?>" name="ho_khau_tt" type="text"
+                                                       id="input_ho_khau_tt"
+                                                       class="width_100 valid" required>
+												<i class="ace-icon fa fa-qrcode blue"></i>
+
+											</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="profile-info-row">
+                                                                <div class="profile-info-name"> Bằng cấp</div>
+
+                                                                <div class="profile-info-value">
+                                                                    <select name="bang_cap"
+                                                                            class="chosen-select form-control valid"
+                                                                            id="form-field-select-3"
+                                                                            data-placeholder="Bằng cấp ..."
+                                                                            style="display: none;width: 10px">
+                                                                        <?php if (count($data_list_bang_cap) > 0) { ?>
+                                                                            <?php foreach ($data_list_bang_cap as $row_bang_cap) { ?>
+                                                                                <option <?php if ($row_bang_cap->id == $bang_cap) echo "selected" ?>
+                                                                                    value="<?php echo $row_bang_cap->id ?>"><?php echo $row_bang_cap->name ?>
+                                                                                </option>
+                                                                            <?php } ?>
+                                                                        <?php } ?>
+                                                                    </select>
                                                                 </div>
                                                             </div>
                                                         </div>

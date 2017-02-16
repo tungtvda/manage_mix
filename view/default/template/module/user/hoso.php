@@ -1148,7 +1148,7 @@
                                                                     <div class="profile-info-name"> Tôn giáo</div>
 
                                                                     <div class="profile-info-value">
-                                                                        <?php echo _returnInputSelect('ton_giao',$ton_giao,$data_list_tongiao,'valid', 'Tôn giáo ...')?>
+                                                                        <?php echo _returnInputSelect('religion',$ton_giao,$data_list_tongiao,'valid', 'Tôn giáo ...')?>
                                                                     </div>
                                                                 </div>
                                                                 <div class="profile-info-row">

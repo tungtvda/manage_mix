@@ -522,8 +522,6 @@ function _returnCreateUser($check_redict)
             }
 
         }
-    }else{
-        echo '<script>alert("Bạn vui lòng điền đầy đủ thông tin bắt buộc")</script>';
     }
 }
 

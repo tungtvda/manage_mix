@@ -728,13 +728,54 @@
                                 </style>
 
                                 <div class="step-content pos-rel">
-                                    <div class="step-pane active" data-step="1" id="step_edit_1">
-                                        <div class="col-md-4 col-sm-4 col-xs-12 hidden-xs">
+                                    <form class="form-horizontal" id="submit_form_profile" role="form" action="" method="post" enctype="multipart/form-data">
+                                        <div class="step-pane active" data-step="1" id="step_edit_1">
+                                            <div class="col-md-4 col-sm-4 col-xs-12 hidden-xs">
+                                            </div>
+                                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                                <div style="margin: auto" class="widget-box">
+                                                    <div class="widget-header">
+                                                        <h4 class="widget-title">Hình ảnh đại diện</h4>
+
+                                                        <div class="widget-toolbar">
+                                                            <a href="#" data-action="collapse">
+                                                                <i class="ace-icon fa fa-chevron-up"></i>
+                                                            </a>
+                                                            <a href="#" data-action="close">
+                                                                <i class="ace-icon fa fa-times"></i>
+                                                            </a>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <div class="widget-body">
+                                                        <div class="widget-main">
+                                                            <div class="form-group">
+                                                                <div id="preview">
+                                                                    <img id="show_img_upload" class="img-responsive"
+                                                                         no-avatar="<?php echo SITE_NAME ?>/view/default/themes/images/no-image.jpg"
+                                                                         src="<?php echo $avatar ?>">
+                                                                </div>
+                                                                <div class="space-6"></div>
+                                                                <input accept="image/*" name="avatar" type="file"
+                                                                       id="id-input-file-2" onchange="loadFile(event)"/>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4 col-xs-12 hidden-xs">
+                                            </div>
+
                                         </div>
-                                        <div class="col-md-4 col-sm-4 col-xs-12">
-                                            <div style="margin: auto" class="widget-box">
+
+                                        <div class="step-pane" id="step_edit_2" data-step="2">
+                                            <div style="margin: auto; float: left;width: 100%" class="widget-box">
                                                 <div class="widget-header">
-                                                    <h4 class="widget-title">Hình ảnh đại diện</h4>
+                                                    <h4 class="widget-title">Thông tin đăng nhập</h4>
 
                                                     <div class="widget-toolbar">
                                                         <a href="#" data-action="collapse">
@@ -745,775 +786,434 @@
                                                         </a>
                                                     </div>
 
-
                                                 </div>
 
                                                 <div class="widget-body">
                                                     <div class="widget-main">
-                                                        <div class="form-group">
-                                                            <div id="preview">
-                                                                <img id="show_img_upload" class="img-responsive"
-                                                                     no-avatar="<?php echo SITE_NAME ?>/view/default/themes/images/no-image.jpg"
-                                                                     src="<?php echo $avatar ?>">
-                                                            </div>
-                                                            <div class="space-6"></div>
-                                                            <input accept="image/*" name="avatar" type="file"
-                                                                   id="id-input-file-2" onchange="loadFile(event)"/>
-                                                        </div>
+                                                        <div class="col-xs-12 col-sm-6">
+                                                            <div class="profile-user-info profile-user-info-striped">
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name">Mã nhân viên <span
+                                                                            style="color: red">*</span></div>
 
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-4 col-xs-12 hidden-xs">
-                                        </div>
-
-                                    </div>
-
-                                    <div class="step-pane" id="step_edit_2" data-step="2">
-                                        <div style="margin: auto; float: left;width: 100%" class="widget-box">
-                                            <div class="widget-header">
-                                                <h4 class="widget-title">Thông tin đăng nhập</h4>
-
-                                                <div class="widget-toolbar">
-                                                    <a href="#" data-action="collapse">
-                                                        <i class="ace-icon fa fa-chevron-up"></i>
-                                                    </a>
-                                                    <a href="#" data-action="close">
-                                                        <i class="ace-icon fa fa-times"></i>
-                                                    </a>
-                                                </div>
-
-
-                                            </div>
-
-                                            <div class="widget-body">
-                                                <div class="widget-main">
-                                                    <div class="col-xs-12 col-sm-6">
-                                                        <div class="profile-user-info profile-user-info-striped">
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name">Mã nhân viên <span
-                                                                        style="color: red">*</span></div>
-
-                                                                <div class="profile-info-value">
-
-
-                                               <span class="input-icon width_100">
-                                                    <input disabled name="user_code" type="text" id="input_user_code"
-                                                           value="<?php echo $user_code ?>"
-                                                           class="width_100 <?php echo $valid_user_code ?>" required>
-                                                    <i class="ace-icon fa fa-qrcode blue"></i>
-                                                    <i id="user_code_error_icon" style="display: none"
-                                                       class="ace-icon fa fa-times-circle icon-right error-color "
-                                                       data-toggle="ggtooltip" data-title="" data-trigger="hover"
-                                                       data-placement="bottom" data-backcolor="red"
-                                                       data-textcolor="#ffffff"
-                                                       title=""></i>
-                                                    <i id="user_code_success_icon" style="display: none"
-                                                       class="ace-icon fa fa-check-circle icon-right success-color"
-                                                       data-toggle="ggtooltip" data-title="" data-trigger="hover"
-                                                       data-placement="bottom" data-backcolor="green"
-                                                       data-textcolor="#000000" title="Mã nhân viên hợp lệ"></i>
-                                                </span>
-                                                                    <label style="display: none"
-                                                                           class="error-color  error-color-size"
-                                                                           id="error_user_code">Bạn vui lòng nhập mã
-                                                                        nhân viên</label>
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInput('user_code', $user_code, $valid_user_code, 'qrcode', 'disabled', 'Bạn vui lòng nhập mã nhân viên','') ?>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
 
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Họ tên <span
-                                                                        style="color: red">*</span></div>
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Họ tên <span
+                                                                            style="color: red">*</span></div>
 
-                                                                <div class="profile-info-value form-group">
-                                                                    <div>
-                                                                        <style>
-                                                                            .chosen-single {
-                                                                                width: 100% !important;
-                                                                                border: 1px solid #d5d5d5 !important;
-                                                                                height: 34px !important;
-                                                                            }
+                                                                    <div class="profile-info-value form-group">
+                                                                            <style>
+                                                                                .chosen-single {
+                                                                                    width: 100% !important;
+                                                                                    border: 1px solid #d5d5d5 !important;
+                                                                                    height: 34px !important;
+                                                                                }
 
-                                                                            #form_field_select_3_chosen {
-                                                                                width: 26% !important;
+                                                                                #form_field_select_3_chosen {
+                                                                                    width: 26% !important;
 
-                                                                            }
-                                                                        </style>
+                                                                                }
+                                                                            </style>
+                                                                            <select name="mr"
+                                                                                    class="chosen-select form-control mr_user"
+                                                                                    id="form-field-select-3"
+                                                                                    data-placeholder="Danh xưng ..."
+                                                                                    style="display: none;width: 10px">
+                                                                                <option value=""></option>
+                                                                                <option <?php if ($mr == "Mr") echo "selected" ?>
+                                                                                    value="Mr">Mr
+                                                                                </option>
+                                                                                <option <?php if ($mr == "Mrs") echo "selected" ?>
+                                                                                    value="Mrs">Mrs
+                                                                                </option>
+                                                                                <option <?php if ($mr == "Ms") echo "selected" ?>
+                                                                                    value="Ms">Ms
+                                                                                </option>
+                                                                            </select>
+                                                                            <?php echo _returnInput('full_name', $name, $valid_name, 'user', '', 'Bạn vui lòng nhập tên nhân viên','width: 73%') ?>
+                                                                    </div>
+                                                                </div>
 
-                                                                        <select name="mr"
-                                                                                class="chosen-select form-control mr_user"
+
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Ngày sinh <span
+                                                                            style="color: red">*</span></div>
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInputDate('birthday', $birthday, $valid_birthday, '', 'Bạn vui lòng chọn ngày sinh','')?>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Giới tính</div>
+                                                                    <div class="profile-info-value">
+                                                                        <select name="gender"
+                                                                                class="chosen-select form-control valid"
                                                                                 id="form-field-select-3"
-                                                                                data-placeholder="Danh xưng ..."
+                                                                                data-placeholder="Giới tính ..."
                                                                                 style="display: none;width: 10px">
-                                                                            <option value=""></option>
-                                                                            <option <?php if ($mr == "Mr") echo "selected" ?>
-                                                                                value="Mr">Mr
+                                                                            <option <?php if ($gender_edit == 0) echo "selected" ?>
+                                                                                value="Ms">Chưa xác định
                                                                             </option>
-                                                                            <option <?php if ($mr == "Mrs") echo "selected" ?>
-                                                                                value="Mrs">Mrs
+                                                                            <option <?php if ($gender_edit == 1) echo "selected" ?>
+                                                                                value="Mr">Nam
                                                                             </option>
-                                                                            <option <?php if ($mr == "Ms") echo "selected" ?>
-                                                                                value="Ms">Ms
+                                                                            <option <?php if ($gender_edit == 2) echo "selected" ?>
+                                                                                value="Mrs">Nữ
                                                                             </option>
                                                                         </select>
-                                                    <span class="input-icon width_100" style="width: 73%">
-                                                  <input value="<?php echo $name ?>" name="full_name" type="text"
-                                                         id="input_full_name"
-                                                         class="width_100 <?php echo $valid_name ?>" required>
-												<i class="ace-icon fa fa-user blue"></i>
-                                                <i id="name_user_error_icon" style="display: none"
-                                                   class="ace-icon fa fa-times-circle icon-right error-color "
-                                                   data-toggle="ggtooltip" data-title="" data-trigger="hover"
-                                                   data-placement="bottom" data-backcolor="red" data-textcolor="#ffffff"
-                                                   title=""></i>
-                                                </span>
-                                                                        <label style="display: none"
-                                                                               class="error-color  error-color-size"
-                                                                               id="error_full_name">Bạn vui lòng nhập
-                                                                            tên nhân
-                                                                            viên</label>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Quyền admin</div>
 
-
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Ngày sinh <span
-                                                                        style="color: red">*</span></div>
-
-                                                                <div class="profile-info-value">
-                                                                    <div>
-                                                                        <div class="input-group" style="">
-                                                                            <input value="<?php echo $birthday ?>"
-                                                                                   class="form-control date-picker width_100 <?php echo $valid_birthday ?>"
-                                                                                   id="input_birthday" name="birthday"
-                                                                                   required
-                                                                                   type="text"
-                                                                                   data-date-format="dd-mm-yyyy">
-																	<span class="input-group-addon date_icon">
-																		<i class="fa fa-calendar bigger-110"></i>
-																	</span>
-
-                                                                        </div>
-                                                                        <label style="display: none"
-                                                                               class="error-color  error-color-size"
-                                                                               id="error_birthday">Bạn vui lòng chọn
-                                                                            ngày sinh</label>
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInputCheck('user_role', 'valid', 'disabled', $user_role)?>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Giới tính</div>
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Tên đăng nhập <span style="color: red">*</span></div>
 
-                                                                <div class="profile-info-value">
-                                                                    <select name="gender"
-                                                                            class="chosen-select form-control valid"
-                                                                            id="form-field-select-3"
-                                                                            data-placeholder="Giới tính ..."
-                                                                            style="display: none;width: 10px">
-                                                                        <option <?php if ($gender_edit == 0) echo "selected" ?>
-                                                                            value="Ms">Chưa xác định
-                                                                        </option>
-                                                                        <option <?php if ($gender_edit == 1) echo "selected" ?>
-                                                                            value="Mr">Nam
-                                                                        </option>
-                                                                        <option <?php if ($gender_edit == 2) echo "selected" ?>
-                                                                            value="Mrs">Nữ
-                                                                        </option>
-                                                                    </select>
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInput('user_name', $user_name, 'valid', 'user', 'disabled', 'Bạn vui lòng kiểm tra tên đăng nhập','') ?>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Quyền admin</div>
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Email <span
+                                                                            style="color: red">*</span></div>
 
-                                                                <div class="profile-info-value">
-                                                                    <label>
-                                                                        <input <?php echo $user_role ?>
-                                                                            id="input_user_role" disabled
-                                                                            name="user_role"
-                                                                            class="ace ace-switch ace-switch-6 valid"
-                                                                            type="checkbox">
-                                                                        <span class="lbl"></span>
-                                                                    </label>
-
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInput('email_user', $user_email, 'valid', 'envelope', 'disabled', 'Bạn vui lòng kiểm tra email','') ?>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Tên đăng nhập <span
-                                                                        style="color: red">*</span></div>
 
-                                                                <div class="profile-info-value">
-                                                   	<span class="input-icon width_100">
-												<input disabled value="<?php echo $user_name ?>" name="user_name"
-                                                       type="text"
-                                                       id="input_user_name"
-                                                       class="width_100 valid" required>
-												<i class="ace-icon fa fa-user blue"></i>
-                                                <i id="error_icon_user_name" style="display: none"
-                                                   class="ace-icon fa fa-times-circle icon-right error-color "
-                                                   title="Bạn vui lòng kiểm tra tên đăng nhập"></i>
-                                                <i id="success_icon_user_name" style="display: none"
-                                                   class="ace-icon fa fa-check-circle icon-right success-color"
-                                                   title="Tên đăng nhập hợp lệ"></i>
-											</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Email <span
-                                                                        style="color: red">*</span></div>
 
-                                                                <div class="profile-info-value">
-                                                    <span class="input-icon width_100">
-												<input value="<?php echo $user_email ?>" name="email_user" readonly
-                                                       type="email" id="input_email_user"
-                                                       class="width_100 <?php echo $valid_email ?>" required>
-												<i class="ace-icon fa fa-envelope blue"></i>
-                                                <i id="email_user_error_icon" style="display: none"
-                                                   class="ace-icon fa fa-times-circle icon-right error-color "
-                                                   title="Bạn vui lòng kiểm tra lại email"></i>
-                                                <i id="email_user_success_icon" style="display: none"
-                                                   class="ace-icon fa fa-check-circle icon-right success-color"
-                                                   title="Email hợp lệ"></i>
-											</span>
-                                                                    <label style="display: none"
-                                                                           class="error-color  error-color-size"
-                                                                           id="error_email_user">Bạn vui lòng nhập
-                                                                        email</label>
-                                                                </div>
                                                             </div>
+
+                                                            <div class="space-6"></div>
 
 
                                                         </div>
+                                                        <div class="col-xs-12 col-sm-6">
+                                                            <div class="profile-user-info profile-user-info-striped">
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Địa chỉ <span style="color: red">*</span></div>
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInput('address_user', $address, $valid_address, 'map-marker', '', 'Bạn vui lòng kiểm tra địa chỉ','') ?>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Phòng ban</div>
 
-                                                        <div class="space-6"></div>
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInputSelect('phong_ban',$phong_ban,$data_list_phongban,'valid', 'Phòng ban ...')?>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Chức vụ</div>
+
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInputSelect('chuc_vu',$chuc_vu,$data_list_chucvu,'valid', 'Chức vụ ...')?>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Hướng dẫn viên</div>
+
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInputCheck('guides', 'valid', '', $guides_check)?>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name">Mã thẻ hdv</div>
+
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInput('guide_card_number', $guide_card_number, 'valid', 'qrcode', '', '','') ?>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name">Ngày làm việc <span
+                                                                            style="color: red">*</span> <span
+                                                                            style="color: red"></span></div>
+
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInput('ngay_lam_viec', $ngay_lam_viec, 'valid', 'calendar', 'disabled', '','') ?>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Ngày chính thức <span style="color: red">*</span>
+                                                                    </div>
+                                                                    <div class="profile-info-value form-group">
+                                                                        <?php echo _returnInput('ngay_chinh_thuc', $ngay_chinh_thuc, 'valid', 'calendar', 'disabled', '','') ?>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="space-6"></div>
 
 
+                                                        </div>
                                                     </div>
-                                                    <div class="col-xs-12 col-sm-6">
-                                                        <div class="profile-user-info profile-user-info-striped">
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Địa chỉ</div>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                                                <div class="profile-info-value">
-                                                                   <span class="input-icon width_100">
-												<input value="<?php echo $address?>" name="address_user" type="text" id="input_address_user" class="width_100 <?php echo $valid_address?>" required>
-												<i class="ace-icon fa fa-map-marker blue"></i>
-                                                <i id="error_icon_address_user" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Bạn vui lòng nhập địa chỉ"></i>
-											</span>
-                                                                    <label  style="display: none" class="error-color  error-color-size" id="error_address_user">Bạn vui lòng nhập địa chỉ</label>
+                                        <div class="step-pane" id="step_edit_3" data-step="3">
+                                            <div style="margin: auto; float: left;width: 100%" class="widget-box">
+                                                <div class="widget-header">
+                                                    <h4 class="widget-title">Thông tin liên hệ</h4>
+
+                                                    <div class="widget-toolbar">
+                                                        <a href="#" data-action="collapse">
+                                                            <i class="ace-icon fa fa-chevron-up"></i>
+                                                        </a>
+                                                        <a href="#" data-action="close">
+                                                            <i class="ace-icon fa fa-times"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                                <div class="widget-body">
+                                                    <div class="widget-main">
+                                                        <div class="col-xs-12 col-sm-6">
+                                                            <div class="profile-user-info profile-user-info-striped">
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Mã số thuế</div>
+
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInput('tax_code', $tax_code, 'valid', 'qrcode', '', '','') ?>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Phòng ban</div>
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Điện thoại <span
+                                                                            style="color: red">*</span></div>
 
-                                                                <div class="profile-info-value">
-                                                                    <select name="phong_ban"
-                                                                            class="chosen-select form-control valid"
-                                                                            id="form-field-select-3"
-                                                                            data-placeholder="Phòng ban ..."
-                                                                            style="display: none;width: 10px">
-                                                                        <?php if (count($data_list_phongban) > 0) { ?>
-                                                                            <?php foreach ($data_list_phongban as $row_phong) { ?>
-                                                                                <option <?php if ($row_phong->id == $phong_ban) echo "selected" ?>
-                                                                                    value="<?php echo $row_phong->id ?>"><?php echo $row_phong->name ?>
-                                                                                </option>
-                                                                            <?php } ?>
-                                                                        <?php } ?>
-                                                                    </select>
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInput('user_phone', $phone, $valid_phone, 'phone', '', 'Bạn vui lòng điền số điện thoại','') ?>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Chức vụ</div>
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Di động</div>
 
-                                                                <div class="profile-info-value">
-                                                                    <select name="phong_ban"
-                                                                            class="chosen-select form-control valid"
-                                                                            id="form-field-select-3"
-                                                                            data-placeholder="Phòng ban ..."
-                                                                            style="display: none;width: 10px">
-                                                                        <?php if (count($data_list_chucvu) > 0) { ?>
-                                                                            <?php foreach ($data_list_chucvu as $row_chucvu) { ?>
-                                                                                <option <?php if ($row_chucvu->id == $chuc_vu) echo "selected" ?>
-                                                                                    value="<?php echo $row_chucvu->id ?>"><?php echo $row_chucvu->name ?>
-                                                                                </option>
-                                                                            <?php } ?>
-                                                                        <?php } ?>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Hướng dẫn viên</div>
-
-                                                                <div class="profile-info-value">
-                                                                    <label>
-                                                                        <input <?php echo $guides_check ?>
-                                                                            id="input_guides"
-                                                                            class="ace ace-switch ace-switch-6 valid"
-                                                                            type="checkbox">
-                                                                        <span class="lbl"></span>
-                                                                    </label>
-
-                                                                </div>
-                                                            </div>
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name">Mã thẻ hdv</div>
-
-                                                                <div class="profile-info-value">
-
-
-                                               <span class="input-icon width_100">
-                                                    <input name="guide_card_number" type="text"
-                                                           id="input_guide_card_number"
-                                                           value="<?php echo $guide_card_number ?>"
-                                                           class="width_100 " required>
-                                                    <i class="ace-icon fa fa-qrcode blue"></i>
-
-                                                </span>
-                                                                    <label style="display: none"
-                                                                           class="error-color  error-color-size"
-                                                                           id="error_user_code">Bạn vui lòng nhập mã
-                                                                        nhân viên</label>
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInput('mobi', $mobi, 'valid', 'mobile', '', '','') ?>
+                                                                    </div>
                                                                 </div>
                                                             </div>
 
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name">Ngày làm việc <span
-                                                                        style="color: red">*</span> <span
-                                                                        style="color: red"></span></div>
-
-                                                                <div class="profile-info-value">
-
-
-                                               <span class="input-icon width_100">
-                                                    <input disabled name="ngay_lam_viec" type="text"
-                                                           id="input_ngay_lam_viec"
-                                                           value="<?php echo $ngay_lam_viec ?>"
-                                                           class="width_100 valid" required>
-                                                    <i class="ace-icon fa fa-calendar blue"></i>
-                                                </span>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Ngày chính thức <span
-                                                                        style="color: red">*</span></div>
-
-                                                                <div class="profile-info-value form-group">
-
-
-
-
-                                                    <span class="input-icon width_100">
-                                                  <input disabled value="<?php echo $ngay_chinh_thuc ?>"
-                                                         name="ngay_chinh_thuc" type="text"
-                                                         id="input_ngay_chinh_thuc"
-                                                         class="width_100 valid">
-												 <i class="ace-icon fa fa-calendar blue"></i>
-
-                                                </span>
-                                                                </div>
-
-
-                                                            </div>
+                                                            <div class="space-6"></div>
 
 
                                                         </div>
+                                                        <div class="col-xs-12 col-sm-6">
+                                                            <div class="profile-user-info profile-user-info-striped">
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Skype</div>
 
-                                                        <div class="space-6"></div>
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInput('skype', $skype, 'valid', 'skype', '', '','') ?>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Facebook</div>
 
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInput('facebook', $face, 'valid', 'facebook', '', '','') ?>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="space-6"></div>
+
+
+                                                        </div>
 
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="step-pane" id="step_edit_3" data-step="3">
-                                        <div style="margin: auto; float: left;width: 100%" class="widget-box">
-                                            <div class="widget-header">
-                                                <h4 class="widget-title">Thông tin liên hệ</h4>
+                                        <div class="step-pane" id="step_edit_4" data-step="4">
+                                            <div style="margin: auto; float: left;width: 100%" class="widget-box">
+                                                <div class="widget-header">
+                                                    <h4 class="widget-title">Thông tin khác</h4>
 
-                                                <div class="widget-toolbar">
-                                                    <a href="#" data-action="collapse">
-                                                        <i class="ace-icon fa fa-chevron-up"></i>
-                                                    </a>
-                                                    <a href="#" data-action="close">
-                                                        <i class="ace-icon fa fa-times"></i>
-                                                    </a>
+                                                    <div class="widget-toolbar">
+                                                        <a href="#" data-action="collapse">
+                                                            <i class="ace-icon fa fa-chevron-up"></i>
+                                                        </a>
+                                                        <a href="#" data-action="close">
+                                                            <i class="ace-icon fa fa-times"></i>
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="widget-body">
-                                                <div class="widget-main">
-                                                    <div class="col-xs-12 col-sm-6">
-                                                        <div class="profile-user-info profile-user-info-striped">
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Mã số thuế </div>
+                                                <div class="widget-body">
+                                                    <div class="widget-main">
+                                                        <div class="col-xs-12 col-sm-6">
+                                                            <div class="profile-user-info profile-user-info-striped">
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> CMTND</div>
 
-                                                                <div class="profile-info-value">
-                                                                    <div>
-                                                                        <span class="input-icon width_100">
-												<input value="<?php echo $tax_code ?>" name="tax_code" type="text"
-                                                       id="input_tax_code"
-                                                       class="width_100 valid" required>
-												<i class="ace-icon fa fa-qrcode blue"></i>
-
-											</span>
-                                                                        <label style="display: none"
-                                                                               class="error-color  error-color-size"
-                                                                               id="error_address_user">Bạn vui lòng nhập
-                                                                            địa chỉ</label>
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInput('cmnd', $cmnd, 'valid', 'qrcode', '', '','') ?>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Điện thoại <span
-                                                                        style="color: red">*</span></div>
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Ngày cấp CMTND</div>
 
-                                                                <div class="profile-info-value">
-                                                                    <span class="input-icon width_100">
-												<input name="user_phone" type="text" id="input_user_phone"
-                                                       class="width_100 <?php echo $valid_phone ?>" required
-                                                       value="<?php echo $phone ?>">
-												<i class="ace-icon fa fa-phone blue"></i>
-                                                <i id="error_icon_user_phone" style="display: none"
-                                                   class="ace-icon fa fa-times-circle icon-right error-color "
-                                                   title="Bạn vui lòng điền số điện thoại"></i>
-
-											</span>
-                                                                    <label style="display: none"
-                                                                           class="error-color  error-color-size"
-                                                                           id="error_user_phone">Bạn vui lòng điền số
-                                                                        điện thoại</label>
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInputDate('date_range_cmnd', $date_range_cmnd, 'valid', '', '','')?>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Di động</div>
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Nơi cấp CMTND</div>
 
-                                                                <div class="profile-info-value">
-                                                                    <span class="input-icon width_100">
-												                        <input name="mobi" type="text" id="input_mobi"
-                                                                               class="width_100 valid"
-                                                                               value="<?php echo $mobi ?>">
-                                                                         <i class="ace-icon fa fa-mobile blue"></i>
-											                            </span>
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInputDate('issued_by_cmnd', $issued_by_cmnd, 'valid', '', '','')?>
+                                                                    </div>
                                                                 </div>
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Hộ chiếu</div>
+
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInput('number_passport', $number_passport, 'valid', 'qrcode', '', '','') ?>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Nơi cấp HC</div>
+
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInput('issued_by_passport', $issued_by_passport, 'valid', 'map-marker', '', '','') ?>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Ngày cấp HC</div>
+
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInputDate('date_range_passport', $date_range_passport, 'valid', '', '','')?>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Ngày hết hạn HC</div>
+
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInputDate('expiration_date_passport', $expiration_date_passport, 'valid', '', '','')?>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Tài khoản ngân hàng
+                                                                    </div>
+
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInput('account_number_bank', $account_number_bank, 'valid', 'qrcode', '', '','') ?>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Ngân hàng</div>
+
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInput('bank', $bank, 'valid', 'university', '', '','') ?>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Chi nhánh</div>
+
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInput('open_bank', $open_bank, 'valid', 'map-marker', '', '','') ?>
+                                                                    </div>
+                                                                </div>
+
                                                             </div>
+
+                                                            <div class="space-6"></div>
+
+
                                                         </div>
+                                                        <div class="col-xs-12 col-sm-6">
+                                                            <div class="profile-user-info profile-user-info-striped">
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Dân tộc</div>
 
-                                                        <div class="space-6"></div>
-
-
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-6">
-                                                        <div class="profile-user-info profile-user-info-striped">
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Skype</div>
-
-                                                                <div class="profile-info-value">
-                                                                    <span class="input-icon width_100">
-												                        <input name="skype" type="text" id="input_skype"
-                                                                               class="width_100 valid"
-                                                                               value="<?php echo $skype ?>">
-                                                                         <i class="ace-icon fa fa-skype blue"></i>
-											                            </span>
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInputSelect('dan_toc',$dan_toc,$data_list_dantoc,'valid', 'Dân tộc ...')?>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Facebook</div>
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Tôn giáo</div>
 
-                                                                <div class="profile-info-value">
-                                                                    <span class="input-icon width_100">
-												                        <input name="skype" type="text" id="input_skype"
-                                                                               class="width_100 valid"
-                                                                               value="<?php echo $face ?>">
-                                                                         <i class="ace-icon fa fa-facebook blue"></i>
-											                            </span>
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInputSelect('ton_giao',$ton_giao,$data_list_tongiao,'valid', 'Tôn giáo ...')?>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Hộ khẩu TT</div>
 
-                                                        <div class="space-6"></div>
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInput('ho_khau_tt', $ho_khau_tt, 'valid', 'map-marker', '', '','') ?>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Bằng cấp</div>
 
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInputSelect('bang_cap',$bang_cap,$data_list_bang_cap,'valid', 'Bằng cấp ...')?>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Hôn nhân</div>
+                                                                    <div class="profile-info-value">
+                                                                        <select name="gender"
+                                                                                class="chosen-select form-control valid"
+                                                                                id="form-field-select-3"
+                                                                                data-placeholder="Giới tính ..."
+                                                                                style="display: none;width: 10px">
+                                                                            <option <?php if ($hon_nhan == 0) echo "selected" ?>
+                                                                                value="0">Độc thân
+                                                                            </option>
+                                                                            <option <?php if ($hon_nhan == 1) echo "selected" ?>
+                                                                                value="1">Đang hẹn hò
+                                                                            </option>
+                                                                            <option <?php if ($hon_nhan == 2) echo "selected" ?>
+                                                                                value="2">Kết hôn
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Ngôn ngữ</div>
 
-                                                    </div>
+                                                                    <div class="profile-info-value">
+                                                                        <?php echo _returnInput('language', $ngon_ngu, 'valid', 'language ', '', '','') ?>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Mô tả bản thân</div>
 
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="step-pane" id="step_edit_4" data-step="4">
-                                        <div style="margin: auto; float: left;width: 100%" class="widget-box">
-                                            <div class="widget-header">
-                                                <h4 class="widget-title">Thông tin khác</h4>
-
-                                                <div class="widget-toolbar">
-                                                    <a href="#" data-action="collapse">
-                                                        <i class="ace-icon fa fa-chevron-up"></i>
-                                                    </a>
-                                                    <a href="#" data-action="close">
-                                                        <i class="ace-icon fa fa-times"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                            <div class="widget-body">
-                                                <div class="widget-main">
-                                                    <div class="col-xs-12 col-sm-6">
-                                                        <div class="profile-user-info profile-user-info-striped">
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> CMTND </div>
-
-                                                                <div class="profile-info-value">
-                                                                    <div>
+                                                                    <div class="profile-info-value">
                                                                         <span class="input-icon width_100">
-												<input value="<?php echo $cmnd ?>" name="cmnd" type="text"
-                                                       id="input_cmnd"
-                                                       class="width_100 valid" required>
-												<i class="ace-icon fa fa-qrcode blue"></i>
+                                                                             <textarea style="width: 100%" name="note"  rows="8"><?php echo $note?></textarea>
+                                                                        </span>
 
-											</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Ngày cấp CMTND</div>
-
-                                                                <div class="profile-info-value">
-                                                                    <div>
-                                                                        <div class="input-group" style="">
-                                                                            <input value="<?php echo $date_range_cmnd ?>"
-                                                                                   class="form-control date-picker width_100 valid"
-                                                                                   id="input_date_range_cmnd" name="date_range_cmnd"
-                                                                                   required
-                                                                                   type="text"
-                                                                                   data-date-format="dd-mm-yyyy">
-																	<span class="input-group-addon date_icon">
-																		<i class="fa fa-calendar bigger-110"></i>
-																	</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Nơi cấp CMTND</div>
-
-                                                                <div class="profile-info-value">
-                                                                    <span class="input-icon width_100">
-												                        <input name="issued_by_cmnd" type="text" id="input_issued_by_cmnd"
-                                                                               class="width_100 valid"
-                                                                               value="<?php echo $issued_by_cmnd ?>">
-                                                                         <i class="ace-icon fa fa-mobile blue"></i>
-											                            </span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Hộ chiếu </div>
-
-                                                                <div class="profile-info-value">
-                                                                    <div>
-                                                                        <span class="input-icon width_100">
-												<input value="<?php echo $number_passport ?>" name="number_passport" type="text"
-                                                       id="input_number_passport"
-                                                       class="width_100 valid" required>
-												<i class="ace-icon fa fa-qrcode blue"></i>
-
-											</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Nơi cấp HC</div>
-
-                                                                <div class="profile-info-value">
-                                                                    <span class="input-icon width_100">
-												                        <input name="issued_by_passport" type="text" id="input_issued_by_passport"
-                                                                               class="width_100 valid"
-                                                                               value="<?php echo $issued_by_passport ?>">
-                                                                         <i class="ace-icon fa fa-mobile blue"></i>
-											                            </span>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Ngày cấp HC</div>
-
-                                                                <div class="profile-info-value">
-                                                                    <div>
-                                                                        <div class="input-group" style="">
-                                                                            <input value="<?php echo $date_range_passport ?>"
-                                                                                   class="form-control date-picker width_100 valid"
-                                                                                   id="input_date_range_passport" name="date_range_passport"
-                                                                                   required
-                                                                                   type="text"
-                                                                                   data-date-format="dd-mm-yyyy">
-																	<span class="input-group-addon date_icon">
-																		<i class="fa fa-calendar bigger-110"></i>
-																	</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Ngày hết hạn HC</div>
-
-                                                                <div class="profile-info-value">
-                                                                    <div>
-                                                                        <div class="input-group" style="">
-                                                                            <input value="<?php echo $expiration_date_passport ?>"
-                                                                                   class="form-control date-picker width_100 valid"
-                                                                                   id="input_expiration_date_passport" name="expiration_date_passport"
-                                                                                   required
-                                                                                   type="text"
-                                                                                   data-date-format="dd-mm-yyyy">
-																	<span class="input-group-addon date_icon">
-																		<i class="fa fa-calendar bigger-110"></i>
-																	</span>
-                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
 
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Tài khoản ngân hàng </div>
+                                                            <div class="space-6"></div>
 
-                                                                <div class="profile-info-value">
-                                                                    <div>
-                                                                        <span class="input-icon width_100">
-												<input value="<?php echo $account_number_bank ?>" name="account_number_bank" type="text"
-                                                       id="input_account_number_bank"
-                                                       class="width_100 valid" required>
-												<i class="ace-icon fa fa-qrcode blue"></i>
-
-											</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Ngân hàng </div>
-
-                                                                <div class="profile-info-value">
-                                                                    <div>
-                                                                        <span class="input-icon width_100">
-												<input value="<?php echo $bank ?>" name="bank" type="text"
-                                                       id="input_bank"
-                                                       class="width_100 valid" required>
-												<i class="ace-icon fa fa-qrcode blue"></i>
-
-											</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Chi nhánh </div>
-
-                                                                <div class="profile-info-value">
-                                                                    <div>
-                                                                        <span class="input-icon width_100">
-												<input value="<?php echo $open_bank ?>" name="open_bank" type="text"
-                                                       id="input_open_bank"
-                                                       class="width_100 valid" required>
-												<i class="ace-icon fa fa-qrcode blue"></i>
-
-											</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
 
                                                         </div>
 
-                                                        <div class="space-6"></div>
-
-
                                                     </div>
-                                                    <div class="col-xs-12 col-sm-6">
-                                                        <div class="profile-user-info profile-user-info-striped">
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Dân tộc</div>
-
-                                                                <div class="profile-info-value">
-                                                                    <select name="dan_toc"
-                                                                            class="chosen-select form-control valid"
-                                                                            id="form-field-select-3"
-                                                                            data-placeholder="Dân tộc ..."
-                                                                            style="display: none;width: 10px">
-                                                                        <?php if (count($data_list_dantoc) > 0) { ?>
-                                                                            <?php foreach ($data_list_dantoc as $row_dantoc) { ?>
-                                                                                <option <?php if ($row_dantoc->id == $dan_toc) echo "selected" ?>
-                                                                                    value="<?php echo $row_dantoc->id ?>"><?php echo $row_dantoc->name ?>
-                                                                                </option>
-                                                                            <?php } ?>
-                                                                        <?php } ?>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Tôn giáo</div>
-
-                                                                <div class="profile-info-value">
-                                                                    <select name="ton_giao"
-                                                                            class="chosen-select form-control valid"
-                                                                            id="form-field-select-3"
-                                                                            data-placeholder="Tôn giáo ..."
-                                                                            style="display: none;width: 10px">
-                                                                        <?php if (count($data_list_tongiao) > 0) { ?>
-                                                                            <?php foreach ($data_list_tongiao as $row_tongiao) { ?>
-                                                                                <option <?php if ($row_tongiao->id == $ton_giao) echo "selected" ?>
-                                                                                    value="<?php echo $row_tongiao->id ?>"><?php echo $row_tongiao->name ?>
-                                                                                </option>
-                                                                            <?php } ?>
-                                                                        <?php } ?>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Hộ khẩu TT </div>
-
-                                                                <div class="profile-info-value">
-                                                                    <div>
-                                                                        <span class="input-icon width_100">
-												<input value="<?php echo $ho_khau_tt ?>" name="ho_khau_tt" type="text"
-                                                       id="input_ho_khau_tt"
-                                                       class="width_100 valid" required>
-												<i class="ace-icon fa fa-qrcode blue"></i>
-
-											</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="profile-info-row">
-                                                                <div class="profile-info-name"> Bằng cấp</div>
-
-                                                                <div class="profile-info-value">
-                                                                    <select name="bang_cap"
-                                                                            class="chosen-select form-control valid"
-                                                                            id="form-field-select-3"
-                                                                            data-placeholder="Bằng cấp ..."
-                                                                            style="display: none;width: 10px">
-                                                                        <?php if (count($data_list_bang_cap) > 0) { ?>
-                                                                            <?php foreach ($data_list_bang_cap as $row_bang_cap) { ?>
-                                                                                <option <?php if ($row_bang_cap->id == $bang_cap) echo "selected" ?>
-                                                                                    value="<?php echo $row_bang_cap->id ?>"><?php echo $row_bang_cap->name ?>
-                                                                                </option>
-                                                                            <?php } ?>
-                                                                        <?php } ?>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="space-6"></div>
-
-
-                                                    </div>
-
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
 

@@ -257,22 +257,43 @@ jQuery(function ($) {
     $('body').on("click",'#next_edit_user', function () {
       var stt=$('.steps .active').attr('data-step');
       if(stt<4){
-          var stt_before=parseInt(stt)+1;
-          $('#step_edit_'+stt).removeClass('active');
-          $('#step_edit_'+stt_before).addClass('active');
-
-          $('#step_tab_'+stt).removeClass('active');
-          $('#step_tab_'+stt).addClass('complete');
-          $('#step_tab_'+stt).attr('complete_value','complete');
-
-          //$('#step_tab_'+stt_before).removeClass();
-          $('#step_tab_'+stt_before).addClass('active');
-          if(stt_before>1){
-              $( "#prev_edit_user" ).prop( "disabled", false );
+          var error_free=true;
+          if(stt==2||stt==3){
+              $('#step_edit_'+stt+' input').each(function() {
+                  var name=$(this).attr("name");
+                  if(name!="mr"&&name!="file-format"&&name!="avatar"&&name!="user_role"&&name!=undefined)
+                  {
+                     var element=$("#input_"+name);
+                     var error=$("#error_"+name);
+                     var valid=element.hasClass("valid");
+                     if (valid==false){
+                         element.addClass("input-error").removeClass("valid");
+                         error.show();
+                         error_free=false
+                     }
+                 }
+              });
           }
+
+          if(error_free==true){
+              var stt_before=parseInt(stt)+1;
+              $('#step_edit_'+stt).removeClass('active');
+              $('#step_edit_'+stt_before).addClass('active');
+
+              $('#step_tab_'+stt).removeClass('active');
+              $('#step_tab_'+stt).addClass('complete');
+              $('#step_tab_'+stt).attr('complete_value','complete');
+
+              //$('#step_tab_'+stt_before).removeClass();
+              $('#step_tab_'+stt_before).addClass('active');
+              if(stt_before>1){
+                  $( "#prev_edit_user" ).prop( "disabled", false );
+              }
+          }
+
       }
         else{
-
+          $( "#submit_form_profile" ).submit();
       }
     });
     $('body').on("click",'#prev_edit_user', function () {

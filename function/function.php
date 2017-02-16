@@ -8,7 +8,7 @@
 require_once DIR . '/model/userService.php';
 require_once DIR . '/common/class.phpmailer.php';
 require_once(DIR . "/common/Mail.php");
-require_once(DIR."/common/hash_pass.php");
+require_once(DIR . "/common/hash_pass.php");
 
 function _returnCheckPermison($module_id = 0, $form_id = 0, $action_id = 0)
 {
@@ -109,11 +109,10 @@ function _returnCheckExitUser()
     }
 }
 
-function _returnLinkDangNhap($mess='')
+function _returnLinkDangNhap($mess = '')
 {
-    if($mess!='')
-    {
-        $_SESSION['mess_login']=$mess;
+    if ($mess != '') {
+        $_SESSION['mess_login'] = $mess;
     }
     return SITE_NAME . '/dang-nhap.html';
 }
@@ -309,15 +308,20 @@ function _returnQuyen($stt)
 
 
 }
+
 function _returnFolderRoot()
 {
-    return $_SERVER['DOCUMENT_ROOT'].'/manage_mix';
+    return $_SERVER['DOCUMENT_ROOT'] . '/manage_mix';
 }
-function _returnmakedirs($dirpath, $mode=0777) {
+
+function _returnmakedirs($dirpath, $mode = 0777)
+{
     return is_dir($dirpath) || mkdir($dirpath, $mode, true);
 }
-function _returnUploadImg($target_dir, $file_name, $link_img){
-    if (isset($_FILES[$file_name])&&$_FILES[$file_name]["name"]!='') {
+
+function _returnUploadImg($target_dir, $file_name, $link_img)
+{
+    if (isset($_FILES[$file_name]) && $_FILES[$file_name]["name"] != '') {
         //    print_r($_FILES['avatar']);
         _returnmakedirs($target_dir, $mode = 0777);
         $temp = explode(".", $_FILES[$file_name]["name"]);
@@ -369,13 +373,13 @@ function _returnUploadImg($target_dir, $file_name, $link_img){
 //            echo "Sorry, there was an error uploading your file.";
             }
         }
-    }
-    else{
+    } else {
         return 0;
     }
 }
 
-function _returnCreateUser($check_redict){
+function _returnCreateUser($check_redict)
+{
     if (isset($_POST['user_code']) && isset($_POST['full_name']) && isset($_POST['birthday']) && isset($_POST['email_user']) && isset($_POST['address_user']) && isset($_POST['user_name']) && isset($_POST['password']) && isset($_POST['password_confirm'])) {
         $user_code = _returnPostParamSecurity('user_code');
         $full_name = _returnPostParamSecurity('full_name');
@@ -391,133 +395,118 @@ function _returnCreateUser($check_redict){
 
         $ngay_lam_viec = _returnPostParamSecurity('user_ngay_lam_viec');
         $ngay_chinh_thuc = _returnPostParamSecurity('user_ngay_chinh_thuc');
-        if($user_role==="on"||$user_role===1)
-        {
-            $user_role=1;
+        if ($user_role === "on" || $user_role === 1) {
+            $user_role = 1;
+        } else {
+            $user_role = 0;
         }
-        else{
-            $user_role=0;
-        }
-        $avatar='';
+        $avatar = '';
 
         if ($user_code != "" && $full_name != '' && $input_birthday != '' && $email_user != '' && $user_name != '' && $password != '' && $password_confirm != '') {
-            if(isset($_POST['check_edit'])&&isset($_POST['id_edit'])&&$_POST['check_edit']==="edit"&&$_POST['id_edit']!='')
-            {
-                $id=_return_mc_decrypt(_returnPostParamSecurity('id_edit'), ENCRYPTION_KEY);
-                $data_user_update=user_getById($id);
-                if(count($data_user_update)>0)
-                {
-                    $array =  (array) $data_user_update[0];
-                    $new_obj=new user($array);
-                    $new_obj->name=$full_name;
-                    $new_obj->birthday=date("Y-m-d", strtotime($input_birthday));
-                    $new_obj->address=$address_user;
-                    $new_obj->user_role=$user_role;
-                    if($ngay_lam_viec!=''){
-                        $new_obj->ngay_lam_viec=date("Y-m-d", strtotime($ngay_lam_viec));
+            if (isset($_POST['check_edit']) && isset($_POST['id_edit']) && $_POST['check_edit'] === "edit" && $_POST['id_edit'] != '') {
+                $id = _return_mc_decrypt(_returnPostParamSecurity('id_edit'), ENCRYPTION_KEY);
+                $data_user_update = user_getById($id);
+                if (count($data_user_update) > 0) {
+                    $array = (array)$data_user_update[0];
+                    $new_obj = new user($array);
+                    $new_obj->name = $full_name;
+                    $new_obj->birthday = date("Y-m-d", strtotime($input_birthday));
+                    $new_obj->address = $address_user;
+                    $new_obj->user_role = $user_role;
+                    if ($ngay_lam_viec != '') {
+                        $new_obj->ngay_lam_viec = date("Y-m-d", strtotime($ngay_lam_viec));
                     }
-                    if($ngay_chinh_thuc!=''){
-                        $new_obj->ngay_chinh_thuc=date("Y-m-d", strtotime($ngay_chinh_thuc));
+                    if ($ngay_chinh_thuc != '') {
+                        $new_obj->ngay_chinh_thuc = date("Y-m-d", strtotime($ngay_chinh_thuc));
                     }
-                    if($phone!="")
-                    {
-                        $new_obj->phone=$phone;
+                    if ($phone != "") {
+                        $new_obj->phone = $phone;
                     }
-                    if($mr!=''){
-                        $new_obj->mr=$mr;
+                    if ($mr != '') {
+                        $new_obj->mr = $mr;
                     }
 
-                    $new_obj->updated=_returnGetDateTime();
-                    $new_obj->id=$id;
+                    $new_obj->updated = _returnGetDateTime();
+                    $new_obj->id = $id;
                     user_update($new_obj);
-                    if($check_redict==1)
-                    {
-                        redict(SITE_NAME.'/nhan-vien/');
-                    }
-                    else{
+                    if ($check_redict == 1) {
+                        redict(SITE_NAME . '/nhan-vien/');
+                    } else {
                         return 1;
                     }
                 }
-            }
-            else{
+            } else {
 
-                if($password!=$password_confirm){
+                if ($password != $password_confirm) {
                     echo '<script>alert("Hai mật khẩu không khớp")</script>';
-                }else{
-                    $dk_check_user="user_name='".$user_name."'";
-                    $dk_check_user.="or user_email ='".$email_user."'";
-                    $dk_check_user.=" or user_email ='".$user_code."'";
-                    $data_check_exist_user=user_getByTop('',$dk_check_user,'id desc');
-                    if(count($data_check_exist_user)>0)
-                    {
-                        if($check_redict==1)
-                        {
+                } else {
+                    $dk_check_user = "user_name='" . $user_name . "'";
+                    $dk_check_user .= "or user_email ='" . $email_user . "'";
+                    $dk_check_user .= " or user_email ='" . $user_code . "'";
+                    $data_check_exist_user = user_getByTop('', $dk_check_user, 'id desc');
+                    if (count($data_check_exist_user) > 0) {
+                        if ($check_redict == 1) {
                             echo "<script>alert('Mã nhân viên, tên đăng nhập, email đã tồn tại trong hệ thống, vui lòng điền lại thông tin khác')</script>";
-                        }
-                        else{
+                        } else {
                             return 'Mã nhân viên, tên đăng nhập, email đã tồn tại trong hệ thống, vui lòng điền lại thông tin khác';
                         }
-                    }else{
+                    } else {
                         $folder = LocDau($email_user);
                         $target_dir = _returnFolderRoot() . "/view/default/themes/uploads/" . $folder . '/';
-                        $avatar=_returnUploadImg($target_dir, 'avatar',"/view/default/themes/uploads/" . $folder . '/');
-                        if($avatar===0)
-                        {
-                            $avatar='';
+                        $avatar = _returnUploadImg($target_dir, 'avatar', "/view/default/themes/uploads/" . $folder . '/');
+                        if ($avatar === 0) {
+                            $avatar = '';
                         }
                         $dangky = new user();
-                        $dangky->name=$full_name;
-                        $dangky->user_code=$user_code;
-                        $dangky->user_name=$user_name;
-                        $dangky->mr=$mr;
-                        $dangky->birthday=date("Y-m-d", strtotime($input_birthday));
-                        $dangky->user_email=$email_user;
-                        $dangky->address=$address_user;
-                        $Pass=hash_pass($password);
-                        $dangky->password=$Pass;
-                        $dangky->created=_returnGetDateTime();
-                        $dangky->updated=_returnGetDateTime();
-                        $dangky->login_two_steps=0;
-                        $dangky->avatar=$avatar;
-                        $dangky->status=1;
-                        $dangky->phone=$phone;
-                        $dangky->user_role=$user_role;
-                        $dangky->created_by=$_SESSION['user_id'];
-                        $dangky->login_two_steps=1;
-                        if($ngay_lam_viec!=''){
-                            $dangky->ngay_lam_viec=date("Y-m-d", strtotime($ngay_lam_viec));
+                        $dangky->name = $full_name;
+                        $dangky->user_code = $user_code;
+                        $dangky->user_name = $user_name;
+                        $dangky->mr = $mr;
+                        $dangky->birthday = date("Y-m-d", strtotime($input_birthday));
+                        $dangky->user_email = $email_user;
+                        $dangky->address = $address_user;
+                        $Pass = hash_pass($password);
+                        $dangky->password = $Pass;
+                        $dangky->created = _returnGetDateTime();
+                        $dangky->updated = _returnGetDateTime();
+                        $dangky->login_two_steps = 0;
+                        $dangky->avatar = $avatar;
+                        $dangky->status = 1;
+                        $dangky->phone = $phone;
+                        $dangky->user_role = $user_role;
+                        $dangky->created_by = $_SESSION['user_id'];
+                        $dangky->login_two_steps = 1;
+                        if ($ngay_lam_viec != '') {
+                            $dangky->ngay_lam_viec = date("Y-m-d", strtotime($ngay_lam_viec));
                         }
-                        if($ngay_chinh_thuc!=''){
-                            $dangky->ngay_chinh_thuc=date("Y-m-d", strtotime($ngay_chinh_thuc));
+                        if ($ngay_chinh_thuc != '') {
+                            $dangky->ngay_chinh_thuc = date("Y-m-d", strtotime($ngay_chinh_thuc));
                         }
                         user_insert($dangky);
                         $subject = "Thông báo đăng ký tài khoản tại hệ thống quản lý MIXTOURIST";
-                        $message='';
-                        if($mr=='')
-                        {
-                            $name_full_mer=$full_name;
-                        }else{
-                            $name_full_mer=$mr.'.'.$full_name;
+                        $message = '';
+                        if ($mr == '') {
+                            $name_full_mer = $full_name;
+                        } else {
+                            $name_full_mer = $mr . '.' . $full_name;
                         }
 
-                        $message .='<div style="float: left; width: 100%">
-                            <p>Xin chào: <span style="color: #132fff; font-weight: bold"> '.$name_full_mer.'</span>!</p>
+                        $message .= '<div style="float: left; width: 100%">
+                            <p>Xin chào: <span style="color: #132fff; font-weight: bold"> ' . $name_full_mer . '</span>!</p>
                             <p>Chúng tôi đã tạo thành công tài khoản của bạn, giờ đây bạn có thể truy cập và sử dụng hệ thống quản lý MIXTOURIST</p>
-                            <p>Link đăng nhập: <span style="color: #132fff; font-weight: bold">'.SITE_NAME.'/dang-nhap.html</span>,</p>
-                            <p>Mã nhân viên: <span style="color: #132fff; font-weight: bold">'.$user_code.'</span>,</p>
-                            <p>Email: <span style="color: #132fff; font-weight: bold">'.$email_user.'</span>,</p>
-                            <p>Username: <span style="color: #132fff; font-weight: bold">'.$user_name.'</span>,</p>
-                            <p>Mật khẩu: <span style="color: #132fff; font-weight: bold">'.$password.'</span>,</p>
-                            <p>Ngày sinh: <span style="color: #132fff; font-weight: bold">'.$input_birthday.'</span>,</p>
-                            <p>Địa chỉ: <span style="color: #132fff; font-weight: bold">'.$address_user.'</span>,</p>
-                            <p>Ngày gửi: <span style="color: #132fff; font-weight: bold">'.date("d-m-Y H:i:s", strtotime(_returnGetDateTime())).'</span>,</p>
+                            <p>Link đăng nhập: <span style="color: #132fff; font-weight: bold">' . SITE_NAME . '/dang-nhap.html</span>,</p>
+                            <p>Mã nhân viên: <span style="color: #132fff; font-weight: bold">' . $user_code . '</span>,</p>
+                            <p>Email: <span style="color: #132fff; font-weight: bold">' . $email_user . '</span>,</p>
+                            <p>Username: <span style="color: #132fff; font-weight: bold">' . $user_name . '</span>,</p>
+                            <p>Mật khẩu: <span style="color: #132fff; font-weight: bold">' . $password . '</span>,</p>
+                            <p>Ngày sinh: <span style="color: #132fff; font-weight: bold">' . $input_birthday . '</span>,</p>
+                            <p>Địa chỉ: <span style="color: #132fff; font-weight: bold">' . $address_user . '</span>,</p>
+                            <p>Ngày gửi: <span style="color: #132fff; font-weight: bold">' . date("d-m-Y H:i:s", strtotime(_returnGetDateTime())) . '</span>,</p>
                         </div>';
                         SendMail($email_user, $message, $subject);
-                        if($check_redict==1)
-                        {
-                            redict(SITE_NAME.'/nhan-vien/');
-                        }
-                        else{
+                        if ($check_redict == 1) {
+                            redict(SITE_NAME . '/nhan-vien/');
+                        } else {
                             return 1;
                         }
 
@@ -525,40 +514,117 @@ function _returnCreateUser($check_redict){
                 }
             }
 
-        }else{
-            if($check_redict==1)
-            {
+        } else {
+            if ($check_redict == 1) {
                 echo '<script>alert("Bạn vui lòng điền đầy đủ thông tin đăng ký")</script>';
-            }
-            else{
+            } else {
                 return 'Bạn vui lòng điền đầy đủ thông tin đăng ký';
             }
 
         }
+    }else{
+        echo '<script>alert("Bạn vui lòng điền đầy đủ thông tin bắt buộc")</script>';
     }
 }
 
-function _deleteSubmitForm($model, $action_delete){
-    if(isset($_POST['check_box_action'])){
-        $check_box_action=$_POST['check_box_action'];
-        if(count($check_box_action)>0){
-            foreach($check_box_action as $val){
-                $id=_return_mc_decrypt($val, ENCRYPTION_KEY);
-                $data=$model.'_getById'.($id);
-                if(count($data)>0)
-                {
-                    $new_obj= new $model();
-                    $new_obj->id=$id;
+function _deleteSubmitForm($model, $action_delete)
+{
+    if (isset($_POST['check_box_action'])) {
+        $check_box_action = $_POST['check_box_action'];
+        if (count($check_box_action) > 0) {
+            foreach ($check_box_action as $val) {
+                $id = _return_mc_decrypt($val, ENCRYPTION_KEY);
+                $data = $model . '_getById' . ($id);
+                if (count($data) > 0) {
+                    $new_obj = new $model();
+                    $new_obj->id = $id;
                     $action_delete($new_obj);
                 }
             }
         }
     }
 }
-function _returnDataEditAdd($data,$field){
-    if(isset($data[0]->$field)){
+
+function _returnDataEditAdd($data, $field)
+{
+    if (isset($data[0]->$field)) {
         return $data[0]->$field;
-    }else{
+    } else {
         return '';
     }
+}
+
+function _returnInput($name, $value = '', $valid = '', $icon_input = '', $disabled = '', $mess_err = '', $width = '')
+{
+    return '  <span class="input-icon width_100" style="' . $width . '">
+                                                    <input ' . $disabled . ' name="' . $name . '" type="text" id="input_' . $name . '"
+                                                           value="' . $value . '"
+                                                           class="width_100 ' . $valid . '" >
+                                                    <i class="ace-icon fa fa-' . $icon_input . ' blue"></i>
+                                                    <i id="icon_error_' . $name . '" style="display: none"
+                                                       class="ace-icon fa fa-times-circle icon-right error-color "
+                                                       data-toggle="ggtooltip" data-title="" data-trigger="hover"
+                                                       data-placement="bottom" data-backcolor="red"
+                                                       data-textcolor="#ffffff"
+                                                       title=""></i>
+                                                    <i id="icon_success_' . $name . '" style="display: none"
+                                                       class="ace-icon fa fa-check-circle icon-right success-color"
+                                                       data-toggle="ggtooltip" data-title="" data-trigger="hover"
+                                                       data-placement="bottom" data-backcolor="green"
+                                                       data-textcolor="#000000" title="' . $mess_err . '"></i>
+                                                </span>
+                                                                    <label style="display: none"
+                                                                           class="error-color  error-color-size"
+                                                                           id="error_' . $name . '">' . $mess_err . '</label>';
+}
+
+function _returnInputDate($name, $value = '', $valid = '', $disabled = '', $mess_err = '', $width = '')
+{
+    return '<div '.$disabled.'  class="input-group" style="'.$width.'">
+                                                                            <input value="'.$value.'"
+                                                                                   class="form-control date-picker width_100 '.$valid.'"
+                                                                                   id="input_'.$name.'" name="'.$name.'"
+                                                                                   required
+                                                                                   type="text"
+                                                                                   data-date-format="dd-mm-yyyy">
+																	<span class="input-group-addon date_icon">
+																		<i class="fa fa-calendar bigger-110"></i>
+																	</span>
+
+                                                                        </div>
+                                                                        <label style="display: none"
+                                                                               class="error-color  error-color-size"
+                                                                               id="error_birthday">'.$mess_err.'</label>';
+}
+
+function _returnInputCheck($name, $valid = '', $disabled = '', $checked = ''){
+    return ' <label>
+                                                                        <input '.$checked.'
+                                                                            id="input_'.$name.'" '.$disabled.'
+                                                                            name="'.$name.'"
+                                                                            class="ace ace-switch ace-switch-6 '.$valid.'"
+                                                                            type="checkbox">
+                                                                        <span class="lbl"></span>
+                                                                    </label>';
+}
+
+function _returnInputSelect($name,$value,$data_list, $valid = '', $name_title){
+    $string='<select name="'.$name.'"
+                                                                            class="chosen-select form-control '.$valid.' '.$name.'"
+                                                                            id="form-field-select-3"
+                                                                            data-placeholder="'.$name_title.'"
+                                                                            style="display: none;width: 10px">';
+
+                                                                        if (count($data_list) > 0) {
+                                                                            foreach ($data_list as $row) {
+                                                                                $selectted='';
+                                                                                if($row->id==$value)
+                                                                                {
+                                                                                    $selectted='selected';
+                                                                                }
+                                                                                $string.='<option '.$selectted.' value="'.$row->id.'">'.$row->name.'</option>';
+                                                                            }
+                                                                        }
+$string.=' </select>';
+    return $string;
 }

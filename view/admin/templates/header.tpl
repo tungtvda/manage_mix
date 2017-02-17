@@ -92,6 +92,9 @@
                         <li><a href="{SITE-NAME}/controller/admin/customer_resources_to.php">Nguồn khách hàng</a></li>
                     </ul>
                 </li>
+                <li class="" ><a href="{SITE-NAME}/controller/admin/httt.php"><span class="icon-pencil"></span> Hình thức thanh toán</a></li>
+                <li class="" ><a href="{SITE-NAME}/controller/admin/tien_te.php"><span class="icon-pencil"></span> Tiền tệ</a></li>
+                <li class="" ><a href="{SITE-NAME}/controller/admin/nguon_tour.php"><span class="icon-pencil"></span> Nguồn tour</a></li>
             </ul>
         </div>
         <!--leftmenu-->

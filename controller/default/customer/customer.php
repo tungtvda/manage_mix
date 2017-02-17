@@ -19,7 +19,7 @@ $data['title']='Danh sách khách hàng';
 $count=8;
 _returnCreateUser(1);
 _deleteSubmitForm('user', 'user_delete');
-$data['list']=customer_getByTop('','','updated desc');
+$data['list']=customer_getByTop('','status=1','updated desc');
 $data['module_valid'] = "customer";
 $data['title_print'] = "Danh sách khách hàng";
 show_header($data);

@@ -380,32 +380,21 @@ function _returnUploadImg($target_dir, $file_name, $link_img)
 
 function _returnCreateUser($check_redict)
 {
-    if (isset($_POST['user_code']) && isset($_POST['full_name']) && isset($_POST['birthday']) && isset($_POST['email_user']) && isset($_POST['address_user']) && isset($_POST['user_name']) && isset($_POST['password']) && isset($_POST['password_confirm'])) {
-        $user_code = _returnPostParamSecurity('user_code');
-        $full_name = _returnPostParamSecurity('full_name');
+    if (isset($_POST['name']) && isset($_POST['code']) && isset($_POST['mr']) && isset($_POST['birthday']) && isset($_POST['email']) && isset($_POST['address']) && isset($_POST['phone']) && isset($_POST['mobi'])) {
+        $name = _returnPostParamSecurity('name');
+        $code = _returnPostParamSecurity('code');
         $mr = _returnPostParamSecurity('mr');
-        $input_birthday = _returnPostParamSecurity('birthday');
-        $email_user = _returnPostParamSecurity('email_user');
-        $user_name = _returnPostParamSecurity('user_name');
-        $address_user = _returnPostParamSecurity('address_user');
-        $password = _returnPostParamSecurity('password');
-        $password_confirm = _returnPostParamSecurity('password_confirm');
-        $phone = _returnPostParamSecurity('user_phone');
-        $user_role = _returnPostParamSecurity('user_role');
-
-        $ngay_lam_viec = _returnPostParamSecurity('user_ngay_lam_viec');
-        $ngay_chinh_thuc = _returnPostParamSecurity('user_ngay_chinh_thuc');
-        if ($user_role === "on" || $user_role === 1) {
-            $user_role = 1;
-        } else {
-            $user_role = 0;
-        }
+        $birthday = _returnPostParamSecurity('birthday');
+        $email = _returnPostParamSecurity('email');
+        $address = _returnPostParamSecurity('address');
+        $phone = _returnPostParamSecurity('phone');
+        $mobi = _returnPostParamSecurity('mobi');
         $avatar = '';
 
-        if ($user_code != "" && $full_name != '' && $input_birthday != '' && $email_user != '' && $user_name != '' && $password != '' && $password_confirm != '') {
+        if ($name != "" && $code != '' && $email != '' && $address != '' && $phone != '' && $mobi != '') {
             if (isset($_POST['check_edit']) && isset($_POST['id_edit']) && $_POST['check_edit'] === "edit" && $_POST['id_edit'] != '') {
                 $id = _return_mc_decrypt(_returnPostParamSecurity('id_edit'), ENCRYPTION_KEY);
-                $data_user_update = user_getById($id);
+                $data_user_update = customer_getById($id);
                 if (count($data_user_update) > 0) {
                     $array = (array)$data_user_update[0];
                     $new_obj = new user($array);
@@ -443,61 +432,57 @@ function _returnCreateUser($check_redict)
                 }
             } else {
 
-                if ($password != $password_confirm) {
-                    echo '<script>alert("Hai mật khẩu không khớp")</script>';
-                } else {
-                    $dk_check_user = "user_name='" . $user_name . "'";
-                    $dk_check_user .= "or user_email ='" . $email_user . "'";
-                    $dk_check_user .= " or user_email ='" . $user_code . "'";
-                    $data_check_exist_user = user_getByTop('', $dk_check_user, 'id desc');
-                    if (count($data_check_exist_user) > 0) {
-                        if ($check_redict == 1) {
-                            echo "<script>alert('Mã nhân viên, tên đăng nhập, email đã tồn tại trong hệ thống, vui lòng điền lại thông tin khác')</script>";
-                        } else {
-                            return 'Mã nhân viên, tên đăng nhập, email đã tồn tại trong hệ thống, vui lòng điền lại thông tin khác';
-                        }
+                $dk_check_user = "code='" . $code . "'";
+                $dk_check_user .= "or email ='" . $email . "'";
+                $data_check_exist_user = customer_getByTop('', $dk_check_user, 'id desc');
+                if (count($data_check_exist_user) > 0) {
+                    if ($check_redict == 1) {
+                        echo "<script>alert('Mã khách hàng, email đã tồn tại trong hệ thống, vui lòng điền lại thông tin khác')</script>";
                     } else {
-                        $folder = LocDau($email_user);
-                        $target_dir = _returnFolderRoot() . "/view/default/themes/uploads/users/". $folder . '/';
-                        $avatar = _returnUploadImg($target_dir, 'avatar', "/view/default/themes/uploads/users/". $folder . '/');
-                        if ($avatar === 0) {
-                            $avatar = '';
-                        }
-                        $dangky = new user();
-                        $dangky->name = $full_name;
-                        $dangky->user_code = $user_code;
-                        $dangky->user_name = $user_name;
-                        $dangky->mr = $mr;
-                        $dangky->birthday = date("Y-m-d", strtotime($input_birthday));
-                        $dangky->user_email = $email_user;
-                        $dangky->address = $address_user;
-                        $Pass = hash_pass($password);
-                        $dangky->password = $Pass;
-                        $dangky->created = _returnGetDateTime();
-                        $dangky->updated = _returnGetDateTime();
-                        $dangky->login_two_steps = 0;
-                        $dangky->avatar = $avatar;
-                        $dangky->status = 1;
-                        $dangky->phone = $phone;
-                        $dangky->user_role = $user_role;
-                        $dangky->created_by = $_SESSION['user_id'];
-                        $dangky->login_two_steps = 1;
-                        if ($ngay_lam_viec != '') {
-                            $dangky->ngay_lam_viec = date("Y-m-d", strtotime($ngay_lam_viec));
-                        }
-                        if ($ngay_chinh_thuc != '') {
-                            $dangky->ngay_chinh_thuc = date("Y-m-d", strtotime($ngay_chinh_thuc));
-                        }
-                        user_insert($dangky);
-                        $subject = "Thông báo đăng ký tài khoản tại hệ thống quản lý MIXTOURIST";
-                        $message = '';
-                        if ($mr == '') {
-                            $name_full_mer = $full_name;
-                        } else {
-                            $name_full_mer = $mr . '.' . $full_name;
-                        }
+                        return 'Mã khách hàng, tên đăng nhập, email đã tồn tại trong hệ thống, vui lòng điền lại thông tin khác';
+                    }
+                } else {
+                    $folder = LocDau($email);
+                    $target_dir = _returnFolderRoot() . "/view/default/themes/uploads/customer/". $folder . '/';
+                    $avatar = _returnUploadImg($target_dir, 'avatar', "/view/default/themes/uploads/customer/". $folder . '/');
+                    if ($avatar === 0) {
+                        $avatar = '';
+                    }
+                    $dangky = new user();
+                    $dangky->name = $full_name;
+                    $dangky->user_code = $user_code;
+                    $dangky->user_name = $user_name;
+                    $dangky->mr = $mr;
+                    $dangky->birthday = date("Y-m-d", strtotime($input_birthday));
+                    $dangky->user_email = $email_user;
+                    $dangky->address = $address_user;
+                    $Pass = hash_pass($password);
+                    $dangky->password = $Pass;
+                    $dangky->created = _returnGetDateTime();
+                    $dangky->updated = _returnGetDateTime();
+                    $dangky->login_two_steps = 0;
+                    $dangky->avatar = $avatar;
+                    $dangky->status = 1;
+                    $dangky->phone = $phone;
+                    $dangky->user_role = $user_role;
+                    $dangky->created_by = $_SESSION['user_id'];
+                    $dangky->login_two_steps = 1;
+                    if ($ngay_lam_viec != '') {
+                        $dangky->ngay_lam_viec = date("Y-m-d", strtotime($ngay_lam_viec));
+                    }
+                    if ($ngay_chinh_thuc != '') {
+                        $dangky->ngay_chinh_thuc = date("Y-m-d", strtotime($ngay_chinh_thuc));
+                    }
+                    user_insert($dangky);
+                    $subject = "Thông báo đăng ký tài khoản tại hệ thống quản lý MIXTOURIST";
+                    $message = '';
+                    if ($mr == '') {
+                        $name_full_mer = $full_name;
+                    } else {
+                        $name_full_mer = $mr . '.' . $full_name;
+                    }
 
-                        $message .= '<div style="float: left; width: 100%">
+                    $message .= '<div style="float: left; width: 100%">
                             <p>Xin chào: <span style="color: #132fff; font-weight: bold"> ' . $name_full_mer . '</span>!</p>
                             <p>Chúng tôi đã tạo thành công tài khoản của bạn, giờ đây bạn có thể truy cập và sử dụng hệ thống quản lý MIXTOURIST</p>
                             <p>Link đăng nhập: <span style="color: #132fff; font-weight: bold">' . SITE_NAME . '/dang-nhap.html</span>,</p>
@@ -509,14 +494,13 @@ function _returnCreateUser($check_redict)
                             <p>Địa chỉ: <span style="color: #132fff; font-weight: bold">' . $address_user . '</span>,</p>
                             <p>Ngày gửi: <span style="color: #132fff; font-weight: bold">' . date("d-m-Y H:i:s", strtotime(_returnGetDateTime())) . '</span>,</p>
                         </div>';
-                        SendMail($email_user, $message, $subject);
-                        if ($check_redict == 1) {
-                            redict(SITE_NAME . '/nhan-vien/');
-                        } else {
-                            return 1;
-                        }
-
+                    SendMail($email_user, $message, $subject);
+                    if ($check_redict == 1) {
+                        redict(SITE_NAME . '/nhan-vien/');
+                    } else {
+                        return 1;
                     }
+
                 }
             }
 

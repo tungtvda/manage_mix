@@ -13,6 +13,9 @@ function view_valid_form($data = array())
         case 'user':
             require_once DIR . '/view/default/template/module/user/valid.php';
             break;
+        case 'customer':
+            require_once DIR . '/view/default/template/module/customer/valid.php';
+            break;
     }
 
 }

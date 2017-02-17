@@ -309,7 +309,7 @@
                         </li>
 
                         <li>
-                            <a href="<?php echo SITE_NAME?>/profile.html">
+                            <a href="<?php echo SITE_NAME?>/profile.html?id=<?php echo _return_mc_encrypt($_SESSION['user_id'], ENCRYPTION_KEY); ?>">
                                 <i class="ace-icon fa fa-user"></i>
                                 Profile
                             </a>

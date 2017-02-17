@@ -12,9 +12,11 @@ RewriteRule ^dang-xuat.html controller/default/logout.php
 RewriteRule ^xac-nhan.html controller/default/confirm_login.php
 RewriteRule ^check-login.html controller/default/check_login.php
 RewriteRule ^doi-mat-khau-login/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/$ controller/default/doimatkhau_login.php?param1=$1&param2=$2&param3=$3&param4=$4&param5=$5
-RewriteRule ^nhan-vien/$ controller/default/user/user.php
+
 RewriteRule ^update-status/$ controller/default/function_share/update_status.php
 RewriteRule ^get-detail-ajax/$ controller/default/function_share/get_detail.php
+
+RewriteRule ^nhan-vien/$ controller/default/user/user.php
 RewriteRule ^nhan-vien/xoa$ controller/default/user/delete.php
 RewriteRule ^nhan-vien/them-moi controller/default/user/themmoi.php
 RewriteRule ^nhan-vien/sua controller/default/user/themmoi.php
@@ -25,3 +27,4 @@ RewriteRule ^tree-phan-quyen$ controller/default/user/tree.php
 RewriteRule ^update-phan-quyen$ controller/default/user/phanquyen_update.php
 RewriteRule ^profile.html$ controller/default/user/hoso.php
 
+RewriteRule ^khach-hang/$ controller/default/customer/customer.php

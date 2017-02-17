@@ -115,8 +115,8 @@ if(isset($_POST['birthday'])&&isset($_POST['address_user'])&&isset($_POST['full_
         $new_obj->updated = _returnGetDateTime();
         $new_obj->id = $_SESSION['user_id'];
         $folder = LocDau($data_user_update[0]->user_email);
-        $target_dir = _returnFolderRoot() . "/view/default/themes/uploads/" . $folder . '/';
-        $avatar = _returnUploadImg($target_dir, 'avatar', "/view/default/themes/uploads/" . $folder . '/');
+        $target_dir = _returnFolderRoot() . "/view/default/themes/uploads/users/" . $folder . '/';
+        $avatar = _returnUploadImg($target_dir, 'avatar', "/view/default/themes/uploads/users/" . $folder . '/');
         if ($avatar != '') {
             $new_obj->avatar=$avatar;
         }

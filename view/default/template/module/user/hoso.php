@@ -32,7 +32,6 @@
                         <span class="bigger-110">Hồ sơ</span>
                     </a>
                 </li>
-
                 <li>
                     <a data-toggle="tab" href="matkhau" data-target="sent" class="tab_list">
                         <i class="red ace-icon fa fa-key bigger-130"></i>
@@ -161,7 +160,7 @@
 
                                         <a href="#" class="btn btn-link">
                                             <i class="ace-icon fa fa-globe bigger-125 blue"></i>
-                                            www.alexdoe.com
+                                            mixtourist.com.vn
                                         </a>
                                     </div>
 

@@ -308,7 +308,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="blue bigger" id="title_form">Tạo mới nhân viên</h4>
+                        <h4 class="blue bigger" id="title_form">Tạo mới khách hàng</h4>
 
                     </div>
                     <form id="submit_form" role="form" action="" method="post" enctype="multipart/form-data">
@@ -321,41 +321,16 @@
                                             <img id="show_img_upload" class="img-responsive" no-avatar="<?php echo SITE_NAME ?>/view/default/themes/images/no-image.jpg"
                                                  src="<?php echo SITE_NAME ?>/view/default/themes/images/no-image.jpg">
                                         </div>
-                                        <input accept="image/*" name="avatar" type="file" id="id-input-file-2" onchange="loadFile(event)" />
+                                        <input class="valid" accept="image/*" name="avatar" type="file" id="id-input-file-2" onchange="loadFile(event)" />
                                     </div>
                                 </div>
                                 <input class="valid" hidden name="check_edit" id="input_check_edit" value="">
                                 <input class="valid" hidden name="id_edit" id="input_id_edit" value="">
                                 <div class="col-xs-12 col-sm-8">
                                     <div class="form-group" style="float: left; width: 100%">
-
-
-                                        <div style="float: left;width: 66%" >
-                                            <label for="form-field-select-3">Mã nhân viên <span style="color: red">*</span></label>
-                                           <span class="input-icon width_100">
-												<input readonly name="user_code" type="text" id="input_user_code"
-                                                       class="width_100" required>
-												<i class="ace-icon fa fa-qrcode blue"></i>
-                                                <i id="user_code_error_icon" style="display: none"
-                                                   class="ace-icon fa fa-times-circle icon-right error-color "
-                                                   data-toggle="ggtooltip" data-title="" data-trigger="hover"
-                                                   data-placement="bottom" data-backcolor="red" data-textcolor="#ffffff"
-                                                   title=""></i>
-                                                <i id="user_code_success_icon" style="display: none"
-                                                   class="ace-icon fa fa-check-circle icon-right success-color"
-                                                   data-toggle="ggtooltip" data-title="" data-trigger="hover"
-                                                   data-placement="bottom" data-backcolor="green"
-                                                   data-textcolor="#000000" title="Mã nhân viên hợp lệ"></i>
-											</span>
-                                            <label style="display: none" class="error-color  error-color-size"
-                                                   id="error_user_code">Bạn vui lòng nhập mã nhân viên</label>
-                                        </div>
-                                        <div style="float: left;width: 33%; text-align: center" >
-                                            <label for="form-field-select-3">Admin hệ thống</label>
-                                            <label>
-                                                <input id="input_user_role" name="user_role" class="ace ace-switch ace-switch-6" type="checkbox">
-                                                <span class="lbl"></span>
-                                            </label>
+                                        <div >
+                                            <label for="form-field-select-3">Mã khách hàng <span style="color: red">*</span></label>
+                                            <?php echo _returnInput('code', '', '', 'qrcode', '', 'Bạn vui lòng nhập mã khách hàng','') ?>
                                         </div>
                                     </div>
 
@@ -377,7 +352,7 @@
                                                 }
                                             </style>
                                             <div style="float: left;width: 33%;" >
-                                            <select name="mr" class="chosen-select form-control mr_user"
+                                            <select name="mr" class="chosen-select form-control mr_user valid"
                                                     id="form-field-select-3" data-placeholder="Danh xưng ..."
                                                     style="display: none;width: 10px">
                                                 <option value=""></option>
@@ -387,18 +362,7 @@
                                             </select>
                                             </div>
                                             <div style="float: left;width: 66%" >
-											<span class="input-icon " style="width: 100%" >
-												<input name="full_name" type="text" id="input_full_name"
-                                                       class="width_100" required>
-												<i class="ace-icon fa fa-user blue"></i>
-                                                <i id="name_user_error_icon" style="display: none"
-                                                   class="ace-icon fa fa-times-circle icon-right error-color "
-                                                   data-toggle="ggtooltip" data-title="" data-trigger="hover"
-                                                   data-placement="bottom" data-backcolor="red" data-textcolor="#ffffff"
-                                                   title=""></i>
-											</span>
-                                            <label style="display: none" class="error-color  error-color-size"
-                                                   id="error_full_name">Bạn vui lòng nhập tên nhân viên</label>
+                                                <?php echo _returnInput('name', '', '', 'users', '', 'Bạn vui lòng nhập tên khách hàng','width: 100%') ?>
                                             </div>
                                         </div>
                                     </div>
@@ -406,18 +370,8 @@
                                     <div class="space-4"></div>
 
                                     <div class="form-group" style="float: left; width: 100%">
-                                        <label for="form-field-select-3">Ngày sinh <span
-                                                style="color: red">*</span></label>
-                                        <div class="input-group" style="">
-                                            <input class="form-control date-picker width_100" id="input_birthday"
-                                                   name="birthday" required type="text" data-date-format="dd-mm-yyyy">
-																	<span class="input-group-addon date_icon">
-																		<i class="fa fa-calendar bigger-110"></i>
-																	</span>
-
-                                        </div>
-                                        <label style="display: none" class="error-color  error-color-size"
-                                               id="error_birthday">Bạn vui lòng chọn ngày sinh</label>
+                                        <label for="form-field-select-3">Ngày sinh </label>
+                                        <?php echo _returnInputDate('birthday', '', 'valid', '', '','')?>
                                     </div>
                                     <div class="space-4"></div>
 
@@ -430,126 +384,30 @@
                                         <div class="form-group">
                                             <label for="form-field-select-3">Email <span
                                                     style="color: red">*</span></label>
-                                            <div>
-                                           <span class="input-icon width_100">
-												<input readonly name="email_user" type="email" id="input_email_user"
-                                                       class="width_100" required>
-												<i class="ace-icon fa fa-envelope blue"></i>
-                                                <i id="email_user_error_icon" style="display: none"
-                                                   class="ace-icon fa fa-times-circle icon-right error-color "
-                                                   title="Bạn vui lòng kiểm tra lại email"></i>
-                                                <i id="email_user_success_icon" style="display: none"
-                                                   class="ace-icon fa fa-check-circle icon-right success-color"
-                                                   title="Email hợp lệ"></i>
-											</span>
-                                                <label style="display: none" class="error-color  error-color-size"
-                                                       id="error_email_user">Bạn vui lòng nhập email</label>
-                                            </div>
+                                            <?php echo _returnInput('email', '', '', 'envelope', '', 'Bạn vui lòng kiểm tra email','') ?>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-6 col-md-6">
                                         <div class="form-group">
                                             <label for="form-field-select-3">Địa chỉ <span
                                                     style="color: red">*</span></label>
-                                            <div>
-                                            <span class="input-icon width_100">
-												<input name="address_user" type="text" id="input_address_user" class="width_100" required>
-												<i class="ace-icon fa fa-map-marker blue"></i>
-                                                <i id="error_icon_address_user" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Bạn vui lòng nhập địa chỉ"></i>
-											</span>
-                                                <label  style="display: none" class="error-color  error-color-size" id="error_address_user">Bạn vui lòng nhập địa chỉ</label>
-                                            </div>
+                                            <?php echo _returnInput('address', '', '', 'map-marker', '', 'Bạn vui lòng kiểm tra email','') ?>
                                         </div>
                                     </div>
                                 </div>
                                 <div style="float: left; width: 100%">
                                     <div class="col-xs-12 col-sm-6 col-md-6">
                                         <div class="form-group">
-                                            <label for="form-field-select-3">Tên đăng nhập <span
+                                            <label for="form-field-select-3">Điện thoại <span
                                                     style="color: red">*</span></label>
-                                            <div>
-                                          <span class="input-icon width_100">
-												<input readonly name="user_name" type="text" id="input_user_name" class="width_100" required>
-												<i class="ace-icon fa fa-user blue"></i>
-                                                <i id="error_icon_user_name" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Bạn vui lòng kiểm tra tên đăng nhập"></i>
-                                                <i id="success_icon_user_name" style="display: none" class="ace-icon fa fa-check-circle icon-right success-color" title="Tên đăng nhập hợp lệ"></i>
-											</span>
-                                                <label  style="display: none" class="error-color  error-color-size" id="error_user_name">Bạn vui lòng điền tên đăng nhập</label>
-                                            </div>
+                                            <?php echo _returnInput('phone', '', '', 'phone', '', 'Bạn vui lòng kiểm tra số điện thoại','') ?>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-6 col-md-6">
                                         <div class="form-group">
-                                            <label for="form-field-select-3">Số điện thoại <span
+                                            <label for="form-field-select-3">Di động <span
                                                     style="color: red">*</span></label>
-                                            <div>
-                                          <span class="input-icon width_100">
-												<input name="user_phone" type="text" id="input_user_phone" class="width_100" required>
-												<i class="ace-icon fa fa-mobile blue"></i>
-                                                <i id="error_icon_user_phone" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Bạn vui lòng điền số điện thoại"></i>
-
-											</span>
-                                                <label  style="display: none" class="error-color  error-color-size" id="error_user_phone">Bạn vui lòng điền số điện thoại</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="float: left; width: 100%">
-                                    <div class="col-xs-12 col-sm-6 col-md-6">
-                                        <div class="form-group" style="float: left; width: 100%">
-                                            <label for="form-field-select-3">Ngày làm việc </label>
-                                            <div class="input-group" style="">
-                                                <input class="form-control date-picker width_100 valid" id="input_user_ngay_lam_viec"
-                                                       name="user_ngay_lam_viec" required type="text" data-date-format="dd-mm-yyyy">
-																	<span class="input-group-addon date_icon">
-																		<i class="fa fa-calendar bigger-110"></i>
-																	</span>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-6 col-md-6">
-                                        <div class="form-group" style="float: left; width: 100%">
-                                            <label for="form-field-select-3">Ngày chính thức </label>
-                                            <div class="input-group" style="">
-                                                <input class="form-control date-picker width_100 valid" id="input_user_ngay_chinh_thuc"
-                                                       name="user_ngay_chinh_thuc" required type="text" data-date-format="dd-mm-yyyy">
-																	<span class="input-group-addon date_icon">
-																		<i class="fa fa-calendar bigger-110"></i>
-																	</span>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="float: left; width: 100%" id="hidden_edit_pass">
-                                    <div class="col-xs-12 col-sm-6 col-md-6">
-                                        <div class="form-group">
-                                            <label for="form-field-select-3">Mật khẩu <span
-                                                    style="color: red">*</span></label>
-                                            <div>
-                                         <span class="input-icon width_100">
-												<input readonly name="password" type="password" id="input_password" class="width_100" required>
-												<i class="ace-icon fa fa-key blue"></i>
-                                                <i id="error_icon_user_pass" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Bạn vui lòng nhập địa chỉ"></i>
-											</span>
-                                                <label  style="display: none" class="error-color  error-color-size" id="error_password">Bạn vui lòng nhập mật khẩu</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-6 col-md-6">
-                                        <div class="form-group">
-                                            <label for="form-field-select-3">Xác nhận mật khẩu <span
-                                                    style="color: red">*</span></label>
-                                            <div>
-                                         <span class="input-icon width_100">
-											<span class="input-icon width_100">
-												<input readonly name="password_confirm" type="password" id="input_password_confirm" class="width_100" required>
-												<i class="ace-icon fa fa-key blue"></i>
-                                                <i id="error_icon_user_pass_con" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title=""></i>
-											</span>
-                                    <label  style="display: none" class="error-color  error-color-size" id="error_password_confirm">Bạn vui lòng xác nhận mật khẩu</label>
-                                            </div>
+                                            <?php echo _returnInput('mobi', '', '', 'mobile', '', 'Bạn vui lòng kiểm tra số di động','') ?>
                                         </div>
                                     </div>
                                 </div>

@@ -29,7 +29,7 @@ function view_customer($data)
 //
 function showTableHeader()
 {
-    return '<th>id</th><th>name</th><th>avatar</th><th>code</th>';
+    return '<th>id</th><th>name</th><th>avatar</th><th>code</th><th>address</th><th>phone</th><th>mobi</th><th>email</th>';
 }
 //
 function showTableBody($data)
@@ -42,6 +42,10 @@ function showTableBody($data)
         $TableBody.="<td>".$obj->name."</td>";
         $TableBody.="<td><img src=\"".$obj->avatar."\" width=\"50px\" height=\"50px\"/> </td>";
         $TableBody.="<td>".$obj->code."</td>";
+        $TableBody.="<td>".$obj->address."</td>";
+        $TableBody.="<td>".$obj->phone."</td>";
+        $TableBody.="<td>".$obj->mobi."</td>";
+        $TableBody.="<td>".$obj->email."</td>";
         $TableBody.="<td><a href=\"?action=edit&id=".$obj->id."\" title=\"Edit\"><img src=\"".SITE_NAME."/view/admin/Themes/images/pencil.png\" alt=\"Edit\"></a>";
         $TableBody.="<a href=\"?action=delete&id=".$obj->id."\" title=\"Delete\" onClick=\"return confirm('Bạn có chắc chắc muốn xóa?')\"><img src=\"".SITE_NAME."/view/admin/Themes/images/cross.png\" alt=\"Delete\"></a> ";
         $TableBody.="</td>";
@@ -86,6 +90,8 @@ function showFrom($form,$ListKey=array())
     $str_from.='<p><label>status</label><input class="text-input small-input" type="text"  name="status" value="'.(($form!=false)?$form->status:'').'" /></p>';
     $str_from.='<p><label>created</label><input class="text-input small-input" type="text"  name="created" value="'.(($form!=false)?$form->created:'').'" /></p>';
     $str_from.='<p><label>updated</label><input class="text-input small-input" type="text"  name="updated" value="'.(($form!=false)?$form->updated:'').'" /></p>';
+    $str_from.='<p><label>created_by</label><input class="text-input small-input" type="text"  name="created_by" value="'.(($form!=false)?$form->created_by:'').'" /></p>';
+    $str_from.='<p><label>update_by</label><input class="text-input small-input" type="text"  name="update_by" value="'.(($form!=false)?$form->update_by:'').'" /></p>';
     $str_from.='<p><label>note</label><textarea name="note">'.(($form!=false)?$form->note:'').'</textarea><script type="text/javascript">CKEDITOR.replace(\'note\'); </script></p>';
     return $str_from;
 }

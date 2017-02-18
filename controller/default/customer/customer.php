@@ -17,7 +17,7 @@ $url_bread='<li class="active">Khách hàng</li>';
 $data['breadcrumbs']=$url_bread;
 $data['title']='Danh sách khách hàng';
 $count=8;
-_returnCreateUser(1);
+_returnCreateCustomer(1);
 _deleteSubmitForm('user', 'user_delete');
 $data['list']=customer_getByTop('','status=1','updated desc');
 $data['module_valid'] = "customer";

@@ -1,7 +1,7 @@
 <?php
 class customer
 {
-    public $id,$name,$mr,$avatar,$code,$category,$company_name,$director_name,$address,$phone,$mobi,$email,$company_email,$skype,$customer_group,$resources_to,$chuc_vu,$phong_ban,$nganh_nghe,$account_number_bank,$bank,$open_bank,$birthday,$cmnd,$date_range_cmnd,$issued_by_cmnd,$number_passport,$date_range_passport,$issued_by_passport,$expiration_date_passport,$gender,$status,$created,$updated,$note;
+    public $id,$name,$mr,$avatar,$code,$category,$company_name,$director_name,$address,$phone,$mobi,$email,$company_email,$skype,$customer_group,$resources_to,$chuc_vu,$phong_ban,$nganh_nghe,$account_number_bank,$bank,$open_bank,$birthday,$cmnd,$date_range_cmnd,$issued_by_cmnd,$number_passport,$date_range_passport,$issued_by_passport,$expiration_date_passport,$gender,$status,$created,$updated,$created_by,$update_by,$note;
     public function customer($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
@@ -38,6 +38,8 @@ class customer
     $this->status=isset($data['status'])?$data['status']:'';
     $this->created=isset($data['created'])?$data['created']:'';
     $this->updated=isset($data['updated'])?$data['updated']:'';
+    $this->created_by=isset($data['created_by'])?$data['created_by']:'';
+    $this->update_by=isset($data['update_by'])?$data['update_by']:'';
     $this->note=isset($data['note'])?$data['note']:'';
           $this->encode();
     }
@@ -77,6 +79,8 @@ class customer
             $this->status=addslashes($this->status);
             $this->created=addslashes($this->created);
             $this->updated=addslashes($this->updated);
+            $this->created_by=addslashes($this->created_by);
+            $this->update_by=addslashes($this->update_by);
             $this->note=addslashes($this->note);
         }
     public function decode()
@@ -115,6 +119,8 @@ class customer
             $this->status=stripslashes($this->status);
             $this->created=stripslashes($this->created);
             $this->updated=stripslashes($this->updated);
+            $this->created_by=stripslashes($this->created_by);
+            $this->update_by=stripslashes($this->update_by);
             $this->note=stripslashes($this->note);
         }
 }

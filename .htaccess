@@ -29,3 +29,4 @@ RewriteRule ^update-phan-quyen$ controller/default/user/phanquyen_update.php
 RewriteRule ^profile.html$ controller/default/user/hoso.php
 
 RewriteRule ^khach-hang/$ controller/default/customer/customer.php
+RewriteRule ^khach-hang/them-moi controller/default/customer/themmoi.php

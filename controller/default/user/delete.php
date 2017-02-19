@@ -16,13 +16,13 @@ if(isset($_GET['id'])&&$_GET['id']!=""){
     $data_user=user_getById($id);
     if(count($data_user)==0)
     {
-        redict(SITE_NAME.'/nhan-vien/');
+        echo 0;
     }
     $new_obj= new user();
     $new_obj->id=$id;
     user_delete($new_obj);
-    redict(SITE_NAME.'/nhan-vien/');
+    echo 1;
 }
 else{
-    redict(SITE_NAME.'/nhan-vien/');
+    echo 0;
 }

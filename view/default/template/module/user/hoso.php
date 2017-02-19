@@ -32,6 +32,7 @@
                         <span class="bigger-110">Hồ sơ</span>
                     </a>
                 </li>
+                <?php if($show_edit==1){ ?>
                 <li>
                     <a data-toggle="tab" href="matkhau" data-target="sent" class="tab_list">
                         <i class="red ace-icon fa fa-key bigger-130"></i>
@@ -86,6 +87,7 @@
                         </li>
                     </ul>
                 </li><!-- /.dropdown -->
+                <?php } ?>
             </ul>
 
             <div class="tab-content no-border no-padding">
@@ -508,6 +510,7 @@
                     <!-- PAGE CONTENT ENDS -->
                 </div>
             </div>
+            <?php if($show_edit==1){ ?>
             <div id="matkhau" class="tab-pane tab_content">
                 <div class="col-xs-12">
                     <!-- PAGE CONTENT BEGINS -->
@@ -1232,7 +1235,7 @@
                     </div><!-- /.widget-body -->
                 </div>
             </div>
-
+            <?php } ?>
         </div><!-- /.tab-content -->
     </div><!-- /.tabbable -->
 </div><!-- /.col -->

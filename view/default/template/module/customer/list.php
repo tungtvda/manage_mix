@@ -95,17 +95,11 @@
                             <th>Avatar</th>
                             <th>Email</th>
                             <th>Phone</th>
+                            <th>Mobile</th>
+                            <th>Skype</th>
                             <th>Address</th>
                             <th>Status</th>
 
-                            <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1"
-                                aria-label="
-
-															Update
-														: activate to sort column ascending">
-                                <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
-                                Update
-                            </th>
                             <th>Action</th>
 
                         </tr>
@@ -115,7 +109,7 @@
                             <?php if (count($list) > 0 && _returnCheckAction(16) == 1) { ?>
                                 <?php $dem = 1; ?>
                                 <?php foreach ($list as $row) { ?>
-                                    <tr>
+                                    <tr class="row_<?php echo $row->id?>">
                                         <td class="center">
                                             <label class="pos-rel">
                                                 <input type="checkbox" class="ace click_check_list" name_record="<?php echo $row->name ?>" id="check_<?php echo $dem ?>" name="check_box_action[]"
@@ -143,6 +137,8 @@
                                         </td>
                                         <td><?php echo $row->email ?></td>
                                         <td><?php echo $row->phone ?></td>
+                                        <td><?php echo $row->mobi ?></td>
+                                        <td><?php echo $row->skype ?></td>
                                         <td >
                                             <?php echo $row->address ?>
                                         </td>
@@ -154,7 +150,7 @@
                                                 <input <?php if ($row->status) echo 'checked' ?>
                                                     id="checkbox_status_<?php echo $row->id ?>"
                                                     countid="<?php echo $row->id ?>"
-                                                    name_record="<?php echo $row->name ?>" table="customer" field="status"
+                                                    name_record="<?php echo $row->name ?>" table="customer" field="status" action="customer_update"
                                                     class="ace ace-switch ace-switch-7 checkbox_status" type="checkbox">
                                                 <span class="lbl"></span>
                                             </label>
@@ -165,7 +161,6 @@
                                         </td>
                                         <!--                                        <td>-->
                                         <?php //echo _returnDateFormatConvert($row->created) ?><!--</td>-->
-                                        <td><?php echo _returnDateFormatConvert($row->updated) ?></td>
 
                                         <td>
                                             <div class="hidden-sm hidden-xs action-buttons">
@@ -424,3 +419,13 @@
         margin-bottom: 8px;
     }
 </style>
+
+<!--<script type=”text/javascript” src=”http://kbeezie.com/jquery13.js”></script>-->
+<!--<script src=”http://kbeezie.com/fancybox/jquery.fancybox-1.3.1.pack.js” type=”text/javascript”></script>-->
+<!--<link rel=”stylesheet” href=”http://kbeezie.com/fancybox/jquery.fancybox-1.3.1.css” type=”text/css” media=”screen”/>-->
+<!--<div style="display: none;">-->
+<!--    <a id=”trigger” href=”#popup”>&nbsp;</a>-->
+<!--    <div id=”popup” style="width: 250px; height: 400px;">-->
+<!--        <p> Write you message here</p>-->
+<!--    </div>-->
+<!--</div>-->

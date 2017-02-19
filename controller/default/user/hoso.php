@@ -15,7 +15,21 @@ if (_returnCheckAction(15) == 0) {
     redict(_returnLinkDangNhap());
 }
 _returnCheckExitUser();
-$data_user_update=$data['data_user']=user_getById($_SESSION['user_id']);
+if(isset($_GET['id'])&&$_GET['id']!='')
+{
+    $id_user=_return_mc_decrypt(_returnGetParamSecurity('id'), ENCRYPTION_KEY);
+    $data_user_update=$data['data_user']=user_getById($id_user);
+    if($id_user==$_SESSION['user_id']){
+        $data['show_edit']=1;
+    }else{
+        $data['show_edit']=0;
+    }
+}
+else{
+    $data['show_edit']=1;
+    $data_user_update=$data['data_user']=user_getById($_SESSION['user_id']);
+}
+
 if(count($data['data_user'])==0){
     redict(_returnLinkDangNhap());
 }

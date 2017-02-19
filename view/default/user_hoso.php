@@ -245,6 +245,12 @@ function show_user_hoso($data = array())
         $mess_xacminh='Kích hoạt chức năng đăng nhập 2 bước';
         $color_xacminh='';
     }
+
+    if($data['show_edit']==1||$_SESSION['user_role']==1){
+        $show_edit=1;
+    }else{
+        $show_edit=0;
+    }
     require_once DIR . '/view/default/template/module/user/hoso.php';
 }
 

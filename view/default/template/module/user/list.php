@@ -123,7 +123,7 @@
                             <?php if (count($list) > 0 && _returnCheckAction(5) == 1) { ?>
                                 <?php $dem = 1; ?>
                                 <?php foreach ($list as $row) { ?>
-                                    <tr>
+                                    <tr class="row_<?php echo $row->id?>">
                                         <td class="center">
                                             <label class="pos-rel">
                                                 <input type="checkbox" class="ace click_check_list" name_record="<?php echo $row->name ?>" id="check_<?php echo $dem ?>" name="check_box_action[]"
@@ -160,7 +160,7 @@
                                                 <input <?php if ($row->user_role) echo 'checked' ?>
                                                     id="checkbox_user_role_<?php echo $row->id ?>"
                                                     countid="<?php echo $row->id ?>"
-                                                    name_record="<?php echo $row->name ?>" table="user" field="user_role"
+                                                    name_record="<?php echo $row->name ?>" table="user" field="user_role" action="user_update"
                                                     class=" ace ace-switch ace-switch-7 checkbox_user_role" type="checkbox">
                                                 <span class="lbl"></span>
                                             </label>
@@ -174,7 +174,7 @@
                                                 <input <?php if ($row->status) echo 'checked' ?>
                                                     id="checkbox_status_<?php echo $row->id ?>"
                                                     countid="<?php echo $row->id ?>"
-                                                    name_record="<?php echo $row->name ?>" table="user" field="status"
+                                                    name_record="<?php echo $row->name ?>" table="user" field="status" action="user_update"
                                                     class="ace ace-switch ace-switch-7 checkbox_status" type="checkbox">
                                                 <span class="lbl"></span>
                                             </label>

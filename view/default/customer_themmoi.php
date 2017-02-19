@@ -171,7 +171,10 @@ function show_customer_themmoi($data = array())
     }else{
         $date_range_cmnd='';
     }
-    if($date_range_cmnd!="0000-00-00"){
+    if($date_range_cmnd=="0000-00-00"||$date_range_cmnd==""){
+        $date_range_cmnd='';
+    }
+    else{
         $date_range_cmnd=date("d-m-Y", strtotime($date_range_cmnd));
     }
     require_once DIR . '/view/default/template/module/customer/themmoi.php';

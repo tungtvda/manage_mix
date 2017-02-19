@@ -1,6 +1,9 @@
 <?php
 if (!defined('DIR')) require_once '../../../config.php';
-_returnCheckPermison(0,0);
+if(!isset($_SESSION['user_id'])){
+    echo 'Bạn không thể cập nhật dữ liệu';
+    exit;
+}
 if (isset($_GET['id']) && isset($_GET['table']) && isset($_GET['field']) && isset($_GET['status'])) {
     $id = _returnGetParamSecurity('id');
     $table = _returnGetParamSecurity('table');
@@ -15,9 +18,11 @@ if (isset($_GET['id']) && isset($_GET['table']) && isset($_GET['field']) && isse
         $function_id = $table . '_getById';
         $data_check = $function_id($id);
         if (count($data_check) > 0) {
-            $new = new $table($data_check);
+            $array = (array)$data_check[0];
+            $new = new $table($array);
             $new->id = $id;
             $new->$field = $status;
+            $new->updated = _returnGetDateTime();
             if(isset($_GET['action'])&&$_GET['action']!='')
             {
                 $function_update =_returnGetParamSecurity('action');

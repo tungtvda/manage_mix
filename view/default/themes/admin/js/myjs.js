@@ -7,6 +7,7 @@ jQuery(function ($) {
         }
 
         var idSelect = $(this).attr('countid');
+        var action = $(this).attr('action');
         var table = $(this).attr('table');
         var field = $(this).attr('field');
         var name_record=$(this).attr('name_record');
@@ -33,7 +34,7 @@ jQuery(function ($) {
                     $.ajax({
                         method: "GET",
                         url: link,
-                        data: "id=" + idSelect + '&table=' + table + '&field=' + field + '&status=' + status,
+                        data: "id=" + idSelect + '&table=' + table + '&field=' + field + '&status=' + status+'&action='+action,
                         success: function (response) {
                             if (response != 1) {
                                 lnv.alert({
@@ -186,8 +187,7 @@ jQuery(function ($) {
                         data: '',
                         success: function (response) {
                             if(response==1){
-                                alert(deleteid);
-                                $( "#row-0").remove();
+                                $( ".row_"+deleteid).remove();
                             }else{
                                 lnv.alert({
                                     title: 'Lỗi',

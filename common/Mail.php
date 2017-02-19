@@ -20,11 +20,13 @@ function SendMail($Sendto,$Body,$Subject)
     $mail->Port = 587;
     $mail->SMTPSecure = "tls";
     $mail->SMTPAuth = true;
-    $mail->Username = 'qsg546.qsoft@gmail.com';
-    $mail->Password = 'edbhqegduzpmwuui';
+//    $mail->Username = 'qsg546.qsoft@gmail.com';
+//    $mail->Password = 'edbhqegduzpmwuui';
+    $mail->Username = 'manage.system.mixtourist@gmail.com';
+    $mail->Password = 'ttulgbiqnksxueze';
     $mail->SetFrom('thanhtuyen@mixmedia.vn', 'Hệ thống quản lý MIXTOURIST');
     $mail->AddReplyTo('thanhtuyen@mixmedia.vn', "");
-    $mail->AddAddress($Sendto,'test');
+    $mail->AddAddress($Sendto,'');
     $mail->Subject = "" . $Subject . "";
     $mail->MsgHTML("" . $Body . "");
     $mail->AltBody = "" . $Subject . "";

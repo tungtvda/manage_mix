@@ -86,11 +86,6 @@ jQuery(function ($) {
     });
 
     $('body').on('click', '.edit_function', function () {
-        document.getElementById("input_user_code").readOnly = true;
-        document.getElementById("input_email_user").readOnly = true;
-        document.getElementById("input_user_name").readOnly = true;
-        document.getElementById("input_password").readOnly = true;
-        document.getElementById("input_password_confirm").readOnly = true;
         var lenght = $('.click_check_list:checked').length;
         if (lenght == 0) {
             lnv.alert({
@@ -516,3 +511,17 @@ function validate(date) {
         return "sorry, no";
     }
 }
+function PopIt() {
+    $("a#trigger").trigger('click');
+    window.onbeforeunload = UnPopIt;
+    return "Would you like to join our mailing list for other offers?";
+}
+function UnPopIt()  { /* nothing to return */ }
+//$(document).ready(function() {
+//    window.onbeforeunload = PopIt;
+//    $("a#trigger").fancybox({
+// 'hideOnContentClick': false,
+// 'showCloseButton': false
+//});
+//    $("a[id!=trigger]").click(function(){ window.onbeforeunload = UnPopIt; });
+//});

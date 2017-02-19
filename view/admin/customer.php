@@ -70,6 +70,7 @@ function showFrom($form,$ListKey=array())
     $str_from.='<p><label>email</label><input class="text-input small-input" type="text"  name="email" value="'.(($form!=false)?$form->email:'').'" /></p>';
     $str_from.='<p><label>company_email</label><input class="text-input small-input" type="text"  name="company_email" value="'.(($form!=false)?$form->company_email:'').'" /></p>';
     $str_from.='<p><label>skype</label><input class="text-input small-input" type="text"  name="skype" value="'.(($form!=false)?$form->skype:'').'" /></p>';
+    $str_from.='<p><label>facebook</label><input class="text-input small-input" type="text"  name="facebook" value="'.(($form!=false)?$form->facebook:'').'" /></p>';
     $str_from.='<p><label>customer_group</label><input class="text-input small-input" type="text"  name="customer_group" value="'.(($form!=false)?$form->customer_group:'').'" /></p>';
     $str_from.='<p><label>resources_to</label><input class="text-input small-input" type="text"  name="resources_to" value="'.(($form!=false)?$form->resources_to:'').'" /></p>';
     $str_from.='<p><label>chuc_vu</label><input class="text-input small-input" type="text"  name="chuc_vu" value="'.(($form!=false)?$form->chuc_vu:'').'" /></p>';

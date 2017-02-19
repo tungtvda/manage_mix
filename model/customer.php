@@ -1,7 +1,7 @@
 <?php
 class customer
 {
-    public $id,$name,$mr,$avatar,$code,$category,$company_name,$director_name,$address,$phone,$mobi,$email,$company_email,$skype,$customer_group,$resources_to,$chuc_vu,$phong_ban,$nganh_nghe,$account_number_bank,$bank,$open_bank,$birthday,$cmnd,$date_range_cmnd,$issued_by_cmnd,$number_passport,$date_range_passport,$issued_by_passport,$expiration_date_passport,$gender,$status,$created,$updated,$created_by,$update_by,$note;
+    public $id,$name,$mr,$avatar,$code,$category,$company_name,$director_name,$address,$phone,$mobi,$email,$company_email,$skype,$facebook,$customer_group,$resources_to,$chuc_vu,$phong_ban,$nganh_nghe,$account_number_bank,$bank,$open_bank,$birthday,$cmnd,$date_range_cmnd,$issued_by_cmnd,$number_passport,$date_range_passport,$issued_by_passport,$expiration_date_passport,$gender,$status,$created,$updated,$created_by,$update_by,$note;
     public function customer($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
@@ -18,6 +18,7 @@ class customer
     $this->email=isset($data['email'])?$data['email']:'';
     $this->company_email=isset($data['company_email'])?$data['company_email']:'';
     $this->skype=isset($data['skype'])?$data['skype']:'';
+    $this->facebook=isset($data['facebook'])?$data['facebook']:'';
     $this->customer_group=isset($data['customer_group'])?$data['customer_group']:'';
     $this->resources_to=isset($data['resources_to'])?$data['resources_to']:'';
     $this->chuc_vu=isset($data['chuc_vu'])?$data['chuc_vu']:'';
@@ -59,6 +60,7 @@ class customer
             $this->email=addslashes($this->email);
             $this->company_email=addslashes($this->company_email);
             $this->skype=addslashes($this->skype);
+            $this->facebook=addslashes($this->facebook);
             $this->customer_group=addslashes($this->customer_group);
             $this->resources_to=addslashes($this->resources_to);
             $this->chuc_vu=addslashes($this->chuc_vu);
@@ -99,6 +101,7 @@ class customer
             $this->email=stripslashes($this->email);
             $this->company_email=stripslashes($this->company_email);
             $this->skype=stripslashes($this->skype);
+            $this->facebook=stripslashes($this->facebook);
             $this->customer_group=stripslashes($this->customer_group);
             $this->resources_to=stripslashes($this->resources_to);
             $this->chuc_vu=stripslashes($this->chuc_vu);

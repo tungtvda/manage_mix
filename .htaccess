@@ -30,3 +30,5 @@ RewriteRule ^profile.html$ controller/default/user/hoso.php
 
 RewriteRule ^khach-hang/$ controller/default/customer/customer.php
 RewriteRule ^khach-hang/them-moi controller/default/customer/themmoi.php
+RewriteRule ^khach-hang/sua controller/default/customer/themmoi.php
+RewriteRule ^khach-hang/xoa$ controller/default/customer/delete.php

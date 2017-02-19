@@ -32,6 +32,12 @@ function show_user_hoso($data = array())
         $valid_user_code="";
     }
     $birthday=_returnDataEditAdd($data['data_user'],'birthday');
+    if($birthday!="0000-00-00")
+    {
+        $birthday=date("d-m-Y", strtotime($birthday));
+    }else{
+        $birthday='';
+    }
     $valid_birthday="valid";
     if($birthday==''){
         $valid_birthday="";
@@ -170,7 +176,7 @@ function show_user_hoso($data = array())
     $cmnd_name='';
     if($cmnd!=''){
        if($date_range_cmnd!="0000-00-00"){
-           $cmnd_name.="Ngày cấp: ".date("Y-m-d", strtotime($date_range_cmnd));
+           $cmnd_name.="Ngày cấp: ".date("d-m-Y", strtotime($date_range_cmnd));
            if($issued_by_cmnd!=""){
                $cmnd_name.=" - Nơi cấp: ".$issued_by_cmnd;
            }
@@ -179,7 +185,10 @@ function show_user_hoso($data = array())
             $date_range_cmnd='';
         }
 
+    }else{
+        $date_range_cmnd='';
     }
+
 
     $number_passport=_returnDataEditAdd($data['data_user'],'number_passport');
     $date_range_passport=_returnDataEditAdd($data['data_user'],'date_range_passport');

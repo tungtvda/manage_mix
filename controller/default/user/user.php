@@ -19,7 +19,13 @@ $data['title']='Danh sách nhân viên';
 $count=8;
 _returnCreateUser(1);
 _deleteSubmitForm('user', 'user_delete');
-$data['list']=user_getByTop('','','updated desc');
+$data_dk_fill='';
+if($_SESSION['user_role']==0)
+{
+    $data['dk_find'] = "created_by=".$_SESSION['user_id'];
+    $data_dk_fill='created_by='.$_SESSION['user_id'];
+}
+$data['list']=user_getByTop('',$data_dk_fill,'updated desc');
 $data['module_valid'] = "user";
 $data['title_print'] = "Danh sách nhân viên";
 show_header($data);

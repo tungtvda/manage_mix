@@ -85,6 +85,13 @@
                 </li>
                 <li class="{kichhoat_chucvu_nhanvien}" ><a href="{SITE-NAME}/controller/admin/user_chucvu.php"><span class="icon-user"></span> Chức vụ nhân viên</a></li>
                 <li class="{kichhoat_phongban_nhanvien}" ><a href="{SITE-NAME}/controller/admin/user_phongban.php"><span class="icon-user"></span> Phòng ban nhân viên</a></li>
+                <li class="dropdown {kichhoat_thucdon}" ><a href="#"><span class="icon-wrench"></span> Quản lý khách  hàng</a>
+                    <ul>
+                        <li><a href="{SITE-NAME}/controller/admin/customer_career.php">Nghề nghiệp khách hàng</a></li>
+                        <li><a href="{SITE-NAME}/controller/admin/customer_category.php">Danh mục khách hàng</a></li>
+                        <li><a href="{SITE-NAME}/controller/admin/customer_resources_to.php">Nguồn khách hàng</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
         <!--leftmenu-->

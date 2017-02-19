@@ -10,7 +10,6 @@ function view_left($data=array())
 {
     $asign=array();
     $trangchu_active = ($data['active'] == 'trangchu') ? 'active' : '';
-
     $permison_module=_returnQuyen(1);
     $permison_form=_returnQuyen(2);
     $string_left_menu="";
@@ -49,7 +48,14 @@ function view_left($data=array())
                                 if($data['active_sub'] == $row_form->active&&$row_form->action_count!='')
                                 {
                                     $action_count=$row_form->action_count;
-                                    $data_count=$action_count($row_form->dk_count);
+                                    $dk_count='';
+                                    if(isset($data['dk_find']))
+                                    {
+                                        $dk_count=$data['dk_find'];
+                                    }else{
+                                        $dk_count=$row_form->dk_count;
+                                    }
+                                    $data_count=$action_count($dk_count);
                                     $count_form='<span class="badge badge-primary">'.$data_count.'</span>';
                                 }
 

@@ -29,6 +29,8 @@ function show_header($data1=array())
 function  show_left($data1=array(),$active='trangchu',$active_sub='trangchu')
 {
     $data=array();
+    $data=$data1;
+
     $data['active']=$active;
     $data['active_sub']=$active_sub;
     $data['data_permison_module']=permison_module_getByTop('','id!=1 and status=1','position asc');

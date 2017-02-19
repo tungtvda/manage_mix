@@ -402,9 +402,12 @@ function show_edit_nhanvien(Id,name){
                 if(data!=0)
                 {
                     var obj = jQuery.parseJSON(data);
+                    var output = document.getElementById('show_img_upload');
                     if(obj.avatar!=''){
-                        var output = document.getElementById('show_img_upload');
                         output.src = url+obj.avatar;
+                    }else{
+                        var no_ava=$('#show_img_upload').attr('no-avatar');
+                        output.src = no_ava;
                     }
                     if(obj.user_code!=''){
                         $('#input_user_code').val(obj.user_code);

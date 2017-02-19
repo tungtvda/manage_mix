@@ -180,7 +180,28 @@ jQuery(function ($) {
                     });
                 }
                 else{
-                    window.location.replace(url_delete+deleteid);
+                    $.ajax({
+                        method: "GET",
+                        url: url_delete+deleteid,
+                        data: '',
+                        success: function (response) {
+                            if(response==1){
+                                alert(deleteid);
+                                $( "#row-0").remove();
+                            }else{
+                                lnv.alert({
+                                    title: 'Lỗi',
+                                    content: 'Xóa dữ liệu thất bại',
+                                    alertBtnText: 'Ok',
+                                    iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                                    alertHandler: function () {
+
+                                    }
+                                });
+                            }
+                        }
+                    });
+                    //window.location.replace(url_delete+deleteid);
                 }
             },
             cancelBtnText: 'Cancel',

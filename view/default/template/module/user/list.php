@@ -135,7 +135,7 @@
                                             <?php echo $dem; ?>
                                         </td>
                                         <td>
-                                            <a href="<?php echo SITE_NAME ?>/nhan-vien/chi-tiet?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"><?php echo $row->name.' - '.$row->user_code ?></a>
+                                            <a href="<?php echo SITE_NAME ?>/nhan-vien/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"><?php echo $row->name.' - '.$row->user_code ?></a>
                                         </td>
                                         <td style="text-align: center">
                                             <?php
@@ -239,19 +239,11 @@
                                                                 </a>
                                                             </li>
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
-                                                                   title="Sửa popup">
-																				<span class="green">
-																					<i class="ace-icon fa fa-pencil bigger-120"></i>
-																				</span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="<?php echo SITE_NAME ?>/nhan-vien/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                                <a  href="<?php echo SITE_NAME ?>/nhan-vien/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
                                                                    class="tooltip-success" data-rel="tooltip"
                                                                    title="Sửa tab mới">
-																				<span class="">
-																					<i class="ace-icon glyphicon glyphicon-edit  bigger-120"></i>
+																				<span class="green">
+																					<i class="ace-icon fa fa-pencil bigger-120"></i>
 																				</span>
                                                                 </a>
                                                             </li>
@@ -271,7 +263,7 @@
                                                         <?php } ?>
                                                         <?php if (_returnCheckAction(4) == 1) { ?>
                                                             <li>
-                                                                <a href="#" class="tooltip-success " data-rel="tooltip"
+                                                                <a href="<?php echo SITE_NAME?>/nhan-vien/phan-quyen?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>" class="tooltip-success " data-rel="tooltip"
                                                                    title="Phân quyền">
 																				<span class="blue">
 																					<i class="ace-icon fa fa-cogs bigger-120"></i>

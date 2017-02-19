@@ -112,7 +112,7 @@
                         </thead>
 
                             <tbody>
-                            <?php if (count($list) > 0 && _returnCheckAction(5) == 1) { ?>
+                            <?php if (count($list) > 0 && _returnCheckAction(16) == 1) { ?>
                                 <?php $dem = 1; ?>
                                 <?php foreach ($list as $row) { ?>
                                     <tr>
@@ -127,7 +127,7 @@
                                             <?php echo $dem; ?>
                                         </td>
                                         <td>
-                                            <a href="<?php echo SITE_NAME ?>/khach-hang/chi-tiet?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"><?php echo $row->name.' - '.$row->code ?></a>
+                                            <a href="<?php echo SITE_NAME ?>/khach-hang/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"><?php echo $row->name.' - '.$row->code ?></a>
                                         </td>
                                         <td style="text-align: center">
                                             <?php
@@ -148,7 +148,7 @@
                                         </td>
                                         <td>
                                             <span hidden><?php echo (int)$row->status ?></span>
-                                    <?php if (_returnCheckAction(2) == 1) { ?>
+                                    <?php if (_returnCheckAction(18) == 1) { ?>
                                             <label>
 
                                                 <input <?php if ($row->status) echo 'checked' ?>
@@ -170,7 +170,7 @@
                                         <td>
                                             <div class="hidden-sm hidden-xs action-buttons">
 
-                                                <?php if (_returnCheckAction(2) == 1) { ?>
+                                                <?php if (_returnCheckAction(18) == 1) { ?>
                                                     <a class="blue view_popup_detail" role="button" name_record="<?php echo $row->name ?>" data-toggle="modal" table="customer" countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
                                                        href="#modal-form"
                                                        title="Chi tiết">
@@ -185,7 +185,7 @@
                                                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                                                     </a>
                                                 <?php } ?>
-                                                <?php if (_returnCheckAction(3) == 1) { ?>
+                                                <?php if (_returnCheckAction(19) == 1) { ?>
                                                     <a title="Xóa" class="red delete_record" href="javascript:void(0)"
                                                        deleteid="<?php echo $row->id ?>"
                                                        name_record_delete="<?php echo $row->name ?>"
@@ -204,7 +204,7 @@
 
                                                     <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 
-                                                        <?php if (_returnCheckAction(2) == 1) { ?>
+                                                        <?php if (_returnCheckAction(18) == 1) { ?>
                                                             <li>
                                                                 <a class="blue view_popup_detail" role="button" name_record="<?php echo $row->name ?>" data-toggle="modal" table="user" countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
                                                                    href="#modal-form"
@@ -212,25 +212,18 @@
                                                                     <i class="ace-icon fa fa-eye-slash bigger-130"></i>
                                                                 </a>
                                                             </li>
+
                                                             <li>
-                                                                <a href="#" class="tooltip-success" data-rel="tooltip"
-                                                                   title="Sửa popup">
-																				<span class="green">
+                                                                <a href="<?php echo SITE_NAME ?>/khach-hang/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                                   class="tooltip-success" data-rel="tooltip"
+                                                                   title="Sửa tab mới">
+																				<span class="">
 																					<i class="ace-icon fa fa-pencil bigger-120"></i>
 																				</span>
                                                                 </a>
                                                             </li>
-                                                            <li>
-                                                                <a href="<?php echo SITE_NAME ?>/nhan-vien/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
-                                                                   class="tooltip-success" data-rel="tooltip"
-                                                                   title="Sửa tab mới">
-																				<span class="">
-																					<i class="ace-icon glyphicon glyphicon-edit  bigger-120"></i>
-																				</span>
-                                                                </a>
-                                                            </li>
                                                         <?php } ?>
-                                                        <?php if (_returnCheckAction(3) == 1) { ?>
+                                                        <?php if (_returnCheckAction(19) == 1) { ?>
                                                             <li>
                                                                 <a href="javascript:void(0)"
                                                                    deleteid="<?php echo $row->id ?>"
@@ -239,16 +232,6 @@
                                                                    class="tooltip-error delete_record" title="Xóa">
 																				<span class="red">
 																					<i class="ace-icon fa fa-trash-o bigger-120"></i>
-																				</span>
-                                                                </a>
-                                                            </li>
-                                                        <?php } ?>
-                                                        <?php if (_returnCheckAction(4) == 1) { ?>
-                                                            <li>
-                                                                <a href="#" class="tooltip-success " data-rel="tooltip"
-                                                                   title="Phân quyền">
-																				<span class="blue">
-																					<i class="ace-icon fa fa-cogs bigger-120"></i>
 																				</span>
                                                                 </a>
                                                             </li>
@@ -276,19 +259,19 @@
                     </button>
 
                     <ul class="dropdown-menu dropdown-danger">
-                        <?php if (_returnCheckAction(2) == 1) { ?>
+                        <?php if (_returnCheckAction(18) == 1) { ?>
                             <li>
                                 <a href="#modal-form"  role="button"  data-toggle="modal" class="edit_function">Sửa</a>
                             </li>
                         <?php } ?>
-                        <?php if (_returnCheckAction(3) == 1) { ?>
+                        <?php if (_returnCheckAction(19) == 1) { ?>
                             <li>
                                 <a class="delete_function"
                                    href="javascript:void()">Xóa</a>
                             </li>
                         <?php } ?>
                         <li class="divider"></li>
-                        <?php if (_returnCheckAction(1) == 1) { ?>
+                        <?php if (_returnCheckAction(17) == 1) { ?>
                             <li>
                                 <a href="<?php echo SITE_NAME ?>/nhan-vien/them-moi">Thêm</a>
                             </li>

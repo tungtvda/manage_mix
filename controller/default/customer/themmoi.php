@@ -42,21 +42,20 @@ if(isset($_GET['id'])&&$_GET['id']!='')
     $data['title'] = 'Thêm khách hàng';
 }
 
-
-
 $_SESSION['link_redict'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 $data['breadcrumbs'] = $url_bread;
 
 $data['module_valid'] = "customer";
 $count = 8;
+_returnCreateCustomerFull(1);
 show_header($data);
 show_left($data, 'khach_hang', 'customer_list');
 show_breadcrumb($data);
 show_navigation($data);
 show_customer_themmoi($data);
 show_footer($data);
-_returnCreateUser(1);
+
 show_valid_form($data);
 show_script_form($data);
 

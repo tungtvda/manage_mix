@@ -21,7 +21,14 @@ if (isset($_GET['value']) && isset($_GET['table']) && isset($_GET['key']))
         {
             $file_model = $table . 'Service.php';
             require_once DIR . '/model/' . $file_model;
-            $dk=$key."='".$value."'";
+
+            if(isset($_GET['id'])&&$_GET['id']!=''){
+                $id=_return_mc_decrypt(_returnGetParamSecurity('id'), ENCRYPTION_KEY);
+                $dk=$key."='".$value."' and id!=".$id;
+            }else{
+                $dk=$key."='".$value."'";
+            }
+
             $function = $table . '_getByTop';
             $data_check=$function('1',$dk,'');
             if(count($data_check)==0){

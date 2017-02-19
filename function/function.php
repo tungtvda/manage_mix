@@ -382,6 +382,7 @@ function _returnCreateUser($check_redict)
 {
     if (isset($_POST['user_code']) && isset($_POST['full_name']) && isset($_POST['birthday']) && isset($_POST['email_user']) && isset($_POST['address_user']) && isset($_POST['user_name']) && isset($_POST['password']) && isset($_POST['password_confirm'])) {
         $user_code = _returnPostParamSecurity('user_code');
+        $mr = _returnPostParamSecurity('mr');
         $full_name = _returnPostParamSecurity('full_name');
         $input_birthday = _returnPostParamSecurity('birthday');
         $email_user = _returnPostParamSecurity('email_user');
@@ -563,43 +564,41 @@ function _returnCreateCustomer($check_redict)
                 $data_user_update = customer_getById($id);
                 if (count($data_user_update) > 0) {
                     $array = (array)$data_user_update[0];
-                    $new_obj = new user($array);
-                    $new_obj->name = $full_name;
-                    $new_obj->birthday = date("Y-m-d", strtotime($input_birthday));
-                    $new_obj->address = $address_user;
-                    $new_obj->user_role = $user_role;
-                    if ($ngay_lam_viec != '') {
-                        $new_obj->ngay_lam_viec = date("Y-m-d", strtotime($ngay_lam_viec));
-                    }
-                    if ($ngay_chinh_thuc != '') {
-                        $new_obj->ngay_chinh_thuc = date("Y-m-d", strtotime($ngay_chinh_thuc));
-                    }
+                    $new_obj = new customer($array);
+                    $new_obj->code = $code;
+                    $new_obj->name = $name;
+                    $new_obj->email = $email;
+                    $new_obj->birthday = date("Y-m-d", strtotime($birthday));
+                    $new_obj->address = $address;
                     if ($phone != "") {
                         $new_obj->phone = $phone;
+                    }
+                    if ($mobi != "") {
+                        $new_obj->mobi = $mobi;
                     }
                     if ($mr != '') {
                         $new_obj->mr = $mr;
                     }
                     $folder = LocDau($data_user_update[0]->user_email);
-                    $target_dir = _returnFolderRoot() . "/view/default/themes/uploads/users/" . $folder . '/';
-                    $avatar = _returnUploadImg($target_dir, 'avatar', "/view/default/themes/uploads/users/" . $folder . '/');
+                    $target_dir = _returnFolderRoot() . "/view/default/themes/uploads/customer/" . $folder . '/';
+                    $avatar = _returnUploadImg($target_dir, 'avatar', "/view/default/themes/uploads/customer/" . $folder . '/');
                     if ($avatar != '') {
                         $new_obj->avatar = $avatar;
                     }
 
                     $new_obj->updated = _returnGetDateTime();
                     $new_obj->id = $id;
-                    user_update($new_obj);
+                    customer_update($new_obj);
                     if ($check_redict == 1) {
-                        redict(SITE_NAME . '/nhan-vien/');
+                        redict(SITE_NAME . '/khach-hang/');
                     } else {
                         return 1;
                     }
                 }
             } else {
 
-                $dk_check_user = "code='" . $code . "'";
-                $dk_check_user .= "or email ='" . $email . "'";
+
+                $dk_check_user = "or email ='" . $email . "'";
                 $data_check_exist_user = customer_getByTop('', $dk_check_user, 'id desc');
                 if (count($data_check_exist_user) > 0) {
                     if ($check_redict == 1) {
@@ -624,9 +623,186 @@ function _returnCreateCustomer($check_redict)
                     $dangky->created = _returnGetDateTime();
                     $dangky->updated = _returnGetDateTime();
                     $dangky->avatar = $avatar;
+                    $dangky->mobi = $mobi;
                     $dangky->status = 1;
                     $dangky->phone = $phone;
                     $dangky->created_by = $_SESSION['user_id'];
+                    customer_insert($dangky);
+                    if ($check_redict == 1) {
+                        redict(SITE_NAME . '/khach-hang/');
+                    } else {
+                        return 1;
+                    }
+
+                }
+            }
+
+        } else {
+            if ($check_redict == 1) {
+                echo '<script>alert("Bạn vui lòng điền đầy đủ thông tin đăng ký")</script>';
+            } else {
+                return 'Bạn vui lòng điền đầy đủ thông tin đăng ký';
+            }
+
+        }
+    }
+}
+
+function _returnCreateCustomerFull($check_redict)
+{
+    if (isset($_POST['name']) && isset($_POST['mr']) && isset($_POST['birthday']) && isset($_POST['email']) && isset($_POST['address']) && isset($_POST['phone']) && isset($_POST['mobi'])) {
+        $name = _returnPostParamSecurity('name');
+        $code = _returnPostParamSecurity('code');
+        $mr = _returnPostParamSecurity('mr');
+        $birthday = _returnPostParamSecurity('birthday');
+        $email = _returnPostParamSecurity('email');
+        $address = _returnPostParamSecurity('address');
+        $phone = _returnPostParamSecurity('phone');
+        $mobi = _returnPostParamSecurity('mobi');
+        $category = _returnPostParamSecurity('category');
+        $resources_to = _returnPostParamSecurity('resources_to');
+        $nganh_nghe = _returnPostParamSecurity('nganh_nghe');
+        $company_name = _returnPostParamSecurity('company_name');
+        $chuc_vu = _returnPostParamSecurity('chuc_vu');
+        $phong_ban = _returnPostParamSecurity('phong_ban');
+        $director_name = _returnPostParamSecurity('director_name');
+        $company_email = _returnPostParamSecurity('company_email');
+       ;
+        $skype = _returnPostParamSecurity('skype');
+        $facebook = _returnPostParamSecurity('facebook');
+        $account_number_bank = _returnPostParamSecurity('account_number_bank');
+        $bank = _returnPostParamSecurity('bank');
+        $open_bank = _returnPostParamSecurity('open_bank');
+        $cmnd = _returnPostParamSecurity('cmnd');
+        $date_range_cmnd = _returnPostParamSecurity('date_range_cmnd');
+        $issued_by_cmnd = _returnPostParamSecurity('issued_by_cmnd');
+
+
+        $avatar = '';
+
+        if ($name != "" && $email != '' && $address != '' && $phone != '' && $mobi != '') {
+            if (isset($_POST['check_edit']) && isset($_POST['id_edit']) && $_POST['check_edit'] === "edit" && $_POST['id_edit'] != '') {
+                $id = _return_mc_decrypt(_returnPostParamSecurity('id_edit'), ENCRYPTION_KEY);
+                $dk_check_user = "email ='" . $email . "' and id!=".$id;
+                $data_check_exist_user = customer_getByTop('', $dk_check_user, 'id desc');
+                if (count($data_check_exist_user) > 0) {
+                    if ($check_redict == 1) {
+                        echo "<script>alert('Email đã tồn tại trong hệ thống, vui lòng điền lại thông tin khác')</script>";
+                    } else {
+                        return 'Email đã tồn tại trong hệ thống, vui lòng điền lại thông tin khác';
+                    }
+                }else{
+                    $data_user_update = customer_getById($id);
+                    if (count($data_user_update) > 0) {
+                        $array = (array)$data_user_update[0];
+                        $new_obj = new customer($array);
+                        $new_obj->name = $name;
+                        $new_obj->email = $email;
+                        $new_obj->birthday = date("Y-m-d", strtotime($birthday));
+                        $new_obj->address = $address;
+                        if ($phone != "") {
+                            $new_obj->phone = $phone;
+                        }
+                        if ($mobi != "") {
+                            $new_obj->mobi = $mobi;
+                        }
+                        if ($mr != '') {
+                            $new_obj->mr = $mr;
+                        }
+                        $folder = LocDau($data_user_update[0]->user_email);
+                        $target_dir = _returnFolderRoot() . "/view/default/themes/uploads/customer/" . $folder . '/';
+                        $avatar = _returnUploadImg($target_dir, 'avatar', "/view/default/themes/uploads/customer/" . $folder . '/');
+                        if ($avatar != '') {
+                            $new_obj->avatar = $avatar;
+                        }
+
+                        $new_obj->updated = _returnGetDateTime();
+                        $new_obj->id = $id;
+                        if($category!=''){
+                            $new_obj->category = $category;
+                        }
+                        if($resources_to!=''){
+                            $new_obj->resources_to = $resources_to;
+                        }
+                        if($nganh_nghe!=''){
+                            $new_obj->nganh_nghe = $nganh_nghe;
+                        }
+
+                        $new_obj->company_name = $company_name;
+                        if($chuc_vu!=''){
+                            $new_obj->chuc_vu = $chuc_vu;
+                        }
+
+                        if($phong_ban!=''){
+                            $new_obj->phong_ban = $phong_ban;
+                        }
+
+                        $new_obj->director_name =$director_name;
+                        $new_obj->company_email = $company_email;
+                        $new_obj->skype = $skype;
+                        $new_obj->facebook = $facebook;
+                        $new_obj->account_number_bank = $account_number_bank;
+                        $new_obj->bank = $bank;
+                        $new_obj->open_bank = $open_bank;
+                        $new_obj->cmnd= $cmnd;
+                        $new_obj->date_range_cmnd =date("Y-m-d", strtotime($date_range_cmnd)); ;
+                        $new_obj->issued_by_cmnd =$issued_by_cmnd;
+                        customer_update($new_obj);
+                        if ($check_redict == 1) {
+                            redict(SITE_NAME . '/khach-hang/');
+                        } else {
+                            return 1;
+                        }
+                    }
+                }
+
+            } else {
+
+                $dk_check_user = "email ='" . $email . "'";
+                $data_check_exist_user = customer_getByTop('', $dk_check_user, 'id desc');
+                if (count($data_check_exist_user) > 0) {
+                    if ($check_redict == 1) {
+                        echo "<script>alert('Email đã tồn tại trong hệ thống, vui lòng điền lại thông tin khác')</script>";
+                    } else {
+                        return 'Email đã tồn tại trong hệ thống, vui lòng điền lại thông tin khác';
+                    }
+                } else {
+                    $folder = LocDau($email);
+                    $target_dir = _returnFolderRoot() . "/view/default/themes/uploads/customer/" . $folder . '/';
+                    $avatar = _returnUploadImg($target_dir, 'avatar', "/view/default/themes/uploads/customer/" . $folder . '/');
+                    if ($avatar === 0) {
+                        $avatar = '';
+                    }
+                    $dangky = new customer();
+                    $dangky->name = $name;
+                    $dangky->code = $code;
+                    $dangky->mr = $mr;
+                    $dangky->birthday = date("Y-m-d", strtotime($birthday));
+                    $dangky->email = $email;
+                    $dangky->address = $address;
+                    $dangky->created = _returnGetDateTime();
+                    $dangky->updated = _returnGetDateTime();
+                    $dangky->avatar = $avatar;
+                    $dangky->mobi = $mobi;
+                    $dangky->status = 1;
+                    $dangky->phone = $phone;
+                    $dangky->created_by = $_SESSION['user_id'];
+                    $dangky->category = $category;
+                    $dangky->resources_to = $resources_to;
+                    $dangky->nganh_nghe = $nganh_nghe;
+                    $dangky->company_name = $company_name;
+                    $dangky->chuc_vu = $chuc_vu;
+                    $dangky->phong_ban = $phong_ban;
+                    $dangky->director_name =$director_name;
+                    $dangky->company_email = $company_email;
+                    $dangky->skype = $skype;
+                    $dangky->facebook = $facebook;
+                    $dangky->account_number_bank = $account_number_bank;
+                    $dangky->bank = $bank;
+                    $dangky->open_bank = $open_bank;
+                    $dangky->cmnd= $cmnd;
+                    $dangky->date_range_cmnd =date("Y-m-d", strtotime($date_range_cmnd)); ;
+                    $dangky->issued_by_cmnd =$issued_by_cmnd;
                     customer_insert($dangky);
                     if ($check_redict == 1) {
                         redict(SITE_NAME . '/khach-hang/');
@@ -721,6 +897,7 @@ function _returnInputSelect($name, $value, $data_list, $valid = '', $name_title)
                                                                             style="display: none;width: 10px">';
 
     if (count($data_list) > 0) {
+        $string .= '<option  value=""></option>';
         foreach ($data_list as $row) {
             $selectted = '';
             if ($row->id == $value) {

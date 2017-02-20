@@ -51,11 +51,12 @@ jQuery(function ($) {
         var error_free = true;
         for (var input in form_data) {
             var name_input=form_data[input]['name'];
-            if (name_input != "mr"&&name_input != "resources_to"&&name_input!='category'&&name_input!='nganh_nghe'&&name_input!='chuc_vu'&&name_input!='phong_ban') {
+            if (name_input != "mr"&&name_input != "resources_to"&&name_input!='category'&&name_input!='nganh_nghe'&&name_input!='chuc_vu'&&name_input!='phong_ban'&&name_input!='note') {
                 var element = $("#input_" + form_data[input]['name']);
                 var error = $("#error_" + form_data[input]['name']);
                 var valid = element.hasClass("valid");
                 if (valid == false) {
+                    alert(name_input);
                     element.addClass("input-error").removeClass("valid");
                     error.show();
                     error_free = false

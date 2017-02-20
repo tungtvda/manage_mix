@@ -91,6 +91,8 @@ function show_customer_themmoi($data = array())
         $valid_mobi="";
     }
 
+    $fax=_returnDataEditAdd($data['data_user'],'fax');
+
     $category=_returnDataEditAdd($data['data_user'],'category');
     $data_category=customer_category_getById($category);
     $category_name='';
@@ -177,6 +179,8 @@ function show_customer_themmoi($data = array())
     else{
         $date_range_cmnd=date("d-m-Y", strtotime($date_range_cmnd));
     }
+    $note=_returnDataEditAdd($data['data_user'],'note');
+
     require_once DIR . '/view/default/template/module/customer/themmoi.php';
 }
 

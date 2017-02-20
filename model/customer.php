@@ -1,7 +1,7 @@
 <?php
 class customer
 {
-    public $id,$name,$mr,$avatar,$code,$category,$company_name,$director_name,$address,$phone,$mobi,$email,$company_email,$skype,$facebook,$customer_group,$resources_to,$chuc_vu,$phong_ban,$nganh_nghe,$account_number_bank,$bank,$open_bank,$birthday,$cmnd,$date_range_cmnd,$issued_by_cmnd,$number_passport,$date_range_passport,$issued_by_passport,$expiration_date_passport,$gender,$status,$created,$updated,$created_by,$update_by,$note;
+    public $id,$name,$mr,$avatar,$code,$category,$company_name,$director_name,$address,$phone,$mobi,$fax,$email,$company_email,$skype,$facebook,$customer_group,$resources_to,$chuc_vu,$phong_ban,$nganh_nghe,$account_number_bank,$bank,$open_bank,$birthday,$cmnd,$date_range_cmnd,$issued_by_cmnd,$number_passport,$date_range_passport,$issued_by_passport,$expiration_date_passport,$gender,$status,$created,$updated,$created_by,$update_by,$note;
     public function customer($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
@@ -15,6 +15,7 @@ class customer
     $this->address=isset($data['address'])?$data['address']:'';
     $this->phone=isset($data['phone'])?$data['phone']:'';
     $this->mobi=isset($data['mobi'])?$data['mobi']:'';
+    $this->fax=isset($data['fax'])?$data['fax']:'';
     $this->email=isset($data['email'])?$data['email']:'';
     $this->company_email=isset($data['company_email'])?$data['company_email']:'';
     $this->skype=isset($data['skype'])?$data['skype']:'';
@@ -57,6 +58,7 @@ class customer
             $this->address=addslashes($this->address);
             $this->phone=addslashes($this->phone);
             $this->mobi=addslashes($this->mobi);
+            $this->fax=addslashes($this->fax);
             $this->email=addslashes($this->email);
             $this->company_email=addslashes($this->company_email);
             $this->skype=addslashes($this->skype);
@@ -98,6 +100,7 @@ class customer
             $this->address=stripslashes($this->address);
             $this->phone=stripslashes($this->phone);
             $this->mobi=stripslashes($this->mobi);
+            $this->fax=stripslashes($this->fax);
             $this->email=stripslashes($this->email);
             $this->company_email=stripslashes($this->company_email);
             $this->skype=stripslashes($this->skype);

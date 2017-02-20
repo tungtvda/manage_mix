@@ -105,6 +105,15 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="space-4"></div>
+                        <div class="col-sm-12 col-xs-12 row">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Fax <span style="color: red"></span></label>
+                                <div class="col-sm-9">
+                                    <?php echo _returnInput('fax', $fax, 'valid', 'fax', '', '','') ?>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -232,6 +241,12 @@
 
                             <label for="form-field-select-3"> Nơi cấp CMTND</label>
                             <?php echo _returnInput('issued_by_cmnd', $issued_by_cmnd, 'valid', 'map-marker', '', '','') ?>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 form-group">
+
+                            <label for="form-field-select-3"> Mô tả khách hàng</label><br>
+                            <textarea style="width: 100%" name="note"  rows="8"><?php echo $note?></textarea>
+
                         </div>
 
                     </div>

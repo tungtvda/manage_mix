@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.4.12
 -- http://www.phpmyadmin.net
 --
--- Client :  127.0.0.1
--- Généré le :  Ven 17 Février 2017 à 10:52
--- Version du serveur :  10.1.9-MariaDB
--- Version de PHP :  5.6.15
+-- Host: 127.0.0.1
+-- Generation Time: Feb 20, 2017 at 01:53 PM
+-- Server version: 5.6.25
+-- PHP Version: 5.6.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,24 +17,24 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `manage_mix`
+-- Database: `manage_mix`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `admin`
+-- Table structure for table `admin`
 --
 
-CREATE TABLE `admin` (
+CREATE TABLE IF NOT EXISTS `admin` (
   `Id` int(11) NOT NULL,
   `TenDangNhap` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `Full_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `MatKhau` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `admin`
+-- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`Id`, `TenDangNhap`, `Full_name`, `MatKhau`) VALUES
@@ -43,16 +43,16 @@ INSERT INTO `admin` (`Id`, `TenDangNhap`, `Full_name`, `MatKhau`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `bang_cap`
+-- Table structure for table `bang_cap`
 --
 
-CREATE TABLE `bang_cap` (
+CREATE TABLE IF NOT EXISTS `bang_cap` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `bang_cap`
+-- Dumping data for table `bang_cap`
 --
 
 INSERT INTO `bang_cap` (`id`, `name`) VALUES
@@ -65,10 +65,10 @@ INSERT INTO `bang_cap` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `booking`
+-- Table structure for table `booking`
 --
 
-CREATE TABLE `booking` (
+CREATE TABLE IF NOT EXISTS `booking` (
   `id` int(11) NOT NULL,
   `code_booking` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id_tour` int(11) NOT NULL,
@@ -105,10 +105,10 @@ CREATE TABLE `booking` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `customer`
+-- Table structure for table `customer`
 --
 
-CREATE TABLE `customer` (
+CREATE TABLE IF NOT EXISTS `customer` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `mr` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -120,6 +120,7 @@ CREATE TABLE `customer` (
   `address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `phone` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `mobi` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fax` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `company_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `skype` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -147,30 +148,30 @@ CREATE TABLE `customer` (
   `created_by` int(11) NOT NULL,
   `update_by` int(11) NOT NULL,
   `note` text COLLATE utf8_unicode_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `customer`
+-- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`id`, `name`, `mr`, `avatar`, `code`, `category`, `company_name`, `director_name`, `address`, `phone`, `mobi`, `email`, `company_email`, `skype`, `facebook`, `customer_group`, `resources_to`, `chuc_vu`, `phong_ban`, `nganh_nghe`, `account_number_bank`, `bank`, `open_bank`, `birthday`, `cmnd`, `date_range_cmnd`, `issued_by_cmnd`, `number_passport`, `date_range_passport`, `issued_by_passport`, `expiration_date_passport`, `gender`, `status`, `created`, `updated`, `created_by`, `update_by`, `note`) VALUES
-(1, 'Nguyễn Văn Nam', 'Mr', '/view/default/themes/uploads/customer//1487465846.gif', 'mix_cus_001', 0, '', '', 'Hà Nội', '12334446547', '457568383467', 'tungtv.soict@gmail.com', '', '', '', 0, 0, '', '', 0, '', '', '', '1970-01-01', '', '0000-00-00', '', '', '0000-00-00', '', '0000-00-00', 0, 1, '0000-00-00 00:00:00', '2017-02-19 13:49:37', 14, 0, ''),
-(2, 'Trần Văn Nam', 'Mr', '/view/default/themes/uploads/customer/tungtvxomdamyahoocom/1487382498.jpg', 'mix_cus_002', 0, 'dfgfgfgjghj', '', 'Đông Anh, Hà Nội', '0123456789', '0123456789', 'tungtv.xomdam@yahoo.com', '', '', '', 0, 0, '', '', 0, '', '', '', '2017-02-18', '', '1970-01-01', '', '', '0000-00-00', '', '0000-00-00', 0, 1, '2017-02-18 08:48:17', '2017-02-19 18:51:55', 1, 0, '');
+INSERT INTO `customer` (`id`, `name`, `mr`, `avatar`, `code`, `category`, `company_name`, `director_name`, `address`, `phone`, `mobi`, `fax`, `email`, `company_email`, `skype`, `facebook`, `customer_group`, `resources_to`, `chuc_vu`, `phong_ban`, `nganh_nghe`, `account_number_bank`, `bank`, `open_bank`, `birthday`, `cmnd`, `date_range_cmnd`, `issued_by_cmnd`, `number_passport`, `date_range_passport`, `issued_by_passport`, `expiration_date_passport`, `gender`, `status`, `created`, `updated`, `created_by`, `update_by`, `note`) VALUES
+(1, 'Nguyễn Văn Nam', 'Mr', '/view/default/themes/uploads/customer//1487465846.gif', 'mix_cus_001', 0, '', '', 'Hà Nội', '12334446547', '457568383467', NULL, 'tungtv.soict@gmail.com', '', '', '', 0, 0, '', '', 0, '', '', '', '1970-01-01', '', '0000-00-00', '', '', '0000-00-00', '', '0000-00-00', 0, 1, '0000-00-00 00:00:00', '2017-02-19 13:49:37', 14, 0, ''),
+(2, 'Trần Văn Nam', 'Mr', '/view/default/themes/uploads/customer/tungtvxomdamyahoocom/1487382498.jpg', 'mix_cus_002', 0, 'dfgfgfgjghj', '', 'Đông Anh, Hà Nội', '0123456789', '0123456789', NULL, 'tungtv.xomdam@yahoo.com', '', '', '', 0, 0, '', '', 0, '', '', '', '2017-02-18', '', '1970-01-01', '', '', '0000-00-00', '', '0000-00-00', 0, 1, '2017-02-18 08:48:17', '2017-02-19 18:51:55', 1, 0, '');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `customer_career`
+-- Table structure for table `customer_career`
 --
 
-CREATE TABLE `customer_career` (
+CREATE TABLE IF NOT EXISTS `customer_career` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `position` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `customer_career`
+-- Dumping data for table `customer_career`
 --
 
 INSERT INTO `customer_career` (`id`, `name`, `position`) VALUES
@@ -186,17 +187,17 @@ INSERT INTO `customer_career` (`id`, `name`, `position`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `customer_category`
+-- Table structure for table `customer_category`
 --
 
-CREATE TABLE `customer_category` (
+CREATE TABLE IF NOT EXISTS `customer_category` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `position` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `customer_category`
+-- Dumping data for table `customer_category`
 --
 
 INSERT INTO `customer_category` (`id`, `name`, `position`) VALUES
@@ -207,17 +208,17 @@ INSERT INTO `customer_category` (`id`, `name`, `position`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `customer_resources_to`
+-- Table structure for table `customer_resources_to`
 --
 
-CREATE TABLE `customer_resources_to` (
+CREATE TABLE IF NOT EXISTS `customer_resources_to` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `position` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `customer_resources_to`
+-- Dumping data for table `customer_resources_to`
 --
 
 INSERT INTO `customer_resources_to` (`id`, `name`, `position`) VALUES
@@ -232,10 +233,10 @@ INSERT INTO `customer_resources_to` (`id`, `name`, `position`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `customer_visa`
+-- Table structure for table `customer_visa`
 --
 
-CREATE TABLE `customer_visa` (
+CREATE TABLE IF NOT EXISTS `customer_visa` (
   `id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `customer_visa_card` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -247,10 +248,10 @@ CREATE TABLE `customer_visa` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `danhmuc_1`
+-- Table structure for table `danhmuc_1`
 --
 
-CREATE TABLE `danhmuc_1` (
+CREATE TABLE IF NOT EXISTS `danhmuc_1` (
   `id` int(11) NOT NULL,
   `tour_quoc_te` tinyint(1) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -260,10 +261,10 @@ CREATE TABLE `danhmuc_1` (
   `title` varchar(70) COLLATE utf8_unicode_ci DEFAULT NULL,
   `keyword` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` varchar(170) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `danhmuc_1`
+-- Dumping data for table `danhmuc_1`
 --
 
 INSERT INTO `danhmuc_1` (`id`, `tour_quoc_te`, `name`, `name_url`, `img`, `position`, `title`, `keyword`, `description`) VALUES
@@ -281,10 +282,10 @@ INSERT INTO `danhmuc_1` (`id`, `tour_quoc_te`, `name`, `name_url`, `img`, `posit
 -- --------------------------------------------------------
 
 --
--- Structure de la table `danhmuc_2`
+-- Table structure for table `danhmuc_2`
 --
 
-CREATE TABLE `danhmuc_2` (
+CREATE TABLE IF NOT EXISTS `danhmuc_2` (
   `id` int(11) NOT NULL,
   `danhmuc1_id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -295,10 +296,10 @@ CREATE TABLE `danhmuc_2` (
   `title` varchar(70) COLLATE utf8_unicode_ci DEFAULT NULL,
   `keyword` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` varchar(170) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `danhmuc_2`
+-- Dumping data for table `danhmuc_2`
 --
 
 INSERT INTO `danhmuc_2` (`id`, `danhmuc1_id`, `name`, `name_url`, `img`, `position`, `content_short`, `title`, `keyword`, `description`) VALUES
@@ -388,16 +389,16 @@ INSERT INTO `danhmuc_2` (`id`, `danhmuc1_id`, `name`, `name_url`, `img`, `positi
 -- --------------------------------------------------------
 
 --
--- Structure de la table `dan_toc`
+-- Table structure for table `dan_toc`
 --
 
-CREATE TABLE `dan_toc` (
+CREATE TABLE IF NOT EXISTS `dan_toc` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `dan_toc`
+-- Dumping data for table `dan_toc`
 --
 
 INSERT INTO `dan_toc` (`id`, `name`) VALUES
@@ -459,10 +460,10 @@ INSERT INTO `dan_toc` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `httt`
+-- Table structure for table `httt`
 --
 
-CREATE TABLE `httt` (
+CREATE TABLE IF NOT EXISTS `httt` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `position` int(11) NOT NULL
@@ -471,10 +472,10 @@ CREATE TABLE `httt` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `nguon_tour`
+-- Table structure for table `nguon_tour`
 --
 
-CREATE TABLE `nguon_tour` (
+CREATE TABLE IF NOT EXISTS `nguon_tour` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `position` int(11) NOT NULL
@@ -483,10 +484,10 @@ CREATE TABLE `nguon_tour` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `permison_action`
+-- Table structure for table `permison_action`
 --
 
-CREATE TABLE `permison_action` (
+CREATE TABLE IF NOT EXISTS `permison_action` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `module_id` int(11) NOT NULL,
@@ -494,10 +495,10 @@ CREATE TABLE `permison_action` (
   `status` tinyint(1) NOT NULL,
   `position` int(11) NOT NULL,
   `note` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `permison_action`
+-- Dumping data for table `permison_action`
 --
 
 INSERT INTO `permison_action` (`id`, `name`, `module_id`, `form_id`, `status`, `position`, `note`) VALUES
@@ -528,10 +529,10 @@ INSERT INTO `permison_action` (`id`, `name`, `module_id`, `form_id`, `status`, `
 -- --------------------------------------------------------
 
 --
--- Structure de la table `permison_form`
+-- Table structure for table `permison_form`
 --
 
-CREATE TABLE `permison_form` (
+CREATE TABLE IF NOT EXISTS `permison_form` (
   `id` int(11) NOT NULL,
   `module_id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -541,10 +542,10 @@ CREATE TABLE `permison_form` (
   `active` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` tinyint(1) NOT NULL,
   `position` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `permison_form`
+-- Dumping data for table `permison_form`
 --
 
 INSERT INTO `permison_form` (`id`, `module_id`, `name`, `url`, `action_count`, `dk_count`, `active`, `status`, `position`) VALUES
@@ -558,10 +559,10 @@ INSERT INTO `permison_form` (`id`, `module_id`, `name`, `url`, `action_count`, `
 -- --------------------------------------------------------
 
 --
--- Structure de la table `permison_module`
+-- Table structure for table `permison_module`
 --
 
-CREATE TABLE `permison_module` (
+CREATE TABLE IF NOT EXISTS `permison_module` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `icon` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -571,10 +572,10 @@ CREATE TABLE `permison_module` (
   `active` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` tinyint(1) NOT NULL,
   `position` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `permison_module`
+-- Dumping data for table `permison_module`
 --
 
 INSERT INTO `permison_module` (`id`, `name`, `icon`, `url`, `action_count`, `dk_count`, `active`, `status`, `position`) VALUES
@@ -588,10 +589,10 @@ INSERT INTO `permison_module` (`id`, `name`, `icon`, `url`, `action_count`, `dk_
 -- --------------------------------------------------------
 
 --
--- Structure de la table `tien_te`
+-- Table structure for table `tien_te`
 --
 
-CREATE TABLE `tien_te` (
+CREATE TABLE IF NOT EXISTS `tien_te` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `value` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
@@ -601,16 +602,16 @@ CREATE TABLE `tien_te` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `ton_giao`
+-- Table structure for table `ton_giao`
 --
 
-CREATE TABLE `ton_giao` (
+CREATE TABLE IF NOT EXISTS `ton_giao` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `ton_giao`
+-- Dumping data for table `ton_giao`
 --
 
 INSERT INTO `ton_giao` (`id`, `name`) VALUES
@@ -632,10 +633,10 @@ INSERT INTO `ton_giao` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `tour`
+-- Table structure for table `tour`
 --
 
-CREATE TABLE `tour` (
+CREATE TABLE IF NOT EXISTS `tour` (
   `id` int(11) NOT NULL,
   `tour_quoc_te` tinyint(1) NOT NULL,
   `DanhMuc1Id` int(11) NOT NULL,
@@ -672,10 +673,10 @@ CREATE TABLE `tour` (
   `description` varchar(170) COLLATE utf8_unicode_ci DEFAULT NULL,
   `inclusion` text COLLATE utf8_unicode_ci,
   `exclusion` text COLLATE utf8_unicode_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=170 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `tour`
+-- Dumping data for table `tour`
 --
 
 INSERT INTO `tour` (`id`, `tour_quoc_te`, `DanhMuc1Id`, `DanhMuc2Id`, `danhmuc_multi`, `promotion`, `packages`, `name`, `name_url`, `count_down`, `code`, `img`, `price_sales`, `price`, `price_2`, `price_3`, `price_4`, `price_5`, `price_6`, `durations`, `departure`, `destination`, `departure_time`, `vehicle`, `hotel`, `summary`, `highlights`, `schedule`, `price_list`, `content`, `list_img`, `title`, `keyword`, `description`, `inclusion`, `exclusion`) VALUES
@@ -881,10 +882,10 @@ INSERT INTO `tour` (`id`, `tour_quoc_te`, `DanhMuc1Id`, `DanhMuc2Id`, `danhmuc_m
 -- --------------------------------------------------------
 
 --
--- Structure de la table `user`
+-- Table structure for table `user`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `user_role` int(11) NOT NULL,
@@ -938,14 +939,14 @@ CREATE TABLE `user` (
   `updated` datetime NOT NULL,
   `created_by` int(11) NOT NULL,
   `updated_by` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `name`, `user_role`, `permison_module`, `permison_form`, `permison_action`, `mr`, `address`, `phone`, `mobi`, `user_name`, `user_code`, `user_email`, `password`, `login_two_steps`, `code_login`, `phong_ban`, `chuc_vu`, `nganh_nghe`, `gender`, `birthday`, `avatar`, `skype`, `facebook`, `ngay_lam_viec`, `ngay_chinh_thuc`, `guides`, `guide_card_number`, `tax_code`, `cmnd`, `date_range_cmnd`, `issued_by_cmnd`, `number_passport`, `date_range_passport`, `issued_by_passport`, `expiration_date_passport`, `dan_toc`, `ho_khau_tt`, `hon_nhan`, `bang_cap`, `language`, `account_number_bank`, `bank`, `open_bank`, `religion`, `note`, `status`, `created`, `token_code`, `time_token`, `updated`, `created_by`, `updated_by`) VALUES
-(1, 'Trần Văn Tùng', 1, '5,3,3,3,3,3,3,3,3,3', '2,2,2,2,2,4,4,4,4', '6,4,3,2,1,5,10,9,8,7', 'Mr', 'Đông Anh, Hà Nội', '0981.572.390', '01676331802', 'tungtv', 'media_002', 'tungtv.soict@gmail.com', '7f95556b24cce073d158beea396fa3b0c27d8c3737ffccca605d96a4aef90134edcaa30b833afb8c04d819aceb3d703a270258fca3f4905c7f0fe3af307c3af7', 0, 'fmuS4cDK0L34hRI', 3, 6, 0, 0, '0000-00-00', '/view/default/themes/uploads/users/tungtvsoictgmailcom/1487293606.jpg', 'tungphongtom', 'Tùng Phồng Tôm', '0000-00-00', '0000-00-00', 1, '123423453', '111111111', '013020588', '2007-01-10', 'Công an Hà Nội', '1122334455', '2017-02-01', 'Hà Nội', '2017-02-24', 1, 'Xóm Đầm, Vân Nội, Đông Anh, Hà Nội', 0, 1, 'Việt, Anh, Trung', '1234097686', 'VietComBank', 'Duy Tân, Cầu Giấy, Hà Nội', 1, '', 1, '2016-11-26 09:05:49', '', '2017-02-20 14:28:23', '2017-02-19 18:48:59', 0, ''),
+(1, 'Trần Văn Tùng', 1, '5,3,3,3,3,3,3,3,3,3', '2,2,2,2,2,4,4,4,4', '6,4,3,2,1,5,10,9,8,7', 'Mr', 'Đông Anh, Hà Nội', '0981.572.390', '01676331802', 'tungtv', 'media_002', 'tungtv.soict@gmail.com', '7f95556b24cce073d158beea396fa3b0c27d8c3737ffccca605d96a4aef90134edcaa30b833afb8c04d819aceb3d703a270258fca3f4905c7f0fe3af307c3af7', 0, 'fmuS4cDK0L34hRI', 3, 6, 0, 0, '0000-00-00', '/view/default/themes/uploads/users/tungtvsoictgmailcom/1487293606.jpg', 'tungphongtom', 'Tùng Phồng Tôm', '0000-00-00', '0000-00-00', 1, '123423453', '111111111', '013020588', '2007-01-10', 'Công an Hà Nội', '1122334455', '2017-02-01', 'Hà Nội', '2017-02-24', 1, 'Xóm Đầm, Vân Nội, Đông Anh, Hà Nội', 0, 1, 'Việt, Anh, Trung', '1234097686', 'VietComBank', 'Duy Tân, Cầu Giấy, Hà Nội', 1, '', 1, '2016-11-26 09:05:49', '', '2017-02-20 19:52:26', '2017-02-19 18:48:59', 0, ''),
 (12, 'Trần Thanh Tuyền', 1, '5,3,3,3,3,3,3,3,3,3,3,3,3,3,3', '2,2,2,2,2,2,3,3,3,3,4,4,4,4', '6,5,1,2,3,4,15,11,12,13,14,7,8,9,10', 'Mrs', 'Đông Anh, Hà Nội', '0967.684.794', '', 'tuyentt', 'media_001', 'tuyenit.sp2@gmail.com', '7f95556b24cce073d158beea396fa3b0c27d8c3737ffccca605d96a4aef90134edcaa30b833afb8c04d819aceb3d703a270258fca3f4905c7f0fe3af307c3af7', 0, '', 0, 1, 0, 0, '0000-00-00', '/view/default/themes/uploads/users/tuyenitsp2gmailcom/1486626864.jpg', '', '', '0000-00-00', '0000-00-00', 0, '', '', '', '0000-00-00', '', '', '0000-00-00', '', '0000-00-00', 1, '', 0, 1, '0', '0', '', '', 1, '', 1, '2017-02-09 14:54:23', '', '2017-02-09 14:55:51', '2017-02-19 18:48:57', 1, ''),
 (14, 'Đỗ Xuân Sơn', 0, '5,2,2,2,2,3', '5,5,5,5,2', '6,16,17,18,19,15', '', '173 Nguyễn Ngọc Vũ, Hà Nội', '094.3838.222', '', 'sondx', 'bod_001', 'info@mixtourist.com.vn', '7f95556b24cce073d158beea396fa3b0c27d8c3737ffccca605d96a4aef90134edcaa30b833afb8c04d819aceb3d703a270258fca3f4905c7f0fe3af307c3af7', 0, '', 0, 0, 0, 0, '1987-02-19', '/view/default/themes/uploads/users/infomixtouristcomvn/1486785815.jpg', '', '', '2017-02-13', '2017-02-25', 0, '', '', '', '0000-00-00', '', '', '0000-00-00', '', '0000-00-00', 1, '', 0, 1, '0', '0', '', '', 1, '', 1, '2017-02-11 11:03:34', '', '2017-02-19 20:42:18', '2017-02-19 20:41:28', 1, ''),
 (15, 'Minh Đỗ', 1, '', '', '', 'Mr', 'Linh Đàm, Hà Nội', '01667545995', '', 'minhdt', 'BOD_002', 'dothanhminh54@gmail.com', '7f95556b24cce073d158beea396fa3b0c27d8c3737ffccca605d96a4aef90134edcaa30b833afb8c04d819aceb3d703a270258fca3f4905c7f0fe3af307c3af7', 1, '', 0, 0, 0, 0, '0000-00-00', '/view/default/themes/uploads/users/dothanhminh54gmailcom/1487125613.jpg', '', '', '0000-00-00', '0000-00-00', 0, '', '', '', '0000-00-00', '', '', '0000-00-00', '', '0000-00-00', 0, '', 0, 0, '', '', '', '', 0, '', 1, '2017-02-15 09:26:52', '', '0000-00-00 00:00:00', '2017-02-19 18:48:56', 1, '');
@@ -953,18 +954,18 @@ INSERT INTO `user` (`id`, `name`, `user_role`, `permison_module`, `permison_form
 -- --------------------------------------------------------
 
 --
--- Structure de la table `user_chucvu`
+-- Table structure for table `user_chucvu`
 --
 
-CREATE TABLE `user_chucvu` (
+CREATE TABLE IF NOT EXISTS `user_chucvu` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `position` int(11) NOT NULL,
   `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `user_chucvu`
+-- Dumping data for table `user_chucvu`
 --
 
 INSERT INTO `user_chucvu` (`id`, `name`, `position`, `description`) VALUES
@@ -978,18 +979,18 @@ INSERT INTO `user_chucvu` (`id`, `name`, `position`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `user_phongban`
+-- Table structure for table `user_phongban`
 --
 
-CREATE TABLE `user_phongban` (
+CREATE TABLE IF NOT EXISTS `user_phongban` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `position` int(11) NOT NULL,
   `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Contenu de la table `user_phongban`
+-- Dumping data for table `user_phongban`
 --
 
 INSERT INTO `user_phongban` (`id`, `name`, `position`, `description`) VALUES
@@ -1005,10 +1006,10 @@ INSERT INTO `user_phongban` (`id`, `name`, `position`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `user_visa`
+-- Table structure for table `user_visa`
 --
 
-CREATE TABLE `user_visa` (
+CREATE TABLE IF NOT EXISTS `user_visa` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `customer_visa_card` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -1018,91 +1019,91 @@ CREATE TABLE `user_visa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Index pour les tables exportées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `admin`
+-- Indexes for table `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`Id`);
 
 --
--- Index pour la table `bang_cap`
+-- Indexes for table `bang_cap`
 --
 ALTER TABLE `bang_cap`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `booking`
+-- Indexes for table `booking`
 --
 ALTER TABLE `booking`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `customer`
+-- Indexes for table `customer`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `customer_career`
+-- Indexes for table `customer_career`
 --
 ALTER TABLE `customer_career`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `customer_category`
+-- Indexes for table `customer_category`
 --
 ALTER TABLE `customer_category`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `customer_resources_to`
+-- Indexes for table `customer_resources_to`
 --
 ALTER TABLE `customer_resources_to`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `customer_visa`
+-- Indexes for table `customer_visa`
 --
 ALTER TABLE `customer_visa`
   ADD PRIMARY KEY (`id`),
   ADD KEY `customer_visa_id_foreign` (`customer_id`);
 
 --
--- Index pour la table `danhmuc_1`
+-- Indexes for table `danhmuc_1`
 --
 ALTER TABLE `danhmuc_1`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `danhmuc_2`
+-- Indexes for table `danhmuc_2`
 --
 ALTER TABLE `danhmuc_2`
   ADD PRIMARY KEY (`id`),
   ADD KEY `danhmuc1_id` (`danhmuc1_id`);
 
 --
--- Index pour la table `dan_toc`
+-- Indexes for table `dan_toc`
 --
 ALTER TABLE `dan_toc`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `httt`
+-- Indexes for table `httt`
 --
 ALTER TABLE `httt`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `nguon_tour`
+-- Indexes for table `nguon_tour`
 --
 ALTER TABLE `nguon_tour`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `permison_action`
+-- Indexes for table `permison_action`
 --
 ALTER TABLE `permison_action`
   ADD PRIMARY KEY (`id`),
@@ -1110,32 +1111,32 @@ ALTER TABLE `permison_action`
   ADD KEY `form_id` (`form_id`);
 
 --
--- Index pour la table `permison_form`
+-- Indexes for table `permison_form`
 --
 ALTER TABLE `permison_form`
   ADD PRIMARY KEY (`id`),
   ADD KEY `module_id` (`module_id`);
 
 --
--- Index pour la table `permison_module`
+-- Indexes for table `permison_module`
 --
 ALTER TABLE `permison_module`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `tien_te`
+-- Indexes for table `tien_te`
 --
 ALTER TABLE `tien_te`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `ton_giao`
+-- Indexes for table `ton_giao`
 --
 ALTER TABLE `ton_giao`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `tour`
+-- Indexes for table `tour`
 --
 ALTER TABLE `tour`
   ADD PRIMARY KEY (`id`),
@@ -1143,187 +1144,187 @@ ALTER TABLE `tour`
   ADD KEY `DanhMuc2Id` (`DanhMuc2Id`);
 
 --
--- Index pour la table `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `user_chucvu`
+-- Indexes for table `user_chucvu`
 --
 ALTER TABLE `user_chucvu`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `user_phongban`
+-- Indexes for table `user_phongban`
 --
 ALTER TABLE `user_phongban`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `user_visa`
+-- Indexes for table `user_visa`
 --
 ALTER TABLE `user_visa`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_visa_id_foreign` (`user_id`);
 
 --
--- AUTO_INCREMENT pour les tables exportées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `admin`
+-- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT pour la table `bang_cap`
+-- AUTO_INCREMENT for table `bang_cap`
 --
 ALTER TABLE `bang_cap`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
--- AUTO_INCREMENT pour la table `booking`
+-- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `customer`
+-- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
--- AUTO_INCREMENT pour la table `customer_career`
+-- AUTO_INCREMENT for table `customer_career`
 --
 ALTER TABLE `customer_career`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
--- AUTO_INCREMENT pour la table `customer_category`
+-- AUTO_INCREMENT for table `customer_category`
 --
 ALTER TABLE `customer_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT pour la table `customer_resources_to`
+-- AUTO_INCREMENT for table `customer_resources_to`
 --
 ALTER TABLE `customer_resources_to`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
--- AUTO_INCREMENT pour la table `customer_visa`
+-- AUTO_INCREMENT for table `customer_visa`
 --
 ALTER TABLE `customer_visa`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `danhmuc_1`
+-- AUTO_INCREMENT for table `danhmuc_1`
 --
 ALTER TABLE `danhmuc_1`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
--- AUTO_INCREMENT pour la table `danhmuc_2`
+-- AUTO_INCREMENT for table `danhmuc_2`
 --
 ALTER TABLE `danhmuc_2`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=86;
 --
--- AUTO_INCREMENT pour la table `dan_toc`
+-- AUTO_INCREMENT for table `dan_toc`
 --
 ALTER TABLE `dan_toc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=55;
 --
--- AUTO_INCREMENT pour la table `httt`
+-- AUTO_INCREMENT for table `httt`
 --
 ALTER TABLE `httt`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `nguon_tour`
+-- AUTO_INCREMENT for table `nguon_tour`
 --
 ALTER TABLE `nguon_tour`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `permison_action`
+-- AUTO_INCREMENT for table `permison_action`
 --
 ALTER TABLE `permison_action`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
 --
--- AUTO_INCREMENT pour la table `permison_form`
+-- AUTO_INCREMENT for table `permison_form`
 --
 ALTER TABLE `permison_form`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
--- AUTO_INCREMENT pour la table `permison_module`
+-- AUTO_INCREMENT for table `permison_module`
 --
 ALTER TABLE `permison_module`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
--- AUTO_INCREMENT pour la table `tien_te`
+-- AUTO_INCREMENT for table `tien_te`
 --
 ALTER TABLE `tien_te`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `ton_giao`
+-- AUTO_INCREMENT for table `ton_giao`
 --
 ALTER TABLE `ton_giao`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
--- AUTO_INCREMENT pour la table `tour`
+-- AUTO_INCREMENT for table `tour`
 --
 ALTER TABLE `tour`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=170;
 --
--- AUTO_INCREMENT pour la table `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
--- AUTO_INCREMENT pour la table `user_chucvu`
+-- AUTO_INCREMENT for table `user_chucvu`
 --
 ALTER TABLE `user_chucvu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
--- AUTO_INCREMENT pour la table `user_phongban`
+-- AUTO_INCREMENT for table `user_phongban`
 --
 ALTER TABLE `user_phongban`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
--- AUTO_INCREMENT pour la table `user_visa`
+-- AUTO_INCREMENT for table `user_visa`
 --
 ALTER TABLE `user_visa`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- Contraintes pour les tables exportées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `customer_visa`
+-- Constraints for table `customer_visa`
 --
 ALTER TABLE `customer_visa`
   ADD CONSTRAINT `customer_visa_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE;
 
 --
--- Contraintes pour la table `danhmuc_2`
+-- Constraints for table `danhmuc_2`
 --
 ALTER TABLE `danhmuc_2`
   ADD CONSTRAINT `danhmuc_2_ibfk_1` FOREIGN KEY (`danhmuc1_id`) REFERENCES `danhmuc_1` (`id`);
 
 --
--- Contraintes pour la table `permison_action`
+-- Constraints for table `permison_action`
 --
 ALTER TABLE `permison_action`
   ADD CONSTRAINT `permison_action_ibfk_1` FOREIGN KEY (`module_id`) REFERENCES `permison_module` (`id`),
   ADD CONSTRAINT `permison_action_ibfk_2` FOREIGN KEY (`form_id`) REFERENCES `permison_form` (`id`);
 
 --
--- Contraintes pour la table `permison_form`
+-- Constraints for table `permison_form`
 --
 ALTER TABLE `permison_form`
   ADD CONSTRAINT `permison_form_ibfk_1` FOREIGN KEY (`module_id`) REFERENCES `permison_module` (`id`);
 
 --
--- Contraintes pour la table `tour`
+-- Constraints for table `tour`
 --
 ALTER TABLE `tour`
   ADD CONSTRAINT `tour_ibfk_1` FOREIGN KEY (`DanhMuc1Id`) REFERENCES `danhmuc_1` (`id`),
   ADD CONSTRAINT `tour_ibfk_2` FOREIGN KEY (`DanhMuc2Id`) REFERENCES `danhmuc_2` (`id`);
 
 --
--- Contraintes pour la table `user_visa`
+-- Constraints for table `user_visa`
 --
 ALTER TABLE `user_visa`
   ADD CONSTRAINT `user_visa_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;

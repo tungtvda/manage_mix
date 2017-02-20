@@ -29,7 +29,7 @@ function view_customer($data)
 //
 function showTableHeader()
 {
-    return '<th>id</th><th>name</th><th>avatar</th><th>code</th><th>address</th><th>phone</th><th>mobi</th><th>email</th>';
+    return '<th>id</th><th>name</th><th>avatar</th><th>code</th>';
 }
 //
 function showTableBody($data)
@@ -42,10 +42,6 @@ function showTableBody($data)
         $TableBody.="<td>".$obj->name."</td>";
         $TableBody.="<td><img src=\"".$obj->avatar."\" width=\"50px\" height=\"50px\"/> </td>";
         $TableBody.="<td>".$obj->code."</td>";
-        $TableBody.="<td>".$obj->address."</td>";
-        $TableBody.="<td>".$obj->phone."</td>";
-        $TableBody.="<td>".$obj->mobi."</td>";
-        $TableBody.="<td>".$obj->email."</td>";
         $TableBody.="<td><a href=\"?action=edit&id=".$obj->id."\" title=\"Edit\"><img src=\"".SITE_NAME."/view/admin/Themes/images/pencil.png\" alt=\"Edit\"></a>";
         $TableBody.="<a href=\"?action=delete&id=".$obj->id."\" title=\"Delete\" onClick=\"return confirm('Bạn có chắc chắc muốn xóa?')\"><img src=\"".SITE_NAME."/view/admin/Themes/images/cross.png\" alt=\"Delete\"></a> ";
         $TableBody.="</td>";
@@ -67,6 +63,7 @@ function showFrom($form,$ListKey=array())
     $str_from.='<p><label>address</label><input class="text-input small-input" type="text"  name="address" value="'.(($form!=false)?$form->address:'').'" /></p>';
     $str_from.='<p><label>phone</label><input class="text-input small-input" type="text"  name="phone" value="'.(($form!=false)?$form->phone:'').'" /></p>';
     $str_from.='<p><label>mobi</label><input class="text-input small-input" type="text"  name="mobi" value="'.(($form!=false)?$form->mobi:'').'" /></p>';
+    $str_from.='<p><label>fax</label><input class="text-input small-input" type="text"  name="fax" value="'.(($form!=false)?$form->fax:'').'" /></p>';
     $str_from.='<p><label>email</label><input class="text-input small-input" type="text"  name="email" value="'.(($form!=false)?$form->email:'').'" /></p>';
     $str_from.='<p><label>company_email</label><input class="text-input small-input" type="text"  name="company_email" value="'.(($form!=false)?$form->company_email:'').'" /></p>';
     $str_from.='<p><label>skype</label><input class="text-input small-input" type="text"  name="skype" value="'.(($form!=false)?$form->skype:'').'" /></p>';

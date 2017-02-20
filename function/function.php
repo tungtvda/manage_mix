@@ -659,6 +659,7 @@ function _returnCreateCustomerFull($check_redict)
         $address = _returnPostParamSecurity('address');
         $phone = _returnPostParamSecurity('phone');
         $mobi = _returnPostParamSecurity('mobi');
+        $fax=_returnPostParamSecurity('fax');
         $category = _returnPostParamSecurity('category');
         $resources_to = _returnPostParamSecurity('resources_to');
         $nganh_nghe = _returnPostParamSecurity('nganh_nghe');
@@ -667,7 +668,7 @@ function _returnCreateCustomerFull($check_redict)
         $phong_ban = _returnPostParamSecurity('phong_ban');
         $director_name = _returnPostParamSecurity('director_name');
         $company_email = _returnPostParamSecurity('company_email');
-       ;
+
         $skype = _returnPostParamSecurity('skype');
         $facebook = _returnPostParamSecurity('facebook');
         $account_number_bank = _returnPostParamSecurity('account_number_bank');
@@ -676,7 +677,7 @@ function _returnCreateCustomerFull($check_redict)
         $cmnd = _returnPostParamSecurity('cmnd');
         $date_range_cmnd = _returnPostParamSecurity('date_range_cmnd');
         $issued_by_cmnd = _returnPostParamSecurity('issued_by_cmnd');
-
+        $note=_returnPostParamSecurity('note');
 
         $avatar = '';
 
@@ -709,6 +710,7 @@ function _returnCreateCustomerFull($check_redict)
                         if ($mr != '') {
                             $new_obj->mr = $mr;
                         }
+                        $new_obj->fax = $fax;
                         $folder = LocDau($data_user_update[0]->user_email);
                         $target_dir = _returnFolderRoot() . "/view/default/themes/uploads/customer/" . $folder . '/';
                         $avatar = _returnUploadImg($target_dir, 'avatar', "/view/default/themes/uploads/customer/" . $folder . '/');
@@ -747,6 +749,7 @@ function _returnCreateCustomerFull($check_redict)
                         $new_obj->cmnd= $cmnd;
                         $new_obj->date_range_cmnd =date("Y-m-d", strtotime($date_range_cmnd)); ;
                         $new_obj->issued_by_cmnd =$issued_by_cmnd;
+                        $new_obj->note = $note;
                         customer_update($new_obj);
                         if ($check_redict == 1) {
                             redict(SITE_NAME . '/khach-hang/');
@@ -786,6 +789,7 @@ function _returnCreateCustomerFull($check_redict)
                     $dangky->mobi = $mobi;
                     $dangky->status = 1;
                     $dangky->phone = $phone;
+                    $dangky->fax = $fax;
                     $dangky->created_by = $_SESSION['user_id'];
                     $dangky->category = $category;
                     $dangky->resources_to = $resources_to;
@@ -803,6 +807,7 @@ function _returnCreateCustomerFull($check_redict)
                     $dangky->cmnd= $cmnd;
                     $dangky->date_range_cmnd =date("Y-m-d", strtotime($date_range_cmnd)); ;
                     $dangky->issued_by_cmnd =$issued_by_cmnd;
+                    $dangky->note = $note;
                     customer_insert($dangky);
                     if ($check_redict == 1) {
                         redict(SITE_NAME . '/khach-hang/');

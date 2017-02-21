@@ -19,7 +19,7 @@ _returnCheckPermison(3, 2);
 
 if(isset($_GET['id'])&&$_GET['id']!='')
 {   $data['action']=2;
-    if (_returnCheckAction(17) == 0) {
+    if (_returnCheckAction(21) == 0) {
         redict(_returnLinkDangNhap());
     }
 //    echo $_GET['id'];
@@ -28,9 +28,9 @@ if(isset($_GET['id'])&&$_GET['id']!='')
 
     if(count($data['data_user'])==0)
     {
-        redict(SITE_NAME.'/khach-hang/');
+        redict(SITE_NAME.'/booking/');
     }
-    $url_bread = '<li><a href="'.SITE_NAME.'/khach-hang/">Khách hàng</a></li><li class="active">Chỉnh sửa khách hàng "'.$data['data_user'][0]->name.'"</li>';
+    $url_bread = '<li><a href="'.SITE_NAME.'/booking/">Danh sách đặt tour</a></li><li class="active">Chỉnh sửa khách hàng "'.$data['data_user'][0]->name.'"</li>';
     $data['title'] = 'Chỉnh sửa khách hàng "'.$data['data_user'][0]->name.'"';
 }else{
     if (_returnCheckAction(1) == 0) {
@@ -38,22 +38,20 @@ if(isset($_GET['id'])&&$_GET['id']!='')
     }
     $data['data_user']='';
     $data['action']=1;
-    $url_bread = '<li><a href="'.SITE_NAME.'/khach-hang/">Khách hàng</a></li><li class="active">Thêm khách hàng</li>';
-    $data['title'] = 'Thêm khách hàng';
+    $url_bread = '<li><a href="'.SITE_NAME.'/booking/">Danh sách đặt tour</a></li><li class="active">Đặt tour</li>';
+    $data['title'] = 'Đặt tour';
 }
 
 $_SESSION['link_redict'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 $data['breadcrumbs'] = $url_bread;
 
-$data['module_valid'] = "customer";
-$count = 8;
-_returnCreateCustomerFull(1);
+$data['module_valid'] = "booking";
 show_header($data);
-show_left($data, 'khach_hang', 'customer_list');
+show_left($data, 'booking', 'booking_list');
 show_breadcrumb($data);
 show_navigation($data);
-show_customer_themmoi($data);
+show_booking_themmoi($data);
 show_footer($data);
 
 show_valid_form($data);

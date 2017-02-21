@@ -23,9 +23,9 @@
                         <?php if (_returnCheckAction(21) == 1) { ?>
                             <a href="<?php echo SITE_NAME ?>/booking/dat-tour"
                                class="btn btn-white  btn-create-new-tab btn-create-new-tab-hover">
-                                <i class="ace-icon fa fa-plus bigger-120 "></i>
-                                Create new tab
-                                <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+                                <i class="ace-icon fa fa-plane bigger-120 "></i>
+                                Đặt tour
+                                <i class="ace-icon fa fa-cart-plus icon-on-right"></i>
                             </a>
                         <?php } ?>
                         <a href="" class="btn btn-white  btn-refresh">
@@ -54,7 +54,7 @@
                                 <li class="divider"></li>
                                 <?php if (_returnCheckAction(21) == 1) { ?>
                                     <li>
-                                        <a href="<?php echo SITE_NAME ?>/booking/them-moi">Đặt tour</a>
+                                        <a href="<?php echo SITE_NAME ?>/booking/dat-tour">Đặt tour</a>
                                     </li>
                                 <?php } ?>
                             </ul>
@@ -88,11 +88,11 @@
                             <th>Mã booking</th>
                             <th>Tên Tour</th>
                             <th>Tên khách hàng</th>
-                            <th>Phone</th>
-                            <th>Mobile</th>
-                            <th>Skype</th>
-                            <th>Address</th>
-                            <th>Status</th>
+                            <th>Trạng thái</th>
+                            <th>Tổng tiền</th>
+                            <th>Còn lại</th>
+                            <th>Sales</th>
+                            <th>Người tạo</th>
 
                             <th>Action</th>
 
@@ -106,7 +106,7 @@
                                     <tr class="row_<?php echo $row->id?>">
                                         <td class="center">
                                             <label class="pos-rel">
-                                                <input type="checkbox" class="ace click_check_list" name_record="<?php echo $row->name ?>" id="check_<?php echo $dem ?>" name="check_box_action[]"
+                                                <input type="checkbox" class="ace click_check_list" name_record="<?php echo $row->code_booking ?>" id="check_<?php echo $dem ?>" name="check_box_action[]"
                                                        value="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"/>
                                                 <span class="lbl"></span>
                                             </label>
@@ -115,44 +115,36 @@
                                             <?php echo $dem; ?>
                                         </td>
                                         <td>
-                                            <a href="<?php echo SITE_NAME ?>/booking/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"><?php echo $row->name.' - '.$row->code ?></a>
+                                            <a href="<?php echo SITE_NAME ?>/booking/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"><?php echo $row->code_booking?></a>
                                         </td>
                                         <td style="text-align: center">
-                                            <?php
-                                            if ($row->avatar == '') {
-                                                $link_ava = SITE_NAME . '/view/default/themes/images/no-avatar.png';
-                                            } else {
-                                                $link_ava = SITE_NAME . $row->avatar;
-                                            }
-                                            ?>
-                                            <img title="<?php echo $row->name ?>" style="width: 50px"
-                                                 src="<?php echo $link_ava ?>"><label
-                                                style="display: none"><?php echo $row->name ?></label>
+                                            <a href="<?php echo SITE_NAME ?>/booking/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"><?php echo $row->name_tour?></a>
                                         </td>
-                                        <td><?php echo $row->email ?></td>
-                                        <td><?php echo $row->phone ?></td>
-                                        <td><?php echo $row->mobi ?></td>
-                                        <td><?php echo $row->skype ?></td>
-                                        <td >
-                                            <?php echo $row->address ?>
-                                        </td>
+                                        <td><?php echo $row->id_customer ?></td>
                                         <td>
                                             <span hidden><?php echo (int)$row->status ?></span>
-                                    <?php if (_returnCheckAction(22) == 1) { ?>
-                                            <label>
+                                            <?php if (_returnCheckAction(22) == 1) { ?>
+                                                <label>
 
-                                                <input <?php if ($row->status) echo 'checked' ?>
-                                                    id="checkbox_status_<?php echo $row->id ?>"
-                                                    countid="<?php echo $row->id ?>"
-                                                    name_record="<?php echo $row->name ?>" table="customer" field="status" action="customer_update"
-                                                    class="ace ace-switch ace-switch-7 checkbox_status" type="checkbox">
-                                                <span class="lbl"></span>
-                                            </label>
-                                    <?php }else{?>
-                                        <?php if ($row->status == 0) echo '<i  style="font-size: 20px;" class="fa fa-check-square-o "></i>' ?>
-                                        <?php if ($row->status == 1) echo ' <i  style="font-size: 20px;color:green" class="fa fa-check-square-o "></i>' ?>
-                                        <?php }?>
+                                                    <input <?php if ($row->status) echo 'checked' ?>
+                                                        id="checkbox_status_<?php echo $row->id ?>"
+                                                        countid="<?php echo $row->id ?>"
+                                                        name_record="<?php echo $row->code_booking ?>" table="customer" field="status" action="customer_update"
+                                                        class="ace ace-switch ace-switch-7 checkbox_status" type="checkbox">
+                                                    <span class="lbl"></span>
+                                                </label>
+                                            <?php }else{?>
+                                                <?php if ($row->status == 0) echo '<i  style="font-size: 20px;" class="fa fa-check-square-o "></i>' ?>
+                                                <?php if ($row->status == 1) echo ' <i  style="font-size: 20px;color:green" class="fa fa-check-square-o "></i>' ?>
+                                            <?php }?>
                                         </td>
+                                        <td><?php echo $row->total_price_thuc_te ?></td>
+                                        <td><?php echo $row->tien_thanh_toan ?></td>
+                                        <td><?php echo $row->user_id ?></td>
+                                        <td >
+                                            <?php echo $row->created_by ?>
+                                        </td>
+
                                         <!--                                        <td>-->
                                         <?php //echo _returnDateFormatConvert($row->created) ?><!--</td>-->
 
@@ -177,7 +169,7 @@
                                                 <?php if (_returnCheckAction(23) == 1) { ?>
                                                     <a title="Xóa" class="red delete_record" href="javascript:void(0)"
                                                        deleteid="<?php echo $row->id ?>"
-                                                       name_record_delete="<?php echo $row->name ?>"
+                                                       name_record_delete="<?php echo $row->code_booking ?>"
                                                        url_delete="<?php echo SITE_NAME ?>/booking/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
                                                         <i class="ace-icon fa fa-trash-o bigger-130"></i>
                                                     </a>
@@ -195,7 +187,7 @@
 
                                                         <?php if (_returnCheckAction(20) == 1) { ?>
                                                             <li>
-                                                                <a class="blue view_popup_detail" role="button" name_record="<?php echo $row->name ?>" data-toggle="modal" table="user" countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                                <a class="blue view_popup_detail" role="button" name_record="<?php echo $row->code_booking ?>" data-toggle="modal" table="user" countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
                                                                    href="#modal-form"
                                                                    title="Chi tiết">
                                                                     <i class="ace-icon fa fa-eye-slash bigger-130"></i>
@@ -216,7 +208,7 @@
                                                             <li>
                                                                 <a href="javascript:void(0)"
                                                                    deleteid="<?php echo $row->id ?>"
-                                                                   name_record_delete="<?php echo $row->name ?>"
+                                                                   name_record_delete="<?php echo $row->code_booking ?>"
                                                                    url_delete="<?php echo SITE_NAME ?>/booking/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
                                                                    class="tooltip-error delete_record" title="Xóa">
 																				<span class="red">

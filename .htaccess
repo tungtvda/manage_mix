@@ -32,3 +32,6 @@ RewriteRule ^khach-hang/$ controller/default/customer/customer.php
 RewriteRule ^khach-hang/them-moi controller/default/customer/themmoi.php
 RewriteRule ^khach-hang/sua controller/default/customer/themmoi.php
 RewriteRule ^khach-hang/xoa$ controller/default/customer/delete.php
+
+RewriteRule ^booking/$ controller/default/booking/booking.php
+RewriteRule ^booking/dat-tour$ controller/default/booking/themmoi.php

@@ -45,6 +45,16 @@ function show_booking_themmoi($data = array())
     }
     $data_list_httt=httt_getByTop('','','position asc');
 
+    $status=_returnDataEditAdd($data['data_user'],'status');
+    $data_status=trang_thai_don_hang_getById($status);
+    $status_name='';
+    if(count($data_status)>0){
+        $status_name=$data_status[0]->name;
+    }
+    $data_list_status=trang_thai_don_hang_getByTop('','','position asc');
+
+    $data_list_customer_category=customer_category_getByTop('','','position asc');
+
     require_once DIR . '/view/default/template/module/booking/themmoi.php';
 }
 

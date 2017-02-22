@@ -1,33 +1,21 @@
 jQuery(function ($) {
+    url = $('#url_input').val();
 
-    $( "#tags" ).autocomplete({
-        source: availableTags()
+    $('body').on("input", '#input_name_customner', function () {
+        removeValue();
     });
-});
-function availableTags(){
-    return available = [
-        "ActionScript",
-        "AppleScript",
-        "Asp",
-        "BASIC",
-        "C",
-        "C++",
-        "Clojure",
-        "COBOL",
-        "ColdFusion",
-        "Erlang",
-        "Fortran",
-        "Groovy",
-        "Haskell",
-        "Java",
-        "JavaScript",
-        "Lisp",
-        "Perl",
-        "PHP",
-        "Python",
-        "Ruby",
-        "Scala",
-        "Scheme"
-    ];
-}
+    $('body').on("keyup", '#input_name_customner', function () {
+        removeValue();
+    });
 
+    //$('i').ggtooltip();
+});
+function removeValue(){
+    $('#input_id_customner').val('');
+    $('#input_address').val('');
+    $('#input_phone').val('');
+    $('#input_fax').val('');
+    $('#input_email').val('');
+    $(".nhom_khach_hang .chosen-default span").html('Nhóm khách hàng ...');
+    $('#input_id_category').val('');
+}

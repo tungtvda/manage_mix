@@ -267,10 +267,46 @@
         });
 
         $('#spinner1').ace_spinner({
-                value: 0,
+                value: '',
                 min: 0,
                 max: 200,
-                step: 10,
+                step: 1,
+                btn_up_class: 'btn-info',
+                btn_down_class: 'btn-info'
+            })
+            .closest('.ace-spinner')
+            .on('changed.fu.spinbox', function () {
+                //console.log($('#spinner1').val())
+            });
+        $('#input_num_nguoi_lon').ace_spinner({
+                value: '',
+                min: 0,
+                max: 200,
+                step: 1,
+                btn_up_class: 'btn-info',
+                btn_down_class: 'btn-info'
+            })
+            .closest('.ace-spinner')
+            .on('changed.fu.spinbox', function () {
+                //console.log($('#spinner1').val())
+            });
+        $('#input_num_tre_em').ace_spinner({
+                value: '',
+                min: 0,
+                max: 200,
+                step: 1,
+                btn_up_class: 'btn-info',
+                btn_down_class: 'btn-info'
+            })
+            .closest('.ace-spinner')
+            .on('changed.fu.spinbox', function () {
+                //console.log($('#spinner1').val())
+            });
+        $('#input_num_tre_em_5').ace_spinner({
+                value: '',
+                min: 0,
+                max: 200,
+                step: 1,
                 btn_up_class: 'btn-info',
                 btn_down_class: 'btn-info'
             })

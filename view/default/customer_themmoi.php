@@ -110,7 +110,7 @@ function show_customer_themmoi($data = array())
     $data_list_resources_to=customer_resources_to_getByTop('','','position asc');
 
     $nganh_nghe=_returnDataEditAdd($data['data_user'],'nganh_nghe');
-    $data_nganh_nghe=customer_resources_to_getById($nganh_nghe);
+    $data_nganh_nghe=customer_career_getById($nganh_nghe);
     $nganh_nghe_name='';
     if(count($data_nganh_nghe)>0){
         $nganh_nghe_name=$data_nganh_nghe[0]->name;

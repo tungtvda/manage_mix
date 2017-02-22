@@ -28,6 +28,23 @@ function show_booking_themmoi($data = array())
         $show_phone="hidden";
         $disabled='';
     }
+
+    $tien_te=_returnDataEditAdd($data['data_user'],'tien_te');
+    $data_tien_te=tien_te_getById($tien_te);
+    $tien_te_name='';
+    if(count($data_tien_te)>0){
+        $tien_te_name=$data_tien_te[0]->name;
+    }
+    $data_list_tien_tee=tien_te_getByTop('','','position asc');
+
+    $hinh_thuc_thanh_toan=_returnDataEditAdd($data['data_user'],'hinh_thuc_thanh_toan');
+    $data_httt=httt_getById($hinh_thuc_thanh_toan);
+    $httt_name='';
+    if(count($data_httt)>0){
+        $httt_name=$data_httt[0]->name;
+    }
+    $data_list_httt=httt_getByTop('','','position asc');
+
     require_once DIR . '/view/default/template/module/booking/themmoi.php';
 }
 

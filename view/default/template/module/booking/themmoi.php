@@ -126,8 +126,54 @@
                                 <i class="ace-icon fa fa-plane fa-plane blue bigger-125"></i>
                                 Thông tin tour
                             </h3>
-                            <div class="row col-xs-12">
-                                sadfasdfsadfsdaf
+                            <div class="row col-xs-12 div_content">
+                                <div class="form-group border-sloid-1-x" style="float: left; width: 100%;    margin-left: 0px;margin-right: 0px;">
+                                    <div style="float: left;width: 66%">
+                                           <span class="input-icon width_100">
+                                                <input id="input_name_tour" type="text" name="name_tour" placeholder="Nhập tên tour ..." style="width:100%;max-width:600px;outline:0" autocomplete="off">
+                                                 <i class="ace-icon fa fa-plane blue"></i>
+                                             </span>
+                                        <input hidden id="input_id_tour"  type="text" name="id_tour">
+                                    </div>
+                                    <div style="float: left;width: 33%;">
+                                        <div class="btn-group">
+                                            <button style="padding: 7px 10px" class="green btn btn-xs btn-success" type="button">
+                                                <i class=" fa fa-plus bigger-120"></i>
+                                            </button>
+
+                                            <button style="padding: 7px 10px" class="green btn btn-xs btn-info" type="button">
+                                                <i class=" fa fa-refresh bigger-120"></i>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <table class="table table-striped table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th class="center">#</th>
+                                        <th>Tên tour</th>
+                                        <th class="hidden-xs">price</th>
+                                        <th class="hidden-480">durations</th>
+                                        <th>vehicle</th>
+                                        <th>departure_name</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody class="table_booking_tour">
+
+                                    </tbody>
+                                </table>
+                                <div class="hr hr8 hr-double hr-dotted"></div>
+                                <div class="row">
+                                    <div class="col-sm-5 pull-right">
+                                        <h4 class="pull-right">
+                                            Total amount :
+                                            <span class="red">$395</span>
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-7 pull-left"> Extra Information </div>
+                                </div>
                             </div>
 
                         </div>
@@ -145,7 +191,7 @@
 
                                         <div class="profile-info-value form-group">
                                          <span class="input-icon width_100">
-                                            <input id="input_name_customner" autofocus="" type="text" name="name_customner" placeholder="Nhập tên khách hàng ..." style="width:100%;max-width:600px;outline:0" autocomplete="off">
+                                            <input id="input_name_customner" type="text" name="name_customner" placeholder="Nhập tên khách hàng ..." style="width:100%;max-width:600px;outline:0" autocomplete="off">
                                              <i class="ace-icon fa fa-user blue"></i>
                                          </span>
                                             <input hidden id="input_id_customner"  type="text" name="id_customner">

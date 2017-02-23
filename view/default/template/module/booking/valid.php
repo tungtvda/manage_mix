@@ -1,33 +1,8 @@
 <?php
-$data_khach_hang = customer_getByTop('', '', 'name asc');
-$string_data='[';
-if(count($data_khach_hang)>0){
-    foreach($data_khach_hang as $row_kh){
-        $name_kh='';
-        if($row_kh->mr!=''){
-            $name_kh.=$row_kh->mr.'.';
-        }
-        $name_kh.=$row_kh->name;
+$string_data_customer=_returnDataAutoCompleteCustomer();
 
-        if($row_kh->avatar!=''){
-            $avatar_kh=SITE_NAME.$row_kh->avatar;
-        }
-        else{
-            $avatar_kh=SITE_NAME.'/view/default/themes/images/no-avatar.png';
-        }
-        $cate_name='Nhóm khách hàng ...';
-        $cate_id='';
-        if($row_kh->category!=0){
-            $data_cate=customer_category_getById($row_kh->category);
-            if(count($data_cate)>0){
-                $cate_name=$data_cate[0]->name;
-                $cate_id=$data_cate[0]->id;
-            }
-        }
-        $string_data.="['".$name_kh."','".$avatar_kh."','".$row_kh->id."','".$row_kh->email."','".$row_kh->phone."','".$row_kh->address."','".$row_kh->fax."','".$cate_id."','".$cate_name."'],";
-    }
-}
-$string_data.='];';
+$string_data_tour=_returnDataAutoCompleteTour();
+
 ?>
 <script src="<?php echo SITE_NAME?>/view/default/themes/admin/js/valid/booking.js"></script>
 <link rel="stylesheet"
@@ -52,7 +27,7 @@ $string_data.='];';
             minChars: 0,
             source: function (term, suggest) {
                 term = term.toLowerCase();
-                var choices =<?php echo $string_data?>
+                var choices =<?php echo $string_data_customer?>
                 var suggestions = [];
                 for (i = 0; i < choices.length; i++)
                     if (~(choices[i][0] + ' ' + choices[i][1]).toLowerCase().indexOf(term)) suggestions.push(choices[i]);
@@ -73,6 +48,29 @@ $string_data.='];';
                 $('#input_email').val(item.data('email'));
                 $(".nhom_khach_hang .chosen-default span").html(item.data('catename'));
                 $('#input_id_category').val(item.data('cateid'));
+            }
+        });
+
+        $('#input_name_tour').autoComplete({
+            minChars: 0,
+            source: function (term, suggest) {
+                term = term.toLowerCase();
+                var choices =<?php echo $string_data_tour?>
+                var suggestions = [];
+                for (i = 0; i < choices.length; i++)
+                    if (~(choices[i][0] + ' ' + choices[i][1]).toLowerCase().indexOf(term)) suggestions.push(choices[i]);
+                suggest(suggestions);
+            },
+            renderItem: function (item, search) {
+                search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+                var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
+                return '<div title="' + item[0] + '-'+item[3]+'-'+item[4]+'" class="autocomplete-suggestion" data-departure_name="' + item[6] + '" data-vehicle="' + item[4] + '" data-durations="' + item[3] + '" data-name="' + item[1] + '" data-price="' + item[2] + '" data-id="' + item[0] + '" > ' + item[1]+'</div>';
+            },
+            onSelect: function (e, term, item) {
+//                console.log('Item "' + item.data('langname') + ' (' + item.data('lang') + ')" selected by ' + (e.type == 'keydown' ? 'pressing enter or tab' : 'mouse click') + '.');
+                $('#input_name_tour').val(item.data('name'));
+                var table_tour="<tr> <td class='center'>1</td><td><a>"+item.data('name')+"</a></td><td>"+item.data('price')+"</td> <td>"+item.data('durations')+"</td><td>"+item.data('vehicle')+"</td><td>"+item.data('departure_name')+"</td></tr>";
+                $('.table_booking_tour').html(table_tour);
             }
         });
     });

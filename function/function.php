@@ -914,3 +914,62 @@ function _returnInputSelect($name, $value, $data_list, $valid = '', $name_title)
     $string .= ' </select>';
     return $string;
 }
+
+function _returnDataAutoCompleteCustomer(){
+    $data_khach_hang = customer_getByTop('', '', 'name asc');
+    $string_data='[';
+    if(count($data_khach_hang)>0){
+        foreach($data_khach_hang as $row_kh){
+            $name_kh='';
+            if($row_kh->mr!=''){
+                $name_kh.=$row_kh->mr.'.';
+            }
+            $name_kh.=$row_kh->name;
+
+            if($row_kh->avatar!=''){
+                $avatar_kh=SITE_NAME.$row_kh->avatar;
+            }
+            else{
+                $avatar_kh=SITE_NAME.'/view/default/themes/images/no-avatar.png';
+            }
+            $cate_name='Nhóm khách hàng ...';
+            $cate_id='';
+            if($row_kh->category!=0){
+                $data_cate=customer_category_getById($row_kh->category);
+                if(count($data_cate)>0){
+                    $cate_name=$data_cate[0]->name;
+                    $cate_id=$data_cate[0]->id;
+                }
+            }
+            $string_data.="['".$name_kh."','".$avatar_kh."','".$row_kh->id."','".$row_kh->email."','".$row_kh->phone."','".$row_kh->address."','".$row_kh->fax."','".$cate_id."','".$cate_name."'],";
+        }
+    }
+    $string_data.='];';
+    return $string_data;
+}
+
+function _returnDataAutoCompleteTour(){
+    $data_tour = tour_getByTop('', '', 'name asc');
+    $string_data='[';
+    if(count($data_tour)>0){
+        foreach($data_tour as $row_kh){
+            $id=$row_kh->id;
+            $name=$row_kh->name;
+            $price=$row_kh->price;
+            $durations=$row_kh->durations;
+            $vehicle=$row_kh->vehicle;
+            $departure_name='';
+            $departure_id='';
+            if($row_kh->departure!=0){
+                $data_departure=departure_getById($row_kh->departure);
+                if(count($data_departure)>0){
+                    $departure_name=$data_departure[0]->name;
+                    $departure_id=$data_departure[0]->id;
+                }
+            }
+            $string_data.="['".$id."','".$name."','".$price."','".$durations."','".$vehicle."','".$departure_id."','".$departure_name."'],";
+        }
+    }
+    $string_data.='];';
+    return $string_data;
+}

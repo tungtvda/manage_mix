@@ -2,15 +2,22 @@ jQuery(function ($) {
     url = $('#url_input').val();
 
     $('body').on("input", '#input_name_customner', function () {
-        removeValue();
+        removeValueCustomer();
     });
     $('body').on("keyup", '#input_name_customner', function () {
-        removeValue();
+        removeValueCustomer();
+    });
+
+    $('body').on("input", '#input_name_tour', function () {
+        removeValueTour();
+    });
+    $('body').on("keyup", '#input_name_tour', function () {
+        removeValueTour();
     });
 
     //$('i').ggtooltip();
 });
-function removeValue(){
+function removeValueCustomer(){
     $('#input_id_customner').val('');
     $('#input_address').val('');
     $('#input_phone').val('');
@@ -18,4 +25,8 @@ function removeValue(){
     $('#input_email').val('');
     $(".nhom_khach_hang .chosen-default span").html('Nhóm khách hàng ...');
     $('#input_id_category').val('');
+}
+
+function removeValueTour(){
+    $('.table_booking_tour').html('');
 }

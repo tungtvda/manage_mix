@@ -29,4 +29,6 @@ function removeValueCustomer(){
 
 function removeValueTour(){
     $('.table_booking_tour').html('');
+    $('#input_id_tour').val('');
+
 }

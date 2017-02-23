@@ -955,7 +955,12 @@ function _returnDataAutoCompleteTour(){
         foreach($data_tour as $row_kh){
             $id=$row_kh->id;
             $name=$row_kh->name;
-            $price=$row_kh->price;
+            if($row_kh->price==0||$row_kh->price==''){
+                $price='Liên hệ';
+            }
+            else{
+                $price=number_format((int)$row_kh->price,0,",",".").' vnđ';
+            }
             $durations=$row_kh->durations;
             $vehicle=$row_kh->vehicle;
             $departure_name='';

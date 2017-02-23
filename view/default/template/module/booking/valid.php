@@ -77,4 +77,3 @@ $string_data_tour=_returnDataAutoCompleteTour();
 
 
 </script>
-<script src="j"></script>

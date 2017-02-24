@@ -64,12 +64,12 @@ $string_data_tour=_returnDataAutoCompleteTour();
             renderItem: function (item, search) {
                 search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
                 var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
-                return '<div title="' + item[0] + '-'+item[3]+'-'+item[4]+'" class="autocomplete-suggestion" data-departure_name="' + item[6] + '" data-vehicle="' + item[4] + '" data-durations="' + item[3] + '" data-name="' + item[1] + '" data-price="' + item[2] + '" data-id="' + item[0] + '" > ' + item[1]+'</div>';
+                return '<div title="' + item[0] + '-'+item[3]+'-'+item[4]+'" class="autocomplete-suggestion" data-departure_name="' + item[6] + '" data-vehicle="' + item[4] + '" data-durations="' + item[3] + '" data-name="' + item[1] + '" data-price-format="' + item[2] + '" data-price="' + item[7] + '" data-id="' + item[0] + '" > ' + item[1]+'</div>';
             },
             onSelect: function (e, term, item) {
 //                console.log('Item "' + item.data('langname') + ' (' + item.data('lang') + ')" selected by ' + (e.type == 'keydown' ? 'pressing enter or tab' : 'mouse click') + '.');
                 $('#input_name_tour').val(item.data('name'));
-                var table_tour="<tr> <td class='center'>1</td><td><a>"+item.data('name')+"</a></td><td>"+item.data('price')+"</td> <td>"+item.data('durations')+"</td><td>"+item.data('vehicle')+"</td><td>"+item.data('departure_name')+"</td></tr>";
+                var table_tour="<tr> <td class='center'>1</td><td><a>"+item.data('name')+"</a></td><td><span id='price_format_span'>"+item.data('price-format')+"</span><input hidden id='input_price_format' value='"+item.data('price-format')+"'><input hidden title='giá sửa' id='input_price' value='"+item.data('price')+"'><input hidden id='input_price_old' title='giá cũ' value='"+item.data('price')+"'> <a id='edit_price' href='javascript:void(0)'> <i class='fa fa-edit' title='Sửa đơn giá'></i></a><a id='reset_price' title='Lấy lại giá cũ' href='javascript:void(0)'> <i class='fa fa-refresh' title='Giá gốc'></i></a></td> <td>"+item.data('durations')+"</td><td>"+item.data('vehicle')+"</td><td>"+item.data('departure_name')+"</td></tr>";
                 $('.table_booking_tour').html(table_tour);
             }
         });

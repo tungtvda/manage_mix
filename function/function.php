@@ -956,10 +956,12 @@ function _returnDataAutoCompleteTour(){
             $id=$row_kh->id;
             $name=$row_kh->name;
             if($row_kh->price==0||$row_kh->price==''){
+                $price_format='Liên hệ';
                 $price='Liên hệ';
             }
             else{
-                $price=number_format((int)$row_kh->price,0,",",".").' vnđ';
+                $price_format=number_format((int)$row_kh->price,0,",",".").' vnđ';
+                $price=$row_kh->price;
             }
             $durations=$row_kh->durations;
             $vehicle=$row_kh->vehicle;
@@ -972,7 +974,7 @@ function _returnDataAutoCompleteTour(){
                     $departure_id=$data_departure[0]->id;
                 }
             }
-            $string_data.="['".$id."','".$name."','".$price."','".$durations."','".$vehicle."','".$departure_id."','".$departure_name."'],";
+            $string_data.="['".$id."','".$name."','".$price_format."','".$durations."','".$vehicle."','".$departure_id."','".$departure_name."','".$price."'],";
         }
     }
     $string_data.='];';

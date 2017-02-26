@@ -34,8 +34,8 @@
                             padding-right: 0px;
                         }
                     </style>
-                    <div class="col-xs-12 col-sm-12 col-md-12 row">
-                        <div class="col-xs-12 col-sm-5 col-md-5">
+                    <div class="col-xs-12 col-sm-12 col-md-12 ">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
                             <h3 class="row header smaller lighter orange">
 											<span class="col-sm-8">
 												<i class="ace-icon fa fa-shopping-cart"></i>
@@ -138,99 +138,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-7 col-md-7">
-                            <h3 class="row header smaller lighter blue">
-                                <i class="ace-icon fa fa-plane fa-plane blue bigger-125"></i>
-                                Thông tin tour
-                            </h3>
-                            <div class="row col-xs-12 div_content">
-                                <div class="form-group border-sloid-1-x"
-                                     style="float: left; width: 100%;    margin-left: 0px;margin-right: 0px;">
-                                    <div style="float: left;width: 66%">
-                                           <span class="input-icon width_100">
-                                                <input id="input_name_tour" type="text" name="name_tour"
-                                                       placeholder="Nhập tên tour ..."
-                                                       style="width:100%;max-width:600px;outline:0" autocomplete="off">
-                                                 <i class="ace-icon fa fa-plane blue"></i>
-                                             </span>
-                                        <input hidden id="input_id_tour" type="text" name="id_tour">
-                                    </div>
-                                    <div style="float: left;width: 33%;">
-                                        <div class="btn-group">
-                                            <button style="padding: 7px 10px" class="green btn btn-xs btn-success"
-                                                    type="button">
-                                                <i class=" fa fa-plus bigger-120"></i>
-                                            </button>
-
-                                            <button style="padding: 7px 10px" class="green btn btn-xs btn-info"
-                                                    type="button">
-                                                <i class=" fa fa-refresh bigger-120"></i>
-                                            </button>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <table class="table table-striped table-bordered">
-                                    <thead>
-                                    <tr>
-                                        <th class="center">#</th>
-                                        <th>Tên tour</th>
-                                        <th>Giá</th>
-                                        <th>Thời gian</th>
-                                        <th>Phương tiện</th>
-                                        <th>Khởi hành</th>
-                                    </tr>
-                                    </thead>
-
-                                    <tbody class="table_booking_tour">
-
-                                    </tbody>
-                                </table>
-                                <div class="hr hr8 hr-double hr-dotted"></div>
-                                <div class="row">
-                                    <div class="col-sm-8 pull-right">
-                                        <div class="profile-user-info profile-user-info-striped">
-                                            <div class="profile-info-row">
-                                                <div class="profile-info-name"> Tồng cộng</div>
-
-                                                <div class="profile-info-value form-group">
-                                                    <span class="red">$395</span>
-                                                </div>
-                                            </div>
-                                            <div class="profile-info-row">
-                                                <div class="profile-info-name"> Thuế VAT 10%</div>
-
-                                                <div class="profile-info-value form-group">
-                                                    <span class="red">$395</span>
-                                                </div>
-                                            </div>
-                                            <div class="profile-info-row">
-                                                <div class="profile-info-name"> Đặt cọc</div>
-
-                                                <div class="profile-info-value form-group">
-                                                     <span class="input-icon width_100">
-                                                        <input id="input_dat_coc" type="text" name="dat_coc">
-                                                         <i class="ace-icon fa fa-user blue"></i>
-                                                     </span>
-                                                </div>
-                                            </div>
-                                            <div class="profile-info-row">
-                                                <div class="profile-info-name"> Còn Lại</div>
-
-                                                <div class="profile-info-value form-group">
-                                                    <span class="red">$395</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 row">
-                        <div class="col-xs-12 col-sm-5 col-md-5">
+                        <div class="col-xs-12 col-sm-6 col-md-6 ">
                             <h3 class="row header smaller lighter green">
                                 <i class="ace-icon fa fa-user"></i>
                                 Thông tin khách hàng
@@ -296,67 +204,134 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-7 col-md-7">
-                            <h3 class="row header smaller lighter purple">
-                                <i class="ace-icon fa fa-users"></i>
-                                Danh sách đoàn
-                                <button title="Thêm dòng" style="padding: 0px 5px" class="green btn btn-xs btn-success" type="button">
-                                    <i class=" fa fa-plus bigger-120"></i>
-                                </button>
-                            </h3>
-                            <div class="col-xs-12 row" style="padding-left: 0px; padding-right: 0px">
-                                <table class="table table-striped table-bordered">
-                                    <thead>
-                                    <tr>
-                                        <th class="center">#</th>
-                                        <th>Họ tên</th>
-                                        <th>Email</th>
-                                        <th>Điện thoại</th>
-                                        <th>Fax</th>
-                                        <th>Địa chỉ</th>
-                                    </tr>
-                                    </thead>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 ">
+                        <h3 class="row header smaller lighter blue">
+                            <i class="ace-icon fa fa-plane fa-plane blue bigger-125"></i>
+                            Thông tin tour
+                        </h3>
+                        <div class="row col-xs-12 div_content">
+                            <div class="form-group border-sloid-1-x"
+                                 style="float: left; width: 100%;    margin-left: 0px;margin-right: 0px;">
+                                <div style="float: left;width: 66%">
+                                           <span class="input-icon width_100">
+                                                <input id="input_name_tour" type="text" name="name_tour"
+                                                       placeholder="Nhập tên tour ..."
+                                                       style="width:100%;max-width:600px;outline:0" autocomplete="off">
+                                                 <i class="ace-icon fa fa-plane blue"></i>
+                                             </span>
+                                    <input hidden id="input_id_tour" type="text" name="id_tour">
+                                </div>
+                                <div style="float: left;width: 33%;">
+                                    <div class="btn-group">
+                                        <button style="padding: 7px 10px" class="green btn btn-xs btn-success"
+                                                type="button">
+                                            <i class=" fa fa-plus bigger-120"></i>
+                                        </button>
 
-                                    <tbody>
-                                    <tr>
-                                        <td class="center">1</td>
-                                        <td>
-                                            <span class="input-icon width_100">
+                                        <button style="padding: 7px 10px" class="green btn btn-xs btn-info"
+                                                type="button">
+                                            <i class=" fa fa-refresh bigger-120"></i>
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th class="center">#</th>
+                                    <th>Tên tour</th>
+                                    <th>Giá</th>
+                                    <th>Thời gian</th>
+                                    <th>Phương tiện</th>
+                                    <th>Khởi hành</th>
+                                </tr>
+                                </thead>
+
+                                <tbody class="table_booking_tour">
+
+                                </tbody>
+                            </table>
+                            <div class="hr hr8 hr-double hr-dotted"></div>
+                            <div class="row">
+                                <div class="col-sm-8 pull-right">
+                                    <div class="profile-user-info profile-user-info-striped">
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Tồng cộng</div>
+
+                                            <div class="profile-info-value form-group">
+                                                <span class="red">$395</span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Thuế VAT 10%</div>
+
+                                            <div class="profile-info-value form-group">
+                                                <span class="red">$395</span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Đặt cọc</div>
+
+                                            <div class="profile-info-value form-group">
+                                                     <span class="input-icon width_100">
                                                         <input id="input_dat_coc" type="text" name="dat_coc">
                                                          <i class="ace-icon fa fa-user blue"></i>
                                                      </span>
-                                        </td>
-                                        <td>
-                                            <span class="input-icon width_100">
-                                                        <input id="input_dat_coc" type="text" name="dat_coc">
-                                                         <i class="ace-icon fa fa-user blue"></i>
-                                                     </span>
-                                        </td>
-                                        <td>
-                                            <span class="input-icon width_100">
-                                                        <input id="input_dat_coc" type="text" name="dat_coc">
-                                                         <i class="ace-icon fa fa-user blue"></i>
-                                                     </span>
-                                        </td>
-                                        <td>
-                                            <span class="input-icon width_100">
-                                                        <input id="input_dat_coc" type="text" name="dat_coc">
-                                                         <i class="ace-icon fa fa-user blue"></i>
-                                                     </span>
-                                        </td>
-                                        <td>
-                                            <span class="input-icon width_100">
-                                                        <input id="input_dat_coc" type="text" name="dat_coc">
-                                                         <i class="ace-icon fa fa-user blue"></i>
-                                                     </span>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Còn Lại</div>
+
+                                            <div class="profile-info-value form-group">
+                                                <span class="red">$395</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 ">
+                        <h3 class="row header smaller lighter purple">
+                            <i class="ace-icon fa fa-users"></i>
+                            Danh sách đoàn
+                            <button title="Thêm dòng" style="padding: 0px 5px"
+                                    class="green btn btn-xs btn-success btn_add_customer" type="button">
+                                <i class=" fa fa-plus bigger-120"></i>
+                            </button>
+                        </h3>
+                        <div class="col-xs-12 row" style="padding-left: 0px; padding-right: 0px">
+                            <table class="table table-striped table-bordered table_add_customer">
+                                <thead>
+                                <tr>
+                                    <th class="center">#</th>
+                                    <th>Họ tên</th>
+                                    <th>Email</th>
+                                    <th>Điện thoại</th>
+                                    <th>Địa chỉ</th>
+                                    <th>Xóa</th>
+                                </tr>
+                                </thead>
 
-
+                                <tbody>
+                                <tr id="row_customer_1">
+                                    <td class="center">1</td>
+                                    <td> <span class="input-icon width_100"><input id="input_name_customer_1" class="valid" type="text"  name="name_customer[]"><i class="ace-icon fa fa-user blue"></i></span></td>
+                                    <td><span class="input-icon width_100"> <input id="input_name_customer_1" type="text" class="valid" name="email_customer[]"><i class="ace-icon fa fa-envelope blue"></i> </span></td>
+                                    <td><span class="input-icon width_100"><input id="input_phone_customer_1" class="valid" type="text" name="phone_customer[]"><i class="ace-icon fa fa-phone blue"></i></span></td>
+                                    <td><span class="input-icon width_100"> <input id="address_phone_customer_1" type="text" name="address_customer[]"><i class="ace-icon fa fa-map_marker blue"></i></span></td>
+                                    <td><a id="stt_custommer_1" title="Xóa khách hàng"  class="red btn_remove_customer" href="javascript:void()"><i class="ace-icon fa fa-trash-o bigger-130"></i></a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button title="Thêm dòng" style="padding: 5px 5px"
+                                class="green btn btn-xs btn-success btn_add_customer" type="button">
+                            <i class=" fa fa-plus bigger-120"></i> Thêm khách hàng
+                        </button>
                     </div>
                 </div>
             </div>

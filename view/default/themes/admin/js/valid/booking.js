@@ -39,22 +39,56 @@ jQuery(function ($) {
     });
 
     $('body').on("click", '.btn_add_customer', function () {
-        var i=1;
-        $('.table_add_customer > tbody  > tr').each(function() {
-            var tds = $(this).find('td.stt_cus');
-            tds.eq(0).text(i);
-            i=i+1;
-        });
-        var row=' <tbody id="row_customer_'+i+'"><tr>' +
-            '<td class="center stt_cus">'+i+'</td>' +
-            '<td> <span class="input-icon width_100"><input id="input_name_customer_'+i+'" class="valid" type="text"  name="name_customer[]"><i class="ace-icon fa fa-user blue"></i></span></td>'+
-            '<td><span class="input-icon width_100"> <input id="input_email_customer_'+i+'" type="text" class="valid" name="email_customer[]"><i class="ace-icon fa fa-envelope blue"></i> </span></td>'+
-            '<td><span class="input-icon width_100"><input id="input_phone_customer_'+i+'" class="valid" type="text" name="phone_customer[]"><i class="ace-icon fa fa-phone blue"></i></span></td>'+
-            '<td><span class="input-icon width_100"> <input id="input_address_customer_'+i+'" type="text" name="address_customer[]"><i class="ace-icon fa fa-map_marker blue"></i></span></td>'+
-            '<td><a id="stt_custommer_'+i+'"  deleteid="'+i+'"  title="Xóa khách hàng"  class="red btn_remove_customer" href="javascript:void()"><i class="ace-icon fa fa-trash-o bigger-130"></i></a></td>'+
-            '</tr></tbody>';
+        var check_number_member=0;
+        var lenght = $('.table_add_customer > tbody  > tr').length;
+        var input_num_nguoi_lon=$('#input_num_nguoi_lon').val();
+        var input_num_tre_em=$('#input_num_tre_em').val();
+        var input_num_tre_em_5=$('#input_num_tre_em_5').val();
+        if(input_num_nguoi_lon!=''&& parseInt(input_num_nguoi_lon)>0){
+            check_number_member=check_number_member+parseInt(input_num_nguoi_lon);
+        }
+        if(input_num_tre_em!=''&& parseInt(input_num_tre_em)>0){
+            check_number_member=check_number_member+parseInt(input_num_tre_em);
+        }
+        if(input_num_tre_em_5!=''&& parseInt(input_num_tre_em_5)>0){
+            check_number_member=check_number_member+parseInt(input_num_tre_em_5);
+        }
+        if(lenght>=check_number_member){
+            if(check_number_member==0){
+                var mess="Bạn vui lòng nhập số người";
+                $('#input_num_nguoi_lon').show().focus().select();;
+            }else{
+                var mess="Bạn đã nhập đủ số người"
+            }
+            lnv.alert({
+                title: 'Lỗi',
+                content: mess,
+                alertBtnText: 'Ok',
+                iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                alertHandler: function () {
 
-        $(".table_add_customer" ).append(row);
+                }
+            });
+        }else{
+            var i=1;
+            $('.table_add_customer > tbody  > tr').each(function() {
+                var tds = $(this).find('td.stt_cus');
+                tds.eq(0).text(i);
+                i=i+1;
+            });
+            var row=' <tbody id="row_customer_'+i+'"><tr>' +
+                '<td class="center stt_cus">'+i+'</td>' +
+                '<td> <span class="input-icon width_100"><input id="input_name_customer_'+i+'" class="valid" type="text"  name="name_customer[]"><i class="ace-icon fa fa-user blue"></i></span></td>'+
+                '<td><span class="input-icon width_100"> <input id="input_email_customer_'+i+'" type="text" class="valid" name="email_customer[]"><i class="ace-icon fa fa-envelope blue"></i> </span></td>'+
+                '<td><span class="input-icon width_100"><input id="input_phone_customer_'+i+'" class="valid" type="text" name="phone_customer[]"><i class="ace-icon fa fa-phone blue"></i></span></td>'+
+                '<td><span class="input-icon width_100"> <input id="input_address_customer_'+i+'" type="text" name="address_customer[]"><i class="ace-icon fa fa-map_marker blue"></i></span></td>'+
+                '<td><a id="stt_custommer_'+i+'"  deleteid="'+i+'"  title="Xóa khách hàng"  class="red btn_remove_customer" href="javascript:void()"><i class="ace-icon fa fa-trash-o bigger-130"></i></a></td>'+
+                '</tr></tbody>';
+
+            $(".table_add_customer" ).append(row);
+        }
+
+
     });
     $('body').on("click", '.btn_remove_customer', function () {
         var deleteid = $(this).attr('deleteid');
@@ -62,15 +96,15 @@ jQuery(function ($) {
         var i=1;
         $('.table_add_customer > tbody  > tr').each(function() {
             var tds = $(this).find('td.stt_cus');
-            tds.eq(0).text(i);
             var id_current=tds.eq(0).text();
-            alert(id_current);
+            tds.eq(0).text(i);
             $('#row_customer_'+id_current).attr('id', 'row_customer_'+i);
-            //$('#input_name_customer_'+id_current).attr('id', 'input_name_customer_'+i);
-            //$('#input_email_customer_'+id_current).attr('id', 'input_email_customer_'+i);
-            //$('#input_phone_customer_'+id_current).attr('id', 'input_phone_customer_'+i);
-            //$('#input_address_customer_'+id_current).attr('id', 'input_address_customer_'+i);
-            //$('#stt_custommer_'+id_current).attr('deleteid',i);
+            $('#input_name_customer_'+id_current).attr('id', 'input_name_customer_'+i);
+            $('#input_email_customer_'+id_current).attr('id', 'input_email_customer_'+i);
+            $('#input_phone_customer_'+id_current).attr('id', 'input_phone_customer_'+i);
+            $('#input_address_customer_'+id_current).attr('id', 'input_address_customer_'+i);
+            $('#stt_custommer_'+id_current).attr('id', 'stt_custommer_'+i);
+            $('#stt_custommer_'+id_current).attr('deleteid',i);
             i=i+1;
         });
     });

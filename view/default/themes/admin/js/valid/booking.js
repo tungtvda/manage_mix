@@ -39,14 +39,40 @@ jQuery(function ($) {
     });
 
     $('body').on("click", '.btn_add_customer', function () {
-        var row=' <tr id="row_customer_1">' +
-            '<td class="center">1</td>' +
-            '<td> <span class="input-icon width_100"><input id="input_name_customer_1" class="valid" type="text"  name="name_customer[]"><i class="ace-icon fa fa-user blue"></i></span></td>'+
-            '<td><span class="input-icon width_100"> <input id="input_name_customer_1" type="text" class="valid" name="email_customer[]"><i class="ace-icon fa fa-envelope blue"></i> </span></td>'+
-            '<td><span class="input-icon width_100"><input id="input_phone_customer_1" class="valid" type="text" name="phone_customer[]"><i class="ace-icon fa fa-phone blue"></i></span></td>'+
-            '<td><span class="input-icon width_100"> <input id="address_phone_customer_1" type="text" name="address_customer[]"><i class="ace-icon fa fa-map_marker blue"></i></span></td>'+
-            '<td><a id="stt_custommer_1" title="Xóa khách hàng"  class="red btn_remove_customer" href="javascript:void()"><i class="ace-icon fa fa-trash-o bigger-130"></i></a></td>'+
-            '</tr>';
+        var i=1;
+        $('.table_add_customer > tbody  > tr').each(function() {
+            var tds = $(this).find('td.stt_cus');
+            tds.eq(0).text(i);
+            i=i+1;
+        });
+        var row=' <tbody id="row_customer_'+i+'"><tr>' +
+            '<td class="center stt_cus">'+i+'</td>' +
+            '<td> <span class="input-icon width_100"><input id="input_name_customer_'+i+'" class="valid" type="text"  name="name_customer[]"><i class="ace-icon fa fa-user blue"></i></span></td>'+
+            '<td><span class="input-icon width_100"> <input id="input_email_customer_'+i+'" type="text" class="valid" name="email_customer[]"><i class="ace-icon fa fa-envelope blue"></i> </span></td>'+
+            '<td><span class="input-icon width_100"><input id="input_phone_customer_'+i+'" class="valid" type="text" name="phone_customer[]"><i class="ace-icon fa fa-phone blue"></i></span></td>'+
+            '<td><span class="input-icon width_100"> <input id="input_address_customer_'+i+'" type="text" name="address_customer[]"><i class="ace-icon fa fa-map_marker blue"></i></span></td>'+
+            '<td><a id="stt_custommer_'+i+'"  deleteid="'+i+'"  title="Xóa khách hàng"  class="red btn_remove_customer" href="javascript:void()"><i class="ace-icon fa fa-trash-o bigger-130"></i></a></td>'+
+            '</tr></tbody>';
+
+        $(".table_add_customer" ).append(row);
+    });
+    $('body').on("click", '.btn_remove_customer', function () {
+        var deleteid = $(this).attr('deleteid');
+        $( "#row_customer_"+deleteid ).remove();
+        var i=1;
+        $('.table_add_customer > tbody  > tr').each(function() {
+            var tds = $(this).find('td.stt_cus');
+            tds.eq(0).text(i);
+            var id_current=tds.eq(0).text();
+            alert(id_current);
+            $('#row_customer_'+id_current).attr('id', 'row_customer_'+i);
+            //$('#input_name_customer_'+id_current).attr('id', 'input_name_customer_'+i);
+            //$('#input_email_customer_'+id_current).attr('id', 'input_email_customer_'+i);
+            //$('#input_phone_customer_'+id_current).attr('id', 'input_phone_customer_'+i);
+            //$('#input_address_customer_'+id_current).attr('id', 'input_address_customer_'+i);
+            //$('#stt_custommer_'+id_current).attr('deleteid',i);
+            i=i+1;
+        });
     });
 
 

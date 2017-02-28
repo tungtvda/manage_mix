@@ -49,7 +49,7 @@
                                                 style="color: red; font-size: 12px">*</span></div>
 
                                         <div class="profile-info-value">
-                                            <?php echo _returnInput('code_booking', '', 'valid', 'qrcode', '', '', '') ?>
+                                            <?php echo _returnInput('code_booking', $Random, 'valid', 'qrcode', '', '', '') ?>
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
@@ -151,12 +151,15 @@
 
                                         <div class="profile-info-value form-group">
                                          <span class="input-icon width_100">
-                                            <input id="input_name_customner" type="text" name="name_customner"
+                                            <input id="input_name_customer" type="text" name="name_customner"
                                                    placeholder="Nhập tên khách hàng ..."
-                                                   style="width:100%;max-width:600px;outline:0" autocomplete="off">
+                                                   style="width:100%;max-width:100%;outline:0" autocomplete="off">
                                              <i class="ace-icon fa fa-user blue"></i>
+                                             <i id="icon_error_name_customer" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " data-toggle="ggtooltip" data-title="" data-trigger="hover" data-placement="bottom" data-backcolor="red" data-textcolor="#ffffff" title=""></i>
+                                             <i id="icon_success_name_customer" style="display: none" class="ace-icon fa fa-check-circle icon-right success-color" data-toggle="ggtooltip" data-title="" data-trigger="hover" data-placement="bottom" data-backcolor="green" data-textcolor="#000000" title=""></i>
                                          </span>
                                             <input hidden id="input_id_customner" type="text" name="id_customner">
+                                            <label style="display: none" class="error-color  error-color-size" id="error_name_customer"></label>
                                         </div>
                                     </div>
                                     <div class="profile-info-row">

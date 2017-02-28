@@ -109,11 +109,295 @@ jQuery(function ($) {
         });
     });
 
+    // check
+    $('body').on("input",'#input_ngay_bat_dau', function () {
+        checkNgayBatDau();
+    });
+    $('body').on("keyup",'#input_ngay_bat_dau', function () {
+        checkNgayBatDau();
+    });
+    $('body').on("change",'#input_ngay_bat_dau', function () {
+        checkNgayBatDau();
+    });
+
+    // check
+    $('body').on("input",'#input_han_thanh_toan', function () {
+        checkHanThanhToan();
+    });
+    $('body').on("keyup",'#input_han_thanh_toan', function () {
+        checkHanThanhToan();
+    });
+    $('body').on("change",'#input_han_thanh_toan', function () {
+        checkHanThanhToan();
+    });
+
+    $('body').on("input", '#input_name_customer', function () {
+        checkNameCustomer();
+    });
+    $('body').on("keyup", '#input_name_customer', function () {
+        checkNameCustomer();
+    });
+
+
+    $('body').on("input", '#input_email', function () {
+        checkEmailCustomer();
+    });
+    $('body').on("keyup", '#input_email', function () {
+        checkEmailCustomer();
+    });
+    $('body').on("change", '#input_email', function () {
+        checkEmailCustomer();
+    });
+
+    $('body').on("input", '#input_address', function () {
+        checkAddressCustomer();
+    });
+    $('body').on("keyup", '#input_address', function () {
+        checkAddressCustomer();
+    });
+    $('body').on("change", '#input_address', function () {
+        checkAddressCustomer();
+    });
+
+
+    $('body').on("input", '#input_diem_don', function () {
+        checkDiemDon();
+    });
+    $('body').on("keyup", '#input_diem_don', function () {
+        checkDiemDon();
+    });
+    $('body').on("change", '#input_diem_don', function () {
+        checkDiemDon();
+    });
+
 
     //$('i').ggtooltip();
 });
+function checkDiemDon(){
+    var value = $("#input_diem_don").val();
+    if(value==''){
+        var mess='Bạn vui lòng nhập điểm đón';
+        showHiddenDiemDon(0,mess);
+    }else{
+        var mess='';
+        showHiddenDiemDon(1,mess);
+    }
+}
+function showHiddenDiemDon(res,mess){
+    var error_diem_don=$("#error_diem_don" );
+    if (res == 1) {
+        error_diem_don.hide();
+        $('#icon_error_diem_don').hide();
+        $('#input_diem_don').removeClass("input-error").addClass("valid");
+    }
+    else {
+        if(res!=0)
+        {
+            mess=res;
+        }
+        $('#icon_error_diem_don').show();
+        $('#input_diem_don').addClass("input-error").removeClass("valid");
+        error_diem_don.removeClass("success-color");
+        error_diem_don.addClass("error-color");
+        error_diem_don.html(mess);
+        error_diem_don.show();
+    }
+}
+
+
+//
+function checkAddressCustomer(){
+    var value = $("#input_address").val();
+    if(value==''){
+        var mess='Bạn vui lòng nhập điện thoại';
+        showHiddenAddressCustomer(0,mess);
+    }else{
+        var mess='';
+        showHiddenAddressCustomer(1,mess);
+    }
+}
+function showHiddenAddressCustomer(res,mess){
+    var error_address=$("#error_address" );
+    if (res == 1) {
+        error_address.hide();
+        $('#icon_error_address').hide();
+        $('#input_address').removeClass("input-error").addClass("valid");
+    }
+    else {
+        if(res!=0)
+        {
+            mess=res;
+        }
+        $('#icon_error_address').show();
+        $('#input_address').addClass("input-error").removeClass("valid");
+        error_address.removeClass("success-color");
+        error_address.addClass("error-color");
+        error_address.html(mess);
+        error_address.show();
+    }
+}
+
+//
+function checkEmailCustomer(){
+    var value = $("#input_email").val();
+    if(value!=''){
+        var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        var is_email=re.test(value);
+        if(is_email){
+            var mess='';
+            showHiddenEmail(1,mess);
+        }
+        else{
+            var mess='Email không đúng định dạng';
+            showHiddenEmail(0,mess);
+        }
+    }
+    else{
+        var mess='Bạn vui lòng nhập email';
+        showHiddenEmail(0,mess);
+    }
+
+}
+// check mã nhân viên
+function showHiddenEmail(res,mess){
+    var email_user_error=$("#error_email" );
+    if (res == 1) {
+        email_user_error.hide();
+        $('#icon_error_email').hide();
+        $('#input_email').removeClass("input-error").addClass("valid");
+    }
+    else {
+        $('#icon_error_email').show();
+        $('#input_email').addClass("input-error").removeClass("valid");
+        email_user_error.removeClass("success-color");
+        email_user_error.addClass("error-color");
+        email_user_error.html(mess);
+        email_user_error.show();
+    }
+}
+// check name user
+function checkNameCustomer(){
+    var value = $("#input_name_customer").val();
+    if(value==''){
+        var mess='Bạn vui lòng nhập tên khách hàng';
+        showHiddenNameCustomer(0,mess);
+    }else{
+        var mess='';
+        showHiddenNameCustomer(1,mess);
+    }
+}
+function showHiddenNameCustomer(res,mess){
+    var error_name_customner=$("#error_name_customer" );
+    if (res == 1) {
+        error_name_customner.hide();
+        $('#icon_error_name_customer').hide();
+        $('#input_name_customer').removeClass("input-error").addClass("valid");
+    }
+    else {
+        if(res!=0)
+        {
+            mess=res;
+        }
+        $('#icon_error_name_customer').show();
+        $('#input_name_customer').addClass("input-error").removeClass("valid");
+        error_name_customner.removeClass("success-color");
+        error_name_customner.addClass("error-color");
+        error_name_customner.html(mess);
+        error_name_customner.show();
+    }
+}
+//
+function checkHanThanhToan(){
+    var value = $("#input_han_thanh_toan").val();
+    if(value==''){
+        var mess='Bạn vui lòng chọn hạn thanh toán';
+        showHiddenHanThanhToan(0,mess);
+    }else{
+        var value_date = value.split("-");
+        var value = new Date(value_date[2], value_date[1] - 1, value_date[0]);
+        var mess='';
+        var res=0;
+        var birthday = moment(value);
+        if (!birthday.isValid()) {
+            mess="Không đúng định dạng ngày tháng năm";
+        }
+        else{
+            mess='';
+            res=1;
+        }
+        //var mess='';
+        showHiddenHanThanhToan(res,mess);
+    }
+}
+function showHiddenHanThanhToan(res,mess){
+    var error_han_thanh_toan=$("#error_han_thanh_toan" );
+    if (res == 1) {
+        error_han_thanh_toan.hide();
+        $('#input_han_thanh_toan').removeClass("input-error").addClass("valid");
+        $('#icon_han_thanh_toan').removeClass("error-color");
+    }
+    else {
+        if(res!=0)
+        {
+            mess=res;
+        }
+        $('#input_ngay_bat_dau').addClass("input-error").removeClass("valid");
+        $('#icon_ngay_bat_dau').addClass("error-color");
+        error_han_thanh_toan.removeClass("success-color");
+        error_han_thanh_toan.addClass("error-color");
+        error_han_thanh_toan.html(mess);
+        error_han_thanh_toan.show();
+    }
+}
+
+// check ngày bắt đầu
+function checkNgayBatDau(){
+    var value = $("#input_ngay_bat_dau").val();
+    if(value==''){
+        var mess='Bạn vui lòng chọn ngày bắt đầu';
+        showHiddenNgayBatDau(0,mess);
+    }else{
+        var value_date = value.split("-");
+        var value = new Date(value_date[2], value_date[1] - 1, value_date[0]);
+        var mess='';
+        var res=0;
+        var eighteenYearsAgo = moment().subtract(18, "years");
+        var birthday = moment(value);
+
+        if (!birthday.isValid()) {
+            mess="Không đúng định dạng ngày tháng năm";
+        }
+        else{
+            mess='';
+            res=1;
+        }
+        //var mess='';
+        showHiddenNgayBatDau(res,mess);
+    }
+}
+function showHiddenNgayBatDau(res,mess){
+    var error_ngay_bat_dau=$("#error_ngay_bat_dau" );
+    if (res == 1) {
+        error_ngay_bat_dau.hide();
+        $('#input_ngay_bat_dau').removeClass("input-error").addClass("valid");
+        $('#icon_ngay_bat_dau').removeClass("error-color");
+    }
+    else {
+        if(res!=0)
+        {
+            mess=res;
+        }
+        $('#input_ngay_bat_dau').addClass("input-error").removeClass("valid");
+        $('#icon_ngay_bat_dau').addClass("error-color");
+        error_ngay_bat_dau.removeClass("success-color");
+        error_ngay_bat_dau.addClass("error-color");
+        error_ngay_bat_dau.html(mess);
+        error_ngay_bat_dau.show();
+    }
+}
+
 function removeValueCustomer(){
-    $('#input_id_customner').val('');
+    $('#input_id_customer').val('');
     $('#input_address').val('');
     $('#input_phone').val('');
     $('#input_fax').val('');

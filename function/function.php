@@ -871,14 +871,14 @@ function _returnInputDate($name, $value = '', $valid = '', $disabled = '', $mess
                                                                                    required
                                                                                    type="text"
                                                                                    data-date-format="dd-mm-yyyy">
-																	<span class="input-group-addon date_icon">
+																	<span id="icon_'.$name.'" class="input-group-addon date_icon">
 																		<i class="fa fa-calendar bigger-110"></i>
 																	</span>
 
                                                                         </div>
                                                                         <label style="display: none"
                                                                                class="error-color  error-color-size"
-                                                                               id="error_birthday">' . $mess_err . '</label>';
+                                                                               id="error_'.$name.'">' . $mess_err . '</label>';
 }
 
 function _returnInputCheck($name, $valid = '', $disabled = '', $checked = '')
@@ -979,4 +979,15 @@ function _returnDataAutoCompleteTour(){
     }
     $string_data.='];';
     return $string_data;
+}
+
+function _getRandomNumbers($min, $max, $count)
+{
+    if ($count > (($max - $min)+1))
+    {
+        return false;
+    }
+    $values = range($min, $max);
+    shuffle($values);
+    return array_slice($values,0, $count);
 }

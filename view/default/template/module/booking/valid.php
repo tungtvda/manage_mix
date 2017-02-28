@@ -23,7 +23,7 @@ $string_data_tour=_returnDataAutoCompleteTour();
                 suggest(suggestions);
             }
         });
-        $('#input_name_customner').autoComplete({
+        $('#input_name_customer').autoComplete({
             minChars: 0,
             source: function (term, suggest) {
                 term = term.toLowerCase();
@@ -40,8 +40,25 @@ $string_data_tour=_returnDataAutoCompleteTour();
             },
             onSelect: function (e, term, item) {
 //                console.log('Item "' + item.data('langname') + ' (' + item.data('lang') + ')" selected by ' + (e.type == 'keydown' ? 'pressing enter or tab' : 'mouse click') + '.');
-                $('#input_name_customner').val(item.data('langname'));
-                $('#input_id_customner').val(item.data('id'));
+
+                $("#error_name_customer").hide();
+                $('#icon_error_name_customer').hide();
+                $('#input_name_customer').removeClass("input-error").addClass("valid");
+
+                if(item.data('email')!=''){
+                    $("#error_email").hide();
+                    $('#icon_error_email').hide();
+                    $('#input_email').removeClass("input-error").addClass("valid");
+                }
+
+                if(item.data('phone')!=''){
+                    $("#error_phone").hide();
+                    $('#icon_error_phone').hide();
+                    $('#input_phone').removeClass("input-error").addClass("valid");
+                }
+
+                $('#input_name_customer').val(item.data('langname'));
+                $('#input_id_customer').val(item.data('id'));
                 $('#input_address').val(item.data('address'));
                 $('#input_phone').val(item.data('phone'));
                 $('#input_fax').val(item.data('fax'));

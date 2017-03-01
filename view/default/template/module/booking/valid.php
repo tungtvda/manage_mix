@@ -57,6 +57,15 @@ $string_data_tour=_returnDataAutoCompleteTour();
                     $('#input_phone').removeClass("input-error").addClass("valid");
                 }
 
+                if(item.data('address')!=''){
+                    $("#error_address").hide();
+                    $('#icon_error_address').hide();
+                    $('#input_address').removeClass("input-error").addClass("valid");
+                }
+                if(item.data('id')!=''){
+                    $('#input_id_customer').removeClass("input-error").addClass("valid");
+                }
+
                 $('#input_name_customer').val(item.data('langname'));
                 $('#input_id_customer').val(item.data('id'));
                 $('#input_address').val(item.data('address'));
@@ -86,8 +95,39 @@ $string_data_tour=_returnDataAutoCompleteTour();
             onSelect: function (e, term, item) {
 //                console.log('Item "' + item.data('langname') + ' (' + item.data('lang') + ')" selected by ' + (e.type == 'keydown' ? 'pressing enter or tab' : 'mouse click') + '.');
                 $('#input_name_tour').val(item.data('name'));
-                var table_tour="<tr> <td class='center'>1</td><td><a>"+item.data('name')+"</a></td><td><span id='price_format_span'>"+item.data('price-format')+"</span><input hidden id='input_price_format' value='"+item.data('price-format')+"'><input hidden title='giá sửa' id='input_price' value='"+item.data('price')+"'><input hidden id='input_price_old' title='giá cũ' value='"+item.data('price')+"'> <a id='edit_price' href='javascript:void(0)'> <i class='fa fa-edit' title='Sửa đơn giá'></i></a><a id='reset_price' title='Lấy lại giá cũ' href='javascript:void(0)'> <i class='fa fa-refresh' title='Giá gốc'></i></a></td> <td>"+item.data('durations')+"</td><td>"+item.data('vehicle')+"</td><td>"+item.data('departure_name')+"</td></tr>";
+                var table_tour="<tr> <td class='center'>1</td><td><a>"+item.data('name')+"</a></td><td>" +
+                    "<span id='price_format_span'>"+item.data('price-format')+"</span>" +
+                    "<input hidden id='input_price_format' value='"+item.data('price-format')+"'>" +
+                    "<input  hidden title='giá sửa' id='input_price' value='"+item.data('price')+"'>" +
+                    "<input hidden id='input_price_old' title='giá cũ' value='"+item.data('price')+"'> " +
+                    " | <a id='edit_price' href='javascript:void(0)'> <i class='fa fa-edit' title='Sửa đơn giá'></i></a>" +
+                    "<a id='reset_price' title='Lấy lại giá cũ' href='javascript:void(0)'> <i class='fa fa-refresh' title='Giá gốc'></i></a>" +
+                    "</td> " +
+                    "<td>" +
+                    "<span id='price_format_span_511'>"+item.data('price-format')+"</span>" +
+                    "<input hidden title='giá sửa' id='input_price_511' value='"+item.data('price')+"'>" +
+                    " | <a id='edit_price_511' href='javascript:void(0)'> <i class='fa fa-edit' title='Sửa đơn giá'></i></a>" +
+                    "<a id='reset_price_511' title='Lấy lại giá cũ' href='javascript:void(0)'> <i class='fa fa-refresh' title='Giá gốc'></i></a>" +
+                    "</td><td>" +
+                    "<span id='price_format_span_5'>"+item.data('price-format')+"</span>" +
+                    "<input hidden title='giá sửa' id='input_price_5' value='"+item.data('price')+"'>" +
+                    " | <a id='edit_price_5' href='javascript:void(0)'> <i class='fa fa-edit' title='Sửa đơn giá'></i></a>" +
+                    "<a id='reset_price_5' title='Lấy lại giá cũ' href='javascript:void(0)'> <i class='fa fa-refresh' title='Giá gốc'></i></a>" +
+                    "</td><td>"+item.data('departure_name')+"" +
+                    "</td></tr>";
                 $('.table_booking_tour').html(table_tour);
+                $('#tong_cong').html('');
+                $('#vat').html('');
+                $('#dat_coc_format').html('');
+                $('#con_lai').html('');
+                $('#dat_coc').val('');
+                $('#input_id_tour').val(item.data('id'));
+                if(item.data('id')!=''){
+                    $('#input_id_tour').removeClass("input-error").addClass("valid");
+                    $("#error_name_tour").hide();
+                    $('#icon_error_name_tour').hide();
+                    $('#input_name_tour').removeClass("input-error").addClass("valid");
+                }
             }
         });
     });

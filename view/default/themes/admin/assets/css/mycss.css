@@ -108,3 +108,37 @@
     padding: 10px;
     background: #EEE;
 }
+.tinh_tien{
+    width: 41%;
+    border-radius: 6px;
+}
+@-webkit-keyframes glowing {
+    0% { background-color: #EDF3F4; -webkit-box-shadow: 0 0 3px #EDF3F4; }
+    50% { background-color: #0094FF; -webkit-box-shadow: 0 0 10px #0094FF; }
+    100% { background-color: #EDF3F4; -webkit-box-shadow: 0 0 3px #EDF3F4; }
+}
+
+@-moz-keyframes glowing {
+    0% { background-color: #EDF3F4; -moz-box-shadow: 0 0 3px #EDF3F4; }
+    50% { background-color: #0094FF; -moz-box-shadow: 0 0 10px #0094FF; }
+    100% { background-color: #EDF3F4; -moz-box-shadow: 0 0 3px #EDF3F4; }
+}
+
+@-o-keyframes glowing {
+    0% { background-color: #EDF3F4; box-shadow: 0 0 3px #EDF3F4; }
+    50% { background-color: #0094FF; box-shadow: 0 0 10px #0094FF; }
+    100% { background-color: #EDF3F4; box-shadow: 0 0 3px #EDF3F4; }
+}
+
+@keyframes glowing {
+    0% { background-color: #EDF3F4; box-shadow: 0 0 3px #EDF3F4; }
+    50% { background-color: #0094FF; box-shadow: 0 0 10px #0094FF; }
+    100% { background-color: #EDF3F4; box-shadow: 0 0 3px #EDF3F4; }
+}
+
+.tinh_tien {
+    -webkit-animation: glowing 1500ms infinite;
+    -moz-animation: glowing 1500ms infinite;
+    -o-animation: glowing 1500ms infinite;
+    animation: glowing 1500ms infinite;
+}

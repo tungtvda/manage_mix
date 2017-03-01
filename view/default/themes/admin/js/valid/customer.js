@@ -56,7 +56,6 @@ jQuery(function ($) {
                 var error = $("#error_" + form_data[input]['name']);
                 var valid = element.hasClass("valid");
                 if (valid == false) {
-                    alert(name_input);
                     element.addClass("input-error").removeClass("valid");
                     error.show();
                     error_free = false

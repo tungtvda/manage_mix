@@ -279,7 +279,7 @@
                 //console.log($('#spinner1').val())
             });
         $('#input_num_nguoi_lon').ace_spinner({
-                value: '',
+                value: 1,
                 min: 0,
                 max: 200,
                 step: 1,
@@ -288,7 +288,19 @@
             })
             .closest('.ace-spinner')
             .on('changed.fu.spinbox', function () {
-                //console.log($('#spinner1').val())
+                var error_so_nguoi = $("#error_so_nguoi");
+               var value_get=$('#input_num_nguoi_lon').val();
+                if(value_get<1){
+                    $('#input_num_nguoi_lon').addClass("input-error").removeClass("valid");
+                    error_so_nguoi.removeClass("success-color");
+                    error_so_nguoi.addClass("error-color");
+                    error_so_nguoi.html('Bạn vui lòng nhập số người lớn');
+                    error_so_nguoi.show();
+                }else{
+                    $('#input_num_nguoi_lon').addClass("valid").removeClass("input-error");
+                    error_so_nguoi.hide();
+
+                }
             });
         $('#input_num_tre_em').ace_spinner({
                 value: '',

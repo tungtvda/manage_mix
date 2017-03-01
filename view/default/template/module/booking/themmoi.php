@@ -72,7 +72,7 @@
                                                 style="color: red; font-size: 12px">*</span></div>
 
                                         <div class="profile-info-value form-group">
-                                            <?php echo _returnInputDate('ngay_bat_dau', '', '', '', '', '') ?>
+                                            <?php echo _returnInputDate('ngay_bat_dau', '', '', '', 'Bạn vui lòng chọn ngày bắt đầu', '') ?>
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
@@ -80,7 +80,7 @@
                                                 style="color: red; font-size: 12px">*</span></div>
 
                                         <div class="profile-info-value form-group">
-                                            <?php echo _returnInputDate('han_thanh_toan', '', '', '', '', '') ?>
+                                            <?php echo _returnInputDate('han_thanh_toan', '', '', '', 'Bạn vui lòng chọn ngày kết thúc', '') ?>
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
@@ -113,18 +113,23 @@
                                                     margin-top: 5px;
                                                 }
                                             </style>
-                                            <input name="num_nguoi_lon" type="text" id="input_num_nguoi_lon"
-                                                   title="Số người lớn" class="spinbox-input form-control text-center"
+                                            <input name="num_nguoi_lon" value="1" type="text" id="input_num_nguoi_lon"
+                                                   title="Số người lớn" class="spinbox-input form-control text-center valid"
                                                    placeholder="Người lớn">
                                             <input name="num_tre_em" type="text" id="input_num_tre_em"
                                                    title="Số trẻ em từ 5 đến 11 tuổi"
-                                                   class="spinbox-input form-control text-center"
+                                                   class="spinbox-input form-control text-center valid"
                                                    placeholder="Trẻ em  5-11 tuổi">
                                             <input name="num_tre_em_5" type="text" id="input_num_tre_em_5"
                                                    title="Số trẻ em dưới 5 tuổi"
-                                                   class="spinbox-input form-control text-center"
+                                                   class="spinbox-input form-control text-center valid"
                                                    placeholder="Trẻ em dưới 5 tuổi">
+                                            <label style="display: none"
+                                                   class="error-color  error-color-size"
+                                                   id="error_so_nguoi">Bạn vui lòng nhập số người lớn</label>
                                         </div>
+
+
                                     </div>
                                     <div class="profile-info-row check_div">
                                         <div class="profile-info-name"> Thuế VAT(10%)</div>
@@ -151,36 +156,36 @@
 
                                         <div class="profile-info-value form-group">
                                          <span class="input-icon width_100">
-                                            <input id="input_name_customer" type="text" name="name_customner"
+                                            <input id="input_name_customer" type="text" name="name_customer"
                                                    placeholder="Nhập tên khách hàng ..."
                                                    style="width:100%;max-width:100%;outline:0" autocomplete="off">
                                              <i class="ace-icon fa fa-user blue"></i>
                                              <i id="icon_error_name_customer" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " data-toggle="ggtooltip" data-title="" data-trigger="hover" data-placement="bottom" data-backcolor="red" data-textcolor="#ffffff" title=""></i>
                                              <i id="icon_success_name_customer" style="display: none" class="ace-icon fa fa-check-circle icon-right success-color" data-toggle="ggtooltip" data-title="" data-trigger="hover" data-placement="bottom" data-backcolor="green" data-textcolor="#000000" title=""></i>
                                          </span>
-                                            <input hidden id="input_id_customner" type="text" name="id_customner">
-                                            <label style="display: none" class="error-color  error-color-size" id="error_name_customer"></label>
+                                            <input hidden id="input_id_customer" type="text" class="valid" name="id_customer">
+                                            <label style="display: none" class="error-color  error-color-size" id="error_name_customer">Bạn vui lòng nhập tên khách hàng</label>
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
                                         <div class="profile-info-name"> Email <span style="color: red; font-size: 12px">*</span>
                                         </div>
                                         <div class="profile-info-value form-group">
-                                            <?php echo _returnInput('email', '', '', 'envelope', '', '', '') ?>
+                                            <?php echo _returnInput('email', '', '', 'envelope', '', 'Bạn vui lòng nhập email khách hàng', '') ?>
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
                                         <div class="profile-info-name"> Địa chỉ <span
                                                 style="color: red; font-size: 12px">*</span></div>
                                         <div class="profile-info-value form-group">
-                                            <?php echo _returnInput('address', '', '', 'map-marker', '', '', '') ?>
+                                            <?php echo _returnInput('address', '', '', 'map-marker', '', 'Bạn vui lòng nhập địa chỉ khách hàng', '') ?>
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
                                         <div class="profile-info-name"> Số điện thoại <span
                                                 style="color: red; font-size: 12px">*</span></div>
                                         <div class="profile-info-value form-group">
-                                            <?php echo _returnInput('phone', '', '', 'phone', '', '', '') ?>
+                                            <?php echo _returnInput('phone', '', '', 'phone', '', 'Bạn vui lòng nhập số điện thoai', '') ?>
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
@@ -201,7 +206,7 @@
                                         <div class="profile-info-name"> Điểm đón <span
                                                 style="color: red; font-size: 12px">*</span></div>
                                         <div class="profile-info-value form-group">
-                                            <?php echo _returnInput('diem_don', '', '', 'map-marker', '', '', '') ?>
+                                            <?php echo _returnInput('diem_don', '', '', 'map-marker', '', 'Bạn vui lòng nhập điểm đón', '') ?>
                                         </div>
                                     </div>
                                 </div>
@@ -224,6 +229,7 @@
                                                  <i class="ace-icon fa fa-plane blue"></i>
                                              </span>
                                     <input hidden id="input_id_tour" type="text" name="id_tour">
+                                    <label style="display: none" class="error-color  error-color-size" id="error_name_tour">Bạn vui lòng chọn tour</label>
                                 </div>
                                 <div style="float: left;width: 33%;">
                                     <div class="btn-group">
@@ -245,9 +251,9 @@
                                 <tr>
                                     <th class="center">#</th>
                                     <th>Tên tour</th>
-                                    <th>Giá</th>
-                                    <th>Thời gian</th>
-                                    <th>Phương tiện</th>
+                                    <th>Đơn giá người lớn</th>
+                                    <th>Đơn giá 5-11 tuổi</th>
+                                    <th>Đơn giá dưới 5 tuổi</th>
                                     <th>Khởi hành</th>
                                 </tr>
                                 </thead>
@@ -258,20 +264,21 @@
                             </table>
                             <div class="hr hr8 hr-double hr-dotted"></div>
                             <div class="row">
+                                <div class="col-sm-4" style="text-align: right"><a title="Tính tiền" id="tinh_tien"  href="javascript:void(0)"><img class="tinh_tien" src="<?php echo SITE_NAME?>/view/default/themes/images/tinhtien.png"></a></div>
                                 <div class="col-sm-8 pull-right">
                                     <div class="profile-user-info profile-user-info-striped">
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Tồng cộng</div>
 
                                             <div class="profile-info-value form-group">
-                                                <span class="red">$395</span>
+                                                <span class="red" id="tong_cong"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Thuế VAT 10%</div>
 
                                             <div class="profile-info-value form-group">
-                                                <span class="red">$395</span>
+                                                <span class="red" id="vat"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
@@ -279,7 +286,8 @@
 
                                             <div class="profile-info-value form-group">
                                                      <span class="input-icon width_100">
-                                                        <input id="input_dat_coc" type="text" name="dat_coc">
+                                                        <input  class="valid" id="input_dat_coc" type="number" name="dat_coc">
+                                                          <span class="red" id="dat_coc_format"></span>
                                                          <i class="ace-icon fa fa-user blue"></i>
                                                      </span>
                                             </div>
@@ -288,7 +296,7 @@
                                             <div class="profile-info-name"> Còn Lại</div>
 
                                             <div class="profile-info-value form-group">
-                                                <span class="red">$395</span>
+                                                <span class="red" id="con_lai"></span>
                                             </div>
                                         </div>
                                     </div>

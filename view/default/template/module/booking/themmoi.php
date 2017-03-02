@@ -49,7 +49,13 @@
                                                 style="color: red; font-size: 12px">*</span></div>
 
                                         <div class="profile-info-value">
-                                            <?php echo _returnInput('code_booking', $Random, 'valid', 'qrcode', '', '', '') ?>
+                                            <span class="input-icon width_100" style="">
+                                                    <input name="code_booking" type="text" id="input_code_booking" value="<?php echo $Random?>" class="width_100 valid">
+                                                    <i class="ace-icon fa fa-qrcode blue"></i>
+                                                    <i id="icon_error_code_booking" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " data-toggle="ggtooltip" data-title="" data-trigger="hover" data-placement="bottom" data-backcolor="red" data-textcolor="#ffffff" title=""></i>
+                                                    <i id="icon_success_code_booking" style="display: none" class="ace-icon fa fa-check-circle icon-right success-color" data-toggle="ggtooltip" data-title="" data-trigger="hover" data-placement="bottom" data-backcolor="green" data-textcolor="#000000" title=""></i>
+                                                </span>
+<!--                                            --><?php //echo _returnInput('code_booking', $Random, 'valid', 'qrcode', '', '', '') ?>
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
@@ -88,6 +94,7 @@
 
                                         <div class="profile-info-value form-group">
                                             <?php echo _returnInputSelect('status', $status, $data_list_status, 'valid', 'Trạng thái ...') ?>
+                                            <label style="display: none" class="error-color  error-color-size" id="error_status">Bạn vui lòng chọn trạng thái đơn hàng</label>
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
@@ -96,6 +103,7 @@
 
                                         <div class="profile-info-value form-group">
                                             <?php echo _returnInputSelect('hinh_thuc_thanh_toan', $hinh_thuc_thanh_toan, $data_list_httt, 'valid', 'Hình thức thanh toán ...') ?>
+                                            <label style="display: none" class="error-color  error-color-size" id="error_hinh_thuc_thanh_toan">Bạn vui lòng chọn hình thức thanh toán</label>
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
@@ -200,7 +208,6 @@
                                         <div class="profile-info-value form-group nhom_khach_hang">
                                             <?php echo _returnInputSelect('nhom_khach_hang', '', $data_list_customer_category, 'valid', 'Nhóm khách hàng ...') ?>
                                         </div>
-                                        <input hidden id="input_id_category" type="text" name="id_category">
                                     </div>
                                     <div class="profile-info-row">
                                         <div class="profile-info-name"> Điểm đón <span
@@ -305,6 +312,8 @@
                             </div>
                         </div>
                     </div>
+                    <input class="valid" hidden name="check_edit" id="input_check_edit" value="add">
+                    <input class="valid" hidden name="id_edit" id="input_id_edit" value="">
                     <div class="col-xs-12 col-sm-12 col-md-12 ">
                         <h3 class="row header smaller lighter purple">
                             <i class="ace-icon fa fa-users"></i>

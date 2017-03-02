@@ -164,7 +164,7 @@ jQuery(function ($) {
                 '<td> <span class="input-icon width_100"><input id="input_name_customer_' + i + '" class="valid" type="text"  name="name_customer[]"><i class="ace-icon fa fa-user blue"></i></span></td>' +
                 '<td><span class="input-icon width_100"> <input id="input_email_customer_' + i + '" type="text" class="valid" name="email_customer[]"><i class="ace-icon fa fa-envelope blue"></i> </span></td>' +
                 '<td><span class="input-icon width_100"><input id="input_phone_customer_' + i + '" class="valid" type="text" name="phone_customer[]"><i class="ace-icon fa fa-phone blue"></i></span></td>' +
-                '<td><span class="input-icon width_100"> <input id="input_address_customer_' + i + '" type="text" name="address_customer[]"><i class="ace-icon fa fa-map_marker blue"></i></span></td>' +
+                '<td><span class="input-icon width_100"> <input id="input_address_customer_' + i + '" type="text" name="address_customer[]"><i class="ace-icon fa fa-map-marker blue"></i></span></td>' +
                 '<td><a id="stt_custommer_' + i + '"  deleteid="' + i + '"  title="Xóa khách hàng"  class="red btn_remove_customer" href="javascript:void()"><i class="ace-icon fa fa-trash-o bigger-130"></i></a></td>' +
                 '</tr></tbody>';
 
@@ -336,6 +336,12 @@ jQuery(function ($) {
         checkPhoneCustomer();
     });
 
+    $('body').on("change", '.hinh_thuc_thanh_toan', function () {
+        $('#error_hinh_thuc_thanh_toan').hide();
+    });
+    $('body').on("change", '.status', function () {
+        $('#error_status').hide();
+    });
 
 
     $('body').on("input", '#input_diem_don', function () {
@@ -348,15 +354,32 @@ jQuery(function ($) {
         checkDiemDon();
     });
 
+
     $('body').on("click", '#submit_form_action', function () {
         var form_data = $("#submit_form").serializeArray();
         var error_free = true;
         for (var input in form_data) {
             var name_input=form_data[input]['name'];
-            if (name_input != "mr"&&name_input != "resources_to"&&name_input!='category'&&name_input!='nganh_nghe'&&name_input!='chuc_vu'&&name_input!='phong_ban'&&name_input!='note') {
+            if (name_input != "tien_te"&&name_input!='category'&&name_input!='nhom_khach_hang'&&name_input!='name_customer[]'&&name_input!='email_customer[]'&&name_input!='phone_customer[]'&&name_input!='address_customer[]') {
                 var element = $("#input_" + name_input);
                 var error = $("#error_" + name_input);
                 var valid = element.hasClass("valid");
+                if(name_input=="hinh_thuc_thanh_toan"){
+                   var httt= $( ".hinh_thuc_thanh_toan option:selected" ).val();
+                   if(httt==''){
+                       valid=false;
+                   }else{
+                       valid=true;
+                   }
+                }
+                if(name_input=="status"){
+                    var status= $( ".status option:selected" ).val();
+                    if(status==''){
+                        valid=false;
+                    }else{
+                        valid=true;
+                    }
+                }
                 if (valid == false) {
                     console.log(name_input);
                     element.addClass("input-error").removeClass("valid");
@@ -366,7 +389,7 @@ jQuery(function ($) {
             }
         }
         if (error_free != false) {
-            //$("#submit_form").submit();
+            $("#submit_form").submit();
         }
 
     });
@@ -654,6 +677,12 @@ function removeValueTour() {
     $('#con_lai').html('');
     $('#input_dat_coc').val('');
     $('#input_id_tour').removeClass("valid").addClass("input-error");
+    $('#input_name_tour').removeClass("valid").addClass("input-error");
+    var error_name_tour=$("#error_name_tour" );
+    error_name_tour.removeClass("success-color");
+    error_name_tour.addClass("error-color");
+    error_name_tour.html("Bạn vui lòng nhập và chọn tour");
+    error_name_tour.show();
 }
 function formatNumber(nStr, decSeperate, groupSeperate) {
     nStr += '';

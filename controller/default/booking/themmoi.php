@@ -43,10 +43,13 @@ if(isset($_GET['id'])&&$_GET['id']!='')
 }
 
 $_SESSION['link_redict'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-
 $data['breadcrumbs'] = $url_bread;
-
 $data['module_valid'] = "booking";
+if(isset($_POST['code_booking']))
+{
+    print_r($_POST);
+    exit;
+}
 show_header($data);
 show_left($data, 'booking', 'booking_list');
 show_breadcrumb($data);

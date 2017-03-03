@@ -916,7 +916,7 @@ function _returnInputSelect($name, $value, $data_list, $valid = '', $name_title)
 }
 
 function _returnDataAutoCompleteCustomer(){
-    $data_khach_hang = customer_getByTop('', '', 'name asc');
+    $data_khach_hang = customer_getByTop('', 'status=1', 'name asc');
     $string_data='[';
     if(count($data_khach_hang)>0){
         foreach($data_khach_hang as $row_kh){
@@ -975,6 +975,29 @@ function _returnDataAutoCompleteTour(){
                 }
             }
             $string_data.="['".$id."','".$name."','".$price_format."','".$durations."','".$vehicle."','".$departure_id."','".$departure_name."','".$price."'],";
+        }
+    }
+    $string_data.='];';
+    return $string_data;
+}
+
+function _returnDataAutoCompleteUser(){
+    $data_user = user_getByTop('', 'status=1', 'name asc');
+    $string_data='[';
+    if(count($data_user)>0){
+        foreach($data_user as $row_user){
+            $id=$row_user->id;
+            $name=$row_user->name;
+            $email=$row_user->user_email;
+            $phone=$row_user->phone;
+            $phong_ban='';
+            $number_tour=0;
+            $data_phongban=user_phongban_getByTop('','id='.$row_user->phong_ban,'');
+            $number_tour=booking_count('user_id='.$row_user->id.' and status!=5');
+            if(count($data_phongban)>0){
+                $phong_ban=$data_phongban[0]->name;
+            }
+            $string_data.="['".$id."','".$name."','".$email."','".$phone."','".$phong_ban."','".$number_tour."'],";
         }
     }
     $string_data.='];';

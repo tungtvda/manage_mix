@@ -19,6 +19,16 @@ jQuery(function ($) {
         }
     });
 
+    $('body').on("input", '#input_name_user', function () {
+        removeValueUser();
+    });
+    $('body').on("keyup", '#input_name_user', function (event) {
+        if (event.keyCode != "13") {
+            removeValueUser();
+        }
+    });
+
+
     $('body').on("input", '#input_dat_coc', function () {
         returnDatCoc();
     });
@@ -79,10 +89,12 @@ jQuery(function ($) {
 
         if (numberRegex.test(price)) {
             var price_format = price.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+            $('#input_price_submit').val(price);
         }
         else {
             var price_old = $('#input_price_old').val();
             $('#input_price').val(price_old);
+            $('#input_price_submit').val(price_old);
             var price_format = $('#input_price_format').val();
         }
 
@@ -94,10 +106,12 @@ jQuery(function ($) {
         var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
         if (numberRegex.test(price)) {
             var price_format = price.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+            $('#input_price_511_submit').val(price);
         }
         else {
             var price_old = $('#input_price_old').val();
             $('#input_price_511').val(price_old);
+            $('#input_price_511_submit').val(price_old);
             var price_format = $('#input_price_format').val();
         }
 
@@ -109,10 +123,12 @@ jQuery(function ($) {
         var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
         if (numberRegex.test(price)) {
             var price_format = price.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+            $('#input_price_5_submit').val(price);
         }
         else {
             var price_old = $('#input_price_old').val();
             $('#input_price_5').val(price_old);
+            $('#input_price_5_submit').val(price_old);
             var price_format = $('#input_price_format').val();
         }
 
@@ -161,7 +177,7 @@ jQuery(function ($) {
             });
             var row = ' <tbody id="row_customer_' + i + '"><tr>' +
                 '<td class="center stt_cus">' + i + '</td>' +
-                '<td> <span class="input-icon width_100"><input id="input_name_customer_' + i + '" class="valid" type="text"  name="name_customer[]"><i class="ace-icon fa fa-user blue"></i></span></td>' +
+                '<td> <span class="input-icon width_100"><input id="input_name_customer_sub_' + i + '" class="valid" type="text"  name="name_customer_sub[]"><i class="ace-icon fa fa-user blue"></i></span></td>' +
                 '<td><span class="input-icon width_100"> <input id="input_email_customer_' + i + '" type="text" class="valid" name="email_customer[]"><i class="ace-icon fa fa-envelope blue"></i> </span></td>' +
                 '<td><span class="input-icon width_100"><input id="input_phone_customer_' + i + '" class="valid" type="text" name="phone_customer[]"><i class="ace-icon fa fa-phone blue"></i></span></td>' +
                 '<td><span class="input-icon width_100"> <input id="input_address_customer_' + i + '" type="text" name="address_customer[]"><i class="ace-icon fa fa-map-marker blue"></i></span></td>' +
@@ -360,7 +376,7 @@ jQuery(function ($) {
         var error_free = true;
         for (var input in form_data) {
             var name_input=form_data[input]['name'];
-            if (name_input != "tien_te"&&name_input!='category'&&name_input!='nhom_khach_hang'&&name_input!='name_customer[]'&&name_input!='email_customer[]'&&name_input!='phone_customer[]'&&name_input!='address_customer[]') {
+            if (name_input != "tien_te"&&name_input!='category'&&name_input!='nhom_khach_hang'&&name_input!='name_customer_sub[]'&&name_input!='email_customer[]'&&name_input!='phone_customer[]'&&name_input!='address_customer[]') {
                 var element = $("#input_" + name_input);
                 var error = $("#error_" + name_input);
                 var valid = element.hasClass("valid");
@@ -676,6 +692,9 @@ function removeValueTour() {
     $('#dat_coc_format').html('');
     $('#con_lai').html('');
     $('#input_dat_coc').val('');
+    $('#input_price_submit').val('');
+    $('#input_price_511_submit').val('');
+    $('#input_price_5_submit').val('');
     $('#input_id_tour').removeClass("valid").addClass("input-error");
     $('#input_name_tour').removeClass("valid").addClass("input-error");
     var error_name_tour=$("#error_name_tour" );
@@ -684,6 +703,18 @@ function removeValueTour() {
     error_name_tour.html("Bạn vui lòng nhập và chọn tour");
     error_name_tour.show();
 }
+function removeValueUser() {
+    $('.table_booking_user').html('');
+    $('#input_id_user').val('');
+    $('#input_id_user').removeClass("valid").addClass("input-error");
+    $('#input_name_user').removeClass("valid").addClass("input-error");
+    var error_name_user=$("#error_name_user" );
+    error_name_user.removeClass("success-color");
+    error_name_user.addClass("error-color");
+    error_name_user.html("Bạn vui lòng nhập và chọn sales");
+    error_name_user.show();
+}
+
 function formatNumber(nStr, decSeperate, groupSeperate) {
     nStr += '';
     x = nStr.split(decSeperate);

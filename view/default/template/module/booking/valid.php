@@ -3,6 +3,8 @@ $string_data_customer=_returnDataAutoCompleteCustomer();
 
 $string_data_tour=_returnDataAutoCompleteTour();
 
+$string_data_user=_returnDataAutoCompleteUser();
+
 ?>
 <script src="<?php echo SITE_NAME?>/view/default/themes/admin/js/valid/booking.js"></script>
 <link rel="stylesheet"
@@ -95,6 +97,10 @@ $string_data_tour=_returnDataAutoCompleteTour();
             onSelect: function (e, term, item) {
 //                console.log('Item "' + item.data('langname') + ' (' + item.data('lang') + ')" selected by ' + (e.type == 'keydown' ? 'pressing enter or tab' : 'mouse click') + '.');
                 $('#input_name_tour').val(item.data('name'));
+
+                $('#input_price_submit').val(item.data('price'));
+                $('#input_price_511_submit').val(item.data('price'));
+                $('#input_price_5_submit').val(item.data('price'));
                 var table_tour="<tr> <td class='center'>1</td><td><a>"+item.data('name')+"</a></td><td>" +
                     "<span id='price_format_span'>"+item.data('price-format')+"</span>" +
                     "<input hidden id='input_price_format' value='"+item.data('price-format')+"'>" +
@@ -127,6 +133,43 @@ $string_data_tour=_returnDataAutoCompleteTour();
                     $("#error_name_tour").hide();
                     $('#icon_error_name_tour').hide();
                     $('#input_name_tour').removeClass("input-error").addClass("valid");
+                }
+            }
+        });
+
+        $('#input_name_user').autoComplete({
+            minChars: 0,
+            source: function (term, suggest) {
+                term = term.toLowerCase();
+                var choices =<?php echo $string_data_user?>
+                var suggestions = [];
+                for (i = 0; i < choices.length; i++)
+                    if (~(choices[i][0] + ' ' + choices[i][1]).toLowerCase().indexOf(term)) suggestions.push(choices[i]);
+                suggest(suggestions);
+            },
+            renderItem: function (item, search) {
+                search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+                var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
+                return '<div title="' + item[1] + '-'+item[2]+'-'+item[3]+'" class="autocomplete-suggestion" data-user_id="' + item[0] + '" data-user_name="' + item[1] + '" data-user-email="' + item[2] + '" data-user-phone="' + item[3] + '" data-user-phong-ban="' + item[4] + '" data-number-tour="' + item[5] + '" > ' + item[1]+' - ' + item[2]+'  - ' + item[3]+'</div>';
+            },
+            onSelect: function (e, term, item) {
+                $('#input_name_user').val(item.data('user_name'));
+                $('#input_id_user').val(item.data('user_id'));
+                var table_user="<tr> <td class='center'>1</td><td><a>"+item.data('user_name')+"</a></td><td>" +
+                    "<span >"+item.data('user-email')+"</span>" +
+                    "</td> " +
+                    "<td>" +
+                    "<span>"+item.data('user-phone')+"</span>" +
+                    "</td><td>" +
+                    "<span id='price_format_span_5'>"+item.data('user-phong-ban')+"</span>" +
+                    "</td><td>"+item.data('number-tour')+"" +
+                    "</td></tr>";
+                $('.table_booking_user').html(table_user);
+                if(item.data('user_id')!=''){
+                    $('#input_id_user').removeClass("input-error").addClass("valid");
+                    $("#error_name_user").hide();
+                    $('#icon_error_name_user').hide();
+                    $('#input_name_user').removeClass("input-error").addClass("valid");
                 }
             }
         });

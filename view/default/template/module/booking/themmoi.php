@@ -35,6 +35,44 @@
                         }
                     </style>
                     <div class="col-xs-12 col-sm-12 col-md-12 ">
+                        <h3 class="row header smaller lighter blue">
+                            <i class="ace-icon fa fa-user blue bigger-125"></i>
+                            Chọn sales
+                        </h3>
+                        <div class="row col-xs-12 div_content">
+                            <div class="form-group border-sloid-1-x"
+                                 style="float: left; width: 100%;    margin-left: 0px;margin-right: 0px;">
+                                <div style="float: left;width: 66%">
+                                           <span class="input-icon width_100">
+                                                <input id="input_name_user" autofocus type="text" name="name_user"
+                                                       placeholder="Nhập tên sales ..."
+                                                       style="width:100%;max-width:600px;outline:0" autocomplete="off">
+                                                 <i class="ace-icon fa fa-user blue"></i>
+                                             </span>
+                                    <input hidden id="input_id_user" type="text" name="id_user">
+                                    <label style="display: none" class="error-color  error-color-size" id="error_name_user">Bạn vui lòng chọn sales</label>
+                                </div>
+                            </div>
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th class="center">#</th>
+                                    <th>Tên Sales</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Phòng ban</th>
+                                    <th>Tour đang điều hành</th>
+                                </tr>
+                                </thead>
+
+                                <tbody class="table_booking_user">
+
+                                </tbody>
+                            </table>
+                            <div class="hr hr8 hr-double hr-dotted"></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 ">
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <h3 class="row header smaller lighter orange">
 											<span class="col-sm-8">
@@ -269,6 +307,9 @@
 
                                 </tbody>
                             </table>
+                            <input hidden="" class="valid"  id="input_price_submit" name="price_submit" value="">
+                            <input hidden="" class="valid"  id="input_price_511_submit" name="price_511_submit" value="">
+                            <input hidden="" class="valid"  id="input_price_5_submit" name="price_5_submit" value="">
                             <div class="hr hr8 hr-double hr-dotted"></div>
                             <div class="row">
                                 <div class="col-sm-4" style="text-align: right"><a title="Tính tiền" id="tinh_tien"  href="javascript:void(0)"><img class="tinh_tien" src="<?php echo SITE_NAME?>/view/default/themes/images/tinhtien.png"></a></div>

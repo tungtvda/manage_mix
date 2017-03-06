@@ -59,6 +59,8 @@ if(isset($_SESSION["Admin"]))
        $array=$_POST;
        if(!isset($array['id']))
        $array['id']='0';
+        if(!isset($array['booking_id']))
+            $array['booking_id']='0';
        if(!isset($array['name']))
        $array['name']='0';
        if(!isset($array['mr']))

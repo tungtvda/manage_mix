@@ -1014,3 +1014,19 @@ function _getRandomNumbers($min, $max, $count)
     shuffle($values);
     return array_slice($values,0, $count);
 }
+function _randomCustommr(){
+    $rand=(implode('',_getRandomNumbers(1, 99, 3))).$_SESSION['user_id'];
+
+}
+function _randomBooking($code_module,$function_count){
+    $rand_number=rand(1,5);
+    $rand=$code_module.(implode('',_getRandomNumbers(1, 99, $rand_number))).$_SESSION['user_id'];
+    $data_booking=booking_count('code_booking="'.$rand.'"');
+    if($data_booking>0){
+        _randomBooking();
+    }
+    else{
+        return $rand;
+    }
+
+}

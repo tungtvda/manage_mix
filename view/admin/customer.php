@@ -53,6 +53,7 @@ function showTableBody($data)
 function showFrom($form,$ListKey=array())
 {
     $str_from='';
+    $str_from.='<p><label>booking_id</label><input class="text-input small-input" type="text"  name="booking_id" value="'.(($form!=false)?$form->booking_id:'').'" /></p>';
     $str_from.='<p><label>name</label><input class="text-input small-input" type="text"  name="name" value="'.(($form!=false)?$form->name:'').'" /></p>';
     $str_from.='<p><label>mr</label><input class="text-input small-input" type="text"  name="mr" value="'.(($form!=false)?$form->mr:'').'" /></p>';
     $str_from.='<p><label>avatar</label><input class="text-input small-input" type="text"  name="avatar" value="'.(($form!=false)?$form->avatar:'').'"/><a class="button" onclick="openKcEditor(\'avatar\');">Upload ảnh</a></p>';

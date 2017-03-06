@@ -54,7 +54,7 @@ if(isset($_SESSION["Admin"]))
             header('Location: '.SITE_NAME.'/controller/admin/booking.php');
         }
     }
-    if(isset($_POST["code_booking"])&&isset($_POST["id_tour"])&&isset($_POST["name_tour"])&&isset($_POST["code_tour"])&&isset($_POST["price_tour"])&&isset($_POST["price_11"])&&isset($_POST["price_5"])&&isset($_POST["nguon_tour"])&&isset($_POST["tien_te"])&&isset($_POST["ty_gia"])&&isset($_POST["ngay_bat_dau"])&&isset($_POST["han_thanh_toan"])&&isset($_POST["loai_khach_hang"])&&isset($_POST["hinh_thuc_thanh_toan"])&&isset($_POST["id_customer"])&&isset($_POST["diem_don"])&&isset($_POST["diem_tra"])&&isset($_POST["ngay_khoi_hanh"])&&isset($_POST["ngay_ket_thuc"])&&isset($_POST["phuong_tien"])&&isset($_POST["total_price_uoc_tinh"])&&isset($_POST["total_price_thuc_te"])&&isset($_POST["tien_thanh_toan"])&&isset($_POST["user_id"])&&isset($_POST["status"])&&isset($_POST["created_by"])&&isset($_POST["updated_by"])&&isset($_POST["created"])&&isset($_POST["updated"])&&isset($_POST["note"]))
+    if(isset($_POST["code_booking"])&&isset($_POST["id_tour"])&&isset($_POST["name_tour"])&&isset($_POST["code_tour"])&&isset($_POST["price_tour"])&&isset($_POST["price_11"])&&isset($_POST["price_5"])&&isset($_POST["price_new"])&&isset($_POST["price_11_new"])&&isset($_POST["price_5_new"])&&isset($_POST["nguon_tour"])&&isset($_POST["tien_te"])&&isset($_POST["ty_gia"])&&isset($_POST["ngay_bat_dau"])&&isset($_POST["han_thanh_toan"])&&isset($_POST["loai_khach_hang"])&&isset($_POST["hinh_thuc_thanh_toan"])&&isset($_POST["id_customer"])&&isset($_POST["diem_don"])&&isset($_POST["diem_tra"])&&isset($_POST["ngay_khoi_hanh"])&&isset($_POST["ngay_ket_thuc"])&&isset($_POST["phuong_tien"])&&isset($_POST["total_price_uoc_tinh"])&&isset($_POST["total_price_thuc_te"])&&isset($_POST["tien_thanh_toan"])&&isset($_POST["user_id"])&&isset($_POST["status"])&&isset($_POST["created_by"])&&isset($_POST["updated_by"])&&isset($_POST["created"])&&isset($_POST["updated"])&&isset($_POST["note"]))
     {
        $array=$_POST;
        if(!isset($array['id']))
@@ -73,6 +73,12 @@ if(isset($_SESSION["Admin"]))
        $array['price_11']='0';
        if(!isset($array['price_5']))
        $array['price_5']='0';
+       if(!isset($array['price_new']))
+       $array['price_new']='0';
+       if(!isset($array['price_11_new']))
+       $array['price_11_new']='0';
+       if(!isset($array['price_5_new']))
+       $array['price_5_new']='0';
        if(!isset($array['nguon_tour']))
        $array['nguon_tour']='0';
        if(!isset($array['tien_te']))

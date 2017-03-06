@@ -55,6 +55,14 @@ function show_booking_themmoi($data = array())
     $data_list_customer_category=customer_category_getByTop('','','position asc');
 
     $Random=_randomBooking('#','booking_count');
+
+    $nguon_tour=_returnDataEditAdd($data['data_user'],'nguon_tour');
+    $data_nguon_tour=tien_te_getById($nguon_tour);
+    $nguon_tour_name='';
+    if(count($data_nguon_tour)>0){
+        $nguon_tour_name=$data_nguon_tour[0]->name;
+    }
+    $data_list_nguon_tour=nguon_tour_getByTop('','','position asc');
     require_once DIR . '/view/default/template/module/booking/themmoi.php';
 }
 

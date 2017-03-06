@@ -108,7 +108,7 @@
                                         <div class="profile-info-name"> Tỷ giá</div>
 
                                         <div class="profile-info-value form-group">
-                                            <?php echo _returnInput('ty_gia', '', 'valid', 'exchange', '', '', '') ?>
+                                            <?php echo _returnInputSelect('nguon_tour', $nguon_tour, $data_list_nguon_tour, 'valid', 'Nguồn đơn hàng ...') ?>
                                         </div>
                                     </div>
                                     <div class="profile-info-row">

@@ -77,8 +77,14 @@ if(isset($_POST['code_booking']))
     $price_5_submit=_returnPostParamSecurity('price_5_submit');
     $check_edit=_returnPostParamSecurity('check_edit');
     $id_edit=_returnPostParamSecurity('id_edit');
-    $name_customer_sub=$_POST['name_customer_sub'];
-    $email_customer=$_POST['email_customer'];
+    $name_customer_sub=array();
+    if(isset($_POST['name_customer_sub'])){
+        $name_customer_sub=$_POST['name_customer_sub'];
+    }
+    $email_customer=array();
+    if(isset($_POST['email_customer'])){
+        $email_customer=$_POST['email_customer'];
+    }
     $phone_customer=$_POST['phone_customer'];
     $address_customer=$_POST['address_customer'];
     if($id_user!=''&&$name_user!=''&&$code_booking!=''&&$ngay_bat_dau!=''&&$han_thanh_toan!=''&&$hinh_thuc_thanh_toan!=''&&$num_nguoi_lon!=''&&$num_nguoi_lon!=0&&$name_customer!=''&&$email!='' &&$address!='' &&$phone!='' &&$diem_don!='' &&$name_tour!='' &&$id_tour!=''&&$price_submit!=''){
@@ -89,7 +95,7 @@ if(isset($_POST['code_booking']))
         }else{
             $dangky = new customer();
             $dangky->name = $name_customer;
-            $dangky->code = '';
+            $dangky->code = _randomBooking('cus','booking_count');
             $dangky->mr = '';
             $dangky->email = $email;
             $dangky->address = $address;
@@ -133,6 +139,7 @@ if(isset($_POST['code_booking']))
             echo "<script>alert($mess)</script>";
             exit;
         }
+
 
 
 

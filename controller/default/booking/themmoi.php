@@ -52,7 +52,15 @@ if(isset($_POST['code_booking']))
     $id_user=_returnPostParamSecurity('id_user');
     $code_booking=_returnPostParamSecurity('code_booking');
     $tien_te=_returnPostParamSecurity('tien_te');
-    $ty_gia=_returnPostParamSecurity('ty_gia');
+    $ty_gia='';
+    if($tien_te!=''){
+        $data_ty_gia=tien_te_getById($tien_te);
+        if(count($data_ty_gia)>0){
+            $ty_gia=$data_ty_gia[0]->value;
+        }
+    }
+
+    $nguon_tour=_returnPostParamSecurity('nguon_tour');
     $ngay_bat_dau=_returnPostParamSecurity('ngay_bat_dau');
     $han_thanh_toan=_returnPostParamSecurity('han_thanh_toan');
     $status=_returnPostParamSecurity('status');
@@ -139,6 +147,34 @@ if(isset($_POST['code_booking']))
             echo "<script>alert($mess)</script>";
             exit;
         }
+        $booking_model=new booking();
+        $booking_model->id_tour=$id_tour;
+        $booking_model->name_tour=$check_data_tour[0]->name;
+        $booking_model->code_tour=$check_data_tour[0]->code;
+        $booking_model->price_tour=$check_data_tour[0]->price;
+        $booking_model->price_11=$check_data_tour[0]->price;
+        $booking_model->price_5=$check_data_tour[0]->price;
+        $booking_model->price_new=$price_submit;
+        $booking_model->price_11_new=$price_511_submit;
+        $booking_model->price_5_new=$price_5_submit;
+        $booking_model->nguon_tour=$nguon_tour;
+        $booking_model->tien_te=$tien_te;
+        $booking_model->ty_gia=$ty_gia;
+        $booking_model->ngay_bat_dau=$ngay_bat_dau;
+        $booking_model->han_thanh_toan=$han_thanh_toan;
+        $booking_model->loai_khach_hang=$nhom_khach_hang;
+        $booking_model->hinh_thuc_thanh_toan=$hinh_thuc_thanh_toan;
+        $booking_model->id_customer=$id_customer;
+        $booking_model->diem_don=$diem_don;
+        $booking_model->diem_tra=$diem_don;
+        $booking_model->id_tour=$id_tour;
+        $booking_model->id_tour=$id_tour;
+        $booking_model->id_tour=$id_tour;
+        $booking_model->id_tour=$id_tour;
+        $booking_model->id_tour=$id_tour;
+        $booking_model->id_tour=$id_tour;
+        $booking_model->id_tour=$id_tour;
+        $booking_model->id_tour=$id_tour;
 
 
 

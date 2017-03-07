@@ -29,7 +29,7 @@ function view_booking($data)
 //
 function showTableHeader()
 {
-    return '<th>id</th><th>code_booking</th><th>id_tour</th><th>name_tour</th><th>code_tour</th><th>price_tour</th><th>price_11</th><th>price_5</th><th>price_new</th><th>price_11_new</th><th>price_5_new</th><th>nguon_tour</th><th>tien_te</th><th>ty_gia</th><th>ngay_bat_dau</th><th>han_thanh_toan</th><th>loai_khach_hang</th><th>hinh_thuc_thanh_toan</th><th>id_customer</th><th>diem_don</th><th>diem_tra</th><th>ngay_khoi_hanh</th><th>ngay_ket_thuc</th><th>phuong_tien</th><th>total_price_uoc_tinh</th><th>total_price_thuc_te</th><th>tien_thanh_toan</th><th>user_id</th><th>status</th><th>created_by</th><th>updated_by</th><th>created</th><th>updated</th><th>note</th>';
+    return '<th>id</th><th>code_booking</th><th>id_tour</th><th>name_tour</th><th>code_tour</th><th>price_tour</th><th>price_11</th><th>price_5</th><th>price_new</th><th>price_11_new</th><th>price_5_new</th><th>nguon_tour</th><th>tien_te</th><th>ty_gia</th><th>ngay_bat_dau</th><th>han_thanh_toan</th><th>loai_khach_hang</th><th>hinh_thuc_thanh_toan</th><th>id_customer</th><th>diem_don</th><th>diem_tra</th><th>ngay_khoi_hanh</th><th>ngay_ket_thuc</th><th>phuong_tien</th><th>num_nguoi_lon</th><th>num_tre_em</th><th>num_tre_em_5</th><th>total_price</th><th>tien_thanh_toan</th><th>user_id</th><th>status</th><th>confirm_admin</th><th>created_by</th><th>updated_by</th><th>created</th><th>updated</th><th>note</th>';
 }
 //
 function showTableBody($data)
@@ -62,11 +62,14 @@ function showTableBody($data)
         $TableBody.="<td>".$obj->ngay_khoi_hanh."</td>";
         $TableBody.="<td>".$obj->ngay_ket_thuc."</td>";
         $TableBody.="<td>".$obj->phuong_tien."</td>";
-        $TableBody.="<td>".$obj->total_price_uoc_tinh."</td>";
-        $TableBody.="<td>".$obj->total_price_thuc_te."</td>";
+        $TableBody.="<td>".$obj->num_nguoi_lon."</td>";
+        $TableBody.="<td>".$obj->num_tre_em."</td>";
+        $TableBody.="<td>".$obj->num_tre_em_5."</td>";
+        $TableBody.="<td>".$obj->total_price."</td>";
         $TableBody.="<td>".$obj->tien_thanh_toan."</td>";
         $TableBody.="<td>".$obj->user_id."</td>";
         $TableBody.="<td>".$obj->status."</td>";
+        $TableBody.="<td>".$obj->confirm_admin."</td>";
         $TableBody.="<td>".$obj->created_by."</td>";
         $TableBody.="<td>".$obj->updated_by."</td>";
         $TableBody.="<td>".$obj->created."</td>";
@@ -106,11 +109,14 @@ function showFrom($form,$ListKey=array())
     $str_from.='<p><label>ngay_khoi_hanh</label><input class="text-input small-input" type="text"  name="ngay_khoi_hanh" value="'.(($form!=false)?$form->ngay_khoi_hanh:'').'" /></p>';
     $str_from.='<p><label>ngay_ket_thuc</label><input class="text-input small-input" type="text"  name="ngay_ket_thuc" value="'.(($form!=false)?$form->ngay_ket_thuc:'').'" /></p>';
     $str_from.='<p><label>phuong_tien</label><input class="text-input small-input" type="text"  name="phuong_tien" value="'.(($form!=false)?$form->phuong_tien:'').'" /></p>';
-    $str_from.='<p><label>total_price_uoc_tinh</label><input class="text-input small-input" type="text"  name="total_price_uoc_tinh" value="'.(($form!=false)?$form->total_price_uoc_tinh:'').'" /></p>';
-    $str_from.='<p><label>total_price_thuc_te</label><input class="text-input small-input" type="text"  name="total_price_thuc_te" value="'.(($form!=false)?$form->total_price_thuc_te:'').'" /></p>';
+    $str_from.='<p><label>num_nguoi_lon</label><input class="text-input small-input" type="text"  name="num_nguoi_lon" value="'.(($form!=false)?$form->num_nguoi_lon:'').'" /></p>';
+    $str_from.='<p><label>num_tre_em</label><input class="text-input small-input" type="text"  name="num_tre_em" value="'.(($form!=false)?$form->num_tre_em:'').'" /></p>';
+    $str_from.='<p><label>num_tre_em_5</label><input class="text-input small-input" type="text"  name="num_tre_em_5" value="'.(($form!=false)?$form->num_tre_em_5:'').'" /></p>';
+    $str_from.='<p><label>total_price</label><input class="text-input small-input" type="text"  name="total_price" value="'.(($form!=false)?$form->total_price:'').'" /></p>';
     $str_from.='<p><label>tien_thanh_toan</label><input class="text-input small-input" type="text"  name="tien_thanh_toan" value="'.(($form!=false)?$form->tien_thanh_toan:'').'" /></p>';
     $str_from.='<p><label>user_id</label><input class="text-input small-input" type="text"  name="user_id" value="'.(($form!=false)?$form->user_id:'').'" /></p>';
     $str_from.='<p><label>status</label><input class="text-input small-input" type="text"  name="status" value="'.(($form!=false)?$form->status:'').'" /></p>';
+    $str_from.='<p><label>confirm_admin</label><input class="text-input small-input" type="text"  name="confirm_admin" value="'.(($form!=false)?$form->confirm_admin:'').'" /></p>';
     $str_from.='<p><label>created_by</label><input class="text-input small-input" type="text"  name="created_by" value="'.(($form!=false)?$form->created_by:'').'" /></p>';
     $str_from.='<p><label>updated_by</label><input class="text-input small-input" type="text"  name="updated_by" value="'.(($form!=false)?$form->updated_by:'').'" /></p>';
     $str_from.='<p><label>created</label><input class="text-input small-input" type="text"  name="created" value="'.(($form!=false)?$form->created:'').'" /></p>';

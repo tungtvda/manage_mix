@@ -1,7 +1,7 @@
 <?php
 class booking
 {
-    public $id,$code_booking,$id_tour,$name_tour,$code_tour,$price_tour,$price_11,$price_5,$price_new,$price_11_new,$price_5_new,$nguon_tour,$tien_te,$ty_gia,$ngay_bat_dau,$han_thanh_toan,$loai_khach_hang,$hinh_thuc_thanh_toan,$id_customer,$diem_don,$diem_tra,$ngay_khoi_hanh,$ngay_ket_thuc,$phuong_tien,$total_price_uoc_tinh,$total_price_thuc_te,$tien_thanh_toan,$user_id,$status,$created_by,$updated_by,$created,$updated,$note;
+    public $id,$code_booking,$id_tour,$name_tour,$code_tour,$price_tour,$price_11,$price_5,$price_new,$price_11_new,$price_5_new,$nguon_tour,$tien_te,$ty_gia,$ngay_bat_dau,$han_thanh_toan,$loai_khach_hang,$hinh_thuc_thanh_toan,$id_customer,$diem_don,$diem_tra,$ngay_khoi_hanh,$ngay_ket_thuc,$phuong_tien,$num_nguoi_lon,$num_tre_em,$num_tre_em_5,$total_price,$tien_thanh_toan,$user_id,$status,$confirm_admin,$created_by,$updated_by,$created,$updated,$note;
     public function booking($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
@@ -28,11 +28,14 @@ class booking
     $this->ngay_khoi_hanh=isset($data['ngay_khoi_hanh'])?$data['ngay_khoi_hanh']:'';
     $this->ngay_ket_thuc=isset($data['ngay_ket_thuc'])?$data['ngay_ket_thuc']:'';
     $this->phuong_tien=isset($data['phuong_tien'])?$data['phuong_tien']:'';
-    $this->total_price_uoc_tinh=isset($data['total_price_uoc_tinh'])?$data['total_price_uoc_tinh']:'';
-    $this->total_price_thuc_te=isset($data['total_price_thuc_te'])?$data['total_price_thuc_te']:'';
+    $this->num_nguoi_lon=isset($data['num_nguoi_lon'])?$data['num_nguoi_lon']:'';
+    $this->num_tre_em=isset($data['num_tre_em'])?$data['num_tre_em']:'';
+    $this->num_tre_em_5=isset($data['num_tre_em_5'])?$data['num_tre_em_5']:'';
+    $this->total_price=isset($data['total_price'])?$data['total_price']:'';
     $this->tien_thanh_toan=isset($data['tien_thanh_toan'])?$data['tien_thanh_toan']:'';
     $this->user_id=isset($data['user_id'])?$data['user_id']:'';
     $this->status=isset($data['status'])?$data['status']:'';
+    $this->confirm_admin=isset($data['confirm_admin'])?$data['confirm_admin']:'';
     $this->created_by=isset($data['created_by'])?$data['created_by']:'';
     $this->updated_by=isset($data['updated_by'])?$data['updated_by']:'';
     $this->created=isset($data['created'])?$data['created']:'';
@@ -66,11 +69,14 @@ class booking
             $this->ngay_khoi_hanh=addslashes($this->ngay_khoi_hanh);
             $this->ngay_ket_thuc=addslashes($this->ngay_ket_thuc);
             $this->phuong_tien=addslashes($this->phuong_tien);
-            $this->total_price_uoc_tinh=addslashes($this->total_price_uoc_tinh);
-            $this->total_price_thuc_te=addslashes($this->total_price_thuc_te);
+            $this->num_nguoi_lon=addslashes($this->num_nguoi_lon);
+            $this->num_tre_em=addslashes($this->num_tre_em);
+            $this->num_tre_em_5=addslashes($this->num_tre_em_5);
+            $this->total_price=addslashes($this->total_price);
             $this->tien_thanh_toan=addslashes($this->tien_thanh_toan);
             $this->user_id=addslashes($this->user_id);
             $this->status=addslashes($this->status);
+            $this->confirm_admin=addslashes($this->confirm_admin);
             $this->created_by=addslashes($this->created_by);
             $this->updated_by=addslashes($this->updated_by);
             $this->created=addslashes($this->created);
@@ -103,11 +109,14 @@ class booking
             $this->ngay_khoi_hanh=stripslashes($this->ngay_khoi_hanh);
             $this->ngay_ket_thuc=stripslashes($this->ngay_ket_thuc);
             $this->phuong_tien=stripslashes($this->phuong_tien);
-            $this->total_price_uoc_tinh=stripslashes($this->total_price_uoc_tinh);
-            $this->total_price_thuc_te=stripslashes($this->total_price_thuc_te);
+            $this->num_nguoi_lon=stripslashes($this->num_nguoi_lon);
+            $this->num_tre_em=stripslashes($this->num_tre_em);
+            $this->num_tre_em_5=stripslashes($this->num_tre_em_5);
+            $this->total_price=stripslashes($this->total_price);
             $this->tien_thanh_toan=stripslashes($this->tien_thanh_toan);
             $this->user_id=stripslashes($this->user_id);
             $this->status=stripslashes($this->status);
+            $this->confirm_admin=stripslashes($this->confirm_admin);
             $this->created_by=stripslashes($this->created_by);
             $this->updated_by=stripslashes($this->updated_by);
             $this->created=stripslashes($this->created);

@@ -1018,12 +1018,12 @@ function _randomCustommr(){
     $rand=(implode('',_getRandomNumbers(1, 99, 3))).$_SESSION['user_id'];
 
 }
-function _randomBooking($code_module,$function_count){
+function _randomBooking($code_module,$function_count, $field='code_booking'){
     $rand_number=rand(1,5);
     $rand=$code_module.(implode('',_getRandomNumbers(1, 99, $rand_number))).$_SESSION['user_id'];
-    $data_booking=booking_count('code_booking="'.$rand.'"');
+    $data_booking=$function_count($field.'="'.$rand.'"');
     if($data_booking>0){
-        _randomBooking();
+        _randomBooking($code_module,$function_count,$field);
     }
     else{
         return $rand;

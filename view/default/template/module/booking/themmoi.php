@@ -105,7 +105,7 @@
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
-                                        <div class="profile-info-name"> Tỷ giá</div>
+                                        <div class="profile-info-name"> Nguồn đơn hàng</div>
 
                                         <div class="profile-info-value form-group">
                                             <?php echo _returnInputSelect('nguon_tour', $nguon_tour, $data_list_nguon_tour, 'valid', 'Nguồn đơn hàng ...') ?>
@@ -124,7 +124,7 @@
                                                 style="color: red; font-size: 12px">*</span></div>
 
                                         <div class="profile-info-value form-group">
-                                            <?php echo _returnInputDate('han_thanh_toan', '', '', '', 'Bạn vui lòng chọn ngày kết thúc', '') ?>
+                                            <?php echo _returnInputDate('han_thanh_toan', '', '', '', 'Bạn vui lòng chọn ngày thanh toán', '') ?>
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
@@ -197,7 +197,7 @@
                             <div class="row col-xs-12 div_content">
                                 <div class="profile-user-info profile-user-info-striped">
                                     <div class="profile-info-row">
-                                        <div class="profile-info-name"> Tên khách hàng <span
+                                        <div class="profile-info-name"> Họ và tên <span
                                                 style="color: red; font-size: 12px">*</span></div>
 
                                         <div class="profile-info-value form-group">
@@ -228,7 +228,7 @@
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
-                                        <div class="profile-info-name"> Số điện thoại <span
+                                        <div class="profile-info-name"> Điện thoại<span
                                                 style="color: red; font-size: 12px">*</span></div>
                                         <div class="profile-info-value form-group">
                                             <?php echo _returnInput('phone', '', '', 'phone', '', 'Bạn vui lòng nhập số điện thoai', '') ?>
@@ -241,8 +241,7 @@
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
-                                        <div class="profile-info-name"> Nhóm khách hàng <span
-                                                style="color: red; font-size: 12px">*</span></div>
+                                        <div class="profile-info-name"> Nhóm</div>
                                         <div class="profile-info-value form-group nhom_khach_hang">
                                             <?php echo _returnInputSelect('nhom_khach_hang', '', $data_list_customer_category, 'valid', 'Nhóm khách hàng ...') ?>
                                         </div>
@@ -252,6 +251,22 @@
                                                 style="color: red; font-size: 12px">*</span></div>
                                         <div class="profile-info-value form-group">
                                             <?php echo _returnInput('diem_don', '', '', 'map-marker', '', 'Bạn vui lòng nhập điểm đón', '') ?>
+                                        </div>
+                                    </div>
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name"> Khởi hành <span
+                                                style="color: red; font-size: 12px">*</span></div>
+
+                                        <div class="profile-info-value form-group">
+                                            <?php echo _returnInputDate('ngay_khoi_hanh', '', '', '', 'Bạn vui lòng chọn ngày khởi hành', '') ?>
+                                        </div>
+                                    </div>
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name"> Kết thúc <span
+                                                style="color: red; font-size: 12px">*</span></div>
+
+                                        <div class="profile-info-value form-group">
+                                            <?php echo _returnInputDate('ngay_ket_thuc', '', '', '', 'Bạn vui lòng chọn ngày kết thúc', '') ?>
                                         </div>
                                     </div>
                                 </div>

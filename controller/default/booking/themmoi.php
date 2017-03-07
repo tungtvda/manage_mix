@@ -47,10 +47,10 @@ $data['breadcrumbs'] = $url_bread;
 $data['module_valid'] = "booking";
 if(isset($_POST['code_booking']))
 {
-    print_r($_POST);
+
     $name_user=_returnPostParamSecurity('name_user');
     $id_user=_returnPostParamSecurity('id_user');
-    $code_booking=_returnPostParamSecurity('code_booking');
+     $code_booking=_returnPostParamSecurity('code_booking');
     $tien_te=_returnPostParamSecurity('tien_te');
     $ty_gia='';
     if($tien_te!=''){
@@ -77,6 +77,8 @@ if(isset($_POST['code_booking']))
     $fax=_returnPostParamSecurity('fax');
     $nhom_khach_hang=_returnPostParamSecurity('nhom_khach_hang');
     $diem_don=_returnPostParamSecurity('diem_don');
+    $ngay_khoi_hanh=_returnPostParamSecurity('ngay_khoi_hanh');
+    $ngay_ket_thuc=_returnPostParamSecurity('ngay_ket_thuc');
     $name_tour=_returnPostParamSecurity('name_tour');
     $id_tour=_returnPostParamSecurity('id_tour');
     $dat_coc=_returnPostParamSecurity('dat_coc');
@@ -86,6 +88,16 @@ if(isset($_POST['code_booking']))
     $check_edit=_returnPostParamSecurity('check_edit');
     $id_edit=_returnPostParamSecurity('id_edit');
     $name_customer_sub=array();
+    $total=0;
+    if(is_numeric($num_nguoi_lon)&&is_numeric($price_submit)){
+        $total=$total+($num_nguoi_lon*$price_submit);
+    }
+    if(is_numeric($num_tre_em)&&is_numeric($num_tre_em)){
+        $total=$total+($num_tre_em*$price_511_submit);
+    }
+    if(is_numeric($num_tre_em_5)&&is_numeric($num_tre_em_5)){
+        $total=$total+($num_tre_em_5*$price_5_submit);
+    }
     if(isset($_POST['name_customer_sub'])){
         $name_customer_sub=$_POST['name_customer_sub'];
     }
@@ -93,8 +105,16 @@ if(isset($_POST['code_booking']))
     if(isset($_POST['email_customer'])){
         $email_customer=$_POST['email_customer'];
     }
-    $phone_customer=$_POST['phone_customer'];
-    $address_customer=$_POST['address_customer'];
+    $phone_customer=array();
+    if(isset($_POST['phone_customer'])){
+        $phone_customer=$_POST['phone_customer'];
+    }
+    $address_customer=array();
+    if(isset($_POST['address_customer'])){
+        $address_customer=$_POST['address_customer'];
+    }
+
+
     if($id_user!=''&&$name_user!=''&&$code_booking!=''&&$ngay_bat_dau!=''&&$han_thanh_toan!=''&&$hinh_thuc_thanh_toan!=''&&$num_nguoi_lon!=''&&$num_nguoi_lon!=0&&$name_customer!=''&&$email!='' &&$address!='' &&$phone!='' &&$diem_don!='' &&$name_tour!='' &&$id_tour!=''&&$price_submit!=''){
         // check thông tin khách hàng
         $check_data_khach_hang=customer_getByTop('1','email="'.$email.'"','id desc');
@@ -160,22 +180,69 @@ if(isset($_POST['code_booking']))
         $booking_model->nguon_tour=$nguon_tour;
         $booking_model->tien_te=$tien_te;
         $booking_model->ty_gia=$ty_gia;
-        $booking_model->ngay_bat_dau=$ngay_bat_dau;
-        $booking_model->han_thanh_toan=$han_thanh_toan;
+        $booking_model->ngay_bat_dau=date("Y-m-d", strtotime($ngay_bat_dau));
+        $booking_model->han_thanh_toan=date("Y-m-d", strtotime($han_thanh_toan));;
         $booking_model->loai_khach_hang=$nhom_khach_hang;
         $booking_model->hinh_thuc_thanh_toan=$hinh_thuc_thanh_toan;
         $booking_model->id_customer=$id_customer;
         $booking_model->diem_don=$diem_don;
         $booking_model->diem_tra=$diem_don;
-        $booking_model->id_tour=$id_tour;
-        $booking_model->id_tour=$id_tour;
-        $booking_model->id_tour=$id_tour;
-        $booking_model->id_tour=$id_tour;
-        $booking_model->id_tour=$id_tour;
-        $booking_model->id_tour=$id_tour;
-        $booking_model->id_tour=$id_tour;
-        $booking_model->id_tour=$id_tour;
+        $booking_model->ngay_khoi_hanh=date("Y-m-d", strtotime($ngay_khoi_hanh));
+        $booking_model->ngay_ket_thuc=date("Y-m-d", strtotime($ngay_ket_thuc));
+        $booking_model->phuong_tien=$check_data_tour[0]->vehicle;
+        $booking_model->num_nguoi_lon=$num_nguoi_lon;
+        $booking_model->num_tre_em=$num_tre_em;
+        $booking_model->num_tre_em_5=$num_tre_em_5;
+        $booking_model->total_price=$total;
+        $booking_model->tien_thanh_toan=$dat_coc;
+        $booking_model->user_id=$id_user;
+        $booking_model->status=$status;
+        if($_SESSION['user_role']==1){
+            $booking_model->confirm_admin=1;
+        }else{
+            $booking_model->confirm_admin=0;
+        }
 
+        $booking_model->created_by=$_SESSION['user_id'];
+        $booking_model->created=_returnGetDateTime();
+        $booking_model->updated=_returnGetDateTime();
+        $data_check_code=booking_count('code_booking="'.$code_booking.'"');
+        if($data_check_code>0){
+            $code_booking=_randomBooking('#','booking_count','code_booking');
+        }
+        $booking_model->code_booking=$code_booking;
+        print_r($name_customer_sub);
+        booking_insert($booking_model);
+        $data_booking=booking_getByTop('1','code_booking="'.$code_booking.'"','');
+        if(count($data_booking)>0){
+            $id_booking=$data_booking[0]->id;
+        }
+        if(count($name_customer_sub)>0){
+            foreach($name_customer_sub as $key=>$value){
+                $name_sub=$value;
+                $email_sub=$email_customer[$key];
+                $phone_sub=$phone_customer[$key];
+                $address_sub=$address_customer[$key];
+                if($value!=''&&$email_customer[$key]!=''&&$phone_customer[$key]!=''&&$address_customer[$key]){
+                    $check_data_khach_hang_sub=customer_getByTop('1','email="'.$email_sub.'"','id desc');
+                    if(count($check_data_khach_hang_sub)==0){
+                        $customer_new=new customer();
+                        $customer_new->name=$name_sub;
+                        $customer_new->email=$email_sub;
+                        $customer_new->phone=$phone_sub;
+                        $customer_new->address=$address_sub;
+                        $customer_new->updated = _returnGetDateTime();
+                        $customer_new->created = _returnGetDateTime();
+                        $customer_new->created_by=$_SESSION['user_id'];
+                        $customer_new->status = 1;
+                        $customer_new->booking_id = $id_booking;
+                        $customer_new->code=_randomBooking('#','customer_count','code');
+                        customer_insert($customer_new);
+                    }
+
+                }
+            }
+        }
 
 
 

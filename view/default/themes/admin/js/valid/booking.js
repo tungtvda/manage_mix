@@ -319,6 +319,28 @@ jQuery(function ($) {
         checkHanThanhToan();
     });
 
+    // check
+    $('body').on("input", '#input_ngay_khoi_hanh', function () {
+        checkNgayKhoiHanh();
+    });
+    $('body').on("keyup", '#input_ngay_khoi_hanh', function () {
+        checkNgayKhoiHanh();
+    });
+    $('body').on("change", '#input_ngay_khoi_hanh', function () {
+        checkNgayKhoiHanh();
+    });
+
+    // check
+    $('body').on("input", '#input_ngay_ket_thuc', function () {
+        checkNgayKetThuc();
+    });
+    $('body').on("keyup", '#input_ngay_ket_thuc', function () {
+        checkNgayKetThuc();
+    });
+    $('body').on("change", '#input_ngay_ket_thuc', function () {
+        checkNgayKetThuc();
+    });
+
 
 
 
@@ -586,6 +608,97 @@ function showHiddenNameCustomer(res, mess) {
         error_name_customner.show();
     }
 }
+
+// check ngày bắt đầu
+function checkNgayKhoiHanh() {
+    var value = $("#input_ngay_khoi_hanh").val();
+    if (value == '') {
+        var mess = 'Bạn vui lòng chọn ngày khởi hành';
+        showHiddenNgayKhoiHanh(0, mess);
+    } else {
+        var value_date = value.split("-");
+        var value = new Date(value_date[2], value_date[1] - 1, value_date[0]);
+        var mess = '';
+        var res = 0;
+        var eighteenYearsAgo = moment().subtract(18, "years");
+        var birthday = moment(value);
+
+        if (!birthday.isValid()) {
+            mess = "Không đúng định dạng ngày tháng năm";
+        }
+        else {
+            mess = '';
+            res = 1;
+        }
+        //var mess='';
+        showHiddenNgayKhoiHanh(res, mess);
+    }
+}
+function showHiddenNgayKhoiHanh(res, mess) {
+    var error_ngay_khoi_hanh = $("#error_ngay_khoi_hanh");
+    if (res == 1) {
+        error_ngay_khoi_hanh.hide();
+        $('#input_ngay_khoi_hanh').removeClass("input-error").addClass("valid");
+        $('#icon_ngay_khoi_hanh').removeClass("error-color");
+    }
+    else {
+        if (res != 0) {
+            mess = res;
+        }
+        $('#input_ngay_khoi_hanh').addClass("input-error").removeClass("valid");
+        $('#icon_ngay_khoi_hanh').addClass("error-color");
+        error_ngay_khoi_hanh.removeClass("success-color");
+        error_ngay_khoi_hanh.addClass("error-color");
+        error_ngay_khoi_hanh.html(mess);
+        error_ngay_khoi_hanh.show();
+    }
+}
+
+// check ngày bắt đầu
+function checkNgayKetThuc() {
+    var value = $("#input_ngay_ket_thuc").val();
+    if (value == '') {
+        var mess = 'Bạn vui lòng chọn ngày khởi hành';
+        showHiddenNgayKetThuc(0, mess);
+    } else {
+        var value_date = value.split("-");
+        var value = new Date(value_date[2], value_date[1] - 1, value_date[0]);
+        var mess = '';
+        var res = 0;
+        var eighteenYearsAgo = moment().subtract(18, "years");
+        var birthday = moment(value);
+
+        if (!birthday.isValid()) {
+            mess = "Không đúng định dạng ngày tháng năm";
+        }
+        else {
+            mess = '';
+            res = 1;
+        }
+        //var mess='';
+        showHiddenNgayKetThuc(res, mess);
+    }
+}
+function showHiddenNgayKetThuc(res, mess) {
+    var error_ngay_ket_thuc = $("#error_ngay_ket_thuc");
+    if (res == 1) {
+        error_ngay_ket_thuc.hide();
+        $('#input_ngay_ket_thuc').removeClass("input-error").addClass("valid");
+        $('#icon_ngay_ket_thuc').removeClass("error-color");
+    }
+    else {
+        if (res != 0) {
+            mess = res;
+        }
+        $('#input_ngay_ket_thuc').addClass("input-error").removeClass("valid");
+        $('#icon_ngay_ket_thuc').addClass("error-color");
+        error_ngay_ket_thuc.removeClass("success-color");
+        error_ngay_ket_thuc.addClass("error-color");
+        error_ngay_ket_thuc.html(mess);
+        error_ngay_ket_thuc.show();
+    }
+}
+
 //
 function checkHanThanhToan() {
     var value = $("#input_han_thanh_toan").val();

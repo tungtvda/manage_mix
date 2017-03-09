@@ -16,9 +16,11 @@ function _returnCheckPermison($module_id = 0, $form_id = 0, $action_id = 0)
     _returnCheckExitUser();
     // Lấy thông tin user
     $data_user = user_getById($_SESSION['user_id']);
+
     if (count($data_user) == 0) {
         redict(_returnLinkDangNhap());
     }
+
     // kiểm tra thời gian đăng nhập
     $date_compare = $data_user[0]->time_token;
     $date_check = date('Y-m-d H:i:s', strtotime('+15 minute', strtotime($date_compare)));
@@ -26,6 +28,7 @@ function _returnCheckPermison($module_id = 0, $form_id = 0, $action_id = 0)
     if (strtotime($currentDate) > strtotime($date_check)) {
         redict(_returnLinkDangNhap());
     }
+
     $user_update = new user();
     $user_update->id = $_SESSION['user_id'];
     $user_update->time_token = _returnGetDateTime();
@@ -37,10 +40,13 @@ function _returnCheckPermison($module_id = 0, $form_id = 0, $action_id = 0)
     $permison_module = explode(',', $data_user[0]->permison_module);
     $permison_form = explode(',', $data_user[0]->permison_form);
     $permison_action = explode(',', $data_user[0]->permison_action);
+
     if (!in_array($module_id, $permison_module) || $module_id == 0) {
         redict(_returnLinkDangNhap('Bạn không có quyền truy cập vào hệ thống'));
     }
+
     if ($form_id != 0) {
+
         if (!in_array($form_id, $permison_form)) {
             redict(_returnLinkDangNhap('Bạn không có quyền truy cập vào hệ thống'));
         } else {
@@ -982,7 +988,12 @@ function _returnDataAutoCompleteTour(){
 }
 
 function _returnDataAutoCompleteUser(){
-    $data_user = user_getByTop('', 'status=1', 'name asc');
+    if($_SESSION['user_role']==1){
+        $data_user = user_getByTop('', 'status=1', 'name asc');
+    }else{
+        $data_user = user_getByTop('', 'status=1 and id='.$_SESSION['user_id'], 'name asc');
+    }
+
     $string_data='[';
     if(count($data_user)>0){
         foreach($data_user as $row_user){
@@ -1029,4 +1040,28 @@ function _randomBooking($code_module,$function_count, $field='code_booking'){
         return $rand;
     }
 
+}
+ function _insertNotification($name='',$user_send_id='',$user_id,$link='',$status=0,$content=''){
+     $notification_model=new notification();
+     $notification_model->name=$name;
+     $notification_model->user_send_id=$user_send_id;
+     $notification_model->user_id=$user_id;
+     $notification_model->link=$link;
+     $notification_model->status=$status;
+     $notification_model->content=$content;
+     $notification_model->created=_returnGetDateTime();
+     notification_insert($notification_model);
+ }
+function _insertLog($user_id,$module_id,$form_id,$action_id,$item_id,$value_old,$value_new,$description){
+    $log_model=new log();
+    $log_model->user_id=$user_id;
+    $log_model->module_id=$module_id;
+    $log_model->form_id=$form_id;
+    $log_model->action_id=$action_id;
+    $log_model->item_id=$item_id;
+    $log_model->value_old=$value_old;
+    $log_model->value_new=$value_new;
+    $log_model->description=$description;
+    $log_model->created=_returnGetDateTime();
+    log_insert($log_model);
 }

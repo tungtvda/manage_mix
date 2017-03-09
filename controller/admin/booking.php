@@ -1,6 +1,7 @@
 <?php
 require_once '../../config.php';
 require_once DIR.'/model/bookingService.php';
+require_once DIR.'/model/customerService.php';
 require_once DIR.'/view/admin/booking.php';
 require_once DIR.'/common/messenger.php';
 $data=array();
@@ -37,6 +38,7 @@ if(isset($_SESSION["Admin"]))
     {
         $data['tab1_class']='default-tab current';
     }
+    $data['listfkey']['id_customer']=customer_getByAll();
     if(isset($_GET["action_all"]))
     {
         if($_GET["action_all"]=="ThemMoi")

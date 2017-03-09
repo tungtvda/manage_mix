@@ -398,7 +398,7 @@ jQuery(function ($) {
         var error_free = true;
         for (var input in form_data) {
             var name_input=form_data[input]['name'];
-            if (name_input != "tien_te"&&name_input != "nguon_tour"&&name_input!='category'&&name_input!='nhom_khach_hang'&&name_input!='name_customer_sub[]'&&name_input!='email_customer[]'&&name_input!='phone_customer[]'&&name_input!='address_customer[]') {
+            if (name_input != "tien_te"&&name_input != "note"&&name_input != "nguon_tour"&&name_input!='category'&&name_input!='nhom_khach_hang'&&name_input!='name_customer_sub[]'&&name_input!='email_customer[]'&&name_input!='phone_customer[]'&&name_input!='address_customer[]') {
                 var element = $("#input_" + name_input);
                 var error = $("#error_" + name_input);
                 var valid = element.hasClass("valid");

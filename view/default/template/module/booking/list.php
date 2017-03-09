@@ -120,7 +120,13 @@
                                         <td style="text-align: center">
                                             <a href="<?php echo SITE_NAME ?>/booking/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"><?php echo $row->name_tour?></a>
                                         </td>
-                                        <td><?php echo $row->id_customer ?></td>
+                                        <td><?php
+                                            $data_customer=customer_getById($row->id_customer);
+                                            if(count($data_customer)>0){
+                                                echo '<a href="'.SITE_NAME.'/khach-hang/sua?id='._return_mc_encrypt($data_customer[0]->id, ENCRYPTION_KEY).'">'.$data_customer[0]->name.'</a>';
+                                            }
+                                        ?>
+                                        </td>
                                         <td>
                                             <span hidden><?php echo (int)$row->status ?></span>
                                             <?php if (_returnCheckAction(22) == 1) { ?>
@@ -138,7 +144,7 @@
                                                 <?php if ($row->status == 1) echo ' <i  style="font-size: 20px;color:green" class="fa fa-check-square-o "></i>' ?>
                                             <?php }?>
                                         </td>
-                                        <td><?php echo $row->total_price_thuc_te ?></td>
+                                        <td><?php echo $row->total_price ?></td>
                                         <td><?php echo $row->tien_thanh_toan ?></td>
                                         <td><?php echo $row->user_id ?></td>
                                         <td >

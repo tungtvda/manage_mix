@@ -117,5 +117,34 @@ function view_left($data=array())
     else{
         $avatar=SITE_NAME.$data['user_left'][0]->avatar;
     }
+    $data_notifi_nenu=notification_getByTop('','status=0 and user_id='.$_SESSION['user_id'],'created asc');
+    $count_noti=count($data_notifi_nenu);
+    $string_noti='';
+    foreach($data_notifi_nenu as $row_noti_menu){
+        $data_user_noti=user_getById($row_noti_menu->user_send_id);
+        $name_user_noti='';
+        $avatar_noti=SITE_NAME.'/view/default/themes/images/no-avatar.png';
+        if(count($data_user_noti)>0){
+            if($data_user_noti[0]->avatar!=""){
+                $avatar_noti=SITE_NAME.$data_user_noti[0]->avatar;
+            }
+            $name_user_noti=$data_user_noti[0]->name;
+        }
+        $string_noti.='  <li>
+                                    <a href="'.$row_noti_menu->link.'" class="clearfix">
+                                        <img src="'.$avatar_noti.'" class="msg-photo" alt="'.$name_user_noti.'" />
+												<span class="msg-body">
+													<span class="msg-title">
+														'.$row_noti_menu->name.'
+													</span>
+
+													<span class="msg-time">
+														<i class="ace-icon fa fa-clock-o"></i>
+														<span>'.date("d-m-Y H:i:s", strtotime($row_noti_menu->created)).'</span>
+													</span>
+												</span>
+                                    </a>
+                                </li>';
+    }
     require_once DIR . '/view/default/template/left.php';
 }

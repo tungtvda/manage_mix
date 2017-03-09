@@ -14,8 +14,7 @@ require_once(DIR."/common/hash_pass.php");
 require_once DIR . '/common/class.phpmailer.php';
 require_once(DIR . "/common/Mail.php");
 $data = array();
-
-_returnCheckPermison(3, 2);
+_returnCheckPermison(6, 6);
 
 if(isset($_GET['id'])&&$_GET['id']!='')
 {   $data['action']=2;
@@ -33,8 +32,8 @@ if(isset($_GET['id'])&&$_GET['id']!='')
     $url_bread = '<li><a href="'.SITE_NAME.'/booking/">Danh sách đặt tour</a></li><li class="active">Chỉnh sửa khách hàng "'.$data['data_user'][0]->name.'"</li>';
     $data['title'] = 'Chỉnh sửa khách hàng "'.$data['data_user'][0]->name.'"';
 }else{
-    if (_returnCheckAction(1) == 0) {
-        redict(_returnLinkDangNhap());
+    if (_returnCheckAction(21) == 0) {
+        redict(_returnLinkDangNhap('Bạn không có quyền thực hiện chức năng này'));
     }
     $data['data_user']='';
     $data['action']=1;
@@ -87,6 +86,7 @@ if(isset($_POST['code_booking']))
     $price_5_submit=_returnPostParamSecurity('price_5_submit');
     $check_edit=_returnPostParamSecurity('check_edit');
     $id_edit=_returnPostParamSecurity('id_edit');
+    $note=_returnPostParamSecurity('note');
     $name_customer_sub=array();
     $total=0;
     if(is_numeric($num_nguoi_lon)&&is_numeric($price_submit)){
@@ -196,6 +196,7 @@ if(isset($_POST['code_booking']))
         $booking_model->total_price=$total;
         $booking_model->tien_thanh_toan=$dat_coc;
         $booking_model->user_id=$id_user;
+        $booking_model->note=$note;
         $booking_model->status=$status;
         if($_SESSION['user_role']==1){
             $booking_model->confirm_admin=1;
@@ -211,7 +212,6 @@ if(isset($_POST['code_booking']))
             $code_booking=_randomBooking('#','booking_count','code_booking');
         }
         $booking_model->code_booking=$code_booking;
-        print_r($name_customer_sub);
         booking_insert($booking_model);
         $data_booking=booking_getByTop('1','code_booking="'.$code_booking.'"','');
         if(count($data_booking)>0){
@@ -245,7 +245,23 @@ if(isset($_POST['code_booking']))
         }
 
 
+        _insertLog($_SESSION['user_id'],6,6,21,$id_booking,'','','Nhân viên '.$check_data_user[0]->name.' đã thực hiện việc tạo đơn hàng');
+        if($_SESSION['user_role']!=1){
+            $data_list_user_admin=user_getByTop('','user_role=1 and status=1','id desc');
+            if(count($data_list_user_admin)>0){
+                foreach($data_list_user_admin as $row_admin){
+                    $name_noti=$check_data_user[0]->name.' đã thêm một đơn hàng';
+                    $link_noti=SITE_NAME.'/don-hang/'._return_mc_encrypt($id_booking, ENCRYPTION_KEY);
+                    _insertNotification($name_noti,$_SESSION['user_id'],$row_admin->id,$link_noti,0,'');
+                }
+            }
+            $subject='Xác nhận đơn hàng '.$code_booking;
+            $message.='<p>Nhân viên '.$check_data_user[0]->name.' vừa tạo đơn hàng mã '.$code_booking.'</p>';
+            $message.='<a>Bạn vui lòng truy cập <a href="'.$link_noti.'">đường link</a> để xác nhận đơn hàng</p>';
+            SendMail('info@mixtourist.com.vn', $message, $subject);
+        }
 
+        redict(SITE_NAME . '/booking/');
 
     }else{
         echo '<script>alert("Bạn vui lòng kiểm tra lại thông tin đặt tour")</script>';

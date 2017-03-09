@@ -103,7 +103,16 @@ function showFrom($form,$ListKey=array())
     $str_from.='<p><label>han_thanh_toan</label><input class="text-input small-input" type="text"  name="han_thanh_toan" value="'.(($form!=false)?$form->han_thanh_toan:'').'" /></p>';
     $str_from.='<p><label>loai_khach_hang</label><input class="text-input small-input" type="text"  name="loai_khach_hang" value="'.(($form!=false)?$form->loai_khach_hang:'').'" /></p>';
     $str_from.='<p><label>hinh_thuc_thanh_toan</label><input class="text-input small-input" type="text"  name="hinh_thuc_thanh_toan" value="'.(($form!=false)?$form->hinh_thuc_thanh_toan:'').'" /></p>';
-    $str_from.='<p><label>id_customer</label><input class="text-input small-input" type="text"  name="id_customer" value="'.(($form!=false)?$form->id_customer:'').'" /></p>';
+    $str_from.='<p><label>id_customer</label>';
+    $str_from.='<select name="id_customer">';
+    if(isset($ListKey['id_customer']))
+    {
+        foreach($ListKey['id_customer'] as $key)
+        {
+            $str_from.='<option value="'.$key->id.'" '.(($form!=false)?(($form->id_customer==$key->id)?'selected':''):'').'>'.$key->name.'</option>';
+        }
+    }
+    $str_from.='</select></p>';
     $str_from.='<p><label>diem_don</label><input class="text-input small-input" type="text"  name="diem_don" value="'.(($form!=false)?$form->diem_don:'').'" /></p>';
     $str_from.='<p><label>diem_tra</label><input class="text-input small-input" type="text"  name="diem_tra" value="'.(($form!=false)?$form->diem_tra:'').'" /></p>';
     $str_from.='<p><label>ngay_khoi_hanh</label><input class="text-input small-input" type="text"  name="ngay_khoi_hanh" value="'.(($form!=false)?$form->ngay_khoi_hanh:'').'" /></p>';

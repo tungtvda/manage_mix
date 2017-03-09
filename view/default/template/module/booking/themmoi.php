@@ -272,6 +272,24 @@
                                 </div>
                             </div>
                         </div>
+                        <div  class="col-xs-12 col-sm-12 col-md-12 ">
+                            <div class="row col-xs-12 div_content">
+                                <div class="profile-user-info profile-user-info-striped">
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name"> Ghi chú </div>
+
+                                        <div class="profile-info-value form-group">
+                                         <span class="input-icon width_100">
+                                            <textarea class="valid" name="note" id="input_note" style="width: 100%">
+
+                                            </textarea>
+                                         </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 ">
                         <h3 class="row header smaller lighter blue">

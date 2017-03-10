@@ -87,7 +87,7 @@ if (isset($_POST['id']) && isset($_POST['table'])) {
                 $data_check[0]->address_customer=$khach_hang[0]->address;
                 $data_check[0]->fax_customer=$khach_hang[0]->fax;
                 $data_cate=customer_category_getById($khach_hang[0]->category);
-                if($data_cate>0){
+                if(count($data_cate)>0){
                     $data_check[0]->nhom_customer=$data_cate[0]->name;
                 }
             }

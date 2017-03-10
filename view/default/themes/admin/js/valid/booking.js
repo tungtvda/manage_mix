@@ -513,7 +513,34 @@ function show_booking(Id,name){
                 if(data!=0)
                 {
                     console.log(data);
-                    //var obj = jQuery.parseJSON(data);
+                    var obj = jQuery.parseJSON(data);
+                    $('.name_sales').html(obj.user_name);
+                    $('.tien_te').html(obj.tien_te_name+' - '+obj.ty_gia);
+                    $('.ngay_bat_dau').html(obj.ngay_bat_dau);
+                    $('.han_thanh_toan').html(obj.han_thanh_toan);
+                    $('.tinh_trang').html(obj.status_name);
+                    $('.httt').html(obj.httt_name);
+                    $('.so_nguoi').html(obj.so_nguoi);
+                    $('.thue_vat').html(obj.vat_check_box);
+                    $('.ghi_chu').html(obj.note);
+                    $('.name_khach_hang').html(obj.name_customer);
+                    $('.email_customer').html(obj.email_customer);
+                    $('.address_customer').html(obj.address_customer);
+                    $('.phone_customer').html(obj.phone_customer);
+                    $('.fax_customer').html(obj.fax_customer);
+                    $('.diem_don').html(obj.diem_don);
+                    $('.nhom_kh').html(obj.nhom_customer);
+                    $('.ngay_khoi_hanh').html(obj.ngay_khoi_hanh);
+                    $('.ngay_ket_thuc').html(obj.ngay_ket_thuc);
+                    $('.name_tour').html(obj.name_tour);
+                    $('.gia_nguoi_lon').html(obj.price_new_format);
+                    $('.gia_tre_em_511').html(obj.price_11_new_format);
+                    $('.gia_tre_em_5').html(obj.price_5_new_format);
+                    $('.tong_cong').html(obj.total_format);
+                    $('.vat_thanh_tien').html(obj.vat_price_format);
+                    $('.dat_coc').html(obj.tien_thanh_toan_format);
+                    $('.con_lai').html(obj.conlai_format);
+
                     //var output = document.getElementById('show_img_upload');
                     //if(obj.avatar!=''){
                     //    output.src = url+obj.avatar;

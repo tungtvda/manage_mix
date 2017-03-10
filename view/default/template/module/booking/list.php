@@ -377,11 +377,11 @@
                                         </div>
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Thuế VAT(10%)</div>
-                                            <div class="profile-info-value">
-                                                <label>
-                                                    <input checked id="thue_vat" name="vat" class="ace ace-switch ace-switch-6 thue_vat" type="checkbox">
-                                                    <span class="lbl"></span>
-                                                </label>
+                                            <div class="profile-info-value thue_vat">
+<!--                                                <label>-->
+<!--                                                    <input checked id="thue_vat" name="vat" class="ace ace-switch ace-switch-6 thue_vat" type="checkbox">-->
+<!--                                                    <span class="lbl"></span>-->
+<!--                                                </label>-->
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
@@ -437,7 +437,7 @@
                                             <div class="profile-info-name"> Nhóm kh</div>
 
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click diem_don">media_002</span>
+                                                <span class="editable editable-click nhom_kh">media_002</span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">

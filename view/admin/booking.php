@@ -29,7 +29,7 @@ function view_booking($data)
 //
 function showTableHeader()
 {
-    return '<th>id</th><th>code_booking</th><th>id_tour</th><th>name_tour</th><th>code_tour</th><th>price_tour</th><th>price_11</th><th>price_5</th><th>price_new</th><th>price_11_new</th><th>price_5_new</th><th>nguon_tour</th><th>tien_te</th><th>ty_gia</th><th>ngay_bat_dau</th><th>han_thanh_toan</th><th>loai_khach_hang</th><th>hinh_thuc_thanh_toan</th><th>id_customer</th><th>diem_don</th><th>diem_tra</th><th>ngay_khoi_hanh</th><th>ngay_ket_thuc</th><th>phuong_tien</th><th>num_nguoi_lon</th><th>num_tre_em</th><th>num_tre_em_5</th><th>total_price</th><th>tien_thanh_toan</th><th>user_id</th><th>status</th><th>confirm_admin</th><th>created_by</th><th>updated_by</th><th>created</th><th>updated</th><th>note</th>';
+    return '<th>id</th><th>code_booking</th><th>id_tour</th><th>name_tour</th><th>code_tour</th><th>price_tour</th><th>price_11</th><th>price_5</th><th>price_new</th><th>price_11_new</th><th>price_5_new</th><th>vat</th><th>nguon_tour</th><th>tien_te</th><th>ty_gia</th><th>ngay_bat_dau</th><th>han_thanh_toan</th><th>loai_khach_hang</th><th>hinh_thuc_thanh_toan</th><th>id_customer</th><th>diem_don</th><th>diem_tra</th><th>ngay_khoi_hanh</th><th>ngay_ket_thuc</th><th>phuong_tien</th><th>num_nguoi_lon</th><th>num_tre_em</th><th>num_tre_em_5</th><th>total_price</th><th>tien_thanh_toan</th><th>user_id</th><th>status</th><th>confirm_admin</th><th>created_by</th><th>updated_by</th><th>created</th><th>updated</th><th>note</th>';
 }
 //
 function showTableBody($data)
@@ -49,6 +49,7 @@ function showTableBody($data)
         $TableBody.="<td>".$obj->price_new."</td>";
         $TableBody.="<td>".$obj->price_11_new."</td>";
         $TableBody.="<td>".$obj->price_5_new."</td>";
+        $TableBody.="<td>".$obj->vat."</td>";
         $TableBody.="<td>".$obj->nguon_tour."</td>";
         $TableBody.="<td>".$obj->tien_te."</td>";
         $TableBody.="<td>".$obj->ty_gia."</td>";
@@ -96,6 +97,7 @@ function showFrom($form,$ListKey=array())
     $str_from.='<p><label>price_new</label><input class="text-input small-input" type="text"  name="price_new" value="'.(($form!=false)?$form->price_new:'').'" /></p>';
     $str_from.='<p><label>price_11_new</label><input class="text-input small-input" type="text"  name="price_11_new" value="'.(($form!=false)?$form->price_11_new:'').'" /></p>';
     $str_from.='<p><label>price_5_new</label><input class="text-input small-input" type="text"  name="price_5_new" value="'.(($form!=false)?$form->price_5_new:'').'" /></p>';
+    $str_from.='<p><label>vat</label><input class="text-input small-input" type="text"  name="vat" value="'.(($form!=false)?$form->vat:'').'" /></p>';
     $str_from.='<p><label>nguon_tour</label><input class="text-input small-input" type="text"  name="nguon_tour" value="'.(($form!=false)?$form->nguon_tour:'').'" /></p>';
     $str_from.='<p><label>tien_te</label><input class="text-input small-input" type="text"  name="tien_te" value="'.(($form!=false)?$form->tien_te:'').'" /></p>';
     $str_from.='<p><label>ty_gia</label><input class="text-input small-input" type="text"  name="ty_gia" value="'.(($form!=false)?$form->ty_gia:'').'" /></p>';
@@ -103,16 +105,7 @@ function showFrom($form,$ListKey=array())
     $str_from.='<p><label>han_thanh_toan</label><input class="text-input small-input" type="text"  name="han_thanh_toan" value="'.(($form!=false)?$form->han_thanh_toan:'').'" /></p>';
     $str_from.='<p><label>loai_khach_hang</label><input class="text-input small-input" type="text"  name="loai_khach_hang" value="'.(($form!=false)?$form->loai_khach_hang:'').'" /></p>';
     $str_from.='<p><label>hinh_thuc_thanh_toan</label><input class="text-input small-input" type="text"  name="hinh_thuc_thanh_toan" value="'.(($form!=false)?$form->hinh_thuc_thanh_toan:'').'" /></p>';
-    $str_from.='<p><label>id_customer</label>';
-    $str_from.='<select name="id_customer">';
-    if(isset($ListKey['id_customer']))
-    {
-        foreach($ListKey['id_customer'] as $key)
-        {
-            $str_from.='<option value="'.$key->id.'" '.(($form!=false)?(($form->id_customer==$key->id)?'selected':''):'').'>'.$key->name.'</option>';
-        }
-    }
-    $str_from.='</select></p>';
+    $str_from.='<p><label>id_customer</label><input class="text-input small-input" type="text"  name="id_customer" value="'.(($form!=false)?$form->id_customer:'').'" /></p>';
     $str_from.='<p><label>diem_don</label><input class="text-input small-input" type="text"  name="diem_don" value="'.(($form!=false)?$form->diem_don:'').'" /></p>';
     $str_from.='<p><label>diem_tra</label><input class="text-input small-input" type="text"  name="diem_tra" value="'.(($form!=false)?$form->diem_tra:'').'" /></p>';
     $str_from.='<p><label>ngay_khoi_hanh</label><input class="text-input small-input" type="text"  name="ngay_khoi_hanh" value="'.(($form!=false)?$form->ngay_khoi_hanh:'').'" /></p>';

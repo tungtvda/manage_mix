@@ -392,6 +392,65 @@ jQuery(function ($) {
         checkDiemDon();
     });
 
+    $('body').on("change", '.select_status', function () {
+
+        var id=$(this).attr('count_id');
+        var code=$(this).attr('code');
+        var status=$(this).val();
+        var table = 'booking';
+        var field = 'status';
+        var link = url + '/update-status/';
+        var action='booking_update';
+        if(id==''||table==''||field==''||code==''||link==''){
+            lnv.alert({
+                title: 'Lỗi',
+                content: 'Các thông tin cập nhật không hợp lệ',
+                alertBtnText: 'Ok',
+                iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                alertHandler: function () {
+
+                }
+            });
+        }else{
+            var value_old=$('#status_old_'+id).val();
+            lnv.confirm({
+                title: '<label class="orange">Xác nhận cập nhật trạng thái</label>',
+                content: 'Bạn chắc chắn rằng muốn cập nhật trạng thái của đơn hàng </br><b>"'+code+'"</b> ?',
+                confirmBtnText: 'Ok',
+                iconBtnText:'<i style="color: #669fc7;" class="ace-icon fa fa-question orange"></i>',
+                confirmHandler: function () {
+                    $.ajax({
+                        method: "GET",
+                        url: link,
+                        data: "id=" + id + '&table=' + table + '&field=' + field + '&status=' + status+'&action='+action,
+                        success: function (response) {
+                            if (response != 1) {
+                                lnv.alert({
+                                    title: 'Lỗi',
+                                    content: response,
+                                    alertBtnText: 'Ok',
+                                    iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                                    alertHandler: function () {
+
+                                    }
+                                });
+                                $("#status_"+id).val(value_old);
+                            }else{
+                                $('#status_old_'+id).val(status);
+                            }
+                        }
+                    });
+
+                },
+                cancelBtnText: 'Cancel',
+                cancelHandler: function () {
+                    $("#status_"+id).val(value_old);
+                }
+            })
+        }
+
+    });
+
 
     $('body').on("click", '#submit_form_action', function () {
         var form_data = $("#submit_form").serializeArray();
@@ -432,8 +491,122 @@ jQuery(function ($) {
 
     });
 
+    $('body').on("click",'.view_popup_detail', function () {
+        var Id = $(this).attr("countid");
+        var code = $(this).attr("name_record");
+        show_booking(Id,code);
+    });
+
     //$('i').ggtooltip();
 });
+function show_booking(Id,name){
+    $( "#title_form" ).html('Thôn tin chi tiết đơn hàng "<b>'+name+'</b>"');
+    $( "#input_check_edit" ).val('edit');
+    if(Id!=''){
+        jQuery.post(url+"/get-detail-ajax-booking/",
+            {
+                id: Id,
+                table:'booking'
+            }
+            )
+            .done(function (data) {
+                if(data!=0)
+                {
+                    console.log(data);
+                    //var obj = jQuery.parseJSON(data);
+                    //var output = document.getElementById('show_img_upload');
+                    //if(obj.avatar!=''){
+                    //    output.src = url+obj.avatar;
+                    //}else{
+                    //    var no_ava=$('#show_img_upload').attr('no-avatar');
+                    //    output.src = no_ava;
+                    //}
+                    //if(obj.user_code!=''){
+                    //    $('#input_user_code').val(obj.user_code);
+                    //    $('#input_user_code').removeClass("input-error").addClass("valid");
+                    //}
+                    //else{
+                    //    $('#input_user_code').addClass("input-error").removeClass("valid");
+                    //}
+                    //
+                    //if(obj.user_role==1)
+                    //{
+                    //    $("#input_user_role").prop('checked', true);
+                    //}else{
+                    //    $("#input_user_role").prop('checked', false);
+                    //}
+                    //if(obj.name!=''){
+                    //    $('#input_full_name').val(obj.name);
+                    //    $('#input_full_name').removeClass("input-error").addClass("valid");
+                    //}
+                    //else{
+                    //    $('#input_full_name').addClass("input-error").removeClass("valid");
+                    //}
+                    //var mr=obj.mr;
+                    //if(mr!='')
+                    //{
+                    //    $(".chosen-default span").html(mr);
+                    //    //$('.mr_user option').each(function() {
+                    //    //
+                    //    //    if($(this).val() == mr) {
+                    //    //        $(this).prop("selected", true);
+                    //    //    }
+                    //    //});
+                    //}
+                    //if(obj.birthday!=''){
+                    //    $('#input_birthday').val(obj.birthday);
+                    //    $('#input_birthday').removeClass("input-error").addClass("valid");
+                    //}
+                    //else{
+                    //    $('#input_birthday').addClass("input-error").removeClass("valid");
+                    //}
+                    //if(obj.user_email!=''){
+                    //    $('#input_email_user').val(obj.user_email);
+                    //    $('#input_email_user').removeClass("input-error").addClass("valid");
+                    //}
+                    //else{
+                    //    $('#input_email_user').addClass("input-error").removeClass("valid");
+                    //}
+                    //if(obj.address!=''){
+                    //    $('#input_address_user').val(obj.address);
+                    //    $('#input_address_user').removeClass("input-error").addClass("valid");
+                    //}
+                    //else{
+                    //    $('#input_address_user').addClass("input-error").removeClass("valid");
+                    //}
+                    //if(obj.user_name!=''){
+                    //    $('#input_user_name').val(obj.user_name);
+                    //    $('#input_user_name').removeClass("input-error").addClass("valid");
+                    //}
+                    //else{
+                    //    $('#input_user_name').addClass("input-error").removeClass("valid");
+                    //}
+                    //if(obj.phone!=''){
+                    //    $('#input_user_phone').val(obj.phone);
+                    //    $('#input_user_phone').removeClass("input-error").addClass("valid");
+                    //}
+                    //else{
+                    //    $('#input_user_phone').addClass("input-error").removeClass("valid");
+                    //}
+                    //$('#input_user_ngay_lam_viec').val(obj.ngay_lam_viec);
+                    //$('#input_user_ngay_chinh_thuc').val(obj.ngay_chinh_thuc);
+                    //
+                    //$('#input_password').val('code');
+                    //$('#input_password').removeClass("input-error").addClass("valid");
+                    //$('#input_password_confirm').val('code');
+                    //$('#input_password_confirm').removeClass("input-error").addClass("valid");
+                    //$('#hidden_edit_pass').hide();
+                    //$('#input_id_edit').val(Id);
+                    ////$('.mr_user').val(mr).prop('selected', true);
+                    ////$(".chosen-default span").val(mr);
+
+                }
+            });
+    }
+    else{
+        alert('Ban không thể xem chi tiết nhân viên');
+    }
+}
 function returnDatCoc() {
     var value = $('#input_dat_coc').val();
     if(value!=''){

@@ -1,7 +1,7 @@
 <?php
 class booking
 {
-    public $id,$code_booking,$id_tour,$name_tour,$code_tour,$price_tour,$price_11,$price_5,$price_new,$price_11_new,$price_5_new,$nguon_tour,$tien_te,$ty_gia,$ngay_bat_dau,$han_thanh_toan,$loai_khach_hang,$hinh_thuc_thanh_toan,$id_customer,$diem_don,$diem_tra,$ngay_khoi_hanh,$ngay_ket_thuc,$phuong_tien,$num_nguoi_lon,$num_tre_em,$num_tre_em_5,$total_price,$tien_thanh_toan,$user_id,$status,$confirm_admin,$created_by,$updated_by,$created,$updated,$note;
+    public $id,$code_booking,$id_tour,$name_tour,$code_tour,$price_tour,$price_11,$price_5,$price_new,$price_11_new,$price_5_new,$vat,$nguon_tour,$tien_te,$ty_gia,$ngay_bat_dau,$han_thanh_toan,$loai_khach_hang,$hinh_thuc_thanh_toan,$id_customer,$diem_don,$diem_tra,$ngay_khoi_hanh,$ngay_ket_thuc,$phuong_tien,$num_nguoi_lon,$num_tre_em,$num_tre_em_5,$total_price,$tien_thanh_toan,$user_id,$status,$confirm_admin,$created_by,$updated_by,$created,$updated,$note;
     public function booking($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
@@ -15,6 +15,7 @@ class booking
     $this->price_new=isset($data['price_new'])?$data['price_new']:'';
     $this->price_11_new=isset($data['price_11_new'])?$data['price_11_new']:'';
     $this->price_5_new=isset($data['price_5_new'])?$data['price_5_new']:'';
+    $this->vat=isset($data['vat'])?$data['vat']:'';
     $this->nguon_tour=isset($data['nguon_tour'])?$data['nguon_tour']:'';
     $this->tien_te=isset($data['tien_te'])?$data['tien_te']:'';
     $this->ty_gia=isset($data['ty_gia'])?$data['ty_gia']:'';
@@ -56,6 +57,7 @@ class booking
             $this->price_new=addslashes($this->price_new);
             $this->price_11_new=addslashes($this->price_11_new);
             $this->price_5_new=addslashes($this->price_5_new);
+            $this->vat=addslashes($this->vat);
             $this->nguon_tour=addslashes($this->nguon_tour);
             $this->tien_te=addslashes($this->tien_te);
             $this->ty_gia=addslashes($this->ty_gia);
@@ -96,6 +98,7 @@ class booking
             $this->price_new=stripslashes($this->price_new);
             $this->price_11_new=stripslashes($this->price_11_new);
             $this->price_5_new=stripslashes($this->price_5_new);
+            $this->vat=stripslashes($this->vat);
             $this->nguon_tour=stripslashes($this->nguon_tour);
             $this->tien_te=stripslashes($this->tien_te);
             $this->ty_gia=stripslashes($this->ty_gia);

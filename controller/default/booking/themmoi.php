@@ -68,6 +68,13 @@ if(isset($_POST['code_booking']))
     $num_tre_em=_returnPostParamSecurity('num_tre_em');
     $num_tre_em_5=_returnPostParamSecurity('num_tre_em_5');
     $vat=_returnPostParamSecurity('vat');
+    if($vat==''){
+        $vat=0;
+    }else{
+        if ($vat === "on" || $vat === 1||$vat === "On") {
+            $vat = 1;
+        }
+    }
     $name_customer=_returnPostParamSecurity('name_customer');
     $id_customer=_returnPostParamSecurity('id_customer');
     $email=_returnPostParamSecurity('email');
@@ -92,11 +99,15 @@ if(isset($_POST['code_booking']))
     if(is_numeric($num_nguoi_lon)&&is_numeric($price_submit)){
         $total=$total+($num_nguoi_lon*$price_submit);
     }
-    if(is_numeric($num_tre_em)&&is_numeric($num_tre_em)){
+    if(is_numeric($num_tre_em)&&is_numeric($price_511_submit)){
         $total=$total+($num_tre_em*$price_511_submit);
     }
-    if(is_numeric($num_tre_em_5)&&is_numeric($num_tre_em_5)){
+    if(is_numeric($num_tre_em_5)&&is_numeric($price_5_submit)){
         $total=$total+($num_tre_em_5*$price_5_submit);
+    }
+    if($vat==1){
+        $vat_price=($total*0.1);
+        $total=$total+$vat_price;
     }
     if(isset($_POST['name_customer_sub'])){
         $name_customer_sub=$_POST['name_customer_sub'];
@@ -134,6 +145,7 @@ if(isset($_POST['code_booking']))
             $dangky->status = 1;
             $dangky->phone = $phone;
             $dangky->created_by = $_SESSION['user_id'];
+            $dangky->category=$nhom_khach_hang;
             customer_insert($dangky);
             $data_khachhang=customer_getByTop('1','email="'.$email.'"','id desc');
             if(count($data_khachhang)>0){
@@ -197,6 +209,10 @@ if(isset($_POST['code_booking']))
         $booking_model->tien_thanh_toan=$dat_coc;
         $booking_model->user_id=$id_user;
         $booking_model->note=$note;
+        $booking_model->vat=$vat;
+        if($status==''){
+            $status=1;
+        }
         $booking_model->status=$status;
         if($_SESSION['user_role']==1){
             $booking_model->confirm_admin=1;
@@ -245,7 +261,7 @@ if(isset($_POST['code_booking']))
         }
 
 
-        _insertLog($_SESSION['user_id'],6,6,21,$id_booking,'','','Nhân viên '.$check_data_user[0]->name.' đã thực hiện việc tạo đơn hàng');
+        $message='';
         if($_SESSION['user_role']!=1){
             $data_list_user_admin=user_getByTop('','user_role=1 and status=1','id desc');
             if(count($data_list_user_admin)>0){
@@ -258,9 +274,20 @@ if(isset($_POST['code_booking']))
             $subject='Xác nhận đơn hàng '.$code_booking;
             $message.='<p>Nhân viên '.$check_data_user[0]->name.' vừa tạo đơn hàng mã '.$code_booking.'</p>';
             $message.='<a>Bạn vui lòng truy cập <a href="'.$link_noti.'">đường link</a> để xác nhận đơn hàng</p>';
-            SendMail('info@mixtourist.com.vn', $message, $subject);
-        }
+//            SendMail('info@mixtourist.com.vn', $message, $subject);
+            $mess_log='Nhân viên '.$check_data_user[0]->name.' đã thực hiện việc tạo đơn hàng';
+        }else{
+            $name_noti=$_SESSION['user_name'].' đã thêm một đơn hàng cho bạn';
+            $link_noti=SITE_NAME.'/don-hang/'._return_mc_encrypt($id_booking, ENCRYPTION_KEY);
+            _insertNotification($name_noti,$_SESSION['user_id'],$id_user,$link_noti,0,'');
 
+            $subject='Xác nhận đơn hàng '.$code_booking;
+            $message.='<p>Admin '.$_SESSION['user_name'].' vừa tạo đơn hàng mã '.$code_booking.'</p>';
+            $message.='<a>Bạn vui lòng truy cập <a href="'.$link_noti.'">đường link</a> để xác nhận đơn hàng</p>';
+            SendMail($check_data_user[0]->email, $message, $subject);
+            $mess_log='Admin '.$_SESSION['user_name'].' đã thực hiện việc tạo đơn hàng';
+        }
+        _insertLog($_SESSION['user_id'],6,6,21,$id_booking,'','',$mess_log);
         redict(SITE_NAME . '/booking/');
 
     }else{

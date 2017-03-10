@@ -53,7 +53,7 @@
                                     <label style="display: none" class="error-color  error-color-size" id="error_name_user">Bạn vui lòng chọn sales</label>
                                 </div>
                             </div>
-                            <table class="table table-striped table-bordered">
+                            <table class="table table-striped tablget_detail.phpe-bordered">
                                 <thead>
                                 <tr>
                                     <th class="center">#</th>

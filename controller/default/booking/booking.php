@@ -22,6 +22,9 @@ $count=10;
 $data_dk_fill='';
 if($_SESSION['user_role']==0)
 {
+    $data['dk_find'] = "user_id=".$_SESSION['user_id'];
+    $data_dk_fill='user_id='.$_SESSION['user_id'];
+}else{
     $data['dk_find'] = "created_by=".$_SESSION['user_id'];
     $data_dk_fill='created_by='.$_SESSION['user_id'];
 }

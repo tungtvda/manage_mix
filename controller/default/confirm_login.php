@@ -45,7 +45,8 @@ if(isset($_POST['xacnhan'])&&isset($_POST['code']))
             'user_role'=>$user_role,
             'user_permison_action'=>$user_permison_action,
             'user_permison_form'=>$user_permison_form,
-            'user_permison_module'=>$user_permison_module
+            'user_permison_module'=>$user_permison_module,
+            'time_token'=>_returnGetDateTime(),
         );
         _returnLogin($data_arr,$user_update);
     }

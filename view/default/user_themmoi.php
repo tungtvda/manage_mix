@@ -20,7 +20,7 @@ function show_user_themmoi($data = array())
         $show_phone="";
     }else{
         $action_name='add';
-        $readonly="readonly";
+        $readonly="";
         $hidden="";
         $valid_pass="";
         $show_phone="hidden";

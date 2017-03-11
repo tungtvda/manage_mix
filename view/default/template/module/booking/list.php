@@ -336,43 +336,43 @@
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Sales</div>
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click name_sales">media_002</span>
+                                                <span class="editable editable-click name_sales"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Tiề tệ</div>
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click tien_te">media_002</span>
+                                                <span class="editable editable-click tien_te"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Ngày bắt đầu</div>
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click ngay_bat_dau">media_002</span>
+                                                <span class="editable editable-click ngay_bat_dau"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Hạn thanh toán</div>
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click han_thanh_toan">media_002</span>
+                                                <span class="editable editable-click han_thanh_toan"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Tình trạng</div>
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click tinh_trang">media_002</span>
+                                                <span class="editable editable-click tinh_trang"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Httt</div>
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click httt">media_002</span>
+                                                <span class="editable editable-click httt"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Số người</div>
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click so_nguoi">media_002</span>
+                                                <span class="editable editable-click so_nguoi"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
@@ -387,7 +387,7 @@
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Ghi chú</div>
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click ghi_chu">media_002</span>
+                                                <span class="editable editable-click ghi_chu"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -402,63 +402,63 @@
                                             <div class="profile-info-name"> Khách hàng</div>
 
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click name_khach_hang">media_002</span>
+                                                <span class="editable editable-click name_khach_hang"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Email</div>
 
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click email_customer">media_002</span>
+                                                <span class="editable editable-click email_customer"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Địa chỉ</div>
 
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click address_customer">media_002</span>
+                                                <span class="editable editable-click address_customer"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Điện thoại</div>
 
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click phone_customer">media_002</span>
+                                                <span class="editable editable-click phone_customer"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Fax</div>
 
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click fax_customer">media_002</span>
+                                                <span class="editable editable-click fax_customer"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Nhóm kh</div>
 
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click nhom_kh">media_002</span>
+                                                <span class="editable editable-click nhom_kh"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Điểm đón</div>
 
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click diem_don">media_002</span>
+                                                <span class="editable editable-click diem_don"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Ngày khởi hành</div>
 
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click ngay_khoi_hanh">media_002</span>
+                                                <span class="editable editable-click ngay_khoi_hanh"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Ngày kết thúc</div>
 
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click ngay_ket_thuc">media_002</span>
+                                                <span class="editable editable-click ngay_ket_thuc"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -479,25 +479,25 @@
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Tên tour</div>
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click name_tour">media_002</span>
+                                                <span class="editable editable-click name_tour"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Giá</div>
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click gia_nguoi_lon">media_002</span>
+                                                <span class="editable editable-click gia_nguoi_lon"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Giá 5-11</div>
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click gia_tre_em_511">media_002</span>
+                                                <span class="editable editable-click gia_tre_em_511"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Giá 5</div>
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click gia_tre_em_5">media_002</span>
+                                                <span class="editable editable-click gia_tre_em_5"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -512,28 +512,28 @@
                                             <div class="profile-info-name"> Tổng cộng</div>
 
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click tong_cong">media_002</span>
+                                                <span class="editable editable-click tong_cong"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Thuế VAT 10%</div>
 
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click vat_thanh_tien">media_002</span>
+                                                <span class="editable editable-click vat_thanh_tien"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Đặt cọc</div>
 
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click dat_coc">media_002</span>
+                                                <span class="editable editable-click dat_coc"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Còn lại</div>
 
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click con_lai">media_002</span>
+                                                <span class="editable editable-click con_lai"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -561,7 +561,7 @@
                 </div>
             </div>
         </div><!-- PAGE CONTENT ENDS -->
-        
+
 
     </div><!-- /.col -->
 

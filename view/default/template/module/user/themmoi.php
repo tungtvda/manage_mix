@@ -89,6 +89,11 @@
                         </a>
                     </div>
                 </div>
+                <style>
+                    .control-label{
+                        font-size: 11px;
+                    }
+                </style>
                 <input class="valid" hidden name="check_edit" id="input_check_edit" value="<?php echo $action_name ?>">
                 <input class="valid" hidden name="id_edit" id="input_id_edit" value="<?php echo $id ?>">
                 <div class="widget-body">
@@ -98,7 +103,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Mã nhân viên <span style="color: red">*</span></label>
                                     <div class="col-sm-9">
-											<span style="width: 60%" class="input-icon width_100">
+											<span style="width: 50%" class="input-icon width_100">
 												<input <?php echo $readonly?>  name="user_code"  type="text" id="input_user_code" class="width_100 <?php echo $valid_user_code?>" required value="<?php echo $user_code?>">
 												<i class="ace-icon fa fa-qrcode blue"></i>
                                                 <i  id="user_code_error_icon" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " data-toggle="ggtooltip" data-title="" data-trigger="hover" data-placement="bottom" data-backcolor="red" data-textcolor="#ffffff" title=""></i>
@@ -253,6 +258,7 @@
                                         </div>
                                     </div>
                                 </div>
+                        <div class="row">
                         <div <?php echo $hidden?> class="col-sm-6">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Mật khẩu <span style="color: red">*</span></label>
@@ -272,13 +278,13 @@
                                 <div class="col-sm-9">
 											<span class="input-icon width_100">
 												<input value="<?php echo $password?>" name="password_confirm" type="password" id="input_password_confirm" class="width_100 <?php echo $valid_pass?>" required>
-												<input value="<?php echo $password?>" name="password_confirm" type="password" id="input_password_confirm" class="width_100 <?php echo $valid_pass?>" required>
 												<i class="ace-icon fa fa-key blue"></i>
                                                 <i id="error_icon_user_pass_con" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title=""></i>
 											</span>
                                     <label  style="display: none" class="error-color  error-color-size" id="error_password_confirm">Bạn vui lòng xác nhận mật khẩu</label>
                                 </div>
                             </div>
+                        </div>
                         </div>
                                 </div>
 

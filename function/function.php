@@ -22,24 +22,21 @@ function _returnCheckPermison($module_id = 0, $form_id = 0, $action_id = 0)
     }
 
     // kiểm tra thời gian đăng nhập
-    $date_compare = $data_user[0]->time_token;
-    $date_check = date('Y-m-d H:i:s', strtotime('+15 minute', strtotime($date_compare)));
+    $date_compare = $_SESSION['time_token'];
+    $date_check = date('Y-m-d H:i:s', strtotime('+25 minute', strtotime($date_compare)));
     $currentDate = _returnGetDateTime();
     if (strtotime($currentDate) > strtotime($date_check)) {
-        redict(_returnLinkDangNhap());
+        redict(_returnLinkDangNhap('Hết thời hạn đăng nhập'));
     }
 
-    $user_update = new user();
-    $user_update->id = $_SESSION['user_id'];
-    $user_update->time_token = _returnGetDateTime();
-    user_update_time_login($user_update);
+    $_SESSION['time_token']=_returnGetDateTime();
     // kiểm tra quyền có phải là super admin
-    if ($data_user[0]->user_role == 1) {
+    if ($_SESSION['user_role'] == 1) {
         return true;
     }
-    $permison_module = explode(',', $data_user[0]->permison_module);
-    $permison_form = explode(',', $data_user[0]->permison_form);
-    $permison_action = explode(',', $data_user[0]->permison_action);
+    $permison_module = explode(',', $_SESSION['user_permison_module']);
+    $permison_form = explode(',', $_SESSION['user_permison_form']);
+    $permison_action = explode(',', $_SESSION['user_permison_action']);
 
     if (!in_array($module_id, $permison_module) || $module_id == 0) {
         redict(_returnLinkDangNhap('Bạn không có quyền truy cập vào hệ thống'));
@@ -53,8 +50,6 @@ function _returnCheckPermison($module_id = 0, $form_id = 0, $action_id = 0)
             return true;
         }
     }
-
-
     $_SESSION['user_permison_action'] = $permison_action;
     return true;
 
@@ -65,26 +60,34 @@ function _returnCheckAction($action_id = 0)
     // Kiểm tra có tồn tại user không
     _returnCheckExitUser();
     // Lấy thông tin user
-    $data_user = user_getById($_SESSION['user_id']);
-    if (count($data_user) == 0) {
-        redict(_returnLinkDangNhap());
-    }
+//    $data_user = user_getById($_SESSION['user_id']);
+//    if (count($data_user) == 0) {
+//        redict(_returnLinkDangNhap());
+//    }
     // kiểm tra thời gian đăng nhập
-    $date_compare = $data_user[0]->time_token;
-    $date_check = date('Y-m-d H:i:s', strtotime('+15 minute', strtotime($date_compare)));
+//    $date_compare = $data_user[0]->time_token;
+//    $date_check = date('Y-m-d H:i:s', strtotime('+15 minute', strtotime($date_compare)));
+//    $currentDate = _returnGetDateTime();
+//    if (strtotime($currentDate) > strtotime($date_check)) {
+//        redict(_returnLinkDangNhap());
+//    }
+//    $user_update = new user();
+//    $user_update->id = $_SESSION['user_id'];
+//    $user_update->time_token = _returnGetDateTime();
+//    user_update_time_login($user_update);
+    $date_compare = $_SESSION['time_token'];
+    $date_check = date('Y-m-d H:i:s', strtotime('+25 minute', strtotime($date_compare)));
     $currentDate = _returnGetDateTime();
     if (strtotime($currentDate) > strtotime($date_check)) {
-        redict(_returnLinkDangNhap());
+        redict(_returnLinkDangNhap('Hết thời hạn đăng nhập'));
     }
-    $user_update = new user();
-    $user_update->id = $_SESSION['user_id'];
-    $user_update->time_token = _returnGetDateTime();
-    user_update_time_login($user_update);
+
+    $_SESSION['time_token']=_returnGetDateTime();
     // kiểm tra quyền có phải là super admin
-    if ($data_user[0]->user_role == 1) {
+    if ($_SESSION['user_role'] == 1) {
         return true;
     }
-    $permison_action = explode(',', $data_user[0]->permison_action);
+    $permison_action = explode(',', $_SESSION['user_permison_action']);
     if ($action_id != 0) {
         if (!in_array($action_id, $permison_action)) {
             return false;
@@ -214,6 +217,7 @@ function _returnLogin($data_arr, $user_update)
     $_SESSION['user_permison_action'] = $data_arr['user_permison_action'];
     $_SESSION['user_permison_form'] = $data_arr['user_permison_form'];
     $_SESSION['user_permison_module'] = $data_arr['user_permison_module'];
+    $_SESSION['time_token'] = $data_arr['time_token'];
     $user_update->time_token = _returnGetDateTime();
     $user_update->id = $data_arr['user_id'];
     user_update_time_login($user_update);
@@ -317,7 +321,12 @@ function _returnQuyen($stt)
 
 function _returnFolderRoot()
 {
-    return $_SERVER['DOCUMENT_ROOT'] . '/manage_mix';
+    //  server
+    return $_SERVER['DOCUMENT_ROOT'];
+
+    // local
+//    return $_SERVER['DOCUMENT_ROOT'] . '/manage_mix';
+
 }
 
 function _returnmakedirs($dirpath, $mode = 0777)

@@ -67,7 +67,8 @@ if(isset($_POST['login'])&&isset($_POST['username_login'])&&isset($_POST['passwo
                         'user_name'=>$user_name,
                         'user_permison_action'=>$user_permison_action,
                         'user_permison_form'=>$user_permison_form,
-                        'user_permison_module'=>$user_permison_module
+                        'user_permison_module'=>$user_permison_module,
+                        'time_token'=>_returnGetDateTime(),
                     );
                     _returnLogin($data_arr,$user_update);
 //

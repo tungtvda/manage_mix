@@ -6,13 +6,15 @@ require_once DIR . '/model/htttService.php';
 require_once DIR . '/model/customerService.php';
 require_once DIR . '/model/customer_categoryService.php';
 require_once DIR . '/model/tourService.php';
-_returnCheckPermison(0,0);
+_returnCheckPermison(6,6);
+return 0;
+if (_returnCheckAction(20) == 0) {
+    return 0;
+}
 if (isset($_POST['id']) && isset($_POST['table'])) {
     $id=_return_mc_decrypt(_returnPostParamSecurity('id'), ENCRYPTION_KEY);
     $table = _returnPostParamSecurity('table');
     if ($id != '' && $table != '') {
-
-
         $file_model = $table . 'Service.php';
         require_once DIR . '/model/' . $file_model;
 

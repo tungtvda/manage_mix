@@ -200,11 +200,29 @@ function show_edit_nhanvien(Id, name) {
                     //$('.mr_user').val(mr).prop('selected', true);
                     //$(".chosen-default span").val(mr);
 
+                }else{
+                    lnv.alert({
+                        title: 'Lỗi',
+                        content: 'Ban không thể xem chi tiết khách hàng "'+name+'"',
+                        alertBtnText: 'Ok',
+                        iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                        alertHandler: function () {
+                            $('#modal-form').modal('hide');
+                        }
+                    });
                 }
             });
     }
     else {
-        alert('Ban không thể xem chi tiết nhân viên');
+        lnv.alert({
+            title: 'Lỗi',
+            content: 'Ban không thể xem chi tiết khách hàng "'+name+'"',
+            alertBtnText: 'Ok',
+            iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+            alertHandler: function () {
+                $('#modal-form').modal('hide');
+            }
+        });
     }
 }
 function resetForm(form) {

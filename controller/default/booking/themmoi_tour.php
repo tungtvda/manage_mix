@@ -24,6 +24,7 @@ if (isset($_POST['name_tour_add']) && isset($_POST['price_tour_add']) && isset($
             $data_tour=tour_getByTop('1','name="'.$name_tour_add.'"','id desc');
             if(count($data_tour)>0){
                 echo $data_tour[0]->id;
+
             }else{
                 echo 'Thêm tour thất bại, bạn vui lòng thử lại';
             }

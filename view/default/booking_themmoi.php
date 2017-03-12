@@ -12,6 +12,12 @@ function show_booking_themmoi($data = array())
     $asign = array();
     $tieude=$data['title'];
     $action=$data['action'];
+    $valid_name_user="";
+    $valid_id_user="";
+    $name_user='';
+    $id_user='';
+    $table_user='';
+    $ngay_bat_dau='';
     if($action==2){
         $action_name='edit';
         $readonly="readonly";
@@ -19,7 +25,25 @@ function show_booking_themmoi($data = array())
         $valid_pass="valid";
         $show_phone="";
         $disabled='disabled';
-
+        $data_sales=user_getById($data['data_user'][0]->user_id);
+        if(count($data_sales)>0){
+            if($data_sales[0]->name!=''){
+                $valid_name_user='valid';
+                $name_user=$data_sales[0]->name;
+            }
+            $phong_ban='';
+            $number_tour=0;
+            $data_phongban=user_phongban_getByTop('','id='.$data_sales[0]->phong_ban,'');
+            $number_tour=booking_count('user_id='.$data_sales[0]->id.' and status!=5');
+            if(count($data_phongban)>0){
+                $phong_ban=$data_phongban[0]->name;
+            }
+            $id_user=$data_sales[0]->id;
+            $valid_id_user="valid";
+            $table_user='<tr> <td class="center">1</td><td><a>'.$name_user.'</a></td><td><span>'.$data_sales[0]->user_email.'</span></td> <td><span>'.$data_sales[0]->phone.'</span></td><td><span>'.$phong_ban.'</span></td><td>'.$number_tour.'</td></tr>';
+        }
+        $Random=_returnDataEditAdd($data['data_user'],'code_booking');
+        $ngay_bat_dau=_returnDataEditAdd($data['data_user'],'code_booking');
     }else{
         $action_name='add';
         $readonly="readonly";
@@ -27,6 +51,7 @@ function show_booking_themmoi($data = array())
         $valid_pass="";
         $show_phone="hidden";
         $disabled='';
+        $Random=_randomBooking('#','booking_count');
     }
 
     $tien_te=_returnDataEditAdd($data['data_user'],'tien_te');
@@ -54,7 +79,6 @@ function show_booking_themmoi($data = array())
     $data_list_status=trang_thai_don_hang_getByTop('','','position asc');
     $data_list_customer_category=customer_category_getByTop('','','position asc');
 
-    $Random=_randomBooking('#','booking_count');
 
     $nguon_tour=_returnDataEditAdd($data['data_user'],'nguon_tour');
     $data_nguon_tour=tien_te_getById($nguon_tour);

@@ -546,7 +546,6 @@ jQuery(function ($) {
                                     price_tour_add: price_tour_add,
                                     price_tour_511_add: price_tour_511_add,
                                     price_tour_5_add: price_tour_5_add,
-                                    diem_khoi_hanh:diem_khoi_hanh
                                 },
                                 success: function (response) {
                                     if (numberRegex.test(response)) {
@@ -566,11 +565,17 @@ jQuery(function ($) {
                                             '<td><span id="price_format_span_5">'+price_tour_5_add_format+'</span>' +
                                             '<input hidden="" title="giá sửa" id="input_price_5" value="'+price_tour_5_add+'"> | <a id="edit_price_5" href="javascript:void(0)"> <i class="fa fa-edit" title="Sửa đơn giá"></i></a>' +
                                             '<a id="reset_price_5" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a></td>' +
-                                            '<td>Hà Nội</td>' +
+                                            '<td>'+diem_khoi_hanh+'</td>' +
                                             '</tr>'
                                         $('.table_booking_tour').html(table_insert);
                                         $('#input_name_tour').val(name_tour_add);
                                         $('#modal-form').modal('hide');
+                                        $('#input_id_tour').val(response);
+                                        $('#input_price_submit').val(price_tour_add);
+                                        $('#input_price_511_submit').val(price_tour_511_add);
+                                        $('#input_price_5_submit').val(price_tour_5_add);
+                                        $('#input_id_tour').removeClass("input-error").addClass("valid");
+                                        $('#input_name_tour').removeClass("input-error").addClass("valid");
                                     }
                                     else{
                                         lnv.alert({

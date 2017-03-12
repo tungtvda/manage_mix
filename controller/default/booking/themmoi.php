@@ -18,19 +18,19 @@ _returnCheckPermison(6, 6);
 
 if(isset($_GET['id'])&&$_GET['id']!='')
 {   $data['action']=2;
-    if (_returnCheckAction(21) == 0) {
+    if (_returnCheckAction(22) == 0) {
         redict(_returnLinkDangNhap());
     }
 //    echo $_GET['id'];
      $id=_return_mc_decrypt(_returnGetParamSecurity('id'), ENCRYPTION_KEY);
-    $data['data_user']=customer_getById($id);
+    $data['data_user']=booking_getById($id);
 
     if(count($data['data_user'])==0)
     {
         redict(SITE_NAME.'/booking/');
     }
-    $url_bread = '<li><a href="'.SITE_NAME.'/booking/">Danh sách đặt tour</a></li><li class="active">Chỉnh sửa khách hàng "'.$data['data_user'][0]->name.'"</li>';
-    $data['title'] = 'Chỉnh sửa khách hàng "'.$data['data_user'][0]->name.'"';
+    $url_bread = '<li><a href="'.SITE_NAME.'/booking/">Danh sách đặt tour</a></li><li class="active">Chỉnh sửa đơn hàng "'.$data['data_user'][0]->code_booking.'"</li>';
+    $data['title'] = 'Chỉnh sửa đơn hàng "'.$data['data_user'][0]->code_booking.'"';
 }else{
     if (_returnCheckAction(21) == 0) {
         redict(_returnLinkDangNhap('Bạn không có quyền thực hiện chức năng này'));

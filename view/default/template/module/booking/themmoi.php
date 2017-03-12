@@ -208,6 +208,7 @@
                                              <i class="ace-icon fa fa-user blue"></i>
                                              <i id="icon_error_name_customer" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " data-toggle="ggtooltip" data-title="" data-trigger="hover" data-placement="bottom" data-backcolor="red" data-textcolor="#ffffff" title=""></i>
                                              <i id="icon_success_name_customer" style="display: none" class="ace-icon fa fa-check-circle icon-right success-color" data-toggle="ggtooltip" data-title="" data-trigger="hover" data-placement="bottom" data-backcolor="green" data-textcolor="#000000" title=""></i>
+
                                          </span>
                                             <input hidden id="input_id_customer" type="text" class="valid" name="id_customer">
                                             <label style="display: none" class="error-color  error-color-size" id="error_name_customer">Bạn vui lòng nhập tên khách hàng</label>
@@ -299,7 +300,7 @@
                         <div class="row col-xs-12 div_content">
                             <div class="form-group border-sloid-1-x"
                                  style="float: left; width: 100%;    margin-left: 0px;margin-right: 0px;">
-                                <div style="float: left;width: 66%">
+                                <div style="float: left;width: 50%">
                                            <span class="input-icon width_100">
                                                 <input id="input_name_tour" type="text" name="name_tour"
                                                        placeholder="Nhập tên tour ..."
@@ -309,17 +310,11 @@
                                     <input hidden id="input_id_tour" type="text" name="id_tour">
                                     <label style="display: none" class="error-color  error-color-size" id="error_name_tour">Bạn vui lòng chọn tour</label>
                                 </div>
-                                <div style="float: left;width: 33%;">
+                                <div style="float: left;">
                                     <div class="btn-group">
-                                        <button style="padding: 7px 10px" class="green btn btn-xs btn-success"
-                                                type="button">
+                                        <a href="#modal-form" data-toggle="modal" role="button" id="btn_add_customer_popup" style="padding: 7px 10px; " class="green btn btn-xs btn-success" type="button">
                                             <i class=" fa fa-plus bigger-120"></i>
-                                        </button>
-
-                                        <button style="padding: 7px 10px" class="green btn btn-xs btn-info"
-                                                type="button">
-                                            <i class=" fa fa-refresh bigger-120"></i>
-                                        </button>
+                                        </a>
 
                                     </div>
                                 </div>
@@ -453,6 +448,123 @@
 <!--        width: 81%;-->
 <!--    }-->
 <!--</style>-->
+
+<div style="display: block"  id="modal-form" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="blue bigger" id="title_form">Tạo tour mới</h4>
+
+            </div>
+            <form id="submit_form" role="form" action="" method="post" enctype="multipart/form-data">
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-8">
+                            <div class="form-group" style="float: left; width: 100%">
+                                <div >
+                                    <label for="form-field-select-3">Mã khách hàng <span style="color: red">*</span></label>
+                                    <?php echo _returnInput('code', '', '', 'qrcode', '', 'Bạn vui lòng nhập mã khách hàng','') ?>
+                                </div>
+                            </div>
+
+                            <div class="space-4"></div>
+
+                            <div class="form-group" style="float: left; width: 100%">
+                                <label for="form-field-select-3">Họ tên <span
+                                        style="color: red">*</span></label>
+                                <div>
+                                    <style>
+                                        .chosen-single{
+                                            width: 100% !important;
+                                            border: 1px solid #d5d5d5 !important;
+                                            height: 34px !important;
+                                        }
+                                        #form_field_select_3_chosen{
+                                            width: 96% !important;
+
+                                        }
+                                    </style>
+                                    <div style="float: left;width: 33%;" >
+                                        <select name="mr" class="chosen-select form-control mr_user valid"
+                                                id="form-field-select-3" data-placeholder="Danh xưng ..."
+                                                style="display: none;width: 10px">
+                                            <option value=""></option>
+                                            <option value="Mr">Mr</option>
+                                            <option value="Mrs">Mrs</option>
+                                            <option value="Ms">Ms</option>
+                                        </select>
+                                    </div>
+                                    <div style="float: left;width: 66%" >
+                                        <?php echo _returnInput('name', '', '', 'users', '', 'Bạn vui lòng nhập tên khách hàng','width: 100%') ?>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-4"></div>
+
+                            <div class="form-group" style="float: left; width: 100%">
+                                <label for="form-field-select-3">Ngày sinh </label>
+                                <?php echo _returnInputDate('birthday', '', 'valid', '', '','')?>
+                            </div>
+                            <div class="space-4"></div>
+
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div style="float: left; width: 100%">
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <label for="form-field-select-3">Email <span
+                                            style="color: red">*</span></label>
+                                    <?php echo _returnInput('email', '', '', 'envelope', '', 'Bạn vui lòng kiểm tra email','') ?>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <label for="form-field-select-3">Địa chỉ <span
+                                            style="color: red">*</span></label>
+                                    <?php echo _returnInput('address', '', '', 'map-marker', '', 'Bạn vui lòng kiểm tra email','') ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="float: left; width: 100%">
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <label for="form-field-select-3">Điện thoại <span
+                                            style="color: red">*</span></label>
+                                    <?php echo _returnInput('phone', '', '', 'phone', '', 'Bạn vui lòng kiểm tra số điện thoại','') ?>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <label for="form-field-select-3">Di động <span
+                                            style="color: red">*</span></label>
+                                    <?php echo _returnInput('mobi', '', '', 'mobile', '', 'Bạn vui lòng kiểm tra số di động','') ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-primary" id="submit_form_action" type="button">
+                        <i class="ace-icon fa fa-check"></i>
+                        Save
+                    </button>
+                    <button type="reset" class="btn btn-sm" data-dismiss="modal" id="reset_form_popup">
+                        <i class="ace-icon fa fa-times"></i>
+                        Cancel
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div><!-- PAGE CONTENT ENDS -->
 
 
 

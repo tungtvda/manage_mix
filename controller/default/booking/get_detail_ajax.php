@@ -7,7 +7,6 @@ require_once DIR . '/model/customerService.php';
 require_once DIR . '/model/customer_categoryService.php';
 require_once DIR . '/model/tourService.php';
 _returnCheckPermison(6,6);
-return 0;
 if (_returnCheckAction(20) == 0) {
     return 0;
 }

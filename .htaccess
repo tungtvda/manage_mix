@@ -36,3 +36,4 @@ RewriteRule ^khach-hang/xoa$ controller/default/customer/delete.php
 RewriteRule ^booking/$ controller/default/booking/booking.php
 RewriteRule ^booking/dat-tour$ controller/default/booking/themmoi.php
 RewriteRule ^get-detail-ajax-booking/$ controller/default/booking/get_detail_ajax.php
+RewriteRule ^booking/insert-tour$ controller/default/booking/themmoi_tour.php

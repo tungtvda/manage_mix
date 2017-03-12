@@ -205,14 +205,14 @@
                                                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                                                     </a>
                                                 <?php } ?>
-<!--                                                --><?php //if (_returnCheckAction(23) == 1) { ?>
-<!--                                                    <a title="Xóa" class="red delete_record" href="javascript:void(0)"-->
-<!--                                                       deleteid="--><?php //echo $row->id ?><!--"-->
-<!--                                                       name_record_delete="--><?php //echo $row->code_booking ?><!--"-->
-<!--                                                       url_delete="--><?php //echo SITE_NAME ?><!--/booking/xoa?id=--><?php //echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?><!--">-->
-<!--                                                        <i class="ace-icon fa fa-trash-o bigger-130"></i>-->
-<!--                                                    </a>-->
-<!--                                                --><?php //} ?>
+                                                <?php if ($_SESSION['user_role'] == 1) { ?>
+                                                    <a title="Xóa" class="red delete_record" href="javascript:void(0)"
+                                                       deleteid="<?php echo $row->id ?>"
+                                                       name_record_delete="<?php echo $row->code_booking ?>"
+                                                       url_delete="<?php echo SITE_NAME ?>/booking/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
+                                                        <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                                                    </a>
+                                                <?php } ?>
                                             </div>
 
                                             <div class="hidden-md hidden-lg">
@@ -243,19 +243,19 @@
                                                                 </a>
                                                             </li>
                                                         <?php } ?>
-<!--                                                        --><?php //if (_returnCheckAction(23) == 1) { ?>
-<!--                                                            <li>-->
-<!--                                                                <a href="javascript:void(0)"-->
-<!--                                                                   deleteid="--><?php //echo $row->id ?><!--"-->
-<!--                                                                   name_record_delete="--><?php //echo $row->code_booking ?><!--"-->
-<!--                                                                   url_delete="--><?php //echo SITE_NAME ?><!--/booking/xoa?id=--><?php //echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?><!--"-->
-<!--                                                                   class="tooltip-error delete_record" title="Xóa">-->
-<!--																				<span class="red">-->
-<!--																					<i class="ace-icon fa fa-trash-o bigger-120"></i>-->
-<!--																				</span>-->
-<!--                                                                </a>-->
-<!--                                                            </li>-->
-<!--                                                        --><?php //} ?>
+                                                        <?php if ($_SESSION['user_role'] == 1) { ?>
+                                                            <li>
+                                                                <a href="javascript:void(0)"
+                                                                   deleteid="<?php echo $row->id ?>"
+                                                                   name_record_delete="<?php echo $row->code_booking ?>"
+                                                                   url_delete="<?php echo SITE_NAME ?>/booking/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                                   class="tooltip-error delete_record" title="Xóa">
+																				<span class="red">
+																					<i class="ace-icon fa fa-trash-o bigger-120"></i>
+																				</span>
+                                                                </a>
+                                                            </li>
+                                                        <?php } ?>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -336,7 +336,7 @@
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Sales</div>
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click name_sales"></span>
+                                                <span style="font-weight: bold; color:#478fca !important; " class="editable editable-click name_sales"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
@@ -402,7 +402,7 @@
                                             <div class="profile-info-name"> Khách hàng</div>
 
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click name_khach_hang"></span>
+                                                <span style="font-weight: bold; color:#478fca !important; " class="editable editable-click name_khach_hang"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
@@ -479,7 +479,7 @@
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Tên tour</div>
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click name_tour"></span>
+                                                <span style="font-weight: bold; color:#478fca !important; " class="editable editable-click name_tour"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
@@ -512,7 +512,7 @@
                                             <div class="profile-info-name"> Tổng cộng</div>
 
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click tong_cong"></span>
+                                                <span style="font-weight: bold; color:#478fca !important; " class="editable editable-click tong_cong"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
@@ -530,10 +530,10 @@
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
-                                            <div class="profile-info-name"> Còn lại</div>
+                                            <div  class="profile-info-name"> Còn lại</div>
 
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click con_lai"></span>
+                                                <span style="font-weight: bold; color:#478fca !important; " class="editable editable-click con_lai"></span>
                                             </div>
                                         </div>
                                     </div>

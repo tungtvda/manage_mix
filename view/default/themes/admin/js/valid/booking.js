@@ -497,6 +497,118 @@ jQuery(function ($) {
         show_booking(Id,code);
     });
 
+    $('body').on("click", '#submit_form_tour_action', function () {
+        var name_tour_add=$('#input_name_tour_add').val();
+        var price_tour_add=$('#input_price_tour_add').val();
+        var price_tour_511_add=$('#input_price_tour_511_add').val();
+        var price_tour_5_add=$('#input_price_tour_5_add').val();
+        var diem_khoi_hanh=$('#input_diem_khoi_hanh').val();
+        var link = url + '/check-validate.html';
+        if(name_tour_add!=''&&price_tour_add!=''&&price_tour_511_add!=''&&price_tour_5_add!=''){
+            $.ajax({
+                method: "GET",
+                url: link,
+                data: "value=" + name_tour_add + '&key=name&table=tour',
+                success: function (response) {
+                    var error=true;
+                    if(response==1){
+                        $('#error_name_tour_add').hide().html('');
+                        var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
+                        if (numberRegex.test(price_tour_add)) {
+                            $('#error_price_tour_add').hide().html('');
+                        }
+                        else {
+                            error=false;
+                            $('#error_price_tour_add').show().html('Đơn giá phải là kiểu số');
+                        }
+                        if (numberRegex.test(price_tour_511_add)) {
+                            $('#error_price_tour_511_add').hide().html('');
+                        }
+                        else {
+                            error=false;
+                            $('#error_price_tour_511_add').show().html('Đơn giá phải là kiểu số');
+                        }
+
+                        if (numberRegex.test(price_tour_5_add)) {
+                            $('#error_price_tour_5_add').hide().html('');
+                        }
+                        else {
+                            error=false;
+                            $('#error_price_tour_5_add').show().html('Đơn giá phải là kiểu số');
+                        }
+                        if(error==true){
+                            var link = url + '/booking/insert-tour';
+                            $.ajax({
+                                method: "POST",
+                                url: link,
+                                data : { // Danh sách các thuộc tính sẽ gửi đi
+                                    name_tour_add : name_tour_add,
+                                    price_tour_add: price_tour_add,
+                                    price_tour_511_add: price_tour_511_add,
+                                    price_tour_5_add: price_tour_5_add,
+                                    diem_khoi_hanh:diem_khoi_hanh
+                                },
+                                success: function (response) {
+                                    if (numberRegex.test(response)) {
+                                        var price_tour_add_format = price_tour_add.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                                        var price_tour_511_add_format = price_tour_511_add.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                                        var price_tour_5_add_format = price_tour_5_add.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                                        var table_insert='<tr> <td class="center">1</td>' +
+                                            '<td><a>'+name_tour_add+'</a></td>' +
+                                            '<td><span id="price_format_span">'+price_tour_add_format+'</span>' +
+                                            '<input hidden="" id="input_price_format" value="'+price_tour_add_format+'">' +
+                                            '<input hidden="" title="giá sửa" id="input_price" value="'+price_tour_add+'">' +
+                                            '<input hidden="" id="input_price_old" title="giá cũ" value="'+price_tour_add+'">  | <a id="edit_price" href="javascript:void(0)"> <i class="fa fa-edit" title="Sửa đơn giá"></i></a>' +
+                                            '<a id="reset_price" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a></td>' +
+                                            '<td><span id="price_format_span_511">'+price_tour_511_add_format+'</span>' +
+                                            '<input hidden="" title="giá sửa" id="input_price_511" value="'+price_tour_511_add+'"> | <a id="edit_price_511" href="javascript:void(0)"> <i class="fa fa-edit" title="Sửa đơn giá"></i></a>' +
+                                            '<a id="reset_price_511" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a></td>' +
+                                            '<td><span id="price_format_span_5">'+price_tour_5_add_format+'</span>' +
+                                            '<input hidden="" title="giá sửa" id="input_price_5" value="'+price_tour_5_add+'"> | <a id="edit_price_5" href="javascript:void(0)"> <i class="fa fa-edit" title="Sửa đơn giá"></i></a>' +
+                                            '<a id="reset_price_5" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a></td>' +
+                                            '<td>Hà Nội</td>' +
+                                            '</tr>'
+                                        $('.table_booking_tour').html(table_insert);
+                                        $('#input_name_tour').val(name_tour_add);
+                                        $('#modal-form').modal('hide');
+                                    }
+                                    else{
+                                        lnv.alert({
+                                            title: 'Lỗi',
+                                            content: response,
+                                            alertBtnText: 'Ok',
+                                            iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                                            alertHandler: function () {
+                                            }
+                                        });
+                                    }
+                                }
+                            });
+
+                        }
+                    }else{
+                        var mess = 'Tên tour "' + name_tour_add + '" đã tồn tại trong hệ thống';
+                        $('#error_name_tour_add').show().html(mess);
+                    }
+                }
+            });
+
+        }else{
+            if(name_tour_add==''){
+                $('#error_name_tour_add').show().html('Bạn vui lòng nhập tên tour');
+            }
+            if(price_tour_add==''){
+                $('#error_price_tour_add').show().html('Bạn vui lòng nhập giá người lớn');
+            }
+            if(price_tour_511_add==''){
+                $('#error_price_tour_511_add').show().html('Bạn vui lòng nhập giá trẻ em 5-11 tuổi');
+            }
+            if(price_tour_5_add==''){
+                $('#error_price_tour_5_add').show().html('Bạn vui lòng nhập giá trẻ em dưới 5 tuổi');
+            }
+        }
+    });
+
     //$('i').ggtooltip();
 });
 function show_booking(Id,name){

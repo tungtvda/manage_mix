@@ -449,7 +449,7 @@
 <!--    }-->
 <!--</style>-->
 
-<div style="display: block"  id="modal-form" class="modal" tabindex="-1">
+<div   id="modal-form" class="modal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -457,92 +457,52 @@
                 <h4 class="blue bigger" id="title_form">Tạo tour mới</h4>
 
             </div>
-            <form id="submit_form" role="form" action="" method="post" enctype="multipart/form-data">
+            <form id="submit_form_tour" role="form" action="" method="post" enctype="multipart/form-data">
 
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-8">
+                        <div class="col-xs-12 col-sm-12">
                             <div class="form-group" style="float: left; width: 100%">
                                 <div >
-                                    <label for="form-field-select-3">Mã khách hàng <span style="color: red">*</span></label>
-                                    <?php echo _returnInput('code', '', '', 'qrcode', '', 'Bạn vui lòng nhập mã khách hàng','') ?>
+                                    <label for="form-field-select-3">Tên tour <span style="color: red">*</span></label>
+                                    <?php echo _returnInput('name_tour_add', '', '', 'plane', '', 'Bạn vui lòng nhập mã khách hàng','') ?>
                                 </div>
                             </div>
-
                             <div class="space-4"></div>
-
-                            <div class="form-group" style="float: left; width: 100%">
-                                <label for="form-field-select-3">Họ tên <span
-                                        style="color: red">*</span></label>
-                                <div>
-                                    <style>
-                                        .chosen-single{
-                                            width: 100% !important;
-                                            border: 1px solid #d5d5d5 !important;
-                                            height: 34px !important;
-                                        }
-                                        #form_field_select_3_chosen{
-                                            width: 96% !important;
-
-                                        }
-                                    </style>
-                                    <div style="float: left;width: 33%;" >
-                                        <select name="mr" class="chosen-select form-control mr_user valid"
-                                                id="form-field-select-3" data-placeholder="Danh xưng ..."
-                                                style="display: none;width: 10px">
-                                            <option value=""></option>
-                                            <option value="Mr">Mr</option>
-                                            <option value="Mrs">Mrs</option>
-                                            <option value="Ms">Ms</option>
-                                        </select>
-                                    </div>
-                                    <div style="float: left;width: 66%" >
-                                        <?php echo _returnInput('name', '', '', 'users', '', 'Bạn vui lòng nhập tên khách hàng','width: 100%') ?>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="space-4"></div>
-
-                            <div class="form-group" style="float: left; width: 100%">
-                                <label for="form-field-select-3">Ngày sinh </label>
-                                <?php echo _returnInputDate('birthday', '', 'valid', '', '','')?>
-                            </div>
-                            <div class="space-4"></div>
-
-
                         </div>
                     </div>
                     <div class="row">
                         <div style="float: left; width: 100%">
                             <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <label for="form-field-select-3">Email <span
+                                    <label for="form-field-select-3">Giá người lớn<span
                                             style="color: red">*</span></label>
-                                    <?php echo _returnInput('email', '', '', 'envelope', '', 'Bạn vui lòng kiểm tra email','') ?>
+                                    <?php echo _returnInput('price_tour_add', '', '', 'usd', '', 'Bạn vui lòng kiểm giá người lớn','') ?>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <label for="form-field-select-3">Địa chỉ <span
+                                    <label for="form-field-select-3">Giá trẻ em 5-11 tuổi<span
                                             style="color: red">*</span></label>
-                                    <?php echo _returnInput('address', '', '', 'map-marker', '', 'Bạn vui lòng kiểm tra email','') ?>
+                                    <?php echo _returnInput('price_tour_511_add', '', '', 'usd', '', 'Bạn vui lòng kiểm tra email','') ?>
                                 </div>
                             </div>
                         </div>
                         <div style="float: left; width: 100%">
                             <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <label for="form-field-select-3">Điện thoại <span
+                                    <label for="form-field-select-3">Giá trẻ em dưới 5 tuổi <span
                                             style="color: red">*</span></label>
-                                    <?php echo _returnInput('phone', '', '', 'phone', '', 'Bạn vui lòng kiểm tra số điện thoại','') ?>
+                                    <?php echo _returnInput('price_tour_5_add', '', '', 'usd', '', 'Bạn vui lòng kiểm tra email','') ?>
                                 </div>
                             </div>
+                        </div>
+
+                        <div style="float: left; width: 100%">
                             <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <label for="form-field-select-3">Di động <span
-                                            style="color: red">*</span></label>
-                                    <?php echo _returnInput('mobi', '', '', 'mobile', '', 'Bạn vui lòng kiểm tra số di động','') ?>
+                                    <label for="form-field-select-3">Điểm khởi hành </label>
+                                    <?php echo _returnInput('diem_khoi_hanh', '', '', 'map-marker', '', '','') ?>
                                 </div>
                             </div>
                         </div>
@@ -551,11 +511,11 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button class="btn btn-sm btn-primary" id="submit_form_action" type="button">
+                    <button class="btn btn-sm btn-primary" id="submit_form_tour_action" type="button">
                         <i class="ace-icon fa fa-check"></i>
                         Save
                     </button>
-                    <button type="reset" class="btn btn-sm" data-dismiss="modal" id="reset_form_popup">
+                    <button type="reset" class="btn btn-sm" data-dismiss="modal" id="reset_form_tour_popup">
                         <i class="ace-icon fa fa-times"></i>
                         Cancel
                     </button>

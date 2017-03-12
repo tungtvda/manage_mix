@@ -44,12 +44,12 @@
                                  style="float: left; width: 100%;    margin-left: 0px;margin-right: 0px;">
                                 <div style="float: left;width: 66%">
                                            <span class="input-icon width_100">
-                                                <input id="input_name_user" autofocus type="text" name="name_user"
+                                                <input class="<?php echo $valid_name_user?>" id="input_name_user" autofocus type="text" name="name_user" value="<?php echo $name_user?>"
                                                        placeholder="Nhập tên sales ..."
                                                        style="width:100%;max-width:600px;outline:0" autocomplete="off">
                                                  <i class="ace-icon fa fa-user blue"></i>
                                              </span>
-                                    <input hidden id="input_id_user" type="text" name="id_user">
+                                    <input class="<?php echo $valid_id_user?>" hidden id="input_id_user" type="text" name="id_user" value="<?php echo $id_user?>">
                                     <label style="display: none" class="error-color  error-color-size" id="error_name_user">Bạn vui lòng chọn sales</label>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                                 </thead>
 
                                 <tbody class="table_booking_user">
-
+                                    <?php echo $table_user?>
                                 </tbody>
                             </table>
                             <div class="hr hr8 hr-double hr-dotted"></div>
@@ -88,7 +88,7 @@
 
                                         <div class="profile-info-value">
                                             <span class="input-icon width_100" style="">
-                                                    <input name="code_booking" type="text" id="input_code_booking" value="<?php echo $Random?>" class="width_100 valid">
+                                                    <input readonly name="code_booking" type="text" id="input_code_booking" value="<?php echo $Random?>" class="width_100 valid">
                                                     <i class="ace-icon fa fa-qrcode blue"></i>
                                                     <i id="icon_error_code_booking" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " data-toggle="ggtooltip" data-title="" data-trigger="hover" data-placement="bottom" data-backcolor="red" data-textcolor="#ffffff" title=""></i>
                                                     <i id="icon_success_code_booking" style="display: none" class="ace-icon fa fa-check-circle icon-right success-color" data-toggle="ggtooltip" data-title="" data-trigger="hover" data-placement="bottom" data-backcolor="green" data-textcolor="#000000" title=""></i>
@@ -496,9 +496,6 @@
                                     <?php echo _returnInput('price_tour_5_add', '', '', 'usd', '', 'Bạn vui lòng kiểm tra email','') ?>
                                 </div>
                             </div>
-                        </div>
-
-                        <div style="float: left; width: 100%">
                             <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="form-group">
                                     <label for="form-field-select-3">Điểm khởi hành </label>

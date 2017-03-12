@@ -161,7 +161,7 @@ $string_data_user=_returnDataAutoCompleteUser();
                     "<td>" +
                     "<span>"+item.data('user-phone')+"</span>" +
                     "</td><td>" +
-                    "<span id='price_format_span_5'>"+item.data('user-phong-ban')+"</span>" +
+                    "<span >"+item.data('user-phong-ban')+"</span>" +
                     "</td><td>"+item.data('number-tour')+"" +
                     "</td></tr>";
                 $('.table_booking_user').html(table_user);

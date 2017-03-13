@@ -50,7 +50,7 @@ function _returnCheckPermison($module_id = 0, $form_id = 0, $action_id = 0)
             return true;
         }
     }
-    $_SESSION['user_permison_action'] = $permison_action;
+//    $_SESSION['user_permison_action'] = $permison_action;
     return true;
 
 }

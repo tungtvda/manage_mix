@@ -547,10 +547,6 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button class="btn btn-sm btn-primary" id="submit_form_action" type="button">
-                                <i class="ace-icon fa fa-check"></i>
-                                Save
-                            </button>
                             <button type="reset" class="btn btn-sm" data-dismiss="modal" id="reset_form_popup">
                                 <i class="ace-icon fa fa-times"></i>
                                 Cancel

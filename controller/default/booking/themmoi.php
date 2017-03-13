@@ -94,6 +94,14 @@ if(isset($_POST['code_booking']))
     $check_edit=_returnPostParamSecurity('check_edit');
     $id_edit=_returnPostParamSecurity('id_edit');
     $note=_returnPostParamSecurity('note');
+
+    $price_submit=str_replace('.','',$price_submit);
+    $price_submit=str_replace(',','',$price_submit);
+    $price_511_submit=str_replace('.','',$price_511_submit);
+    $price_511_submit=str_replace(',','',$price_511_submit);
+    $price_5_submit=str_replace('.','',$price_5_submit);
+    $price_5_submit=str_replace(',','',$price_5_submit);
+
     $name_customer_sub=array();
     $total=0;
     if(is_numeric($num_nguoi_lon)&&is_numeric($price_submit)){
@@ -125,173 +133,314 @@ if(isset($_POST['code_booking']))
         $address_customer=$_POST['address_customer'];
     }
 
-
-    if($id_user!=''&&$name_user!=''&&$code_booking!=''&&$ngay_bat_dau!=''&&$han_thanh_toan!=''&&$hinh_thuc_thanh_toan!=''&&$num_nguoi_lon!=''&&$num_nguoi_lon!=0&&$name_customer!=''&&$email!='' &&$address!='' &&$phone!='' &&$diem_don!='' &&$name_tour!='' &&$id_tour!=''&&$price_submit!=''){
-        // check thông tin khách hàng
-        $check_data_khach_hang=customer_getByTop('1','email="'.$email.'"','id desc');
-        if(count($check_data_khach_hang)>0){
-            $id_customer=$check_data_khach_hang[0]->id;
-        }else{
-            $dangky = new customer();
-            $dangky->name = $name_customer;
-            $dangky->code = _randomBooking('cus','booking_count');
-            $dangky->mr = '';
-            $dangky->email = $email;
-            $dangky->address = $address;
-            $dangky->created = _returnGetDateTime();
-            $dangky->updated = _returnGetDateTime();
-            $dangky->mobi = $phone;
-            $dangky->fax = $fax;
-            $dangky->status = 1;
-            $dangky->phone = $phone;
-            $dangky->created_by = $_SESSION['user_id'];
-            $dangky->category=$nhom_khach_hang;
-            customer_insert($dangky);
-            $data_khachhang=customer_getByTop('1','email="'.$email.'"','id desc');
-            if(count($data_khachhang)>0){
-                $id_customer=$data_khachhang[0]->id;
+    if(isset($_POST['check_edit'])&&$_POST['check_edit']=='edit'&&isset($_POST['id_edit'])&&$_POST['id_edit']!=''){
+        $string_value_old='';
+        $string_value_new='';
+       $data_detail=$data['data_user'];
+        $array_detail=((array)$data_detail[0]);
+        $booking_update=new booking($array_detail);
+        if($data_detail[0]->confirm_admin==0||$_SESSION['user_role']==1){
+            if($id_user!=$array_detail['user_id']){
+                $booking_update->user_id=$id_user;
+                $string_value_old.=' Sales: "'.$array_detail['user_id'].'" - ';
+                $string_value_new.=' Sales: "'.$id_user.'" - ';
             }
-            else{
-                echo '<script>alert("Khách hàng chưa được cập nhật vào hệ thống, bạn vui lòng thử lại")</script>';
+
+            if($id_customer!=$array_detail['id_customer']){
+                $booking_update->id_customer=$id_customer;
+                $string_value_old.=' Khách hàng: "'.$array_detail['id_customer'].'" - ';
+                $string_value_new.=' Khách hàng: "'.$id_customer.'" - ';
+            }
+
+            if($id_tour!=$array_detail['id_tour']){
+                $booking_update->id_tour=$id_tour;
+                $string_value_old.=' Tour: "'.$array_detail['id_tour'].'" - ';
+                $string_value_new.=' Tour: "'.$id_tour.'" - ';
+                $check_data_tour=tour_getById($id_tour);
+                if(count($check_data_tour)==0){
+                    $mess="Tour ".$name_tour.'không tồn tại trong hệ thống';
+                    echo "<script>alert($mess)</script>";
+                    $link=SITE_NAME.'/booking/';
+                    echo '<script>window.location="'.$link.'";</script>';
+                    exit;
+                }
+                $booking_update->price_tour=$check_data_tour[0]->price;
+                $booking_update->price_11=$check_data_tour[0]->price;
+                $booking_update->price_5=$check_data_tour[0]->price;
+            }
+            if($price_submit!=$array_detail['price_new']){
+                $booking_update->price_new=$price_submit;
+                $string_value_old.=' Giá người lớn: "'.$array_detail['price_new'].'" - ';
+                $string_value_new.=' Giá người lớn: "'.$price_submit.'" - ';
+            }
+
+            if($price_511_submit!=$array_detail['price_11_new']){
+                $booking_update->price_11_new=$price_511_submit;
+                $string_value_old.=' Giá trẻ em 5->11 tuổi: "'.$array_detail['price_11_new'].'" - ';
+                $string_value_new.=' Giá trẻ em 5->11 tuổi: "'.$price_511_submit.'" - ';
+            }
+
+            if($price_5_submit!=$array_detail['price_5_new']){
+                $booking_update->price_5_new=$price_5_submit;
+                $string_value_old.=' Giá trẻ em dưới 5 tuổi: "'.$array_detail['price_5_new'].'" - ';
+                $string_value_new.=' Giá trẻ em dưới 5 tuổi: "'.$price_5_submit.'" - ';
+            }
+
+
+
+        }
+        if($tien_te!=$array_detail['tien_te']){
+            $booking_update->tien_te=$tien_te;
+            $string_value_old.=' Tiền tệ: "'.$array_detail['tien_te'].'" - ';
+            $string_value_new.=' Tiền tệ: "'.$tien_te.'" - ';
+        }
+        if($ty_gia!=$array_detail['ty_gia']){
+            $booking_update->ty_gia=$ty_gia;
+            $string_value_old.=' Tỷ giá: "'.$array_detail['ty_gia'].'" - ';
+            $string_value_new.=' Tỷ giá: "'.$ty_gia.'" - ';
+        }
+        if($nguon_tour!=$array_detail['nguon_tour']){
+            $booking_update->nguon_tour=$nguon_tour;
+            $string_value_old.=' Nguồn tour: "'.$array_detail['nguon_tour'].'" - ';
+            $string_value_new.=' Nguồn tour: "'.$nguon_tour.'" - ';
+        }
+        $ngay_bat_dau= date('Y-m-d', strtotime($ngay_bat_dau));
+        if($ngay_bat_dau!=$array_detail['ngay_bat_dau']){
+            $booking_update->ngay_bat_dau=$ngay_bat_dau;
+            $string_value_old.=' Ngày bắt đầu: "'.$array_detail['ngay_bat_dau'].'" - ';
+            $string_value_new.=' Ngày bắt đầu: "'.$ngay_bat_dau.'" - ';
+        }
+        $han_thanh_toan= date('Y-m-d', strtotime($han_thanh_toan));
+        if($han_thanh_toan!=$array_detail['han_thanh_toan']){
+            $booking_update->han_thanh_toan=$han_thanh_toan;
+            $string_value_old.=' Hạn thanh toán: "'.$array_detail['han_thanh_toan'].'" - ';
+            $string_value_new.=' Hạn thanh toán: "'.$han_thanh_toan.'" - ';
+        }
+        if($status!=$array_detail['status']){
+            $booking_update->status=$status;
+            $string_value_old.=' Trạng thái đơn hàng: "'.$array_detail['status'].'" - ';
+            $string_value_new.=' Trạng thái đơn hàng: "'.$status.'" - ';
+        }
+        if($hinh_thuc_thanh_toan!=$array_detail['hinh_thuc_thanh_toan']){
+            $booking_update->hinh_thuc_thanh_toan=$hinh_thuc_thanh_toan;
+            $string_value_old.=' Hình thức thanh toán: "'.$array_detail['hinh_thuc_thanh_toan'].'" - ';
+            $string_value_new.=' Hình thức thanh toán: "'.$hinh_thuc_thanh_toan.'" - ';
+        }
+        if($num_nguoi_lon!=$array_detail['num_nguoi_lon']){
+            $booking_update->num_nguoi_lon=$num_nguoi_lon;
+            $string_value_old.=' Số người lớn: "'.$array_detail['num_nguoi_lon'].'" - ';
+            $string_value_new.=' Số người lớn: "'.$num_nguoi_lon.'" - ';
+        }
+        if($num_tre_em!=$array_detail['num_tre_em']){
+            $booking_update->num_tre_em=$num_tre_em;
+            $string_value_old.=' Số trẻ em 5->11 tuổi: "'.$array_detail['num_tre_em'].'" - ';
+            $string_value_new.=' Số trẻ em 5->11 tuổi: "'.$num_tre_em.'" - ';
+        }
+        if($num_tre_em_5!=$array_detail['num_tre_em_5']){
+            $booking_update->num_tre_em_5=$num_tre_em_5;
+            $string_value_old.=' Số trẻ em 5 tuổi: "'.$array_detail['num_tre_em_5'].'" - ';
+            $string_value_new.=' Số trẻ em 5 tuổi: "'.$num_tre_em_5.'" - ';
+        }
+        if($num_tre_em_5!=$array_detail['num_tre_em_5']){
+            $booking_update->num_tre_em_5=$num_tre_em_5;
+            $string_value_old.=' Số trẻ em 5 tuổi: "'.$array_detail['num_tre_em_5'].'" - ';
+            $string_value_new.=' Số trẻ em 5 tuổi: "'.$num_tre_em_5.'" - ';
+        }
+
+        if($diem_don!=$array_detail['diem_don']){
+            $booking_update->diem_don=$diem_don;
+            $string_value_old.=' Điểm đón: "'.$array_detail['diem_don'].'" - ';
+            $string_value_new.=' Điểm đón: "'.$diem_don.'" - ';
+        }
+        $ngay_khoi_hanh= date('Y-m-d', strtotime($ngay_khoi_hanh));
+        if($ngay_khoi_hanh!=$array_detail['ngay_khoi_hanh']){
+            $booking_update->ngay_khoi_hanh=$ngay_khoi_hanh;
+            $string_value_old.=' Ngày khởi hành: "'.$array_detail['ngay_khoi_hanh'].'" - ';
+            $string_value_new.=' Ngày khởi hành: "'.$ngay_khoi_hanh.'" - ';
+        }
+        $ngay_ket_thuc= date('Y-m-d', strtotime($ngay_ket_thuc));
+        if($ngay_ket_thuc!=$array_detail['ngay_ket_thuc']){
+            $booking_update->ngay_ket_thuc=$ngay_ket_thuc;
+            $string_value_old.=' Ngày kết thúc: "'.$array_detail['ngay_ket_thuc'].'" - ';
+            $string_value_new.=' Ngày kết thúc: "'.$ngay_ket_thuc.'" - ';
+        }
+        if($dat_coc!=$array_detail['tien_thanh_toan']){
+            $booking_update->tien_thanh_toan=$dat_coc;
+            $string_value_old.=' Tiền thanh toán: "'.$array_detail['tien_thanh_toan'].'" - ';
+            $string_value_new.=' Tiền thanh toán: "'.$dat_coc.'" - ';
+        }
+
+        if($note!=$array_detail['note']){
+            $booking_update->note=$note;
+            $string_value_old.=' Chú ý: "'.$array_detail['note'].'" - ';
+            $string_value_new.=' Chú ý: "'.$note.'" - ';
+        }
+
+        print_r($_POST);
+    }else{
+        if($id_user!=''&&$name_user!=''&&$code_booking!=''&&$ngay_bat_dau!=''&&$han_thanh_toan!=''&&$hinh_thuc_thanh_toan!=''&&$num_nguoi_lon!=''&&$num_nguoi_lon!=0&&$name_customer!=''&&$email!='' &&$address!='' &&$phone!='' &&$diem_don!='' &&$name_tour!='' &&$id_tour!=''&&$price_submit!=''){
+            // check thông tin khách hàng
+            $check_data_khach_hang=customer_getByTop('1','email="'.$email.'"','id desc');
+            if(count($check_data_khach_hang)>0){
+                $id_customer=$check_data_khach_hang[0]->id;
+            }else{
+                $dangky = new customer();
+                $dangky->name = $name_customer;
+                $dangky->code = _randomBooking('cus','booking_count');
+                $dangky->mr = '';
+                $dangky->email = $email;
+                $dangky->address = $address;
+                $dangky->created = _returnGetDateTime();
+                $dangky->updated = _returnGetDateTime();
+                $dangky->mobi = $phone;
+                $dangky->fax = $fax;
+                $dangky->status = 1;
+                $dangky->phone = $phone;
+                $dangky->created_by = $_SESSION['user_id'];
+                $dangky->category=$nhom_khach_hang;
+                customer_insert($dangky);
+                $data_khachhang=customer_getByTop('1','email="'.$email.'"','id desc');
+                if(count($data_khachhang)>0){
+                    $id_customer=$data_khachhang[0]->id;
+                }
+                else{
+                    echo '<script>alert("Khách hàng chưa được cập nhật vào hệ thống, bạn vui lòng thử lại")</script>';
+                    exit;
+                }
+
+            }
+
+            $check_data_tour=tour_getById($id_tour);
+            if(count($check_data_tour)==0){
+                $mess="Tour ".$name_tour.'không tồn tại trong hệ thống';
+                echo "<script>alert($mess)</script>";
                 exit;
             }
-
-        }
-
-        $check_data_tour=tour_getById($id_tour);
-        if(count($check_data_tour)==0){
-            $mess="Tour ".$name_tour.'không tồn tại trong hệ thống';
-            echo "<script>alert($mess)</script>";
-            exit;
-        }
-        $price_old=$check_data_tour[0]->price;
-        $price_submit=str_replace('.','',$price_submit);
-        $price_submit=str_replace(',','',$price_submit);
-        $price_511_submit=str_replace('.','',$price_511_submit);
-        $price_511_submit=str_replace(',','',$price_511_submit);
-        $price_5_submit=str_replace('.','',$price_5_submit);
-        $price_5_submit=str_replace(',','',$price_5_submit);
+            $price_old=$check_data_tour[0]->price;
 
 
-        $check_data_user=user_getById($id_user);
-        if(count($check_data_user)==0){
-            $mess="Sales ".$name_user.' không tồn tại trong hệ thống';
-            echo "<script>alert($mess)</script>";
-            exit;
-        }
-        $booking_model=new booking();
-        $booking_model->id_tour=$id_tour;
-        $booking_model->name_tour=$check_data_tour[0]->name;
-        $booking_model->code_tour=$check_data_tour[0]->code;
-        $booking_model->price_tour=$check_data_tour[0]->price;
-        $booking_model->price_11=$check_data_tour[0]->price;
-        $booking_model->price_5=$check_data_tour[0]->price;
-        $booking_model->price_new=$price_submit;
-        $booking_model->price_11_new=$price_511_submit;
-        $booking_model->price_5_new=$price_5_submit;
-        $booking_model->nguon_tour=$nguon_tour;
-        $booking_model->tien_te=$tien_te;
-        $booking_model->ty_gia=$ty_gia;
-        $booking_model->ngay_bat_dau=date("Y-m-d", strtotime($ngay_bat_dau));
-        $booking_model->han_thanh_toan=date("Y-m-d", strtotime($han_thanh_toan));;
-        $booking_model->loai_khach_hang=$nhom_khach_hang;
-        $booking_model->hinh_thuc_thanh_toan=$hinh_thuc_thanh_toan;
-        $booking_model->id_customer=$id_customer;
-        $booking_model->diem_don=$diem_don;
-        $booking_model->diem_tra=$diem_don;
-        $booking_model->ngay_khoi_hanh=date("Y-m-d", strtotime($ngay_khoi_hanh));
-        $booking_model->ngay_ket_thuc=date("Y-m-d", strtotime($ngay_ket_thuc));
-        $booking_model->phuong_tien=$check_data_tour[0]->vehicle;
-        $booking_model->num_nguoi_lon=$num_nguoi_lon;
-        $booking_model->num_tre_em=$num_tre_em;
-        $booking_model->num_tre_em_5=$num_tre_em_5;
-        $booking_model->total_price=$total;
-        $booking_model->tien_thanh_toan=$dat_coc;
-        $booking_model->user_id=$id_user;
-        $booking_model->note=$note;
-        $booking_model->vat=$vat;
-        if($status==''){
-            $status=1;
-        }
-        $booking_model->status=$status;
-        if($_SESSION['user_role']==1){
-            $booking_model->confirm_admin=1;
-        }else{
-            $booking_model->confirm_admin=0;
-        }
 
-        $booking_model->created_by=$_SESSION['user_id'];
-        $booking_model->created=_returnGetDateTime();
-        $booking_model->updated=_returnGetDateTime();
-        $data_check_code=booking_count('code_booking="'.$code_booking.'"');
-        if($data_check_code>0){
-            $code_booking=_randomBooking('#','booking_count','code_booking');
-        }
-        $booking_model->code_booking=$code_booking;
-        booking_insert($booking_model);
-        $data_booking=booking_getByTop('1','code_booking="'.$code_booking.'"','');
-        if(count($data_booking)>0){
-            $id_booking=$data_booking[0]->id;
-        }
-        if(count($name_customer_sub)>0){
-            foreach($name_customer_sub as $key=>$value){
-                $name_sub=$value;
-                $email_sub=$email_customer[$key];
-                $phone_sub=$phone_customer[$key];
-                $address_sub=$address_customer[$key];
-                if($value!=''&&$email_customer[$key]!=''&&$phone_customer[$key]!=''&&$address_customer[$key]){
-                    $check_data_khach_hang_sub=customer_getByTop('1','email="'.$email_sub.'"','id desc');
-                    if(count($check_data_khach_hang_sub)==0){
-                        $customer_new=new customer();
-                        $customer_new->name=$name_sub;
-                        $customer_new->email=$email_sub;
-                        $customer_new->phone=$phone_sub;
-                        $customer_new->address=$address_sub;
-                        $customer_new->updated = _returnGetDateTime();
-                        $customer_new->created = _returnGetDateTime();
-                        $customer_new->created_by=$_SESSION['user_id'];
-                        $customer_new->status = 1;
-                        $customer_new->booking_id = $id_booking;
-                        $customer_new->code=_randomBooking('#','customer_count','code');
-                        customer_insert($customer_new);
+            $check_data_user=user_getById($id_user);
+            if(count($check_data_user)==0){
+                $mess="Sales ".$name_user.' không tồn tại trong hệ thống';
+                echo "<script>alert($mess)</script>";
+                exit;
+            }
+            $booking_model=new booking();
+            $booking_model->id_tour=$id_tour;
+            $booking_model->name_tour=$check_data_tour[0]->name;
+            $booking_model->code_tour=$check_data_tour[0]->code;
+            $booking_model->price_tour=$check_data_tour[0]->price;
+            $booking_model->price_11=$check_data_tour[0]->price;
+            $booking_model->price_5=$check_data_tour[0]->price;
+            $booking_model->price_new=$price_submit;
+            $booking_model->price_11_new=$price_511_submit;
+            $booking_model->price_5_new=$price_5_submit;
+            $booking_model->nguon_tour=$nguon_tour;
+            $booking_model->tien_te=$tien_te;
+            $booking_model->ty_gia=$ty_gia;
+            $booking_model->ngay_bat_dau=date("Y-m-d", strtotime($ngay_bat_dau));
+            $booking_model->han_thanh_toan=date("Y-m-d", strtotime($han_thanh_toan));;
+            $booking_model->loai_khach_hang=$nhom_khach_hang;
+            $booking_model->hinh_thuc_thanh_toan=$hinh_thuc_thanh_toan;
+            $booking_model->id_customer=$id_customer;
+            $booking_model->diem_don=$diem_don;
+            $booking_model->diem_tra=$diem_don;
+            $booking_model->ngay_khoi_hanh=date("Y-m-d", strtotime($ngay_khoi_hanh));
+            $booking_model->ngay_ket_thuc=date("Y-m-d", strtotime($ngay_ket_thuc));
+            $booking_model->phuong_tien=$check_data_tour[0]->vehicle;
+            $booking_model->num_nguoi_lon=$num_nguoi_lon;
+            $booking_model->num_tre_em=$num_tre_em;
+            $booking_model->num_tre_em_5=$num_tre_em_5;
+            $booking_model->total_price=$total;
+            $booking_model->tien_thanh_toan=$dat_coc;
+            $booking_model->user_id=$id_user;
+            $booking_model->note=$note;
+            $booking_model->vat=$vat;
+            if($status==''){
+                $status=1;
+            }
+            $booking_model->status=$status;
+            if($_SESSION['user_role']==1){
+                $booking_model->confirm_admin=1;
+            }else{
+                $booking_model->confirm_admin=0;
+            }
+
+            $booking_model->created_by=$_SESSION['user_id'];
+            $booking_model->created=_returnGetDateTime();
+            $booking_model->updated=_returnGetDateTime();
+            $data_check_code=booking_count('code_booking="'.$code_booking.'"');
+            if($data_check_code>0){
+                $code_booking=_randomBooking('#','booking_count','code_booking');
+            }
+            $booking_model->code_booking=$code_booking;
+            booking_insert($booking_model);
+            $data_booking=booking_getByTop('1','code_booking="'.$code_booking.'"','');
+            if(count($data_booking)>0){
+                $id_booking=$data_booking[0]->id;
+            }
+            if(count($name_customer_sub)>0){
+                foreach($name_customer_sub as $key=>$value){
+                    $name_sub=$value;
+                    $email_sub=$email_customer[$key];
+                    $phone_sub=$phone_customer[$key];
+                    $address_sub=$address_customer[$key];
+                    if($value!=''&&$email_customer[$key]!=''&&$phone_customer[$key]!=''&&$address_customer[$key]){
+                        $check_data_khach_hang_sub=customer_getByTop('1','email="'.$email_sub.'"','id desc');
+                        if(count($check_data_khach_hang_sub)==0){
+                            $customer_new=new customer();
+                            $customer_new->name=$name_sub;
+                            $customer_new->email=$email_sub;
+                            $customer_new->phone=$phone_sub;
+                            $customer_new->address=$address_sub;
+                            $customer_new->updated = _returnGetDateTime();
+                            $customer_new->created = _returnGetDateTime();
+                            $customer_new->created_by=$_SESSION['user_id'];
+                            $customer_new->status = 1;
+                            $customer_new->booking_id = $id_booking;
+                            $customer_new->code=_randomBooking('#','customer_count','code');
+                            customer_insert($customer_new);
+                        }
+
                     }
-
                 }
             }
-        }
 
 
-        $message='';
-        if($_SESSION['user_role']!=1){
-            $data_list_user_admin=user_getByTop('','user_role=1 and status=1','id desc');
-            if(count($data_list_user_admin)>0){
-                foreach($data_list_user_admin as $row_admin){
-                    $name_noti=$check_data_user[0]->name.' đã thêm một đơn hàng';
-                    $link_noti=SITE_NAME.'/don-hang/'._return_mc_encrypt($id_booking, ENCRYPTION_KEY);
-                    _insertNotification($name_noti,$_SESSION['user_id'],$row_admin->id,$link_noti,0,'');
+            $message='';
+            if($_SESSION['user_role']!=1){
+                $data_list_user_admin=user_getByTop('','user_role=1 and status=1','id desc');
+                if(count($data_list_user_admin)>0){
+                    foreach($data_list_user_admin as $row_admin){
+                        $name_noti=$check_data_user[0]->name.' đã thêm một đơn hàng';
+                        $link_noti=SITE_NAME.'/don-hang/'._return_mc_encrypt($id_booking, ENCRYPTION_KEY);
+                        _insertNotification($name_noti,$_SESSION['user_id'],$row_admin->id,$link_noti,0,'');
+                    }
                 }
-            }
-            $subject='Xác nhận đơn hàng '.$code_booking;
-            $message.='<p>Nhân viên '.$check_data_user[0]->name.' vừa tạo đơn hàng mã '.$code_booking.'</p>';
-            $message.='<a>Bạn vui lòng truy cập <a href="'.$link_noti.'">đường link</a> để xác nhận đơn hàng</p>';
+                $subject='Xác nhận đơn hàng '.$code_booking;
+                $message.='<p>Nhân viên '.$check_data_user[0]->name.' vừa tạo đơn hàng mã '.$code_booking.'</p>';
+                $message.='<a>Bạn vui lòng truy cập <a href="'.$link_noti.'">đường link</a> để xác nhận đơn hàng</p>';
 //            SendMail('info@mixtourist.com.vn', $message, $subject);
-            $mess_log='Nhân viên '.$check_data_user[0]->name.' đã thực hiện việc tạo đơn hàng';
+                $mess_log='Nhân viên '.$check_data_user[0]->name.' đã thực hiện việc tạo đơn hàng';
+            }else{
+                $name_noti=$_SESSION['user_name'].' đã thêm một đơn hàng cho bạn';
+                $link_noti=SITE_NAME.'/don-hang/'._return_mc_encrypt($id_booking, ENCRYPTION_KEY);
+                _insertNotification($name_noti,$_SESSION['user_id'],$id_user,$link_noti,0,'');
+
+                $subject='Xác nhận đơn hàng '.$code_booking;
+                $message.='<p>Admin '.$_SESSION['user_name'].' vừa tạo đơn hàng mã '.$code_booking.'</p>';
+                $message.='<a>Bạn vui lòng truy cập <a href="'.$link_noti.'">đường link</a> để xác nhận đơn hàng</p>';
+                SendMail($check_data_user[0]->email, $message, $subject);
+                $mess_log='Admin '.$_SESSION['user_name'].' đã thực hiện việc tạo đơn hàng';
+            }
+            _insertLog($_SESSION['user_id'],6,6,21,$id_booking,'','',$mess_log);
+            redict(SITE_NAME . '/booking/');
+
         }else{
-            $name_noti=$_SESSION['user_name'].' đã thêm một đơn hàng cho bạn';
-            $link_noti=SITE_NAME.'/don-hang/'._return_mc_encrypt($id_booking, ENCRYPTION_KEY);
-            _insertNotification($name_noti,$_SESSION['user_id'],$id_user,$link_noti,0,'');
-
-            $subject='Xác nhận đơn hàng '.$code_booking;
-            $message.='<p>Admin '.$_SESSION['user_name'].' vừa tạo đơn hàng mã '.$code_booking.'</p>';
-            $message.='<a>Bạn vui lòng truy cập <a href="'.$link_noti.'">đường link</a> để xác nhận đơn hàng</p>';
-            SendMail($check_data_user[0]->email, $message, $subject);
-            $mess_log='Admin '.$_SESSION['user_name'].' đã thực hiện việc tạo đơn hàng';
+            echo '<script>alert("Bạn vui lòng kiểm tra lại thông tin đặt tour")</script>';
         }
-        _insertLog($_SESSION['user_id'],6,6,21,$id_booking,'','',$mess_log);
-        redict(SITE_NAME . '/booking/');
 
-    }else{
-        echo '<script>alert("Bạn vui lòng kiểm tra lại thông tin đặt tour")</script>';
     }
 
 

@@ -279,7 +279,7 @@
                 //console.log($('#spinner1').val())
             });
         $('#input_num_nguoi_lon').ace_spinner({
-                value: 1,
+//                value: 1,
                 min: 0,
                 max: 200,
                 step: 1,
@@ -303,7 +303,7 @@
                 }
             });
         $('#input_num_tre_em').ace_spinner({
-                value: '',
+//                value: '',
                 min: 0,
                 max: 200,
                 step: 1,
@@ -315,7 +315,7 @@
                 //console.log($('#spinner1').val())
             });
         $('#input_num_tre_em_5').ace_spinner({
-                value: '',
+//                value: '',
                 min: 0,
                 max: 200,
                 step: 1,

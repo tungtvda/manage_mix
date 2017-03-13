@@ -112,11 +112,13 @@ $string_data_user=_returnDataAutoCompleteUser();
                     "<td>" +
                     "<span id='price_format_span_511'>"+item.data('price-format')+"</span>" +
                     "<input hidden title='giá sửa' id='input_price_511' value='"+item.data('price')+"'>" +
+                    "<input hidden id='input_price_511_old' title='giá cũ' value='"+item.data('price')+"'> " +
                     " | <a id='edit_price_511' href='javascript:void(0)'> <i class='fa fa-edit' title='Sửa đơn giá'></i></a>" +
                     "<a id='reset_price_511' title='Lấy lại giá cũ' href='javascript:void(0)'> <i class='fa fa-refresh' title='Giá gốc'></i></a>" +
                     "</td><td>" +
                     "<span id='price_format_span_5'>"+item.data('price-format')+"</span>" +
                     "<input hidden title='giá sửa' id='input_price_5' value='"+item.data('price')+"'>" +
+                    "<input hidden id='input_price_5_old' title='giá cũ' value='"+item.data('price')+"'> " +
                     " | <a id='edit_price_5' href='javascript:void(0)'> <i class='fa fa-edit' title='Sửa đơn giá'></i></a>" +
                     "<a id='reset_price_5' title='Lấy lại giá cũ' href='javascript:void(0)'> <i class='fa fa-refresh' title='Giá gốc'></i></a>" +
                     "</td><td>"+item.data('departure_name')+"" +

@@ -45,7 +45,7 @@ jQuery(function ($) {
 
     });
     $('body').on("click", '#reset_price_511', function () {
-        var price_old = $('#input_price_old').val();
+        var price_old = $('#input_price_511_old').val();
         var price_format = price_old.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
         $('#input_price_511').val(price_old);
         $('#input_price_511').hide();
@@ -54,7 +54,7 @@ jQuery(function ($) {
     });
 
     $('body').on("click", '#reset_price_5', function () {
-        var price_old = $('#input_price_old').val();
+        var price_old = $('#input_price_5_old').val();
         var price_format = price_old.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
         $('#input_price_5').val(price_old);
         $('#input_price_5').hide();
@@ -73,14 +73,13 @@ jQuery(function ($) {
     $('body').on("click", '#input_vat', function () {
         $('#tong_cong').html('');    $('#tong_cong').html('');
         $('#vat').html('');
-        $('#dat_coc_format').html('');
+        //$('#dat_coc_format').html('');
         $('#con_lai').html('');
-        $('#input_dat_coc').val('');
+        //$('#input_dat_coc').val('');
     });
 
     $('body').on("click", '#edit_price_5', function () {
         $('#input_price_5').show().focus().select();
-        ;
         $('#price_format_span_5').hide();
     });
     $('body').on("blur", '#input_price', function () {

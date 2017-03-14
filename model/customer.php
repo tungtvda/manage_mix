@@ -1,11 +1,11 @@
 <?php
 class customer
 {
-    public $id, $booking_id,$name,$mr,$avatar,$code,$category,$company_name,$director_name,$address,$phone,$mobi,$fax,$email,$company_email,$skype,$facebook,$customer_group,$resources_to,$chuc_vu,$phong_ban,$nganh_nghe,$account_number_bank,$bank,$open_bank,$birthday,$cmnd,$date_range_cmnd,$issued_by_cmnd,$number_passport,$date_range_passport,$issued_by_passport,$expiration_date_passport,$gender,$status,$created,$updated,$created_by,$update_by,$note;
+    public $id,$booking_id,$name,$mr,$avatar,$code,$category,$company_name,$director_name,$address,$phone,$mobi,$fax,$email,$company_email,$skype,$facebook,$customer_group,$resources_to,$chuc_vu,$phong_ban,$nganh_nghe,$account_number_bank,$bank,$open_bank,$birthday,$cmnd,$date_range_cmnd,$issued_by_cmnd,$number_passport,$date_range_passport,$issued_by_passport,$expiration_date_passport,$gender,$status,$created,$updated,$created_by,$update_by,$note;
     public function customer($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
-        $this->booking_id=isset($data['booking_id'])?$data['booking_id']:'';
+    $this->booking_id=isset($data['booking_id'])?$data['booking_id']:'';
     $this->name=isset($data['name'])?$data['name']:'';
     $this->mr=isset($data['mr'])?$data['mr']:'';
     $this->avatar=isset($data['avatar'])?$data['avatar']:'';

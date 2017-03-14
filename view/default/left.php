@@ -117,7 +117,7 @@ function view_left($data=array())
     else{
         $avatar=SITE_NAME.$data['user_left'][0]->avatar;
     }
-    $data_notifi_nenu=notification_getByTop('','status=0 and user_id='.$_SESSION['user_id'],'created asc');
+    $data_notifi_nenu=notification_getByTop(5,'status=0 and user_id='.$_SESSION['user_id'],'created desc');
     $count_noti=count($data_notifi_nenu);
     $string_noti='';
     foreach($data_notifi_nenu as $row_noti_menu){

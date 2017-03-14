@@ -1000,7 +1000,7 @@ function _returnDataAutoCompleteUser(){
     if($_SESSION['user_role']==1){
         $data_user = user_getByTop('', 'status=1', 'name asc');
     }else{
-        $data_user = user_getByTop('', 'status=1 and id='.$_SESSION['user_id'], 'name asc');
+        $data_user = user_getByTop('', 'status=1 and (id='.$_SESSION['user_id'].' or created_by='.$_SESSION['user_id'].')', 'name asc');
     }
 
     $string_data='[';
@@ -1097,17 +1097,14 @@ function _updateCustomerBooking($name_customer_sub,$email_customer,$phone_custom
                     $customer_new->code=_randomBooking('#','customer_count','code');
                     customer_insert($customer_new);
                 }else{
-//                    $arr_data=(array)$check_data_khach_hang_sub[0];
-
-                    $customer_new=new customer();
+                    $arr_data=(array)$check_data_khach_hang_sub[0];
+                    $customer_new=new customer($arr_data);
                     $customer_new->name=$name_sub;
                     $customer_new->email=$email_sub;
                     $customer_new->phone=$phone_sub;
                     $customer_new->address=$address_sub;
                     $customer_new->updated = _returnGetDateTime();
                     $customer_new->booking_id = $id_booking;
-                    $customer_new->id = $check_data_khach_hang_sub[0]->id;
-                    print_r($customer_new);
                     customer_update($customer_new);
                 }
 

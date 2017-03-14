@@ -29,7 +29,7 @@ function view_customer($data)
 //
 function showTableHeader()
 {
-    return '<th>id</th><th>name</th><th>avatar</th><th>code</th>';
+    return '<th>id</th><th>booking_id</th><th>name</th><th>mr</th><th>avatar</th><th>code</th><th>category</th><th>company_name</th><th>director_name</th><th>address</th><th>phone</th><th>mobi</th><th>fax</th><th>email</th><th>company_email</th><th>skype</th><th>facebook</th><th>customer_group</th><th>resources_to</th><th>chuc_vu</th><th>phong_ban</th><th>nganh_nghe</th><th>account_number_bank</th><th>bank</th><th>open_bank</th><th>birthday</th><th>cmnd</th><th>date_range_cmnd</th><th>issued_by_cmnd</th><th>number_passport</th><th>date_range_passport</th><th>issued_by_passport</th><th>expiration_date_passport</th><th>gender</th><th>status</th><th>created</th><th>updated</th><th>created_by</th><th>update_by</th><th>note</th>';
 }
 //
 function showTableBody($data)
@@ -39,9 +39,45 @@ function showTableBody($data)
     {
         $TableBody.="<tr><td><input type=\"checkbox\" name=\"check_".$obj->id."\"/></td>";
         $TableBody.="<td>".$obj->id."</td>";
+        $TableBody.="<td>".$obj->booking_id."</td>";
         $TableBody.="<td>".$obj->name."</td>";
-        $TableBody.="<td><img src=\"".$obj->avatar."\" width=\"50px\" height=\"50px\"/> </td>";
+        $TableBody.="<td>".$obj->mr."</td>";
+        $TableBody.="<td>".$obj->avatar."</td>";
         $TableBody.="<td>".$obj->code."</td>";
+        $TableBody.="<td>".$obj->category."</td>";
+        $TableBody.="<td>".$obj->company_name."</td>";
+        $TableBody.="<td>".$obj->director_name."</td>";
+        $TableBody.="<td>".$obj->address."</td>";
+        $TableBody.="<td>".$obj->phone."</td>";
+        $TableBody.="<td>".$obj->mobi."</td>";
+        $TableBody.="<td>".$obj->fax."</td>";
+        $TableBody.="<td>".$obj->email."</td>";
+        $TableBody.="<td>".$obj->company_email."</td>";
+        $TableBody.="<td>".$obj->skype."</td>";
+        $TableBody.="<td>".$obj->facebook."</td>";
+        $TableBody.="<td>".$obj->customer_group."</td>";
+        $TableBody.="<td>".$obj->resources_to."</td>";
+        $TableBody.="<td>".$obj->chuc_vu."</td>";
+        $TableBody.="<td>".$obj->phong_ban."</td>";
+        $TableBody.="<td>".$obj->nganh_nghe."</td>";
+        $TableBody.="<td>".$obj->account_number_bank."</td>";
+        $TableBody.="<td>".$obj->bank."</td>";
+        $TableBody.="<td>".$obj->open_bank."</td>";
+        $TableBody.="<td>".$obj->birthday."</td>";
+        $TableBody.="<td>".$obj->cmnd."</td>";
+        $TableBody.="<td>".$obj->date_range_cmnd."</td>";
+        $TableBody.="<td>".$obj->issued_by_cmnd."</td>";
+        $TableBody.="<td>".$obj->number_passport."</td>";
+        $TableBody.="<td>".$obj->date_range_passport."</td>";
+        $TableBody.="<td>".$obj->issued_by_passport."</td>";
+        $TableBody.="<td>".$obj->expiration_date_passport."</td>";
+        $TableBody.="<td>".$obj->gender."</td>";
+        $TableBody.="<td>".$obj->status."</td>";
+        $TableBody.="<td>".$obj->created."</td>";
+        $TableBody.="<td>".$obj->updated."</td>";
+        $TableBody.="<td>".$obj->created_by."</td>";
+        $TableBody.="<td>".$obj->update_by."</td>";
+        $TableBody.="<td>".$obj->note."</td>";
         $TableBody.="<td><a href=\"?action=edit&id=".$obj->id."\" title=\"Edit\"><img src=\"".SITE_NAME."/view/admin/Themes/images/pencil.png\" alt=\"Edit\"></a>";
         $TableBody.="<a href=\"?action=delete&id=".$obj->id."\" title=\"Delete\" onClick=\"return confirm('Bạn có chắc chắc muốn xóa?')\"><img src=\"".SITE_NAME."/view/admin/Themes/images/cross.png\" alt=\"Delete\"></a> ";
         $TableBody.="</td>";
@@ -56,7 +92,7 @@ function showFrom($form,$ListKey=array())
     $str_from.='<p><label>booking_id</label><input class="text-input small-input" type="text"  name="booking_id" value="'.(($form!=false)?$form->booking_id:'').'" /></p>';
     $str_from.='<p><label>name</label><input class="text-input small-input" type="text"  name="name" value="'.(($form!=false)?$form->name:'').'" /></p>';
     $str_from.='<p><label>mr</label><input class="text-input small-input" type="text"  name="mr" value="'.(($form!=false)?$form->mr:'').'" /></p>';
-    $str_from.='<p><label>avatar</label><input class="text-input small-input" type="text"  name="avatar" value="'.(($form!=false)?$form->avatar:'').'"/><a class="button" onclick="openKcEditor(\'avatar\');">Upload ảnh</a></p>';
+    $str_from.='<p><label>avatar</label><input class="text-input small-input" type="text"  name="avatar" value="'.(($form!=false)?$form->avatar:'').'" /></p>';
     $str_from.='<p><label>code</label><input class="text-input small-input" type="text"  name="code" value="'.(($form!=false)?$form->code:'').'" /></p>';
     $str_from.='<p><label>category</label><input class="text-input small-input" type="text"  name="category" value="'.(($form!=false)?$form->category:'').'" /></p>';
     $str_from.='<p><label>company_name</label><input class="text-input small-input" type="text"  name="company_name" value="'.(($form!=false)?$form->company_name:'').'" /></p>';

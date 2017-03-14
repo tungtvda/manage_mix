@@ -1074,3 +1074,44 @@ function _insertLog($user_id,$module_id,$form_id,$action_id,$item_id,$value_old,
     $log_model->created=_returnGetDateTime();
     log_insert($log_model);
 }
+function _updateCustomerBooking($name_customer_sub,$email_customer,$phone_customer,$address_customer,$id_booking){
+    if(count($name_customer_sub)>0){
+        foreach($name_customer_sub as $key=>$value){
+            $name_sub=$value;
+            $email_sub=$email_customer[$key];
+            $phone_sub=$phone_customer[$key];
+            $address_sub=$address_customer[$key];
+            if($value!=''&&$email_customer[$key]!=''&&$phone_customer[$key]!=''&&$address_customer[$key]){
+                $check_data_khach_hang_sub=customer_getByTop('1','email="'.$email_sub.'"','id desc');
+                if(count($check_data_khach_hang_sub)==0){
+                    $customer_new=new customer();
+                    $customer_new->name=$name_sub;
+                    $customer_new->email=$email_sub;
+                    $customer_new->phone=$phone_sub;
+                    $customer_new->address=$address_sub;
+                    $customer_new->updated = _returnGetDateTime();
+                    $customer_new->created = _returnGetDateTime();
+                    $customer_new->created_by=$_SESSION['user_id'];
+                    $customer_new->status = 1;
+                    $customer_new->booking_id = $id_booking;
+                    $customer_new->code=_randomBooking('#','customer_count','code');
+                    customer_insert($customer_new);
+                }else{
+//                    $arr_data=(array)$check_data_khach_hang_sub[0];
+
+                    $customer_new=new customer();
+                    $customer_new->name=$name_sub;
+                    $customer_new->email=$email_sub;
+                    $customer_new->phone=$phone_sub;
+                    $customer_new->address=$address_sub;
+                    $customer_new->updated = _returnGetDateTime();
+                    $customer_new->booking_id = $id_booking;
+                    $customer_new->id = $check_data_khach_hang_sub[0]->id;
+                    print_r($customer_new);
+                    customer_update($customer_new);
+                }
+
+            }
+        }
+    }
+}

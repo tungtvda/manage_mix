@@ -90,3 +90,7 @@ function customer_count($where)
     }
    else return false;
 }
+function customer_update_booking($obj,$booking_id)
+{
+    return exe_query("update customer set booking_id='$obj->booking_id' where booking_id=$booking_id",'customer');
+}

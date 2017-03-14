@@ -279,6 +279,39 @@ if(isset($_POST['code_booking']))
         $customer_update->booking_id=0;
         customer_update_booking($customer_update,$array_detail['id']);
         _updateCustomerBooking($name_customer_sub,$email_customer,$phone_customer,$address_customer,$array_detail['id']);
+        $booking_update->updated=_returnGetDateTime();
+        booking_update($booking_update);
+        if($string_value_old!=''){
+            $arr_send_noti=array();
+            _insertLog($_SESSION['user_id'],6,6,22,$data_detail[0]->id,$string_value_old,$string_value_new,'Cập nhật đơn hàng "'.$data_detail[0]->code_booking.'"');
+            $link_noti=SITE_NAME.'/booking/sua?id='._return_mc_encrypt($data_detail[0]->id, ENCRYPTION_KEY);
+            $content_noti='__________Gía trị cũ_________'.$string_value_old.'__________Gía trị mới_________'.$string_value_new;
+            $name_noti=$_SESSION['user_name'].' đã thay đổi thông tin đơn hàng "'.$booking_update->code_booking.'"';
+            if($_SESSION['user_role']==1){
+                if($_SESSION['user_id']!=$data_detail[0]->user_id){
+                    array_push($arr_send_noti,$data_detail[0]->user_id);
+                    _insertNotification($name_noti,$_SESSION['user_id'],$data_detail[0]->user_id,$link_noti,0,$content_noti);
+                }
+            }else{
+                $data_list_user_admin=user_getByTop('','user_role=1 and status=1','id desc');
+                if(count($data_list_user_admin)>0){
+                    foreach($data_list_user_admin as $row_admin){
+                        array_push($arr_send_noti,$row_admin->id);
+                        _insertNotification($name_noti,$_SESSION['user_id'],$row_admin->id,$link_noti,0,$content_noti);
+                    }
+                }
+            }
+            if(!in_array($data_detail[0]->created_by,$arr_send_noti)){
+                if($_SESSION['user_id']!=$data_detail[0]->created_by){
+                    $name_noti=$_SESSION['user_name'].' đã thay đổi thông tin đơn hàng "'.$booking_update->code_booking.'"';
+                    _insertNotification($name_noti,$_SESSION['user_id'],$data_detail[0]->created_by,$link_noti,0,$content_noti);
+                }
+            }
+
+
+
+        }
+        redict(SITE_NAME.'/booking/');
 
 
 //        print_r($_POST);
@@ -393,18 +426,19 @@ if(isset($_POST['code_booking']))
                 if(count($data_list_user_admin)>0){
                     foreach($data_list_user_admin as $row_admin){
                         $name_noti=$check_data_user[0]->name.' đã thêm một đơn hàng';
-                        $link_noti=SITE_NAME.'/don-hang/'._return_mc_encrypt($id_booking, ENCRYPTION_KEY);
+                        $link_noti=SITE_NAME.'/booking/sua?id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY);
                         _insertNotification($name_noti,$_SESSION['user_id'],$row_admin->id,$link_noti,0,'');
                     }
                 }
                 $subject='Xác nhận đơn hàng '.$code_booking;
                 $message.='<p>Nhân viên '.$check_data_user[0]->name.' vừa tạo đơn hàng mã '.$code_booking.'</p>';
                 $message.='<a>Bạn vui lòng truy cập <a href="'.$link_noti.'">đường link</a> để xác nhận đơn hàng</p>';
-//            SendMail('info@mixtourist.com.vn', $message, $subject);
+//                SendMail('info@mixtourist.com.vn', $message, $subject);
+                SendMail('tungtv.soict@gmail.com', $message, $subject);
                 $mess_log='Nhân viên '.$check_data_user[0]->name.' đã thực hiện việc tạo đơn hàng';
             }else{
                 $name_noti=$_SESSION['user_name'].' đã thêm một đơn hàng cho bạn';
-                $link_noti=SITE_NAME.'/don-hang/'._return_mc_encrypt($id_booking, ENCRYPTION_KEY);
+                $link_noti=SITE_NAME.'/booking/sua?id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY);
                 _insertNotification($name_noti,$_SESSION['user_id'],$id_user,$link_noti,0,'');
 
                 $subject='Xác nhận đơn hàng '.$code_booking;

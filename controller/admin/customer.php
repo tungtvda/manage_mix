@@ -54,13 +54,13 @@ if(isset($_SESSION["Admin"]))
             header('Location: '.SITE_NAME.'/controller/admin/customer.php');
         }
     }
-    if(isset($_POST["name"])&&isset($_POST["mr"])&&isset($_POST["avatar"])&&isset($_POST["code"])&&isset($_POST["category"])&&isset($_POST["company_name"])&&isset($_POST["director_name"])&&isset($_POST["address"])&&isset($_POST["phone"])&&isset($_POST["mobi"])&&isset($_POST["fax"])&&isset($_POST["email"])&&isset($_POST["company_email"])&&isset($_POST["skype"])&&isset($_POST["facebook"])&&isset($_POST["customer_group"])&&isset($_POST["resources_to"])&&isset($_POST["chuc_vu"])&&isset($_POST["phong_ban"])&&isset($_POST["nganh_nghe"])&&isset($_POST["account_number_bank"])&&isset($_POST["bank"])&&isset($_POST["open_bank"])&&isset($_POST["birthday"])&&isset($_POST["cmnd"])&&isset($_POST["date_range_cmnd"])&&isset($_POST["issued_by_cmnd"])&&isset($_POST["number_passport"])&&isset($_POST["date_range_passport"])&&isset($_POST["issued_by_passport"])&&isset($_POST["expiration_date_passport"])&&isset($_POST["gender"])&&isset($_POST["status"])&&isset($_POST["created"])&&isset($_POST["updated"])&&isset($_POST["created_by"])&&isset($_POST["update_by"])&&isset($_POST["note"]))
+    if(isset($_POST["booking_id"])&&isset($_POST["name"])&&isset($_POST["mr"])&&isset($_POST["avatar"])&&isset($_POST["code"])&&isset($_POST["category"])&&isset($_POST["company_name"])&&isset($_POST["director_name"])&&isset($_POST["address"])&&isset($_POST["phone"])&&isset($_POST["mobi"])&&isset($_POST["fax"])&&isset($_POST["email"])&&isset($_POST["company_email"])&&isset($_POST["skype"])&&isset($_POST["facebook"])&&isset($_POST["customer_group"])&&isset($_POST["resources_to"])&&isset($_POST["chuc_vu"])&&isset($_POST["phong_ban"])&&isset($_POST["nganh_nghe"])&&isset($_POST["account_number_bank"])&&isset($_POST["bank"])&&isset($_POST["open_bank"])&&isset($_POST["birthday"])&&isset($_POST["cmnd"])&&isset($_POST["date_range_cmnd"])&&isset($_POST["issued_by_cmnd"])&&isset($_POST["number_passport"])&&isset($_POST["date_range_passport"])&&isset($_POST["issued_by_passport"])&&isset($_POST["expiration_date_passport"])&&isset($_POST["gender"])&&isset($_POST["status"])&&isset($_POST["created"])&&isset($_POST["updated"])&&isset($_POST["created_by"])&&isset($_POST["update_by"])&&isset($_POST["note"]))
     {
        $array=$_POST;
        if(!isset($array['id']))
        $array['id']='0';
-        if(!isset($array['booking_id']))
-            $array['booking_id']='0';
+       if(!isset($array['booking_id']))
+       $array['booking_id']='0';
        if(!isset($array['name']))
        $array['name']='0';
        if(!isset($array['mr']))

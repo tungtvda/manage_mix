@@ -275,8 +275,13 @@ if(isset($_POST['code_booking']))
             $string_value_old.=' Chú ý: "'.$array_detail['note'].'" - ';
             $string_value_new.=' Chú ý: "'.$note.'" - ';
         }
+        $customer_update=new customer();
+        $customer_update->booking_id=0;
+        customer_update_booking($customer_update,$array_detail['id']);
+        _updateCustomerBooking($name_customer_sub,$email_customer,$phone_customer,$address_customer,$array_detail['id']);
 
-        print_r($_POST);
+
+//        print_r($_POST);
     }else{
         if($id_user!=''&&$name_user!=''&&$code_booking!=''&&$ngay_bat_dau!=''&&$han_thanh_toan!=''&&$hinh_thuc_thanh_toan!=''&&$num_nguoi_lon!=''&&$num_nguoi_lon!=0&&$name_customer!=''&&$email!='' &&$address!='' &&$phone!='' &&$diem_don!='' &&$name_tour!='' &&$id_tour!=''&&$price_submit!=''){
             // check thông tin khách hàng
@@ -380,33 +385,7 @@ if(isset($_POST['code_booking']))
             if(count($data_booking)>0){
                 $id_booking=$data_booking[0]->id;
             }
-            if(count($name_customer_sub)>0){
-                foreach($name_customer_sub as $key=>$value){
-                    $name_sub=$value;
-                    $email_sub=$email_customer[$key];
-                    $phone_sub=$phone_customer[$key];
-                    $address_sub=$address_customer[$key];
-                    if($value!=''&&$email_customer[$key]!=''&&$phone_customer[$key]!=''&&$address_customer[$key]){
-                        $check_data_khach_hang_sub=customer_getByTop('1','email="'.$email_sub.'"','id desc');
-                        if(count($check_data_khach_hang_sub)==0){
-                            $customer_new=new customer();
-                            $customer_new->name=$name_sub;
-                            $customer_new->email=$email_sub;
-                            $customer_new->phone=$phone_sub;
-                            $customer_new->address=$address_sub;
-                            $customer_new->updated = _returnGetDateTime();
-                            $customer_new->created = _returnGetDateTime();
-                            $customer_new->created_by=$_SESSION['user_id'];
-                            $customer_new->status = 1;
-                            $customer_new->booking_id = $id_booking;
-                            $customer_new->code=_randomBooking('#','customer_count','code');
-                            customer_insert($customer_new);
-                        }
-
-                    }
-                }
-            }
-
+            _updateCustomerBooking($name_customer_sub,$email_customer,$phone_customer,$address_customer,$id_booking);
 
             $message='';
             if($_SESSION['user_role']!=1){

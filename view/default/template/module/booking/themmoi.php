@@ -427,6 +427,7 @@
             </div>
 
             <div class="modal-footer">
+                                    <?php echo $confirm_admin_tring?>
                 <button class="btn btn-sm btn-primary" id="submit_form_action" type="button">
                     <i class="ace-icon fa fa-check"></i>
                     Save

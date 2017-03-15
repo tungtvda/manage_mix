@@ -75,6 +75,9 @@ function show_booking_themmoi($data = array())
         if($ngay_ket_thuc!=''){
             $ngay_ket_thuc_valid='valid';
         }
+
+
+
     }else{
         $action_name='add';
         $readonly="readonly";
@@ -290,6 +293,18 @@ function show_booking_themmoi($data = array())
         $nguon_tour_name=$data_nguon_tour[0]->name;
     }
     $data_list_nguon_tour=nguon_tour_getByTop('','','position asc');
+    $confirm_admin_tring='';
+    if($action==2)
+    {
+        if($confirm_admin==0){
+            if($_SESSION['user_role']==1){
+                $confirm_admin_tring=' <a href="javascript:void(0)" code="'.$Random.'" count_id="'._return_mc_encrypt($booking_id, ENCRYPTION_KEY).'" class="btn btn-xs btn-danger" id="confirm_order" type="button">
+                    <i class="ace-icon fa fa-check"></i>
+                    Xác nhận đơn hàng
+                </a>';
+            }
+        }
+    }
     require_once DIR . '/view/default/template/module/booking/themmoi.php';
 }
 

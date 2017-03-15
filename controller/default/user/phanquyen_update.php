@@ -26,26 +26,35 @@ if(isset($_POST['id'])&&isset($_POST['value'])&&$_POST['id']!=""&&$_POST['value'
     $count_module=1;
     $count_form=1;
     $count_action=1;
+    $array_show_form=array('7','8','9','10','11','12');
     foreach($data as $row)
     {
-        if(isset($row['check_action'])&&$row['check_action']==1){
-            if($row['id']!=''){
-                if($count_action==1){
-                    $permison_action.=$row['id'];
+
+        $exit_action=0;
+        if(isset($row['check_action'])&&$row['check_action']==1)
+        {
+            $exit_action=1;
+        }
+        if($exit_action==1||in_array($row['check_form'],$array_show_form)){
+            if($exit_action==1){
+                if($row['id']!=''){
+                    if($count_action==1){
+                        $permison_action.=$row['id'];
+                    }
+                    else{
+                        $permison_action.=','.$row['id'];
+                    }
+                    $count_action++;
                 }
-                else{
-                    $permison_action.=','.$row['id'];
+                if($row['check_module']!=''){
+                    if($count_module==1){
+                        $permison_module.=$row['check_module'];
+                    }
+                    else{
+                        $permison_module.=','.$row['check_module'];
+                    }
+                    $count_module++;
                 }
-                $count_action++;
-            }
-            if($row['check_module']!=''){
-                if($count_module==1){
-                    $permison_module.=$row['check_module'];
-                }
-                else{
-                    $permison_module.=','.$row['check_module'];
-                }
-                $count_module++;
             }
             if($row['check_form']!=''){
                 if($count_form==1){

@@ -30,6 +30,7 @@ $permison_action=explode(',',$data_user[0]->permison_action);
 
 $data_permison_module=permison_module_getByTop('','id!=1 and status=1','position asc');
 $arr_module=array();
+$array_show_form=array(7,8,9,10,11,12);
 if(count($data_permison_module)>0){
     foreach($data_permison_module as $row_module){
         $check_exit_action=0;
@@ -40,7 +41,7 @@ if(count($data_permison_module)>0){
             foreach($data_permison_form as $row_form){
                 $arr_action=array();
                 $data_permison_action=permison_action_getByTop('',' status=1 and form_id='.$row_form->id,'position asc');
-                if(count($data_permison_action)>0)
+                if(count($data_permison_action)>0||in_array($row_form->id,$array_show_form))
                 {
                     foreach($data_permison_action as $row_action){
                         //'mảng cấp 3
@@ -73,13 +74,26 @@ if(count($data_permison_module)>0){
                 {
                     $checked_form=true;
                 }
-                $item_form=array(
-                    "id"=>$row_form->id,
-                    "text"=>$row_form->name,
-                    "children"=>$children_action,
-                    "check_module"=>$row_module->id,
-                    "check_form"=>$row_form->id,
-                );
+                if(in_array($row_form->id,$array_show_form)){
+                    $item_form=array(
+                        "id"=>$row_form->id,
+                        "text"=>$row_form->name,
+                        "children"=>$children_action,
+                        "check_module"=>$row_module->id,
+                        "check_form"=>$row_form->id,
+                        "checked"=>true,
+                    );
+                }
+                else{
+                    $item_form=array(
+                        "id"=>$row_form->id,
+                        "text"=>$row_form->name,
+                        "children"=>$children_action,
+                        "check_module"=>$row_module->id,
+                        "check_form"=>$row_form->id,
+                    );
+                }
+
                 array_push($arr_form,$item_form);
             }
         }else{

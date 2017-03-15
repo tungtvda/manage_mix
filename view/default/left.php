@@ -13,6 +13,7 @@ function view_left($data=array())
     $permison_module=_returnQuyen(1);
     $permison_form=_returnQuyen(2);
     $string_left_menu="";
+    $array_show_form=array(7,8,9,10,11,12);
     if(count($data['data_permison_module'])>0){
         foreach($data['data_permison_module'] as $row_module){
             if(in_array($row_module->id,$permison_module)||$permison_module==null) {
@@ -42,12 +43,12 @@ function view_left($data=array())
                             $name_form=$row_form->name;
                             $data_permison_action=permison_action_getByTop('',' status=1 and form_id='.$row_form->id,'position desc');
                             $user_active_sub = ($data['active_sub'] == $row_form->active) ? 'active' : '';
-                            if(count($data_permison_action)>0)
+                            if(count($data_permison_action)>0||in_array($row_form->id,$array_show_form))
                             {
+                                $action_count=$row_form->action_count;
                                 $count_form='';
                                 if($data['active_sub'] == $row_form->active&&$row_form->action_count!='')
                                 {
-                                    $action_count=$row_form->action_count;
                                     $dk_count='';
                                     if(isset($data['dk_find']))
                                     {
@@ -57,6 +58,12 @@ function view_left($data=array())
                                     }
                                     $data_count=$action_count($dk_count);
                                     $count_form='<span class="badge badge-primary">'.$data_count.'</span>';
+                                }else{
+                                    if($user_active!=''||$row_form->action_count!=''){
+                                        $data_count=$action_count($row_form->dk_count);
+                                        $count_form='<span class="badge" style="color: #428bca">'.$data_count.'</span>';
+                                    }
+
                                 }
 
                                 $string_left_menu.='<li class="'.$user_active_sub.'">
@@ -130,8 +137,8 @@ function view_left($data=array())
             }
             $name_user_noti=$data_user_noti[0]->name;
         }
-        $string_noti.='  <li>
-                                    <a href="'.$row_noti_menu->link.'" class="clearfix">
+        $string_noti.='  <li style="position: relative;">
+                                    <a title="Chi tiết bài viết" href="'.$row_noti_menu->link.'&id_noti='._return_mc_encrypt($row_noti_menu->id, ENCRYPTION_KEY).'" class="clearfix">
                                         <img src="'.$avatar_noti.'" class="msg-photo" alt="'.$name_user_noti.'" />
 												<span class="msg-body">
 													<span class="msg-title">
@@ -140,10 +147,12 @@ function view_left($data=array())
 
 													<span class="msg-time">
 														<i class="ace-icon fa fa-clock-o"></i>
-														<span>'.date("d-m-Y H:i:s", strtotime($row_noti_menu->created)).'</span>
+														<span>'.date("d-m-Y H:i:s", strtotime($row_noti_menu->created)).' </span>
+
 													</span>
 												</span>
                                     </a>
+                                    <a title="Chi tiết thông báo" href="'.SITE_NAME.'/notification/detail?id='._return_mc_encrypt($row_noti_menu->id, ENCRYPTION_KEY).'" style="position: absolute;right: 0%;bottom: 5%; "><i style="color:#4a96d9 !important;" class="ace-icon fa fa-hand-o-right"></i></a>
                                 </li>';
     }
     require_once DIR . '/view/default/template/left.php';

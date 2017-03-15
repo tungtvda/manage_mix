@@ -31,6 +31,8 @@ if(isset($_GET['id'])&&$_GET['id']!='')
     }
     $url_bread = '<li><a href="'.SITE_NAME.'/booking/">Danh sách đặt tour</a></li><li class="active">Chỉnh sửa đơn hàng "'.$data['data_user'][0]->code_booking.'"</li>';
     $data['title'] = 'Chỉnh sửa đơn hàng "'.$data['data_user'][0]->code_booking.'"';
+    _updateStatusNoti();
+
 }else{
     if (_returnCheckAction(21) == 0) {
         redict(_returnLinkDangNhap('Bạn không có quyền thực hiện chức năng này'));
@@ -284,7 +286,7 @@ if(isset($_POST['code_booking']))
         if($string_value_old!=''){
             $arr_send_noti=array();
             _insertLog($_SESSION['user_id'],6,6,22,$data_detail[0]->id,$string_value_old,$string_value_new,'Cập nhật đơn hàng "'.$data_detail[0]->code_booking.'"');
-            $link_noti=SITE_NAME.'/booking/sua?id='._return_mc_encrypt($data_detail[0]->id, ENCRYPTION_KEY);
+            $link_noti=SITE_NAME.'/booking/sua?noti=1&id='._return_mc_encrypt($data_detail[0]->id, ENCRYPTION_KEY);
             $content_noti='__________Gía trị cũ_________'.$string_value_old.'__________Gía trị mới_________'.$string_value_new;
             $name_noti=$_SESSION['user_name'].' đã thay đổi thông tin đơn hàng "'.$booking_update->code_booking.'"';
             if($_SESSION['user_role']==1){
@@ -400,7 +402,7 @@ if(isset($_POST['code_booking']))
             }
             $booking_model->status=$status;
             if($_SESSION['user_role']==1){
-                $booking_model->confirm_admin=1;
+                $booking_model->confirm_admin=$_SESSION['user_id'];
             }else{
                 $booking_model->confirm_admin=0;
             }
@@ -422,11 +424,11 @@ if(isset($_POST['code_booking']))
 
             $message='';
             if($_SESSION['user_role']!=1){
+                $name_noti=$_SESSION['user_name'].' đã thêm một đơn hàng';
+                $link_noti=SITE_NAME.'/booking/sua?noti=1&confirm=1&id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY);
                 $data_list_user_admin=user_getByTop('','user_role=1 and status=1','id desc');
                 if(count($data_list_user_admin)>0){
                     foreach($data_list_user_admin as $row_admin){
-                        $name_noti=$check_data_user[0]->name.' đã thêm một đơn hàng';
-                        $link_noti=SITE_NAME.'/booking/sua?id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY);
                         _insertNotification($name_noti,$_SESSION['user_id'],$row_admin->id,$link_noti,0,'');
                     }
                 }
@@ -438,7 +440,7 @@ if(isset($_POST['code_booking']))
                 $mess_log='Nhân viên '.$check_data_user[0]->name.' đã thực hiện việc tạo đơn hàng';
             }else{
                 $name_noti=$_SESSION['user_name'].' đã thêm một đơn hàng cho bạn';
-                $link_noti=SITE_NAME.'/booking/sua?id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY);
+                $link_noti=SITE_NAME.'/booking/sua?noti=1&id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY);
                 _insertNotification($name_noti,$_SESSION['user_id'],$id_user,$link_noti,0,'');
 
                 $subject='Xác nhận đơn hàng '.$code_booking;

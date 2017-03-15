@@ -1112,3 +1112,15 @@ function _updateCustomerBooking($name_customer_sub,$email_customer,$phone_custom
         }
     }
 }
+
+function _updateStatusNoti(){
+    if(isset($_GET['id_noti'])&&$_GET['id_noti']!=''&&isset($_GET['noti'])){
+        $id_noti=_return_mc_decrypt(_returnGetParamSecurity('id_noti'), ENCRYPTION_KEY);
+        $data_noti_id=notification_getById($id_noti);
+        if(count($data_noti_id)>0){
+            $noti_model=new notification((array)$data_noti_id[0]);
+            $noti_model->status=1;
+            notification_update($noti_model);
+        }
+    }
+}

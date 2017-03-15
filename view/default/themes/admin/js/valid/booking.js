@@ -450,6 +450,60 @@ jQuery(function ($) {
 
     });
 
+    $('body').on("click", '#confirm_order', function () {
+
+        var id=$(this).attr('count_id');
+        var code=$(this).attr('code');
+        var link = url + '/booking/confirm-order/';
+
+        if(id==''||link==''||code==''){
+            lnv.alert({
+                title: 'Lỗi',
+                content: 'Các thông tin cập nhật không hợp lệ',
+                alertBtnText: 'Ok',
+                iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                alertHandler: function () {
+
+                }
+            });
+        }else{
+            lnv.confirm({
+                title: '<label class="orange">Xác nhận đơn hàng</label>',
+                content: 'Bạn chắc chắn rằng muốn xác đơn hàng </br><b>"'+code+'"</b> ?',
+                confirmBtnText: 'Ok',
+                iconBtnText:'<i style="color: #669fc7;" class="ace-icon fa fa-question orange"></i>',
+                confirmHandler: function () {
+                    $.ajax({
+                        method: "GET",
+                        url: link,
+                        data: "id=" + id,
+                        success: function (response) {
+                            if (response != 1) {
+                                lnv.alert({
+                                    title: 'Lỗi',
+                                    content: response,
+                                    alertBtnText: 'Ok',
+                                    iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                                    alertHandler: function () {
+
+                                    }
+                                });
+                            }else{
+                                $('#confirm_order').remove();
+                            }
+                        }
+                    });
+
+                },
+                cancelBtnText: 'Cancel',
+                cancelHandler: function () {
+
+                }
+            })
+        }
+
+    });
+
 
     $('body').on("click", '#submit_form_action', function () {
         var form_data = $("#submit_form").serializeArray();

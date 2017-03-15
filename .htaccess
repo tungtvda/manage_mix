@@ -38,3 +38,4 @@ RewriteRule ^booking/dat-tour$ controller/default/booking/themmoi.php
 RewriteRule ^get-detail-ajax-booking/$ controller/default/booking/get_detail_ajax.php
 RewriteRule ^booking/insert-tour$ controller/default/booking/themmoi_tour.php
 RewriteRule ^booking/sua controller/default/booking/themmoi.php
+RewriteRule ^booking/confirm-order controller/default/booking/confirm_order.php

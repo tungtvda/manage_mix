@@ -26,6 +26,7 @@ if(isset($_GET['id'])&&$_GET['id']!=""){
     $new_obj= new booking();
     $new_obj->id=$id;
     booking_delete($new_obj);
+//    _insertLog($_SESSION['user_id'],6,6,22,$data_detail[0]->id,$string_value_old,$string_value_new,'Cập nhật đơn hàng "'.$data_detail[0]->code_booking.'"');
     echo 1;
 }
 else{

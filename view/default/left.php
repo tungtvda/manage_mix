@@ -59,9 +59,20 @@ function view_left($data=array())
                                     $data_count=$action_count($dk_count);
                                     $count_form='<span class="badge badge-primary">'.$data_count.'</span>';
                                 }else{
-                                    if($user_active!=''||$row_form->action_count!=''){
-                                        $data_count=$action_count($row_form->dk_count);
-                                        $count_form='<span class="badge" style="color: #428bca">'.$data_count.'</span>';
+                                    if($user_active!=''&&$row_form->action_count!=''){
+                                        if(in_array($row_form->id,$array_show_form)&&$_SESSION['user_role']!=1){
+                                            $dk_count=$row_form->dk_count.' and user_id='.$_SESSION['user_id'];
+                                        }else{
+                                            if($row_form->id==6&&$_SESSION['user_role']!=1){
+                                                $dk_count=' user_id='.$_SESSION['user_id'];
+                                            }
+                                            else{
+                                                $dk_count=$row_form->dk_count;
+                                            }
+
+                                        }
+                                        $data_count=$action_count($dk_count);
+                                        $count_form='<span class="badge" style="color: #428bca;background: none;">'.$data_count.'</span>';
                                     }
 
                                 }

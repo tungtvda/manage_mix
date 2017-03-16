@@ -11,6 +11,8 @@ function show_booking_list($data = array())
 {
     $asign = array();
     $list=$data['list'];
+    $title=$data['title'];
+    $action_link=$data['action_link'];
     $data_list_status=trang_thai_don_hang_getByTop('','','position asc');
     require_once DIR . '/view/default/template/module/booking/list.php';
 }

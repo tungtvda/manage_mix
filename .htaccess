@@ -34,7 +34,30 @@ RewriteRule ^khach-hang/sua controller/default/customer/themmoi.php
 RewriteRule ^khach-hang/xoa$ controller/default/customer/delete.php
 
 RewriteRule ^booking/$ controller/default/booking/booking.php
+RewriteRule ^booking-new/$ controller/default/booking/booking.php
+RewriteRule ^booking-giao-dich/$ controller/default/booking/booking.php
+RewriteRule ^booking-tam-dung/$ controller/default/booking/booking.php
+RewriteRule ^booking-no-tien/$ controller/default/booking/booking.php
+RewriteRule ^booking-ket-thuc/$ controller/default/booking/booking.php
+RewriteRule ^booking-ban-nhap/$ controller/default/booking/booking.php
+
 RewriteRule ^booking/dat-tour$ controller/default/booking/themmoi.php
+RewriteRule ^booking-new/dat-tour$ controller/default/booking/themmoi.php
+RewriteRule ^booking-giao-dich/dat-tour$ controller/default/booking/themmoi.php
+RewriteRule ^booking-tam-dung/dat-tour$ controller/default/booking/themmoi.php
+RewriteRule ^booking-no-tien/dat-tour$ controller/default/booking/themmoi.php
+RewriteRule ^booking-ket-thuc/dat-tour$ controller/default/booking/themmoi.php
+RewriteRule ^booking-ban-nhap/dat-tour$ controller/default/booking/themmoi.php
+
+RewriteRule ^booking/xoa$ controller/default/booking/delete.php
+RewriteRule ^booking-new/xoa$ controller/default/booking/delete.php
+RewriteRule ^booking-giao-dich/xoa$ controller/default/booking/delete.php
+RewriteRule ^booking-tam-dung/xoa$ controller/default/booking/delete.php
+RewriteRule ^booking-no-tien/xoa$ controller/default/booking/delete.php
+RewriteRule ^booking-ket-thuc/xoa$ controller/default/booking/delete.php
+RewriteRule ^booking-ban-nhap/xoa$ controller/default/booking/delete.php
+
+
 RewriteRule ^get-detail-ajax-booking/$ controller/default/booking/get_detail_ajax.php
 RewriteRule ^booking/insert-tour$ controller/default/booking/themmoi_tour.php
 RewriteRule ^booking/sua controller/default/booking/themmoi.php

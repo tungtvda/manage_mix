@@ -16,6 +16,34 @@ require_once(DIR . "/common/Mail.php");
 $data = array();
 _returnCheckPermison(6, 6);
 
+$action_link=str_replace('manage_mix','',$_SERVER['REQUEST_URI']);
+$action_link=str_replace('dat-tour','',$action_link);
+$action_link=str_replace('/','',$action_link);
+
+switch($action_link){
+    case 'booking-new':
+        $active_tab_left='booking_new';
+        break;
+    case 'booking-giao-dich':
+        $active_tab_left='booking_giao_dich';
+        break;
+    case 'booking-tam-dung':
+        $active_tab_left='booking_tam_dung';
+        break;
+    case 'booking-no-tien':
+        $active_tab_left='booking_no_tien';
+        break;
+    case 'booking-ket-thuc':
+        $active_tab_left='booking_ket_thuc';
+        break;
+    case 'booking-ban-nhap':
+        $active_tab_left='booking_ban_nhap';
+        break;
+    default:
+        $active_tab_left='booking_list';
+
+}
+
 if(isset($_GET['id'])&&$_GET['id']!='')
 {   $data['action']=2;
     if (_returnCheckAction(22) == 0) {
@@ -27,9 +55,9 @@ if(isset($_GET['id'])&&$_GET['id']!='')
 
     if(count($data['data_user'])==0)
     {
-        redict(SITE_NAME.'/booking/');
+        redict(SITE_NAME.'/'.$action_link.'/');
     }
-    $url_bread = '<li><a href="'.SITE_NAME.'/booking/">Danh sách đặt tour</a></li><li class="active">Chỉnh sửa đơn hàng "'.$data['data_user'][0]->code_booking.'"</li>';
+    $url_bread = '<li><a href="'.SITE_NAME.'/'.$action_link.'/">Danh sách đặt tour</a></li><li class="active">Chỉnh sửa đơn hàng "'.$data['data_user'][0]->code_booking.'"</li>';
     $data['title'] = 'Chỉnh sửa đơn hàng "'.$data['data_user'][0]->code_booking.'"';
     _updateStatusNoti();
 
@@ -39,13 +67,14 @@ if(isset($_GET['id'])&&$_GET['id']!='')
     }
     $data['data_user']='';
     $data['action']=1;
-    $url_bread = '<li><a href="'.SITE_NAME.'/booking/">Danh sách đặt tour</a></li><li class="active">Đặt tour</li>';
+    $url_bread = '<li><a href="'.SITE_NAME.'/'.$action_link.'/">Danh sách đặt tour</a></li><li class="active">Đặt tour</li>';
     $data['title'] = 'Đặt tour';
 }
 
 $_SESSION['link_redict'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $data['breadcrumbs'] = $url_bread;
 $data['module_valid'] = "booking";
+
 if(isset($_POST['code_booking']))
 {
 
@@ -146,6 +175,7 @@ if(isset($_POST['code_booking']))
                 $booking_update->user_id=$id_user;
                 $string_value_old.=' Sales: "'.$array_detail['user_id'].'" - ';
                 $string_value_new.=' Sales: "'.$id_user.'" - ';
+                $edit_user=$array_detail['user_id'];
             }
 
             if($id_customer!=$array_detail['id_customer']){
@@ -162,7 +192,7 @@ if(isset($_POST['code_booking']))
                 if(count($check_data_tour)==0){
                     $mess="Tour ".$name_tour.'không tồn tại trong hệ thống';
                     echo "<script>alert($mess)</script>";
-                    $link=SITE_NAME.'/booking/';
+                    $link=SITE_NAME.'/'.$action_link.'/';
                     echo '<script>window.location="'.$link.'";</script>';
                     exit;
                 }
@@ -284,15 +314,28 @@ if(isset($_POST['code_booking']))
         $booking_update->updated=_returnGetDateTime();
         booking_update($booking_update);
         if($string_value_old!=''){
+
             $arr_send_noti=array();
             _insertLog($_SESSION['user_id'],6,6,22,$data_detail[0]->id,$string_value_old,$string_value_new,'Cập nhật đơn hàng "'.$data_detail[0]->code_booking.'"');
-            $link_noti=SITE_NAME.'/booking/sua?noti=1&id='._return_mc_encrypt($data_detail[0]->id, ENCRYPTION_KEY);
+            $link_noti=SITE_NAME.'/'.$action_link.'/sua?noti=1&id='._return_mc_encrypt($data_detail[0]->id, ENCRYPTION_KEY);
             $content_noti='__________Gía trị cũ_________'.$string_value_old.'__________Gía trị mới_________'.$string_value_new;
             $name_noti=$_SESSION['user_name'].' đã thay đổi thông tin đơn hàng "'.$booking_update->code_booking.'"';
             if($_SESSION['user_role']==1){
                 if($_SESSION['user_id']!=$data_detail[0]->user_id){
-                    array_push($arr_send_noti,$data_detail[0]->user_id);
-                    _insertNotification($name_noti,$_SESSION['user_id'],$data_detail[0]->user_id,$link_noti,0,$content_noti);
+                    if(isset($edit_user)&&$edit_user>0){
+                        $name_noti_edit=$_SESSION['user_name'].' đã rời bạn ra khỏi đơn hàng "'.$booking_update->code_booking.'"';
+                        _insertNotification($name_noti_edit,$_SESSION['user_id'],$edit_user,$link_noti,0,$content_noti);
+                        array_push($arr_send_noti,$edit_user);
+                        array_push($arr_send_noti,$booking_update->user_id);
+                        $name_noti=$_SESSION['user_name'].' đã apply đơn hàng "'.$booking_update->code_booking.'" cho bạn';
+                        _insertNotification($name_noti,$_SESSION['user_id'],$booking_update->user_id,$link_noti,0,$content_noti);
+                    }else{
+                        array_push($arr_send_noti,$booking_update->user_id);
+                        _insertNotification($name_noti,$_SESSION['user_id'],$booking_update->user_id,$link_noti,0,$content_noti);
+                    }
+
+
+
                 }
             }else{
                 $data_list_user_admin=user_getByTop('','user_role=1 and status=1','id desc');
@@ -313,7 +356,7 @@ if(isset($_POST['code_booking']))
 
 
         }
-        redict(SITE_NAME.'/booking/');
+        redict(SITE_NAME.'/'.$action_link.'/');
 
 
 //        print_r($_POST);
@@ -425,7 +468,7 @@ if(isset($_POST['code_booking']))
             $message='';
             if($_SESSION['user_role']!=1){
                 $name_noti=$_SESSION['user_name'].' đã thêm một đơn hàng';
-                $link_noti=SITE_NAME.'/booking/sua?noti=1&confirm=1&id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY);
+                $link_noti=SITE_NAME.'/'.$action_link.'/sua?noti=1&confirm=1&id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY);
                 $data_list_user_admin=user_getByTop('','user_role=1 and status=1','id desc');
                 if(count($data_list_user_admin)>0){
                     foreach($data_list_user_admin as $row_admin){
@@ -440,7 +483,7 @@ if(isset($_POST['code_booking']))
                 $mess_log='Nhân viên '.$check_data_user[0]->name.' đã thực hiện việc tạo đơn hàng';
             }else{
                 $name_noti=$_SESSION['user_name'].' đã thêm một đơn hàng cho bạn';
-                $link_noti=SITE_NAME.'/booking/sua?noti=1&id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY);
+                $link_noti=SITE_NAME.'/'.$action_link.'/sua?noti=1&id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY);
                 _insertNotification($name_noti,$_SESSION['user_id'],$id_user,$link_noti,0,'');
 
                 $subject='Xác nhận đơn hàng '.$code_booking;
@@ -450,7 +493,7 @@ if(isset($_POST['code_booking']))
                 $mess_log='Admin '.$_SESSION['user_name'].' đã thực hiện việc tạo đơn hàng';
             }
             _insertLog($_SESSION['user_id'],6,6,21,$id_booking,'','',$mess_log);
-            redict(SITE_NAME . '/booking/');
+            redict(SITE_NAME . '/'.$action_link.'/');
 
         }else{
             echo '<script>alert("Bạn vui lòng kiểm tra lại thông tin đặt tour")</script>';
@@ -461,7 +504,7 @@ if(isset($_POST['code_booking']))
 
 }
 show_header($data);
-show_left($data, 'booking', 'booking_list');
+show_left($data, 'booking', $active_tab_left);
 show_breadcrumb($data);
 show_navigation($data);
 show_booking_themmoi($data);

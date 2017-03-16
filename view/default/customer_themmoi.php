@@ -44,6 +44,9 @@ function show_customer_themmoi($data = array())
     }
 
     $code=_returnDataEditAdd($data['data_user'],'code');
+    if($code==''){
+        $code=_randomBooking('cus','customer_count');
+    }
     $valid_code="valid";
     if($code==''){
         $valid_code="";

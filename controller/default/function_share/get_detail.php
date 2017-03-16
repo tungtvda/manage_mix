@@ -13,6 +13,19 @@ if (isset($_POST['id']) && isset($_POST['table'])) {
         $function_id = $table . '_getById';
         $data_check = $function_id($id);
         if (count($data_check) > 0) {
+            if(isset($data_check[0]->code)){
+                if($data_check[0]->code==''){
+                    $data_check[0]->code=_randomBooking('cus','customer_count');
+                }
+            }
+            if(isset($data_check[0]->created)){
+                if($data_check[0]->created==''){
+                    $data_check[0]->created=_returnDateNotTimieFormatConvertVn($data_check[0]->created);
+                }
+            }
+            if(isset($data_check[0]->birthday)){
+                    $data_check[0]->birthday=_returnDateNotTimieFormatConvertVn($data_check[0]->birthday);
+            }
           echo $data=json_encode($data_check[0]);
         } else {
             echo 0;

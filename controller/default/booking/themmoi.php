@@ -369,7 +369,7 @@ if(isset($_POST['code_booking']))
             }else{
                 $dangky = new customer();
                 $dangky->name = $name_customer;
-                $dangky->code = _randomBooking('cus','booking_count');
+                $dangky->code = _randomBooking('cus','customer_count');
                 $dangky->mr = '';
                 $dangky->email = $email;
                 $dangky->address = $address;

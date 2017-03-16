@@ -197,7 +197,15 @@ function _returnDateFormatConvert($date)
     }
     return $DatesRemainder;
 }
-
+function _returnDateNotTimieFormatConvertVn($date)
+{
+    if ($date == '0000-00-00') {
+        $DatesRemainder = '';
+    } else {
+        $DatesRemainder = date("d-m-Y", strtotime($date));
+    }
+    return $DatesRemainder;
+}
 function _returnRandString($length)
 {
     $str = '';
@@ -1094,6 +1102,7 @@ function _updateCustomerBooking($name_customer_sub,$email_customer,$phone_custom
                     $customer_new->created_by=$_SESSION['user_id'];
                     $customer_new->status = 1;
                     $customer_new->booking_id = $id_booking;
+                    $customer_new->code=_randomBooking('cus','customer_count');
                     $customer_new->code=_randomBooking('#','customer_count','code');
                     customer_insert($customer_new);
                 }else{

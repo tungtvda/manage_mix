@@ -27,6 +27,8 @@ if(isset($_POST['id'])&&isset($_POST['value'])&&$_POST['id']!=""&&$_POST['value'
     $count_form=1;
     $count_action=1;
     $array_show_form=array('7','8','9','10','11','12');
+    $arr_exit_module=array();
+    $arr_exit_form=array();
     foreach($data as $row)
     {
 
@@ -47,23 +49,45 @@ if(isset($_POST['id'])&&isset($_POST['value'])&&$_POST['id']!=""&&$_POST['value'
                     $count_action++;
                 }
                 if($row['check_module']!=''){
-                    if($count_module==1){
-                        $permison_module.=$row['check_module'];
+                    if(!in_array($row['check_module'],$arr_exit_module)){
+                        if($count_module==1){
+                            $permison_module.=$row['check_module'];
+                        }
+                        else{
+                            $permison_module.=','.$row['check_module'];
+                        }
+                        array_push($arr_exit_module,$row['check_module']);
+                        $count_module++;
                     }
-                    else{
-                        $permison_module.=','.$row['check_module'];
-                    }
-                    $count_module++;
                 }
             }
+            if(in_array($row['check_form'],$array_show_form)){
+                if($row['check_module']!=''){
+                    if(!in_array($row['check_module'],$arr_exit_module)){
+                        if($count_module==1){
+                            $permison_module.=$row['check_module'];
+                        }
+                        else{
+                            $permison_module.=','.$row['check_module'];
+                        }
+                        array_push($arr_exit_module,$row['check_module']);
+                        $count_module++;
+                    }
+                }
+            }
+
             if($row['check_form']!=''){
-                if($count_form==1){
-                    $permison_form.=$row['check_form'];
+                if(!in_array($row['check_form'],$arr_exit_form)){
+                    if($count_form==1){
+                        $permison_form.=$row['check_form'];
+                    }
+                    else{
+                        $permison_form.=','.$row['check_form'];
+                    }
+                    array_push($arr_exit_form,$row['check_form']);
+                    $count_form++;
                 }
-                else{
-                    $permison_form.=','.$row['check_form'];
-                }
-                $count_form++;
+
             }
         }
     }

@@ -15,6 +15,19 @@ _returnCheckPermison(5,0);
 $url_bread='<li><a href="">Trang chủ</a></li><li class="active">List</li>';
 $data['breadcrumbs']=$url_bread;
 $data['title']='Hệ thống quản lý MIXTOURIST';
+$data_dk_fill='';
+if($_SESSION['user_role']==0)
+{
+    $data_dk_fill='user_id='.$_SESSION['user_id'].' and ';
+}
+$data['count_don_hang_moi']=booking_count($data_dk_fill.' status=1 ');
+$data['count_dang_giao_dich']=booking_count($data_dk_fill.' status=2 ');
+$data['count_tam_dung']=booking_count($data_dk_fill.' status=3 ');
+$data['count_no_tien']=booking_count($data_dk_fill.' status=4 ');
+$data['count_ket_thuc']=booking_count($data_dk_fill.' status=5 ');
+$data['count_ban_nhap']=booking_count($data_dk_fill.' status=6 ');
+$data['count_all']=$data['count_don_hang_moi']+$data['count_dang_giao_dich']+$data['count_tam_dung']+$data['count_no_tien']+$data['count_ket_thuc']+$data['count_ban_nhap'];
+
 
 show_header($data);
 show_left($data,'trangchu');
@@ -22,4 +35,4 @@ show_breadcrumb($data);
 show_navigation($data);
 show_index($data);
 show_footer($data);
-show_script_table($data);
+show_script_index($data);

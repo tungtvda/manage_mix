@@ -107,3 +107,10 @@ function show_script_form($data1=array())
     view_script_form($data);
 }
 
+function show_script_index($data1=array())
+{
+    $data=array();
+    $data=$data1;
+    view_script_index($data);
+}
+

@@ -69,19 +69,20 @@ if(count($data_permison_module)>0){
                 {
                     $children_action=$arr_action;
                 }
-                $checked_form=false;
-                if(in_array($row_form->id,$permison_form))
-                {
-                    $checked_form=true;
-                }
+
                 if(in_array($row_form->id,$array_show_form)){
+                    $checked_form=false;
+                    if(in_array($row_form->id,$permison_form))
+                    {
+                        $checked_form=true;
+                    }
                     $item_form=array(
                         "id"=>$row_form->id,
                         "text"=>$row_form->name,
                         "children"=>$children_action,
                         "check_module"=>$row_module->id,
                         "check_form"=>$row_form->id,
-                        "checked"=>true,
+                        "checked"=>$checked_form,
                     );
                 }
                 else{

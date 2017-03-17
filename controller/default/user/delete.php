@@ -21,6 +21,7 @@ if(isset($_GET['id'])&&$_GET['id']!=""){
     $new_obj= new user();
     $new_obj->id=$id;
     user_delete($new_obj);
+    _insertLog($_SESSION['user_id'],3,2,3,$id,'','',$_SESSION['user_name'].' đã xóa nhân viên "'.$data_user[0]->user_code.'"');
     echo 1;
 }
 else{

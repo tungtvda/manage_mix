@@ -454,6 +454,7 @@ function _returnCreateUser($check_redict)
                     $new_obj->updated = _returnGetDateTime();
                     $new_obj->id = $id;
                     user_update($new_obj);
+//                    _insertLog($_SESSION['user_id'],3,2,1,$data_get_user[0]->id,'','',$_SESSION['user_name'].' đã tạo nhân viên mã "'.$user_code.'"');
                     if ($check_redict == 1) {
                         redict(SITE_NAME . '/nhan-vien/');
                     } else {
@@ -507,6 +508,11 @@ function _returnCreateUser($check_redict)
                             $dangky->ngay_chinh_thuc = date("Y-m-d", strtotime($ngay_chinh_thuc));
                         }
                         user_insert($dangky);
+                        $data_get_user=user_getByTop('1','user_code="'.$user_code.'""','id desc');
+                        if(count($data_get_user)>0){
+                            _insertLog($_SESSION['user_id'],3,2,1,$data_get_user[0]->id,'','',$_SESSION['user_name'].' đã tạo nhân viên mã "'.$user_code.'"');
+                        }
+
                         $subject = "Thông báo đăng ký tài khoản tại hệ thống quản lý MIXTOURIST";
                         $message = '';
                         if ($mr == '') {

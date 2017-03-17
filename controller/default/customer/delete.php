@@ -26,6 +26,7 @@ if(isset($_GET['id'])&&$_GET['id']!=""){
     $new_obj= new customer();
     $new_obj->id=$id;
     customer_delete($new_obj);
+    _insertLog($_SESSION['user_id'],2,5,19,$id,'','',$_SESSION['user_name'].' đã xóa khách hàng "'.$data_user[0]->code.'"');
     echo 1;
 }
 else{

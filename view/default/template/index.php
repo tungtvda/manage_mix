@@ -28,10 +28,9 @@
 
             Welcome to
             <strong class="green">
-                Ace
-                <small>(v1.4)</small>
-            </strong>,
-           //
+               MIXTOURISt
+                <small>(v1.1)</small>
+            </strong>
         </div>
 
         <div class="row">
@@ -235,161 +234,25 @@
         <div class="hr hr32 hr-dotted"></div>
 
         <div class="row">
-            <div class="col-sm-5">
-                <div class="widget-box transparent">
-                    <div class="widget-header widget-header-flat">
-                        <h4 class="widget-title lighter">
-                            <i class="ace-icon fa fa-star orange"></i>
-                            Popular Domains
-                        </h4>
-
-                        <div class="widget-toolbar">
-                            <a href="#" data-action="collapse">
-                                <i class="ace-icon fa fa-chevron-up"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="widget-body">
-                        <div class="widget-main no-padding">
-                            <table class="table table-bordered table-striped">
-                                <thead class="thin-border-bottom">
-                                <tr>
-                                    <th>
-                                        <i class="ace-icon fa fa-caret-right blue"></i>name
-                                    </th>
-
-                                    <th>
-                                        <i class="ace-icon fa fa-caret-right blue"></i>price
-                                    </th>
-
-                                    <th class="hidden-480">
-                                        <i class="ace-icon fa fa-caret-right blue"></i>status
-                                    </th>
-                                </tr>
-                                </thead>
-
-                                <tbody>
-                                <tr>
-                                    <td>internet.com</td>
-
-                                    <td>
-                                        <small>
-                                            <s class="red">$29.99</s>
-                                        </small>
-                                        <b class="green">$19.99</b>
-                                    </td>
-
-                                    <td class="hidden-480">
-                                        <span class="label label-info arrowed-right arrowed-in">on sale</span>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>online.com</td>
-
-                                    <td>
-                                        <b class="blue">$16.45</b>
-                                    </td>
-
-                                    <td class="hidden-480">
-                                        <span class="label label-success arrowed-in arrowed-in-right">approved</span>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>newnet.com</td>
-
-                                    <td>
-                                        <b class="blue">$15.00</b>
-                                    </td>
-
-                                    <td class="hidden-480">
-                                        <span class="label label-danger arrowed">pending</span>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>web.com</td>
-
-                                    <td>
-                                        <small>
-                                            <s class="red">$24.99</s>
-                                        </small>
-                                        <b class="green">$19.95</b>
-                                    </td>
-
-                                    <td class="hidden-480">
-																	<span class="label arrowed">
-																		<s>out of stock</s>
-																	</span>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>domain.com</td>
-
-                                    <td>
-                                        <b class="blue">$12.00</b>
-                                    </td>
-
-                                    <td class="hidden-480">
-                                        <span class="label label-warning arrowed arrowed-right">SOLD</span>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div><!-- /.widget-main -->
-                    </div><!-- /.widget-body -->
-                </div><!-- /.widget-box -->
-            </div><!-- /.col -->
-
-            <div class="col-sm-7">
-                <div class="widget-box transparent">
-                    <div class="widget-header widget-header-flat">
-                        <h4 class="widget-title lighter">
-                            <i class="ace-icon fa fa-signal"></i>
-                            Sale Stats
-                        </h4>
-
-                        <div class="widget-toolbar">
-                            <a href="#" data-action="collapse">
-                                <i class="ace-icon fa fa-chevron-up"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="widget-body">
-                        <div class="widget-main padding-4">
-                            <div id="sales-charts"></div>
-                        </div><!-- /.widget-main -->
-                    </div><!-- /.widget-body -->
-                </div><!-- /.widget-box -->
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-
-        <div class="hr hr32 hr-dotted"></div>
-
-        <div class="row">
             <div class="col-sm-6">
                 <div class="widget-box transparent" id="recent-box">
                     <div class="widget-header">
-                        <h4 class="widget-title lighter smaller">
-                            <i class="ace-icon fa fa-rss orange"></i>RECENT
+                        <h4 style="color: #ff00bd" class="widget-title lighter smaller">
+                            <i class="ace-icon fa fa-gift"></i>Sinh nhật khách hàng
                         </h4>
 
                         <div class="widget-toolbar no-border">
                             <ul class="nav nav-tabs" id="recent-tab">
                                 <li class="active">
-                                    <a data-toggle="tab" href="#task-tab">Tasks</a>
+                                    <a data-toggle="tab" href="#task-tab">Hôm nay</a>
                                 </li>
 
                                 <li>
-                                    <a data-toggle="tab" href="#member-tab">Members</a>
+                                    <a data-toggle="tab" href="#member-tab">Trong Tuần</a>
                                 </li>
 
                                 <li>
-                                    <a data-toggle="tab" href="#comment-tab">Comments</a>
+                                    <a data-toggle="tab" href="#comment-tab">Trong Tháng</a>
                                 </li>
                             </ul>
                         </div>
@@ -400,21 +263,88 @@
                             <div class="tab-content padding-8">
                                 <div id="task-tab" class="tab-pane active">
                                     <h4 class="smaller lighter green">
-                                        <i class="ace-icon fa fa-list"></i>
-                                        Sortable Lists
+                                        <i class="ace-icon fa fa-check"></i>
+                                        Gửi lời chúc tới khách hàng
                                     </h4>
+                                    <style>
+                                        .item-list>li.selected label, .item-list>li.selected .lbl{
+                                            text-decoration:none;
+                                        }
+                                    </style>
 
+                                        <div class="comments">
                                     <ul id="tasks" class="item-list">
+                                        <li class="item-orange clearfix">
+                                            <div class="itemdiv commentdiv">
+
+                                                <div class="user">
+                                                    <img alt="Jennifer's Avatar"
+                                                         src="http://localhost/manage_mix/view/default/themes/uploads/users/tungtvsoictgmailcom/1487293606.jpg"/>
+
+                                                </div>
+
+                                                <div class="body">
+                                                    <div class="name">
+                                                        <a href="#">Jennifer</a>
+                                                    </div>
+
+                                                    <div class="time">
+                                                        <i style="color: #ff00bd;" class="ace-icon fa fa-birthday-cake "></i>
+                                                        <span class="blue">15 tuổi</span>
+                                                    </div>
+
+                                                    <div style="padding-left: 0px" class="text">
+                                                       <a href="mail:tungtv.soiict@gmail.com"> <i class="ace-icon fa fa-envelope"></i> tungtv.soiict@gmail.com</a>
+                                                        | <a href="tel:123456789"> <i class="ace-icon fa fa-phone"></i> 123456789</a>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="tools">
+                                                    <div class="action-buttons bigger-125">
+                                                        <a>
+                                                            <label class="inline">
+                                                                <input type="checkbox" class="ace"/>
+                                                                <span class="lbl"></span>
+                                                            </label>
+                                                        </a>
+
+                                                        <a href="#">
+                                                            <i class="ace-icon fa fa-trash-o red"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
                                         <li class="item-orange clearfix">
                                             <label class="inline">
                                                 <input type="checkbox" class="ace"/>
                                                 <span class="lbl"> Answering customer questions</span>
                                             </label>
-
-                                            <div class="pull-right easy-pie-chart percentage"
-                                                 data-size="30" data-color="#ECCB71" data-percent="42">
-                                                <span class="percent">42</span>%
-                                            </div>
+                                        </li>
+                                        <li class="item-orange clearfix">
+                                            <label class="inline">
+                                                <input type="checkbox" class="ace"/>
+                                                <span class="lbl"> Answering customer questions</span>
+                                            </label>
+                                        </li>
+                                        <li class="item-orange clearfix">
+                                            <label class="inline">
+                                                <input type="checkbox" class="ace"/>
+                                                <span class="lbl"> Answering customer questions</span>
+                                            </label>
+                                        </li>
+                                        <li class="item-orange clearfix">
+                                            <label class="inline">
+                                                <input type="checkbox" class="ace"/>
+                                                <span class="lbl"> Answering customer questions</span>
+                                            </label>
+                                        </li>
+                                        <li class="item-orange clearfix">
+                                            <label class="inline">
+                                                <input type="checkbox" class="ace"/>
+                                                <span class="lbl"> Answering customer questions</span>
+                                            </label>
                                         </li>
 
                                         <li class="item-red clearfix">
@@ -504,6 +434,8 @@
                                             </label>
                                         </li>
                                     </ul>
+                                            </div>
+
                                 </div>
 
                                 <div id="member-tab" class="tab-pane">
@@ -1178,6 +1110,144 @@
                 </div><!-- /.widget-box -->
             </div><!-- /.col -->
         </div><!-- /.row -->
+        <div class="hr hr32 hr-dotted"></div>
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="widget-box transparent">
+                    <div class="widget-header widget-header-flat">
+                        <h4 class="widget-title lighter">
+                            <i class="ace-icon fa fa-star orange"></i>
+                            Popular Domains
+                        </h4>
+
+                        <div class="widget-toolbar">
+                            <a href="#" data-action="collapse">
+                                <i class="ace-icon fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="widget-body">
+                        <div class="widget-main no-padding">
+                            <table class="table table-bordered table-striped">
+                                <thead class="thin-border-bottom">
+                                <tr>
+                                    <th>
+                                        <i class="ace-icon fa fa-caret-right blue"></i>name
+                                    </th>
+
+                                    <th>
+                                        <i class="ace-icon fa fa-caret-right blue"></i>price
+                                    </th>
+
+                                    <th class="hidden-480">
+                                        <i class="ace-icon fa fa-caret-right blue"></i>status
+                                    </th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr>
+                                    <td>internet.com</td>
+
+                                    <td>
+                                        <small>
+                                            <s class="red">$29.99</s>
+                                        </small>
+                                        <b class="green">$19.99</b>
+                                    </td>
+
+                                    <td class="hidden-480">
+                                        <span class="label label-info arrowed-right arrowed-in">on sale</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>online.com</td>
+
+                                    <td>
+                                        <b class="blue">$16.45</b>
+                                    </td>
+
+                                    <td class="hidden-480">
+                                        <span class="label label-success arrowed-in arrowed-in-right">approved</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>newnet.com</td>
+
+                                    <td>
+                                        <b class="blue">$15.00</b>
+                                    </td>
+
+                                    <td class="hidden-480">
+                                        <span class="label label-danger arrowed">pending</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>web.com</td>
+
+                                    <td>
+                                        <small>
+                                            <s class="red">$24.99</s>
+                                        </small>
+                                        <b class="green">$19.95</b>
+                                    </td>
+
+                                    <td class="hidden-480">
+																	<span class="label arrowed">
+																		<s>out of stock</s>
+																	</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>domain.com</td>
+
+                                    <td>
+                                        <b class="blue">$12.00</b>
+                                    </td>
+
+                                    <td class="hidden-480">
+                                        <span class="label label-warning arrowed arrowed-right">SOLD</span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div><!-- /.widget-main -->
+                    </div><!-- /.widget-body -->
+                </div><!-- /.widget-box -->
+            </div><!-- /.col -->
+
+            <div class="col-sm-7">
+                <div class="widget-box transparent">
+                    <div class="widget-header widget-header-flat">
+                        <h4 class="widget-title lighter">
+                            <i class="ace-icon fa fa-signal"></i>
+                            Sale Stats
+                        </h4>
+
+                        <div class="widget-toolbar">
+                            <a href="#" data-action="collapse">
+                                <i class="ace-icon fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="widget-body">
+                        <div class="widget-main padding-4">
+                            <div id="sales-charts"></div>
+                        </div><!-- /.widget-main -->
+                    </div><!-- /.widget-body -->
+                </div><!-- /.widget-box -->
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+
+
+
+
 
         <!-- PAGE CONTENT ENDS -->
     </div><!-- /.col -->

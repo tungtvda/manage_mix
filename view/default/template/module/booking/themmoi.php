@@ -15,8 +15,7 @@
 </div><!-- /.page-header -->
 <div class="row">
     <div class="col-xs-12">
-        <form class="form-horizontal" id="submit_form" role="form" action="" method="post"
-              enctype="multipart/form-data">
+        <form class="form-horizontal" id="submit_form" role="form" action="" method="post" enctype="multipart/form-data">
             <div class="modal-body">
                 <div class="row" style="margin-bottom: 20px">
                     <style>

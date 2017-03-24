@@ -1,7 +1,7 @@
 <?php
 class booking
 {
-    public $id,$code_booking,$id_tour,$name_tour,$code_tour,$price_tour,$price_11,$price_5,$price_new,$price_11_new,$price_5_new,$vat,$nguon_tour,$tien_te,$ty_gia,$ngay_bat_dau,$han_thanh_toan,$loai_khach_hang,$hinh_thuc_thanh_toan,$id_customer,$diem_don,$diem_tra,$ngay_khoi_hanh,$ngay_ket_thuc,$phuong_tien,$num_nguoi_lon,$num_tre_em,$num_tre_em_5,$total_price,$tien_thanh_toan,$user_id,$status,$confirm_admin,$created_by,$updated_by,$created,$updated,$note;
+    public $id,$code_booking,$id_tour,$name_tour,$code_tour,$price_tour,$price_11,$price_5,$price_new,$price_11_new,$price_5_new,$vat,$nguon_tour,$tien_te,$ty_gia,$ngay_bat_dau,$han_thanh_toan,$loai_khach_hang,$hinh_thuc_thanh_toan,$id_customer,$diem_don,$diem_tra,$ngay_khoi_hanh,$ngay_ket_thuc,$phuong_tien,$num_nguoi_lon,$num_tre_em,$num_tre_em_5,$price_number,$price_number_2,$price_number_3,$total_price,$tien_thanh_toan,$user_id,$status,$confirm_admin,$created_by,$updated_by,$created,$updated,$note;
     public function booking($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
@@ -32,6 +32,9 @@ class booking
     $this->num_nguoi_lon=isset($data['num_nguoi_lon'])?$data['num_nguoi_lon']:'';
     $this->num_tre_em=isset($data['num_tre_em'])?$data['num_tre_em']:'';
     $this->num_tre_em_5=isset($data['num_tre_em_5'])?$data['num_tre_em_5']:'';
+    $this->price_number=isset($data['price_number'])?$data['price_number']:'';
+    $this->price_number_2=isset($data['price_number_2'])?$data['price_number_2']:'';
+    $this->price_number_3=isset($data['price_number_3'])?$data['price_number_3']:'';
     $this->total_price=isset($data['total_price'])?$data['total_price']:'';
     $this->tien_thanh_toan=isset($data['tien_thanh_toan'])?$data['tien_thanh_toan']:'';
     $this->user_id=isset($data['user_id'])?$data['user_id']:'';
@@ -74,6 +77,9 @@ class booking
             $this->num_nguoi_lon=addslashes($this->num_nguoi_lon);
             $this->num_tre_em=addslashes($this->num_tre_em);
             $this->num_tre_em_5=addslashes($this->num_tre_em_5);
+            $this->price_number=addslashes($this->price_number);
+            $this->price_number_2=addslashes($this->price_number_2);
+            $this->price_number_3=addslashes($this->price_number_3);
             $this->total_price=addslashes($this->total_price);
             $this->tien_thanh_toan=addslashes($this->tien_thanh_toan);
             $this->user_id=addslashes($this->user_id);
@@ -115,6 +121,9 @@ class booking
             $this->num_nguoi_lon=stripslashes($this->num_nguoi_lon);
             $this->num_tre_em=stripslashes($this->num_tre_em);
             $this->num_tre_em_5=stripslashes($this->num_tre_em_5);
+            $this->price_number=stripslashes($this->price_number);
+            $this->price_number_2=stripslashes($this->price_number_2);
+            $this->price_number_3=stripslashes($this->price_number_3);
             $this->total_price=stripslashes($this->total_price);
             $this->tien_thanh_toan=stripslashes($this->tien_thanh_toan);
             $this->user_id=stripslashes($this->user_id);

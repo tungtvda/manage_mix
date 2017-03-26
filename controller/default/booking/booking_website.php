@@ -11,8 +11,6 @@ if (!defined('SITE_NAME')) {
 require_once DIR . '/controller/default/public.php';
 $data = array();
 if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['phone'])&& isset($_POST['address'])&& isset($_POST['ngay_khoi_hanh'])&& isset($_POST['id_tour'])&& isset($_POST['name_tour'])&& isset($_POST['code_tour'])&& isset($_POST['ng_tour'])&& isset($_POST['n1'])&& isset($_POST['n2'])&& isset($_POST['n3'])&& isset($_POST['po1'])&& isset($_POST['po2'])&& isset($_POST['po3'])&& isset($_POST['pn1'])&& isset($_POST['pn2'])&& isset($_POST['pn3'])) {
-    echo '#9472';
-    exit;
     $name_customer = _return_mc_decrypt(_returnPostParamSecurity('name_customer'), '');
     $email = _return_mc_decrypt(_returnPostParamSecurity('email'), '');
     $address = _return_mc_decrypt(_returnPostParamSecurity('address'), '');
@@ -35,7 +33,7 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
 
     $httt = _return_mc_decrypt(_returnPostParamSecurity('httt'), '');
     $note = _return_mc_decrypt(_returnPostParamSecurity('note'), '');
-    $ngay_bat_dau = _returnGetDateTime();
+    $ngay_khoi_hanh = _return_mc_decrypt(_returnPostParamSecurity('ngay_khoi_hanh'), '');
     $status=1;
     $num_nguoi_lon=_return_mc_decrypt(_returnPostParamSecurity('n1'), '');
     $num_tre_em=_return_mc_decrypt(_returnPostParamSecurity('n2'), '');
@@ -60,7 +58,7 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
     if($name_customer!=''&&$email!=''&&$phone!=''&&$address!=''){
         $check_data_khach_hang=customer_getByTop('1','email="'.$email.'"','id desc');
         if(count($check_data_khach_hang)>0){
-           echo $id_customer=$check_data_khach_hang[0]->id;
+            $id_customer=$check_data_khach_hang[0]->id;
         }else{
             $dangky = new customer();
             $dangky->name = $name_customer;
@@ -73,12 +71,12 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
             $dangky->mobi = $phone;
             $dangky->status = 1;
             $dangky->phone = $phone;
-            $dangky->created_by = $_SESSION['user_id'];
-            $dangky->category=$nhom_khach_hang;
+            $dangky->created_by = '';
+            $dangky->category=0;
             customer_insert($dangky);
             $data_khachhang=customer_getByTop('1','email="'.$email.'"','id desc');
             if(count($data_khachhang)>0){
-              echo  $id_customer=$data_khachhang[0]->id;
+                $id_customer=$data_khachhang[0]->id;
             }
             else{
                 echo 0;
@@ -102,7 +100,7 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
         $booking_model->id_customer=$id_customer;
         $booking_model->diem_don=$diem_don;
         $booking_model->diem_tra=$diem_don;
-        $booking_model->ngay_khoi_hanh=date("Y-m-d", strtotime($ngay_bat_dau));
+        $booking_model->ngay_khoi_hanh=date("Y-m-d", strtotime($ngay_khoi_hanh));
         $booking_model->phuong_tien=$phuong_tien;
         $booking_model->num_nguoi_lon=$num_nguoi_lon;
         $booking_model->num_tre_em=$num_tre_em;
@@ -136,8 +134,8 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
         $subject='Xác nhận đơn hàng '.$code_booking;
         $message.='<p>Khách hàng '.$name_customer.' đã thêm một đơn hàng từ '.$nguon_tour.'</p>';
         $message.='<a>Bạn vui lòng truy cập <a href="'.$link_noti.'">đường link</a> để xác nhận đơn hàng</p>';
-//                SendMail('info@mixtourist.com.vn', $message, $subject);
-        SendMail('tungtv.soict@gmail.com', $message, $subject);
+                SendMail('info@mixtourist.com.vn', $message, $subject);
+//        SendMail('tungtv.soict@gmail.com', $message, $subject);
         $mess_log='Khách hàng '.$name_customer.' đã thêm một đơn hàng từ '.$nguon_tour;
         _insertLog(0,6,6,21,$id_booking,'','',$mess_log);
         echo $code_booking;

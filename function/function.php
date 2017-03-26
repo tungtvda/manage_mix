@@ -29,7 +29,7 @@ function _returnCheckPermison($module_id = 0, $form_id = 0, $action_id = 0)
         redict(_returnLinkDangNhap('Hết thời hạn đăng nhập'));
     }
 
-    $_SESSION['time_token']=_returnGetDateTime();
+    $_SESSION['time_token'] = _returnGetDateTime();
     // kiểm tra quyền có phải là super admin
     if ($_SESSION['user_role'] == 1) {
         return true;
@@ -82,7 +82,7 @@ function _returnCheckAction($action_id = 0)
         redict(_returnLinkDangNhap('Hết thời hạn đăng nhập'));
     }
 
-    $_SESSION['time_token']=_returnGetDateTime();
+    $_SESSION['time_token'] = _returnGetDateTime();
     // kiểm tra quyền có phải là super admin
     if ($_SESSION['user_role'] == 1) {
         return true;
@@ -197,6 +197,7 @@ function _returnDateFormatConvert($date)
     }
     return $DatesRemainder;
 }
+
 function _returnDateNotTimieFormatConvertVn($date)
 {
     if ($date == '0000-00-00') {
@@ -206,6 +207,7 @@ function _returnDateNotTimieFormatConvertVn($date)
     }
     return $DatesRemainder;
 }
+
 function _returnRandString($length)
 {
     $str = '';
@@ -508,9 +510,9 @@ function _returnCreateUser($check_redict)
                             $dangky->ngay_chinh_thuc = date("Y-m-d", strtotime($ngay_chinh_thuc));
                         }
                         user_insert($dangky);
-                        $data_get_user=user_getByTop('1','user_code="'.$user_code.'""','id desc');
-                        if(count($data_get_user)>0){
-                            _insertLog($_SESSION['user_id'],3,2,1,$data_get_user[0]->id,'','',$_SESSION['user_name'].' đã tạo nhân viên mã "'.$user_code.'"');
+                        $data_get_user = user_getByTop('1', 'user_code="' . $user_code . '""', 'id desc');
+                        if (count($data_get_user) > 0) {
+                            _insertLog($_SESSION['user_id'], 3, 2, 1, $data_get_user[0]->id, '', '', $_SESSION['user_name'] . ' đã tạo nhân viên mã "' . $user_code . '"');
                         }
 
                         $subject = "Thông báo đăng ký tài khoản tại hệ thống quản lý MIXTOURIST";
@@ -688,7 +690,7 @@ function _returnCreateCustomerFull($check_redict)
         $address = _returnPostParamSecurity('address');
         $phone = _returnPostParamSecurity('phone');
         $mobi = _returnPostParamSecurity('mobi');
-        $fax=_returnPostParamSecurity('fax');
+        $fax = _returnPostParamSecurity('fax');
         $category = _returnPostParamSecurity('category');
         $resources_to = _returnPostParamSecurity('resources_to');
         $nganh_nghe = _returnPostParamSecurity('nganh_nghe');
@@ -706,14 +708,14 @@ function _returnCreateCustomerFull($check_redict)
         $cmnd = _returnPostParamSecurity('cmnd');
         $date_range_cmnd = _returnPostParamSecurity('date_range_cmnd');
         $issued_by_cmnd = _returnPostParamSecurity('issued_by_cmnd');
-        $note=_returnPostParamSecurity('note');
+        $note = _returnPostParamSecurity('note');
 
         $avatar = '';
 
         if ($name != "" && $email != '' && $address != '' && $phone != '' && $mobi != '') {
             if (isset($_POST['check_edit']) && isset($_POST['id_edit']) && $_POST['check_edit'] === "edit" && $_POST['id_edit'] != '') {
                 $id = _return_mc_decrypt(_returnPostParamSecurity('id_edit'), ENCRYPTION_KEY);
-                $dk_check_user = "email ='" . $email . "' and id!=".$id;
+                $dk_check_user = "email ='" . $email . "' and id!=" . $id;
                 $data_check_exist_user = customer_getByTop('', $dk_check_user, 'id desc');
                 if (count($data_check_exist_user) > 0) {
                     if ($check_redict == 1) {
@@ -721,7 +723,7 @@ function _returnCreateCustomerFull($check_redict)
                     } else {
                         return 'Email đã tồn tại trong hệ thống, vui lòng điền lại thông tin khác';
                     }
-                }else{
+                } else {
                     $data_user_update = customer_getById($id);
                     if (count($data_user_update) > 0) {
                         $array = (array)$data_user_update[0];
@@ -749,35 +751,35 @@ function _returnCreateCustomerFull($check_redict)
 
                         $new_obj->updated = _returnGetDateTime();
                         $new_obj->id = $id;
-                        if($category!=''){
+                        if ($category != '') {
                             $new_obj->category = $category;
                         }
-                        if($resources_to!=''){
+                        if ($resources_to != '') {
                             $new_obj->resources_to = $resources_to;
                         }
-                        if($nganh_nghe!=''){
+                        if ($nganh_nghe != '') {
                             $new_obj->nganh_nghe = $nganh_nghe;
                         }
 
                         $new_obj->company_name = $company_name;
-                        if($chuc_vu!=''){
+                        if ($chuc_vu != '') {
                             $new_obj->chuc_vu = $chuc_vu;
                         }
 
-                        if($phong_ban!=''){
+                        if ($phong_ban != '') {
                             $new_obj->phong_ban = $phong_ban;
                         }
 
-                        $new_obj->director_name =$director_name;
+                        $new_obj->director_name = $director_name;
                         $new_obj->company_email = $company_email;
                         $new_obj->skype = $skype;
                         $new_obj->facebook = $facebook;
                         $new_obj->account_number_bank = $account_number_bank;
                         $new_obj->bank = $bank;
                         $new_obj->open_bank = $open_bank;
-                        $new_obj->cmnd= $cmnd;
-                        $new_obj->date_range_cmnd =date("Y-m-d", strtotime($date_range_cmnd)); ;
-                        $new_obj->issued_by_cmnd =$issued_by_cmnd;
+                        $new_obj->cmnd = $cmnd;
+                        $new_obj->date_range_cmnd = date("Y-m-d", strtotime($date_range_cmnd));;
+                        $new_obj->issued_by_cmnd = $issued_by_cmnd;
                         $new_obj->note = $note;
                         customer_update($new_obj);
                         if ($check_redict == 1) {
@@ -826,16 +828,16 @@ function _returnCreateCustomerFull($check_redict)
                     $dangky->company_name = $company_name;
                     $dangky->chuc_vu = $chuc_vu;
                     $dangky->phong_ban = $phong_ban;
-                    $dangky->director_name =$director_name;
+                    $dangky->director_name = $director_name;
                     $dangky->company_email = $company_email;
                     $dangky->skype = $skype;
                     $dangky->facebook = $facebook;
                     $dangky->account_number_bank = $account_number_bank;
                     $dangky->bank = $bank;
                     $dangky->open_bank = $open_bank;
-                    $dangky->cmnd= $cmnd;
-                    $dangky->date_range_cmnd =date("Y-m-d", strtotime($date_range_cmnd)); ;
-                    $dangky->issued_by_cmnd =$issued_by_cmnd;
+                    $dangky->cmnd = $cmnd;
+                    $dangky->date_range_cmnd = date("Y-m-d", strtotime($date_range_cmnd));;
+                    $dangky->issued_by_cmnd = $issued_by_cmnd;
                     $dangky->note = $note;
                     customer_insert($dangky);
                     if ($check_redict == 1) {
@@ -900,14 +902,14 @@ function _returnInputDate($name, $value = '', $valid = '', $disabled = '', $mess
                                                                                    required
                                                                                    type="text"
                                                                                    data-date-format="dd-mm-yyyy">
-																	<span id="icon_'.$name.'" class="input-group-addon date_icon">
+																	<span id="icon_' . $name . '" class="input-group-addon date_icon">
 																		<i class="fa fa-calendar bigger-110"></i>
 																	</span>
 
                                                                         </div>
                                                                         <label style="display: none"
                                                                                class="error-color  error-color-size"
-                                                                               id="error_'.$name.'">' . $mess_err . '</label>';
+                                                                               id="error_' . $name . '">' . $mess_err . '</label>';
 }
 
 function _returnInputCheck($name, $valid = '', $disabled = '', $checked = '')
@@ -944,199 +946,233 @@ function _returnInputSelect($name, $value, $data_list, $valid = '', $name_title)
     return $string;
 }
 
-function _returnDataAutoCompleteCustomer(){
+function _returnDataAutoCompleteCustomer()
+{
     $data_khach_hang = customer_getByTop('', 'status=1', 'name asc');
-    $string_data='[';
-    if(count($data_khach_hang)>0){
-        foreach($data_khach_hang as $row_kh){
-            $name_kh='';
-            if($row_kh->mr!=''){
-                $name_kh.=$row_kh->mr.'.';
+    $string_data = '[';
+    if (count($data_khach_hang) > 0) {
+        foreach ($data_khach_hang as $row_kh) {
+            $name_kh = '';
+            if ($row_kh->mr != '') {
+                $name_kh .= $row_kh->mr . '.';
             }
-            $name_kh.=$row_kh->name;
+            $name_kh .= $row_kh->name;
 
-            if($row_kh->avatar!=''){
-                $avatar_kh=SITE_NAME.$row_kh->avatar;
+            if ($row_kh->avatar != '') {
+                $avatar_kh = SITE_NAME . $row_kh->avatar;
+            } else {
+                $avatar_kh = SITE_NAME . '/view/default/themes/images/no-avatar.png';
             }
-            else{
-                $avatar_kh=SITE_NAME.'/view/default/themes/images/no-avatar.png';
-            }
-            $cate_name='Nhóm khách hàng ...';
-            $cate_id='';
-            if($row_kh->category!=0){
-                $data_cate=customer_category_getById($row_kh->category);
-                if(count($data_cate)>0){
-                    $cate_name=$data_cate[0]->name;
-                    $cate_id=$data_cate[0]->id;
+            $cate_name = 'Nhóm khách hàng ...';
+            $cate_id = '';
+            if ($row_kh->category != 0) {
+                $data_cate = customer_category_getById($row_kh->category);
+                if (count($data_cate) > 0) {
+                    $cate_name = $data_cate[0]->name;
+                    $cate_id = $data_cate[0]->id;
                 }
             }
-            $string_data.="['".$name_kh."','".$avatar_kh."','".$row_kh->id."','".$row_kh->email."','".$row_kh->phone."','".$row_kh->address."','".$row_kh->fax."','".$cate_id."','".$cate_name."'],";
+            $string_data .= "['" . $name_kh . "','" . $avatar_kh . "','" . $row_kh->id . "','" . $row_kh->email . "','" . $row_kh->phone . "','" . $row_kh->address . "','" . $row_kh->fax . "','" . $cate_id . "','" . $cate_name . "'],";
         }
     }
-    $string_data.='];';
+    $string_data .= '];';
     return $string_data;
 }
 
-function _returnDataAutoCompleteTour(){
+function _returnDataAutoCompleteTour()
+{
     $data_tour = tour_getByTop('', '', 'name asc');
-    $string_data='[';
-    if(count($data_tour)>0){
-        foreach($data_tour as $row_kh){
-            $id=$row_kh->id;
-            $name=$row_kh->name;
-            if($row_kh->price==0||$row_kh->price==''){
-                $price_format='Liên hệ';
-                $price='Liên hệ';
+    $string_data = '[';
+    if (count($data_tour) > 0) {
+        foreach ($data_tour as $row_kh) {
+            $id = $row_kh->id;
+            $name = $row_kh->name;
+            if ($row_kh->price == 0 || $row_kh->price == '') {
+                $price_format = 'Liên hệ';
+                $price = 'Liên hệ';
+            } else {
+                $price_format = number_format((int)$row_kh->price, 0, ",", ".") . ' vnđ';
+                $price = $row_kh->price;
             }
-            else{
-                $price_format=number_format((int)$row_kh->price,0,",",".").' vnđ';
-                $price=$row_kh->price;
-            }
-            $durations=$row_kh->durations;
-            $vehicle=$row_kh->vehicle;
-            $departure_name='';
-            $departure_id='';
-            if($row_kh->departure!=0){
-                $data_departure=departure_getById($row_kh->departure);
-                if(count($data_departure)>0){
-                    $departure_name=$data_departure[0]->name;
-                    $departure_id=$data_departure[0]->id;
+            $durations = $row_kh->durations;
+            $vehicle = $row_kh->vehicle;
+            $departure_name = '';
+            $departure_id = '';
+            if ($row_kh->departure != 0) {
+                $data_departure = departure_getById($row_kh->departure);
+                if (count($data_departure) > 0) {
+                    $departure_name = $data_departure[0]->name;
+                    $departure_id = $data_departure[0]->id;
                 }
             }
-            $string_data.="['".$id."','".$name."','".$price_format."','".$durations."','".$vehicle."','".$departure_id."','".$departure_name."','".$price."'],";
+            $string_data .= "['" . $id . "','" . $name . "','" . $price_format . "','" . $durations . "','" . $vehicle . "','" . $departure_id . "','" . $departure_name . "','" . $price . "'],";
         }
     }
-    $string_data.='];';
+    $string_data .= '];';
     return $string_data;
 }
 
-function _returnDataAutoCompleteUser(){
-    if($_SESSION['user_role']==1){
+function _returnDataAutoCompleteUser()
+{
+    if ($_SESSION['user_role'] == 1) {
         $data_user = user_getByTop('', 'status=1', 'name asc');
-    }else{
-        $data_user = user_getByTop('', 'status=1 and (id='.$_SESSION['user_id'].' or created_by='.$_SESSION['user_id'].')', 'name asc');
+    } else {
+        $data_user = user_getByTop('', 'status=1 and (id=' . $_SESSION['user_id'] . ' or created_by=' . $_SESSION['user_id'] . ')', 'name asc');
     }
 
-    $string_data='[';
-    if(count($data_user)>0){
-        foreach($data_user as $row_user){
-            $id=$row_user->id;
-            $name=$row_user->name;
-            $email=$row_user->user_email;
-            $phone=$row_user->phone;
-            $phong_ban='';
-            $number_tour=0;
-            $data_phongban=user_phongban_getByTop('','id='.$row_user->phong_ban,'');
-            $number_tour=booking_count('user_id='.$row_user->id.' and status!=5');
-            if(count($data_phongban)>0){
-                $phong_ban=$data_phongban[0]->name;
+    $string_data = '[';
+    if (count($data_user) > 0) {
+        foreach ($data_user as $row_user) {
+            $id = $row_user->id;
+            $name = $row_user->name;
+            $email = $row_user->user_email;
+            $phone = $row_user->phone;
+            $phong_ban = '';
+            $number_tour = 0;
+            $data_phongban = user_phongban_getByTop('', 'id=' . $row_user->phong_ban, '');
+            $number_tour = booking_count('user_id=' . $row_user->id . ' and status!=5');
+            if (count($data_phongban) > 0) {
+                $phong_ban = $data_phongban[0]->name;
             }
-            $string_data.="['".$id."','".$name."','".$email."','".$phone."','".$phong_ban."','".$number_tour."'],";
+            $string_data .= "['" . $id . "','" . $name . "','" . $email . "','" . $phone . "','" . $phong_ban . "','" . $number_tour . "'],";
         }
     }
-    $string_data.='];';
+    $string_data .= '];';
     return $string_data;
 }
 
 function _getRandomNumbers($min, $max, $count)
 {
-    if ($count > (($max - $min)+1))
-    {
+    if ($count > (($max - $min) + 1)) {
         return false;
     }
     $values = range($min, $max);
     shuffle($values);
-    return array_slice($values,0, $count);
+    return array_slice($values, 0, $count);
 }
-function _randomCustommr(){
-    $rand=(implode('',_getRandomNumbers(1, 99, 3))).$_SESSION['user_id'];
+
+function _randomCustommr()
+{
+    $rand = (implode('', _getRandomNumbers(1, 99, 3))) . $_SESSION['user_id'];
 
 }
-function _randomBooking($code_module,$function_count, $field='code_booking'){
-    $rand_number=rand(1,5);
-    $user_id='';
-    if(isset($_SESSION['user_id'])){
-        $user_id=$_SESSION['user_id'];
+
+function _randomBooking($code_module, $function_count, $field = 'code_booking')
+{
+    $rand_number = rand(1, 5);
+    $user_id = '';
+    if (isset($_SESSION['user_id'])) {
+        $user_id = $_SESSION['user_id'];
     }
 
-    $rand=$code_module.(implode('',_getRandomNumbers(1, 99, $rand_number))).$user_id;
-    $data_booking=$function_count($field.'="'.$rand.'"');
-    if($data_booking>0){
-        _randomBooking($code_module,$function_count,$field);
-    }
-    else{
+    $rand = $code_module . (implode('', _getRandomNumbers(1, 99, $rand_number))) . $user_id;
+    $data_booking = $function_count($field . '="' . $rand . '"');
+    if ($data_booking > 0) {
+        _randomBooking($code_module, $function_count, $field);
+    } else {
         return $rand;
     }
 
 }
- function _insertNotification($name='',$user_send_id='',$user_id,$link='',$status=0,$content=''){
-     $notification_model=new notification();
-     $notification_model->name=$name;
-     $notification_model->user_send_id=$user_send_id;
-     $notification_model->user_id=$user_id;
-     $notification_model->link=$link;
-     $notification_model->status=$status;
-     $notification_model->content=$content;
-     $notification_model->created=_returnGetDateTime();
-     notification_insert($notification_model);
- }
-function _insertLog($user_id,$module_id,$form_id,$action_id,$item_id,$value_old,$value_new,$description){
-    $log_model=new log();
-    $log_model->user_id=$user_id;
-    $log_model->module_id=$module_id;
-    $log_model->form_id=$form_id;
-    $log_model->action_id=$action_id;
-    $log_model->item_id=$item_id;
-    $log_model->value_old=$value_old;
-    $log_model->value_new=$value_new;
-    $log_model->description=$description;
-    $log_model->created=_returnGetDateTime();
+
+function _insertNotification($name = '', $user_send_id = '', $user_id, $link = '', $status = 0, $content = '')
+{
+    $notification_model = new notification();
+    $notification_model->name = $name;
+    $notification_model->user_send_id = $user_send_id;
+    $notification_model->user_id = $user_id;
+    $notification_model->link = $link;
+    $notification_model->status = $status;
+    $notification_model->content = $content;
+    $notification_model->created = _returnGetDateTime();
+    notification_insert($notification_model);
+}
+
+function _insertLog($user_id, $module_id, $form_id, $action_id, $item_id, $value_old, $value_new, $description)
+{
+    $log_model = new log();
+    $log_model->user_id = $user_id;
+    $log_model->module_id = $module_id;
+    $log_model->form_id = $form_id;
+    $log_model->action_id = $action_id;
+    $log_model->item_id = $item_id;
+    $log_model->value_old = $value_old;
+    $log_model->value_new = $value_new;
+    $log_model->description = $description;
+    $log_model->created = _returnGetDateTime();
     log_insert($log_model);
 }
-function _updateCustomerBooking($name_customer_sub,$email_customer,$phone_customer,$address_customer,$do_tuoi_customer,$id_booking,  $created_by=''){
-    if(count($name_customer_sub)>0){
-        foreach($name_customer_sub as $key=>$value){
-            $name_sub=$value;
-            $email_sub='';
-            if(isset($email_customer[$key])){
-                $email_sub=$email_customer[$key];
+
+function _updateCustomerBooking($name_customer_sub, $email_customer, $phone_customer, $address_customer, $do_tuoi_customer, $birthday_customer_sub, $passport_customer_sub, $date_passport_customer_sub, $id_booking, $created_by = '')
+{
+    if (count($name_customer_sub) > 0) {
+        foreach ($name_customer_sub as $key => $value) {
+            $name_sub = $value;
+            $email_sub = '';
+            if (isset($email_customer[$key])) {
+                $email_sub = $email_customer[$key];
             }
-            $phone_sub='';
-            if(isset($phone_customer[$key])){
-                $phone_sub=$phone_customer[$key];
+            $phone_sub = '';
+            if (isset($phone_customer[$key])) {
+                $phone_sub = $phone_customer[$key];
             }
-            $address_sub='';
-            if(isset($address_sub[$key])){
-                $address_sub=$address_customer[$key];
+
+            $address_sub = '';
+            if (isset($address_customer[$key])) {
+                $address_sub = $address_customer[$key];
             }
-            $dotuoi_sub='';
-            if(isset($do_tuoi_customer[$key])){
-                $dotuoi_sub=$do_tuoi_customer[$key];
+
+            $dotuoi_sub = '';
+            if (isset($do_tuoi_customer[$key])) {
+                $dotuoi_sub = $do_tuoi_customer[$key];
             }
-            if($value!=''){
-                    $customer_new=new customer_booking();
-                    $customer_new->name=$name_sub;
-                    $customer_new->email=$email_sub;
-                    $customer_new->phone=$phone_sub;
-                    $customer_new->address=$address_sub;
-                    $customer_new->do_tuoi=$dotuoi_sub;
-                    $customer_new->updated = _returnGetDateTime();
-                    $customer_new->created = _returnGetDateTime();
-                    $customer_new->created_by=$created_by;
-                    $customer_new->booking_id = $id_booking;
-                    customer_booking_insert($customer_new);
+            print_r($birthday_customer_sub);
+            $ngaysinh_sub = '';
+            if (isset($birthday_customer_sub[$key])) {
+                if($birthday_customer_sub[$key]!=''){
+                    $birthday_customer_sub[$key]=str_replace('/','-',$birthday_customer_sub[$key]);
+                    $ngaysinh_sub=date("Y-m-d", strtotime($birthday_customer_sub[$key]));
+                }
+            }
+            $pass_sub = '';
+            if (isset($passport_customer_sub[$key])) {
+                $pass_sub = $passport_customer_sub[$key];
+            }
+            $date_pass_sub = '';
+            if (isset($date_passport_customer_sub[$key])) {
+                if($date_passport_customer_sub[$key]!=''){
+                    $date_passport_customer_sub[$key]=str_replace('/','-',$date_passport_customer_sub[$key]);
+                    $date_pass_sub=date("Y-m-d", strtotime($date_passport_customer_sub[$key]));
+                }
+            }
+            if ($value != '') {
+                $customer_new = new customer_booking();
+                $customer_new->name = $name_sub;
+                $customer_new->email = $email_sub;
+                $customer_new->phone = $phone_sub;
+                $customer_new->address = $address_sub;
+                $customer_new->do_tuoi = $dotuoi_sub;
+                $customer_new->birthday = $ngaysinh_sub;
+                $customer_new->passport = $pass_sub;
+                $customer_new->date_passport = $date_pass_sub;
+                $customer_new->updated = _returnGetDateTime();
+                $customer_new->created = _returnGetDateTime();
+                $customer_new->created_by = $created_by;
+                $customer_new->booking_id = $id_booking;
+                customer_booking_insert($customer_new);
             }
         }
     }
 }
 
-function _updateStatusNoti(){
-    if(isset($_GET['id_noti'])&&$_GET['id_noti']!=''&&isset($_GET['noti'])){
-        $id_noti=_return_mc_decrypt(_returnGetParamSecurity('id_noti'), ENCRYPTION_KEY);
-        $data_noti_id=notification_getById($id_noti);
-        if(count($data_noti_id)>0){
-            $noti_model=new notification((array)$data_noti_id[0]);
-            $noti_model->status=1;
+function _updateStatusNoti()
+{
+    if (isset($_GET['id_noti']) && $_GET['id_noti'] != '' && isset($_GET['noti'])) {
+        $id_noti = _return_mc_decrypt(_returnGetParamSecurity('id_noti'), ENCRYPTION_KEY);
+        $data_noti_id = notification_getById($id_noti);
+        if (count($data_noti_id) > 0) {
+            $noti_model = new notification((array)$data_noti_id[0]);
+            $noti_model->status = 1;
             notification_update($noti_model);
         }
     }

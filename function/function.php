@@ -1054,7 +1054,12 @@ function _randomCustommr(){
 }
 function _randomBooking($code_module,$function_count, $field='code_booking'){
     $rand_number=rand(1,5);
-    $rand=$code_module.(implode('',_getRandomNumbers(1, 99, $rand_number))).$_SESSION['user_id'];
+    $user_id='';
+    if(isset($_SESSION['user_id'])){
+        $user_id=$_SESSION['user_id'];
+    }
+
+    $rand=$code_module.(implode('',_getRandomNumbers(1, 99, $rand_number))).$user_id;
     $data_booking=$function_count($field.'="'.$rand.'"');
     if($data_booking>0){
         _randomBooking($code_module,$function_count,$field);
@@ -1088,41 +1093,38 @@ function _insertLog($user_id,$module_id,$form_id,$action_id,$item_id,$value_old,
     $log_model->created=_returnGetDateTime();
     log_insert($log_model);
 }
-function _updateCustomerBooking($name_customer_sub,$email_customer,$phone_customer,$address_customer,$id_booking){
+function _updateCustomerBooking($name_customer_sub,$email_customer,$phone_customer,$address_customer,$do_tuoi_customer,$id_booking,  $created_by=''){
     if(count($name_customer_sub)>0){
         foreach($name_customer_sub as $key=>$value){
             $name_sub=$value;
-            $email_sub=$email_customer[$key];
-            $phone_sub=$phone_customer[$key];
-            $address_sub=$address_customer[$key];
-            if($value!=''&&$email_customer[$key]!=''&&$phone_customer[$key]!=''&&$address_customer[$key]){
-                $check_data_khach_hang_sub=customer_getByTop('1','email="'.$email_sub.'"','id desc');
-                if(count($check_data_khach_hang_sub)==0){
-                    $customer_new=new customer();
+            $email_sub='';
+            if(isset($email_customer[$key])){
+                $email_sub=$email_customer[$key];
+            }
+            $phone_sub='';
+            if(isset($phone_customer[$key])){
+                $phone_sub=$phone_customer[$key];
+            }
+            $address_sub='';
+            if(isset($address_sub[$key])){
+                $address_sub=$address_customer[$key];
+            }
+            $dotuoi_sub='';
+            if(isset($do_tuoi_customer[$key])){
+                $dotuoi_sub=$do_tuoi_customer[$key];
+            }
+            if($value!=''){
+                    $customer_new=new customer_booking();
                     $customer_new->name=$name_sub;
                     $customer_new->email=$email_sub;
                     $customer_new->phone=$phone_sub;
                     $customer_new->address=$address_sub;
+                    $customer_new->do_tuoi=$dotuoi_sub;
                     $customer_new->updated = _returnGetDateTime();
                     $customer_new->created = _returnGetDateTime();
-                    $customer_new->created_by=$_SESSION['user_id'];
-                    $customer_new->status = 1;
+                    $customer_new->created_by=$created_by;
                     $customer_new->booking_id = $id_booking;
-                    $customer_new->code=_randomBooking('cus','customer_count');
-                    $customer_new->code=_randomBooking('#','customer_count','code');
-                    customer_insert($customer_new);
-                }else{
-                    $arr_data=(array)$check_data_khach_hang_sub[0];
-                    $customer_new=new customer($arr_data);
-                    $customer_new->name=$name_sub;
-                    $customer_new->email=$email_sub;
-                    $customer_new->phone=$phone_sub;
-                    $customer_new->address=$address_sub;
-                    $customer_new->updated = _returnGetDateTime();
-                    $customer_new->booking_id = $id_booking;
-                    customer_update($customer_new);
-                }
-
+                    customer_booking_insert($customer_new);
             }
         }
     }

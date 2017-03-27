@@ -34,6 +34,7 @@ RewriteRule ^khach-hang/sua controller/default/customer/themmoi.php
 RewriteRule ^khach-hang/xoa$ controller/default/customer/delete.php
 
 RewriteRule ^booking-website/$ controller/default/booking/booking_website.php
+RewriteRule ^return-booking-website/$ controller/default/booking/return_booking_website.php
 RewriteRule ^booking/$ controller/default/booking/booking.php
 RewriteRule ^booking-new/$ controller/default/booking/booking.php
 RewriteRule ^booking-giao-dich/$ controller/default/booking/booking.php

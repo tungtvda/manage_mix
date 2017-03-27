@@ -57,7 +57,21 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
     $number_3=_return_mc_decrypt(_returnPostParamSecurity('number_3'), '');
     $gen=_return_mc_decrypt(_returnPostParamSecurity('gen'), '');
     $tol=_return_mc_decrypt(_returnPostParamSecurity('tol'), '');
-
+    if($nguon_tour!=''){
+        $data_nguon_tour=nguon_tour_getByTop('1','name="'.$nguon_tour.'"','id desc');
+        if(count($data_nguon_tour)>0){
+            $nguon_tour=$data_nguon_tour[0]->id;
+        }else{
+            $nguon_tour_model=new nguon_tour();
+            $nguon_tour_model->name=$nguon_tour;
+            $nguon_tour_model->position=1;
+            nguon_tour_insert($nguon_tour_model);
+            $data_nguon_tour=nguon_tour_getByTop('1','name="'.$nguon_tour.'"','id desc');
+            if(count($data_nguon_tour)>0){
+                $nguon_tour=$data_nguon_tour[0]->id;
+            }
+        }
+    }
     if($name_customer!=''&&$email!=''&&$phone!=''&&$address!=''){
         $check_data_khach_hang=customer_getByTop('1','email="'.$email.'"','id desc');
         if(count($check_data_khach_hang)>0){

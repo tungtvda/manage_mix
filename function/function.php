@@ -1126,7 +1126,6 @@ function _updateCustomerBooking($name_customer_sub, $email_customer, $phone_cust
             if (isset($do_tuoi_customer[$key])) {
                 $dotuoi_sub = $do_tuoi_customer[$key];
             }
-            print_r($birthday_customer_sub);
             $ngaysinh_sub = '';
             if (isset($birthday_customer_sub[$key])) {
                 if($birthday_customer_sub[$key]!=''){

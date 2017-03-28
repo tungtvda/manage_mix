@@ -54,7 +54,7 @@ if(isset($_SESSION["Admin"]))
             header('Location: '.SITE_NAME.'/controller/admin/customer_booking.php');
         }
     }
-    if(isset($_POST["booking_id"])&&isset($_POST["name"])&&isset($_POST["email"])&&isset($_POST["phone"])&&isset($_POST["address"])&&isset($_POST["do_tuoi"])&&isset($_POST["birthday"])&&isset($_POST["passport"])&&isset($_POST["date_passport"])&&isset($_POST["created_by"])&&isset($_POST["created"])&&isset($_POST["updated"]))
+    if(isset($_POST["booking_id"])&&isset($_POST["name"])&&isset($_POST["email"])&&isset($_POST["phone"])&&isset($_POST["address"])&&isset($_POST["do_tuoi"])&&isset($_POST["do_tuoi_number"])&&isset($_POST["birthday"])&&isset($_POST["passport"])&&isset($_POST["date_passport"])&&isset($_POST["created_by"])&&isset($_POST["created"])&&isset($_POST["updated"]))
     {
        $array=$_POST;
        if(!isset($array['id']))
@@ -71,6 +71,8 @@ if(isset($_SESSION["Admin"]))
        $array['address']='0';
        if(!isset($array['do_tuoi']))
        $array['do_tuoi']='0';
+       if(!isset($array['do_tuoi_number']))
+       $array['do_tuoi_number']='0';
        if(!isset($array['birthday']))
        $array['birthday']='0';
        if(!isset($array['passport']))

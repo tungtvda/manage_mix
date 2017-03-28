@@ -44,6 +44,7 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
     $phone_customer_sub=json_decode(_return_mc_decrypt(_returnPostParamSecurity('phone_customer_sub'), ''));
     $address_customer_sub=json_decode(_return_mc_decrypt(_returnPostParamSecurity('address_customer_sub'), ''));
     $tuoi_customer_sub=json_decode(_return_mc_decrypt(_returnPostParamSecurity('tuoi_customer_sub'), ''));
+    $tuoi_number_customer_sub=json_decode(_return_mc_decrypt(_returnPostParamSecurity('tuoi_number_customer_sub'), ''));
     $birthday_customer_sub=json_decode(_return_mc_decrypt(_returnPostParamSecurity('birthday_customer_sub'), ''));
     $passport_customer_sub=json_decode(_return_mc_decrypt(_returnPostParamSecurity('passport_customer_sub'), ''));
     $date_passport_customer_sub=json_decode(_return_mc_decrypt(_returnPostParamSecurity('date_passport_customer_sub'), ''));
@@ -129,6 +130,9 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
         $booking_model->status=1;
         $booking_model->confirm_admin=0;
         $booking_model->created_by=0;
+        $booking_model->name_price=$name_price;
+        $booking_model->name_price_2=$name_price_2;
+        $booking_model->name_price_3=$name_price_3;
         $booking_model->created=_returnGetDateTime();
         $booking_model->updated=_returnGetDateTime();
         $code_booking=_randomBooking('#','booking_count','code_booking');
@@ -139,7 +143,7 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
             $id_booking=$data_booking[0]->id;
         }
 
-        _updateCustomerBooking($name_customer_sub,$email_customer_sub,$phone_customer_sub,$address_customer_sub,$tuoi_customer_sub,$birthday_customer_sub,$passport_customer_sub,$date_passport_customer_sub,$id_booking);
+        _updateCustomerBooking($name_customer_sub,$email_customer_sub,$phone_customer_sub,$address_customer_sub,$tuoi_customer_sub,$tuoi_number_customer_sub,$birthday_customer_sub,$passport_customer_sub,$date_passport_customer_sub,$id_booking);
         $message='';
         $name_noti='Khách hàng '.$name_customer.' đã thêm một đơn hàng từ '.$nguon_tour;
         $link_noti=SITE_NAME.'/booking-new/sua?noti=1&confirm=1&id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY);

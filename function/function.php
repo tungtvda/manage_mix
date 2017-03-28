@@ -1103,7 +1103,7 @@ function _insertLog($user_id, $module_id, $form_id, $action_id, $item_id, $value
     log_insert($log_model);
 }
 
-function _updateCustomerBooking($name_customer_sub, $email_customer, $phone_customer, $address_customer, $do_tuoi_customer, $birthday_customer_sub, $passport_customer_sub, $date_passport_customer_sub, $id_booking, $created_by = '')
+function _updateCustomerBooking($name_customer_sub, $email_customer, $phone_customer, $address_customer, $do_tuoi_customer,$tuoi_number_customer_sub, $birthday_customer_sub, $passport_customer_sub, $date_passport_customer_sub, $id_booking, $created_by = '')
 {
     if (count($name_customer_sub) > 0) {
         foreach ($name_customer_sub as $key => $value) {
@@ -1126,6 +1126,11 @@ function _updateCustomerBooking($name_customer_sub, $email_customer, $phone_cust
             if (isset($do_tuoi_customer[$key])) {
                 $dotuoi_sub = $do_tuoi_customer[$key];
             }
+            $dotuoi_number_sub = 1;
+            if (isset($tuoi_number_customer_sub[$key])) {
+                $dotuoi_number_sub = $tuoi_number_customer_sub[$key];
+            }
+
             $ngaysinh_sub = '';
             if (isset($birthday_customer_sub[$key])) {
                 if($birthday_customer_sub[$key]!=''){
@@ -1151,6 +1156,7 @@ function _updateCustomerBooking($name_customer_sub, $email_customer, $phone_cust
                 $customer_new->phone = $phone_sub;
                 $customer_new->address = $address_sub;
                 $customer_new->do_tuoi = $dotuoi_sub;
+                $customer_new->do_tuoi_number = $dotuoi_number_sub;
                 $customer_new->birthday = $ngaysinh_sub;
                 $customer_new->passport = $pass_sub;
                 $customer_new->date_passport = $date_pass_sub;

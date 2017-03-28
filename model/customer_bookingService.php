@@ -62,17 +62,17 @@ function customer_booking_getByPaging($CurrentPage, $PageSize,$Order,$where)
 //
 function customer_booking_getByPagingReplace($CurrentPage, $PageSize,$Order,$where)
 {
-   return customer_booking_Get("SELECT customer_booking.id, customer_booking.booking_id, customer_booking.name, customer_booking.email, customer_booking.phone, customer_booking.address, customer_booking.do_tuoi, customer_booking.birthday, customer_booking.passport, customer_booking.date_passport, customer_booking.created_by, customer_booking.created, customer_booking.updated FROM  customer_booking ".(($where!='')?(' where '.$where):'')." Order By ".$Order." Limit ".(($CurrentPage-1)*$PageSize)." , ".$PageSize);
+   return customer_booking_Get("SELECT customer_booking.id, customer_booking.booking_id, customer_booking.name, customer_booking.email, customer_booking.phone, customer_booking.address, customer_booking.do_tuoi, customer_booking.do_tuoi_number, customer_booking.birthday, customer_booking.passport, customer_booking.date_passport, customer_booking.created_by, customer_booking.created, customer_booking.updated FROM  customer_booking ".(($where!='')?(' where '.$where):'')." Order By ".$Order." Limit ".(($CurrentPage-1)*$PageSize)." , ".$PageSize);
 }
 //
 function customer_booking_insert($obj)
 {
-    return exe_query("insert into customer_booking (booking_id,name,email,phone,address,do_tuoi,birthday,passport,date_passport,created_by,created,updated) values ('$obj->booking_id','$obj->name','$obj->email','$obj->phone','$obj->address','$obj->do_tuoi','$obj->birthday','$obj->passport','$obj->date_passport','$obj->created_by','$obj->created','$obj->updated')",'customer_booking');
+    return exe_query("insert into customer_booking (booking_id,name,email,phone,address,do_tuoi,do_tuoi_number,birthday,passport,date_passport,created_by,created,updated) values ('$obj->booking_id','$obj->name','$obj->email','$obj->phone','$obj->address','$obj->do_tuoi','$obj->do_tuoi_number','$obj->birthday','$obj->passport','$obj->date_passport','$obj->created_by','$obj->created','$obj->updated')",'customer_booking');
 }
 //
 function customer_booking_update($obj)
 {
-    return exe_query("update customer_booking set booking_id='$obj->booking_id',name='$obj->name',email='$obj->email',phone='$obj->phone',address='$obj->address',do_tuoi='$obj->do_tuoi',birthday='$obj->birthday',passport='$obj->passport',date_passport='$obj->date_passport',created_by='$obj->created_by',created='$obj->created',updated='$obj->updated' where id=$obj->id",'customer_booking');
+    return exe_query("update customer_booking set booking_id='$obj->booking_id',name='$obj->name',email='$obj->email',phone='$obj->phone',address='$obj->address',do_tuoi='$obj->do_tuoi',do_tuoi_number='$obj->do_tuoi_number',birthday='$obj->birthday',passport='$obj->passport',date_passport='$obj->date_passport',created_by='$obj->created_by',created='$obj->created',updated='$obj->updated' where id=$obj->id",'customer_booking');
 }
 //
 function customer_booking_delete($obj)

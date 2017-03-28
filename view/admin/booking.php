@@ -29,7 +29,7 @@ function view_booking($data)
 //
 function showTableHeader()
 {
-    return '<th>id</th><th>code_booking</th><th>id_tour</th><th>name_tour</th><th>code_tour</th><th>price_tour</th><th>price_11</th><th>price_5</th><th>price_new</th><th>price_11_new</th><th>price_5_new</th><th>vat</th><th>nguon_tour</th><th>tien_te</th><th>ty_gia</th><th>ngay_bat_dau</th><th>han_thanh_toan</th><th>loai_khach_hang</th><th>hinh_thuc_thanh_toan</th><th>id_customer</th><th>diem_don</th><th>diem_tra</th><th>ngay_khoi_hanh</th><th>ngay_ket_thuc</th><th>phuong_tien</th><th>num_nguoi_lon</th><th>num_tre_em</th><th>num_tre_em_5</th><th>price_number</th><th>price_number_2</th><th>price_number_3</th><th>total_price</th><th>tien_thanh_toan</th><th>user_id</th><th>status</th><th>confirm_admin</th><th>created_by</th><th>updated_by</th><th>created</th><th>updated</th><th>note</th>';
+    return '<th>id</th><th>code_booking</th><th>id_tour</th><th>name_tour</th><th>code_tour</th><th>price_tour</th><th>price_11</th><th>price_5</th><th>price_new</th><th>price_11_new</th><th>price_5_new</th><th>vat</th><th>nguon_tour</th><th>tien_te</th><th>ty_gia</th><th>ngay_bat_dau</th><th>han_thanh_toan</th><th>loai_khach_hang</th><th>hinh_thuc_thanh_toan</th><th>id_customer</th><th>diem_don</th><th>diem_tra</th><th>ngay_khoi_hanh</th><th>ngay_ket_thuc</th><th>phuong_tien</th><th>num_nguoi_lon</th><th>num_tre_em</th><th>num_tre_em_5</th><th>price_number</th><th>price_number_2</th><th>price_number_3</th><th>name_price</th><th>name_price_2</th><th>name_price_3</th><th>total_price</th><th>tien_thanh_toan</th><th>user_id</th><th>status</th><th>confirm_admin</th><th>created_by</th><th>updated_by</th><th>created</th><th>updated</th><th>note</th>';
 }
 //
 function showTableBody($data)
@@ -69,6 +69,9 @@ function showTableBody($data)
         $TableBody.="<td>".$obj->price_number."</td>";
         $TableBody.="<td>".$obj->price_number_2."</td>";
         $TableBody.="<td>".$obj->price_number_3."</td>";
+        $TableBody.="<td>".$obj->name_price."</td>";
+        $TableBody.="<td>".$obj->name_price_2."</td>";
+        $TableBody.="<td>".$obj->name_price_3."</td>";
         $TableBody.="<td>".$obj->total_price."</td>";
         $TableBody.="<td>".$obj->tien_thanh_toan."</td>";
         $TableBody.="<td>".$obj->user_id."</td>";
@@ -120,6 +123,9 @@ function showFrom($form,$ListKey=array())
     $str_from.='<p><label>price_number</label><input class="text-input small-input" type="text"  name="price_number" value="'.(($form!=false)?$form->price_number:'').'" /></p>';
     $str_from.='<p><label>price_number_2</label><input class="text-input small-input" type="text"  name="price_number_2" value="'.(($form!=false)?$form->price_number_2:'').'" /></p>';
     $str_from.='<p><label>price_number_3</label><input class="text-input small-input" type="text"  name="price_number_3" value="'.(($form!=false)?$form->price_number_3:'').'" /></p>';
+    $str_from.='<p><label>name_price</label><input class="text-input small-input" type="text"  name="name_price" value="'.(($form!=false)?$form->name_price:'').'" /></p>';
+    $str_from.='<p><label>name_price_2</label><input class="text-input small-input" type="text"  name="name_price_2" value="'.(($form!=false)?$form->name_price_2:'').'" /></p>';
+    $str_from.='<p><label>name_price_3</label><input class="text-input small-input" type="text"  name="name_price_3" value="'.(($form!=false)?$form->name_price_3:'').'" /></p>';
     $str_from.='<p><label>total_price</label><input class="text-input small-input" type="text"  name="total_price" value="'.(($form!=false)?$form->total_price:'').'" /></p>';
     $str_from.='<p><label>tien_thanh_toan</label><input class="text-input small-input" type="text"  name="tien_thanh_toan" value="'.(($form!=false)?$form->tien_thanh_toan:'').'" /></p>';
     $str_from.='<p><label>user_id</label><input class="text-input small-input" type="text"  name="user_id" value="'.(($form!=false)?$form->user_id:'').'" /></p>';

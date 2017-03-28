@@ -29,7 +29,7 @@ function view_customer_booking($data)
 //
 function showTableHeader()
 {
-    return '<th>id</th><th>booking_id</th><th>name</th><th>email</th><th>phone</th><th>address</th><th>do_tuoi</th><th>birthday</th><th>passport</th><th>date_passport</th><th>created_by</th><th>created</th><th>updated</th>';
+    return '<th>id</th><th>booking_id</th><th>name</th><th>email</th><th>phone</th><th>address</th><th>do_tuoi</th><th>do_tuoi_number</th><th>birthday</th><th>passport</th><th>date_passport</th><th>created_by</th><th>created</th><th>updated</th>';
 }
 //
 function showTableBody($data)
@@ -45,6 +45,7 @@ function showTableBody($data)
         $TableBody.="<td>".$obj->phone."</td>";
         $TableBody.="<td>".$obj->address."</td>";
         $TableBody.="<td>".$obj->do_tuoi."</td>";
+        $TableBody.="<td>".$obj->do_tuoi_number."</td>";
         $TableBody.="<td>".$obj->birthday."</td>";
         $TableBody.="<td>".$obj->passport."</td>";
         $TableBody.="<td>".$obj->date_passport."</td>";
@@ -68,6 +69,7 @@ function showFrom($form,$ListKey=array())
     $str_from.='<p><label>phone</label><input class="text-input small-input" type="text"  name="phone" value="'.(($form!=false)?$form->phone:'').'" /></p>';
     $str_from.='<p><label>address</label><input class="text-input small-input" type="text"  name="address" value="'.(($form!=false)?$form->address:'').'" /></p>';
     $str_from.='<p><label>do_tuoi</label><input class="text-input small-input" type="text"  name="do_tuoi" value="'.(($form!=false)?$form->do_tuoi:'').'" /></p>';
+    $str_from.='<p><label>do_tuoi_number</label><input class="text-input small-input" type="text"  name="do_tuoi_number" value="'.(($form!=false)?$form->do_tuoi_number:'').'" /></p>';
     $str_from.='<p><label>birthday</label><input class="text-input small-input" type="text"  name="birthday" value="'.(($form!=false)?$form->birthday:'').'" /></p>';
     $str_from.='<p><label>passport</label><input class="text-input small-input" type="text"  name="passport" value="'.(($form!=false)?$form->passport:'').'" /></p>';
     $str_from.='<p><label>date_passport</label><input class="text-input small-input" type="text"  name="date_passport" value="'.(($form!=false)?$form->date_passport:'').'" /></p>';

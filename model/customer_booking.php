@@ -1,7 +1,7 @@
 <?php
 class customer_booking
 {
-    public $id,$booking_id,$name,$email,$phone,$address,$do_tuoi,$birthday,$passport,$date_passport,$created_by,$created,$updated;
+    public $id,$booking_id,$name,$email,$phone,$address,$do_tuoi,$do_tuoi_number,$birthday,$passport,$date_passport,$created_by,$created,$updated;
     public function customer_booking($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
@@ -11,6 +11,7 @@ class customer_booking
     $this->phone=isset($data['phone'])?$data['phone']:'';
     $this->address=isset($data['address'])?$data['address']:'';
     $this->do_tuoi=isset($data['do_tuoi'])?$data['do_tuoi']:'';
+    $this->do_tuoi_number=isset($data['do_tuoi_number'])?$data['do_tuoi_number']:'';
     $this->birthday=isset($data['birthday'])?$data['birthday']:'';
     $this->passport=isset($data['passport'])?$data['passport']:'';
     $this->date_passport=isset($data['date_passport'])?$data['date_passport']:'';
@@ -28,6 +29,7 @@ class customer_booking
             $this->phone=addslashes($this->phone);
             $this->address=addslashes($this->address);
             $this->do_tuoi=addslashes($this->do_tuoi);
+            $this->do_tuoi_number=addslashes($this->do_tuoi_number);
             $this->birthday=addslashes($this->birthday);
             $this->passport=addslashes($this->passport);
             $this->date_passport=addslashes($this->date_passport);
@@ -44,6 +46,7 @@ class customer_booking
             $this->phone=stripslashes($this->phone);
             $this->address=stripslashes($this->address);
             $this->do_tuoi=stripslashes($this->do_tuoi);
+            $this->do_tuoi_number=stripslashes($this->do_tuoi_number);
             $this->birthday=stripslashes($this->birthday);
             $this->passport=stripslashes($this->passport);
             $this->date_passport=stripslashes($this->date_passport);

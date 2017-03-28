@@ -28,7 +28,7 @@ if (isset($_POST['number'])){
        }
     }
     $arr_data_cus=array();
-    $data_cus=customer_booking_getByTop('','','id desc');
+    $data_cus=customer_booking_getByTop('','','id ASC');
     if(count($data_cus)>0){
         $arr_data['sub_customer']=$data_cus;
     }

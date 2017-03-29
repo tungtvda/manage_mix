@@ -994,6 +994,42 @@ function _returnDataAutoCompleteTour()
                 $price_format = number_format((int)$row_kh->price, 0, ",", ".") . ' vnđ';
                 $price = $row_kh->price;
             }
+            if($row_kh->price_2==''){
+                $price_2_format=$price_format;
+                $price_2=$price;
+            }else{
+                $price_2_format=number_format((int)$row_kh->price_2, 0, ",", ".") . ' vnđ';
+                $price_2=$row_kh->price_2;
+            }
+            if($row_kh->price_3==''){
+                $price_3_format=$price_format;
+                $price_3=$price;
+            }else{
+                $price_3_format=number_format((int)$row_kh->price_3, 0, ",", ".") . ' vnđ';
+                $price_3=$row_kh->price_2;
+            }
+
+//            $price_number= $row_kh->price_number;
+//            $price_number_2= $row_kh->price_number_2;
+//            $price_number_3= $row_kh->price_number_3;
+
+//            $list_price_nguoi_lon=json_encode(returnInput_price($price_number,'price_nguoi_lon_'));
+//            $list_price_tre_em_511=returnInput_price($price_number_2,'price_tre_em_511_');
+//            $list_price_tre_em_5=returnInput_price($price_number_3,'price_tre_em_5_');
+
+            $name_price='Giá người lớn';
+            $name_price_2='Giá trẻ em 5-11 tuổi';
+            $name_price_3='Giá trẻ em dưới 5 tuổi';
+            if($row_kh->name_price!=''){
+                $name_price=$row_kh->name_price;
+            }
+            if($row_kh->name_price_2!=''){
+                $name_price_2=$row_kh->name_price_2;
+            }
+            if($row_kh->name_price_3!=''){
+                $name_price_3=$row_kh->name_price_3;
+            }
+
             $durations = $row_kh->durations;
             $vehicle = $row_kh->vehicle;
             $departure_name = '';
@@ -1005,13 +1041,39 @@ function _returnDataAutoCompleteTour()
                     $departure_id = $data_departure[0]->id;
                 }
             }
-            $string_data .= "['" . $id . "','" . $name . "','" . $price_format . "','" . $durations . "','" . $vehicle . "','" . $departure_id . "','" . $departure_name . "','" . $price . "'],";
+            $string_data .= "['" . $id . "','" . $name . "','" . $price_format . "','" . $durations . "','" . $vehicle . "','" . $departure_id . "','" . $departure_name . "','" . $price . "','" . $name_price . "','" . $price_2 . "','" . $price_2_format . "','" . $name_price_2 . "','" . $price_3 . "','" . $price_3_format . "','" . $name_price_3 . "'],";
         }
     }
     $string_data .= '];';
     return $string_data;
 }
+function returnInput_price($price,$name_price){
+    $string='';
+    if($price!=''){
+        $array_price=explode(',',$price);
+        if(count($array_price)>0){
+            foreach($array_price as $row){
+                if($row!=''){
+                    $array_item=explode('-',$row);
+                    if(count($array_item)>0){
+                        if(isset($array_item[0])&&isset($array_item[1])&&$array_item[0]!=''&&$array_item[1]!=''){
+                            $check_lon_hon=strstr($array_item[0],">");
+                            $input_lon_hon='';
+                            if($check_lon_hon!=''){
+                                $number_lonhon=str_replace('>','',$check_lon_hon);
+                                $input_lon_hon='<input hidden value="'.$number_lonhon.'" id="input_'.$name_price.'tu" class="valid" name="'.$name_price.'tu">';
+                                $array_item[0]=str_replace('>','lon_hon_',$array_item[0]);
+                            }
+                            $string.='<input hidden value="'.$array_item[1].'" id="input_'.$name_price.$array_item[0].'" class="valid" name="'.$name_price.$array_item[0].'">'.$input_lon_hon;
 
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return $string;
+}
 function _returnDataAutoCompleteUser()
 {
     if ($_SESSION['user_role'] == 1) {

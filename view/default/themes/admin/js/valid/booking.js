@@ -721,6 +721,15 @@ jQuery(function ($) {
         }
     });
 
+    $('body').on("blur", '#input_num_nguoi_lon', function () {
+        returnDanhSachDoan('#input_num_nguoi_lon');
+    });
+    $('body').on("blur", '#input_num_tre_em', function () {
+        returnDanhSachDoan('#input_num_tre_em');
+    });
+    $('body').on("blur", '#input_num_tre_em_5', function () {
+        returnDanhSachDoan('#input_num_tre_em_5');
+    });
     //$('i').ggtooltip();
 });
 function show_booking(Id,name){
@@ -1240,6 +1249,7 @@ function removeValueCustomer() {
 }
 
 function removeValueTour() {
+    $('#input_list_price').html('');
     $('.table_booking_tour').html('');
     $('#input_id_tour').val('');
     $('#tong_cong').html('');    $('#tong_cong').html('');

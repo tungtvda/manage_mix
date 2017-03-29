@@ -64,3 +64,5 @@ RewriteRule ^get-detail-ajax-booking/$ controller/default/booking/get_detail_aja
 RewriteRule ^booking/insert-tour$ controller/default/booking/themmoi_tour.php
 RewriteRule ^booking/sua controller/default/booking/themmoi.php
 RewriteRule ^booking/confirm-order controller/default/booking/confirm_order.php
+
+RewriteRule ^return-input-price-booking/$ controller/default/booking/list_price_input.php

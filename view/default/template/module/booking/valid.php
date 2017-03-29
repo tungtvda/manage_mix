@@ -92,15 +92,33 @@ $string_data_user=_returnDataAutoCompleteUser();
             renderItem: function (item, search) {
                 search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
                 var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
-                return '<div title="' + item[0] + '-'+item[3]+'-'+item[4]+'" class="autocomplete-suggestion" data-departure_name="' + item[6] + '" data-vehicle="' + item[4] + '" data-durations="' + item[3] + '" data-name="' + item[1] + '" data-price-format="' + item[2] + '" data-price="' + item[7] + '" data-id="' + item[0] + '" > ' + item[1]+'</div>';
+
+                return '<div data-name-price-3="' + item[14] + '" data-price-3-format="' + item[13] + '" data-price-3="' + item[12] + '" data-name-price-2="' + item[11] + '" data-price-2-format="' + item[10] + '" data-price-2="' + item[9] + '" data-name-price="' + item[8] + '" title="' + item[0] + '-'+item[3]+'-'+item[4]+'" class="autocomplete-suggestion" data-departure_name="' + item[6] + '" data-vehicle="' + item[4] + '" data-durations="' + item[3] + '" data-name="' + item[1] + '" data-price-format="' + item[2] + '" data-price="' + item[7] + '" data-id="' + item[0] + '" > ' + item[1]+'</div>';
             },
             onSelect: function (e, term, item) {
+                $('#input_list_price').html();
 //                console.log('Item "' + item.data('langname') + ' (' + item.data('lang') + ')" selected by ' + (e.type == 'keydown' ? 'pressing enter or tab' : 'mouse click') + '.');
                 $('#input_name_tour').val(item.data('name'));
 
                 $('#input_price_submit').val(item.data('price'));
-                $('#input_price_511_submit').val(item.data('price'));
-                $('#input_price_5_submit').val(item.data('price'));
+                $('#input_price_511_submit').val(item.data('price-2'));
+                $('#input_price_5_submit').val(item.data('price-3'));
+
+                $('#name_price_nguoi_lon').html(item.data('name-price'));
+                $('#name_price_tre_em_511').html(item.data('name-price-2'));
+                $('#name_price_tre_em_5').html(item.data('name-price-3'));
+                var Id=item.data('id');
+                var url = $('#url_input').val();
+                if(Id!=''){
+                    jQuery.post(url+"/return-input-price-booking/",
+                        {
+                            id: Id,
+                        }
+                        )
+                        .done(function (res) {
+                            $('#input_list_price').html(res)
+                        });
+                }
                 var table_tour="<tr> <td class='center'>1</td><td><a>"+item.data('name')+"</a></td><td>" +
                     "<span id='price_format_span'>"+item.data('price-format')+"</span>" +
                     "<input hidden id='input_price_format' value='"+item.data('price-format')+"'>" +
@@ -110,15 +128,15 @@ $string_data_user=_returnDataAutoCompleteUser();
                     "<a id='reset_price' title='Lấy lại giá cũ' href='javascript:void(0)'> <i class='fa fa-refresh' title='Giá gốc'></i></a>" +
                     "</td> " +
                     "<td>" +
-                    "<span id='price_format_span_511'>"+item.data('price-format')+"</span>" +
-                    "<input hidden title='giá sửa' id='input_price_511' value='"+item.data('price')+"'>" +
-                    "<input hidden id='input_price_511_old' title='giá cũ' value='"+item.data('price')+"'> " +
+                    "<span id='price_format_span_511'>"+item.data('price-2-format')+"</span>" +
+                    "<input hidden title='giá sửa' id='input_price_511' value='"+item.data('price-2')+"'>" +
+                    "<input hidden id='input_price_511_old' title='giá cũ' value='"+item.data('price-2')+"'> " +
                     " | <a id='edit_price_511' href='javascript:void(0)'> <i class='fa fa-edit' title='Sửa đơn giá'></i></a>" +
                     "<a id='reset_price_511' title='Lấy lại giá cũ' href='javascript:void(0)'> <i class='fa fa-refresh' title='Giá gốc'></i></a>" +
                     "</td><td>" +
-                    "<span id='price_format_span_5'>"+item.data('price-format')+"</span>" +
-                    "<input hidden title='giá sửa' id='input_price_5' value='"+item.data('price')+"'>" +
-                    "<input hidden id='input_price_5_old' title='giá cũ' value='"+item.data('price')+"'> " +
+                    "<span id='price_format_span_5'>"+item.data('price-3-format')+"</span>" +
+                    "<input hidden title='giá sửa' id='input_price_5' value='"+item.data('price-3')+"'>" +
+                    "<input hidden id='input_price_5_old' title='giá cũ' value='"+item.data('price-3')+"'> " +
                     " | <a id='edit_price_5' href='javascript:void(0)'> <i class='fa fa-edit' title='Sửa đơn giá'></i></a>" +
                     "<a id='reset_price_5' title='Lấy lại giá cũ' href='javascript:void(0)'> <i class='fa fa-refresh' title='Giá gốc'></i></a>" +
                     "</td><td>"+item.data('departure_name')+"" +

@@ -16,6 +16,7 @@ if (isset($_POST['number'])){
         echo 0;
         exit;
     }
+
     $data_booking=booking_getByTop('1','code_booking="'.$code_booking.'"','id desc');
     if(count($data_booking)==0){
         echo 0;

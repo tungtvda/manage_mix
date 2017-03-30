@@ -154,6 +154,15 @@ $string_data_user=_returnDataAutoCompleteUser();
                     $('#icon_error_name_tour').hide();
                     $('#input_name_tour').removeClass("input-error").addClass("valid");
                 }
+                var numbe_1=parseInt($('#input_num_nguoi_lon').val());
+                var numbe_2=parseInt($('#input_num_tre_em').val());
+                var numbe_3=parseInt($('#input_num_tre_em_5').val());
+                if(numbe_1==0){
+                    $('#input_num_nguoi_lon').show().focus().select();
+                }else{
+                    returnDanhSachDoan();
+                }
+
             }
         });
 

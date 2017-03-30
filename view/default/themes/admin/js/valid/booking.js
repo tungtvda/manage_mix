@@ -1291,3 +1291,274 @@ function formatNumber(nStr, decSeperate, groupSeperate) {
     }
     return x1 + x2;
 }
+function returnDanhSachDoan(id_field){
+    var value=$(id_field).val();
+    var id=$(id_field).attr('id_title');
+    var name_1=$('#input_num_nguoi_lon').attr('name_title');
+    var name_2=$('#input_num_tre_em').attr('name_title');
+    var name_3=$('#input_num_tre_em_5').attr('name_title');
+    if(value==''){
+        if(id==1){
+            $(id_field).val(1);
+        }
+        if(id==2||id==3){
+            $(id_field).val(0);
+        }
+    }
+    if(value==0&&id==1){
+        $(id_field).val(1);
+    }
+    var numbe_1=parseInt($('#input_num_nguoi_lon').val());
+    var numbe_2=parseInt($('#input_num_tre_em').val());
+    var numbe_3=parseInt($('#input_num_tre_em_5').val());
+    var so_cho=$('#input_so_cho').val();
+    var check_show_table=true;
+    var total=numbe_1+numbe_2+numbe_3;
+    $('#input_total_num').val(total);
+    if(so_cho!=undefined){
+        so_cho=parseInt(so_cho);
+        if(total>so_cho){
+            check_show_table=false;
+            $('#input_total_num').addClass("input-error").removeClass("valid");
+            $('#error_total_num').show().html('Số người bạn vừa nhập đã vượt quá số chỗ, bạn vui lòng nhập lại số người');
+        }else{
+            check_show_table=true;
+            $('#input_total_num').addClass("valid").removeClass("input-error");
+            $('#error_total_num').hide().html('Bạn vui lòng kiểm tra lại số người');
+        }
+    }
+    var row='';
+    var stt=1;
+    var price= $('#input_price').val();
+    if(price===''||price===0){
+        price==='Liên hệ'
+    }
+    var price_2= $('#input_price_2').val();
+    if(price_2===''||price_2===0){
+        price_2==price
+    }
+    var price_3= $('#input_price_3').val();
+    if(price_3===''||price_3===0){
+        price_3==price
+    }
+    var total_nguoi_lon=0;
+    var ti_le_nguoi_lon='';
+    if(check_show_table==true){
+        $(".show_hide_table").html('');
+        if(numbe_1>0){
+            if(price==='Liên hệ'){
+                total_nguoi_lon='Liên hệ';
+                var price_item='Liên hệ';
+            }else{
+                var price_item= price.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                total_nguoi_lon=price*numbe_1;
+            }
+            if(numbe_1>1){
+                var price_in_array=$('#input_price_nguoi_lon_'+numbe_1).val();
+                if(price_in_array!=undefined){
+                    if(price_in_array==='Liên hệ'){
+                        total_nguoi_lon='Liên hệ'
+                    }else{
+                        price_item= price_in_array.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                        total_nguoi_lon=(price_in_array*numbe_1);
+
+                        ti_le_nguoi_lon=((price-price_in_array)/price)*100;
+                        ti_le_nguoi_lon = Math.round(ti_le_nguoi_lon);
+                        if(ti_le_nguoi_lon!=0){
+                            ti_le_nguoi_lon='(<i class="fa fa-long-arrow-down"></i>'+ti_le_nguoi_lon+'%)';
+                        }else{
+                            ti_le_nguoi_lon='';
+                        }
+
+
+                    }
+                }else{
+                    var price_tu=$('#input_price_nguoi_lon_tu').val();
+                    if(price_tu!=undefined){
+                        if(parseInt(numbe_1)>=parseInt(price_tu)){
+                            var price_in_array=$('#input_price_nguoi_lon_lon_hon_'+price_tu).val();
+                            if(price_in_array==='Liên hệ'){
+                                total_nguoi_lon='Liên hệ'
+                            }else{
+                                price_item= price_in_array.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                                total_nguoi_lon=(price_in_array*numbe_1);
+
+                                ti_le_nguoi_lon=((price-price_in_array)/price)*100;
+                                ti_le_nguoi_lon = Math.round(ti_le_nguoi_lon);
+                                if(ti_le_nguoi_lon!=0){
+                                    ti_le_nguoi_lon='(<i class="fa fa-long-arrow-down"></i>'+ti_le_nguoi_lon+'%)';
+                                }else{
+                                    ti_le_nguoi_lon='';
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for(var i=1;i<=numbe_1;i++){
+                row =row+'<tr id="row_customer_' + stt+ '"><td class="center stt_cus">' + stt + '</td>' +
+                    '<td><input style="height: 30px" name="name_customer_sub[]" id="input_name_customer_sub_' + stt + '" type="text"class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" name="birthday_customer[]" id="input_birthday_customer_sub_' + stt + '" type="date" placeholder="dd/MM/yyyy" class="valid input_table datepicker"></td>' +
+                    '<td><input style="height: 30px" name="email_customer[]" id="input_email_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" name="phone_customer[]" id="input_phone_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td><input  style="height: 30px" name="address_customer[]" id="input_address_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td>' +
+                    '<input hidden style="height: 30px" name="tuoi_number_customer[]" value="1"  id="input_tuoi_number_customer_' + stt + '" type="text"  class="valid input_table">' +
+                    '<input hidden value="'+name_1+'"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table"><span style="font-size: 12px;">'+name_1+'</span></td>' +
+                    '<td><input style="height: 30px" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text" class="valid input_table "></td>' +
+                    '<td><input style="height: 30px" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date" class="valid input_table datepicker"></td>' +
+                    '<td style="width: 130px"><input hidden value=""  style="height: 30px" name="dongia_customer[]" id="input_dongia_customer_' + stt + '" type="text" class="valid input_table"><span style="font-size: 12px;color: red">'+price_item+' '+ti_le_nguoi_lon+'</span></td>' +
+                    '</tr>';
+                stt=stt+1;
+            }
+        }
+        var ti_le_tre_em_511='';
+        var total_tre_em_511=0;
+        if(numbe_2>0){
+            if(price_2==='Liên hệ'){
+                total_tre_em_511='Liên hệ';
+                var price_item='Liên hệ';
+            }else{
+                var price_item= price_2.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                total_tre_em_511=price_2*numbe_2;
+            }
+            if(numbe_2>1){
+                var price_in_array=$('#input_price_tre_em_511_'+numbe_2).val();
+                if(price_in_array!=undefined){
+                    if(price_in_array==='Liên hệ'){
+                        total_tre_em_511='Liên hệ'
+                    }else{
+                        price_item= price_in_array.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                        total_tre_em_511=(price_in_array*numbe_2);
+
+                        ti_le_tre_em_511=((price_2-price_in_array)/price_2)*100;
+                        ti_le_tre_em_511 = Math.round(ti_le_tre_em_511);
+                        if(ti_le_tre_em_511!=0){
+                            ti_le_tre_em_511='(<i class="fa fa-long-arrow-down"></i>'+ti_le_tre_em_511+'%)';
+                        }else{
+                            ti_le_tre_em_511='';
+                        }
+                    }
+                }else{
+                    var price_tu=$('#input_price_tre_em_511_tu').val();
+                    if(price_tu!=undefined){
+                        if(parseInt(numbe_2)>=parseInt(price_tu)){
+                            var price_in_array=$('#input_price_tre_em_511_lon_hon_'+price_tu).val();
+                            if(price_in_array==='Liên hệ'){
+                                total_tre_em_511='Liên hệ'
+                            }else{
+                                price_item= price_in_array.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                                total_tre_em_511=(price_in_array*numbe_2);
+
+                                ti_le_tre_em_511=((price_2-price_in_array)/price_2)*100;
+                                ti_le_tre_em_511 = Math.round(ti_le_tre_em_511);
+                                if(ti_le_tre_em_511!=0){
+                                    ti_le_tre_em_511='(<i class="fa fa-long-arrow-down"></i>'+ti_le_tre_em_511+'%)';
+                                }else{
+                                    ti_le_tre_em_511='';
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            for(var j=1;j<=numbe_2;j++){
+                row =row+'<tr id="row_customer_' + stt+ '"><td class="center stt_cus">' + stt + '</td>' +
+                    '<td><input style="height: 30px" name="name_customer_sub[]" id="input_name_customer_sub_' + stt + '" type="text"class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" name="birthday_customer[]" id="input_birthday_customer_sub_' + stt + '" type="date" class="valid input_table datepicker"></td>' +
+                    '<td><input style="height: 30px" name="email_customer[]" id="input_email_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" name="phone_customer[]" id="input_phone_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td><input  style="height: 30px" name="address_customer[]" id="input_address_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td>' +
+                    '<input hidden style="height: 30px" name="tuoi_number_customer[]" value="2"  id="input_tuoi_number_customer_' + stt + '" type="text"  class="valid input_table">' +
+                    '<input hidden value="'+name_2+'"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table"><span style="font-size: 12px;">'+name_2+'</span></td>' +
+                    '<td><input style="height: 30px" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text"class="valid input_table "></td>' +
+                    '<td><input style="height: 30px" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date"class="valid input_table datepicker"></td>' +
+                    '<td><input hidden value=""  style="height: 30px" name="dongia_customer[]" id="input_dongia_customer_' + stt + '" type="text" class="valid input_table"><span style="font-size: 12px;color: red">'+price_item+' '+ti_le_tre_em_511+'</span></td>' +
+                    '</tr>';
+                stt=stt+1;
+            }
+        }
+        var ti_le_tre_em_5='';
+        var total_tre_em_5=0;
+        if(numbe_3>0){
+            if(price_3==='Liên hệ'){
+                total_tre_em_5='Liên hệ';
+                var price_item='Liên hệ';
+            }else{
+                var price_item= price_3.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                total_tre_em_5=price_3*numbe_3;
+            }
+            if(numbe_3>1){
+                var price_in_array=$('#input_price_tre_em_5_'+numbe_3).val();
+                if(price_in_array!=undefined){
+                    if(price_in_array==='Liên hệ'){
+                        total_tre_em_5='Liên hệ'
+                    }else{
+                        price_item= price_in_array.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                        total_tre_em_5=(price_in_array*numbe_3);
+
+                        ti_le_tre_em_5=((price_3-price_in_array)/price_3)*100;
+                        ti_le_tre_em_5 = Math.round(ti_le_tre_em_5);
+                        if(ti_le_tre_em_5!=0){
+                            ti_le_tre_em_5='(<i class="fa fa-long-arrow-down"></i>'+ti_le_tre_em_5+'%)';
+                        }else{
+                            ti_le_tre_em_5='';
+                        }
+                    }
+                }else{
+                    var price_tu=$('#input_price_tre_em_5_tu').val();
+                    if(price_tu!=undefined){
+                        if(parseInt(numbe_3)>=parseInt(price_tu)){
+                            var price_in_array=$('#input_price_tre_em_5_lon_hon_'+price_tu).val();
+                            if(price_in_array==='Liên hệ'){
+                                total_tre_em_5='Liên hệ'
+                            }else{
+                                price_item= price_in_array.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                                total_tre_em_5=(price_in_array*numbe_3);
+
+                                ti_le_tre_em_5=((price_3-price_in_array)/price_3)*100;
+                                ti_le_tre_em_5 = Math.round(ti_le_tre_em_5);
+                                if(ti_le_tre_em_5!=0){
+                                    ti_le_tre_em_5='(<i class="fa fa-long-arrow-down"></i>'+ti_le_tre_em_5+'%)';
+                                }else{
+                                    ti_le_tre_em_5='';
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for(var k=1;k<=numbe_3;k++){
+                row =row+'<tr id="row_customer_' + stt+ '"><td class="center stt_cus">' + stt + '</td>' +
+                    '<td><input style="height: 30px" name="name_customer_sub[]" id="input_name_customer_sub_' + stt + '" type="text"class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" name="birthday_customer[]" id="input_birthday_customer_sub_' + stt + '" type="date" class="valid input_table datepicker"></td>' +
+                    '<td><input style="height: 30px" name="email_customer[]" id="input_email_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" name="phone_customer[]" id="input_phone_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td><input  style="height: 30px" name="address_customer[]" id="input_address_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td>' +
+                    '<input hidden style="height: 30px" name="tuoi_number_customer[]" value="3"  id="input_tuoi_number_customer_' + stt + '" type="text"  class="valid input_table">' +
+                    '<input hidden value="'+name_3+'"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table"><span style="font-size: 12px;">'+name_3+'</span></td>' +
+                    '<td><input style="height: 30px" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text"class="valid input_table "></td>' +
+                    '<td><input style="height: 30px" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date"class="valid input_table datepicker"></td>' +
+                    '<td><input hidden value=""  style="height: 30px" name="dongia_customer[]" id="input_dongia_customer_' + stt + '" type="text" class="valid input_table"><span style="font-size: 12px;color: red">'+price_item+' '+ti_le_tre_em_5+'</span></td>' +
+                    '</tr>';
+                stt=stt+1;
+            }
+        }
+
+        $(".show_hide_table").html(row);
+
+        if(total_nguoi_lon==="Liên hệ"||total_tre_em_511==="Liên hệ"||total_tre_em_5==="Liên hệ")
+        {
+            $('#amount_total').html('Liên hệ');
+        }else{
+            var total_price=total_nguoi_lon+total_tre_em_511+total_tre_em_5;
+            total_price= total_price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+            $('#amount_total').html(total_price);
+        }
+    }
+
+
+}

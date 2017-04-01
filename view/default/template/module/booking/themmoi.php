@@ -373,6 +373,7 @@
                                     <th id="name_price_tre_em_511">Đơn giá 5-11 tuổi</th>
                                     <th id="name_price_tre_em_5">Đơn giá dưới 5 tuổi</th>
                                     <th>Khởi hành</th>
+                                    <th>Số chỗ</th>
                                 </tr>
                                 </thead>
 

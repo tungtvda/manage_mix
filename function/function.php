@@ -1006,9 +1006,9 @@ function _returnDataAutoCompleteTour()
                 $price_3=$price;
             }else{
                 $price_3_format=number_format((int)$row_kh->price_3, 0, ",", ".") . ' vnđ';
-                $price_3=$row_kh->price_2;
+                $price_3=$row_kh->price_3;
             }
-
+            $so_cho=$row_kh->so_cho;
 //            $price_number= $row_kh->price_number;
 //            $price_number_2= $row_kh->price_number_2;
 //            $price_number_3= $row_kh->price_number_3;
@@ -1041,7 +1041,7 @@ function _returnDataAutoCompleteTour()
                     $departure_id = $data_departure[0]->id;
                 }
             }
-            $string_data .= "['" . $id . "','" . $name . "','" . $price_format . "','" . $durations . "','" . $vehicle . "','" . $departure_id . "','" . $departure_name . "','" . $price . "','" . $name_price . "','" . $price_2 . "','" . $price_2_format . "','" . $name_price_2 . "','" . $price_3 . "','" . $price_3_format . "','" . $name_price_3 . "'],";
+            $string_data .= "['" . $id . "','" . $name . "','" . $price_format . "','" . $durations . "','" . $vehicle . "','" . $departure_id . "','" . $departure_name . "','" . $price . "','" . $name_price . "','" . $price_2 . "','" . $price_2_format . "','" . $name_price_2 . "','" . $price_3 . "','" . $price_3_format . "','" . $name_price_3 . "','" . $so_cho . "'],";
         }
     }
     $string_data .= '];';

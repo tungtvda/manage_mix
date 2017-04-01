@@ -1291,40 +1291,34 @@ function formatNumber(nStr, decSeperate, groupSeperate) {
     }
     return x1 + x2;
 }
-function returnDanhSachDoan(id_field){
-    var value=$(id_field).val();
-    var id=$(id_field).attr('id_title');
-    var name_1=$('#input_num_nguoi_lon').attr('name_title');
-    var name_2=$('#input_num_tre_em').attr('name_title');
-    var name_3=$('#input_num_tre_em_5').attr('name_title');
-    if(value==''){
-        if(id==1){
-            $(id_field).val(1);
-        }
-        if(id==2||id==3){
-            $(id_field).val(0);
-        }
-    }
-    if(value==0&&id==1){
-        $(id_field).val(1);
-    }
+function returnDanhSachDoan(){
     var numbe_1=parseInt($('#input_num_nguoi_lon').val());
     var numbe_2=parseInt($('#input_num_tre_em').val());
     var numbe_3=parseInt($('#input_num_tre_em_5').val());
+
+    //var id=$(id_field).attr('id_title');
+    var name_1=$('#name_price_nguoi_lon').html();
+    var name_2=$('#name_price_tre_em_511').html();
+    var name_3=$('#name_price_tre_em_5').html();
+    if(numbe_1==0){
+        numbe_1=1;
+        $('#input_num_nguoi_lon').val(1);
+    }
+
     var so_cho=$('#input_so_cho').val();
     var check_show_table=true;
     var total=numbe_1+numbe_2+numbe_3;
-    $('#input_total_num').val(total);
+    //$('#input_total_num').val(total);
     if(so_cho!=undefined){
         so_cho=parseInt(so_cho);
         if(total>so_cho){
             check_show_table=false;
-            $('#input_total_num').addClass("input-error").removeClass("valid");
-            $('#error_total_num').show().html('Số người bạn vừa nhập đã vượt quá số chỗ, bạn vui lòng nhập lại số người');
+            $('#input_num_nguoi_lon').addClass("input-error").removeClass("valid");
+            $('#error_so_nguoi').show().html('Số người bạn vừa nhập đã vượt quá số chỗ, bạn vui lòng nhập lại số người');
         }else{
             check_show_table=true;
-            $('#input_total_num').addClass("valid").removeClass("input-error");
-            $('#error_total_num').hide().html('Bạn vui lòng kiểm tra lại số người');
+            $('#input_num_nguoi_lon').addClass("valid").removeClass("input-error");
+            $('#error_so_nguoi').hide().html('Bạn vui lòng kiểm tra lại số người');
         }
     }
     var row='';
@@ -1333,11 +1327,11 @@ function returnDanhSachDoan(id_field){
     if(price===''||price===0){
         price==='Liên hệ'
     }
-    var price_2= $('#input_price_2').val();
+    var price_2= $('#input_price_511').val();
     if(price_2===''||price_2===0){
         price_2==price
     }
-    var price_3= $('#input_price_3').val();
+    var price_3= $('#input_price_5').val();
     if(price_3===''||price_3===0){
         price_3==price
     }
@@ -1353,8 +1347,13 @@ function returnDanhSachDoan(id_field){
                 var price_item= price.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
                 total_nguoi_lon=price*numbe_1;
             }
+
             if(numbe_1>1){
+
                 var price_in_array=$('#input_price_nguoi_lon_'+numbe_1).val();
+                alert(price_in_array);
+
+                //alert(price_in_array);
                 if(price_in_array!=undefined){
                     if(price_in_array==='Liên hệ'){
                         total_nguoi_lon='Liên hệ'

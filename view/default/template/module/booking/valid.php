@@ -78,7 +78,6 @@ $string_data_user=_returnDataAutoCompleteUser();
                 $('#input_id_category').val(item.data('cateid'));
             }
         });
-
         $('#input_name_tour').autoComplete({
             minChars: 0,
             source: function (term, suggest) {
@@ -93,10 +92,14 @@ $string_data_user=_returnDataAutoCompleteUser();
                 search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
                 var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
 
-                return '<div data-name-price-3="' + item[14] + '" data-price-3-format="' + item[13] + '" data-price-3="' + item[12] + '" data-name-price-2="' + item[11] + '" data-price-2-format="' + item[10] + '" data-price-2="' + item[9] + '" data-name-price="' + item[8] + '" title="' + item[0] + '-'+item[3]+'-'+item[4]+'" class="autocomplete-suggestion" data-departure_name="' + item[6] + '" data-vehicle="' + item[4] + '" data-durations="' + item[3] + '" data-name="' + item[1] + '" data-price-format="' + item[2] + '" data-price="' + item[7] + '" data-id="' + item[0] + '" > ' + item[1]+'</div>';
+                return '<div data-so-cho="' + item[15] + '" data-name-price-3="' + item[14] + '" data-price-3-format="' + item[13] + '" data-price-3="' + item[12] + '" data-name-price-2="' + item[11] + '" data-price-2-format="' + item[10] + '" data-price-2="' + item[9] + '" data-name-price="' + item[8] + '" title="' + item[0] + '-'+item[3]+'-'+item[4]+'" class="autocomplete-suggestion" data-departure_name="' + item[6] + '" data-vehicle="' + item[4] + '" data-durations="' + item[3] + '" data-name="' + item[1] + '" data-price-format="' + item[2] + '" data-price="' + item[7] + '" data-id="' + item[0] + '" > ' + item[1]+'</div>';
             },
             onSelect: function (e, term, item) {
                 $('#input_list_price').html();
+                var so_cho='';
+                if(item.data('so-cho')!=''){
+                    so_cho="<input hidden  id='input_so_cho' value='"+item.data('so-cho')+"'>"+item.data('so-cho');
+                }
 //                console.log('Item "' + item.data('langname') + ' (' + item.data('lang') + ')" selected by ' + (e.type == 'keydown' ? 'pressing enter or tab' : 'mouse click') + '.');
                 $('#input_name_tour').val(item.data('name'));
 
@@ -109,16 +112,16 @@ $string_data_user=_returnDataAutoCompleteUser();
                 $('#name_price_tre_em_5').html(item.data('name-price-3'));
                 var Id=item.data('id');
                 var url = $('#url_input').val();
-                if(Id!=''){
-                    jQuery.post(url+"/return-input-price-booking/",
-                        {
-                            id: Id,
-                        }
-                        )
-                        .done(function (res) {
-                            $('#input_list_price').html(res)
-                        });
-                }
+//                if(Id!=''){
+//                    jQuery.post(url+"/return-input-price-booking/",
+//                        {
+//                            id: Id,
+//                        }
+//                        )
+//                        .done(function (res) {
+//                            $('#input_list_price').html(res)
+//                        });
+//                }
                 var table_tour="<tr> <td class='center'>1</td><td><a>"+item.data('name')+"</a></td><td>" +
                     "<span id='price_format_span'>"+item.data('price-format')+"</span>" +
                     "<input hidden id='input_price_format' value='"+item.data('price-format')+"'>" +
@@ -140,6 +143,8 @@ $string_data_user=_returnDataAutoCompleteUser();
                     " | <a id='edit_price_5' href='javascript:void(0)'> <i class='fa fa-edit' title='Sửa đơn giá'></i></a>" +
                     "<a id='reset_price_5' title='Lấy lại giá cũ' href='javascript:void(0)'> <i class='fa fa-refresh' title='Giá gốc'></i></a>" +
                     "</td><td>"+item.data('departure_name')+"" +
+                    "</td>" +
+                    "<td style='color:red'>" +so_cho+
                     "</td></tr>";
                 $('.table_booking_tour').html(table_tour);
                 $('#tong_cong').html('');
@@ -158,10 +163,10 @@ $string_data_user=_returnDataAutoCompleteUser();
                 var numbe_2=parseInt($('#input_num_tre_em').val());
                 var numbe_3=parseInt($('#input_num_tre_em_5').val());
                 if(numbe_1==0){
-                    $('#input_num_nguoi_lon').show().focus().select();
-                }else{
-                    returnDanhSachDoan();
+                    $('#input_num_nguoi_lon').val(1);
+                    numbe_1=1;
                 }
+//                returnDanhSachDoan();
 
             }
         });

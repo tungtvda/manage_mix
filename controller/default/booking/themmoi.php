@@ -134,6 +134,15 @@ if(isset($_POST['code_booking']))
     $price_5_submit=str_replace(',','',$price_5_submit);
 
     $name_customer_sub=array();
+    $email_customer_sub=array();
+    $phone_customer_sub=array();
+    $address_customer_sub=array();
+    $tuoi_customer_sub=array();
+    $tuoi_number_customer_sub=array();
+    $birthday_customer_sub=array();
+    $passport_customer_sub=array();
+    $date_passport_customer_sub=array();
+
     $total=0;
     if(is_numeric($num_nguoi_lon)&&is_numeric($price_submit)){
         $total=$total+($num_nguoi_lon*$price_submit);
@@ -151,17 +160,29 @@ if(isset($_POST['code_booking']))
     if(isset($_POST['name_customer_sub'])){
         $name_customer_sub=$_POST['name_customer_sub'];
     }
-    $email_customer=array();
     if(isset($_POST['email_customer'])){
-        $email_customer=$_POST['email_customer'];
+        $email_customer_sub=$_POST['email_customer'];
     }
-    $phone_customer=array();
     if(isset($_POST['phone_customer'])){
-        $phone_customer=$_POST['phone_customer'];
+        $phone_customer_sub=$_POST['phone_customer'];
     }
-    $address_customer=array();
     if(isset($_POST['address_customer'])){
-        $address_customer=$_POST['address_customer'];
+        $address_customer_sub=$_POST['address_customer'];
+    }
+    if(isset($_POST['tuoi_customer'])){
+        $tuoi_customer_sub=$_POST['tuoi_customer'];
+    }
+    if(isset($_POST['tuoi_number_customer'])){
+        $tuoi_number_customer_sub=$_POST['tuoi_number_customer'];
+    }
+    if(isset($_POST['birthday_customer'])){
+        $birthday_customer_sub=$_POST['birthday_customer'];
+    }
+    if(isset($_POST['passport_customer'])){
+        $passport_customer_sub=$_POST['passport_customer'];
+    }
+    if(isset($_POST['date_passport_customer'])){
+        $date_passport_customer_sub=$_POST['date_passport_customer'];
     }
 
     if(isset($_POST['check_edit'])&&$_POST['check_edit']=='edit'&&isset($_POST['id_edit'])&&$_POST['id_edit']!=''){
@@ -310,7 +331,7 @@ if(isset($_POST['code_booking']))
         $customer_update=new customer();
         $customer_update->booking_id=0;
         customer_update_booking($customer_update,$array_detail['id']);
-        _updateCustomerBooking($name_customer_sub,$email_customer,$phone_customer,$address_customer,$array_detail['id']);
+        _updateCustomerBooking($name_customer_sub,$email_customer_sub,$phone_customer_sub,$address_customer_sub,$tuoi_customer_sub,$tuoi_number_customer_sub,$birthday_customer_sub,$passport_customer_sub,$date_passport_customer_sub,$array_detail['id'], $_SESSION['user_id']);
         $booking_update->updated=_returnGetDateTime();
         booking_update($booking_update);
         if($string_value_old!=''){
@@ -414,8 +435,8 @@ if(isset($_POST['code_booking']))
             $booking_model->name_tour=$check_data_tour[0]->name;
             $booking_model->code_tour=$check_data_tour[0]->code;
             $booking_model->price_tour=$check_data_tour[0]->price;
-            $booking_model->price_11=$check_data_tour[0]->price;
-            $booking_model->price_5=$check_data_tour[0]->price;
+            $booking_model->price_11=$check_data_tour[0]->price_2;
+            $booking_model->price_5=$check_data_tour[0]->price_3;
             $booking_model->price_new=$price_submit;
             $booking_model->price_11_new=$price_511_submit;
             $booking_model->price_5_new=$price_5_submit;
@@ -463,7 +484,7 @@ if(isset($_POST['code_booking']))
             if(count($data_booking)>0){
                 $id_booking=$data_booking[0]->id;
             }
-            _updateCustomerBooking($name_customer_sub,$email_customer,$phone_customer,$address_customer,$id_booking);
+            _updateCustomerBooking($name_customer_sub,$email_customer_sub,$phone_customer_sub,$address_customer_sub,$tuoi_customer_sub,$tuoi_number_customer_sub,$birthday_customer_sub,$passport_customer_sub,$date_passport_customer_sub,$id_booking, $_SESSION['user_id']);
 
             $message='';
             if($_SESSION['user_role']!=1){
@@ -479,7 +500,7 @@ if(isset($_POST['code_booking']))
                 $message.='<p>Nhân viên '.$check_data_user[0]->name.' vừa tạo đơn hàng mã '.$code_booking.'</p>';
                 $message.='<a>Bạn vui lòng truy cập <a href="'.$link_noti.'">đường link</a> để xác nhận đơn hàng</p>';
 //                SendMail('info@mixtourist.com.vn', $message, $subject);
-                SendMail('tungtv.soict@gmail.com', $message, $subject);
+//                SendMail('tungtv.soict@gmail.com', $message, $subject);
                 $mess_log='Nhân viên '.$check_data_user[0]->name.' đã thực hiện việc tạo đơn hàng';
             }else{
                 $name_noti=$_SESSION['user_name'].' đã thêm một đơn hàng cho bạn';
@@ -489,7 +510,7 @@ if(isset($_POST['code_booking']))
                 $subject='Xác nhận đơn hàng '.$code_booking;
                 $message.='<p>Admin '.$_SESSION['user_name'].' vừa tạo đơn hàng mã '.$code_booking.'</p>';
                 $message.='<a>Bạn vui lòng truy cập <a href="'.$link_noti.'">đường link</a> để xác nhận đơn hàng</p>';
-                SendMail($check_data_user[0]->email, $message, $subject);
+//                SendMail($check_data_user[0]->email, $message, $subject);
                 $mess_log='Admin '.$_SESSION['user_name'].' đã thực hiện việc tạo đơn hàng';
             }
             _insertLog($_SESSION['user_id'],6,6,21,$id_booking,'','',$mess_log);

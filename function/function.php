@@ -1167,6 +1167,9 @@ function _insertLog($user_id, $module_id, $form_id, $action_id, $item_id, $value
 
 function _updateCustomerBooking($name_customer_sub, $email_customer, $phone_customer, $address_customer, $do_tuoi_customer,$tuoi_number_customer_sub, $birthday_customer_sub, $passport_customer_sub, $date_passport_customer_sub, $id_booking, $created_by = '')
 {
+    $booking_cus=new customer_booking();
+    $booking_cus->booking_id=$id_booking;
+    customer_booking_delete_all($booking_cus);
     if (count($name_customer_sub) > 0) {
         foreach ($name_customer_sub as $key => $value) {
             $name_sub = $value;

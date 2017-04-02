@@ -90,3 +90,7 @@ function customer_booking_count($where)
     }
    else return false;
 }
+function customer_booking_delete_all($obj)
+{
+    return exe_query('delete from customer_booking where booking_id='.$obj->booking_id,'customer_booking');
+}

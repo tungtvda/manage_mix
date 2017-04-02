@@ -166,7 +166,20 @@ $string_data_user=_returnDataAutoCompleteUser();
                     $('#input_num_nguoi_lon').val(1);
                     numbe_1=1;
                 }
-//                returnDanhSachDoan();
+                var so_cho=$('#input_so_cho').val();
+                var check_show_table=true;
+                var total=numbe_1+numbe_2+numbe_3;
+                if(so_cho!=undefined){
+                    so_cho=parseInt(so_cho);
+                    if(total>so_cho){
+                        $('#input_num_nguoi_lon').addClass("input-error").removeClass("valid");
+                        $('#error_so_nguoi').show().html('Số người bạn vừa nhập đã vượt quá số chỗ, bạn vui lòng nhập lại số người');
+                    }else{
+                        $('#input_num_nguoi_lon').addClass("valid").removeClass("input-error");
+                        $('#error_so_nguoi').hide().html('Bạn vui lòng kiểm tra lại số người');
+                    }
+                }
+                returnGenDanhSachDoan();
 
             }
         });

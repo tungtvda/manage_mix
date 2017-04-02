@@ -467,8 +467,13 @@
                                     <th>Đơn giá <i class="fa fa-sort-amount-desc "></i></th>
                                 </tr>
                                 </thead>
+                                <style>
+                                    .show_hide_table tr td{
+                                        padding: 5px;
+                                    }
+                                </style>
                                 <tbody class="show_hide_table">
-                                <tr class="row_customer_1">
+                                <tr hidden class="row_customer_1">
                                     <td class="center stt_cus">1</td>
                                     <td>
                                         <input style="height: 30px" name="name_customer_sub[]"
@@ -476,7 +481,7 @@
                                                class="valid input_table">
                                     </td>
                                     <td>
-                                        <input value="" class=" date-picker  valid" id="input_birthday_customer_sub_1"
+                                        <input style="padding-top: 0px" value="" class=" date-picker  valid" id="input_birthday_customer_sub_1"
                                                name="birthday_customer[]" required="" type="text"
                                                data-date-format="dd-mm-yyyy">
                                     </td>
@@ -509,7 +514,7 @@
                                     </td>
 
                                     <td>
-                                        <input value="" class=" date-picker  valid" id="input_date_passport_customer_1"
+                                        <input style="padding-top: 0px" value="" class=" date-picker  valid" id="input_date_passport_customer_1"
                                                name="date_passport_customer[]" required="" type="text"
                                                data-date-format="dd-mm-yyyy">
                                     </td>
@@ -544,10 +549,10 @@
                                 <!--                                </tbody>-->
                             </table>
                         </div>
-                        <button title="Thêm dòng" style="padding: 5px 5px"
-                                class="green btn btn-xs btn-success btn_add_customer" type="button">
-                            <i class=" fa fa-plus bigger-120"></i> Thêm khách hàng
-                        </button>
+<!--                        <button title="Thêm dòng" style="padding: 5px 5px"-->
+<!--                                class="green btn btn-xs btn-success btn_add_customer" type="button">-->
+<!--                            <i class=" fa fa-plus bigger-120"></i> Thêm khách hàng-->
+<!--                        </button>-->
                     </div>
                 </div>
             </div>

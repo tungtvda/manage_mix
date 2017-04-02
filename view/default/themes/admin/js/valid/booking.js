@@ -1561,3 +1561,129 @@ function returnDanhSachDoan(){
 
 
 }
+
+function returnGenDanhSachDoan(){
+    var numbe_1=parseInt($('#input_num_nguoi_lon').val());
+    var numbe_2=parseInt($('#input_num_tre_em').val());
+    var numbe_3=parseInt($('#input_num_tre_em_5').val());
+
+    //var id=$(id_field).attr('id_title');
+    var name_1=$('#name_price_nguoi_lon').html();
+    var name_2=$('#name_price_tre_em_511').html();
+    var name_3=$('#name_price_tre_em_5').html();
+    if(numbe_1==0){
+        numbe_1=1;
+        $('#input_num_nguoi_lon').val(1);
+    }
+
+    var so_cho=$('#input_so_cho').val();
+    var check_show_table=true;
+    var total=numbe_1+numbe_2+numbe_3;
+    //$('#input_total_num').val(total);
+    if(so_cho!=undefined){
+        so_cho=parseInt(so_cho);
+        if(total>so_cho){
+            check_show_table=false;
+            $('#input_num_nguoi_lon').addClass("input-error").removeClass("valid");
+            $('#error_so_nguoi').show().html('Số người bạn vừa nhập đã vượt quá số chỗ, bạn vui lòng nhập lại số người');
+        }else{
+            check_show_table=true;
+            $('#input_num_nguoi_lon').addClass("valid").removeClass("input-error");
+            $('#error_so_nguoi').hide().html('Bạn vui lòng kiểm tra lại số người');
+        }
+    }
+    var row='';
+    var stt=1;
+    var price= $('#input_price').val();
+    if(price===''||price===0){
+        price==='Liên hệ'
+    }
+    var price_2= $('#input_price_511').val();
+    if(price_2===''||price_2===0){
+        price_2==price
+    }
+    var price_3= $('#input_price_5').val();
+    if(price_3===''||price_3===0){
+        price_3==price
+    }
+    if(check_show_table==true){
+
+        if(numbe_1>0){
+            if(price==='Liên hệ'){
+                var price_item='Liên hệ';
+            }else{
+                var price_item= price.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+            }
+            for(var i=1;i<=numbe_1;i++){
+                row =row+'<tr id="row_customer_' + stt+ '"><td class="center stt_cus">' + stt + '</td>' +
+                    '<td><input style="height: 30px" name="name_customer_sub[]" id="input_name_customer_sub_' + stt + '" type="text"class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" name="birthday_customer[]" id="input_birthday_customer_sub_' + stt + '" type="text"  class="valid input_table date-picker" data-date-format="dd-mm-yyyy"></td>' +
+                    '<td><input style="height: 30px" name="email_customer[]" id="input_email_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" name="phone_customer[]" id="input_phone_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td><input  style="height: 30px" name="address_customer[]" id="input_address_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td>' +
+                    '<input hidden style="height: 30px" name="tuoi_number_customer[]" value="1"  id="input_tuoi_number_customer_' + stt + '" type="text"  class="valid input_table">' +
+                    '<input hidden value="'+name_1+'"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table">' +
+                    '<input style="height: 30px"  class="valid" value="'+name_1+'" style="font-size: 12px;"></td>' +
+                    '<td><input style="height: 30px" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text" class="valid input_table "></td>' +
+                    '<td><input style="height: 30px" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="text" class="valid input_table date-picker" data-date-format="dd-mm-yyyy"></td>' +
+                    '<td style="width: 150px"><input hidden value=""  style="height: 30px" name="dongia_customer[]" id="input_dongia_customer_' + stt + '" type="text" class="valid input_table"><span style="font-size: 12px;color: red">'+price_item+'</span></td>' +
+                    '</tr>';
+                stt=stt+1;
+            }
+        }
+        if(numbe_2>0){
+            if(price==='Liên hệ'){
+                var price_item='Liên hệ';
+            }else{
+                var price_item= price_2.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+            }
+            for(var j=1;j<=numbe_2;j++){
+                row =row+'<tr id="row_customer_' + stt+ '"><td class="center stt_cus">' + stt + '</td>' +
+                    '<td><input style="height: 30px" name="name_customer_sub[]" id="input_name_customer_sub_' + stt + '" type="text"class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" name="birthday_customer[]" id="input_birthday_customer_sub_' + stt + '" type="text" class="valid input_table date-picker" data-date-format="dd-mm-yyyy"></td>' +
+                    '<td><input style="height: 30px" name="email_customer[]" id="input_email_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" name="phone_customer[]" id="input_phone_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td><input  style="height: 30px" name="address_customer[]" id="input_address_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td>' +
+                    '<input hidden style="height: 30px" name="tuoi_number_customer[]" value="2"  id="input_tuoi_number_customer_' + stt + '" type="text"  class="valid input_table">' +
+                    '<input hidden value="'+name_2+'"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table">' +
+                    '<input style="height: 30px"  class="valid" value="'+name_2+'" style="font-size: 12px;"></td>' +
+                    '<td><input style="height: 30px" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text"class="valid input_table "></td>' +
+                    '<td><input style="height: 30px" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="text" class="valid input_table date-picker" data-date-format="dd-mm-yyyy"></td>' +
+                    '<td style="width: 150px"><input hidden value=""  style="height: 30px" name="dongia_customer[]" id="input_dongia_customer_' + stt + '" type="text" class="valid input_table"><span style="font-size: 12px;color: red">'+price_item+'</span></td>' +
+                    '</tr>';
+                stt=stt+1;
+            }
+        }
+        if(numbe_3>0){
+            if(price==='Liên hệ'){
+                var price_item='Liên hệ';
+            }else{
+                var price_item= price.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+            }
+            for(var k=1;k<=numbe_3;k++){
+                row =row+'<tr id="row_customer_' + stt+ '"><td class="center stt_cus">' + stt + '</td>' +
+                    '<td><input style="height: 30px" name="name_customer_sub[]" id="input_name_customer_sub_' + stt + '" type="text"class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" name="birthday_customer[]" id="input_birthday_customer_sub_' + stt + '" type="text" class="valid input_table date-picker" data-date-format="dd-mm-yyyy"></td>' +
+                    '<td><input style="height: 30px" name="email_customer[]" id="input_email_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" name="phone_customer[]" id="input_phone_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td><input  style="height: 30px" name="address_customer[]" id="input_address_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td>' +
+                    '<input hidden style="height: 30px" name="tuoi_number_customer[]" value="3"  id="input_tuoi_number_customer_' + stt + '" type="text"  class="valid input_table">' +
+                    '<input hidden value="'+name_3+'"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table">' +
+                    '<input style="height: 30px"  class="valid" value="'+name_3+'" style="font-size: 12px;"></td>' +
+                    '<td><input style="height: 30px" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text"class="valid input_table "></td>' +
+                    '<td><input style="height: 30px" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="text" class="valid input_table date-picker" data-date-format="dd-mm-yyyy"></td>' +
+                    '<td style="width: 150px"><input hidden value=""  style="height: 30px" name="dongia_customer[]" id="input_dongia_customer_' + stt + '" type="text" class="valid input_table"><span style="font-size: 12px;color: red">'+price_item+'</span></td>' +
+                    '</tr>';
+                stt=stt+1;
+            }
+        }
+        $(".show_hide_table").html('');
+        $(".show_hide_table").html(row);
+
+    }
+
+
+}

@@ -179,7 +179,7 @@ $string_data_user=_returnDataAutoCompleteUser();
                         $('#error_so_nguoi').hide().html('Bạn vui lòng kiểm tra lại số người');
                     }
                 }
-                returnGenDanhSachDoan();
+                returnGenDanhSachDoan(item.data('price'),item.data('price-2'),item.data('price-3'));
 
             }
         });

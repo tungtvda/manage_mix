@@ -1562,7 +1562,7 @@ function returnDanhSachDoan(){
 
 }
 
-function returnGenDanhSachDoan(){
+function returnGenDanhSachDoan(price,price_2,price_3){
     var numbe_1=parseInt($('#input_num_nguoi_lon').val());
     var numbe_2=parseInt($('#input_num_tre_em').val());
     var numbe_3=parseInt($('#input_num_tre_em_5').val());
@@ -1594,15 +1594,15 @@ function returnGenDanhSachDoan(){
     }
     var row='';
     var stt=1;
-    var price= $('#input_price').val();
+    //var price= $('#input_price').val();
     if(price===''||price===0){
         price==='Liên hệ'
     }
-    var price_2= $('#input_price_511').val();
+    //var price_2= $('#input_price_511').val();
     if(price_2===''||price_2===0){
         price_2==price
     }
-    var price_3= $('#input_price_5').val();
+    //var price_3= $('#input_price_5').val();
     if(price_3===''||price_3===0){
         price_3==price
     }
@@ -1612,7 +1612,7 @@ function returnGenDanhSachDoan(){
             if(price==='Liên hệ'){
                 var price_item='Liên hệ';
             }else{
-                var price_item= price.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                var price_item= price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
             }
             for(var i=1;i<=numbe_1;i++){
                 row =row+'<tr id="row_customer_' + stt+ '"><td class="center stt_cus">' + stt + '</td>' +
@@ -1636,7 +1636,7 @@ function returnGenDanhSachDoan(){
             if(price==='Liên hệ'){
                 var price_item='Liên hệ';
             }else{
-                var price_item= price_2.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                var price_item= price_2.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
             }
             for(var j=1;j<=numbe_2;j++){
                 row =row+'<tr id="row_customer_' + stt+ '"><td class="center stt_cus">' + stt + '</td>' +
@@ -1660,7 +1660,7 @@ function returnGenDanhSachDoan(){
             if(price==='Liên hệ'){
                 var price_item='Liên hệ';
             }else{
-                var price_item= price.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                var price_item= price_3.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
             }
             for(var k=1;k<=numbe_3;k++){
                 row =row+'<tr id="row_customer_' + stt+ '"><td class="center stt_cus">' + stt + '</td>' +
@@ -1682,8 +1682,98 @@ function returnGenDanhSachDoan(){
         }
         $(".show_hide_table").html('');
         $(".show_hide_table").html(row);
-
+        returnTinhTien(price,price_2,price_3);
     }
 
 
+}
+
+function  returnTinhTien(price_nguoi_lon,price_tre_em_511,price_tre_em_5){
+    var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
+    //var price_nguoi_lon = $('#input_price').val();
+    //var price_tre_em_511 = $('#input_price_511').val();
+    //var price_tre_em_5 = $('#input_price_5').val();
+
+    var number_nguoi_lon = $('#input_num_nguoi_lon').val();
+    var number_tre_em_511 = $('#input_num_tre_em').val();
+    var number_tre_em_5 = $('#input_num_tre_em_5').val();
+    if(numberRegex.test(price_nguoi_lon)&&numberRegex.test(price_tre_em_511)&&numberRegex.test(price_tre_em_5)) {
+        if (number_nguoi_lon > 0 && number_nguoi_lon != '') {
+            if (price_nguoi_lon == undefined) {
+                lnv.alert({
+                    title: 'Lỗi',
+                    content: 'Bạn vui lòng chọn tour',
+                    alertBtnText: 'Ok',
+                    iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                    alertHandler: function () {
+                        $('#input_name_tour').show().focus().select();
+                    }
+                });
+            } else {
+                var con_lai = 0;
+                var total = 0;
+                if (number_tre_em_511 == '') {
+                    number_tre_em_511 = 0;
+                }
+                if (number_tre_em_5 == '') {
+                    number_tre_em_5 = 0;
+                }
+                var total_nguoi_lon = parseInt(number_nguoi_lon) * parseInt(price_nguoi_lon);
+                var total_tre_em_511 = parseInt(number_tre_em_511) * parseInt(price_tre_em_511);
+                var total_tre_em_5 = parseInt(number_tre_em_5) * parseInt(price_tre_em_5);
+                total = total_nguoi_lon + total_tre_em_511 + total_tre_em_5;
+                var vat = 0;
+                if ($("#input_vat").is(':checked')) {
+                    vat = total * 0.1
+                }
+                con_lai = total + vat;
+                var dat_coc = $("#input_dat_coc").val();
+                if (dat_coc != '' && dat_coc > 0) {
+                    dat_coc = dat_coc.toString().split(",");
+                    dat_coc = dat_coc.toString().split(".");
+                    if (parseInt(dat_coc) > con_lai) {
+                        lnv.alert({
+                            title: 'Lỗi',
+                            content: 'Tiền đặt cọc đã vượt quá số tiền phải thanh toán, vui lòng nhập lại',
+                            alertBtnText: 'Ok',
+                            iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                            alertHandler: function () {
+                                $('#input_dat_coc').show().focus().select();
+                            }
+                        });
+                    } else {
+                        con_lai = con_lai - parseInt(dat_coc);
+                    }
+                }
+                var tong_cong = total.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                $('#tong_cong').html(tong_cong);
+                var vat_format = vat.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                $('#vat').html(vat_format);
+
+                var con_lai_format = con_lai.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                $('#con_lai').html(con_lai_format);
+            }
+        } else {
+            lnv.alert({
+                title: 'Lỗi',
+                content: 'Bạn vui lòng nhập số người trước khi tính tiền',
+                alertBtnText: 'Ok',
+                iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                alertHandler: function () {
+
+                }
+            });
+        }
+
+    }else{
+        lnv.alert({
+            title: 'Lỗi',
+            content: 'Bạn vui lòng kiểm tra đơn giá',
+            alertBtnText: 'Ok',
+            iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+            alertHandler: function () {
+                $('#input_name_tour').show().focus().select();
+            }
+        });
+    }
 }

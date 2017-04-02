@@ -299,7 +299,7 @@
                 }else{
                     $('#input_num_nguoi_lon').addClass("valid").removeClass("input-error");
                     error_so_nguoi.hide();
-
+                    checkSoNguoi();
                 }
             });
         $('#input_num_tre_em').ace_spinner({
@@ -313,6 +313,7 @@
             .closest('.ace-spinner')
             .on('changed.fu.spinbox', function () {
                 //console.log($('#spinner1').val())
+                checkSoNguoi()
             });
         $('#input_num_tre_em_5').ace_spinner({
 //                value: '',
@@ -325,6 +326,7 @@
             .closest('.ace-spinner')
             .on('changed.fu.spinbox', function () {
                 //console.log($('#spinner1').val())
+                checkSoNguoi()
             });
         $('#spinner2').ace_spinner({
             value: 0,

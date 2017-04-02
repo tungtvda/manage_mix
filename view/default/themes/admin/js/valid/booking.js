@@ -99,6 +99,7 @@ jQuery(function ($) {
 
         $('#input_price').hide();
         $('#price_format_span').show().html(price_format);
+        checkSoNguoi();
     });
     $('body').on("blur", '#input_price_511', function () {
         var price = $(this).val();
@@ -116,6 +117,7 @@ jQuery(function ($) {
 
         $('#input_price_511').hide();
         $('#price_format_span_511').show().html(price_format);
+        checkSoNguoi();
     });
     $('body').on("blur", '#input_price_5', function () {
         var price = $(this).val();
@@ -133,6 +135,7 @@ jQuery(function ($) {
 
         $('#input_price_5').hide();
         $('#price_format_span_5').show().html(price_format);
+        checkSoNguoi();
     });
 
     $('body').on("click", '.btn_add_customer', function () {
@@ -564,7 +567,7 @@ jQuery(function ($) {
         var error_free = true;
         for (var input in form_data) {
             var name_input=form_data[input]['name'];
-            if (name_input != "tien_te"&&name_input != "note"&&name_input != "nguon_tour"&&name_input!='category'&&name_input!='nhom_khach_hang'&&name_input!='name_customer_sub[]'&&name_input!='email_customer[]'&&name_input!='phone_customer[]'&&name_input!='address_customer[]') {
+            if (name_input != "tien_te"&&name_input != "note"&&name_input != "nguon_tour"&&name_input!='category'&&name_input!='nhom_khach_hang'&&name_input!='name_customer_sub[]'&&name_input!='email_customer[]'&&name_input!='phone_customer[]'&&name_input!='address_customer[]'&&name_input!='birthday_customer[]'&&name_input!='tuoi_number_customer[]'&&name_input!='tuoi_customer[]'&&name_input!='date_passport_customer[]'&&name_input!='passport_customer[]') {
                 var element = $("#input_" + name_input);
                 var error = $("#error_" + name_input);
                 var valid = element.hasClass("valid");
@@ -720,18 +723,28 @@ jQuery(function ($) {
             }
         }
     });
-
-    $('body').on("blur", '#input_num_nguoi_lon', function () {
-        returnDanhSachDoan('#input_num_nguoi_lon');
-    });
-    $('body').on("blur", '#input_num_tre_em', function () {
-        returnDanhSachDoan('#input_num_tre_em');
-    });
-    $('body').on("blur", '#input_num_tre_em_5', function () {
-        returnDanhSachDoan('#input_num_tre_em_5');
-    });
+    //
+    //$('body').on("change", '#input_num_nguoi_lon', function () {
+    //    checkSoNguoi();
+    //});
+    //$('body').on("change", '#input_num_tre_em', function () {
+    //    checkSoNguoi();
+    //});
+    //$('body').on("change", '#input_num_tre_em_5', function () {
+    //    checkSoNguoi();
+    //});
     //$('i').ggtooltip();
 });
+function checkSoNguoi(){
+
+    var price=$('#input_price_submit').val();
+    var price_2=$('#input_price_511_submit').val();
+    var price_3=$('#input_price_5_submit').val();
+    if(price!=''){
+        returnGenDanhSachDoan(price,price_2,price_3);
+    }
+
+}
 function show_booking(Id,name){
     $( "#title_form" ).html('Thôn tin chi tiết đơn hàng "<b>'+name+'</b>"');
     $( "#input_check_edit" ).val('edit');
@@ -892,10 +905,17 @@ function returnDatCoc() {
         if (numberRegex.test(value)) {
             var value_format = value.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
             $('#dat_coc_format').html(value_format);
+
         }else{
             $('#input_dat_coc').focus().select().val();
             $('#dat_coc_format').html('');
         }
+    }
+    var price=$('#input_price_submit').val();
+    var price_2=$('#input_price_511_submit').val();
+    var price_3=$('#input_price_5_submit').val();
+    if(price!=''){
+        returnTinhTien(price,price_2,price_3);
     }
 
 }
@@ -1617,7 +1637,7 @@ function returnGenDanhSachDoan(price,price_2,price_3){
             for(var i=1;i<=numbe_1;i++){
                 row =row+'<tr id="row_customer_' + stt+ '"><td class="center stt_cus">' + stt + '</td>' +
                     '<td><input style="height: 30px" name="name_customer_sub[]" id="input_name_customer_sub_' + stt + '" type="text"class="valid input_table"></td>' +
-                    '<td><input style="height: 30px" name="birthday_customer[]" id="input_birthday_customer_sub_' + stt + '" type="text"  class="valid input_table date-picker" data-date-format="dd-mm-yyyy"></td>' +
+                    '<td><input style="height: 30px" name="birthday_customer[]" id="input_birthday_customer_sub_' + stt + '" type="date"  class="valid input_table"></td>' +
                     '<td><input style="height: 30px" name="email_customer[]" id="input_email_customer_' + stt + '" type="text" class="valid input_table"></td>' +
                     '<td><input style="height: 30px" name="phone_customer[]" id="input_phone_customer_' + stt + '" type="text" class="valid input_table"></td>' +
                     '<td><input  style="height: 30px" name="address_customer[]" id="input_address_customer_' + stt + '" type="text" class="valid input_table"></td>' +
@@ -1626,7 +1646,7 @@ function returnGenDanhSachDoan(price,price_2,price_3){
                     '<input hidden value="'+name_1+'"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table">' +
                     '<input style="height: 30px"  class="valid" value="'+name_1+'" style="font-size: 12px;"></td>' +
                     '<td><input style="height: 30px" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text" class="valid input_table "></td>' +
-                    '<td><input style="height: 30px" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="text" class="valid input_table date-picker" data-date-format="dd-mm-yyyy"></td>' +
+                    '<td><input style="height: 30px" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date" class="valid input_table"></td>' +
                     '<td style="width: 150px"><input hidden value=""  style="height: 30px" name="dongia_customer[]" id="input_dongia_customer_' + stt + '" type="text" class="valid input_table"><span style="font-size: 12px;color: red">'+price_item+'</span></td>' +
                     '</tr>';
                 stt=stt+1;
@@ -1641,7 +1661,7 @@ function returnGenDanhSachDoan(price,price_2,price_3){
             for(var j=1;j<=numbe_2;j++){
                 row =row+'<tr id="row_customer_' + stt+ '"><td class="center stt_cus">' + stt + '</td>' +
                     '<td><input style="height: 30px" name="name_customer_sub[]" id="input_name_customer_sub_' + stt + '" type="text"class="valid input_table"></td>' +
-                    '<td><input style="height: 30px" name="birthday_customer[]" id="input_birthday_customer_sub_' + stt + '" type="text" class="valid input_table date-picker" data-date-format="dd-mm-yyyy"></td>' +
+                    '<td><input style="height: 30px" name="birthday_customer[]" id="input_birthday_customer_sub_' + stt + '" type="date" class="valid input_table date-picker" data-date-format="dd-mm-yyyy"></td>' +
                     '<td><input style="height: 30px" name="email_customer[]" id="input_email_customer_' + stt + '" type="text" class="valid input_table"></td>' +
                     '<td><input style="height: 30px" name="phone_customer[]" id="input_phone_customer_' + stt + '" type="text" class="valid input_table"></td>' +
                     '<td><input  style="height: 30px" name="address_customer[]" id="input_address_customer_' + stt + '" type="text" class="valid input_table"></td>' +
@@ -1650,7 +1670,7 @@ function returnGenDanhSachDoan(price,price_2,price_3){
                     '<input hidden value="'+name_2+'"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table">' +
                     '<input style="height: 30px"  class="valid" value="'+name_2+'" style="font-size: 12px;"></td>' +
                     '<td><input style="height: 30px" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text"class="valid input_table "></td>' +
-                    '<td><input style="height: 30px" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="text" class="valid input_table date-picker" data-date-format="dd-mm-yyyy"></td>' +
+                    '<td><input style="height: 30px" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date" class="valid input_table date-picker"></td>' +
                     '<td style="width: 150px"><input hidden value=""  style="height: 30px" name="dongia_customer[]" id="input_dongia_customer_' + stt + '" type="text" class="valid input_table"><span style="font-size: 12px;color: red">'+price_item+'</span></td>' +
                     '</tr>';
                 stt=stt+1;
@@ -1665,7 +1685,7 @@ function returnGenDanhSachDoan(price,price_2,price_3){
             for(var k=1;k<=numbe_3;k++){
                 row =row+'<tr id="row_customer_' + stt+ '"><td class="center stt_cus">' + stt + '</td>' +
                     '<td><input style="height: 30px" name="name_customer_sub[]" id="input_name_customer_sub_' + stt + '" type="text"class="valid input_table"></td>' +
-                    '<td><input style="height: 30px" name="birthday_customer[]" id="input_birthday_customer_sub_' + stt + '" type="text" class="valid input_table date-picker" data-date-format="dd-mm-yyyy"></td>' +
+                    '<td><input style="height: 30px" name="birthday_customer[]" id="input_birthday_customer_sub_' + stt + '" type="date" class="valid input_table date-picker"></td>' +
                     '<td><input style="height: 30px" name="email_customer[]" id="input_email_customer_' + stt + '" type="text" class="valid input_table"></td>' +
                     '<td><input style="height: 30px" name="phone_customer[]" id="input_phone_customer_' + stt + '" type="text" class="valid input_table"></td>' +
                     '<td><input  style="height: 30px" name="address_customer[]" id="input_address_customer_' + stt + '" type="text" class="valid input_table"></td>' +
@@ -1674,7 +1694,7 @@ function returnGenDanhSachDoan(price,price_2,price_3){
                     '<input hidden value="'+name_3+'"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table">' +
                     '<input style="height: 30px"  class="valid" value="'+name_3+'" style="font-size: 12px;"></td>' +
                     '<td><input style="height: 30px" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text"class="valid input_table "></td>' +
-                    '<td><input style="height: 30px" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="text" class="valid input_table date-picker" data-date-format="dd-mm-yyyy"></td>' +
+                    '<td><input style="height: 30px" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date" class="valid input_table date-picker" data-date-format="dd-mm-yyyy"></td>' +
                     '<td style="width: 150px"><input hidden value=""  style="height: 30px" name="dongia_customer[]" id="input_dongia_customer_' + stt + '" type="text" class="valid input_table"><span style="font-size: 12px;color: red">'+price_item+'</span></td>' +
                     '</tr>';
                 stt=stt+1;

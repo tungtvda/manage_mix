@@ -209,7 +209,7 @@ function show_booking_themmoi($data = array())
         <i class="fa fa-edit" title="Sửa đơn giá"></i></a><a id="reset_price_5" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a>';
         }
         $table_tour .= '</td>
-        <td>'.$departure_name.'</td></tr>';
+        <td>'.$departure_name.'</td> <td>'.$data_tour[0]->so_cho.'</td></tr>';
 
         $total=0;
         if(is_numeric($num_nguoi_lon)&&is_numeric($price_new)){
@@ -235,26 +235,75 @@ function show_booking_themmoi($data = array())
 
     $booking_id=_returnDataEditAdd($data['data_user'],'id');
     $string_cus_tommer='';
-    $data_sub_khach_hang=customer_getByTop('','booking_id='.$booking_id,'id asc');
+    $data_sub_khach_hang=customer_booking_getByTop('','booking_id='.$booking_id,'id asc');
     if(count($data_sub_khach_hang)>0){
         $count_stt_cus=1;
         foreach($data_sub_khach_hang as $row_sub_cus){
-            $string_cus_tommer.='<tbody id="row_customer_'.$count_stt_cus.'"><tr>
-                                <td class="center stt_cus">'.$count_stt_cus.'</td>
-                                <td> <span class="input-icon width_100">
-                                <input id="input_name_customer_sub_'.$count_stt_cus.'" class="valid" type="text" name="name_customer_sub[]" value="'.$row_sub_cus->name.'">
-                                <i class="ace-icon fa fa-user blue"></i></span></td>
-                                <td><span class="input-icon width_100">
-                                <input id="input_email_customer_'.$count_stt_cus.'" type="text" class="valid" name="email_customer[]" value="'.$row_sub_cus->email.'">
-                                <i class="ace-icon fa fa-envelope blue"></i> </span></td>
-                                <td><span class="input-icon width_100">
-                                <input id="input_phone_customer_'.$count_stt_cus.'" class="valid" type="text" name="phone_customer[]" value="'.$row_sub_cus->phone.'">
-                                <i class="ace-icon fa fa-phone blue"></i></span></td>
-                                <td><span class="input-icon width_100">
-                                <input id="input_address_customer_'.$count_stt_cus.'" type="text" name="address_customer[]" value="'.$row_sub_cus->address.'">
-                                <i class="ace-icon fa fa-map-marker blue"></i></span></td>
-                                <td><a id="stt_custommer_'.$count_stt_cus.'" deleteid="'.$count_stt_cus.'" title="Xóa khách hàng" class="red btn_remove_customer" href="javascript:void()">
-                                <i class="ace-icon fa fa-trash-o bigger-130"></i></a></td></tr></tbody>';
+            $birthday_customer='';
+            if($row_sub_cus->birthday!='0000-00-00'){
+                $birthday_customer=date("Y-m-d", strtotime($row_sub_cus->birthday));
+            }
+            $date_passport='';
+            if($row_sub_cus->date_passport!='0000-00-00'){
+                $date_passport=date("Y-m-d", strtotime($row_sub_cus->date_passport));
+            }
+            $price_item='Liên hệ';
+            if($row_sub_cus->do_tuoi_number==1){
+                $price_item=$price_new_format;
+            }
+            if($row_sub_cus->do_tuoi_number==2){
+                $price_item=$price_11_new_format;
+            }
+            if($row_sub_cus->do_tuoi_number==3){
+                $price_item=$price_5_new_format;
+            }
+
+            $string_cus_tommer.='<tr class="row_customer_'.$count_stt_cus.'">
+                                    <td class="center stt_cus">'.$count_stt_cus.'</td>
+                                    <td>
+                                        <input style="height: 30px" name="name_customer_sub[]" value="'.$row_sub_cus->name.'"
+                                               id="input_name_customer_sub_'.$count_stt_cus.'" type="text"
+                                               class="valid input_table">
+                                    </td>
+                                    <td>
+                                        <input style="padding-top: 0px; height: 30px" class="  valid" id="input_birthday_customer_sub_'.$count_stt_cus.'" value="'.$birthday_customer.'"
+                                               name="birthday_customer[]" required="" type="date" >
+                                    </td>
+                                    <td>
+                                        <input style="height: 30px" name="email_customer[]"
+                                               id="input_email_customer_'.$count_stt_cus.'" type="text" value="'.$row_sub_cus->email.'"
+                                               class="valid input_table">
+                                    </td>
+                                    <td>
+                                        <input style="height: 30px" name="phone_customer[]"
+                                               id="input_phone_customer_'.$count_stt_cus.'" type="text" value="'.$row_sub_cus->phone.'"
+                                               class="valid input_table">
+                                    </td>
+                                    <td>
+                                        <input style="height: 30px" name="address_customer[]" value="'.$row_sub_cus->address.'"
+                                               id="input_address_customer_'.$count_stt_cus.'" type="text"
+                                               class="valid input_table">
+                                    </td>
+                                    <td>
+                                        <input hidden style="height: 30px" name="tuoi_number_customer[]" value="'.$row_sub_cus->do_tuoi_number.'"
+                                               id="input_tuoi_number_customer_'.$count_stt_cus.'" type="text" class="valid input_table">
+                                        <input  style="height: 30px" name="tuoi_customer[]" value="'.$row_sub_cus->do_tuoi.'"
+                                               id="input_tuoi_customer_'.$count_stt_cus.'" type="text" class="valid input_table">
+                                    </td>
+                                    <td>
+                                        <input style="height: 30px" name="passport_customer[]" value="'.$row_sub_cus->passport.'"
+                                               id="input_passport_customer_'.$count_stt_cus.'" type="text"
+                                               class="valid input_table">
+                                    </td>
+
+                                    <td>
+                                        <input style="padding-top: 0px; height: 30px"  class="  valid" id="input_date_passport_customer_'.$count_stt_cus.'" value="'.$date_passport.'"
+                                               name="date_passport_customer[]" required="" type="date" >
+                                    </td>
+                                    <td style="width: 130px">
+                                        <span style="color: red; font-size: 12px">'.$price_item.'</span>
+                                    </td>
+                                </tr>';
             $count_stt_cus++;
         }
     }

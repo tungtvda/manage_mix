@@ -94,6 +94,7 @@ if(isset($_POST['code_booking']))
     $ngay_bat_dau=_returnPostParamSecurity('ngay_bat_dau');
     $han_thanh_toan=_returnPostParamSecurity('han_thanh_toan');
     $status=_returnPostParamSecurity('status');
+    $action_link=_returnLinkBooking($status);
     $hinh_thuc_thanh_toan=_returnPostParamSecurity('hinh_thuc_thanh_toan');
     $num_nguoi_lon=_returnPostParamSecurity('num_nguoi_lon');
     $num_tre_em=_returnPostParamSecurity('num_tre_em');

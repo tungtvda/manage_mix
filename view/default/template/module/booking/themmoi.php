@@ -473,6 +473,7 @@
                                     }
                                 </style>
                                 <tbody class="show_hide_table">
+                                <?php echo $string_cus_tommer ?>
                                 <tr hidden class="row_customer_1">
                                     <td class="center stt_cus">1</td>
                                     <td>
@@ -535,7 +536,7 @@
                                     <th>Xóa</th>
                                 </tr>
                                 </thead>
-                                <?php echo $string_cus_tommer ?>
+
 
                                 <!--                                <tbody id="row_customer_1">-->
                                 <!--                                <tr>-->

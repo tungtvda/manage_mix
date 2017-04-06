@@ -28,7 +28,7 @@
 
             Welcome to
             <strong class="green">
-               MIXTOURISt
+                MIXTOURISt
                 <small>(v1.1)</small>
             </strong>
         </div>
@@ -185,7 +185,7 @@
 																<i class="ace-icon fa fa-tasks fa-2x "></i>
 																&nbsp; Đơn hàng mới
 															</span>
-                                    <h4 class="bigger pull-right"><?php echo $count_don_hang_moi?></h4>
+                                    <h4 class="bigger pull-right"><?php echo $count_don_hang_moi ?></h4>
                                 </div>
 
                                 <div class="grid3">
@@ -193,7 +193,7 @@
 																<i class="ace-icon fa fa-tasks fa-2x "></i>
 																&nbsp; Đang giao dịch
 															</span>
-                                    <h4 class="bigger pull-right"><?php echo $count_dang_giao_dich?></h4>
+                                    <h4 class="bigger pull-right"><?php echo $count_dang_giao_dich ?></h4>
                                 </div>
 
                                 <div class="grid3">
@@ -201,28 +201,28 @@
 																<i class="ace-icon fa fa-tasks fa-2x "></i>
 																&nbsp; Tạm dừng
 															</span>
-                                    <h4 class="bigger pull-right"><?php echo $count_tam_dung?></h4>
+                                    <h4 class="bigger pull-right"><?php echo $count_tam_dung ?></h4>
                                 </div>
                                 <div class="grid3">
 															<span style="color:#DA5430" class="">
 																<i class="ace-icon fa fa-tasks fa-2x "></i>
 																&nbsp; Nợ tiền
 															</span>
-                                    <h4 class="bigger pull-right"><?php echo $count_no_tien?></h4>
+                                    <h4 class="bigger pull-right"><?php echo $count_no_tien ?></h4>
                                 </div>
                                 <div class="grid3">
 															<span style="color:#000000" class="">
 																<i class="ace-icon fa fa-tasks fa-2x "></i>
 																&nbsp; Kết thúc
 															</span>
-                                    <h4 class="bigger pull-right"><?php echo $count_ket_thuc?></h4>
+                                    <h4 class="bigger pull-right"><?php echo $count_ket_thuc ?></h4>
                                 </div>
                                 <div class="grid3">
 															<span style="color:#FEE074" class="">
 																<i class="ace-icon fa fa-tasks fa-2x "></i>
 																&nbsp; Bản nháp
 															</span>
-                                    <h4 class="bigger pull-right"><?php echo $count_ban_nhap?></h4>
+                                    <h4 class="bigger pull-right"><?php echo $count_ban_nhap ?></h4>
                                 </div>
                             </div>
                         </div><!-- /.widget-main -->
@@ -262,180 +262,59 @@
                         <div class="widget-main padding-4">
                             <div class="tab-content padding-8">
                                 <div id="task-tab" class="tab-pane active">
-                                    <h4 class="smaller lighter green">
+                                    <h4 style="border-bottom: 1px solid #e8b110; padding-bottom: 10px; margin-bottom: 0px;" class="smaller lighter green">
                                         <i class="ace-icon fa fa-check"></i>
                                         Gửi lời chúc tới khách hàng
+                                        <a style="float: right;margin-left: 10px" title="Soạn tin nhắn và email chúc mừng sinh nhật" href="<?php echo SITE_NAME?>/sinh-nhat?type=khach_hang" >
+                                            <i class="ace-icon fa fa-hand-o-right "></i>
+                                        </a>
+                                        <a style="float: right">|</a>
+                                        <a style="float: right; margin-right: 10px ">
+                                            <label class="pos-rel">
+                                                <input id="check_all_form_birthday" value="" type="checkbox" class="ace">
+                                                <span class="lbl"></span>
+                                            </label>
+                                        </a>
+
                                     </h4>
+
                                     <style>
-                                        .item-list>li.selected label, .item-list>li.selected .lbl{
-                                            text-decoration:none;
+                                        .item-list > li.selected label, .item-list > li.selected .lbl {
+                                            text-decoration: none;
                                         }
                                     </style>
+                                    <form id="form_birthday" method="post">
 
-                                        <div class="comments">
-                                    <ul id="tasks" class="item-list">
-                                        <li class="item-orange clearfix">
-                                            <div class="itemdiv commentdiv">
 
-                                                <div class="user">
-                                                    <img alt="Jennifer's Avatar"
-                                                         src="http://localhost/manage_mix/view/default/themes/uploads/users/tungtvsoictgmailcom/1487293606.jpg"/>
+                                    <div class="comments">
+                                        <ul id="tasks" class="item-list">
+                                            <?php echo $list_customer_sinh_nhat_hien_tai ?>
+                                        </ul>
 
-                                                </div>
+                                    </div>
+                                    <div style="margin-top: 0px" class="form-actions">
+                                        <div style="background-color: #ffffff; padding: 10px; width: 100%" class="input-group" >
+                                            <h4 style="font-size: 13px"  class="smaller lighter green">
+                                                <i class="ace-icon fa fa-key"></i>
+                                                Từ khóa gửi tin nhắn
+                                            </h4>
+                                            <span class="label label-warning arrowed-right arrowed-in">[ten_kh]</span>
+                                            <span class="label label-warning arrowed-right arrowed-in">[tuoi_kh]</span>
+                                        </div>
+                                        <div style="background-color: #ffffff;    border-top: 1px solid #E5E5E5;"  class="input-group">
+                                            <textarea style="border: none" placeholder="Tin nhắn SMS chúc mừng sinh nhật ..." class="form-control" name="message_birthday" id="message_birthday" class="required" cols="20" rows="2"></textarea>
+                                            <span style="position: absolute;color:#68BC31" id="count_ky_tu">150 ký tự</span>
+																<span style="vertical-align: bottom;" class="input-group-btn">
+																	<button id="btn_send_birthday" class="btn btn-sm btn-info no-radius"
+                                                                            type="button">
+                                                                        <i class="ace-icon fa fa-share"></i>
+                                                                        Send
+                                                                    </button>
+																</span>
+                                        </div>
 
-                                                <div class="body">
-                                                    <div class="name">
-                                                        <a href="#">Jennifer</a>
-                                                    </div>
-
-                                                    <div class="time">
-                                                        <i style="color: #ff00bd;" class="ace-icon fa fa-birthday-cake "></i>
-                                                        <span class="blue">15 tuổi</span>
-                                                    </div>
-
-                                                    <div style="padding-left: 0px" class="text">
-                                                       <a href="mail:tungtv.soiict@gmail.com"> <i class="ace-icon fa fa-envelope"></i> tungtv.soiict@gmail.com</a>
-                                                        | <a href="tel:123456789"> <i class="ace-icon fa fa-phone"></i> 123456789</a>
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="tools">
-                                                    <div class="action-buttons bigger-125">
-                                                        <a>
-                                                            <label class="inline">
-                                                                <input type="checkbox" class="ace"/>
-                                                                <span class="lbl"></span>
-                                                            </label>
-                                                        </a>
-
-                                                        <a href="#">
-                                                            <i class="ace-icon fa fa-trash-o red"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="item-orange clearfix">
-                                            <label class="inline">
-                                                <input type="checkbox" class="ace"/>
-                                                <span class="lbl"> Answering customer questions</span>
-                                            </label>
-                                        </li>
-                                        <li class="item-orange clearfix">
-                                            <label class="inline">
-                                                <input type="checkbox" class="ace"/>
-                                                <span class="lbl"> Answering customer questions</span>
-                                            </label>
-                                        </li>
-                                        <li class="item-orange clearfix">
-                                            <label class="inline">
-                                                <input type="checkbox" class="ace"/>
-                                                <span class="lbl"> Answering customer questions</span>
-                                            </label>
-                                        </li>
-                                        <li class="item-orange clearfix">
-                                            <label class="inline">
-                                                <input type="checkbox" class="ace"/>
-                                                <span class="lbl"> Answering customer questions</span>
-                                            </label>
-                                        </li>
-                                        <li class="item-orange clearfix">
-                                            <label class="inline">
-                                                <input type="checkbox" class="ace"/>
-                                                <span class="lbl"> Answering customer questions</span>
-                                            </label>
-                                        </li>
-
-                                        <li class="item-red clearfix">
-                                            <label class="inline">
-                                                <input type="checkbox" class="ace"/>
-                                                <span class="lbl"> Fixing bugs</span>
-                                            </label>
-
-                                            <div class="pull-right action-buttons">
-                                                <a href="#" class="blue">
-                                                    <i class="ace-icon fa fa-pencil bigger-130"></i>
-                                                </a>
-
-                                                <span class="vbar"></span>
-
-                                                <a href="#" class="red">
-                                                    <i class="ace-icon fa fa-trash-o bigger-130"></i>
-                                                </a>
-
-                                                <span class="vbar"></span>
-
-                                                <a href="#" class="green">
-                                                    <i class="ace-icon fa fa-flag bigger-130"></i>
-                                                </a>
-                                            </div>
-                                        </li>
-
-                                        <li class="item-default clearfix">
-                                            <label class="inline">
-                                                <input type="checkbox" class="ace"/>
-                                                <span class="lbl"> Adding new features</span>
-                                            </label>
-
-                                            <div class="pull-right pos-rel dropdown-hover">
-                                                <button class="btn btn-minier bigger btn-primary">
-                                                    <i class="ace-icon fa fa-cog icon-only bigger-120"></i>
-                                                </button>
-
-                                                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-caret dropdown-close dropdown-menu-right">
-                                                    <li>
-                                                        <a href="#" class="tooltip-success"
-                                                           data-rel="tooltip"
-                                                           title="Mark&nbsp;as&nbsp;done">
-																					<span class="green">
-																						<i class="ace-icon fa fa-check bigger-110"></i>
-																					</span>
-                                                        </a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="#" class="tooltip-error"
-                                                           data-rel="tooltip" title="Delete">
-																					<span class="red">
-																						<i class="ace-icon fa fa-trash-o bigger-110"></i>
-																					</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-
-                                        <li class="item-blue clearfix">
-                                            <label class="inline">
-                                                <input type="checkbox" class="ace"/>
-                                                <span class="lbl"> Upgrading scripts used in template</span>
-                                            </label>
-                                        </li>
-
-                                        <li class="item-grey clearfix">
-                                            <label class="inline">
-                                                <input type="checkbox" class="ace"/>
-                                                <span class="lbl"> Adding new skins</span>
-                                            </label>
-                                        </li>
-
-                                        <li class="item-green clearfix">
-                                            <label class="inline">
-                                                <input type="checkbox" class="ace"/>
-                                                <span class="lbl"> Updating server software up</span>
-                                            </label>
-                                        </li>
-
-                                        <li class="item-pink clearfix">
-                                            <label class="inline">
-                                                <input type="checkbox" class="ace"/>
-                                                <span class="lbl"> Cleaning up</span>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                            </div>
-
+                                    </div>
+                                    </form>
                                 </div>
 
                                 <div id="member-tab" class="tab-pane">
@@ -460,9 +339,10 @@
                                                     <span class="label label-warning label-sm">pending</span>
 
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow btn-no-border dropdown-toggle"
-                                                                data-toggle="dropdown"
-                                                                data-position="auto">
+                                                        <button
+                                                            class="btn btn-minier btn-yellow btn-no-border dropdown-toggle"
+                                                            data-toggle="dropdown"
+                                                            data-position="auto">
                                                             <i class="ace-icon fa fa-angle-down icon-only bigger-120"></i>
                                                         </button>
 
@@ -519,9 +399,10 @@
                                                     <span class="label label-warning label-sm">pending</span>
 
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow btn-no-border dropdown-toggle"
-                                                                data-toggle="dropdown"
-                                                                data-position="auto">
+                                                        <button
+                                                            class="btn btn-minier btn-yellow btn-no-border dropdown-toggle"
+                                                            data-toggle="dropdown"
+                                                            data-position="auto">
                                                             <i class="ace-icon fa fa-angle-down icon-only bigger-120"></i>
                                                         </button>
 
@@ -578,9 +459,10 @@
                                                     <span class="label label-warning label-sm">pending</span>
 
                                                     <div class="inline position-relative">
-                                                        <button class="btn btn-minier btn-yellow btn-no-border dropdown-toggle"
-                                                                data-toggle="dropdown"
-                                                                data-position="auto">
+                                                        <button
+                                                            class="btn btn-minier btn-yellow btn-no-border dropdown-toggle"
+                                                            data-toggle="dropdown"
+                                                            data-position="auto">
                                                             <i class="ace-icon fa fa-angle-down icon-only bigger-120"></i>
                                                         </button>
 
@@ -656,7 +538,8 @@
                                                 </div>
 
                                                 <div>
-                                                    <span class="label label-success label-sm arrowed-in">approved</span>
+                                                    <span
+                                                        class="label label-success label-sm arrowed-in">approved</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -678,7 +561,8 @@
                                                 </div>
 
                                                 <div>
-                                                    <span class="label label-success label-sm arrowed-in">approved</span>
+                                                    <span
+                                                        class="label label-success label-sm arrowed-in">approved</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -722,7 +606,8 @@
                                                 </div>
 
                                                 <div>
-                                                    <span class="label label-success label-sm arrowed-in">approved</span>
+                                                    <span
+                                                        class="label label-success label-sm arrowed-in">approved</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -1244,9 +1129,6 @@
                 </div><!-- /.widget-box -->
             </div><!-- /.col -->
         </div><!-- /.row -->
-
-
-
 
 
         <!-- PAGE CONTENT ENDS -->

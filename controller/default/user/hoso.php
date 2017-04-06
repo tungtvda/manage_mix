@@ -33,6 +33,7 @@ else{
 if(count($data['data_user'])==0){
     redict(_returnLinkDangNhap());
 }
+
 $_SESSION['link_redict']='http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 $url_bread='<li><a href="'.SITE_NAME.'/nhan-vien/">Nhân viên</a></li><li class="active">Hồ sơ</li>';
 $data['breadcrumbs']=$url_bread;

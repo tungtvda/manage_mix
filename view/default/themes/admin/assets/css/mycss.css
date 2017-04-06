@@ -142,3 +142,6 @@
     -o-animation: glowing 1500ms infinite;
     animation: glowing 1500ms infinite;
 }
+.item_check_sinh_nhat{
+    display: block !important;
+}

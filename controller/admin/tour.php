@@ -1,26 +1,12 @@
 <?php
 require_once '../../config.php';
 require_once DIR.'/model/tourService.php';
-require_once DIR.'/model/danhmuc_1Service.php';
-require_once DIR.'/model/danhmuc_2Service.php';
-require_once DIR.'/model/departureService.php';
 require_once DIR.'/view/admin/tour.php';
 require_once DIR.'/common/messenger.php';
-require_once DIR.'/common/locdautiengviet.php';
 $data=array();
 $insert=true;
-returnCountData();
 if(isset($_SESSION["Admin"]))
 {
-    $danhmuc_id_get='';
-    if(isset($_GET['DanhMuc1Id'])&&$_GET['DanhMuc1Id']!=''){
-        $danhmuc_id_get='?DanhMuc1Id='.$_GET['DanhMuc1Id'];
-    }
-    else{
-        if(isset($_GET['DanhMuc2Id'])&&$_GET['DanhMuc2Id']!=''){
-            $danhmuc_id_get='?DanhMuc2Id='.$_GET['DanhMuc2Id'];
-        }
-    }
     if(isset($_GET["action"])&&isset($_GET["id"]))
     {
         if($_GET["action"]=="delete")
@@ -28,7 +14,7 @@ if(isset($_SESSION["Admin"]))
             $new_obj= new tour();
             $new_obj->id=$_GET["id"];
             tour_delete($new_obj);
-            header('Location: '.SITE_NAME.'/controller/admin/tour.php'.$danhmuc_id_get);
+            header('Location: '.SITE_NAME.'/controller/admin/tour.php');
         }
         else if($_GET["action"]=="edit")
         {
@@ -40,7 +26,7 @@ if(isset($_SESSION["Admin"]))
                 $data['tab1_class']=' ';
                 $insert=false;
             }
-            else header('Location: '.SITE_NAME.'/controller/admin/tour.php'.$danhmuc_id_get);
+            else header('Location: '.SITE_NAME.'/controller/admin/tour.php');
         }
         else
         {
@@ -51,9 +37,6 @@ if(isset($_SESSION["Admin"]))
     {
         $data['tab1_class']='default-tab current';
     }
-    $data['listfkey']['DanhMuc1Id']=danhmuc_1_getByAll();
-    $data['listfkey']['DanhMuc2Id']=danhmuc_2_getByAll();
-    $data['listfkey']['departure']=departure_getByTop('','','position asc');
     if(isset($_GET["action_all"]))
     {
         if($_GET["action_all"]=="ThemMoi")
@@ -71,15 +54,19 @@ if(isset($_SESSION["Admin"]))
             header('Location: '.SITE_NAME.'/controller/admin/tour.php');
         }
     }
-    if(isset($_POST["DanhMuc1Id"])&&isset($_POST["DanhMuc2Id"])&&isset($_POST["name"])&&isset($_POST["name_url"])&&isset($_POST["count_down"])&&isset($_POST["code"])&&isset($_POST["img"])&&isset($_POST["price_sales"])&&isset($_POST["price"])&&isset($_POST["price_2"])&&isset($_POST["price_3"])&&isset($_POST["price_4"])&&isset($_POST["price_5"])&&isset($_POST["price_6"])&&isset($_POST["durations"])&&isset($_POST["departure"])&&isset($_POST["departure_time"])&&isset($_POST["destination"])&&isset($_POST["vehicle"])&&isset($_POST["hotel"])&&isset($_POST["summary"])&&isset($_POST["highlights"])&&isset($_POST["schedule"])&&isset($_POST["price_list"])&&isset($_POST["content"])&&isset($_POST["list_img"])&&isset($_POST["title"])&&isset($_POST["keyword"])&&isset($_POST["description"])&&isset($_POST["inclusion"])&&isset($_POST["exclusion"]))
+    if(isset($_POST["tour_quoc_te"])&&isset($_POST["DanhMuc1Id"])&&isset($_POST["DanhMuc2Id"])&&isset($_POST["danhmuc_multi"])&&isset($_POST["promotion"])&&isset($_POST["packages"])&&isset($_POST["name"])&&isset($_POST["name_url"])&&isset($_POST["count_down"])&&isset($_POST["code"])&&isset($_POST["img"])&&isset($_POST["price_sales"])&&isset($_POST["price"])&&isset($_POST["price_2"])&&isset($_POST["price_3"])&&isset($_POST["price_4"])&&isset($_POST["price_5"])&&isset($_POST["price_6"])&&isset($_POST["price_number"])&&isset($_POST["price_number_2"])&&isset($_POST["price_number_3"])&&isset($_POST["price_number_4"])&&isset($_POST["price_number_5"])&&isset($_POST["price_number_6"])&&isset($_POST["name_price"])&&isset($_POST["name_price_2"])&&isset($_POST["name_price_3"])&&isset($_POST["name_price_4"])&&isset($_POST["name_price_5"])&&isset($_POST["name_price_6"])&&isset($_POST["so_cho"])&&isset($_POST["durations"])&&isset($_POST["departure"])&&isset($_POST["destination"])&&isset($_POST["departure_time"])&&isset($_POST["vehicle"])&&isset($_POST["hotel"])&&isset($_POST["summary"])&&isset($_POST["highlights"])&&isset($_POST["schedule"])&&isset($_POST["price_list"])&&isset($_POST["content"])&&isset($_POST["list_img"])&&isset($_POST["title"])&&isset($_POST["keyword"])&&isset($_POST["description"])&&isset($_POST["inclusion"])&&isset($_POST["exclusion"]))
     {
        $array=$_POST;
        if(!isset($array['id']))
        $array['id']='0';
+       if(!isset($array['tour_quoc_te']))
+       $array['tour_quoc_te']='0';
        if(!isset($array['DanhMuc1Id']))
        $array['DanhMuc1Id']='0';
        if(!isset($array['DanhMuc2Id']))
        $array['DanhMuc2Id']='0';
+       if(!isset($array['danhmuc_multi']))
+       $array['danhmuc_multi']='0';
        if(!isset($array['promotion']))
        $array['promotion']='0';
        if(!isset($array['packages']))
@@ -88,9 +75,8 @@ if(isset($_SESSION["Admin"]))
        $array['name']='0';
        if(!isset($array['name_url']))
        $array['name_url']='0';
-        $array['name_url']=LocDau($array['name']);
-        if(!isset($array['count_down']))
-            $array['count_down']='';
+       if(!isset($array['count_down']))
+       $array['count_down']='0';
        if(!isset($array['code']))
        $array['code']='0';
        if(!isset($array['img']))
@@ -109,19 +95,40 @@ if(isset($_SESSION["Admin"]))
        $array['price_5']='0';
        if(!isset($array['price_6']))
        $array['price_6']='0';
+       if(!isset($array['price_number']))
+       $array['price_number']='0';
+       if(!isset($array['price_number_2']))
+       $array['price_number_2']='0';
+       if(!isset($array['price_number_3']))
+       $array['price_number_3']='0';
+       if(!isset($array['price_number_4']))
+       $array['price_number_4']='0';
+       if(!isset($array['price_number_5']))
+       $array['price_number_5']='0';
+       if(!isset($array['price_number_6']))
+       $array['price_number_6']='0';
+       if(!isset($array['name_price']))
+       $array['name_price']='0';
+       if(!isset($array['name_price_2']))
+       $array['name_price_2']='0';
+       if(!isset($array['name_price_3']))
+       $array['name_price_3']='0';
+       if(!isset($array['name_price_4']))
+       $array['name_price_4']='0';
+       if(!isset($array['name_price_5']))
+       $array['name_price_5']='0';
+       if(!isset($array['name_price_6']))
+       $array['name_price_6']='0';
+       if(!isset($array['so_cho']))
+       $array['so_cho']='0';
        if(!isset($array['durations']))
        $array['durations']='0';
        if(!isset($array['departure']))
        $array['departure']='0';
-        $departure='';
-        if(isset($_POST["departure"])&&$_POST["departure"]!=''){
-            $departure=implode(',',$_POST["departure"]);
-            $array['departure']=$departure;
-        }
-        if(!isset($array['departure_time']))
-            $array['departure_time']='0';
        if(!isset($array['destination']))
        $array['destination']='0';
+       if(!isset($array['departure_time']))
+       $array['departure_time']='0';
        if(!isset($array['vehicle']))
        $array['vehicle']='0';
        if(!isset($array['hotel']))
@@ -148,59 +155,24 @@ if(isset($_SESSION["Admin"]))
        $array['inclusion']='0';
        if(!isset($array['exclusion']))
        $array['exclusion']='0';
-        $array['updated']=date(DATETIME_FORMAT);
       $new_obj=new tour($array);
         if($insert)
         {
             tour_insert($new_obj);
-            header('Location: '.SITE_NAME.'/controller/admin/tour.php'.$danhmuc_id_get);
+            header('Location: '.SITE_NAME.'/controller/admin/tour.php');
         }
         else
         {
             $new_obj->id=$_GET["id"];
             tour_update($new_obj);
             $insert=false;
-            header('Location: '.SITE_NAME.'/controller/admin/tour.php'.$danhmuc_id_get);
-        }
-    }
-    $dk='';
-    $dk_count='';
-    if(isset($_GET['giatri'])&&$_GET['giatri']!=''){
-        $key_timkiem=mb_strtolower(addslashes(strip_tags($_GET['giatri'])));
-        $dk_count='name LIKE "%'.$key_timkiem.'%" or name_url LIKE "%'.$key_timkiem.'%" or code LIKE "%'.$key_timkiem.'%" or price_sales LIKE "%'.$key_timkiem.'%" or price LIKE "%'.$key_timkiem.'%" or durations LIKE "%'.$key_timkiem.'%"  or departure LIKE "%'.$key_timkiem.'%" or departure_time LIKE "%'.$key_timkiem.'%" or destination LIKE "%'.$key_timkiem.'%" or destination LIKE "%'.$key_timkiem.'%"';
-        $dk='(tour.name LIKE "%'.$key_timkiem.'%" or tour.name_url LIKE "%'.$key_timkiem.'%" or tour.code LIKE "%'.$key_timkiem.'%" or tour.price_sales LIKE "%'.$key_timkiem.'%" or tour.price LIKE "%'.$key_timkiem.'%" or tour.durations LIKE "%'.$key_timkiem.'%"  or tour.departure LIKE "%'.$key_timkiem.'%" or tour.departure_time LIKE "%'.$key_timkiem.'%" or tour.destination LIKE "%'.$key_timkiem.'%" or tour.destination LIKE "%'.$key_timkiem.'%")';
-    }
-    if(isset($_GET['DanhMuc1Id'])&&$_GET['DanhMuc1Id']!=''){
-        $danhmuc_id=mb_strtolower(addslashes(strip_tags($_GET['DanhMuc1Id'])));
-        if($dk!='')
-        {
-            $dk.=' (and tour.DanhMuc1Id='.$danhmuc_id.')';
-            $dk_count.=' and DanhMuc1Id='.$danhmuc_id;
-        }
-        else{
-            $dk.='  tour.DanhMuc1Id='.$danhmuc_id.'';
-            $dk_count.='  DanhMuc1Id='.$danhmuc_id;
-        }
-
-    }else{
-        if(isset($_GET['DanhMuc2Id'])&&$_GET['DanhMuc2Id']!=''){
-            $danhmuc_id=mb_strtolower(addslashes(strip_tags($_GET['DanhMuc2Id'])));
-            if($dk!='')
-            {
-                $dk.=' (and tour.DanhMuc2Id='.$danhmuc_id.')';
-                $dk_count.=' and DanhMuc2Id='.$danhmuc_id;
-            }
-            else{
-                $dk.='  tour.DanhMuc2Id='.$danhmuc_id.'';
-                $dk_count.='  DanhMuc2Id='.$danhmuc_id;
-            }
-
+            header('Location: '.SITE_NAME.'/controller/admin/tour.php');
         }
     }
     $data['username']=isset($_SESSION["UserName"])?$_SESSION["UserName"]:'quản trị viên';
-    $data['count_paging']=tour_count($dk_count);
+    $data['count_paging']=tour_count('');
     $data['page']=isset($_GET['page'])?$_GET['page']:'1';
-    $data['table_body']=tour_getByPagingReplace($data['page'],20,'id DESC',$dk);
+    $data['table_body']=tour_getByPagingReplace($data['page'],20,'id DESC','');
     // gọi phương thức trong tầng view để hiển thị
     view_tour($data);
 }

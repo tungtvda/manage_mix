@@ -138,7 +138,7 @@ jQuery(function ($) {
         checkSoNguoi();
     });
 
-    $('body').on("click", '.btn_add_customer', function () {
+    $('body').on("click", '.btn_add_customer_bk', function () {
         var check_number_member = 0;
         var lenght = $('.table_add_customer > tbody  > tr').length;
         var input_num_nguoi_lon = $('#input_num_nguoi_lon').val();
@@ -190,6 +190,24 @@ jQuery(function ($) {
         }
 
 
+    });
+    $('body').on("click", '.btn_add_customer', function () {
+        var price=$('#input_price_submit').val();
+        var price_2=$('#input_price_511_submit').val();
+        var price_3=$('#input_price_5_submit').val();
+        if(price!=''){
+            returnGenDanhSachDoan(price,price_2,price_3);
+        }else{
+            lnv.alert({
+                title: 'Lỗi',
+                content: 'Bạn vui lòng chọn tour',
+                alertBtnText: 'Ok',
+                iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                alertHandler: function () {
+                    $('#input_name_tour').show().focus().select();
+                }
+            });
+        }
     });
     $('body').on("click", '.btn_remove_customer', function () {
         var deleteid = $(this).attr('deleteid');
@@ -1426,7 +1444,7 @@ function returnDanhSachDoan(){
                     '<input hidden value="'+name_1+'"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table"><span style="font-size: 12px;">'+name_1+'</span></td>' +
                     '<td><input style="height: 30px" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text" class="valid input_table "></td>' +
                     '<td><input style="height: 30px" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date" class="valid input_table datepicker"></td>' +
-                    '<td style="width: 130px"><input hidden value=""  style="height: 30px" name="dongia_customer[]" id="input_dongia_customer_' + stt + '" type="text" class="valid input_table"><span style="font-size: 12px;color: red">'+price_item+' '+ti_le_nguoi_lon+'</span></td>' +
+                    '<td style="width: 130px"><span style="font-size: 12px;color: red">'+price_item+' '+ti_le_nguoi_lon+'</span></td>' +
                     '</tr>';
                 stt=stt+1;
             }
@@ -1494,7 +1512,7 @@ function returnDanhSachDoan(){
                     '<input hidden value="'+name_2+'"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table"><span style="font-size: 12px;">'+name_2+'</span></td>' +
                     '<td><input style="height: 30px" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text"class="valid input_table "></td>' +
                     '<td><input style="height: 30px" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date"class="valid input_table datepicker"></td>' +
-                    '<td><input hidden value=""  style="height: 30px" name="dongia_customer[]" id="input_dongia_customer_' + stt + '" type="text" class="valid input_table"><span style="font-size: 12px;color: red">'+price_item+' '+ti_le_tre_em_511+'</span></td>' +
+                    '<td><span style="font-size: 12px;color: red">'+price_item+' '+ti_le_tre_em_511+'</span></td>' +
                     '</tr>';
                 stt=stt+1;
             }
@@ -1561,7 +1579,7 @@ function returnDanhSachDoan(){
                     '<input hidden value="'+name_3+'"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table"><span style="font-size: 12px;">'+name_3+'</span></td>' +
                     '<td><input style="height: 30px" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text"class="valid input_table "></td>' +
                     '<td><input style="height: 30px" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date"class="valid input_table datepicker"></td>' +
-                    '<td><input hidden value=""  style="height: 30px" name="dongia_customer[]" id="input_dongia_customer_' + stt + '" type="text" class="valid input_table"><span style="font-size: 12px;color: red">'+price_item+' '+ti_le_tre_em_5+'</span></td>' +
+                    '<td><span style="font-size: 12px;color: red">'+price_item+' '+ti_le_tre_em_5+'</span></td>' +
                     '</tr>';
                 stt=stt+1;
             }
@@ -1635,19 +1653,53 @@ function returnGenDanhSachDoan(price,price_2,price_3){
                 var price_item= price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
             }
             for(var i=1;i<=numbe_1;i++){
+                var name_customer_sub='';
+                if($('#input_name_customer_sub_'+ stt).length){
+                    name_customer_sub=$('#input_name_customer_sub_'+ stt).val();
+                }
+                var birthday_customer='';
+                if($('#input_birthday_customer_sub_'+ stt).length){
+                    birthday_customer=$('#input_birthday_customer_sub_'+ stt).val();
+                }
+                var email_customer='';
+                if($('#input_email_customer_'+ stt).length){
+                    email_customer=$('#input_email_customer_'+ stt).val();
+                }
+                var phone_customer='';
+                if($('#input_phone_customer_'+ stt).length){
+                    phone_customer=$('#input_phone_customer_'+ stt).val();
+                }
+                var address_customer='';
+                if($('#input_phone_customer_'+ stt).length){
+                    address_customer=$('#input_address_customer_'+ stt).val();
+                }
+                var tuoi_customer='';
+                if($('#input_tuoi_customer_'+ stt).length){
+                    tuoi_customer=$('#input_tuoi_customer_'+ stt).val();
+                }
+                if(tuoi_customer==''){
+                    tuoi_customer=name_1;
+                }
+                var passport_customer='';
+                if($('#input_passport_customer_'+ stt).length){
+                    passport_customer=$('#input_passport_customer_'+ stt).val();
+                }
+                var date_passport_customer='';
+                if($('#input_date_passport_customer_'+ stt).length){
+                    date_passport_customer=$('#input_date_passport_customer_'+ stt).val();
+                }
                 row =row+'<tr id="row_customer_' + stt+ '"><td class="center stt_cus">' + stt + '</td>' +
-                    '<td><input style="height: 30px" name="name_customer_sub[]" id="input_name_customer_sub_' + stt + '" type="text"class="valid input_table"></td>' +
-                    '<td><input style="height: 30px" name="birthday_customer[]" id="input_birthday_customer_sub_' + stt + '" type="date"  class="valid input_table"></td>' +
-                    '<td><input style="height: 30px" name="email_customer[]" id="input_email_customer_' + stt + '" type="text" class="valid input_table"></td>' +
-                    '<td><input style="height: 30px" name="phone_customer[]" id="input_phone_customer_' + stt + '" type="text" class="valid input_table"></td>' +
-                    '<td><input  style="height: 30px" name="address_customer[]" id="input_address_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" value="'+name_customer_sub+'" name="name_customer_sub[]" id="input_name_customer_sub_' + stt + '" type="text"class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" value="'+birthday_customer+'" name="birthday_customer[]" id="input_birthday_customer_sub_' + stt + '" type="date"  class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" value="'+email_customer+'" name="email_customer[]" id="input_email_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" value="'+phone_customer+'" name="phone_customer[]" id="input_phone_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td><input  style="height: 30px"  value="'+address_customer+'" name="address_customer[]" id="input_address_customer_' + stt + '" type="text" class="valid input_table"></td>' +
                     '<td>' +
-                    '<input hidden style="height: 30px" name="tuoi_number_customer[]" value="1"  id="input_tuoi_number_customer_' + stt + '" type="text"  class="valid input_table">' +
-                    '<input hidden value="'+name_1+'"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table">' +
-                    '<input style="height: 30px"  class="valid" value="'+name_1+'" style="font-size: 12px;"></td>' +
-                    '<td><input style="height: 30px" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text" class="valid input_table "></td>' +
-                    '<td><input style="height: 30px" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date" class="valid input_table"></td>' +
-                    '<td style="width: 150px"><input hidden value=""  style="height: 30px" name="dongia_customer[]" id="input_dongia_customer_' + stt + '" type="text" class="valid input_table"><span style="font-size: 12px;color: red">'+price_item+'</span></td>' +
+                    '<input hidden style="height: 30px"  name="tuoi_number_customer[]" value="1"  id="input_tuoi_number_customer_' + stt + '" type="text"  class="valid input_table">' +
+                    '<input  value="'+tuoi_customer+'" style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table">' +
+                    '<td><input style="height: 30px" value="'+passport_customer+'" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text" class="valid input_table "></td>' +
+                    '<td><input style="height: 30px" value="'+date_passport_customer+'" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date" class="valid input_table"></td>' +
+                    '<td style="width: 150px"><span style="font-size: 12px;color: red">'+price_item+'</span></td>' +
                     '</tr>';
                 stt=stt+1;
             }
@@ -1659,19 +1711,53 @@ function returnGenDanhSachDoan(price,price_2,price_3){
                 var price_item= price_2.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
             }
             for(var j=1;j<=numbe_2;j++){
+                var name_customer_sub='';
+                if($('#input_name_customer_sub_'+ stt).length){
+                    name_customer_sub=$('#input_name_customer_sub_'+ stt).val();
+                }
+                var birthday_customer='';
+                if($('#input_birthday_customer_sub_'+ stt).length){
+                    birthday_customer=$('#input_birthday_customer_sub_'+ stt).val();
+                }
+                var email_customer='';
+                if($('#input_email_customer_'+ stt).length){
+                    email_customer=$('#input_email_customer_'+ stt).val();
+                }
+                var phone_customer='';
+                if($('#input_phone_customer_'+ stt).length){
+                    phone_customer=$('#input_phone_customer_'+ stt).val();
+                }
+                var address_customer='';
+                if($('#input_phone_customer_'+ stt).length){
+                    address_customer=$('#input_address_customer_'+ stt).val();
+                }
+                var tuoi_customer='';
+                if($('#input_tuoi_customer_'+ stt).length){
+                    tuoi_customer=$('#input_tuoi_customer_'+ stt).val();
+                }
+                if(tuoi_customer==''){
+                    tuoi_customer=name_2;
+                }
+                var passport_customer='';
+                if($('#input_passport_customer_'+ stt).length){
+                    passport_customer=$('#input_passport_customer_'+ stt).val();
+                }
+                var date_passport_customer='';
+                if($('#input_date_passport_customer_'+ stt).length){
+                    date_passport_customer=$('#input_date_passport_customer_'+ stt).val();
+                }
                 row =row+'<tr id="row_customer_' + stt+ '"><td class="center stt_cus">' + stt + '</td>' +
-                    '<td><input style="height: 30px" name="name_customer_sub[]" id="input_name_customer_sub_' + stt + '" type="text"class="valid input_table"></td>' +
-                    '<td><input style="height: 30px" name="birthday_customer[]" id="input_birthday_customer_sub_' + stt + '" type="date" class="valid input_table date-picker" data-date-format="dd-mm-yyyy"></td>' +
-                    '<td><input style="height: 30px" name="email_customer[]" id="input_email_customer_' + stt + '" type="text" class="valid input_table"></td>' +
-                    '<td><input style="height: 30px" name="phone_customer[]" id="input_phone_customer_' + stt + '" type="text" class="valid input_table"></td>' +
-                    '<td><input  style="height: 30px" name="address_customer[]" id="input_address_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" value="'+name_customer_sub+'" name="name_customer_sub[]" id="input_name_customer_sub_' + stt + '" type="text"class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" value="'+birthday_customer+'" name="birthday_customer[]" id="input_birthday_customer_sub_' + stt + '" type="date" class="valid input_table date-picker" data-date-format="dd-mm-yyyy"></td>' +
+                    '<td><input style="height: 30px" value="'+email_customer+'" name="email_customer[]" id="input_email_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" value="'+phone_customer+'" name="phone_customer[]" id="input_phone_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td><input  style="height: 30px" value="'+address_customer+'" name="address_customer[]" id="input_address_customer_' + stt + '" type="text" class="valid input_table"></td>' +
                     '<td>' +
-                    '<input hidden style="height: 30px" name="tuoi_number_customer[]" value="2"  id="input_tuoi_number_customer_' + stt + '" type="text"  class="valid input_table">' +
-                    '<input hidden value="'+name_2+'"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table">' +
-                    '<input style="height: 30px"  class="valid" value="'+name_2+'" style="font-size: 12px;"></td>' +
-                    '<td><input style="height: 30px" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text"class="valid input_table "></td>' +
-                    '<td><input style="height: 30px" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date" class="valid input_table date-picker"></td>' +
-                    '<td style="width: 150px"><input hidden value=""  style="height: 30px" name="dongia_customer[]" id="input_dongia_customer_' + stt + '" type="text" class="valid input_table"><span style="font-size: 12px;color: red">'+price_item+'</span></td>' +
+                    '<input hidden style="height: 30px"  name="tuoi_number_customer[]" value="2"  id="input_tuoi_number_customer_' + stt + '" type="text"  class="valid input_table">' +
+                    '<input   value="'+tuoi_customer+'"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table">' +
+                    '<td><input style="height: 30px" value="'+passport_customer+'" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text"class="valid input_table "></td>' +
+                    '<td><input style="height: 30px" value="'+date_passport_customer+'" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date" class="valid input_table date-picker"></td>' +
+                    '<td style="width: 150px"><span style="font-size: 12px;color: red">'+price_item+'</span></td>' +
                     '</tr>';
                 stt=stt+1;
             }
@@ -1683,19 +1769,53 @@ function returnGenDanhSachDoan(price,price_2,price_3){
                 var price_item= price_3.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
             }
             for(var k=1;k<=numbe_3;k++){
+                var name_customer_sub='';
+                if($('#input_name_customer_sub_'+ stt).length){
+                    name_customer_sub=$('#input_name_customer_sub_'+ stt).val();
+                }
+                var birthday_customer='';
+                if($('#input_birthday_customer_sub_'+ stt).length){
+                    birthday_customer=$('#input_birthday_customer_sub_'+ stt).val();
+                }
+                var email_customer='';
+                if($('#input_email_customer_'+ stt).length){
+                    email_customer=$('#input_email_customer_'+ stt).val();
+                }
+                var phone_customer='';
+                if($('#input_phone_customer_'+ stt).length){
+                    phone_customer=$('#input_phone_customer_'+ stt).val();
+                }
+                var address_customer='';
+                if($('#input_phone_customer_'+ stt).length){
+                    address_customer=$('#input_address_customer_'+ stt).val();
+                }
+                var tuoi_customer='';
+                if($('#input_tuoi_customer_'+ stt).length){
+                    tuoi_customer=$('#input_tuoi_customer_'+ stt).val();
+                }
+                if(tuoi_customer==''){
+                    tuoi_customer=name_3;
+                }
+                var passport_customer='';
+                if($('#input_passport_customer_'+ stt).length){
+                    passport_customer=$('#input_passport_customer_'+ stt).val();
+                }
+                var date_passport_customer='';
+                if($('#input_date_passport_customer_'+ stt).length){
+                    date_passport_customer=$('#input_date_passport_customer_'+ stt).val();
+                }
                 row =row+'<tr id="row_customer_' + stt+ '"><td class="center stt_cus">' + stt + '</td>' +
-                    '<td><input style="height: 30px" name="name_customer_sub[]" id="input_name_customer_sub_' + stt + '" type="text"class="valid input_table"></td>' +
-                    '<td><input style="height: 30px" name="birthday_customer[]" id="input_birthday_customer_sub_' + stt + '" type="date" class="valid input_table date-picker"></td>' +
-                    '<td><input style="height: 30px" name="email_customer[]" id="input_email_customer_' + stt + '" type="text" class="valid input_table"></td>' +
-                    '<td><input style="height: 30px" name="phone_customer[]" id="input_phone_customer_' + stt + '" type="text" class="valid input_table"></td>' +
-                    '<td><input  style="height: 30px" name="address_customer[]" id="input_address_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" value="'+name_customer_sub+'" name="name_customer_sub[]" id="input_name_customer_sub_' + stt + '" type="text"class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" value="'+birthday_customer+'" name="birthday_customer[]" id="input_birthday_customer_sub_' + stt + '" type="date" class="valid input_table date-picker"></td>' +
+                    '<td><input style="height: 30px" value="'+email_customer+'" name="email_customer[]" id="input_email_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" value="'+phone_customer+'" name="phone_customer[]" id="input_phone_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td><input  style="height: 30px" value="'+address_customer+'" name="address_customer[]" id="input_address_customer_' + stt + '" type="text" class="valid input_table"></td>' +
                     '<td>' +
                     '<input hidden style="height: 30px" name="tuoi_number_customer[]" value="3"  id="input_tuoi_number_customer_' + stt + '" type="text"  class="valid input_table">' +
-                    '<input hidden value="'+name_3+'"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table">' +
-                    '<input style="height: 30px"  class="valid" value="'+name_3+'" style="font-size: 12px;"></td>' +
-                    '<td><input style="height: 30px" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text"class="valid input_table "></td>' +
-                    '<td><input style="height: 30px" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date" class="valid input_table date-picker" data-date-format="dd-mm-yyyy"></td>' +
-                    '<td style="width: 150px"><input hidden value=""  style="height: 30px" name="dongia_customer[]" id="input_dongia_customer_' + stt + '" type="text" class="valid input_table"><span style="font-size: 12px;color: red">'+price_item+'</span></td>' +
+                    '<input  value="'+tuoi_customer+'" style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table">' +
+                    '<td><input style="height: 30px" value="'+passport_customer+'" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text"class="valid input_table "></td>' +
+                    '<td><input style="height: 30px" value="'+date_passport_customer+'" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date" class="valid input_table date-picker" data-date-format="dd-mm-yyyy"></td>' +
+                    '<td style="width: 150px"><span style="font-size: 12px;color: red">'+price_item+'</span></td>' +
                     '</tr>';
                 stt=stt+1;
             }

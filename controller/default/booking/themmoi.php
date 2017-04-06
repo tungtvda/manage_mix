@@ -334,6 +334,7 @@ if(isset($_POST['code_booking']))
         _updateCustomerBooking($name_customer_sub,$email_customer_sub,$phone_customer_sub,$address_customer_sub,$tuoi_customer_sub,$tuoi_number_customer_sub,$birthday_customer_sub,$passport_customer_sub,$date_passport_customer_sub,$array_detail['id'], $_SESSION['user_id']);
         $booking_update->updated=_returnGetDateTime();
         booking_update($booking_update);
+        
         if($string_value_old!=''){
 
             $arr_send_noti=array();
@@ -354,9 +355,6 @@ if(isset($_POST['code_booking']))
                         array_push($arr_send_noti,$booking_update->user_id);
                         _insertNotification($name_noti,$_SESSION['user_id'],$booking_update->user_id,$link_noti,0,$content_noti);
                     }
-
-
-
                 }
             }else{
                 $data_list_user_admin=user_getByTop('','user_role=1 and status=1','id desc');
@@ -483,6 +481,15 @@ if(isset($_POST['code_booking']))
             $data_booking=booking_getByTop('1','code_booking="'.$code_booking.'"','');
             if(count($data_booking)>0){
                 $id_booking=$data_booking[0]->id;
+            }
+            if($check_data_tour[0]->so_cho>=0){
+                $update_tour=new tour((array)$check_data_tour[0]);
+                $con_lai=$check_data_tour[0]->so_cho-($num_nguoi_lon+$num_tre_em+$num_tre_em_5);
+                if($con_lai<0){
+                    $con_lai=0;
+                }
+                $update_tour->so_cho=$con_lai;
+                tour_update($update_tour);
             }
             _updateCustomerBooking($name_customer_sub,$email_customer_sub,$phone_customer_sub,$address_customer_sub,$tuoi_customer_sub,$tuoi_number_customer_sub,$birthday_customer_sub,$passport_customer_sub,$date_passport_customer_sub,$id_booking, $_SESSION['user_id']);
 

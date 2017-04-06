@@ -94,6 +94,7 @@ if(isset($_POST['code_booking']))
     $ngay_bat_dau=_returnPostParamSecurity('ngay_bat_dau');
     $han_thanh_toan=_returnPostParamSecurity('han_thanh_toan');
     $status=_returnPostParamSecurity('status');
+    $action_link=_returnLinkBooking($status);
     $hinh_thuc_thanh_toan=_returnPostParamSecurity('hinh_thuc_thanh_toan');
     $num_nguoi_lon=_returnPostParamSecurity('num_nguoi_lon');
     $num_tre_em=_returnPostParamSecurity('num_tre_em');
@@ -506,7 +507,7 @@ if(isset($_POST['code_booking']))
                 $subject='Xác nhận đơn hàng '.$code_booking;
                 $message.='<p>Nhân viên '.$check_data_user[0]->name.' vừa tạo đơn hàng mã '.$code_booking.'</p>';
                 $message.='<a>Bạn vui lòng truy cập <a href="'.$link_noti.'">đường link</a> để xác nhận đơn hàng</p>';
-//                SendMail('info@mixtourist.com.vn', $message, $subject);
+                SendMail('info@mixtourist.com.vn', $message, $subject);
 //                SendMail('tungtv.soict@gmail.com', $message, $subject);
                 $mess_log='Nhân viên '.$check_data_user[0]->name.' đã thực hiện việc tạo đơn hàng';
             }else{
@@ -517,7 +518,7 @@ if(isset($_POST['code_booking']))
                 $subject='Xác nhận đơn hàng '.$code_booking;
                 $message.='<p>Admin '.$_SESSION['user_name'].' vừa tạo đơn hàng mã '.$code_booking.'</p>';
                 $message.='<a>Bạn vui lòng truy cập <a href="'.$link_noti.'">đường link</a> để xác nhận đơn hàng</p>';
-//                SendMail($check_data_user[0]->email, $message, $subject);
+                SendMail($check_data_user[0]->email, $message, $subject);
                 $mess_log='Admin '.$_SESSION['user_name'].' đã thực hiện việc tạo đơn hàng';
             }
             _insertLog($_SESSION['user_id'],6,6,21,$id_booking,'','',$mess_log);

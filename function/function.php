@@ -1247,3 +1247,27 @@ function _updateStatusNoti()
         }
     }
 }
+function _returnLinkBooking($status){
+    $action_link='';
+    switch($status){
+        case '2':
+            $action_link='booking-giao-dich';
+            break;
+        case '3':
+            $action_link='booking-tam-dung';
+            break;
+        case '4':
+            $action_link='booking-no-tien';
+            break;
+        case '5':
+            $action_link='booking-ket-thuc';
+            break;
+        case '6':
+            $action_link='booking-ban-nhap';
+            break;
+        default:
+            $action_link='booking-new';
+    }
+    return $action_link;
+
+}

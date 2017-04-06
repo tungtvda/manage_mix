@@ -220,5 +220,46 @@
             else $(this).removeClass('dropup');
         });
 
-    })
+    });
+    $('body').on("change", '#check_all_form_birthday', function () {
+        $('#value_1').prop('checked', true);
+        if($(this).is(':checked')){
+            $("form input[type='checkbox']").prop('checked', true);
+        }else{
+            $("form input[type='checkbox']").prop('checked', false);
+        }
+    });
+    $('body').on("click", '#btn_send_birthday', function () {
+        var lenght = $('.click_check_list:checked').length;
+        if (lenght == 0) {
+            lnv.alert({
+                title: 'Lỗi',
+                content: 'Bạn vui lòng chọn khách hàng',
+                alertBtnText: 'Ok',
+                iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                alertHandler: function () {
+
+                }
+            });
+        }
+        else{
+            var mess=$('#message_birthday').val();
+            if(mess=="")
+            {
+                lnv.alert({
+                    title: 'Lỗi',
+                    content: 'Bạn vui lòng nhập nội dung tin nhắn chúc mừng',
+                    alertBtnText: 'Ok',
+                    iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                    alertHandler: function () {
+                        $('#message_birthday').show().focus().select();
+                    }
+                });
+            }else{
+                $("#form_birthday").submit();
+            }
+
+        }
+    });
+
 </script>

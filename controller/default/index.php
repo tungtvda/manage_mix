@@ -27,7 +27,14 @@ $data['count_no_tien']=booking_count($data_dk_fill.' status=4 ');
 $data['count_ket_thuc']=booking_count($data_dk_fill.' status=5 ');
 $data['count_ban_nhap']=booking_count($data_dk_fill.' status=6 ');
 $data['count_all']=$data['count_don_hang_moi']+$data['count_dang_giao_dich']+$data['count_tam_dung']+$data['count_no_tien']+$data['count_ket_thuc']+$data['count_ban_nhap'];
+$dk_hien_tai='birthday LIKE "%04-06%"';
+$date_hien_tai=_returnGetDateMouth();
+$data['customer_sinh_nhat_hien_tai']=customer_getByTop('',$dk_hien_tai,'name asc');
 
+if(isset($_POST['message_birthday'])&&isset($_POST['customer_birthday']))
+{
+    print_r($_POST);
+}
 
 show_header($data);
 show_left($data,'trangchu');

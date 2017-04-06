@@ -151,7 +151,11 @@ function _returnGetDate()
     date_default_timezone_set("Asia/Ho_Chi_Minh");
     return date('Y-m-d');
 }
-
+function _returnGetDateMouth()
+{
+    date_default_timezone_set("Asia/Ho_Chi_Minh");
+    return date('m-d');
+}
 function _returnGetDateTime()
 {
     date_default_timezone_set("Asia/Ho_Chi_Minh");
@@ -1269,5 +1273,34 @@ function _returnLinkBooking($status){
             $action_link='booking-new';
     }
     return $action_link;
+
+}
+function _returnGetAge($birthdate = '0000-00-00') {
+    if ($birthdate == '0000-00-00') return '';
+
+    $bits = explode('-', $birthdate);
+
+    $age = date('Y') - $bits[0] - 1;
+
+    $arr[1] = 'm';
+    $arr[2] = 'd';
+    for ($i = 1; $arr[$i]; $i++) {
+
+        $n = date($arr[$i]);
+        if ($n < $bits[$i])
+            break;
+        if ($n > $bits[$i]) {
+            ++$age;
+            break;
+        }
+        if(!isset($arr[$i+1])){
+            break;
+        }
+    }
+    if($age<-1){
+        return '';
+    }else{
+        return str_replace('-','',$age);
+    }
 
 }

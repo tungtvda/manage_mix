@@ -178,7 +178,8 @@ function show_booking_themmoi($data = array())
         $price_11_new_format=number_format((int)$price_11_new,0,",",".").' vnđ';
         $price_5_new=_returnDataEditAdd($data['data_user'],'price_5_new');
         $price_5_new_format=number_format((int)$price_5_new,0,",",".").' vnđ';
-        $table_tour='<tr> <td class="center">1</td><td><a>'.$name_tour.'</a></td>
+        $so_cho=$data_tour[0]->so_cho;
+        $table_tour='<tr> <td class="center">1</td><td><a>'.$so_cho.'</a></td>
         <td><span id="price_format_span">'.$price_new_format.'</span>';
 
             $table_tour.='<input hidden="" id="input_price_format" value="'.$price_new_format.'">
@@ -209,7 +210,11 @@ function show_booking_themmoi($data = array())
         <i class="fa fa-edit" title="Sửa đơn giá"></i></a><a id="reset_price_5" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a>';
         }
         $table_tour .= '</td>
+<<<<<<< HEAD
+        <td>'.$departure_name.'</td> <td style="color:red">'.$so_cho.'</td></tr>';
+=======
         <td>'.$departure_name.'</td> <td>'.$data_tour[0]->so_cho.'</td></tr>';
+>>>>>>> develop
 
         $total=0;
         if(is_numeric($num_nguoi_lon)&&is_numeric($price_new)){
@@ -239,6 +244,40 @@ function show_booking_themmoi($data = array())
     if(count($data_sub_khach_hang)>0){
         $count_stt_cus=1;
         foreach($data_sub_khach_hang as $row_sub_cus){
+<<<<<<< HEAD
+//            $string_cus_tommer.='<tbody id="row_customer_'.$count_stt_cus.'"><tr>
+//                                <td class="center stt_cus">'.$count_stt_cus.'</td>
+//                                <td> <span class="input-icon width_100">
+//                                <input id="input_name_customer_sub_'.$count_stt_cus.'" class="valid" type="text" name="name_customer_sub[]" value="'.$row_sub_cus->name.'">
+//                                <i class="ace-icon fa fa-user blue"></i></span></td>
+//                                <td><span class="input-icon width_100">
+//                                <input id="input_email_customer_'.$count_stt_cus.'" type="text" class="valid" name="email_customer[]" value="'.$row_sub_cus->email.'">
+//                                <i class="ace-icon fa fa-envelope blue"></i> </span></td>
+//                                <td><span class="input-icon width_100">
+//                                <input id="input_phone_customer_'.$count_stt_cus.'" class="valid" type="text" name="phone_customer[]" value="'.$row_sub_cus->phone.'">
+//                                <i class="ace-icon fa fa-phone blue"></i></span></td>
+//                                <td><span class="input-icon width_100">
+//                                <input id="input_address_customer_'.$count_stt_cus.'" type="text" name="address_customer[]" value="'.$row_sub_cus->address.'">
+//                                <i class="ace-icon fa fa-map-marker blue"></i></span></td>
+//                                <td><a id="stt_custommer_'.$count_stt_cus.'" deleteid="'.$count_stt_cus.'" title="Xóa khách hàng" class="red btn_remove_customer" href="javascript:void()">
+//                                <i class="ace-icon fa fa-trash-o bigger-130"></i></a></td></tr></tbody>';
+            $price_item='';
+            if($row_sub_cus->do_tuoi_number==1){
+                $price_item=$price_new_format;
+            }else{
+                if($row_sub_cus->do_tuoi_number==2){
+                    $price_item=$price_11_new_format;
+                }else{
+                    if($row_sub_cus->do_tuoi_number==3){
+                        $price_item=$price_5_new_format;
+                    }
+                }
+            }
+
+
+
+            $string_cus_tommer.='<tr  class="row_customer_'.$count_stt_cus.'">
+=======
             $birthday_customer='';
             if($row_sub_cus->birthday!='0000-00-00'){
                 $birthday_customer=date("Y-m-d", strtotime($row_sub_cus->birthday));
@@ -259,6 +298,7 @@ function show_booking_themmoi($data = array())
             }
 
             $string_cus_tommer.='<tr class="row_customer_'.$count_stt_cus.'">
+>>>>>>> develop
                                     <td class="center stt_cus">'.$count_stt_cus.'</td>
                                     <td>
                                         <input style="height: 30px" name="name_customer_sub[]" value="'.$row_sub_cus->name.'"
@@ -266,8 +306,13 @@ function show_booking_themmoi($data = array())
                                                class="valid input_table">
                                     </td>
                                     <td>
+<<<<<<< HEAD
+                                        <input style="padding-top: 0px;height: 30px" class="  valid" id="input_birthday_customer_sub_'.$count_stt_cus.'"
+                                               name="birthday_customer[]" required="" type="date" value="'.$row_sub_cus->birthday.'">
+=======
                                         <input style="padding-top: 0px; height: 30px" class="  valid" id="input_birthday_customer_sub_'.$count_stt_cus.'" value="'.$birthday_customer.'"
                                                name="birthday_customer[]" required="" type="date" >
+>>>>>>> develop
                                     </td>
                                     <td>
                                         <input style="height: 30px" name="email_customer[]"
@@ -275,8 +320,13 @@ function show_booking_themmoi($data = array())
                                                class="valid input_table">
                                     </td>
                                     <td>
+<<<<<<< HEAD
+                                        <input style="height: 30px" name="phone_customer[]" value="'.$row_sub_cus->phone.'"
+                                               id="input_phone_customer_'.$count_stt_cus.'" type="text"
+=======
                                         <input style="height: 30px" name="phone_customer[]"
                                                id="input_phone_customer_'.$count_stt_cus.'" type="text" value="'.$row_sub_cus->phone.'"
+>>>>>>> develop
                                                class="valid input_table">
                                     </td>
                                     <td>
@@ -297,13 +347,23 @@ function show_booking_themmoi($data = array())
                                     </td>
 
                                     <td>
+<<<<<<< HEAD
+                                        <input style="padding-top: 0px;height: 30px" value="" class=" valid" id="input_date_passport_customer_'.$count_stt_cus.'"
+                                               name="date_passport_customer[]" required="" type="date" value="'.$row_sub_cus->date_passport.'"
+                                             >
+=======
                                         <input style="padding-top: 0px; height: 30px"  class="  valid" id="input_date_passport_customer_'.$count_stt_cus.'" value="'.$date_passport.'"
                                                name="date_passport_customer[]" required="" type="date" >
+>>>>>>> develop
                                     </td>
                                     <td style="width: 130px">
                                         <span style="color: red; font-size: 12px">'.$price_item.'</span>
                                     </td>
                                 </tr>';
+<<<<<<< HEAD
+
+=======
+>>>>>>> develop
             $count_stt_cus++;
         }
     }

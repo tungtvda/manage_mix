@@ -446,7 +446,7 @@
                         <h3 class="row header smaller lighter purple">
                             <i class="ace-icon fa fa-users"></i>
                             Danh sách đoàn
-                            <button title="Thêm dòng" style="padding: 0px 5px"
+                            <button title="Tạo danh sách đoàn" style="padding: 0px 5px"
                                     class="green btn btn-xs btn-success btn_add_customer" type="button">
                                 <i class=" fa fa-plus bigger-120"></i>
                             </button>
@@ -473,6 +473,9 @@
                                     }
                                 </style>
                                 <tbody class="show_hide_table">
+<<<<<<< HEAD
+                                <?php echo $string_cus_tommer?>
+=======
                                 <?php echo $string_cus_tommer ?>
                                 <tr hidden class="row_customer_1">
                                     <td class="center stt_cus">1</td>
@@ -523,6 +526,7 @@
                                         <span style="color: red; font-size: 12px">{price_format}</span>
                                     </td>
                                 </tr>
+>>>>>>> develop
                                 </tbody>
                             </table>
                             <table hidden class="table table-striped table-bordered table_add_customer">

@@ -1695,17 +1695,11 @@ function returnGenDanhSachDoan(price,price_2,price_3){
                     '<td><input style="height: 30px" value="'+phone_customer+'" name="phone_customer[]" id="input_phone_customer_' + stt + '" type="text" class="valid input_table"></td>' +
                     '<td><input  style="height: 30px"  value="'+address_customer+'" name="address_customer[]" id="input_address_customer_' + stt + '" type="text" class="valid input_table"></td>' +
                     '<td>' +
-<<<<<<< HEAD
+
                     '<input hidden style="height: 30px"  name="tuoi_number_customer[]" value="1"  id="input_tuoi_number_customer_' + stt + '" type="text"  class="valid input_table">' +
                     '<input  value="'+tuoi_customer+'" style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table">' +
                     '<td><input style="height: 30px" value="'+passport_customer+'" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text" class="valid input_table "></td>' +
                     '<td><input style="height: 30px" value="'+date_passport_customer+'" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date" class="valid input_table"></td>' +
-=======
-                    '<input hidden style="height: 30px" name="tuoi_number_customer[]" value="1"  id="input_tuoi_number_customer_' + stt + '" type="text"  class="valid input_table">' +
-                    '<input  value="'+name_1+'"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table">' +
-                    '<td><input style="height: 30px" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text" class="valid input_table "></td>' +
-                    '<td><input style="height: 30px" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date" class="valid input_table"></td>' +
->>>>>>> develop
                     '<td style="width: 150px"><span style="font-size: 12px;color: red">'+price_item+'</span></td>' +
                     '</tr>';
                 stt=stt+1;
@@ -1760,17 +1754,10 @@ function returnGenDanhSachDoan(price,price_2,price_3){
                     '<td><input style="height: 30px" value="'+phone_customer+'" name="phone_customer[]" id="input_phone_customer_' + stt + '" type="text" class="valid input_table"></td>' +
                     '<td><input  style="height: 30px" value="'+address_customer+'" name="address_customer[]" id="input_address_customer_' + stt + '" type="text" class="valid input_table"></td>' +
                     '<td>' +
-<<<<<<< HEAD
                     '<input hidden style="height: 30px"  name="tuoi_number_customer[]" value="2"  id="input_tuoi_number_customer_' + stt + '" type="text"  class="valid input_table">' +
                     '<input   value="'+tuoi_customer+'"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table">' +
                     '<td><input style="height: 30px" value="'+passport_customer+'" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text"class="valid input_table "></td>' +
                     '<td><input style="height: 30px" value="'+date_passport_customer+'" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date" class="valid input_table date-picker"></td>' +
-=======
-                    '<input hidden style="height: 30px" name="tuoi_number_customer[]" value="2"  id="input_tuoi_number_customer_' + stt + '" type="text"  class="valid input_table">' +
-                    '<input  value="'+name_2+'"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table">' +
-                    '<td><input style="height: 30px" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text"class="valid input_table "></td>' +
-                    '<td><input style="height: 30px" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date" class="valid input_table date-picker"></td>' +
->>>>>>> develop
                     '<td style="width: 150px"><span style="font-size: 12px;color: red">'+price_item+'</span></td>' +
                     '</tr>';
                 stt=stt+1;
@@ -1826,15 +1813,9 @@ function returnGenDanhSachDoan(price,price_2,price_3){
                     '<td><input  style="height: 30px" value="'+address_customer+'" name="address_customer[]" id="input_address_customer_' + stt + '" type="text" class="valid input_table"></td>' +
                     '<td>' +
                     '<input hidden style="height: 30px" name="tuoi_number_customer[]" value="3"  id="input_tuoi_number_customer_' + stt + '" type="text"  class="valid input_table">' +
-<<<<<<< HEAD
                     '<input  value="'+tuoi_customer+'" style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table">' +
                     '<td><input style="height: 30px" value="'+passport_customer+'" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text"class="valid input_table "></td>' +
                     '<td><input style="height: 30px" value="'+date_passport_customer+'" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date" class="valid input_table date-picker" data-date-format="dd-mm-yyyy"></td>' +
-=======
-                    '<input  value="'+name_3+'"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table">' +
-                    '<td><input style="height: 30px" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text"class="valid input_table "></td>' +
-                    '<td><input style="height: 30px" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date" class="valid input_table date-picker" data-date-format="dd-mm-yyyy"></td>' +
->>>>>>> develop
                     '<td style="width: 150px"><span style="font-size: 12px;color: red">'+price_item+'</span></td>' +
                     '</tr>';
                 stt=stt+1;

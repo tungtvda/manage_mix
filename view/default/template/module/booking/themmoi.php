@@ -473,60 +473,7 @@
                                     }
                                 </style>
                                 <tbody class="show_hide_table">
-<<<<<<< HEAD
                                 <?php echo $string_cus_tommer?>
-=======
-                                <?php echo $string_cus_tommer ?>
-                                <tr hidden class="row_customer_1">
-                                    <td class="center stt_cus">1</td>
-                                    <td>
-                                        <input style="height: 30px" name="name_customer_sub[]"
-                                               id="input_name_customer_sub_1" type="text"
-                                               class="valid input_table">
-                                    </td>
-                                    <td>
-                                        <input style="padding-top: 0px" value="" class=" date-picker  valid" id="input_birthday_customer_sub_1"
-                                               name="birthday_customer[]" required="" type="text"
-                                               data-date-format="dd-mm-yyyy">
-                                    </td>
-                                    <td>
-                                        <input style="height: 30px" name="email_customer[]"
-                                               id="input_email_customer_1" type="text"
-                                               class="valid input_table">
-                                    </td>
-                                    <td>
-                                        <input style="height: 30px" name="phone_customer[]"
-                                               id="input_phone_customer_1" type="text"
-                                               class="valid input_table">
-                                    </td>
-                                    <td>
-                                        <input style="height: 30px" name="address_customer[]"
-                                               id="input_address_customer_1" type="text"
-                                               class="valid input_table">
-                                    </td>
-                                    <td>
-                                        <input hidden style="height: 30px" name="tuoi_number_customer[]" value="1"
-                                               id="input_tuoi_number_customer_1" type="text" class="valid input_table">
-                                        <input hidden style="height: 30px" name="tuoi_customer[]" value="{name_price}"
-                                               id="input_tuoi_customer_1" type="text" class="valid input_table"><span
-                                            style="font-size: 12px">{name_price}</span>
-                                    </td>
-                                    <td>
-                                        <input style="height: 30px" name="passport_customer[]"
-                                               id="input_passport_customer_1" type="text"
-                                               class="valid input_table">
-                                    </td>
-
-                                    <td>
-                                        <input style="padding-top: 0px" value="" class=" date-picker  valid" id="input_date_passport_customer_1"
-                                               name="date_passport_customer[]" required="" type="text"
-                                               data-date-format="dd-mm-yyyy">
-                                    </td>
-                                    <td style="width: 130px">
-                                        <span style="color: red; font-size: 12px">{price_format}</span>
-                                    </td>
-                                </tr>
->>>>>>> develop
                                 </tbody>
                             </table>
                             <table hidden class="table table-striped table-bordered table_add_customer">

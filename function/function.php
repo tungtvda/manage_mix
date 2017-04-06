@@ -1300,7 +1300,7 @@ function _returnGetAge($birthdate = '0000-00-00') {
     if($age<-1){
         return '';
     }else{
-        return str_replace('-','',$age);
+        return str_replace('-','',$age+1);
     }
 
 }

@@ -282,11 +282,14 @@
                                         .item-list > li.selected label, .item-list > li.selected .lbl {
                                             text-decoration: none;
                                         }
+                                        .key_birthday{
+                                            cursor: pointer;
+                                        }
                                     </style>
                                     <form id="form_birthday" method="post">
 
 
-                                    <div class="comments">
+                                    <div class="comments birthday_content">
                                         <ul id="tasks" class="item-list">
                                             <?php echo $list_customer_sinh_nhat_hien_tai ?>
                                         </ul>
@@ -296,10 +299,10 @@
                                         <div style="background-color: #ffffff; padding: 10px; width: 100%" class="input-group" >
                                             <h4 style="font-size: 13px"  class="smaller lighter green">
                                                 <i class="ace-icon fa fa-key"></i>
-                                                Từ khóa gửi tin nhắn
+                                                Từ khóa gửi tin nhắn <span style="color:red"> (Chú ý: không được sử dụng tiếng Việt có dấu)</span>
                                             </h4>
-                                            <span class="label label-warning arrowed-right arrowed-in">[ten_kh]</span>
-                                            <span class="label label-warning arrowed-right arrowed-in">[tuoi_kh]</span>
+                                            <span class="label label-warning arrowed-right arrowed-in key_birthday" countId="1">[ten_kh] <input id="value_key_1" hidden value="[ten_kh]"></span>
+                                            <span class="label label-warning arrowed-right arrowed-in key_birthday" countId="1">[tuoi_kh]<input id="value_key_2" hidden value="[tuoi_kh]"></span>
                                         </div>
                                         <div style="background-color: #ffffff;    border-top: 1px solid #E5E5E5;"  class="input-group">
                                             <textarea style="border: none" placeholder="Tin nhắn SMS chúc mừng sinh nhật ..." class="form-control" name="message_birthday" id="message_birthday" class="required" cols="20" rows="2"></textarea>
@@ -311,8 +314,9 @@
                                                                         Send
                                                                     </button>
 																</span>
-                                        </div>
 
+                                        </div>
+                                        <p id="error_check_length" hidden style="color: red">Bạn đã nhập quá số ký tự cho phép</p>
                                     </div>
                                     </form>
                                 </div>

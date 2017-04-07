@@ -17,6 +17,7 @@ function show_index($data = array())
     $count_ket_thuc=$data['count_ket_thuc'];
     $count_ban_nhap=$data['count_ban_nhap'];
     $list_customer_sinh_nhat_hien_tai='';
+    $show_btn_birthday="";
     if(count($data['customer_sinh_nhat_hien_tai'])>0){
         $count_hien_tai=1;
         foreach($data['customer_sinh_nhat_hien_tai'] as $row_hien_tai){
@@ -59,7 +60,7 @@ function show_index($data = array())
                                                                 <span class="lbl"></span>
                                                             </label>
                                                         </a>
-                                                        <a href="javascript:void(0)" class="remove_birthday" countId="'.$row_hien_tai->id.'">
+                                                        <a href="javascript:void(0)" class="remove_birthday" countId="'.$row_hien_tai->id.'" name_record_delete="'.$row_hien_tai->name.'">
                                                             <i class="ace-icon fa fa-trash-o red"></i>
                                                         </a>
                                                     </div>
@@ -69,8 +70,10 @@ function show_index($data = array())
             $count_hien_tai++;
         }
     }else{
+        $show_btn_birthday="display: none;";
         $list_customer_sinh_nhat_hien_tai='Không có khách hàng sinh nhật trong ngày hôm nay';
     }
+    $count_birthday_hien_tai=$data['count_hien_tai'];
     require_once DIR . '/view/default/template/index.php';
 }
 

@@ -32,6 +32,7 @@ RewriteRule ^khach-hang/$ controller/default/customer/customer.php
 RewriteRule ^khach-hang/them-moi controller/default/customer/themmoi.php
 RewriteRule ^khach-hang/sua controller/default/customer/themmoi.php
 RewriteRule ^khach-hang/xoa$ controller/default/customer/delete.php
+RewriteRule ^khach-hang/send-sms-birthday/$ controller/default/customer/send_sms.php
 
 RewriteRule ^booking-website/$ controller/default/booking/booking_website.php
 RewriteRule ^return-booking-website/$ controller/default/booking/return_booking_website.php

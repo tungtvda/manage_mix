@@ -268,7 +268,17 @@
                         }
                     });
                 }else{
-                    $("#form_birthday").submit();
+                    var url = $('#url_input').val();
+                    var link = url + '/khach-hang/send-sms-birthday/';
+                    $.ajax({
+                        method: "POST",
+                        url:link,
+                        data: $("#form_birthday").serialize(),
+                        success: function (response) {
+
+                        }
+                    });
+//                    $("#form_birthday").submit();
                 }
 
             }

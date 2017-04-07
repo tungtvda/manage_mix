@@ -275,48 +275,39 @@
 
         }
     });
-    $('body').on("input", '#message_birthday', function () {
-        var value=change_alias($(this).val());
-        var MaxLength = 150;
-        $(this).val(value);
-        var length_text=value.length;
-        var length_con_lai=MaxLength - length_text;
-        if(length_con_lai<=0){
-            $('#error_check_length').show();
-            $(this).css("border", "1px solid red");
-            $('#count_ky_tu').css("color", "red");
-            $('#message_birthday').show().focus();
-            $('#count_ky_tu').html('0 ký tự');
-        }else{
-            $('#error_check_length').hide();
-            $(this).css("border", "none");
-            if(length_con_lai<=50){
-                $('#count_ky_tu').css("color", "#f89406");
-            }else{
-                $('#count_ky_tu').css("color", "#68BC31");
+    $('body').on("click", '.remove_birthday', function () {
+        var deleteid = $(this).attr('countid');
+        var name_record_delete=$(this).attr('name_record_delete');
+        lnv.confirm({
+            title: 'Xác nhận xóa bản ghi',
+            content: 'Bạn chắc chắn rằng muốn xóa bản ghi </br><b>"'+name_record_delete+'"</b>',
+            confirmBtnText: 'Ok',
+            iconBtnText:'<i style="color: #669fc7;" class="ace-icon fa fa-check"></i>',
+            confirmHandler: function () {
+                if(deleteid==''||name_record_delete==''){
+                    lnv.alert({
+                        title: 'Lỗi',
+                        content: 'Các thông tin xóa không hợp lệ',
+                        alertBtnText: 'Ok',
+                        iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                        alertHandler: function () {
+
+                        }
+                    });
+                }
+                else{
+                   var count_birthday_hien_tai=parseInt($('#count_birthday_hien_tai').html());
+                    if(count_birthday_hien_tai>0){
+                        count_birthday_hien_tai=count_birthday_hien_tai-1;
+                        $('#count_birthday_hien_tai').html(count_birthday_hien_tai);
+                    }
+
+                    $( "#row_birthday_"+deleteid).remove();
+                }
+            },
+            cancelBtnText: 'Cancel',
+            cancelHandler: function () {
             }
-            $('#count_ky_tu').html(length_con_lai+' ký tự');
-        }
-
-
-
+        })
     });
-    function change_alias( alias )
-    {
-        var str = alias;
-        str= str.toLowerCase();
-        str= str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a");
-        str= str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e");
-        str= str.replace(/ì|í|ị|ỉ|ĩ/g,"i");
-        str= str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g,"o");
-        str= str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u");
-        str= str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y");
-        str= str.replace(/đ/g,"d");
-//        str= str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'| |\"|\&|\#|\[|\]|~|$|_/g,"-");
-        /* tìm và thay thế các kí tự đặc biệt trong chuỗi sang kí tự - */
-        str= str.replace(/-+-/g,"-"); //thay thế 2- thành 1-
-        str= str.replace(/^\-+|\-+$/g,"");
-        //cắt bỏ ký tự - ở đầu và cuối chuỗi
-        return str;
-    }
 </script>

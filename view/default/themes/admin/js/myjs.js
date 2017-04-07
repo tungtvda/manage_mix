@@ -411,7 +411,103 @@ jQuery(function ($) {
 
 
     });
+    $('body').on("input", '#message_birthday', function () {
+        var value=change_alias($(this).val());
+        var MaxLength = 150;
+        $(this).val(value);
+        var length_text=value.length;
+        var length_con_lai=MaxLength - length_text;
+        if(length_con_lai<=0){
+            $('#error_check_length').show();
+            $(this).css("border", "1px solid red");
+            $('#count_ky_tu').css("color", "red");
+            $('#message_birthday').show().focus();
+            $('#count_ky_tu').html('0 ký tự');
+        }else{
+            $('#error_check_length').hide();
+            $(this).css("border", "none");
+            if(length_con_lai<=50){
+                $('#count_ky_tu').css("color", "#f89406");
+            }else{
+                $('#count_ky_tu').css("color", "#68BC31");
+            }
+            $('#count_ky_tu').html(length_con_lai+' ký tự');
+        }
 
+
+
+    });
+    function change_alias( alias )
+    {
+        var str = alias;
+        str= str.toLowerCase();
+        str= str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a");
+        str= str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e");
+        str= str.replace(/ì|í|ị|ỉ|ĩ/g,"i");
+        str= str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g,"o");
+        str= str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u");
+        str= str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y");
+        str= str.replace(/đ/g,"d");
+//        str= str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'| |\"|\&|\#|\[|\]|~|$|_/g,"-");
+        /* tìm và thay thế các kí tự đặc biệt trong chuỗi sang kí tự - */
+        str= str.replace(/-+-/g,"-"); //thay thế 2- thành 1-
+        str= str.replace(/^\-+|\-+$/g,"");
+        //cắt bỏ ký tự - ở đầu và cuối chuỗi
+        return str;
+    }
+    $('body').on('click','.key_birthday', function () {
+        var id=$(this).attr('countId');
+        copyToClipboard(document.getElementById('value_key_'+id));
+    });
+    function copyToClipboard(elem) {
+        // create hidden text element, if it doesn't already exist
+        var targetId = "_hiddenCopyText_";
+        var isInput = elem.tagName === "INPUT" || elem.tagName === "TEXTAREA";
+        var origSelectionStart, origSelectionEnd;
+        if (isInput) {
+            // can just use the original source element for the selection and copy
+            target = elem;
+            origSelectionStart = elem.selectionStart;
+            origSelectionEnd = elem.selectionEnd;
+        } else {
+            // must use a temporary form element for the selection and copy
+            target = document.getElementById(targetId);
+            if (!target) {
+                var target = document.createElement("textarea");
+                target.style.position = "absolute";
+                target.style.left = "-9999px";
+                target.style.top = "0";
+                target.id = targetId;
+                document.body.appendChild(target);
+            }
+            target.textContent = elem.textContent;
+        }
+        // select the content
+        var currentFocus = document.activeElement;
+        target.focus();
+        target.setSelectionRange(0, target.value.length);
+
+        // copy the selection
+        var succeed;
+        try {
+            succeed = document.execCommand("copy");
+        } catch(e) {
+            succeed = false;
+        }
+        // restore original focus
+        if (currentFocus && typeof currentFocus.focus === "function") {
+            currentFocus.focus();
+        }
+
+        if (isInput) {
+            // restore prior selection
+            elem.setSelectionRange(origSelectionStart, origSelectionEnd);
+        } else {
+            // clear temporary content
+            target.textContent = "";
+        }
+        return succeed;
+    }
 // Select all tabs
 //    $('.nav-tabs a').click(function(){
 //        $(this).tab('show');

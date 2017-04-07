@@ -244,7 +244,7 @@
                         <div class="widget-toolbar no-border">
                             <ul class="nav nav-tabs" id="recent-tab">
                                 <li class="active">
-                                    <a data-toggle="tab" href="#task-tab">Hôm nay</a>
+                                    <a data-toggle="tab" href="#task-tab">Hôm nay (<span style="color: red" id="count_birthday_hien_tai"><?php echo $count_birthday_hien_tai?></span>)</a>
                                 </li>
 
                                 <li>
@@ -295,14 +295,16 @@
                                         </ul>
 
                                     </div>
-                                    <div style="margin-top: 0px" class="form-actions">
+                                    <div  style="margin-top: 0px; <?php echo $show_btn_birthday?>" class="form-actions">
                                         <div style="background-color: #ffffff; padding: 10px; width: 100%" class="input-group" >
                                             <h4 style="font-size: 13px"  class="smaller lighter green">
                                                 <i class="ace-icon fa fa-key"></i>
                                                 Từ khóa gửi tin nhắn <span style="color:red"> (Chú ý: không được sử dụng tiếng Việt có dấu)</span>
                                             </h4>
-                                            <span class="label label-warning arrowed-right arrowed-in key_birthday" countId="1">[ten_kh] <input id="value_key_1" hidden value="[ten_kh]"></span>
-                                            <span class="label label-warning arrowed-right arrowed-in key_birthday" countId="1">[tuoi_kh]<input id="value_key_2" hidden value="[tuoi_kh]"></span>
+                                            <span class="label label-warning arrowed-right arrowed-in key_birthday" countId="1">[ten_kh]</span>
+                                            <input class="input_key_birthday" id="value_key_1" countId="1" type="text" value="[ten_kh]">
+                                            <span class="label label-warning arrowed-right arrowed-in key_birthday" countId="2">[tuoi_kh]</span>
+                                            <input class="input_key_birthday" id="value_key_2" countId="2" type="text" value="[tuoi_kh]">
                                         </div>
                                         <div style="background-color: #ffffff;    border-top: 1px solid #E5E5E5;"  class="input-group">
                                             <textarea style="border: none" placeholder="Tin nhắn SMS chúc mừng sinh nhật ..." class="form-control" name="message_birthday" id="message_birthday" class="required" cols="20" rows="2"></textarea>

@@ -145,3 +145,6 @@
 .item_check_sinh_nhat{
     display: block !important;
 }
+.input_key_birthday{
+    background: #ffffff; color: #ffffff; border: none; position: absolute; z-index: -111111
+}

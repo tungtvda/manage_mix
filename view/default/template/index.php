@@ -308,7 +308,7 @@
                                         </div>
                                         <div style="background-color: #ffffff;    border-top: 1px solid #E5E5E5;"  class="input-group">
                                             <textarea style="border: none" placeholder="Tin nhắn SMS chúc mừng sinh nhật ..." class="form-control" name="message_birthday" id="message_birthday" class="required" cols="20" rows="2"></textarea>
-                                            <span style="position: absolute;color:#68BC31" id="count_ky_tu">150 ký tự</span>
+                                            <span style="position: absolute;color:#68BC31" id="count_ky_tu">160 ký tự</span>
 																<span style="vertical-align: bottom;" class="input-group-btn">
 																	<button id="btn_send_birthday" class="btn btn-sm btn-info no-radius"
                                                                             type="button">

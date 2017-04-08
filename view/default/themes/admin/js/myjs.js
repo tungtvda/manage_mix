@@ -413,7 +413,7 @@ jQuery(function ($) {
     });
     $('body').on("input", '#message_birthday', function () {
         var value=change_alias($(this).val());
-        var MaxLength = 150;
+        var MaxLength = 160;
         $(this).val(value);
         var length_text=value.length;
         var length_con_lai=MaxLength - length_text;

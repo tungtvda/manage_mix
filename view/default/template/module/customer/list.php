@@ -201,7 +201,7 @@
 
                                                         <?php if (_returnCheckAction(18) == 1) { ?>
                                                             <li>
-                                                                <a class="blue view_popup_detail" role="button" name_record="<?php echo $row->name ?>" data-toggle="modal" table="user" countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                                <a class="blue view_popup_detail" role="button" name_record="<?php echo $row->name ?>" data-toggle="modal" table="customer" countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
                                                                    href="#modal-form"
                                                                    title="Chi tiết">
                                                                     <i class="ace-icon fa fa-eye-slash bigger-130"></i>

@@ -11,6 +11,9 @@ if (isset($_POST['message_birthday']) && isset($_POST['customer_birthday'])) {
     $message_sms = _returnPostParamSecurity('message_birthday');
     $content_email = _returnPostParamSecurity('content_email');
     $title_sms = _returnPostParamSecurity('title_sms');
+    if($title_sms==''){
+        $title_sms="Chúc mừng sinh nhật khách hàng";
+    }
     $title_email = _returnPostParamSecurity('title_email');
     $arr_cus = $_POST['customer_birthday'];
     // type =0 là chăm sóc khách hàng
@@ -81,8 +84,11 @@ if (isset($_POST['message_birthday']) && isset($_POST['customer_birthday'])) {
         $insert->cus_false_sms = 0;
         $insert->cus_false_email = 0;
         $insert->date_send = _returnGetDateTime();
+        $insert->date_time_send = $date_check = date('Y-m-d H:i:s', strtotime('+2 minute', strtotime(_returnGetDateTime())));
         $insert->created =  _returnGetDateTime();
         $insert->created_by = $_SESSION['user_id'];
+        $insert->updated =  _returnGetDateTime();
+        $insert->update_by = 0;
         sms_email_insert($insert);
         $data_res=sms_email_getByTop('1','code="'.$code.'"','id desc');
         if(count($data_res)>0)

@@ -20,11 +20,11 @@
             <div class="col-xs-12">
                 <div class="clearfix">
                     <div class="col-md-6 col-sm-6 col-xs-12 pink" style="padding-left: 0px">
-                        <?php if (_returnCheckAction(21) == 1) { ?>
-                            <a href="<?php echo SITE_NAME.'/'.$action_link ?>/dat-tour"
+                        <?php if (_returnCheckAction(29) == 1) { ?>
+                            <a href="<?php echo SITE_NAME.'/'.$action_link ?>/them"
                                class="btn btn-white  btn-create-new-tab btn-create-new-tab-hover">
-                                <i class="ace-icon fa fa-plane bigger-120 "></i>
-                                Đặt tour
+                                <i class="ace-icon fa fa-envelope bigger-120 "></i>
+                                Soạn Email - SMS
                                 <i class="ace-icon fa fa-cart-plus icon-on-right"></i>
                             </a>
                         <?php } ?>
@@ -40,21 +40,21 @@
                             </button>
 
                             <ul class="dropdown-menu dropdown-danger">
-                                <?php if (_returnCheckAction(22) == 1) { ?>
+                                <?php if (_returnCheckAction(30) == 1) { ?>
                                     <li>
                                         <a href="#modal-form" role="button" data-toggle="modal" class="edit_function">Sửa</a>
                                     </li>
                                 <?php } ?>
-                                <!--                                --><?php //if (_returnCheckAction(23) == 1) { ?>
-                                <!--                                    <li>-->
-                                <!--                                        <a class="delete_function"-->
-                                <!--                                           href="javascript:void()">Xóa</a>-->
-                                <!--                                    </li>-->
-                                <!--                                --><?php //} ?>
+                                                                <?php if (_returnCheckAction(31) == 1) { ?>
+                                                                    <li>
+                                                                        <a class="delete_function"
+                                                                           href="javascript:void()">Xóa</a>
+                                                                    </li>
+                                                                <?php } ?>
                                 <li class="divider"></li>
                                 <?php if (_returnCheckAction(21) == 1) { ?>
                                     <li>
-                                        <a href="<?php echo SITE_NAME.'/'.$action_link ?>/dat-tour">Đặt tour</a>
+                                        <a href="<?php echo SITE_NAME.'/'.$action_link ?>/them">Soạn Email - SMS</a>
                                     </li>
                                 <?php } ?>
                             </ul>
@@ -86,30 +86,29 @@
                                     </label>
                                 </th>
                                 <th>#</th>
-                                <th>Mã booking</th>
-                                <th>Tên Tour</th>
-                                <th>Tên khách hàng</th>
+                                <th>Mã</th>
+                                <th>Tiêu đề SMS/Email</th>
+                                <th>Số khách</th>
+                                <th>SMS</th>
+                                <th>Email</th>
                                 <th>Trạng thái</th>
-                                <th>Tổng tiền</th>
-                                <th>Thanh toán</th>
-                                <th>Còn lại</th>
-                                <th>Sales</th>
+                                <th>Ngày gửi</th>
+                                <th>Ngày tạo</th>
                                 <th>Người tạo</th>
-                                <th>Xác nhận</th>
                                 <th>Action</th>
 
                             </tr>
                             </thead>
 
                             <tbody>
-                            <?php if (count($list) > 0 && _returnCheckAction(20) == 1) { ?>
+                            <?php if (count($list) > 0 && _returnCheckAction(28) == 1) { ?>
                                 <?php $dem = 1; ?>
                                 <?php foreach ($list as $row) { ?>
                                     <tr class="row_<?php echo $row->id ?>">
                                         <td class="center">
                                             <label class="pos-rel">
                                                 <input type="checkbox" class="ace click_check_list"
-                                                       name_record="<?php echo $row->code_booking ?>"
+                                                       name_record="<?php echo $row->code?>"
                                                        id="check_<?php echo $dem ?>" name="check_box_action[]"
                                                        value="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"/>
                                                 <span class="lbl"></span>
@@ -119,68 +118,55 @@
                                             <?php echo $dem; ?>
                                         </td>
                                         <td>
-                                            <a href="<?php echo SITE_NAME.'/'.$action_link ?>/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"><?php echo $row->code_booking ?></a>
+                                            <a href="<?php echo SITE_NAME.'/'.$action_link ?>/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"><?php echo $row->code ?></a>
                                         </td>
                                         <td style="text-align: center">
-                                            <a href="<?php echo SITE_NAME.'/'.$action_link ?>/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"><?php echo $row->name_tour ?></a>
+                                            <a href="<?php echo SITE_NAME.'/'.$action_link ?>/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
+                                                <?php if($row->title_sms==$row->title_email){?>
+                                                    <p> <?php echo $row->title_sms ?></p>
+                                                <?php } else{?>
+                                                    <p> <?php echo $row->title_sms ?></p>
+                                                    <p> <?php echo $row->title_email ?></p>
+                                                <?php }?>
+
+                                            </a>
                                         </td>
-                                        <td><?php
-                                            $data_customer = customer_getById($row->id_customer);
-                                            if (count($data_customer) > 0) {
-                                                echo '<a href="' . SITE_NAME . '/khach-hang/sua?id=' . _return_mc_encrypt($data_customer[0]->id, ENCRYPTION_KEY) . '">' . $data_customer[0]->name . '</a>';
-                                            }
-                                            ?>
+                                        <td style="text-align: center">
+                                            <?php echo $row->count_cus ?>
                                         </td>
+                                        <td style="text-align: center">
+                                            <span class="green"><?php echo $row->count_success_sms ?></span> |  <span class="red"><?php echo $row->cus_false_sms ?></span>
+                                        </td>
+                                        <td style="text-align: center">
+                                            <span class="green"><?php echo $row->count_success_email ?></span> |  <span class="red"><?php echo $row->cus_false_email ?></span>
+                                        </td>
+
                                         <td>
                                             <input id="status_old_<?php echo $row->id ?>"
                                                    value="<?php echo $row->status ?>" hidden>
                                             <label style="display: none"><?php echo $row->status ?></label>
-                                            <?php
-                                            $disabled = 'disabled';
-                                            if ($row->confirm_admin == 1 || $_SESSION['user_role'] == 1) {
-                                                $disabled = '';
-                                            }
-                                            ?>
-                                            <select <?php echo $disabled ?> id="status_<?php echo $row->id ?>"
-                                                                            class="select_status"
-                                                                            count_id="<?php echo $row->id ?>"
-                                                                            code="<?php echo $row->code_booking ?>">
-                                                <?php
-                                                foreach ($data_list_status as $row_status) {
-                                                    $select = '';
-                                                    if ($row->status == $row_status->id) {
-                                                        $select = 'selected';
-                                                    }
-                                                    echo "<option $select value='$row_status->id'>$row_status->name</option>";
 
-                                                }
-                                                ?>
-                                            </select>
-                                        </td>
-                                        <td><?php echo number_format((int)$row->total_price, 0, ",", ".") . ' vnđ'; ?></td>
-                                        <td><?php
-                                            if ($row->tien_thanh_toan != '') {
-                                                echo number_format((int)$row->tien_thanh_toan, 0, ",", ".") . ' vnđ';
-                                            }
-                                            ?>
-                                        </td>
-                                        <td><?php
-                                            $thanhtoan = 0;
-                                            if ($row->tien_thanh_toan != '') {
-                                                $thanhtoan = $row->tien_thanh_toan;
-                                            }
-                                            $con_lai = $row->total_price - $row->tien_thanh_toan;
-                                            echo number_format((int)$con_lai, 0, ",", ".") . ' vnđ';
-                                            ?>
+<!--                                            <select --><?php //echo $disabled ?><!-- id="status_--><?php //echo $row->id ?><!--"-->
+<!--                                                                            class="select_status"-->
+<!--                                                                            count_id="--><?php //echo $row->id ?><!--"-->
+<!--                                                                            code="--><?php //echo $row->code ?><!--">-->
+<!--                                                --><?php
+//                                                foreach ($data_list_status as $row_status) {
+//                                                    $select = '';
+//                                                    if ($row->status == $row_status->id) {
+//                                                        $select = 'selected';
+//                                                    }
+//                                                    echo "<option $select value='$row_status->id'>$row_status->name</option>";
+//
+//                                                }
+//                                                ?>
+<!--                                            </select>-->
                                         </td>
                                         <td>
-                                            <?php
-                                            $data_sales = user_getById($row->user_id);
-                                            if (count($data_sales) > 0) {
-                                                echo '<a href="' . SITE_NAME . '/nhan-vien/sua?id=' . _return_mc_encrypt($data_sales[0]->id, ENCRYPTION_KEY) . '">' . $data_sales[0]->name . '</a>';
-                                            }
-                                            ?>
-
+                                            <?php echo date("d-m-Y H:i:s", strtotime($row->date_time_send));?>
+                                        </td>
+                                        <td>
+                                            <?php echo date("d-m-Y H:i:s", strtotime($row->created));?>
                                         </td>
                                         <td>
                                             <?php
@@ -190,47 +176,14 @@
                                             }
                                             ?>
                                         </td>
-                                        <td>
-                                            <span hidden><?php echo (int)$row->confirm_admin ?></span>
-                                            <?php if ($row->confirm_admin > 0) { ?>
-                                                <?php
-                                                $data_user_confirm=user_getById($row->confirm_admin);
-                                                $name_user_confirm='';
-                                                if(count($data_user_confirm)>0){
-                                                    $name_user_confirm=$data_user_confirm[0]->name;
-                                                }
-                                                ?>
-                                                <label title="<?php echo $name_user_confirm ?>">
-                                                    <input disabled checked name="switch-field-1" class="ace ace-switch ace-switch-3" type="checkbox">
-                                                    <span class="lbl"></span>
-                                                </label>
-                                            <?php } else { ?>
-                                                <label title="Chưa được xác nhận">
-                                                    <input  name="switch-field-1"
-                                                            class="ace ace-switch ace-switch-3 <?php if($_SESSION['user_role']==1){?> confirm_booking_list<?php }?>"
-                                                            <?php if($_SESSION['user_role']==1){?>
-                                                            count_id="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY)  ?>"
-                                                                id_filed="<?php echo $row->id  ?>"
-                                                            code="<?php echo $row->code_booking ?>"
-                                                                id="confirm_booking_<?php echo $row->id ?>"
-                                                            <?php }?>
-                                                            type="checkbox">
-
-                                                    <span class="lbl"></span>
-                                                </label>
-
-                                            <?php } ?>
-                                        </td>
-                                        <!--                                        <td>-->
-                                        <?php //echo _returnDateFormatConvert($row->created) ?><!--</td>-->
 
                                         <td>
                                             <div class="hidden-sm hidden-xs action-buttons">
 
-                                                <?php if (_returnCheckAction(18) == 1) { ?>
+                                                <?php if (_returnCheckAction(30) == 1) { ?>
                                                     <a class="blue view_popup_detail" role="button"
-                                                       name_record="<?php echo $row->code_booking ?>"
-                                                       data-toggle="modal" table="booking"
+                                                       name_record="<?php echo $row->code ?>"
+                                                       data-toggle="modal" table="sms_email"
                                                        countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
                                                        href="#modal-form"
                                                        title="Chi tiết">
@@ -245,10 +198,10 @@
                                                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                                                     </a>
                                                 <?php } ?>
-                                                <?php if ($_SESSION['user_role'] == 1) { ?>
+                                                <?php if (_returnCheckAction(31) == 1) { ?>
                                                     <a title="Xóa" class="red delete_record" href="javascript:void(0)"
                                                        deleteid="<?php echo $row->id ?>"
-                                                       name_record_delete="<?php echo $row->code_booking ?>"
+                                                       name_record_delete="<?php echo $row->code ?>"
                                                        url_delete="<?php echo SITE_NAME.'/'.$action_link ?>/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
                                                         <i class="ace-icon fa fa-trash-o bigger-130"></i>
                                                     </a>
@@ -264,11 +217,11 @@
 
                                                     <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 
-                                                        <?php if (_returnCheckAction(20) == 1) { ?>
+                                                        <?php if (_returnCheckAction(30) == 1) { ?>
                                                             <li>
                                                                 <a class="blue view_popup_detail" role="button"
-                                                                   name_record="<?php echo $row->code_booking ?>"
-                                                                   data-toggle="modal" table="booking"
+                                                                   name_record="<?php echo $row->code ?>"
+                                                                   data-toggle="modal" table="sms_email"
                                                                    countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
                                                                    href="#modal-form"
                                                                    title="Chi tiết">
@@ -286,11 +239,11 @@
                                                                 </a>
                                                             </li>
                                                         <?php } ?>
-                                                        <?php if ($_SESSION['user_role'] == 1) { ?>
+                                                        <?php if (_returnCheckAction(31) == 1) { ?>
                                                             <li>
                                                                 <a href="javascript:void(0)"
                                                                    deleteid="<?php echo $row->id ?>"
-                                                                   name_record_delete="<?php echo $row->code_booking ?>"
+                                                                   name_record_delete="<?php echo $row->code ?>"
                                                                    url_delete="<?php echo SITE_NAME.'/'.$action_link ?>/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
                                                                    class="tooltip-error delete_record" title="Xóa">
 																				<span class="red">

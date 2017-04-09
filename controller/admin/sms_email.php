@@ -54,7 +54,7 @@ if(isset($_SESSION["Admin"]))
             header('Location: '.SITE_NAME.'/controller/admin/sms_email.php');
         }
     }
-    if(isset($_POST["code"])&&isset($_POST["type"])&&isset($_POST["user"])&&isset($_POST["customer"])&&isset($_POST["title_sms"])&&isset($_POST["title_email"])&&isset($_POST["content_sms"])&&isset($_POST["content_email"])&&isset($_POST["status"])&&isset($_POST["count_cus"])&&isset($_POST["count_success_sms"])&&isset($_POST["count_success_email"])&&isset($_POST["cus_false_sms"])&&isset($_POST["cus_false_email"])&&isset($_POST["date_send"])&&isset($_POST["created"])&&isset($_POST["created_by"]))
+    if(isset($_POST["code"])&&isset($_POST["type"])&&isset($_POST["user"])&&isset($_POST["customer"])&&isset($_POST["title_sms"])&&isset($_POST["title_email"])&&isset($_POST["content_sms"])&&isset($_POST["content_email"])&&isset($_POST["status"])&&isset($_POST["count_cus"])&&isset($_POST["count_success_sms"])&&isset($_POST["count_success_email"])&&isset($_POST["cus_false_sms"])&&isset($_POST["cus_false_email"])&&isset($_POST["date_send"])&&isset($_POST["date_time_send"])&&isset($_POST["created"])&&isset($_POST["created_by"])&&isset($_POST["updated"])&&isset($_POST["update_by"]))
     {
        $array=$_POST;
        if(!isset($array['id']))
@@ -89,10 +89,16 @@ if(isset($_SESSION["Admin"]))
        $array['cus_false_email']='0';
        if(!isset($array['date_send']))
        $array['date_send']='0';
+       if(!isset($array['date_time_send']))
+       $array['date_time_send']='0';
        if(!isset($array['created']))
        $array['created']='0';
        if(!isset($array['created_by']))
        $array['created_by']='0';
+       if(!isset($array['updated']))
+       $array['updated']='0';
+       if(!isset($array['update_by']))
+       $array['update_by']='0';
       $new_obj=new sms_email($array);
         if($insert)
         {

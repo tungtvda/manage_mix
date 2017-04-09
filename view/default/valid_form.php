@@ -19,6 +19,9 @@ function view_valid_form($data = array())
         case 'booking':
             require_once DIR . '/view/default/template/module/booking/valid.php';
             break;
+        case 'email':
+            require_once DIR . '/view/default/template/module/email_marketing/valid.php';
+            break;
     }
 
 }

@@ -1,7 +1,7 @@
 <?php
 class sms_email
 {
-    public $id,$code,$type,$user,$customer,$title_sms,$title_email,$content_sms,$content_email,$status,$count_cus,$count_success_sms,$count_success_email,$cus_false_sms,$cus_false_email,$date_send,$date_time_send,$created,$created_by,$updated,$update_by;
+    public $id,$code,$type,$user,$customer,$title,$content_sms,$content_email,$status,$count_cus,$count_success_sms,$count_success_email,$cus_false_sms,$cus_false_email,$date_send,$date_time_send,$created,$created_by,$updated,$update_by;
     public function sms_email($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
@@ -9,8 +9,7 @@ class sms_email
     $this->type=isset($data['type'])?$data['type']:'';
     $this->user=isset($data['user'])?$data['user']:'';
     $this->customer=isset($data['customer'])?$data['customer']:'';
-    $this->title_sms=isset($data['title_sms'])?$data['title_sms']:'';
-    $this->title_email=isset($data['title_email'])?$data['title_email']:'';
+    $this->title=isset($data['title'])?$data['title']:'';
     $this->content_sms=isset($data['content_sms'])?$data['content_sms']:'';
     $this->content_email=isset($data['content_email'])?$data['content_email']:'';
     $this->status=isset($data['status'])?$data['status']:'';
@@ -34,8 +33,7 @@ class sms_email
             $this->type=addslashes($this->type);
             $this->user=addslashes($this->user);
             $this->customer=addslashes($this->customer);
-            $this->title_sms=addslashes($this->title_sms);
-            $this->title_email=addslashes($this->title_email);
+            $this->title=addslashes($this->title);
             $this->content_sms=addslashes($this->content_sms);
             $this->content_email=addslashes($this->content_email);
             $this->status=addslashes($this->status);
@@ -58,8 +56,7 @@ class sms_email
             $this->type=stripslashes($this->type);
             $this->user=stripslashes($this->user);
             $this->customer=stripslashes($this->customer);
-            $this->title_sms=stripslashes($this->title_sms);
-            $this->title_email=stripslashes($this->title_email);
+            $this->title=stripslashes($this->title);
             $this->content_sms=stripslashes($this->content_sms);
             $this->content_email=stripslashes($this->content_email);
             $this->status=stripslashes($this->status);

@@ -21,7 +21,7 @@
                 <div class="clearfix">
                     <div class="col-md-6 col-sm-6 col-xs-12 pink" style="padding-left: 0px">
                         <?php if (_returnCheckAction(29) == 1) { ?>
-                            <a href="<?php echo SITE_NAME.'/'.$action_link ?>/them"
+                            <a href="<?php echo SITE_NAME.'/'.$action_link ?>/them-moi"
                                class="btn btn-white  btn-create-new-tab btn-create-new-tab-hover">
                                 <i class="ace-icon fa fa-envelope bigger-120 "></i>
                                 Soạn Email - SMS
@@ -122,12 +122,7 @@
                                         </td>
                                         <td style="text-align: center">
                                             <a href="<?php echo SITE_NAME.'/'.$action_link ?>/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
-                                                <?php if($row->title_sms==$row->title_email){?>
-                                                    <p> <?php echo $row->title_sms ?></p>
-                                                <?php } else{?>
-                                                    <p> <?php echo $row->title_sms ?></p>
-                                                    <p> <?php echo $row->title_email ?></p>
-                                                <?php }?>
+                                                <?php echo $row->title ?>
 
                                             </a>
                                         </td>

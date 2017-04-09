@@ -10,11 +10,10 @@ require_once DIR . '/model/logService.php';
 if (isset($_POST['message_birthday']) && isset($_POST['customer_birthday'])) {
     $message_sms = _returnPostParamSecurity('message_birthday');
     $content_email = _returnPostParamSecurity('content_email');
-    $title_sms = _returnPostParamSecurity('title_sms');
-    if($title_sms==''){
-        $title_sms="Chúc mừng sinh nhật khách hàng";
+    $title_sms = _returnPostParamSecurity('title');
+    if($title==''){
+        $title="Chúc mừng sinh nhật khách hàng";
     }
-    $title_email = _returnPostParamSecurity('title_email');
     $arr_cus = $_POST['customer_birthday'];
     // type =0 là chăm sóc khách hàng
     // type =1 là chúc mừng sinh nhật
@@ -73,8 +72,7 @@ if (isset($_POST['message_birthday']) && isset($_POST['customer_birthday'])) {
         $insert->user = '';
         $insert->type = $type;
         $insert->customer =$string_cus;
-        $insert->title_sms = $title_sms;
-        $insert->title_email = $title_email;
+        $insert->title = $title;
         $insert->content_sms = $message_sms;
         $insert->content_email = $content_email;
         $insert->status = $status;

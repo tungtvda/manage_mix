@@ -29,7 +29,7 @@ function view_sms_email($data)
 //
 function showTableHeader()
 {
-    return '<th>id</th><th>code</th><th>type</th><th>user</th><th>customer</th><th>title_sms</th><th>title_email</th><th>content_sms</th><th>content_email</th><th>status</th><th>count_cus</th><th>count_success_sms</th><th>count_success_email</th><th>cus_false_sms</th><th>cus_false_email</th><th>date_send</th><th>date_time_send</th><th>created</th><th>created_by</th><th>updated</th><th>update_by</th>';
+    return '<th>id</th><th>code</th><th>type</th><th>user</th><th>customer</th><th>title</th><th>content_sms</th><th>content_email</th><th>status</th><th>count_cus</th><th>count_success_sms</th><th>count_success_email</th><th>cus_false_sms</th><th>cus_false_email</th><th>date_send</th><th>date_time_send</th><th>created</th><th>created_by</th><th>updated</th><th>update_by</th>';
 }
 //
 function showTableBody($data)
@@ -43,8 +43,7 @@ function showTableBody($data)
         $TableBody.="<td>".$obj->type."</td>";
         $TableBody.="<td>".$obj->user."</td>";
         $TableBody.="<td>".$obj->customer."</td>";
-        $TableBody.="<td>".$obj->title_sms."</td>";
-        $TableBody.="<td>".$obj->title_email."</td>";
+        $TableBody.="<td>".$obj->title."</td>";
         $TableBody.="<td>".$obj->content_sms."</td>";
         $TableBody.="<td>".$obj->content_email."</td>";
         $TableBody.="<td>".$obj->status."</td>";
@@ -74,8 +73,7 @@ function showFrom($form,$ListKey=array())
     $str_from.='<p><label>type</label><input class="text-input small-input" type="text"  name="type" value="'.(($form!=false)?$form->type:'').'" /></p>';
     $str_from.='<p><label>user</label><input class="text-input small-input" type="text"  name="user" value="'.(($form!=false)?$form->user:'').'" /></p>';
     $str_from.='<p><label>customer</label><input class="text-input small-input" type="text"  name="customer" value="'.(($form!=false)?$form->customer:'').'" /></p>';
-    $str_from.='<p><label>title_sms</label><input class="text-input small-input" type="text"  name="title_sms" value="'.(($form!=false)?$form->title_sms:'').'" /></p>';
-    $str_from.='<p><label>title_email</label><input class="text-input small-input" type="text"  name="title_email" value="'.(($form!=false)?$form->title_email:'').'" /></p>';
+    $str_from.='<p><label>title</label><input class="text-input small-input" type="text"  name="title" value="'.(($form!=false)?$form->title:'').'" /></p>';
     $str_from.='<p><label>content_sms</label><input class="text-input small-input" type="text"  name="content_sms" value="'.(($form!=false)?$form->content_sms:'').'" /></p>';
     $str_from.='<p><label>content_email</label><input class="text-input small-input" type="text"  name="content_email" value="'.(($form!=false)?$form->content_email:'').'" /></p>';
     $str_from.='<p><label>status</label><input class="text-input small-input" type="text"  name="status" value="'.(($form!=false)?$form->status:'').'" /></p>';

@@ -275,7 +275,26 @@
                         url:link,
                         data: $("#form_birthday").serialize(),
                         success: function (response) {
-
+                            if(response=='1'){
+                                lnv.alert({
+                                    title: '<label class="green">Thông báo</label>',
+                                    content: 'Lưu tin nhắn thành công, hệ thống sẽ tự động gửi tin nhắn trong 1 phút tới',
+                                    alertBtnText: 'Ok',
+                                    iconBtnText:'<i style="color: red;" class="ace-icon fa fa-check green"></i>',
+                                    alertHandler: function () {
+                                        location.reload();
+                                    }
+                                });
+                            }else{
+                                lnv.alert({
+                                    title: 'Lỗi',
+                                    content: response,
+                                    alertBtnText: 'Ok',
+                                    iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                                    alertHandler: function () {
+                                    }
+                                });
+                            }
                         }
                     });
 //                    $("#form_birthday").submit();

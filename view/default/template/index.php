@@ -307,6 +307,7 @@
                                             <input class="input_key_birthday" id="value_key_2" countId="2" type="text" value="[tuoi_kh]">
                                         </div>
                                         <div style="background-color: #ffffff;    border-top: 1px solid #E5E5E5;"  class="input-group">
+                                            <input type="text" value="1" name="type" hidden>
                                             <textarea style="border: none" placeholder="Tin nhắn SMS chúc mừng sinh nhật ..." class="form-control" name="message_birthday" id="message_birthday" class="required" cols="20" rows="2"></textarea>
                                             <span style="position: absolute;color:#68BC31" id="count_ky_tu">160 ký tự</span>
 																<span style="vertical-align: bottom;" class="input-group-btn">

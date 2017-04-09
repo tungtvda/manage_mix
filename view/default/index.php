@@ -32,6 +32,20 @@ function show_index($data = array())
             }
             $birthday=date('d-m-Y', strtotime($row_hien_tai->birthday));
             $tuoi=_returnGetAge($row_hien_tai->birthday);
+            $dk='customer LIKE "%,'.$row_hien_tai->id.',%" and date_send="'._returnGetDate().'"';
+            $data_send_mess=sms_email_getByTop('1',$dk,'id desc');
+            $sms_icon='';
+            $email_icon='';
+            if(count($data_send_mess)>0){
+                if($data_send_mess[0]->content_sms!='')
+                {
+                    $sms_icon='<a href="'.SITE_NAME.'/chuc-mung-sinh-nhat/sua?id='._return_mc_encrypt($data_send_mess[0]->id, ENCRYPTION_KEY).'" title="Đã gửi tin nhắn chúc mừng"><i  class="fa fa-comments-o "></i> </a>';
+                }
+                if($data_send_mess[0]->content_email!='')
+                {
+                    $email_icon='<a href="'.SITE_NAME.'/chuc-mung-sinh-nhat/sua?id='._return_mc_encrypt($data_send_mess[0]->id, ENCRYPTION_KEY).'" title="Đã gửi mail chúc mừng"><i class="fa fa-envelope-o blue "></i> </a>';
+                }
+            }
             $list_customer_sinh_nhat_hien_tai.='<li id="row_birthday_'.$row_hien_tai->id.'" style="'.$backgroup.'" class="item-orange clearfix">
                                             <div class="itemdiv commentdiv">
                                                 <div class="user">
@@ -53,8 +67,8 @@ function show_index($data = array())
                                                 </div>
                                                 <div class="tools item_check_sinh_nhat">
                                                     <div class="action-buttons bigger-125">
-                                                        <a href="" title="Đã gửi tin nhắn chúc mừng"><i  class="fa fa-comments-o "></i> </a>
-                                                        <a href="" title="Đã gửi mail chúc mừng"><i class="fa fa-envelope-o blue "></i> </a>
+                                                        '.$sms_icon.'
+                                                        '.$email_icon.'
                                                         <a> <label class="inline">
                                                                 <input name="customer_birthday[]" id="value_'.$row_hien_tai->id.'" value="'.$row_hien_tai->id.'" type="checkbox" class="ace click_check_list"/>
                                                                 <span class="lbl"></span>

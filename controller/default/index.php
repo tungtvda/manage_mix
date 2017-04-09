@@ -33,11 +33,6 @@ $dk_hien_tai='birthday LIKE "%'.$date_hien_tai.'%"';
 $data['customer_sinh_nhat_hien_tai']=customer_getByTop('',$dk_hien_tai,'name asc');
 $data['count_hien_tai']=count($data['customer_sinh_nhat_hien_tai']);
 
-if(isset($_POST['message_birthday'])&&isset($_POST['customer_birthday']))
-{
-    print_r($_POST);
-}
-
 show_header($data);
 show_left($data,'trangchu');
 show_breadcrumb($data);

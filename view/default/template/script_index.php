@@ -269,7 +269,7 @@
                     });
                 }else{
                     var url = $('#url_input').val();
-                    var link = url + '/khach-hang/send-sms-birthday/';
+                    var link = url + '/chuc-mung-sinh-nhat/send-sms-birthday/';
                     $.ajax({
                         method: "POST",
                         url:link,

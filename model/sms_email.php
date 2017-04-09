@@ -1,7 +1,7 @@
 <?php
 class sms_email
 {
-    public $id,$code,$type,$user,$customer,$title_sms,$title_email,$content_sms,$content_email,$status,$count_cus,$count_success_sms,$count_success_email,$cus_false_sms,$cus_false_email,$date_send,$created,$created_by;
+    public $id,$code,$type,$user,$customer,$title_sms,$title_email,$content_sms,$content_email,$status,$count_cus,$count_success_sms,$count_success_email,$cus_false_sms,$cus_false_email,$date_send,$date_time_send,$created,$created_by,$updated,$update_by;
     public function sms_email($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
@@ -20,8 +20,11 @@ class sms_email
     $this->cus_false_sms=isset($data['cus_false_sms'])?$data['cus_false_sms']:'';
     $this->cus_false_email=isset($data['cus_false_email'])?$data['cus_false_email']:'';
     $this->date_send=isset($data['date_send'])?$data['date_send']:'';
+    $this->date_time_send=isset($data['date_time_send'])?$data['date_time_send']:'';
     $this->created=isset($data['created'])?$data['created']:'';
     $this->created_by=isset($data['created_by'])?$data['created_by']:'';
+    $this->updated=isset($data['updated'])?$data['updated']:'';
+    $this->update_by=isset($data['update_by'])?$data['update_by']:'';
           $this->encode();
     }
     public function encode()
@@ -42,8 +45,11 @@ class sms_email
             $this->cus_false_sms=addslashes($this->cus_false_sms);
             $this->cus_false_email=addslashes($this->cus_false_email);
             $this->date_send=addslashes($this->date_send);
+            $this->date_time_send=addslashes($this->date_time_send);
             $this->created=addslashes($this->created);
             $this->created_by=addslashes($this->created_by);
+            $this->updated=addslashes($this->updated);
+            $this->update_by=addslashes($this->update_by);
         }
     public function decode()
         {
@@ -63,7 +69,10 @@ class sms_email
             $this->cus_false_sms=stripslashes($this->cus_false_sms);
             $this->cus_false_email=stripslashes($this->cus_false_email);
             $this->date_send=stripslashes($this->date_send);
+            $this->date_time_send=stripslashes($this->date_time_send);
             $this->created=stripslashes($this->created);
             $this->created_by=stripslashes($this->created_by);
+            $this->updated=stripslashes($this->updated);
+            $this->update_by=stripslashes($this->update_by);
         }
 }

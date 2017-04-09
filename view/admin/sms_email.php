@@ -29,7 +29,7 @@ function view_sms_email($data)
 //
 function showTableHeader()
 {
-    return '<th>id</th><th>code</th><th>type</th><th>user</th><th>customer</th><th>title_sms</th><th>title_email</th><th>content_sms</th><th>content_email</th><th>status</th><th>count_cus</th><th>count_success_sms</th><th>count_success_email</th><th>cus_false_sms</th><th>cus_false_email</th><th>date_send</th><th>created</th><th>created_by</th>';
+    return '<th>id</th><th>code</th><th>type</th><th>user</th><th>customer</th><th>title_sms</th><th>title_email</th><th>content_sms</th><th>content_email</th><th>status</th><th>count_cus</th><th>count_success_sms</th><th>count_success_email</th><th>cus_false_sms</th><th>cus_false_email</th><th>date_send</th><th>date_time_send</th><th>created</th><th>created_by</th><th>updated</th><th>update_by</th>';
 }
 //
 function showTableBody($data)
@@ -54,8 +54,11 @@ function showTableBody($data)
         $TableBody.="<td>".$obj->cus_false_sms."</td>";
         $TableBody.="<td>".$obj->cus_false_email."</td>";
         $TableBody.="<td>".$obj->date_send."</td>";
+        $TableBody.="<td>".$obj->date_time_send."</td>";
         $TableBody.="<td>".$obj->created."</td>";
         $TableBody.="<td>".$obj->created_by."</td>";
+        $TableBody.="<td>".$obj->updated."</td>";
+        $TableBody.="<td>".$obj->update_by."</td>";
         $TableBody.="<td><a href=\"?action=edit&id=".$obj->id."\" title=\"Edit\"><img src=\"".SITE_NAME."/view/admin/Themes/images/pencil.png\" alt=\"Edit\"></a>";
         $TableBody.="<a href=\"?action=delete&id=".$obj->id."\" title=\"Delete\" onClick=\"return confirm('Bạn có chắc chắc muốn xóa?')\"><img src=\"".SITE_NAME."/view/admin/Themes/images/cross.png\" alt=\"Delete\"></a> ";
         $TableBody.="</td>";
@@ -82,7 +85,10 @@ function showFrom($form,$ListKey=array())
     $str_from.='<p><label>cus_false_sms</label><input class="text-input small-input" type="text"  name="cus_false_sms" value="'.(($form!=false)?$form->cus_false_sms:'').'" /></p>';
     $str_from.='<p><label>cus_false_email</label><input class="text-input small-input" type="text"  name="cus_false_email" value="'.(($form!=false)?$form->cus_false_email:'').'" /></p>';
     $str_from.='<p><label>date_send</label><input class="text-input small-input" type="text"  name="date_send" value="'.(($form!=false)?$form->date_send:'').'" /></p>';
+    $str_from.='<p><label>date_time_send</label><input class="text-input small-input" type="text"  name="date_time_send" value="'.(($form!=false)?$form->date_time_send:'').'" /></p>';
     $str_from.='<p><label>created</label><input class="text-input small-input" type="text"  name="created" value="'.(($form!=false)?$form->created:'').'" /></p>';
     $str_from.='<p><label>created_by</label><input class="text-input small-input" type="text"  name="created_by" value="'.(($form!=false)?$form->created_by:'').'" /></p>';
+    $str_from.='<p><label>updated</label><input class="text-input small-input" type="text"  name="updated" value="'.(($form!=false)?$form->updated:'').'" /></p>';
+    $str_from.='<p><label>update_by</label><input class="text-input small-input" type="text"  name="update_by" value="'.(($form!=false)?$form->update_by:'').'" /></p>';
     return $str_from;
 }

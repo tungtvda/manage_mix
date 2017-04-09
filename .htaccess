@@ -32,7 +32,7 @@ RewriteRule ^khach-hang/$ controller/default/customer/customer.php
 RewriteRule ^khach-hang/them-moi controller/default/customer/themmoi.php
 RewriteRule ^khach-hang/sua controller/default/customer/themmoi.php
 RewriteRule ^khach-hang/xoa$ controller/default/customer/delete.php
-RewriteRule ^khach-hang/send-sms-birthday/$ controller/default/customer/send_sms.php
+
 
 RewriteRule ^booking-website/$ controller/default/booking/booking_website.php
 RewriteRule ^return-booking-website/$ controller/default/booking/return_booking_website.php
@@ -80,3 +80,6 @@ RewriteRule ^booking-ket-thuc/confirm-order$ controller/default/booking/confirm_
 RewriteRule ^booking-ban-nhap/confirm-order$ controller/default/booking/confirm_order.php
 
 RewriteRule ^return-input-price-booking/$ controller/default/booking/list_price_input.php
+
+RewriteRule ^chuc-mung-sinh-nhat/send-sms-birthday/$ controller/default/email_marketing/send_sms.php
+RewriteRule ^cham-soc-khach-hang/$ controller/default/email_marketing/email_marketing.php

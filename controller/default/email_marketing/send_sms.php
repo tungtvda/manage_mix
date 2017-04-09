@@ -9,12 +9,23 @@ require_once DIR . '/model/sms_emailService.php';
 require_once DIR . '/model/logService.php';
 if (isset($_POST['message_birthday']) && isset($_POST['customer_birthday'])) {
     $message_sms = _returnPostParamSecurity('message_birthday');
-    $content_email = _returnPostParamSecurity('content_email');
+    $content_email='';
+    if(isset( $_POST['content_email'])){
+        $content_email = $_POST['content_email'];
+    }
     $title_sms = _returnPostParamSecurity('title');
+    $date_send = _returnPostParamSecurity('date_send');
+    $time_send = _returnPostParamSecurity('time_send');
+    $title = _returnPostParamSecurity('title');
+    $date_time_send =_returnGetDateTime();
+    if($date_send!=''&&$time_send!=''){
+        $date_time_send =date('Y-m-d', strtotime($date_send)).' '.$time_send;
+    }
+    $arr_cus = $_POST['customer_birthday'];
     if($title==''){
         $title="Chúc mừng sinh nhật khách hàng";
     }
-    $arr_cus = $_POST['customer_birthday'];
+
     // type =0 là chăm sóc khách hàng
     // type =1 là chúc mừng sinh nhật
     $type=0;
@@ -49,20 +60,25 @@ if (isset($_POST['message_birthday']) && isset($_POST['customer_birthday'])) {
         $count = 0;
         $count_cus = count($arr_cus);
         $cus_false_sms=0;
+        $array_check_push=array();
         foreach ($arr_cus as $row) {
             $id = addslashes(strip_tags(trim($row)));
             $cus_data = customer_getById($id);
             if (count($cus_data) > 0) {
-//                $name = $cus_data[0]->name;
+                if(!in_array($cus_data[0]->id,$array_check_push)){
+                    //                $name = $cus_data[0]->name;
 //                $tuoi = _returnGetAge($cus_data[0]->birthday);
 //                $mess_send = str_replace('[ten_kh]', $name, $message_sms);
 //                $mess_send = str_replace('[tuoi_kh]', $tuoi, $mess_send);
-                if ($count > 0) {
-                    $string_cus .= $cus_data[0]->id . ',';
-                } else {
-                    $string_cus .= ',' . $cus_data[0]->id . ',';
+                    if ($count > 0) {
+                        $string_cus .= $cus_data[0]->id . ',';
+                    } else {
+                        $string_cus .= ',' . $cus_data[0]->id . ',';
+                    }
+                    $count++;
+                    array_push($array_check_push,$cus_data[0]->id);
                 }
-                $count++;
+
 
             }
         }
@@ -82,7 +98,7 @@ if (isset($_POST['message_birthday']) && isset($_POST['customer_birthday'])) {
         $insert->cus_false_sms = 0;
         $insert->cus_false_email = 0;
         $insert->date_send = _returnGetDateTime();
-        $insert->date_time_send = $date_check = date('Y-m-d H:i:s', strtotime('+2 minute', strtotime(_returnGetDateTime())));
+        $insert->date_time_send = $date_time_send;
         $insert->created =  _returnGetDateTime();
         $insert->created_by = $_SESSION['user_id'];
         $insert->updated =  _returnGetDateTime();

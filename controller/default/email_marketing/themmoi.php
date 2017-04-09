@@ -59,6 +59,7 @@ if($_SESSION['user_role']==0)
     $data_dk_fill=' and created_by='.$_SESSION['user_id'];
 }
 $count=6;
+$data['list_short_code']=short_code_getByTop('','type=1','position asc');
 $data['list']=customer_getByTop('',$data_dk_fill,'updated desc');
 show_header($data);
 show_left($data, 'email', $active_tab_left);

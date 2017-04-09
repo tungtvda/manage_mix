@@ -50,12 +50,11 @@
                     </style>
 
                     <div class="step-content pos-rel">
-                        <form class="form-horizontal" id="submit_form_profile" role="form" action="" method="post"
+                        <form class="form-horizontal" id="submit_form" role="form" action="" method="post"
                               enctype="multipart/form-data">
                             <div class="step-pane active" data-step="1" id="step_edit_1">
                                 <div class="col-md-8 col-sm-8 col-xs-12  "
                                      style="height: 300px; overflow: scroll">
-                                    <form action="" method="post" id="form_submit_delete">
                                         <table id="dynamic-table"
                                                class="table table-striped table-bordered table-hover table-responsive">
                                             <thead>
@@ -88,7 +87,7 @@
                                                                 <input type="checkbox" class="ace click_check_list"
                                                                        email_record="<?php echo $row->email ?>"
                                                                        id="check_<?php echo $dem ?>"
-                                                                       name="check_box_action[]"
+                                                                       name="customer_birthday[]"
                                                                        value="<?php echo $row->id ?>"/>
                                                                 <span class="lbl"></span>
                                                             </label>
@@ -145,7 +144,6 @@
 
 
                                         </table>
-                                    </form>
                                 </div>
                                 <div style="height: 300px; overflow: scroll" class="col-md-4 col-sm-4 col-xs-12">
                                     <div id="dynamic-table_wrapper" class="dataTables_wrapper form-inline no-footer">
@@ -173,23 +171,96 @@
                             <div class="step-pane" id="step_edit_2" data-step="2">
                                 <div class="col-md-8 col-sm-8 col-xs-12  "
                                      style="height: 300px; overflow: scroll">
-                                    asdf
+                                    <div class="form-group" style="float: left; width: 100%">
+                                        <div>
+                                            <label for="form-field-select-3">Tiêu đề <span
+                                                    style="color: red">*</span></label>
+                                              <span class=" width_100" style="">
+                                                    <input name="title" type="text" id="input_title" value=""
+                                                           class="width_100">
+                                                   <input hidden name="type" type="text" id="input_type" value="0"
+                                                          class="width_100">
+                                                </span>
+                                            <label style="display: none" class="error-color  error-color-size"
+                                                   id="error_title">Bạn vui lòng nhập tiêu đề thư</label></div>
+                                    </div>
+                                    <div class="form-group" style="float: left; width: 50%; margin-right: 0px">
+                                        <div>
+                                            <label for="form-field-select-3">Ngày gửi <span
+                                                    style="color: red">*</span></label>
+                                            <div class="input-group">
+                                                <input class="form-control date-picker" name="date_send" id="id-date-picker-1" type="text" data-date-format="dd-mm-yyyy">
+																	<span class="input-group-addon">
+																		<i class="fa fa-calendar bigger-110"></i>
+																	</span>
+                                            </div>
+                                            <label style="display: none" class="error-color  error-color-size"
+                                                   id="error_date_send">Bạn vui lòng chọn ngày gửi</label></div>
+                                    </div>
+                                    <div class="form-group" style="float: left; width: 50%; margin-left: 0px">
+                                        <div>
+                                            <label for="form-field-select-3">Giờ gửi <span
+                                                    style="color: red">*</span></label>
+                                            <div class="input-group bootstrap-timepicker">
+                                                <input id="timepicker1" name="time_send" type="text" class="form-control">
+															<span class="input-group-addon">
+																<i class="fa fa-clock-o bigger-110"></i>
+															</span>
+                                            </div>
+                                            <label style="display: none" class="error-color  error-color-size"
+                                                   id="error_time_send">Bạn vui lòng chọn giờ gửi</label></div>
+                                    </div>
+                                    <div class="form-group" style="float: left; width: 100%">
+                                        <div>
+                                            <label for="form-field-select-3">Nội dung SMS (<span
+                                                    style="color:#68BC31; font-size: 13px"
+                                                    id="count_ky_tu">160 ký tự</span>) - <span
+                                                    style="color:red; font-style: italic;font-size: 13px"> (Chú ý: không được sử dụng tiếng Việt có dấu)</label>
+                                            <style>
+                                                #message_birthday {
+                                                    border: 1px solid #b5b5b5 !important;
+                                                }
+                                            </style>
+                                            <textarea placeholder="Tin nhắn SMS chúc mừng sinh nhật ..."
+                                                      class="form-control" name="message_birthday" id="message_birthday"
+                                                      class="required" cols="20" rows="2"></textarea>
+                                            <label style="display: none" class="error-color  error-color-size"
+                                                   id="error_content">Bạn vui lòng nhập nôi dung SMS hoặc Email</label></div>
+                                    </div>
+                                    <div class="form-group" style="float: left; width: 100%">
+                                        <div>
+                                            <label for="form-field-select-3">Nội dung Email
+                                                <style>
+                                                    #message_birthday {
+                                                        border: 1px solid #b5b5b5 !important;
+                                                    }
+                                                </style>
+                                                <script type="text/javascript"
+                                                        src="<?php echo SITE_NAME ?>/view/admin/Themes/ckeditor/ckeditor.js"></script>
+                                                <textarea name="content_email" id="content_email"></textarea>
+                                                <script
+                                                    type="text/javascript">CKEDITOR.replace('content_email'); </script>
+                                                <label style="display: none" class="error-color  error-color-size"
+                                                       id="error_title">Bạn vui lòng nhập tiêu đề thư</label></div>
+                                    </div>
                                 </div>
                                 <div style="height: 300px; overflow: scroll" class="col-md-4 col-sm-4 col-xs-12">
                                     <div id="dynamic-table_wrapper" class="dataTables_wrapper form-inline no-footer">
-                                        <div class="row" style="height: 57px">
+                                        <div class="row">
                                             <div class="col-xs-12">
                                                 <div class="dataTables_length">Từ khóa gửi tin nhắn</div>
 
                                             </div>
                                         </div>
+                                        <style>
+                                            .key_birthday {
+                                                cursor: pointer;
+                                            }
+                                        </style>
                                         <table id=""
                                                class="table table-striped table-bordered table-hover table-responsive dataTable no-footer DTTT_selectable">
-                                            <tr >
-                                                <td>
-                                                    <span class="label label-warning arrowed-right arrowed-in key_birthday" countId="1">[ten_kh]</span>
-                                                    <input class="input_key_birthday" id="value_key_1" countId="1" type="text" value="[ten_kh]">
-                                                </td>
+                                            <tr>
+                                                <?php echo $list_short_code ?>
                                             </tr>
                                         </table>
                                     </div>

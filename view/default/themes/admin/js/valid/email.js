@@ -9,9 +9,13 @@ jQuery(function ($) {
         var email=$(this).attr('email_record');
         var number_email=$('#number_email').html();
         if(id!='' && email!=''&&number_email!=''){
+
             if($(this).hasClass("success")){
-                $('#table_list_email_customer').append(" <tbody><tr id='row_email_"+id+"'> <td>"+email+"</td> </tr></tbody>");
-                number_email=parseInt(number_email)+1;
+             var check_exit=$('#row_email_'+id).html();
+                if(check_exit==undefined){
+                    $('#table_list_email_customer').append(" <tbody id='row_email_"+id+"'><tr > <td>"+email+"</td> </tr></tbody>");
+                    number_email=parseInt(number_email)+1;
+                }
             }else{
                 $('#row_email_'+id).remove();
                 number_email=parseInt(number_email)-1;
@@ -29,6 +33,27 @@ jQuery(function ($) {
             });
         }
 
+    });
+    $('body').on("click",'#check_all', function () {
+        var lenght = $('.click_check_list:checked').length;
+        var th_checked = this.checked;//checkbox inside "TH" table header
+        var number_email=0;
+        $('#table_list_email_customer').html('');
+        if(th_checked==true){
+            $('#dynamic-table > tbody  > tr').each(function() {
+               var email=$(this).attr('email_record');
+                var id=$(this).attr('value');
+                if(email!=''){
+                    var check_exit=$('#row_email_'+id).html();
+                    if(check_exit==undefined){
+                        $('#table_list_email_customer').append(" <tbody id='row_email_"+id+"'><tr > <td>"+email+"</td> </tr></tbody>");
+                        number_email=parseInt(number_email)+1;
+                    }
+                }
+            });
+
+        }
+        $('#number_email').html(number_email);
     });
     $('body').on("click",'#next_edit_user', function () {
         var stt=$('.steps .active').attr('data-step');
@@ -108,7 +133,7 @@ jQuery(function ($) {
                             if(response=='1'){
                                 lnv.alert({
                                     title: '<label class="green">Thông báo</label>',
-                                    content: 'Lưu tin nhắn thành công, hệ thống sẽ tự động gửi tin nhắn trong 1 phút tới',
+                                    content: 'Lưu tin nhắn thành công, hệ thống sẽ tự động gửi tin nhắn theo thời gian bạn đã cài đặt',
                                     alertBtnText: 'Ok',
                                     iconBtnText:'<i style="color: red;" class="ace-icon fa fa-check green"></i>',
                                     alertHandler: function () {

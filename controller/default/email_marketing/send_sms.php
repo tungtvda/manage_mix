@@ -21,6 +21,11 @@ if (isset($_POST['message_birthday']) && isset($_POST['customer_birthday'])) {
     if($date_send!=''&&$time_send!=''){
         $date_time_send =date('Y-m-d', strtotime($date_send)).' '.$time_send;
     }
+    if($date_send!=''){
+        $date_send =date('Y-m-d', strtotime($date_send));
+    }else{
+        $date_send =_returnGetDateTime();
+    }
     $arr_cus = $_POST['customer_birthday'];
     if($title==''){
         $title="Chúc mừng sinh nhật khách hàng";
@@ -97,7 +102,7 @@ if (isset($_POST['message_birthday']) && isset($_POST['customer_birthday'])) {
         $insert->count_success_email = 0;
         $insert->cus_false_sms = 0;
         $insert->cus_false_email = 0;
-        $insert->date_send = _returnGetDateTime();
+        $insert->date_send = $date_send;
         $insert->date_time_send = $date_time_send;
         $insert->created =  _returnGetDateTime();
         $insert->created_by = $_SESSION['user_id'];

@@ -61,7 +61,7 @@
                                             <tr>
                                                 <th class="center">
                                                     <label class="pos-rel">
-                                                        <input type="checkbox" class="ace"/>
+                                                        <input type="checkbox" id="check_all" class="ace"/>
                                                         <span class="lbl"></span>
                                                     </label>
                                                 </th>
@@ -237,7 +237,7 @@
                                                 </style>
                                                 <script type="text/javascript"
                                                         src="<?php echo SITE_NAME ?>/view/admin/Themes/ckeditor/ckeditor.js"></script>
-                                                <textarea name="content_email" id="content_email"></textarea>
+                                                <textarea style="width: 100% !important;" name="content_email" id="content_email"></textarea>
                                                 <script
                                                     type="text/javascript">CKEDITOR.replace('content_email'); </script>
                                                 <label style="display: none" class="error-color  error-color-size"

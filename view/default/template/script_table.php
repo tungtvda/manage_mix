@@ -153,8 +153,8 @@ else{
 
         //select/deselect all rows according to table header checkbox
         $('#dynamic-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
-            var th_checked = this.checked;//checkbox inside "TH" table header
 
+            var th_checked = this.checked;//checkbox inside "TH" table header
             $(this).closest('table').find('tbody > tr').each(function(){
                 var row = this;
                 if(th_checked) tableTools_obj.fnSelect(row);

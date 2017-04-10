@@ -15,7 +15,7 @@ _returnCheckPermison(7,14);
 $_SESSION['link_redict']='http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
  $action_link=str_replace('manage_mix','',$_SERVER['REQUEST_URI']);
 $action_link=str_replace('/','',$action_link);
-$data_dk_fill='type=1';
+$data_dk_fill='type=0';
 $active_tab_left='cham_soc_khach_hang';
 if($_SESSION['user_role']==0)
 {

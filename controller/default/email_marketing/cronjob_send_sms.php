@@ -1,20 +1,28 @@
 <?php
+define("SITE_NAME", "http://manage.mixtourist.com.vn");
+define("DIR", str_replace('/controller/default/email_marketing','',dirname(__FILE__)));
+define('SERVER','localhost');
+define('DB_USERNAME','mixtourvn_manage');
+define('DB_PASSWORD','m2SjhVJT6R');
+define('DB_NAME','mixtourvn_manage');
+define('CACHE',false);
+define('DATETIME_FORMAT',"y-m-d H:i:s");
+define('DATETIME_FORMAT_VN',"d-m-y H:i:s");
+define('PRIVATE_KEY','hoidinhnvbk');
 
-if (!defined('DIR')) require_once '../../../config.php';
-echo DIR;
 require_once DIR . '/model/userService.php';
 require_once DIR . '/model/customerService.php';
 require_once DIR . '/model/sms_emailService.php';
 require_once DIR . '/model/short_codeService.php';
 require_once DIR . '/model/logService.php';
-$data_user=user_getById(1);
-$new =new user((array)$data_user[0]);
-$new->mr="Mrs";
-user_update($new);
+require_once DIR . '/common/class.phpmailer.php';
+require_once(DIR . "/common/Mail.php");
+
+date_default_timezone_set('Asia/Ho_Chi_Minh');
+$time_now=gmdate("d/m/Y H:i:s", time());
+$data_short_code_cus=short_code_getByTop('','type=1','position asc');
 
 exit;
-$data_short_code_cus=short_code_getByTop('','type=1','position asc');
-$time_now=_returnGetDateTime();
 $dk_find="status=0 and date_time_send<='".$time_now."'";
 $data_email=sms_email_getByTop('',$dk_find,'id desc');
 $content_email_customer='';
@@ -22,7 +30,10 @@ $content_email_user='';
 $content_sms_customer='';
 $content_sms_user='';
 $title_email='';
+
+exit;
 if(count($data_email)>0){
+
     foreach($data_email as $row){
         $customer=trim($row->customer,',');
         $user=trim($row->user,',');

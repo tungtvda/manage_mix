@@ -148,18 +148,19 @@ function _returnPostParamSecurity($param)
 
 function _returnGetDate()
 {
-    date_default_timezone_set("Asia/Ho_Chi_Minh");
-    return date('Y-m-d');
+    date_default_timezone_set('Asia/Ho_Chi_Minh');
+    return gmdate('Y-m-d',time());
 }
 function _returnGetDateMouth()
 {
-    date_default_timezone_set("Asia/Ho_Chi_Minh");
-    return date('m-d');
+    date_default_timezone_set('Asia/Ho_Chi_Minh');
+    return gmdate('m-d',time());
 }
 function _returnGetDateTime()
 {
-    date_default_timezone_set("Asia/Ho_Chi_Minh");
-    return date('Y-m-d H:i:s');
+    date_default_timezone_set('Asia/Ho_Chi_Minh');
+    return gmdate("Y-m-d H:i:s", time());
+//    return date('Y-m-d H:i:s',time());
 }
 
 function _returnDateFormatEn($date)

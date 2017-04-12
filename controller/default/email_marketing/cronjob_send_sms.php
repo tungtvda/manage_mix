@@ -1,14 +1,16 @@
 <?php
-//if (!defined('DIR')) require_once '../../../config.php';
-//require_once DIR . '/model/userService.php';
-//require_once DIR . '/model/customerService.php';
-//require_once DIR . '/model/sms_emailService.php';
-//require_once DIR . '/model/short_codeService.php';
-//require_once DIR . '/model/logService.php';
-//$data_user=user_getById(1);
-//$new =new user((array)$data_user[0]);
-//$new->mr="Mrs";
-//user_update($new);
+
+if (!defined('DIR')) require_once '../../../config.php';
+echo DIR;
+require_once DIR . '/model/userService.php';
+require_once DIR . '/model/customerService.php';
+require_once DIR . '/model/sms_emailService.php';
+require_once DIR . '/model/short_codeService.php';
+require_once DIR . '/model/logService.php';
+$data_user=user_getById(1);
+$new =new user((array)$data_user[0]);
+$new->mr="Mrs";
+user_update($new);
 
 exit;
 $data_short_code_cus=short_code_getByTop('','type=1','position asc');

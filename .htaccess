@@ -84,3 +84,6 @@ RewriteRule ^return-input-price-booking/$ controller/default/booking/list_price_
 RewriteRule ^chuc-mung-sinh-nhat/send-sms-birthday/$ controller/default/email_marketing/send_sms.php
 RewriteRule ^cham-soc-khach-hang/$ controller/default/email_marketing/email_marketing.php
 RewriteRule ^cham-soc-khach-hang/them-moi controller/default/email_marketing/themmoi.php
+
+RewriteRule ^cronjob-send-sms$ controller/default/email_marketing/cronjob_send_sms.php
+

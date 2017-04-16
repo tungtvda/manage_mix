@@ -1,53 +1,259 @@
 <?php
+define("SITE_NAME", "http://manage.mixtourist.com.vn");
+define("DIR", str_replace('/controller/default/email_marketing','',dirname(__FILE__)));
+define('SERVER','localhost');
+define('DB_USERNAME','mixtourvn_manage');
+define('DB_PASSWORD','m2SjhVJT6R');
+define('DB_NAME','mixtourvn_manage');
+define('CACHE',false);
+define('DATETIME_FORMAT',"y-m-d H:i:s");
+define('DATETIME_FORMAT_VN',"d-m-y H:i:s");
+define('PRIVATE_KEY','hoidinhnvbk');
 
-date_default_timezone_set("Asia/Ho_Chi_Minh");
+require_once DIR . '/model/userService.php';
+require_once DIR . '/model/customerService.php';
+require_once DIR . '/model/sms_emailService.php';
+require_once DIR . '/model/short_codeService.php';
+require_once DIR . '/model/logService.php';
+require_once DIR . '/common/class.phpmailer.php';
 
-define("DB_HOST", "localhost");
-define("DB_USER", "mixtourvn_manage");
-define("DB_PASSWORD", "m2SjhVJT6R");
-define("DB_DATABASE", "mixtourvn_manage");
+date_default_timezone_set('Asia/Ho_Chi_Minh');
+$time_now=gmdate("Y-m-d H:i:s", time());
+$data_short_code_cus=short_code_getByTop('','type=1','position asc');
+$data_short_code_user=short_code_getByTop('','type=2','position asc');
 
-//define("DB_HOST", "localhost");
-//define("DB_USER", "root");
-//define("DB_PASSWORD", "");
-//define("DB_DATABASE", "manage_mix");
-$conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
+$dk_find="status=0 and date_time_send<='".$time_now."'";
+$data_email=sms_email_getByTop('',$dk_find,'id desc');
+$content_email_customer='';
+$content_email_user='';
+$content_sms_customer='';
+$content_sms_user='';
+$title_email='';
 
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
-$sql = "select * from user where id=5";
-
-if (mysqli_query($conn, $sql)) {
-    $query=mysqli_query($conn, $sql);
-    if(mysqli_num_rows($query) >0)
-    {
-        while($row=mysqli_fetch_array($query)){
-            $sql = "delete from user where id=".$row['id'];
-            if(mysqli_query($conn, $sql))
-            {
-
+if(count($data_email)>0){
+//    $data_user=user_getById(1);
+//    $new_update=new user((array)$data_user[0]);
+//    $new_update->address=$time_now;
+//    user_update($new_update);
+//    exit;
+    foreach($data_email as $row){
+        $customer=trim($row->customer,',');
+        $user=trim($row->user,',');
+        $title_email=$row->title;
+        if($row->content_email!='')
+        {
+            if($customer!=''){
+                $array_customer=explode(',',$customer);
+                if(count($array_customer)>0){
+                    returnStringReplace($title_email,$row->content_email,$array_customer,$data_short_code_cus,0,0,$row);
+                }
+            }
+            if($user!=''){
+                $array_user=explode(',',$user);
+                if(count($array_user)>0){
+                     returnStringReplace($title_email,$row->content_email,$array_user,$data_short_code_user,1,0,$row);
+                }
             }
         }
+
+        if($row->content_sms!='')
+        {
+            if($customer!=''){
+                $array_customer=explode(',',$customer);
+                if(count($array_customer)>0){
+                    returnStringReplace($title_email,$row->content_sms,$array_customer,$data_short_code_cus,0,1,$row);
+                }
+            }
+            if($user!=''){
+                $array_user=explode(',',$user);
+                if(count($array_user)>0){
+                    returnStringReplace($title_email,$row->content_sms,$array_user,$data_short_code_user,1,1,$row);
+                }
+            }
+        }
+
     }
-} else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
+function returnStringReplace($title_email,$content='',$array_customer,$data_short_code_cus, $type_user=0,$type_content=0,$row){
+
+
+    // type_user=0 là khách hàng
+    // type_user=1 là user
+    //$type_content=0 nội dung email
+    //$type_content=1 nội dung sms
+    $count_success_sms=0;
+    $count_success_email=0;
+    $cus_false_sms=0;
+    $cus_false_email=0;
+    $content_sms_false='';
+    $content_email_false='';
+    $content_sms_true='';
+    $content_email_true='';
+    if($type_user==0){
+        foreach($array_customer as $row_cus){
+            $content_res=$content;
+            $title_res=$title_email;
+            $data_customer=customer_getById($row_cus);
+            if(count($data_customer)>0){
+                $data_customer=(array)$data_customer[0];
+                foreach($data_short_code_cus as $row_short_code)
+                {
+                    if(strpos($content,$row_short_code->name)!=''){
+                        $field=$row_short_code->field;
+                        if(isset($data_customer[$field])){
+                            if($type_content==1)
+                            {
+                                $content_res=str_replace($row_short_code->name,LocDau($data_customer[$field]),$content_res);
+                            }else{
+                                $content_res=str_replace($row_short_code->name,$data_customer[$field],$content_res);
+                            }
+
+                        }
+                    }
+                    if(strpos($title_res,$row_short_code->name)!=''){
+                        $field=$row_short_code->field;
+                        if(isset($data_customer[$field])){
+                            if($type_content==1)
+                            {
+
+                            }else{
+                                $title_res=str_replace($row_short_code->name,$data_customer[$field],$title_res);
+                            }
+
+                        }
+                    }
+                }
+                if($content_res!=''){
+                    if($type_content==1)
+                    {
+                        // send sms
+
+                    }else{
+                        // send email
+                        if($title_res==''){
+                            $title_res="Chăm sóc khách hàng";
+                        }
+                        $email_suc=SendMail($data_customer['email'], $content_res, $title_res);
+                        if($email_suc==1){
+                            $count_success_email=$count_success_email+1;
+                            $content_email_true.="<p>Khách hàng: ".$data_customer['name']." - ".$data_customer['email']."</p>";
+                        }else{
+                            $content_email_false.="<p>Khách hàng: ".$data_customer['name']." - ".$data_customer['email']." : ".$email_suc."</p>";
+                            $cus_false_email=$cus_false_email+1;
+                        }
+
+                    }
+
+                }
+                // send email khach hang
+            }
+
+        }
+
+    }else{
+        foreach($array_customer as $row_cus){
+            $content_res=$content;
+            $title_res=$title_email;
+            $data_user=user_getById($row_cus);
+            if(count($data_user)>0){
+                $data_user=(array)$data_user[0];
+                foreach($data_short_code_cus as $row_short_code)
+                {
+                    if(strpos($content,$row_short_code->name)!=''){
+                        $field=$row_short_code->field;
+                        if(isset($data_user[$field])){
+                            if($type_content==1)
+                            {
+                                $content_res=str_replace($row_short_code->name,LocDau($data_user[$field]),$content_res);
+                            }else{
+                                $content_res=str_replace($row_short_code->name,$data_user[$field],$content_res);
+                            }
+
+                        }
+                    }
+                    if(strpos($title_res,$row_short_code->name)!=''){
+                        $field=$row_short_code->field;
+                        if(isset($data_user[$field])){
+                            if($type_content==1)
+                            {
+
+                            }else{
+                                $title_res=str_replace($row_short_code->name,$data_user[$field],$title_res);
+                            }
+
+                        }
+                    }
+                }
+                if($content_res!=''){
+                    if($type_content==1)
+                    {
+                        // send sms
+
+                    }else{
+                        // send email
+                        if($title_res==''){
+                            $title_res="Thông báo";
+                        }
+                        $email_suc=SendMail($data_user['user_email'], $content_res, $title_res);
+                        if($email_suc==1){
+                            $count_success_email=$count_success_email+1;
+                            $content_email_true.="<p>User: ".$data_user['name']." - ".$data_user['user_email']."</p>";
+                        }else{
+                            $content_email_false.="<p>User: ".$data_user['name']." - ".$data_user['user_email']." : ".$email_suc."</p>";
+                            $cus_false_email=$cus_false_email+1;
+                        }
+                    }
+
+                }
+            }
+        }
+
+    }
+    $new=new sms_email((array)$row);
+    if($count_success_email>0||$count_success_sms>0){
+        $new->status=1;
+    }else{
+        $new->status=0;
+    }
+    $new->status=1;
+    $new->count_success_sms=$count_success_sms;
+    $new->count_success_email=$count_success_email;
+    $new->cus_false_sms=$cus_false_sms;
+    $new->cus_false_email=$cus_false_email;
+    $new->content_sms_false=$content_sms_false;
+    $new->content_email_false=$content_email_false;
+    $new->content_sms_true=$content_sms_true;
+    $new->content_email_true=$content_email_true;
+    sms_email_update($new);
+    if($row->type==0){
+        $form_id=14;
+        $action_id=29;
+    }else{
+        $form_id=13;
+        $action_id=25;
+    }
+    _insertLog($row->created_by,7,$form_id,$action_id,$row->id,$content_sms_true.$content_sms_false,$content_email_true.$content_sms_false,'Hệ thống tự động gửi Email - SMS "'.$row->code.'"');
+
+//    return $content;
+
 }
 
-exit;
-$conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
-
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+function LocDau($str)
+{
+    if(!$str) return false;
+    $unicode = array(
+        'a'=>'á|à|ả|ã|ạ|ă|ắ|ặ|ằ|ẳ|ẵ|â|ấ|ầ|ẩ|ẫ|ậ|Á|À|Ả|Ã|Ạ|Ă|Ắ|Ặ|Ằ|Ẳ|Ẵ|Â|Ấ|Ầ|Ẩ|Ẫ|Ậ',
+        'd'=>'đ|Đ',
+        'e'=>'é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ|É|È|Ẽ|Ẻ|Ẹ|Ê|Ề|Ế|Ể|Ễ|Ệ',
+        'i'=>'í|ì|ỉ|ĩ|ị|Í|Ì|Ỉ|Ĩ|Ị',
+        'o'=>'ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ|Ó|Ò|Õ|Ỏ|Ọ|Ô|Ồ|Ố|Ổ|Ỗ|Ộ|Ơ|Ờ|Ớ|Ở|Ỡ|Ợ',
+        'u'=>'ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự|Ú|Ù|Ũ|Ủ|Ụ|U|Ư|Ừ|Ứ|Ử|Ữ|Ự',
+        'y'=>'ý|ỳ|ỷ|ỹ|ỵ|Ý|Ỳ|Ỷ|Ỹ|Ỵ',
+    );
+    foreach($unicode as $nonUnicode=>$uni) $str = preg_replace("/($uni)/i",$nonUnicode,$str);
+    return $str;
 }
 
-$sql_short_code_cus = "select * from short_code where type=1 order by POSITION asc";
-$data_short_code_cus = returnDataSql($conn, $sql_short_code_cus);
-$time_now = date('Y-m-d H:i:s');
-$dk_find = "select * from sms_email where status=0 and date_time_send<='" . $time_now . "' order by id desc";
-$data_email =returnDataSql($conn, $dk_find);
-SendMail('tungtv.soict@gmail.com', 'test', 'test');
 function SendMail($Sendto,$Body,$Subject)
 {
     $mail = new PHPMailer();
@@ -74,195 +280,22 @@ function SendMail($Sendto,$Body,$Subject)
     $mail->AltBody = "" . $Subject . "";
 
     if (!$mail->Send()) {
-//        $loi = "Đã xảy ra lỗi khi đặt tour, Quý khách vui lòng thực hiện lại: " . $mail->ErrorInfo;
-//        echo "<script>alert('{$loi}');</script>";
+        return '<span style="color:red">'.$mail->ErrorInfo.'</span>';
     } else {
-//        echo "<script>alert('Quý khách đã đặt tour thành công, chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất, Xin cảm ơn!')</script>";
-
+        return 1;
     }
 }
-exit;
-$content_email_customer = '';
-$content_email_user = '';
-$content_sms_customer = '';
-$content_sms_user = '';
-$title_email = '';
-if (count($data_email) > 0) {
-    foreach ($data_email as $row) {
-        $customer = trim($row->customer, ',');
-        $user = trim($row->user, ',');
-        $title_email = $row->title;
-        if ($row->content_email != '') {
-            if ($customer != '') {
-                $array_customer = explode(',', $customer);
-                if (count($array_customer) > 0) {
-                    returnStringReplace($title_email, $row->content_email, $array_customer, $data_short_code_cus, 0, 0);
-                }
-            }
-            if ($user != '') {
-                $array_user = explode(',', $user);
-                if (count($array_user) > 0) {
-                    returnStringReplace($title_email, $row->content_email, $array_user, $data_short_code_cus, 1, 0);
-                }
-            }
-        }
-
-        if ($row->content_sms != '') {
-            if ($customer != '') {
-                $array_customer = explode(',', $customer);
-                if (count($array_customer) > 0) {
-                    returnStringReplace($title_email, $row->content_sms, $array_customer, $data_short_code_cus, 0, 1);
-                }
-            }
-            if ($user != '') {
-                $array_user = explode(',', $user);
-                if (count($array_user) > 0) {
-                    returnStringReplace($title_email, $row->content_sms, $array_user, $data_short_code_cus, 1, 1);
-                }
-            }
-        }
-
-    }
-}
-mysqli_close($conn);
-function returnStringReplace($title_email, $content = '', $array_customer, $data_short_code_cus, $type_user = 0, $type_content = 0)
+function _insertLog($user_id, $module_id, $form_id, $action_id, $item_id, $value_old, $value_new, $description)
 {
-
-    // type_user=0 là khách hàng
-    // type_user=1 là user
-    //$type_content=0 nội dung email
-    //$type_content=1 nội dung sms
-
-    if ($type_user == 0) {
-        foreach ($array_customer as $row_cus) {
-            $content_res = $content;
-            $title_res = $title_email;
-            $data_customer = customer_getById($row_cus);
-            if (count($data_customer) > 0) {
-                $data_customer = (array)$data_customer[0];
-                foreach ($data_short_code_cus as $row_short_code) {
-                    if (strpos($content, $row_short_code->name) != '') {
-                        $field = $row_short_code->field;
-                        if (isset($data_customer[$field])) {
-                            if ($type_content == 1) {
-                                $content_res = str_replace($row_short_code->name, LocDau($data_customer[$field]), $content_res);
-                            } else {
-                                $content_res = str_replace($row_short_code->name, $data_customer[$field], $content_res);
-                            }
-
-                        }
-                    }
-                    if (strpos($title_res, $row_short_code->name) != '') {
-                        $field = $row_short_code->field;
-                        if (isset($data_customer[$field])) {
-                            if ($type_content == 1) {
-
-                            } else {
-                                $title_res = str_replace($row_short_code->name, $data_customer[$field], $title_res);
-                            }
-
-                        }
-                    }
-                }
-                if ($content_res != '') {
-                    if ($type_content == 1) {
-                        // send sms
-
-                    } else {
-                        // send email
-                        if ($title_res == '') {
-                            $title_res = "Chăm sóc khách hàng";
-                        }
-                        SendMail($data_customer['email'], $content_res, $title_res);
-                    }
-
-                }
-                // send email khach hang
-            }
-
-        }
-
-    } else {
-        foreach ($array_customer as $row_cus) {
-            $content_res = $content;
-            $title_res = $title_email;
-            $data_user = user_getById($row_cus);
-            if (count($data_user) > 0) {
-                $data_user = (array)$data_user[0];
-                foreach ($data_short_code_cus as $row_short_code) {
-                    if (strpos($content, $row_short_code->name) != '') {
-                        $field = $row_short_code->field;
-                        if (isset($data_user[$field])) {
-                            if ($type_content == 1) {
-                                $content_res = str_replace($row_short_code->name, LocDau($data_user[$field]), $content_res);
-                            } else {
-                                $content_res = str_replace($row_short_code->name, $data_user[$field], $content_res);
-                            }
-
-                        }
-                    }
-                    if (strpos($title_res, $row_short_code->name) != '') {
-                        $field = $row_short_code->field;
-                        if (isset($data_user[$field])) {
-                            if ($type_content == 1) {
-
-                            } else {
-                                $title_res = str_replace($row_short_code->name, $data_user[$field], $title_res);
-                            }
-
-                        }
-                    }
-                }
-                if ($content_res != '') {
-                    if ($type_content == 1) {
-                        // send sms
-
-                    } else {
-                        // send email
-                        if ($title_res == '') {
-                            $title_res = "Thông báo";
-                        }
-                        SendMail($data_user['user_email'], $content_res, $title_res);
-                    }
-
-                }
-            }
-        }
-    }
-
-//    return $content;
-
-}
-
-function LocDau($str)
-{
-    if (!$str) return false;
-    $unicode = array(
-        'a' => 'á|à|ả|ã|ạ|ă|ắ|ặ|ằ|ẳ|ẵ|â|ấ|ầ|ẩ|ẫ|ậ|Á|À|Ả|Ã|Ạ|Ă|Ắ|Ặ|Ằ|Ẳ|Ẵ|Â|Ấ|Ầ|Ẩ|Ẫ|Ậ',
-        'd' => 'đ|Đ',
-        'e' => 'é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ|É|È|Ẽ|Ẻ|Ẹ|Ê|Ề|Ế|Ể|Ễ|Ệ',
-        'i' => 'í|ì|ỉ|ĩ|ị|Í|Ì|Ỉ|Ĩ|Ị',
-        'o' => 'ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ|Ó|Ò|Õ|Ỏ|Ọ|Ô|Ồ|Ố|Ổ|Ỗ|Ộ|Ơ|Ờ|Ớ|Ở|Ỡ|Ợ',
-        'u' => 'ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự|Ú|Ù|Ũ|Ủ|Ụ|U|Ư|Ừ|Ứ|Ử|Ữ|Ự',
-        'y' => 'ý|ỳ|ỷ|ỹ|ỵ|Ý|Ỳ|Ỷ|Ỹ|Ỵ',
-    );
-    foreach ($unicode as $nonUnicode => $uni) $str = preg_replace("/($uni)/i", $nonUnicode, $str);
-    return $str;
-}
-
-function returnDataSql($conn, $sql)
-{
-    $array_sql = array();
-    if (mysqli_query($conn, $sql)) {
-        $query = mysqli_query($conn, $sql);
-        if (mysqli_num_rows($query) > 0) {
-            while ($row = mysqli_fetch_array($query)) {
-                $object = (object)$row;
-                array_push($array_sql, $object);
-            }
-        }
-    } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-    }
-    return $array_sql;
+    $log_model = new log();
+    $log_model->user_id = $user_id;
+    $log_model->module_id = $module_id;
+    $log_model->form_id = $form_id;
+    $log_model->action_id = $action_id;
+    $log_model->item_id = $item_id;
+    $log_model->value_old = $value_old;
+    $log_model->value_new = $value_new;
+    $log_model->description = $description;
+    $log_model->created =gmdate("Y-m-d H:i:s", time());
+    log_insert($log_model);
 }

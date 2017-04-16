@@ -5,12 +5,14 @@ jQuery(function ($) {
     //    alert('asdf');
     //});
     $('body').on("click",'.row_tr_click', function () {
+
         var id=$(this).attr('value');
         var email=$(this).attr('email_record');
         var number_email=$('#number_email').html();
         if(id!='' && email!=''&&number_email!=''){
 
             if($(this).hasClass("success")){
+
              var check_exit=$('#row_email_'+id).html();
                 if(check_exit==undefined){
                     $('#table_list_email_customer').append(" <tbody id='row_email_"+id+"'><tr > <td>"+email+"</td> </tr></tbody>");

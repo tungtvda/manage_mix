@@ -12,6 +12,8 @@ function show_email_marketing_themmoi($data = array())
     $asign = array();
     $tieude=$data['title'];
     $action=$data['action'];
+    $array_customer=array();
+    $list_customer='';
     if($action==2){
         $action_name='edit';
         $readonly="readonly";
@@ -19,6 +21,8 @@ function show_email_marketing_themmoi($data = array())
         $valid_pass="valid";
         $show_phone="";
         $disabled='disabled';
+        $customer=trim(_returnDataEditAdd($data['data_user'],'customer'),',');
+        $array_customer=explode(',',$customer);
 
     }else{
         $action_name='add';
@@ -32,9 +36,10 @@ function show_email_marketing_themmoi($data = array())
     $list_short_code='';
     if(count($data['list_short_code'])>0){
         foreach($data['list_short_code'] as $row_short_code){
-            $list_short_code.=' <tr ><td><span class="label label-warning arrowed-right arrowed-in key_birthday" countId="'.$row_short_code->id.'">'.$row_short_code->name.'</span>
-                                                    <span style="font-size: 12px">'.$row_short_code->description.'</span>
-                                                    <input class="input_key_birthday" id="value_key_'.$row_short_code->id.'" countId="'.$row_short_code->id.'" type="text" value="'.$row_short_code->name.'">
+            $list_short_code.=' <tr ><td>
+                                    <span class="label label-warning arrowed-right arrowed-in key_birthday" countId="'.$row_short_code->id.'">'.$row_short_code->name.'</span>
+                                     <span style="font-size: 12px">'.$row_short_code->description.'</span>
+                                    <input class="input_key_birthday" id="value_key_'.$row_short_code->id.'" countId="'.$row_short_code->id.'" type="text" value="'.$row_short_code->name.'">
                                                 </td> </tr>';
         }
     }

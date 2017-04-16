@@ -79,12 +79,25 @@
                                             <?php if (count($list) > 0 && _returnCheckAction(16) == 1) { ?>
                                                 <?php $dem = 1; ?>
                                                 <?php foreach ($list as $row) { ?>
-                                                    <tr class="row_<?php echo $row->id ?> row_tr_click"
+                                                    <?php
+                                                    $checked='';
+                                                    $success_edit='';
+                                                    $success='';
+                                                    if(in_array($row->id,$array_customer))
+                                                    {
+                                                        $checked='checked';
+                                                        $success='success';
+                                                        $success_edit='success_edit';
+                                                        $list_customer.='<tbody id="row_email_'.$row->id.'"><tr> <td>'.$row->email.'</td> </tr></tbody>';
+                                                    }
+
+                                                    ?>
+                                                    <tr class="row_<?php echo $row->id ?> row_tr_click <?php echo $success.' '.$success_edit?>"
                                                         value="<?php echo $row->id ?>"
                                                         email_record="<?php echo $row->email ?>">
-                                                        <td class="center">
+                                                        <td class="center ">
                                                             <label class="pos-rel">
-                                                                <input type="checkbox" class="ace click_check_list"
+                                                                <input type="checkbox" <?php echo $checked?> class="ace click_check_list"
                                                                        email_record="<?php echo $row->email ?>"
                                                                        id="check_<?php echo $dem ?>"
                                                                        name="customer_birthday[]"
@@ -151,7 +164,7 @@
                                             <div class="col-xs-12">
                                                 <div class="dataTables_length">Số khách hàng được lựa chọn: <span
                                                         id="number_email"
-                                                        style="font-size: 16px; font-weight: bold; color: red">0</span>
+                                                        style="font-size: 16px; font-weight: bold; color: red"><?php echo count($array_customer)?></span>
 
 
                                                 </div>
@@ -160,7 +173,7 @@
                                         </div>
                                         <table id="table_list_email_customer"
                                                class="table table-striped table-bordered table-hover table-responsive dataTable no-footer DTTT_selectable">
-
+                                            <?php echo $list_customer?>
                                         </table>
                                     </div>
 

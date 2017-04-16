@@ -1,7 +1,7 @@
 <?php
 class sms_email
 {
-    public $id,$code,$type,$user,$customer,$title,$content_sms,$content_email,$status,$count_cus,$count_success_sms,$count_success_email,$cus_false_sms,$cus_false_email,$date_send,$date_time_send,$created,$created_by,$updated,$update_by;
+    public $id,$code,$type,$user,$customer,$title,$content_sms,$content_email,$status,$count_cus,$count_success_sms,$count_success_email,$cus_false_sms,$cus_false_email,$content_sms_false,$content_email_false,$content_sms_true,$content_email_true,$date_send,$date_time_send,$created,$created_by,$updated,$update_by;
     public function sms_email($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
@@ -18,6 +18,10 @@ class sms_email
     $this->count_success_email=isset($data['count_success_email'])?$data['count_success_email']:'';
     $this->cus_false_sms=isset($data['cus_false_sms'])?$data['cus_false_sms']:'';
     $this->cus_false_email=isset($data['cus_false_email'])?$data['cus_false_email']:'';
+    $this->content_sms_false=isset($data['content_sms_false'])?$data['content_sms_false']:'';
+    $this->content_email_false=isset($data['content_email_false'])?$data['content_email_false']:'';
+    $this->content_sms_true=isset($data['content_sms_true'])?$data['content_sms_true']:'';
+    $this->content_email_true=isset($data['content_email_true'])?$data['content_email_true']:'';
     $this->date_send=isset($data['date_send'])?$data['date_send']:'';
     $this->date_time_send=isset($data['date_time_send'])?$data['date_time_send']:'';
     $this->created=isset($data['created'])?$data['created']:'';
@@ -42,6 +46,10 @@ class sms_email
             $this->count_success_email=addslashes($this->count_success_email);
             $this->cus_false_sms=addslashes($this->cus_false_sms);
             $this->cus_false_email=addslashes($this->cus_false_email);
+            $this->content_sms_false=addslashes($this->content_sms_false);
+            $this->content_email_false=addslashes($this->content_email_false);
+            $this->content_sms_true=addslashes($this->content_sms_true);
+            $this->content_email_true=addslashes($this->content_email_true);
             $this->date_send=addslashes($this->date_send);
             $this->date_time_send=addslashes($this->date_time_send);
             $this->created=addslashes($this->created);
@@ -65,6 +73,10 @@ class sms_email
             $this->count_success_email=stripslashes($this->count_success_email);
             $this->cus_false_sms=stripslashes($this->cus_false_sms);
             $this->cus_false_email=stripslashes($this->cus_false_email);
+            $this->content_sms_false=stripslashes($this->content_sms_false);
+            $this->content_email_false=stripslashes($this->content_email_false);
+            $this->content_sms_true=stripslashes($this->content_sms_true);
+            $this->content_email_true=stripslashes($this->content_email_true);
             $this->date_send=stripslashes($this->date_send);
             $this->date_time_send=stripslashes($this->date_time_send);
             $this->created=stripslashes($this->created);

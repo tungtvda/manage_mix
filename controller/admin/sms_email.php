@@ -54,7 +54,7 @@ if(isset($_SESSION["Admin"]))
             header('Location: '.SITE_NAME.'/controller/admin/sms_email.php');
         }
     }
-    if(isset($_POST["code"])&&isset($_POST["type"])&&isset($_POST["user"])&&isset($_POST["customer"])&&isset($_POST["title"])&&isset($_POST["content_sms"])&&isset($_POST["content_email"])&&isset($_POST["status"])&&isset($_POST["count_cus"])&&isset($_POST["count_success_sms"])&&isset($_POST["count_success_email"])&&isset($_POST["cus_false_sms"])&&isset($_POST["cus_false_email"])&&isset($_POST["date_send"])&&isset($_POST["date_time_send"])&&isset($_POST["created"])&&isset($_POST["created_by"])&&isset($_POST["updated"])&&isset($_POST["update_by"]))
+    if(isset($_POST["code"])&&isset($_POST["type"])&&isset($_POST["user"])&&isset($_POST["customer"])&&isset($_POST["title"])&&isset($_POST["content_sms"])&&isset($_POST["content_email"])&&isset($_POST["status"])&&isset($_POST["count_cus"])&&isset($_POST["count_success_sms"])&&isset($_POST["count_success_email"])&&isset($_POST["cus_false_sms"])&&isset($_POST["cus_false_email"])&&isset($_POST["content_sms_false"])&&isset($_POST["content_email_false"])&&isset($_POST["content_sms_true"])&&isset($_POST["content_email_true"])&&isset($_POST["date_send"])&&isset($_POST["date_time_send"])&&isset($_POST["created"])&&isset($_POST["created_by"])&&isset($_POST["updated"])&&isset($_POST["update_by"]))
     {
        $array=$_POST;
        if(!isset($array['id']))
@@ -85,6 +85,14 @@ if(isset($_SESSION["Admin"]))
        $array['cus_false_sms']='0';
        if(!isset($array['cus_false_email']))
        $array['cus_false_email']='0';
+       if(!isset($array['content_sms_false']))
+       $array['content_sms_false']='0';
+       if(!isset($array['content_email_false']))
+       $array['content_email_false']='0';
+       if(!isset($array['content_sms_true']))
+       $array['content_sms_true']='0';
+       if(!isset($array['content_email_true']))
+       $array['content_email_true']='0';
        if(!isset($array['date_send']))
        $array['date_send']='0';
        if(!isset($array['date_time_send']))

@@ -23,7 +23,8 @@ $action_link=str_replace('/','',$action_link);
 $active_tab_left='cham_soc_khach_hang';
 
 if(isset($_GET['id'])&&$_GET['id']!='')
-{   $data['action']=2;
+{
+    $data['action']=2;
     if (_returnCheckAction(30) == 0) {
         redict(_returnLinkDangNhap());
     }
@@ -36,8 +37,7 @@ if(isset($_GET['id'])&&$_GET['id']!='')
         redict(SITE_NAME.'/'.$action_link.'/');
     }
     $url_bread = '<li><a href="'.SITE_NAME.'/'.$action_link.'/">Email - SMS chăm sóc khách hàng</a></li><li class="active">Chỉnh sửa Email - SMS "'.$data['data_user'][0]->code.'"</li>';
-    $data['title'] = 'Chỉnh sửa đơn hàng "'.$data['data_user'][0]->code_booking.'"';
-    _updateStatusNoti();
+    $data['title'] = 'Chỉnh sửa Email - SMS "'.$data['data_user'][0]->code.'"';
 
 }else{
     if (_returnCheckAction(29) == 0) {

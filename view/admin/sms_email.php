@@ -29,7 +29,7 @@ function view_sms_email($data)
 //
 function showTableHeader()
 {
-    return '<th>id</th><th>code</th><th>type</th><th>user</th><th>customer</th><th>title</th><th>content_sms</th><th>content_email</th><th>status</th><th>count_cus</th><th>count_success_sms</th><th>count_success_email</th><th>cus_false_sms</th><th>cus_false_email</th><th>date_send</th><th>date_time_send</th><th>created</th><th>created_by</th><th>updated</th><th>update_by</th>';
+    return '<th>id</th><th>code</th><th>type</th><th>user</th><th>customer</th><th>title</th><th>content_sms</th><th>content_email</th><th>status</th><th>count_cus</th><th>count_success_sms</th><th>count_success_email</th><th>cus_false_sms</th><th>cus_false_email</th><th>content_sms_false</th><th>content_email_false</th><th>content_sms_true</th><th>content_email_true</th><th>date_send</th><th>date_time_send</th><th>created</th><th>created_by</th><th>updated</th><th>update_by</th>';
 }
 //
 function showTableBody($data)
@@ -52,6 +52,10 @@ function showTableBody($data)
         $TableBody.="<td>".$obj->count_success_email."</td>";
         $TableBody.="<td>".$obj->cus_false_sms."</td>";
         $TableBody.="<td>".$obj->cus_false_email."</td>";
+        $TableBody.="<td>".$obj->content_sms_false."</td>";
+        $TableBody.="<td>".$obj->content_email_false."</td>";
+        $TableBody.="<td>".$obj->content_sms_true."</td>";
+        $TableBody.="<td>".$obj->content_email_true."</td>";
         $TableBody.="<td>".$obj->date_send."</td>";
         $TableBody.="<td>".$obj->date_time_send."</td>";
         $TableBody.="<td>".$obj->created."</td>";
@@ -82,6 +86,10 @@ function showFrom($form,$ListKey=array())
     $str_from.='<p><label>count_success_email</label><input class="text-input small-input" type="text"  name="count_success_email" value="'.(($form!=false)?$form->count_success_email:'').'" /></p>';
     $str_from.='<p><label>cus_false_sms</label><input class="text-input small-input" type="text"  name="cus_false_sms" value="'.(($form!=false)?$form->cus_false_sms:'').'" /></p>';
     $str_from.='<p><label>cus_false_email</label><input class="text-input small-input" type="text"  name="cus_false_email" value="'.(($form!=false)?$form->cus_false_email:'').'" /></p>';
+    $str_from.='<p><label>content_sms_false</label><input class="text-input small-input" type="text"  name="content_sms_false" value="'.(($form!=false)?$form->content_sms_false:'').'" /></p>';
+    $str_from.='<p><label>content_email_false</label><input class="text-input small-input" type="text"  name="content_email_false" value="'.(($form!=false)?$form->content_email_false:'').'" /></p>';
+    $str_from.='<p><label>content_sms_true</label><input class="text-input small-input" type="text"  name="content_sms_true" value="'.(($form!=false)?$form->content_sms_true:'').'" /></p>';
+    $str_from.='<p><label>content_email_true</label><input class="text-input small-input" type="text"  name="content_email_true" value="'.(($form!=false)?$form->content_email_true:'').'" /></p>';
     $str_from.='<p><label>date_send</label><input class="text-input small-input" type="text"  name="date_send" value="'.(($form!=false)?$form->date_send:'').'" /></p>';
     $str_from.='<p><label>date_time_send</label><input class="text-input small-input" type="text"  name="date_time_send" value="'.(($form!=false)?$form->date_time_send:'').'" /></p>';
     $str_from.='<p><label>created</label><input class="text-input small-input" type="text"  name="created" value="'.(($form!=false)?$form->created:'').'" /></p>';

@@ -20,8 +20,8 @@
             <div class="col-xs-12">
                 <div class="clearfix">
                     <div class="col-md-6 col-sm-6 col-xs-12 pink" style="padding-left: 0px">
-                        <?php if (_returnCheckAction(29) == 1) { ?>
-                            <a href="<?php echo SITE_NAME.'/'.$action_link ?>/them-moi"
+                        <?php if (_returnCheckAction($action_them) == 1) { ?>
+                            <a href="<?php echo SITE_NAME.'/'.$action_link ?>/them-moi?type=<?php echo $type?>"
                                class="btn btn-white  btn-create-new-tab btn-create-new-tab-hover">
                                 <i class="ace-icon fa fa-envelope bigger-120 "></i>
                                 Soạn Email - SMS
@@ -40,21 +40,21 @@
                             </button>
 
                             <ul class="dropdown-menu dropdown-danger">
-                                <?php if (_returnCheckAction(30) == 1) { ?>
+                                <?php if (_returnCheckAction($action_sua) == 1) { ?>
                                     <li>
                                         <a href="#modal-form" role="button" data-toggle="modal" class="edit_function">Sửa</a>
                                     </li>
                                 <?php } ?>
-                                                                <?php if (_returnCheckAction(31) == 1) { ?>
+                                                                <?php if (_returnCheckAction($action_xoa) == 1) { ?>
                                                                     <li>
                                                                         <a class="delete_function"
                                                                            href="javascript:void()">Xóa</a>
                                                                     </li>
                                                                 <?php } ?>
                                 <li class="divider"></li>
-                                <?php if (_returnCheckAction(21) == 1) { ?>
+                                <?php if (_returnCheckAction($action_them) == 1) { ?>
                                     <li>
-                                        <a href="<?php echo SITE_NAME.'/'.$action_link ?>/them">Soạn Email - SMS</a>
+                                        <a href="<?php echo SITE_NAME.'/'.$action_link ?>/them-moi?type=<?php echo $type?>">Soạn Email - SMS</a>
                                     </li>
                                 <?php } ?>
                             </ul>
@@ -101,7 +101,7 @@
                             </thead>
 
                             <tbody>
-                            <?php if (count($list) > 0 && _returnCheckAction(28) == 1) { ?>
+                            <?php if (count($list) > 0 && _returnCheckAction($action_list) == 1) { ?>
                                 <?php $dem = 1; ?>
                                 <?php foreach ($list as $row) { ?>
                                     <tr class="row_<?php echo $row->id ?>">
@@ -118,10 +118,10 @@
                                             <?php echo $dem; ?>
                                         </td>
                                         <td>
-                                            <a href="<?php echo SITE_NAME.'/'.$action_link ?>/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"><?php echo $row->code ?></a>
+                                            <a href="<?php echo SITE_NAME.'/'.$action_link ?>/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>&type=<?php echo $type ?>"><?php echo $row->code ?></a>
                                         </td>
                                         <td style="text-align: center">
-                                            <a href="<?php echo SITE_NAME.'/'.$action_link ?>/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
+                                            <a href="<?php echo SITE_NAME.'/'.$action_link ?>/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>&type=<?php echo $type ?>">
                                                 <?php echo $row->title ?>
 
                                             </a>
@@ -134,28 +134,26 @@
                                         </td>
                                         <td style="text-align: center">
                                             <span class="green"><?php echo $row->count_success_email ?></span> |  <span class="red"><?php echo $row->cus_false_email ?></span>
-                                        </td>
-
                                         <td>
                                             <input id="status_old_<?php echo $row->id ?>"
                                                    value="<?php echo $row->status ?>" hidden>
                                             <label style="display: none"><?php echo $row->status ?></label>
-
-<!--                                            <select --><?php //echo $disabled ?><!-- id="status_--><?php //echo $row->id ?><!--"-->
-<!--                                                                            class="select_status"-->
-<!--                                                                            count_id="--><?php //echo $row->id ?><!--"-->
-<!--                                                                            code="--><?php //echo $row->code ?><!--">-->
-<!--                                                --><?php
-//                                                foreach ($data_list_status as $row_status) {
-//                                                    $select = '';
-//                                                    if ($row->status == $row_status->id) {
-//                                                        $select = 'selected';
-//                                                    }
-//                                                    echo "<option $select value='$row_status->id'>$row_status->name</option>";
-//
-//                                                }
-//                                                ?>
-<!--                                            </select>-->
+                                            <?php
+                                            $disabled = 'disabled';
+                                            if (_returnCheckAction($action_list) == 1 || $_SESSION['user_role'] == 1) {
+                                                $disabled = '';
+                                            }
+                                            ?>
+                                            <select <?php echo $disabled ?> id="status_<?php echo $row->id ?>"
+                                                                            class="select_status"
+                                                                            count_id="<?php echo $row->id ?>"
+                                                                            code="<?php echo $row->code?>">
+                                                <option <?php if($row->status==0) echo "selected"?> value="0">Draft</option>
+                                                <option  <?php if($row->status==1) echo "selected";?> value="1">Processing</option>
+                                                <option <?php if($row->status==2) echo "selected"?> value="2">Sent</option>
+                                                <option <?php if($row->status==3) echo "selected"?> value="3">Paused</option>
+                                            </select>
+                                        </td>
                                         </td>
                                         <td>
                                             <?php echo date("d-m-Y H:i:s", strtotime($row->date_time_send));?>
@@ -175,7 +173,7 @@
                                         <td>
                                             <div class="hidden-sm hidden-xs action-buttons">
 
-                                                <?php if (_returnCheckAction(30) == 1) { ?>
+                                                <?php if (_returnCheckAction($action_list) == 1) { ?>
                                                     <a class="blue view_popup_detail" role="button"
                                                        name_record="<?php echo $row->code ?>"
                                                        data-toggle="modal" table="sms_email"
@@ -184,20 +182,16 @@
                                                        title="Chi tiết">
                                                         <i class="ace-icon fa fa-eye-slash bigger-130"></i>
                                                     </a>
-                                                    <!--                                                    <a class="" href="#" title="Sửa popup">-->
-                                                    <!--                                                        <i class="ace-icon glyphicon glyphicon-edit"></i>-->
-                                                    <!--                                                    </a>-->
-
                                                     <a title="Sửa tab mới" class="green"
-                                                       href="<?php echo SITE_NAME.'/'.$action_link ?>/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
+                                                       href="<?php echo SITE_NAME.'/'.$action_link ?>/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>&type=<?php echo $type?>">
                                                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                                                     </a>
                                                 <?php } ?>
-                                                <?php if (_returnCheckAction(31) == 1) { ?>
+                                                <?php if (_returnCheckAction($action_xoa) == 1) { ?>
                                                     <a title="Xóa" class="red delete_record" href="javascript:void(0)"
                                                        deleteid="<?php echo $row->id ?>"
                                                        name_record_delete="<?php echo $row->code ?>"
-                                                       url_delete="<?php echo SITE_NAME.'/'.$action_link ?>/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
+                                                       url_delete="<?php echo SITE_NAME.'/'.$action_link ?>/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>&type=<?php echo $type?>">
                                                         <i class="ace-icon fa fa-trash-o bigger-130"></i>
                                                     </a>
                                                 <?php } ?>
@@ -212,7 +206,7 @@
 
                                                     <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 
-                                                        <?php if (_returnCheckAction(30) == 1) { ?>
+                                                        <?php if (_returnCheckAction($action_sua) == 1) { ?>
                                                             <li>
                                                                 <a class="blue view_popup_detail" role="button"
                                                                    name_record="<?php echo $row->code ?>"
@@ -225,7 +219,7 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="<?php echo SITE_NAME.'/'.$action_link ?>/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                                <a href="<?php echo SITE_NAME.'/'.$action_link ?>/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>&type=<?php echo $type?>"
                                                                    class="tooltip-success" data-rel="tooltip"
                                                                    title="Sửa tab mới">
 																				<span class="">
@@ -234,12 +228,12 @@
                                                                 </a>
                                                             </li>
                                                         <?php } ?>
-                                                        <?php if (_returnCheckAction(31) == 1) { ?>
+                                                        <?php if (_returnCheckAction($action_xoa) == 1) { ?>
                                                             <li>
                                                                 <a href="javascript:void(0)"
                                                                    deleteid="<?php echo $row->id ?>"
                                                                    name_record_delete="<?php echo $row->code ?>"
-                                                                   url_delete="<?php echo SITE_NAME.'/'.$action_link ?>/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                                   url_delete="<?php echo SITE_NAME.'/'.$action_link ?>/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>&type=<?php echo $type?>"
                                                                    class="tooltip-error delete_record" title="Xóa">
 																				<span class="red">
 																					<i class="ace-icon fa fa-trash-o bigger-120"></i>
@@ -270,21 +264,21 @@
                     </button>
 
                     <ul class="dropdown-menu dropdown-danger">
-                        <?php if (_returnCheckAction(22) == 1) { ?>
-                            <li>
-                                <a href="#modal-form" role="button" data-toggle="modal" class="edit_function">Sửa</a>
-                            </li>
-                        <?php } ?>
-                        <?php if (_returnCheckAction(23) == 1) { ?>
+<!--                        --><?php //if (_returnCheckAction($action_sua) == 1) { ?>
+<!--                            <li>-->
+<!--                                <a href="#modal-form" role="button" data-toggle="modal" class="edit_function">Sửa</a>-->
+<!--                            </li>-->
+<!--                        --><?php //} ?>
+                        <?php if (_returnCheckAction($action_xoa) == 1) { ?>
                             <li>
                                 <a class="delete_function"
                                    href="javascript:void()">Xóa</a>
                             </li>
                         <?php } ?>
                         <li class="divider"></li>
-                        <?php if (_returnCheckAction(21) == 1) { ?>
+                        <?php if (_returnCheckAction($action_them) == 1) { ?>
                             <li>
-                                <a href="<?php echo SITE_NAME.'/'.$action_link ?>/them-moi">Đặt tour</a>
+                                <a href="<?php echo SITE_NAME.'/'.$action_link ?>/them-moi?type=<?php echo $type?>">Soạn Email - SMS</a>
                             </li>
                         <?php } ?>
                     </ul>
@@ -310,7 +304,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="blue bigger" id="title_form">Thông tin đơn hàng</h4>
+                        <h4 class="blue bigger" id="title_form">Thông tin SMS - Email</h4>
                     </div>
                     <form id="submit_form" role="form" action="" method="post" enctype="multipart/form-data">
 
@@ -319,221 +313,75 @@
                                 <h3 style="margin-right: 0px; margin-left: 0px;    font-size: 14px;"
                                     class="row header smaller lighter orange">
 											<span class="col-sm-8">
-												<i class="ace-icon fa fa-shopping-cart"></i>
-												Thông tin booking
+												<i class="ace-icon fa fa-comments-o"></i>
+												Danh sách khách hàng (<span id="count_cus"></span>)
 											</span>
                                 </h3>
-                                <div class="col-xs-12 col-sm-6">
-                                    <div class="profile-user-info profile-user-info-striped">
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> Sales</div>
-                                            <div class="profile-info-value">
-                                                <span style="font-weight: bold; color:#478fca !important; "
-                                                      class="editable editable-click name_sales"></span>
-                                            </div>
-                                        </div>
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> Tiề tệ</div>
-                                            <div class="profile-info-value">
-                                                <span class="editable editable-click tien_te"></span>
-                                            </div>
-                                        </div>
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> Ngày bắt đầu</div>
-                                            <div class="profile-info-value">
-                                                <span class="editable editable-click ngay_bat_dau"></span>
-                                            </div>
-                                        </div>
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> Hạn thanh toán</div>
-                                            <div class="profile-info-value">
-                                                <span class="editable editable-click han_thanh_toan"></span>
-                                            </div>
-                                        </div>
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> Tình trạng</div>
-                                            <div class="profile-info-value">
-                                                <span class="editable editable-click tinh_trang"></span>
-                                            </div>
-                                        </div>
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> Httt</div>
-                                            <div class="profile-info-value">
-                                                <span class="editable editable-click httt"></span>
-                                            </div>
-                                        </div>
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> Số người</div>
-                                            <div class="profile-info-value">
-                                                <span class="editable editable-click so_nguoi"></span>
-                                            </div>
-                                        </div>
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> Thuế VAT(10%)</div>
-                                            <div class="profile-info-value thue_vat">
-                                                <!--                                                <label>-->
-                                                <!--                                                    <input checked id="thue_vat" name="vat" class="ace ace-switch ace-switch-6 thue_vat" type="checkbox">-->
-                                                <!--                                                    <span class="lbl"></span>-->
-                                                <!--                                                </label>-->
-                                            </div>
-                                        </div>
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> Ghi chú</div>
-                                            <div class="profile-info-value">
-                                                <span class="editable editable-click ghi_chu"></span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <style>
+                                    .div_list_cus{
+                                        height: 300px;
+                                        overflow: scroll
+                                    }
+
+                                </style>
+                                <div class="col-xs-12 col-sm-12" id="div_list_cus">
+                                    <table id="dynamic-table" class="table table-striped table-bordered table-hover table-responsive dataTable no-footer DTTT_selectable" role="grid" aria-describedby="dynamic-table_info">
+                                        <thead>
+                                        <tr role="row">
+                                            <th >#</th>
+                                            <th >Họ tên</th>
+                                            <th >Avatar</th>
+                                            <th >Email</th>
+                                            <th>Phone</th>
+                                            <th>Mobile</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody  class="show_cus_list">
+
+                                        </tbody>
+
+
+                                    </table>
                                     <div class="space-6"></div>
 
 
                                 </div>
-                                <div class="col-xs-12 col-sm-6">
-                                    <div class="profile-user-info profile-user-info-striped">
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> Khách hàng</div>
 
-                                            <div class="profile-info-value">
-                                                <span style="font-weight: bold; color:#478fca !important; "
-                                                      class="editable editable-click name_khach_hang"></span>
-                                            </div>
-                                        </div>
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> Email</div>
-
-                                            <div class="profile-info-value">
-                                                <span class="editable editable-click email_customer"></span>
-                                            </div>
-                                        </div>
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> Địa chỉ</div>
-
-                                            <div class="profile-info-value">
-                                                <span class="editable editable-click address_customer"></span>
-                                            </div>
-                                        </div>
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> Điện thoại</div>
-
-                                            <div class="profile-info-value">
-                                                <span class="editable editable-click phone_customer"></span>
-                                            </div>
-                                        </div>
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> Fax</div>
-
-                                            <div class="profile-info-value">
-                                                <span class="editable editable-click fax_customer"></span>
-                                            </div>
-                                        </div>
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> Nhóm kh</div>
-
-                                            <div class="profile-info-value">
-                                                <span class="editable editable-click nhom_kh"></span>
-                                            </div>
-                                        </div>
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> Điểm đón</div>
-
-                                            <div class="profile-info-value">
-                                                <span class="editable editable-click diem_don"></span>
-                                            </div>
-                                        </div>
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> Ngày khởi hành</div>
-
-                                            <div class="profile-info-value">
-                                                <span class="editable editable-click ngay_khoi_hanh"></span>
-                                            </div>
-                                        </div>
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> Ngày kết thúc</div>
-
-                                            <div class="profile-info-value">
-                                                <span class="editable editable-click ngay_ket_thuc"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="space-6"></div>
-
-                                </div>
 
                             </div>
                             <div class="row">
                                 <h3 style="margin-right: 0px; margin-left: 0px;    font-size: 14px;"
                                     class="row header smaller lighter blue">
-                                    <span class="col-sm-8">
-												<i class="ace-icon fa fa-plane blue bigger-125"></i>
-												Thông tin tour
+                                   <span class="col-sm-8">
+												<i class="ace-icon fa fa-comments-o"></i>
+												Nội dung tin nhắn
 											</span>
                                 </h3>
-                                <div class="col-xs-12 col-sm-6">
+                                <div class="col-xs-12 col-sm-12">
                                     <div class="profile-user-info profile-user-info-striped">
                                         <div class="profile-info-row">
-                                            <div class="profile-info-name"> Tên tour</div>
+                                            <div class="profile-info-name"> Tiêu đề</div>
                                             <div class="profile-info-value">
                                                 <span style="font-weight: bold; color:#478fca !important; "
-                                                      class="editable editable-click name_tour"></span>
+                                                      class="editable editable-click tieu_de_detail"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
-                                            <div class="profile-info-name"> Giá</div>
+                                            <div class="profile-info-name"> Trạng thái</div>
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click gia_nguoi_lon"></span>
+                                                <span class="editable editable-click trang_thai_detail"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
-                                            <div class="profile-info-name"> Giá 5-11</div>
+                                            <div class="profile-info-name"> Ngày - giờ gửi</div>
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click gia_tre_em_511"></span>
-                                            </div>
-                                        </div>
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> Giá 5</div>
-                                            <div class="profile-info-value">
-                                                <span class="editable editable-click gia_tre_em_5"></span>
+                                                <span class="editable editable-click ngay_gui_detail"></span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="space-6"></div>
 
-
-                                </div>
-                                <div class="col-xs-12 col-sm-6">
-                                    <div class="profile-user-info profile-user-info-striped">
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> Tổng cộng</div>
-
-                                            <div class="profile-info-value">
-                                                <span style="font-weight: bold; color:#478fca !important; "
-                                                      class="editable editable-click tong_cong"></span>
-                                            </div>
-                                        </div>
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> Thuế VAT 10%</div>
-
-                                            <div class="profile-info-value">
-                                                <span class="editable editable-click vat_thanh_tien"></span>
-                                            </div>
-                                        </div>
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> Đặt cọc</div>
-
-                                            <div class="profile-info-value">
-                                                <span class="editable editable-click dat_coc"></span>
-                                            </div>
-                                        </div>
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> Còn lại</div>
-
-                                            <div class="profile-info-value">
-                                                <span style="font-weight: bold; color:#478fca !important; "
-                                                      class="editable editable-click con_lai"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="space-6"></div>
 
                                 </div>
 

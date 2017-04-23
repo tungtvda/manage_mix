@@ -184,25 +184,46 @@
                             <div class="step-pane" id="step_edit_2" data-step="2">
                                 <div class="col-md-8 col-sm-8 col-xs-12  "
                                      style="height: 300px; overflow: scroll">
-                                    <div class="form-group" style="float: left; width: 100%">
+                                    <div class="form-group" style="float: left; width: 68%; margin-right: 13px">
                                         <div>
                                             <label for="form-field-select-3">Tiêu đề <span
                                                     style="color: red">*</span></label>
                                               <span class=" width_100" style="">
-                                                    <input name="title" type="text" id="input_title" value=""
+                                                    <input name="title" type="text" id="input_title" value="<?php echo $title?>"
                                                            class="width_100">
-                                                   <input hidden name="type" type="text" id="input_type" value="0"
+                                                   <input hidden name="type" type="text" id="input_type" value="<?php echo $type?>"
+                                                          class="width_100">
+                                                   <input hidden name="id" type="text" id="input_id" value="<?php echo $id?>"
                                                           class="width_100">
                                                 </span>
                                             <label style="display: none" class="error-color  error-color-size"
                                                    id="error_title">Bạn vui lòng nhập tiêu đề thư</label></div>
+                                    </div>
+                                    <div class="form-group" style="float: left; width: 30%; margin-left: 0px">
+                                        <label for="form-field-select-3">Trạng thái<span
+                                                style="color: red">*</span></label>
+                                        <div >
+                                            <style>
+                                                #form_field_select_3_chosen{
+                                                    width: 100% !important;
+                                                }
+                                            </style>
+                                            <select name="status"  class="chosen-select form-control status_sms" id="form-field-select-3" data-placeholder="Trạng thái ..." style="display: none;width: 10px">
+                                                <option  value=""></option>
+                                                <option <?php if($status==0) echo "selected"?> value="0">Draft</option>
+                                                <option  <?php if($status==1) echo "selected"; else echo 'selected'?> value="1">Processing</option>
+                                                <option <?php if($status==2) echo "selected"?> value="2">Sent</option>
+                                                <option <?php if($status==3) echo "selected"?> value="3">Paused</option>
+
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="form-group" style="float: left; width: 50%; margin-right: 0px">
                                         <div>
                                             <label for="form-field-select-3">Ngày gửi <span
                                                     style="color: red">*</span></label>
                                             <div class="input-group">
-                                                <input class="form-control date-picker" name="date_send" id="id-date-picker-1" type="text" data-date-format="dd-mm-yyyy">
+                                                <input class="form-control date-picker" name="date_send" id="id-date-picker-1" value="<?php echo $date_send?>" type="text" data-date-format="dd-mm-yyyy">
 																	<span class="input-group-addon">
 																		<i class="fa fa-calendar bigger-110"></i>
 																	</span>
@@ -215,7 +236,7 @@
                                             <label for="form-field-select-3">Giờ gửi <span
                                                     style="color: red">*</span></label>
                                             <div class="input-group bootstrap-timepicker">
-                                                <input id="timepicker1" name="time_send" type="text" class="form-control">
+                                                <input id="timepicker1" name="time_send" type="text" class="form-control" value="<?php echo $time_send?>">
 															<span class="input-group-addon">
 																<i class="fa fa-clock-o bigger-110"></i>
 															</span>
@@ -236,7 +257,7 @@
                                             </style>
                                             <textarea placeholder="Tin nhắn SMS chúc mừng sinh nhật ..."
                                                       class="form-control" name="message_birthday" id="message_birthday"
-                                                      class="required" cols="20" rows="2"></textarea>
+                                                      class="required" cols="20" rows="2"> <?php echo $content_sms?></textarea>
                                             <label style="display: none" class="error-color  error-color-size"
                                                    id="error_content">Bạn vui lòng nhập nôi dung SMS hoặc Email</label></div>
                                     </div>
@@ -250,7 +271,7 @@
                                                 </style>
                                                 <script type="text/javascript"
                                                         src="<?php echo SITE_NAME ?>/view/admin/Themes/ckeditor/ckeditor.js"></script>
-                                                <textarea style="width: 100% !important;" name="content_email" id="content_email"></textarea>
+                                                <textarea style="width: 100% !important;" name="content_email" id="content_email"><?php echo $content_email?></textarea>
                                                 <script
                                                     type="text/javascript">CKEDITOR.replace('content_email'); </script>
                                                 <label style="display: none" class="error-color  error-color-size"

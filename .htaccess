@@ -85,5 +85,10 @@ RewriteRule ^chuc-mung-sinh-nhat/send-sms-birthday/$ controller/default/email_ma
 RewriteRule ^cham-soc-khach-hang/$ controller/default/email_marketing/email_marketing.php
 RewriteRule ^cham-soc-khach-hang/them-moi controller/default/email_marketing/themmoi.php
 RewriteRule ^cham-soc-khach-hang/sua  controller/default/email_marketing/themmoi.php
+RewriteRule ^cham-soc-khach-hang/xoa  controller/default/email_marketing/delete.php
+RewriteRule ^chuc-mung-sinh-nhat/$ controller/default/email_marketing/email_marketing.php
+RewriteRule ^chuc-mung-sinh-nhat/them-moi controller/default/email_marketing/themmoi.php
+RewriteRule ^chuc-mung-sinh-nhat/sua  controller/default/email_marketing/themmoi.php
+RewriteRule ^chuc-mung-sinh-nhat/xoa  controller/default/email_marketing/delete.php
 RewriteRule ^cronjob-send-sms$ controller/default/email_marketing/cronjob_send_sms.php
 

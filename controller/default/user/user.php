@@ -18,7 +18,7 @@ $data['breadcrumbs']=$url_bread;
 $data['title']='Danh sách nhân viên';
 $count=8;
 _returnCreateUser(1);
-_deleteSubmitForm('user', 'user_delete');
+_deleteSubmitForm('user', 'user_delete',3,2,3);
 $data_dk_fill='';
 if($_SESSION['user_role']==0)
 {

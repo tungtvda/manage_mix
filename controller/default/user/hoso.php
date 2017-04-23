@@ -39,7 +39,7 @@ $url_bread='<li><a href="'.SITE_NAME.'/nhan-vien/">Nhân viên</a></li><li class
 $data['breadcrumbs']=$url_bread;
 $data['title']='Hồ sơ nhân viên "'.$data['data_user'][0]->name.'"';
 $count=8;
-_deleteSubmitForm('user', 'user_delete');
+_deleteSubmitForm('user', 'user_delete',3,2,3);
 $data['list']=user_getByTop('','','updated desc');
 $data['module_valid'] = "user";
 $data['title_print'] = 'Hồ sơn nhân viên "'.$data['data_user'][0]->name.'"';

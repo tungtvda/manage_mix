@@ -22,7 +22,7 @@ $time_now=gmdate("Y-m-d H:i:s", time());
 $data_short_code_cus=short_code_getByTop('','type=1','position asc');
 $data_short_code_user=short_code_getByTop('','type=2','position asc');
 
-$dk_find="status=0 and date_time_send<='".$time_now."'";
+$dk_find="status=1 and date_time_send<='".$time_now."'";
 $data_email=sms_email_getByTop('',$dk_find,'id desc');
 $content_email_customer='';
 $content_email_user='';
@@ -169,11 +169,10 @@ function returnStringReplace($title_email,$array_customer,$data_short_code_cus, 
     }
     $new=new sms_email((array)$row);
     if($count_success_email>0||$count_success_sms>0){
-        $new->status=1;
+        $new->status=2;
     }else{
-        $new->status=0;
+        $new->status=1;
     }
-    $new->status=1;
     $new->count_success_sms=$count_success_sms;
     $new->count_success_email=$count_success_email;
     $new->cus_false_sms=$cus_false_sms;

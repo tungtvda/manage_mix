@@ -16,12 +16,23 @@ require_once(DIR . "/common/Mail.php");
 $data = array();
 _returnCheckPermison(7, 14);
 
-$action_link=str_replace('manage_mix','',$_SERVER['REQUEST_URI']);
-$action_link=str_replace('them','',$action_link);
-$action_link=str_replace('/','',$action_link);
+//$action_link=str_replace('manage_mix','',$_SERVER['REQUEST_URI']);
+//$action_link=str_replace('them','',$action_link);
+//$action_link=str_replace('/','',$action_link);
 
-$active_tab_left='cham_soc_khach_hang';
 
+if(isset($_GET['type'])&&$_GET['type']==1){
+    $action_link='chuc-mung-sinh-nhat';
+    $data['type']=1;
+    $active_tab_left='chuc_mung_sinh_nhat';
+    $name_bread="Email - SMS chúc mừng sinh nhật";
+}
+else{
+    $action_link='cham-soc-khach-hang';
+    $data['type']=0;
+    $active_tab_left='cham_soc_khach_hang';
+    $name_bread="Email - SMS chăm sóc khách hàng";
+}
 if(isset($_GET['id'])&&$_GET['id']!='')
 {
     $data['action']=2;
@@ -36,7 +47,7 @@ if(isset($_GET['id'])&&$_GET['id']!='')
     {
         redict(SITE_NAME.'/'.$action_link.'/');
     }
-    $url_bread = '<li><a href="'.SITE_NAME.'/'.$action_link.'/">Email - SMS chăm sóc khách hàng</a></li><li class="active">Chỉnh sửa Email - SMS "'.$data['data_user'][0]->code.'"</li>';
+    $url_bread = '<li><a href="'.SITE_NAME.'/'.$action_link.'/">'.$name_bread.'</a></li><li class="active">Chỉnh sửa Email - SMS "'.$data['data_user'][0]->code.'"</li>';
     $data['title'] = 'Chỉnh sửa Email - SMS "'.$data['data_user'][0]->code.'"';
 
 }else{
@@ -45,7 +56,7 @@ if(isset($_GET['id'])&&$_GET['id']!='')
     }
     $data['data_user']='';
     $data['action']=1;
-    $url_bread = '<li><a href="'.SITE_NAME.'/'.$action_link.'/">Email - SMS chăm sóc khách hàng</a></li><li class="active">Soạn tin</li>';
+    $url_bread = '<li><a href="'.SITE_NAME.'/'.$action_link.'/">'.$name_bread.'</a></li><li class="active">Soạn tin</li>';
     $data['title'] = 'Soạn Email - SMS';
 }
 

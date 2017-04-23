@@ -88,6 +88,10 @@ jQuery(function ($) {
                     type=0;
                 }
                 var date_send=$('#id-date-picker-1').val();
+                var id=$('#input_id').val();
+                var status=$('.status_sms').val();
+                console.log(id);
+                console.log(status);
                 var time_send=$('#timepicker1').val();
                 var message_birthday=$('#message_birthday').val();
                 var content_email=CKEDITOR.instances['content_email'].getData();
@@ -97,7 +101,6 @@ jQuery(function ($) {
                         customer_birthday.push(field.value);
                     }
                 });
-                console.log(customer_birthday);
                 //console.log($("#submit_form").serializeArray().name);
                 var success=true;
                 if(title==''){
@@ -129,20 +132,26 @@ jQuery(function ($) {
                             'time_send':time_send,
                             'message_birthday':message_birthday,
                             'content_email':content_email,
-                            'customer_birthday':customer_birthday
+                            'customer_birthday':customer_birthday,
+                            'id':id,
+                            'status':status
                         },
                         success: function (response) {
                             if(response=='1'){
+                                var mes='Lưu tin nhắn thành công, hệ thống sẽ tự động gửi tin nhắn theo thời gian bạn đã cài đặt';
+                                if(id!=''){
+                                    var mes='Lưu tin nhắn thành công';
+                                }
                                 lnv.alert({
                                     title: '<label class="green">Thông báo</label>',
-                                    content: 'Lưu tin nhắn thành công, hệ thống sẽ tự động gửi tin nhắn theo thời gian bạn đã cài đặt',
+                                    content: mes,
                                     alertBtnText: 'Ok',
                                     iconBtnText:'<i style="color: red;" class="ace-icon fa fa-check green"></i>',
                                     alertHandler: function () {
                                         if(type==0){
                                             var link_re = url + '/cham-soc-khach-hang/';
                                         }else{
-                                            var link_re = url + '/chuc-mung-sinh-nhat/';
+                                            var link_re = url + '/chuc-mung-sinh-nhat/?type=1';
                                         }
                                         window.location=link_re;
                                     }
@@ -181,6 +190,125 @@ jQuery(function ($) {
         $('#step_tab_1').addClass('active');
         $('#step_edit_1').addClass('active');
         $('#step_edit_2').removeClass('active');
+    });
+
+    $('body').on("click", '.view_popup_detail', function () {
+        var Id = $(this).attr("countid");
+        var name = $(this).attr("name_record");
+        show_edit_info_mess(Id, name);
+    });
+    function show_edit_info_mess(Id, name) {
+        $("#title_form").html('Chi tiết SMS - Email "<b>' + name + '</b>"');
+        if (Id != '') {
+            jQuery.post(url + "/get-detail-ajax/",
+                {
+                    id: Id,
+                    table: 'sms_email'
+                }
+                )
+                .done(function (data) {
+                    if (data != 0) {
+                        var obj = jQuery.parseJSON(data);
+                        $('.show_cus_list').html(obj.customer);
+                        $('#count_cus').html(obj.count_cus);
+                        $('.tieu_de_detail').html(obj.title);
+                        var ststus='Draft';
+                        if(obj.status==1){
+                            ststus='Processing';
+                        }else{
+                            if(obj.status==2){
+                                ststus='Sent';
+                            }else{
+                                if(obj.status==3){
+                                    ststus='Paused';
+                                }
+                            }
+                        }
+                        $('.trang_thai_detail').html(ststus);
+                        $('.ngay_gui_detail').html(obj.date_time_send);
+                        $("#div_list_cus").addClass(obj.css_height);
+                    }else{
+                        lnv.alert({
+                            title: 'Lỗi',
+                            content: 'Ban không thể xem chi tiết SMS - Email "'+name+'"',
+                            alertBtnText: 'Ok',
+                            iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                            alertHandler: function () {
+                                $('#modal-form').modal('hide');
+                            }
+                        });
+                    }
+                });
+        }
+        else {
+            lnv.alert({
+                title: 'Lỗi',
+                content: 'Ban không thể xem chi tiết khách hàng "'+name+'"',
+                alertBtnText: 'Ok',
+                iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                alertHandler: function () {
+                    $('#modal-form').modal('hide');
+                }
+            });
+        }
+    }
+    $('body').on("change", '.select_status', function () {
+
+        var id=$(this).attr('count_id');
+        var code=$(this).attr('code');
+        var status=$(this).val();
+        var table = 'sms_email';
+        var field = 'status';
+        var link = url + '/update-status/';
+        var action='sms_email_update';
+        if(id==''||table==''||field==''||code==''||link==''){
+            lnv.alert({
+                title: 'Lỗi',
+                content: 'Các thông tin cập nhật không hợp lệ',
+                alertBtnText: 'Ok',
+                iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                alertHandler: function () {
+
+                }
+            });
+        }else{
+            var value_old=$('#status_old_'+id).val();
+            lnv.confirm({
+                title: '<label class="orange">Xác nhận cập nhật trạng thái</label>',
+                content: 'Bạn chắc chắn rằng muốn cập nhật trạng thái của tin nhắn </br><b>"'+code+'"</b> ?',
+                confirmBtnText: 'Ok',
+                iconBtnText:'<i style="color: #669fc7;" class="ace-icon fa fa-question orange"></i>',
+                confirmHandler: function () {
+                    $.ajax({
+                        method: "GET",
+                        url: link,
+                        data: "id=" + id + '&table=' + table + '&field=' + field + '&status=' + status+'&action='+action,
+                        success: function (response) {
+                            if (response != 1) {
+                                lnv.alert({
+                                    title: 'Lỗi',
+                                    content: response,
+                                    alertBtnText: 'Ok',
+                                    iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                                    alertHandler: function () {
+
+                                    }
+                                });
+                                $("#status_"+id).val(value_old);
+                            }else{
+                                $('#status_old_'+id).val(status);
+                            }
+                        }
+                    });
+
+                },
+                cancelBtnText: 'Cancel',
+                cancelHandler: function () {
+                    $("#status_"+id).val(value_old);
+                }
+            })
+        }
+
     });
 
 });

@@ -13,7 +13,12 @@ function show_email_marketing_list($data = array())
     $list=$data['list'];
     $title=$data['title'];
     $action_link=$data['action_link'];
-//    $data_list_status=trang_thai_don_hang_getByTop('','','position asc');
+    $type=$data['type'];
+    $form=$data['form'];
+    $action_list=$data['action_list'];
+    $action_them=$data['action_them'];
+    $action_sua=$data['action_sua'];
+    $action_xoa=$data['action_xoa'];
     require_once DIR . '/view/default/template/module/email_marketing/list.php';
 }
 

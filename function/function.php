@@ -563,7 +563,7 @@ function _returnCreateUser($check_redict)
     }
 }
 
-function _deleteSubmitForm($model, $action_delete)
+function _deleteSubmitForm($model, $action_delete,$module,$form, $action)
 {
     if (isset($_POST['check_box_action'])) {
         $check_box_action = $_POST['check_box_action'];
@@ -575,6 +575,7 @@ function _deleteSubmitForm($model, $action_delete)
                     $new_obj = new $model();
                     $new_obj->id = $id;
                     $action_delete($new_obj);
+                    _insertLog($_SESSION['user_id'],$module,$form,$action,$id,'','',$_SESSION['user_name'].' đã xóa bản ghi "'.$id.'"');
                 }
             }
         }

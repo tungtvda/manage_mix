@@ -183,7 +183,7 @@ jQuery(function ($) {
                 else{
                     $.ajax({
                         method: "GET",
-                        url: url_delete+deleteid,
+                        url: url_delete,
                         data: '',
                         success: function (response) {
                             if(response==1){

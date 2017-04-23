@@ -34,6 +34,20 @@ function show_email_marketing_themmoi($data = array())
     }
     $list=$data['list'];
     $list_short_code='';
+    $type=$data['type'];
+    $title=_returnDataEditAdd($data['data_user'],'title');
+    $date_time_send=_returnDataEditAdd($data['data_user'],'date_time_send');
+    $date_send='';
+    $time_send='';
+    if($date_time_send!=''){
+        $date_send =date('d-m-Y', strtotime($date_time_send));
+        $time_send =date('H:i:s', strtotime($date_time_send));
+    }
+    $content_sms=_returnDataEditAdd($data['data_user'],'content_sms');
+    $content_email=_returnDataEditAdd($data['data_user'],'content_email');
+    $id=_returnDataEditAdd($data['data_user'],'id');
+    $status=_returnDataEditAdd($data['data_user'],'status');
+
     if(count($data['list_short_code'])>0){
         foreach($data['list_short_code'] as $row_short_code){
             $list_short_code.=' <tr ><td>

@@ -79,6 +79,15 @@ RewriteRule ^booking-no-tien/confirm-order$ controller/default/booking/confirm_o
 RewriteRule ^booking-ket-thuc/confirm-order$ controller/default/booking/confirm_order.php
 RewriteRule ^booking-ban-nhap/confirm-order$ controller/default/booking/confirm_order.php
 
+RewriteRule ^booking/chi-phi$ controller/default/booking/chi_phi.php
+RewriteRule ^booking-new/chi-phi$ controller/default/booking/chi_phi.php
+RewriteRule ^booking-giao-dich/chi-phi$ controller/default/booking/chi_phi.php
+RewriteRule ^booking-tam-dung/chi-phi$ controller/default/booking/chi_phi.php
+RewriteRule ^booking-no-tien/chi-phi$ controller/default/booking/chi_phi.php
+RewriteRule ^booking-ket-thuc/chi-phi$ controller/default/booking/chi_phi.php
+RewriteRule ^booking-ban-nhap/chi-phi$ controller/default/booking/chi_phi.php
+
+
 RewriteRule ^return-input-price-booking/$ controller/default/booking/list_price_input.php
 
 RewriteRule ^chuc-mung-sinh-nhat/send-sms-birthday/$ controller/default/email_marketing/send_sms.php

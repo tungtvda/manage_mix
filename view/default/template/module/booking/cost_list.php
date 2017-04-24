@@ -21,11 +21,11 @@
                 <div class="clearfix">
                     <div class="col-md-6 col-sm-6 col-xs-12 pink" style="padding-left: 0px">
                         <?php if (_returnCheckAction(21) == 1) { ?>
-                            <a href="<?php echo SITE_NAME.'/'.$action_link ?>/dat-tour"
-                               class="btn btn-white  btn-create-new-tab btn-create-new-tab-hover">
-                                <i class="ace-icon fa fa-plane bigger-120 "></i>
-                                Đặt tour
-                                <i class="ace-icon fa fa-cart-plus icon-on-right"></i>
+                            <a href="#modal-form" role="button" data-toggle="modal" id="create_popup"
+                               class="green btn btn-white btn-create btn-hover-white">
+                                <i class="ace-icon fa fa-plus bigger-120 "></i>
+                                Create popup
+                                <i class="ace-icon fa fa-external-link"></i>
                             </a>
                         <?php } ?>
                         <a href="" class="btn btn-white  btn-refresh">

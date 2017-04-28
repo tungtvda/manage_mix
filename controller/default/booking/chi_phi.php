@@ -17,7 +17,10 @@ if(!isset($_GET['id'])){
 }
 $id=_returnGetParamSecurity('id');
 $id_pass=_return_mc_decrypt($id, ENCRYPTION_KEY);
-
+$data['data_booking_detail']=booking_getById($id_pass);
+if(count($data['data_booking_detail'])==0){
+    redict(_returnLinkDangNhap());
+}
 $_SESSION['link_redict']='http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
  $action_link=str_replace('manage_mix','',$_SERVER['REQUEST_URI']);
 $action_link=str_replace('?id='.$id,'',$action_link);

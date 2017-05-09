@@ -160,6 +160,8 @@ function show_booking_themmoi($data = array())
         $readonly_name_customer='disabled';
     }
     $show_add_tour='';
+    $so_cho='';
+    $departure_name='';
     $data_tour=tour_getById(_returnDataEditAdd($data['data_user'],'id_tour'));
     if(count($data_tour)>0){
         if($data_tour[0]->name!=''){
@@ -167,72 +169,72 @@ function show_booking_themmoi($data = array())
             $name_tour=$data_tour[0]->name;
             $id_tour=$data_tour[0]->id;
         }
-        $departure_name='';
         $data_departure=departure_getById($data_tour[0]->departure);
         if(count($data_departure)>0){
             $departure_name=$data_departure[0]->name;
         }
-        $price_new=_returnDataEditAdd($data['data_user'],'price_new');
-        $price_new_format=number_format((int)$price_new,0,",",".").' vnđ';
-        $price_11_new=_returnDataEditAdd($data['data_user'],'price_11_new');
-        $price_11_new_format=number_format((int)$price_11_new,0,",",".").' vnđ';
-        $price_5_new=_returnDataEditAdd($data['data_user'],'price_5_new');
-        $price_5_new_format=number_format((int)$price_5_new,0,",",".").' vnđ';
         $so_cho=$data_tour[0]->so_cho;
-        $table_tour='<tr> <td class="center">1</td><td><a>'.$so_cho.'</a></td>
+    }
+    $price_new=_returnDataEditAdd($data['data_user'],'price_new');
+    $price_new_format=number_format((int)$price_new,0,",",".").' vnđ';
+    $price_11_new=_returnDataEditAdd($data['data_user'],'price_11_new');
+    $price_11_new_format=number_format((int)$price_11_new,0,",",".").' vnđ';
+    $price_5_new=_returnDataEditAdd($data['data_user'],'price_5_new');
+    $price_5_new_format=number_format((int)$price_5_new,0,",",".").' vnđ';
+
+    $table_tour='<tr> <td class="center">1</td><td><a>'.$so_cho.'</a></td>
         <td><span id="price_format_span">'.$price_new_format.'</span>';
 
-            $table_tour.='<input hidden="" id="input_price_format" value="'.$price_new_format.'">
+    $table_tour.='<input hidden="" id="input_price_format" value="'.$price_new_format.'">
         <input hidden="" title="giá sửa" id="input_price" value="'.$price_new.'">
         <input hidden="" id="input_price_old" title="giá cũ" value="'.$price_new.'"> ';
-        if($_SESSION['user_role']==1||$confirm_admin==0){
-            $table_tour.='| <a id="edit_price" href="javascript:void(0)"><i class="fa fa-edit" title="Sửa đơn giá"></i></a>
+    if($_SESSION['user_role']==1||$confirm_admin==0){
+        $table_tour.='| <a id="edit_price" href="javascript:void(0)"><i class="fa fa-edit" title="Sửa đơn giá"></i></a>
         <a id="reset_price" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a>';
-        }else{
-            $show_add_tour='hidden';
-        }
+    }else{
+        $show_add_tour='hidden';
+    }
 
-        $table_tour.='</td>
+    $table_tour.='</td>
         <td><span id="price_format_span_511">'.$price_11_new_format.'</span>';
 
-            $table_tour .= '<input hidden="" title="giá sửa" id="input_price_511" value="' . $price_11_new . '"> <input hidden="" id="input_price_511_old" title="giá cũ" value="'.$price_11_new.'">';
-        if($_SESSION['user_role']==1||$confirm_admin==0) {
-            $table_tour .= '| <a id="edit_price_511" href="javascript:void(0)">
+    $table_tour .= '<input hidden="" title="giá sửa" id="input_price_511" value="' . $price_11_new . '"> <input hidden="" id="input_price_511_old" title="giá cũ" value="'.$price_11_new.'">';
+    if($_SESSION['user_role']==1||$confirm_admin==0) {
+        $table_tour .= '| <a id="edit_price_511" href="javascript:void(0)">
         <i class="fa fa-edit" title="Sửa đơn giá"></i></a>
         <a id="reset_price_511" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a>';
-        }
-        $table_tour.='</td>
+    }
+    $table_tour.='</td>
         <td><span id="price_format_span_5">'.$price_5_new_format.'</span>';
 
-            $table_tour .= '<input hidden="" title="giá sửa" id="input_price_5" value="' . $price_5_new . '"> <input hidden="" id="input_price_5_old" title="giá cũ" value="'.$price_5_new.'"> ';
-        if($_SESSION['user_role']==1||$confirm_admin==0) {
-            $table_tour .= '| <a id="edit_price_5" href="javascript:void(0)">
+    $table_tour .= '<input hidden="" title="giá sửa" id="input_price_5" value="' . $price_5_new . '"> <input hidden="" id="input_price_5_old" title="giá cũ" value="'.$price_5_new.'"> ';
+    if($_SESSION['user_role']==1||$confirm_admin==0) {
+        $table_tour .= '| <a id="edit_price_5" href="javascript:void(0)">
         <i class="fa fa-edit" title="Sửa đơn giá"></i></a><a id="reset_price_5" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a>';
-        }
-        $table_tour .= '</td>
+    }
+    $table_tour .= '</td>
         <td>'.$departure_name.'</td> <td style="color:red">'.$so_cho.'</td></tr>';
 
-        $total=0;
-        if(is_numeric($num_nguoi_lon)&&is_numeric($price_new)){
-            $total=$total+($num_nguoi_lon*$price_new);
-        }
-        if(is_numeric($num_tre_em)&&is_numeric($price_11_new)){
-            $total=$total+($num_tre_em*$price_11_new);
-        }
-        if(is_numeric($num_tre_em_5)&&is_numeric($price_5_new)){
-            $total=$total+($num_tre_em_5*$price_5_new);
-        }
-        $total_format=number_format((int)$total,0,",",".").' vnđ';
-        if($vat==1){
-            $vat_price=($total*0.1);
-            $vat_format=number_format((int)$vat_price,0,",",".").' vnđ';
-            $total=$total+$vat_price;
-        }
-        if(is_numeric($dat_coc)&&$dat_coc>0){
-            $total=$total-$dat_coc;
-        }
-        $conlai_format=number_format((int)$total,0,",",".").' vnđ';
+    $total=0;
+    if(is_numeric($num_nguoi_lon)&&is_numeric($price_new)){
+        $total=$total+($num_nguoi_lon*$price_new);
     }
+    if(is_numeric($num_tre_em)&&is_numeric($price_11_new)){
+        $total=$total+($num_tre_em*$price_11_new);
+    }
+    if(is_numeric($num_tre_em_5)&&is_numeric($price_5_new)){
+        $total=$total+($num_tre_em_5*$price_5_new);
+    }
+    $total_format=number_format((int)$total,0,",",".").' vnđ';
+    if($vat==1){
+        $vat_price=($total*0.1);
+        $vat_format=number_format((int)$vat_price,0,",",".").' vnđ';
+        $total=$total+$vat_price;
+    }
+    if(is_numeric($dat_coc)&&$dat_coc>0){
+        $total=$total-$dat_coc;
+    }
+    $conlai_format=number_format((int)$total,0,",",".").' vnđ';
 
     $booking_id=_returnDataEditAdd($data['data_user'],'id');
     $string_cus_tommer='';

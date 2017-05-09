@@ -19,7 +19,10 @@ _returnCheckPermison(6, 6);
 $action_link=str_replace('manage_mix','',$_SERVER['REQUEST_URI']);
 $action_link=str_replace('dat-tour','',$action_link);
 $action_link=str_replace('/','',$action_link);
-
+if(isset($_GET['id'])&&$_GET['id']!='')
+{
+    $action_link=str_replace('sua?id='.$_GET['id'],'',$action_link);
+}
 switch($action_link){
     case 'booking-new':
         $active_tab_left='booking_new';

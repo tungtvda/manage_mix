@@ -21,7 +21,7 @@
                 <div class="clearfix">
                     <div class="col-md-6 col-sm-6 col-xs-12 pink" style="padding-left: 0px">
                         <?php if (_returnCheckAction(21) == 1) { ?>
-                            <a href="#modal-form-detail" role="button" data-toggle="modal"  name_record="#4572" table="booking" countid="Vm0xMGEwNUdWWGhWYms1U1lrVndVbFpyVWtKUFVUMDk="
+                            <a href="#modal-form-detail" role="button" data-toggle="modal"  name_record="#4572" table="booking" countid="<?php echo $id_booking?>"
                                class="green btn btn-white btn-create btn-hover-white view_popup_detail">
                                 <i class="ace-icon fa fa-eye bigger-120 "></i>
                                 Chi tiết đơn hàng
@@ -94,16 +94,12 @@
                                     </label>
                                 </th>
                                 <th>#</th>
-                                <th>Mã booking</th>
-                                <th>Tên Tour</th>
-                                <th>Tên khách hàng</th>
-                                <th>Trạng thái</th>
-                                <th>Tổng tiền</th>
-                                <th>Thanh toán</th>
-                                <th>Còn lại</th>
+                                <th>Tên chi phí</th>
+                                <th>Tiền</th>
+                                <th>Thời gian</th>
+                                <th>Mô tả</th>
                                 <th>Sales</th>
                                 <th>Người tạo</th>
-                                <th>Xác nhận</th>
                                 <th>Action</th>
 
                             </tr>
@@ -393,15 +389,28 @@
                                 <div class="col-xs-12 col-sm-12">
                                     <div class="profile-user-info profile-user-info-striped">
                                         <div class="profile-info-row">
-                                            <div class="profile-info-name"> Tên chi phí</div>
+                                            <div class="profile-info-name"> Tên chi phí <span style="color: red">*</span></div>
                                             <div class="profile-info-value">
                                                 <?php echo _returnInput('name', '', '', 'qrcode', '', 'Bạn vui lòng nhập tên chi phí','') ?>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
-                                            <div class="profile-info-name"> Tiề tệ</div>
+                                            <div class="profile-info-name"> Tiề tệ <span style="color: red">*</span></div>
                                             <div class="profile-info-value">
-                                                <?php echo _returnInput('price', '', '', 'usd', '', 'Bạn vui lòng nhập chi phí','') ?>
+                                                <?php echo _returnInput('price_cost', '', '', 'usd', '', 'Bạn vui lòng nhập chi phí','') ?>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Ngày thanh toán <span style="color: red">*</span></div>
+                                            <div class="profile-info-value">
+                                                <div class="input-group" style="">
+                                                    <input value="" class="form-control date-picker width_100 " id="input_birthday" name="birthday" required type="text" data-date-format="dd-mm-yyyy">
+																	<span   class="input-group-addon date_icon">
+																		<i class="fa fa-calendar bigger-110"></i>
+																	</span>
+
+                                                </div>
+                                                <label  style="display: none" class="error-color  error-color-size" id="error_birthday">Bạn vui lòng chọn ngày thanh toán</label>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">

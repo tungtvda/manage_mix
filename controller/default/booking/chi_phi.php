@@ -15,7 +15,8 @@ _returnCheckPermison(6,6);
 if(!isset($_GET['id'])){
     redict(_returnLinkDangNhap());
 }
-$id=_returnGetParamSecurity('id');
+
+$data['id_booking']=$id=_returnGetParamSecurity('id');
 $id_pass=_return_mc_decrypt($id, ENCRYPTION_KEY);
 $data['data_booking_detail']=booking_getById($id_pass);
 if(count($data['data_booking_detail'])==0){

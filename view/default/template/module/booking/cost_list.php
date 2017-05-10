@@ -17,21 +17,22 @@
     <div class="col-xs-12">
         <!-- PAGE CONTENT BEGINS -->
         <div class="row">
-            <div class="col-md-3 col-sm-4 col-xs-12">
-                <div class="clearfix">
-                  Chi tiết đơn hàng
-                </div>
-
-                <div class="hr hr-18 dotted hr-double"></div>
-            </div>
-            <div class="col-xs-12 col-sm-8 col-md-9">
+            <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="clearfix">
                     <div class="col-md-6 col-sm-6 col-xs-12 pink" style="padding-left: 0px">
+                        <?php if (_returnCheckAction(21) == 1) { ?>
+                            <a href="#modal-form-detail" role="button" data-toggle="modal"  name_record="#4572" table="booking" countid="Vm0xMGEwNUdWWGhWYms1U1lrVndVbFpyVWtKUFVUMDk="
+                               class="green btn btn-white btn-create btn-hover-white view_popup_detail">
+                                <i class="ace-icon fa fa-eye bigger-120 "></i>
+                                Chi tiết đơn hàng
+                                <i class="ace-icon fa fa-external-link"></i>
+                            </a>
+                        <?php } ?>
                         <?php if (_returnCheckAction(21) == 1) { ?>
                             <a href="#modal-form" role="button" data-toggle="modal" id="create_popup"
                                class="green btn btn-white btn-create btn-hover-white">
                                 <i class="ace-icon fa fa-plus bigger-120 "></i>
-                                Create popup
+                                Tạo chi phí
                                 <i class="ace-icon fa fa-external-link"></i>
                             </a>
                         <?php } ?>
@@ -372,7 +373,7 @@
 
             @media (min-width: 768px) {
                 .modal-dialog {
-                    width: 40%;
+                    width: 50%;
                     margin: 30px auto;
                 }
             }
@@ -422,6 +423,255 @@
                                 <i class="ace-icon fa fa-check"></i>
                                 Save
                             </button>
+                            <button type="reset" class="btn btn-sm" data-dismiss="modal" id="reset_form_popup">
+                                <i class="ace-icon fa fa-times"></i>
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div><!-- PAGE CONTENT ENDS -->
+
+        <div id="modal-form-detail" class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="blue bigger" id="title_form">Thông tin đơn hàng</h4>
+                    </div>
+                    <form id="submit_form" role="form" action="" method="post" enctype="multipart/form-data">
+
+                        <div class="modal-body">
+                            <div class="row">
+                                <h3 style="margin-right: 0px; margin-left: 0px;    font-size: 14px;"
+                                    class="row header smaller lighter orange">
+											<span class="col-sm-8">
+												<i class="ace-icon fa fa-shopping-cart"></i>
+												Thông tin booking
+											</span>
+                                </h3>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="profile-user-info profile-user-info-striped">
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Sales</div>
+                                            <div class="profile-info-value">
+                                                <span style="font-weight: bold; color:#478fca !important; "
+                                                      class="editable editable-click name_sales"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Tiề tệ</div>
+                                            <div class="profile-info-value">
+                                                <span class="editable editable-click tien_te"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Ngày bắt đầu</div>
+                                            <div class="profile-info-value">
+                                                <span class="editable editable-click ngay_bat_dau"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Hạn thanh toán</div>
+                                            <div class="profile-info-value">
+                                                <span class="editable editable-click han_thanh_toan"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Tình trạng</div>
+                                            <div class="profile-info-value">
+                                                <span class="editable editable-click tinh_trang"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Httt</div>
+                                            <div class="profile-info-value">
+                                                <span class="editable editable-click httt"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Số người</div>
+                                            <div class="profile-info-value">
+                                                <span class="editable editable-click so_nguoi"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Thuế VAT(10%)</div>
+                                            <div class="profile-info-value thue_vat">
+                                                <!--                                                <label>-->
+                                                <!--                                                    <input checked id="thue_vat" name="vat" class="ace ace-switch ace-switch-6 thue_vat" type="checkbox">-->
+                                                <!--                                                    <span class="lbl"></span>-->
+                                                <!--                                                </label>-->
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Ghi chú</div>
+                                            <div class="profile-info-value">
+                                                <span class="editable editable-click ghi_chu"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="space-6"></div>
+
+
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="profile-user-info profile-user-info-striped">
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Khách hàng</div>
+
+                                            <div class="profile-info-value">
+                                                <span style="font-weight: bold; color:#478fca !important; "
+                                                      class="editable editable-click name_khach_hang"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Email</div>
+
+                                            <div class="profile-info-value">
+                                                <span class="editable editable-click email_customer"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Địa chỉ</div>
+
+                                            <div class="profile-info-value">
+                                                <span class="editable editable-click address_customer"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Điện thoại</div>
+
+                                            <div class="profile-info-value">
+                                                <span class="editable editable-click phone_customer"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Fax</div>
+
+                                            <div class="profile-info-value">
+                                                <span class="editable editable-click fax_customer"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Nhóm kh</div>
+
+                                            <div class="profile-info-value">
+                                                <span class="editable editable-click nhom_kh"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Điểm đón</div>
+
+                                            <div class="profile-info-value">
+                                                <span class="editable editable-click diem_don"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Ngày khởi hành</div>
+
+                                            <div class="profile-info-value">
+                                                <span class="editable editable-click ngay_khoi_hanh"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Ngày kết thúc</div>
+
+                                            <div class="profile-info-value">
+                                                <span class="editable editable-click ngay_ket_thuc"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="space-6"></div>
+
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <h3 style="margin-right: 0px; margin-left: 0px;    font-size: 14px;"
+                                    class="row header smaller lighter blue">
+                                    <span class="col-sm-8">
+												<i class="ace-icon fa fa-plane blue bigger-125"></i>
+												Thông tin tour
+											</span>
+                                </h3>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="profile-user-info profile-user-info-striped">
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Tên tour</div>
+                                            <div class="profile-info-value">
+                                                <span style="font-weight: bold; color:#478fca !important; "
+                                                      class="editable editable-click name_tour"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Giá</div>
+                                            <div class="profile-info-value">
+                                                <span class="editable editable-click gia_nguoi_lon"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Giá 5-11</div>
+                                            <div class="profile-info-value">
+                                                <span class="editable editable-click gia_tre_em_511"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Giá 5</div>
+                                            <div class="profile-info-value">
+                                                <span class="editable editable-click gia_tre_em_5"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="space-6"></div>
+
+
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="profile-user-info profile-user-info-striped">
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Tổng cộng</div>
+
+                                            <div class="profile-info-value">
+                                                <span style="font-weight: bold; color:#478fca !important; "
+                                                      class="editable editable-click tong_cong"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Thuế VAT 10%</div>
+
+                                            <div class="profile-info-value">
+                                                <span class="editable editable-click vat_thanh_tien"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Đặt cọc</div>
+
+                                            <div class="profile-info-value">
+                                                <span class="editable editable-click dat_coc"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Còn lại</div>
+
+                                            <div class="profile-info-value">
+                                                <span style="font-weight: bold; color:#478fca !important; "
+                                                      class="editable editable-click con_lai"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="space-6"></div>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="modal-footer">
                             <button type="reset" class="btn btn-sm" data-dismiss="modal" id="reset_form_popup">
                                 <i class="ace-icon fa fa-times"></i>
                                 Cancel

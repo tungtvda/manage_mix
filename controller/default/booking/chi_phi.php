@@ -26,37 +26,63 @@ $_SESSION['link_redict']='http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']
 $action_link=str_replace('?id='.$id,'',$action_link);
 $action_link=str_replace('chi-phi','',$action_link);
 $action_link=str_replace('/','',$action_link);
-$data_dk_fill='booking_id = '.$id_pass;
+//$data_dk_fill='booking_id = '.$id_pass;
+$data_dk_fill='';
 $active_tab_left='booking_list';
 if($_SESSION['user_role']==0)
 {
     $data_dk_fill.=' and user_id='.$_SESSION['user_id'];
+//    $data_dk_fill_list.=' and user_id='.$_SESSION['user_id'];
 }
 
 switch($action_link){
     case 'booking-new':
         $data['title']='Danh sách đơn hàng mới';
         $active_tab_left='booking_new';
+        if($data_dk_fill!=''){
+            $data_dk_fill.=' and ';
+        }
+        $data_dk_fill.=' status=1';
         break;
     case 'booking-giao-dich':
         $data['title']='Danh sách đơn hàng đang giao dịch';
         $active_tab_left='booking_giao_dich';
+        if($data_dk_fill!=''){
+            $data_dk_fill.=' and ';
+        }
+        $data_dk_fill.=' status=2 ';
         break;
     case 'booking-tam-dung':
         $data['title']='Danh sách đơn hàng tạm dừng';
         $active_tab_left='booking_tam_dung';
+        if($data_dk_fill!=''){
+            $data_dk_fill.=' and ';
+        }
+        $data_dk_fill.=' status=3 ';
         break;
     case 'booking-no-tien':
         $data['title']='Danh sách đơn hàng còn nợ tiền';
         $active_tab_left='booking_no_tien';
+        if($data_dk_fill!=''){
+            $data_dk_fill.=' and ';
+        }
+        $data_dk_fill.=' status=4 ';
         break;
     case 'booking-ket-thuc':
         $data['title']='Danh sách đơn hàng kết thúc';
         $active_tab_left='booking_ket_thuc';
+        if($data_dk_fill!=''){
+            $data_dk_fill.=' and ';
+        }
+        $data_dk_fill.=' status=5 ';
         break;
     case 'booking-ban-nhap':
         $data['title']='Danh sách đơn hàng nháp';
         $active_tab_left='booking_ban_nhap';
+        if($data_dk_fill!=''){
+            $data_dk_fill.=' and ';
+        }
+        $data_dk_fill.=' status=6 ';
         break;
     default:
         $data['title']='Danh sách đặt tour';

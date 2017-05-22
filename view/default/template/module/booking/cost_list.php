@@ -382,7 +382,7 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="blue bigger" id="title_form">Thêm chi phí</h4>
                     </div>
-                    <form id="submit_form" role="form" action="" method="post" enctype="multipart/form-data">
+                    <form id="submit_form_cot" role="form" action="" method="post" enctype="multipart/form-data">
 
                         <div class="modal-body">
                             <div class="row">
@@ -391,26 +391,27 @@
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Tên chi phí <span style="color: red">*</span></div>
                                             <div class="profile-info-value">
-                                                <?php echo _returnInput('name', '', '', 'qrcode', '', 'Bạn vui lòng nhập tên chi phí','') ?>
+                                                <?php echo _returnInput('name_gia', '', '', 'qrcode', '', 'Bạn vui lòng nhập tên chi phí','') ?>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
-                                            <div class="profile-info-name"> Tiề tệ <span style="color: red">*</span></div>
+                                            <div class="profile-info-name"> Tiền thanh toán <span style="color: red">*</span></div>
                                             <div class="profile-info-value">
-                                                <?php echo _returnInput('price_cost', '', '', 'usd', '', 'Bạn vui lòng nhập chi phí','') ?>
+                                                <?php echo _returnInput('price_cost', '', '', 'usd', '', 'Bạn vui lòng nhập chi phí','','number') ?>
+                                                <label  style="display: none" class="  error-color-size" id="price_format_cost"></label>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Ngày thanh toán <span style="color: red">*</span></div>
                                             <div class="profile-info-value">
                                                 <div class="input-group" style="">
-                                                    <input value="" class="form-control date-picker width_100 " id="input_birthday" name="birthday" required type="text" data-date-format="dd-mm-yyyy">
+                                                    <input value="" class="form-control date-picker width_100 " id="input_created" name="created" required type="text" data-date-format="dd-mm-yyyy">
 																	<span   class="input-group-addon date_icon">
 																		<i class="fa fa-calendar bigger-110"></i>
 																	</span>
 
                                                 </div>
-                                                <label  style="display: none" class="error-color  error-color-size" id="error_birthday">Bạn vui lòng chọn ngày thanh toán</label>
+                                                <label  style="display: none" class="error-color  error-color-size" id="error_created">Bạn vui lòng chọn ngày thanh toán</label>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
@@ -428,7 +429,7 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button class="btn btn-sm btn-primary" id="submit_form_action" type="button">
+                            <button class="btn btn-sm btn-primary" id="submit_form_action_cot" type="button">
                                 <i class="ace-icon fa fa-check"></i>
                                 Save
                             </button>

@@ -606,7 +606,6 @@ jQuery(function ($) {
                     }
                 }
                 if (valid == false) {
-                    console.log(name_input);
                     element.addClass("input-error").removeClass("valid");
                     error.show();
                     error_free = false
@@ -752,7 +751,145 @@ jQuery(function ($) {
     //    checkSoNguoi();
     //});
     //$('i').ggtooltip();
+
+    $('body').on("click", '#submit_form_action_cot', function () {
+        var form_data = $("#submit_form_cot").serializeArray();
+        var error_free = true;
+        for (var input in form_data) {
+            var name_input=form_data[input]['name'];
+            if(name_input!='description'){
+                var element = $("#input_" + name_input);
+                var error = $("#error_" + name_input);
+                var valid = element.hasClass("valid");
+                if (valid == false) {
+                    element.addClass("input-error").removeClass("valid");
+                    error.show();
+                    error_free = false
+                }
+            }
+
+        }
+        if (error_free != false) {
+            $("#submit_form_cot").submit();
+        }
+    });
+    $('body').on("input", '#input_name_gia', function () {
+        checkNameGia();
+    });
+    $('body').on("input", '#input_price_cost', function () {
+        checkPriceCost();
+    });
+    $('body').on("change", '#input_created', function () {
+        checkNgayThanhToan();
+    });
+    $('body').on("input", '#input_created', function () {
+        checkNgayThanhToan();
+    });
 });
+// check name user
+function checkNgayThanhToan() {
+    var value = $("#input_created").val();
+    if (value == '') {
+        var mess = 'Bạn vui lòng nhập ngày thanh toán';
+        showHiddenNgayThanhToan(0, mess);
+    } else {
+        var mess = '';
+        showHiddenNgayThanhToan(1, mess);
+    }
+}
+function showHiddenNgayThanhToan(res, mess) {
+    var error_created = $("#error_created");
+    if (res == 1) {
+        error_created.hide();
+        $('#icon_error_created').hide();
+        $('#input_created').removeClass("input-error").addClass("valid");
+    }
+    else {
+        if (res != 0) {
+            mess = res;
+        }
+        $('#icon_error_created').show();
+        $('#input_created').addClass("input-error").removeClass("valid");
+        error_created.removeClass("success-color");
+        error_created.addClass("error-color");
+        error_created.html(mess);
+        error_created.show();
+    }
+}
+
+// check name user
+function checkPriceCost() {
+    var value = $("#input_price_cost").val();
+    if (value == '') {
+        var mess = 'Bạn vui lòng nhập chi phí';
+        showHiddenPriceCost(0, mess);
+        $("#input_price_cost").val();
+        $('#price_format_cost').hide().html('');
+    } else {
+        var mess = '';
+        showHiddenPriceCost(1, mess);
+        var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
+        if (numberRegex.test(value)) {
+            var price_format = value.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+            $('#price_format_cost').show().html(price_format);
+        }else{
+            $("#input_price_cost").val();
+            $('#price_format_cost').hide().html('');
+        }
+    }
+}
+function showHiddenPriceCost(res, mess) {
+    var error_price_cost = $("#error_price_cost");
+    if (res == 1) {
+        error_price_cost.hide();
+        $('#icon_error_price_cost').hide();
+        $('#input_price_cost').removeClass("input-error").addClass("valid");
+    }
+    else {
+        if (res != 0) {
+            mess = res;
+        }
+        $('#icon_error_price_cost').show();
+        $('#input_price_cost').addClass("input-error").removeClass("valid");
+        error_price_cost.removeClass("success-color");
+        error_price_cost.addClass("error-color");
+        error_price_cost.html(mess);
+        error_price_cost.show();
+    }
+}
+
+// check name user
+function checkNameGia() {
+    var value = $("#input_name_gia").val();
+    if (value == '') {
+        var mess = 'Bạn vui lòng nhập tên chi phí';
+        showHiddenNameGia(0, mess);
+    } else {
+        var mess = '';
+        showHiddenNameGia(1, mess);
+    }
+}
+function showHiddenNameGia(res, mess) {
+    var error_name_gia = $("#error_name_gia");
+    if (res == 1) {
+        error_name_gia.hide();
+        $('#icon_error_name_gia').hide();
+        $('#input_name_gia').removeClass("input-error").addClass("valid");
+    }
+    else {
+        if (res != 0) {
+            mess = res;
+        }
+        $('#icon_error_name_gia').show();
+        $('#input_name_gia').addClass("input-error").removeClass("valid");
+        error_name_gia.removeClass("success-color");
+        error_name_gia.addClass("error-color");
+        error_name_gia.html(mess);
+        error_name_gia.show();
+    }
+}
+
+
 function checkSoNguoi(){
 
     var price=$('#input_price_submit').val();

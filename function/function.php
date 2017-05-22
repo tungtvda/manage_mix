@@ -875,10 +875,10 @@ function _returnDataEditAdd($data, $field)
     }
 }
 
-function _returnInput($name, $value = '', $valid = '', $icon_input = '', $disabled = '', $mess_err = '', $width = '')
+function _returnInput($name, $value = '', $valid = '', $icon_input = '', $disabled = '', $mess_err = '', $width = '', $type='text')
 {
     return '  <span class="input-icon width_100" style="' . $width . '">
-                                                    <input ' . $disabled . ' name="' . $name . '" type="text" id="input_' . $name . '"
+                                                    <input ' . $disabled . ' name="' . $name . '" type="'.$type.'" id="input_' . $name . '"
                                                            value="' . $value . '"
                                                            class="width_100 ' . $valid . '" >
                                                     <i class="ace-icon fa fa-' . $icon_input . ' blue"></i>

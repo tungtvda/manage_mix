@@ -12,6 +12,8 @@ if(!defined('SITE_NAME'))
 require_once DIR.'/controller/default/public.php';
 $data=array();
 _returnCheckPermison(6,6);
+
+
 if(!isset($_GET['id'])){
     redict(_returnLinkDangNhap());
 }
@@ -105,7 +107,7 @@ if(isset($_POST['name_gia'])&&isset($_POST['price_cost'])&&isset($_POST['created
             $obj->name=$name_gia;
             $obj->price=$price_cost;
             $obj->description=$description;
-            $obj->created=$created;
+            $obj->created=date('Y-m-d', strtotime($created));
             $obj->created_by=$_SESSION['user_id'];
             booking_cost_insert($obj);
             redict(SITE_NAME . '/'.$action_link.'/chi-phi?id='.$id);
@@ -118,8 +120,7 @@ $data['dk_find'] =$data_dk_fill;
 $url_bread='<li class="active">Booking</li>';
 $data['breadcrumbs']=$url_bread;
 $data['action_link']=$action_link;
-$count=11;
-
+$count=5;
 
 $data['list']=booking_cost_getByTop('',$data_dk_list,'updated desc');
 $data['module_valid'] = "booking";

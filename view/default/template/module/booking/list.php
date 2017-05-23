@@ -158,7 +158,8 @@
                                             </select>
                                         </td>
                                         <td><?php echo number_format((int)$row->total_price, 0, ",", ".") . ' vnđ'; ?></td>
-                                        <td><?php
+                                        <td>
+                                            <?php
                                             if ($row->tien_thanh_toan != '') {
                                                 echo number_format((int)$row->tien_thanh_toan, 0, ",", ".") . ' vnđ';
                                             }

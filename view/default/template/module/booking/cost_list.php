@@ -9,7 +9,7 @@
 <div class="page-header">
 
     <h1>
-       Danh sách chi phí cho đơn hàng "<?php echo $code_booking?>"
+        Danh sách chi phí cho đơn hàng "<?php echo $code_booking ?>"
     </h1>
 
 </div><!-- /.page-header -->
@@ -20,15 +20,16 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="clearfix">
                     <div class="col-md-6 col-sm-6 col-xs-12 pink" style="padding-left: 0px">
-                        <?php if (_returnCheckAction(21) == 1) { ?>
-                            <a href="#modal-form-detail" role="button" data-toggle="modal"  name_record="#4572" table="booking" countid="<?php echo $id_booking?>"
+                        <?php if (_returnCheckAction(20) == 1) { ?>
+                            <a href="#modal-form-detail" role="button" data-toggle="modal" name_record="#4572"
+                               table="booking" countid="<?php echo $id_booking ?>"
                                class="green btn btn-white btn-create btn-hover-white view_popup_detail">
                                 <i class="ace-icon fa fa-eye bigger-120 "></i>
                                 Chi tiết đơn hàng
                                 <i class="ace-icon fa fa-external-link"></i>
                             </a>
                         <?php } ?>
-                        <?php if (_returnCheckAction(21) == 1) { ?>
+                        <?php if ($add_action == 1) { ?>
                             <a href="#modal-form" role="button" data-toggle="modal" id="create_popup"
                                class="green btn btn-white btn-create btn-hover-white">
                                 <i class="ace-icon fa fa-plus bigger-120 "></i>
@@ -48,21 +49,15 @@
                             </button>
 
                             <ul class="dropdown-menu dropdown-danger">
-                                <?php if (_returnCheckAction(22) == 1) { ?>
+                                <?php if ($edit_action == 1) { ?>
                                     <li>
                                         <a href="#modal-form" role="button" data-toggle="modal" class="edit_function">Sửa</a>
                                     </li>
                                 <?php } ?>
-                                <!--                                --><?php //if (_returnCheckAction(23) == 1) { ?>
-                                <!--                                    <li>-->
-                                <!--                                        <a class="delete_function"-->
-                                <!--                                           href="javascript:void()">Xóa</a>-->
-                                <!--                                    </li>-->
-                                <!--                                --><?php //} ?>
-                                <li class="divider"></li>
-                                <?php if (_returnCheckAction(21) == 1) { ?>
+                                <?php if ($delete_action == 1) { ?>
                                     <li>
-                                        <a href="<?php echo SITE_NAME.'/'.$action_link ?>/dat-tour">Đặt tour</a>
+                                        <a class="delete_function"
+                                           href="javascript:void()">Xóa</a>
                                     </li>
                                 <?php } ?>
                             </ul>
@@ -97,8 +92,6 @@
                                 <th>Tên chi phí</th>
                                 <th>Tiền</th>
                                 <th>Thời gian</th>
-                                <th>Mô tả</th>
-                                <th>Sales</th>
                                 <th>Người tạo</th>
                                 <th>Action</th>
 
@@ -106,14 +99,16 @@
                             </thead>
 
                             <tbody>
-                            <?php if (count($list) > 0 && _returnCheckAction(20) == 1) { ?>
+                            <?php if (count($list) > 0 && $list_action == 1) { ?>
                                 <?php $dem = 1; ?>
+
+
                                 <?php foreach ($list as $row) { ?>
                                     <tr class="row_<?php echo $row->id ?>">
                                         <td class="center">
                                             <label class="pos-rel">
                                                 <input type="checkbox" class="ace click_check_list"
-                                                       name_record="<?php echo $row->code_booking ?>"
+                                                       name_record="<?php echo $row->name ?>"
                                                        id="check_<?php echo $dem ?>" name="check_box_action[]"
                                                        value="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"/>
                                                 <span class="lbl"></span>
@@ -123,63 +118,25 @@
                                             <?php echo $dem; ?>
                                         </td>
                                         <td>
-                                            <a href="<?php echo SITE_NAME.'/'.$action_link ?>/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"><?php echo $row->code_booking ?></a>
+                                            <a href="javascript:void(0)"><?php echo $row->name ?></a>
                                         </td>
                                         <td style="text-align: center">
-                                            <a href="<?php echo SITE_NAME.'/'.$action_link ?>/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"><?php echo $row->name_tour ?></a>
+                                            <?php
+                                            if ($row->price != '') {
+                                                echo number_format((int)$row->price, 0, ",", ".") . ' vnđ';
+                                            }
+                                            ?>
                                         </td>
-                                        <td><?php
-                                            $data_customer = customer_getById($row->id_customer);
-                                            if (count($data_customer) > 0) {
-                                                echo '<a href="' . SITE_NAME . '/khach-hang/sua?id=' . _return_mc_encrypt($data_customer[0]->id, ENCRYPTION_KEY) . '">' . $data_customer[0]->name . '</a>';
+                                        <td style="text-align: center">
+                                            <?php
+                                            if ($row->created != '') {
+                                                echo date('d-m-Y', strtotime($row->created));
                                             }
                                             ?>
                                         </td>
                                         <td>
-                                            <input id="status_old_<?php echo $row->id ?>"
-                                                   value="<?php echo $row->status ?>" hidden>
-                                            <label style="display: none"><?php echo $row->status ?></label>
                                             <?php
-                                            $disabled = 'disabled';
-                                            if ($row->confirm_admin == 1 || $_SESSION['user_role'] == 1) {
-                                                $disabled = '';
-                                            }
-                                            ?>
-                                            <select <?php echo $disabled ?> id="status_<?php echo $row->id ?>"
-                                                                            class="select_status"
-                                                                            count_id="<?php echo $row->id ?>"
-                                                                            code="<?php echo $row->code_booking ?>">
-                                                <?php
-                                                foreach ($data_list_status as $row_status) {
-                                                    $select = '';
-                                                    if ($row->status == $row_status->id) {
-                                                        $select = 'selected';
-                                                    }
-                                                    echo "<option $select value='$row_status->id'>$row_status->name</option>";
-
-                                                }
-                                                ?>
-                                            </select>
-                                        </td>
-                                        <td><?php echo number_format((int)$row->total_price, 0, ",", ".") . ' vnđ'; ?></td>
-                                        <td><?php
-                                            if ($row->tien_thanh_toan != '') {
-                                                echo number_format((int)$row->tien_thanh_toan, 0, ",", ".") . ' vnđ';
-                                            }
-                                            ?>
-                                        </td>
-                                        <td><?php
-                                            $thanhtoan = 0;
-                                            if ($row->tien_thanh_toan != '') {
-                                                $thanhtoan = $row->tien_thanh_toan;
-                                            }
-                                            $con_lai = $row->total_price - $row->tien_thanh_toan;
-                                            echo number_format((int)$con_lai, 0, ",", ".") . ' vnđ';
-                                            ?>
-                                        </td>
-                                        <td>
-                                            <?php
-                                            $data_sales = user_getById($row->user_id);
+                                            $data_sales = user_getById($row->created_by);
                                             if (count($data_sales) > 0) {
                                                 echo '<a href="' . SITE_NAME . '/nhan-vien/sua?id=' . _return_mc_encrypt($data_sales[0]->id, ENCRYPTION_KEY) . '">' . $data_sales[0]->name . '</a>';
                                             }
@@ -187,76 +144,22 @@
 
                                         </td>
                                         <td>
-                                            <?php
-                                            $data_created_by = user_getById($row->created_by);
-                                            if (count($data_created_by) > 0) {
-                                                echo '<a href="' . SITE_NAME . '/nhan-vien/sua?id=' . _return_mc_encrypt($data_created_by[0]->id, ENCRYPTION_KEY) . '">' . $data_created_by[0]->name . '</a>';
-                                            }
-                                            ?>
-                                        </td>
-                                        <td>
-                                            <span hidden><?php echo (int)$row->confirm_admin ?></span>
-                                            <?php if ($row->confirm_admin > 0) { ?>
-                                                <?php
-                                                $data_user_confirm=user_getById($row->confirm_admin);
-                                                $name_user_confirm='';
-                                                if(count($data_user_confirm)>0){
-                                                    $name_user_confirm=$data_user_confirm[0]->name;
-                                                }
-                                                ?>
-                                                <label title="<?php echo $name_user_confirm ?>">
-                                                    <input disabled checked name="switch-field-1" class="ace ace-switch ace-switch-3" type="checkbox">
-                                                    <span class="lbl"></span>
-                                                </label>
-                                            <?php } else { ?>
-                                                <label title="Chưa được xác nhận">
-                                                    <input  name="switch-field-1"
-                                                            class="ace ace-switch ace-switch-3 <?php if($_SESSION['user_role']==1){?> confirm_booking_list<?php }?>"
-                                                            <?php if($_SESSION['user_role']==1){?>
-                                                            count_id="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY)  ?>"
-                                                                id_filed="<?php echo $row->id  ?>"
-                                                            code="<?php echo $row->code_booking ?>"
-                                                                id="confirm_booking_<?php echo $row->id ?>"
-                                                            <?php }?>
-                                                            type="checkbox">
-
-                                                    <span class="lbl"></span>
-                                                </label>
-
-                                            <?php } ?>
-                                        </td>
-                                        <!--                                        <td>-->
-                                        <?php //echo _returnDateFormatConvert($row->created) ?><!--</td>-->
-
-                                        <td>
                                             <div class="hidden-sm hidden-xs action-buttons">
-
-                                                <?php if (_returnCheckAction(18) == 1) { ?>
-                                                    <a title="Danh sách chi phí" class="red"
-                                                       href="<?php echo SITE_NAME.'/'.$action_link ?>/chi-phi?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
-                                                        <i class="ace-icon fa fa-usd bigger-130"></i>
-                                                    </a>
-                                                <?php } ?>
-                                                <?php if (_returnCheckAction(18) == 1) { ?>
+                                                <?php if ($edit_action == 1) { ?>
                                                     <a class="blue view_popup_detail" role="button"
-                                                       name_record="<?php echo $row->code_booking ?>"
-                                                       data-toggle="modal" table="booking"
+                                                       name_record="<?php echo $row->name ?>"
+                                                       data-toggle="modal" table="booking_cost"
                                                        countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
                                                        href="#modal-form"
                                                        title="Chi tiết">
-                                                        <i class="ace-icon fa fa-eye-slash bigger-130"></i>
-                                                    </a>
-
-                                                    <a title="Sửa tab mới" class="green"
-                                                       href="<?php echo SITE_NAME.'/'.$action_link ?>/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
                                                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                                                     </a>
                                                 <?php } ?>
-                                                <?php if ($_SESSION['user_role'] == 1) { ?>
+                                                <?php if ($delete_action == 1) { ?>
                                                     <a title="Xóa" class="red delete_record" href="javascript:void(0)"
                                                        deleteid="<?php echo $row->id ?>"
-                                                       name_record_delete="<?php echo $row->code_booking ?>"
-                                                       url_delete="<?php echo SITE_NAME.'/'.$action_link ?>/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
+                                                       name_record_delete="<?php echo $row->name ?>"
+                                                       url_delete="<?php echo SITE_NAME . '/chi-phi' ?>/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
                                                         <i class="ace-icon fa fa-trash-o bigger-130"></i>
                                                     </a>
                                                 <?php } ?>
@@ -270,46 +173,24 @@
                                                     </button>
 
                                                     <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-
-                                                        <?php if (_returnCheckAction(18) == 1) { ?>
-                                                            <li  class="red">
-                                                                <a href="<?php echo SITE_NAME.'/'.$action_link ?>/chi-phi?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
-                                                                   class="tooltip-success" data-rel="tooltip"
-                                                                   title="Danh sách chi phí">
-																				<span class="">
-																					<i class="ace-icon fa fa-usd bigger-120"></i>
-																				</span>
-                                                                </a>
-                                                            </li>
-                                                        <?php } ?>
-                                                        <?php if (_returnCheckAction(20) == 1) { ?>
+                                                        <?php if ($edit_action == 1) { ?>
                                                             <li>
                                                                 <a class="blue view_popup_detail" role="button"
-                                                                   name_record="<?php echo $row->code_booking ?>"
-                                                                   data-toggle="modal" table="booking"
+                                                                   name_record="<?php echo $row->name ?>"
+                                                                   data-toggle="modal" table="booking_cost"
                                                                    countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
                                                                    href="#modal-form"
                                                                    title="Chi tiết">
                                                                     <i class="ace-icon fa fa-eye-slash bigger-130"></i>
                                                                 </a>
                                                             </li>
-
-                                                            <li>
-                                                                <a href="<?php echo SITE_NAME.'/'.$action_link ?>/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
-                                                                   class="tooltip-success" data-rel="tooltip"
-                                                                   title="Sửa tab mới">
-																				<span class="">
-																					<i class="ace-icon fa fa-pencil bigger-120"></i>
-																				</span>
-                                                                </a>
-                                                            </li>
                                                         <?php } ?>
-                                                        <?php if ($_SESSION['user_role'] == 1) { ?>
+                                                        <?php if ($delete_action == 1) { ?>
                                                             <li>
                                                                 <a href="javascript:void(0)"
                                                                    deleteid="<?php echo $row->id ?>"
-                                                                   name_record_delete="<?php echo $row->code_booking ?>"
-                                                                   url_delete="<?php echo SITE_NAME.'/'.$action_link ?>/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                                   name_record_delete="<?php echo $row->name ?>"
+                                                                   url_delete="<?php echo SITE_NAME . '/' . $action_link ?>/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
                                                                    class="tooltip-error delete_record" title="Xóa">
 																				<span class="red">
 																					<i class="ace-icon fa fa-trash-o bigger-120"></i>
@@ -340,21 +221,15 @@
                     </button>
 
                     <ul class="dropdown-menu dropdown-danger">
-                        <?php if (_returnCheckAction(22) == 1) { ?>
+                        <?php if ($edit_action == 1) { ?>
                             <li>
                                 <a href="#modal-form" role="button" data-toggle="modal" class="edit_function">Sửa</a>
                             </li>
                         <?php } ?>
-                        <?php if (_returnCheckAction(23) == 1) { ?>
+                        <?php if ($delete_action == 1) { ?>
                             <li>
                                 <a class="delete_function"
                                    href="javascript:void()">Xóa</a>
-                            </li>
-                        <?php } ?>
-                        <li class="divider"></li>
-                        <?php if (_returnCheckAction(21) == 1) { ?>
-                            <li>
-                                <a href="<?php echo SITE_NAME.'/'.$action_link ?>/them-moi">Đặt tour</a>
                             </li>
                         <?php } ?>
                     </ul>
@@ -389,35 +264,42 @@
                                 <div class="col-xs-12 col-sm-12">
                                     <div class="profile-user-info profile-user-info-striped">
                                         <div class="profile-info-row">
-                                            <div class="profile-info-name"> Tên chi phí <span style="color: red">*</span></div>
+                                            <div class="profile-info-name"> Tên chi phí <span
+                                                    style="color: red">*</span></div>
                                             <div class="profile-info-value">
-                                                <?php echo _returnInput('name_gia', '', '', 'qrcode', '', 'Bạn vui lòng nhập tên chi phí','') ?>
+                                                <?php echo _returnInput('name_gia', '', '', 'qrcode', '', 'Bạn vui lòng nhập tên chi phí', '') ?>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
-                                            <div class="profile-info-name"> Tiền thanh toán <span style="color: red">*</span></div>
+                                            <div class="profile-info-name"> Tiền thanh toán <span
+                                                    style="color: red">*</span></div>
                                             <div class="profile-info-value">
-                                                <?php echo _returnInput('price_cost', '', '', 'usd', '', 'Bạn vui lòng nhập chi phí','','number') ?>
-                                                <label  style="display: none" class="  error-color-size" id="price_format_cost"></label>
+                                                <?php echo _returnInput('price_cost', '', '', 'usd', '', 'Bạn vui lòng nhập chi phí', '', 'number') ?>
+                                                <label style="display: none" class="  error-color-size"
+                                                       id="price_format_cost"></label>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
-                                            <div class="profile-info-name"> Ngày thanh toán <span style="color: red">*</span></div>
+                                            <div class="profile-info-name"> Ngày thanh toán <span
+                                                    style="color: red">*</span></div>
                                             <div class="profile-info-value">
                                                 <div class="input-group" style="">
-                                                    <input value="" class="form-control date-picker width_100 " id="input_created" name="created" required type="text" data-date-format="dd-mm-yyyy">
-																	<span   class="input-group-addon date_icon">
+                                                    <input value="" class="form-control date-picker width_100 "
+                                                           id="input_created" name="created" required type="text"
+                                                           data-date-format="dd-mm-yyyy">
+																	<span class="input-group-addon date_icon">
 																		<i class="fa fa-calendar bigger-110"></i>
 																	</span>
 
                                                 </div>
-                                                <label  style="display: none" class="error-color  error-color-size" id="error_created">Bạn vui lòng chọn ngày thanh toán</label>
+                                                <label style="display: none" class="error-color  error-color-size"
+                                                       id="error_created">Bạn vui lòng chọn ngày thanh toán</label>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Mô tả</div>
                                             <div class="profile-info-value">
-                                                <textarea style="width: 100%" name="description"  rows="8"></textarea>
+                                                <textarea style="width: 100%" name="description" rows="8"></textarea>
                                             </div>
                                         </div>
                                     </div>

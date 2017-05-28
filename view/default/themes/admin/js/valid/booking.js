@@ -785,7 +785,83 @@ jQuery(function ($) {
     $('body').on("input", '#input_created', function () {
         checkNgayThanhToan();
     });
+    $('body').on("click", '#create_popup_cost', function () {
+       $('#input_name_gia').val('');
+       $('#input_price_cost').val('');
+       $('#input_created').val('');
+       $('#description_input').val('');
+       $('#price_format_cost').hide().html('');
+        $('#title_form').html('Thêm chi phí');
+        $('.error-color').hide();
+    });
+    $('body').on("click",'.view_popup_detail_cost', function () {
+        var Id = $(this).attr("countid");
+        var code = $(this).attr("name_record");
+        show_info_cost(Id,code);
+    });
 });
+function show_info_cost(Id,name){
+    $( "#title_form" ).html('Thôn tin chi tiết "<b>'+name+'</b>"');
+    $( "#input_check_edit" ).val('edit');
+    if(Id!=''){
+        jQuery.post(url+"/get-detail-ajax/",
+            {
+                id: Id,
+                table:'booking_cost'
+            }
+            )
+            .done(function (data) {
+                if(data!=0)
+                {
+                    var obj = jQuery.parseJSON(data);
+                    $('#input_id_edit').val(Id);
+                    $('#input_name_gia').val(obj.name);
+                    $('#input_price_cost').val(obj.price);
+                    $('#input_created').val(obj.created);
+                    $('#description_input').val(obj.description);
+                    if(obj.price!=''){
+                        var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
+                        if (numberRegex.test(obj.price)) {
+                            var price_format = obj.price.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                            $('#price_format_cost').show().html(price_format);
+                        }
+                    }else{
+                        $('#price_format_cost').hide().html('');
+                    }
+                    if(obj.name!=''){
+                        $('#input_name_gia').removeClass("input-error").addClass("valid");
+                    }
+                    if(obj.name!=''){
+                        $('#input_price_cost').removeClass("input-error").addClass("valid");
+                    }
+                    if(obj.name!=''){
+                        $('#input_created').removeClass("input-error").addClass("valid");
+                    }
+                }else{
+                    lnv.alert({
+                        title: 'Lỗi',
+                        content: 'Ban không thể xem chi tiết chi phí"'+name+'"',
+                        alertBtnText: 'Ok',
+                        iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                        alertHandler: function () {
+                            $('#modal-form').modal('hide');
+                        }
+                    });
+                }
+            });
+    }
+    else{
+        lnv.alert({
+            title: 'Lỗi',
+            content: 'Ban không thể xem chi tiết chi phí "'+name+'"',
+            alertBtnText: 'Ok',
+            iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+            alertHandler: function () {
+                $('#modal-form').modal('hide');
+            }
+        });
+    }
+}
 // check name user
 function checkNgayThanhToan() {
     var value = $("#input_created").val();

@@ -30,7 +30,7 @@
                             </a>
                         <?php } ?>
                         <?php if ($add_action == 1) { ?>
-                            <a href="#modal-form" role="button" data-toggle="modal" id="create_popup"
+                            <a href="#modal-form" role="button" data-toggle="modal" id="create_popup_cost"
                                class="green btn btn-white btn-create btn-hover-white">
                                 <i class="ace-icon fa fa-plus bigger-120 "></i>
                                 Tạo chi phí
@@ -146,7 +146,7 @@
                                         <td>
                                             <div class="hidden-sm hidden-xs action-buttons">
                                                 <?php if ($edit_action == 1) { ?>
-                                                    <a class="blue view_popup_detail" role="button"
+                                                    <a class="blue view_popup_detail_cost" role="button"
                                                        name_record="<?php echo $row->name ?>"
                                                        data-toggle="modal" table="booking_cost"
                                                        countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
@@ -159,7 +159,8 @@
                                                     <a title="Xóa" class="red delete_record" href="javascript:void(0)"
                                                        deleteid="<?php echo $row->id ?>"
                                                        name_record_delete="<?php echo $row->name ?>"
-                                                       url_delete="<?php echo SITE_NAME . '/chi-phi' ?>/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
+                                                       url_delete="<?php echo SITE_NAME . '/' . $action_link ?>/xoa-chi-phi?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>&booking_id=<?php echo _return_mc_encrypt($row->booking_id, ENCRYPTION_KEY); ?>"
+                                                    >
                                                         <i class="ace-icon fa fa-trash-o bigger-130"></i>
                                                     </a>
                                                 <?php } ?>
@@ -175,7 +176,7 @@
                                                     <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
                                                         <?php if ($edit_action == 1) { ?>
                                                             <li>
-                                                                <a class="blue view_popup_detail" role="button"
+                                                                <a class="blue view_popup_detail_cost" role="button"
                                                                    name_record="<?php echo $row->name ?>"
                                                                    data-toggle="modal" table="booking_cost"
                                                                    countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
@@ -190,7 +191,7 @@
                                                                 <a href="javascript:void(0)"
                                                                    deleteid="<?php echo $row->id ?>"
                                                                    name_record_delete="<?php echo $row->name ?>"
-                                                                   url_delete="<?php echo SITE_NAME . '/' . $action_link ?>/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                                   url_delete="<?php echo SITE_NAME . '/' . $action_link ?>/xoa-chi-phi?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>&booking_id=<?php echo _return_mc_encrypt($row->booking_id, ENCRYPTION_KEY); ?>"
                                                                    class="tooltip-error delete_record" title="Xóa">
 																				<span class="red">
 																					<i class="ace-icon fa fa-trash-o bigger-120"></i>
@@ -262,6 +263,8 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12">
+                                    <input class="valid" hidden name="check_edit" id="input_check_edit" value="">
+                                    <input class="valid" hidden name="id_edit" id="input_id_edit" value="">
                                     <div class="profile-user-info profile-user-info-striped">
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Tên chi phí <span
@@ -299,7 +302,7 @@
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Mô tả</div>
                                             <div class="profile-info-value">
-                                                <textarea style="width: 100%" name="description" rows="8"></textarea>
+                                                <textarea id="description_input" style="width: 100%" name="description" rows="8"></textarea>
                                             </div>
                                         </div>
                                     </div>

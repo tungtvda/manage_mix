@@ -80,6 +80,9 @@ if (isset($_POST['id']) && isset($_POST['table'])) {
                         $data_check[0]->customer=$string_cus;
                     }
                     break;
+                case 'booking_cost':
+                    $data_check[0]->created=date('d-m-Y', strtotime($data_check[0]->created));
+                    break;
             }
           echo $data=json_encode($data_check[0]);
         } else {

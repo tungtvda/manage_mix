@@ -49,11 +49,11 @@
                             </button>
 
                             <ul class="dropdown-menu dropdown-danger">
-                                <?php if ($edit_action == 1) { ?>
-                                    <li>
-                                        <a href="#modal-form" role="button" data-toggle="modal" class="edit_function">Sửa</a>
-                                    </li>
-                                <?php } ?>
+<!--                                --><?php //if ($edit_action == 1) { ?>
+<!--                                    <li>-->
+<!--                                        <a href="#modal-form" role="button" data-toggle="modal" class="edit_function">Sửa</a>-->
+<!--                                    </li>-->
+<!--                                --><?php //} ?>
                                 <?php if ($delete_action == 1) { ?>
                                     <li>
                                         <a class="delete_function"
@@ -222,11 +222,11 @@
                     </button>
 
                     <ul class="dropdown-menu dropdown-danger">
-                        <?php if ($edit_action == 1) { ?>
-                            <li>
-                                <a href="#modal-form" role="button" data-toggle="modal" class="edit_function">Sửa</a>
-                            </li>
-                        <?php } ?>
+<!--                        --><?php //if ($edit_action == 1) { ?>
+<!--                            <li>-->
+<!--                                <a href="#modal-form" role="button" data-toggle="modal" class="edit_function">Sửa</a>-->
+<!--                            </li>-->
+<!--                        --><?php //} ?>
                         <?php if ($delete_action == 1) { ?>
                             <li>
                                 <a class="delete_function"

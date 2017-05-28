@@ -128,6 +128,9 @@ if (isset($_POST['name_gia']) && isset($_POST['price_cost']) && isset($_POST['cr
         echo '<script>alert("Bạn vui lòng điền đầy đủ thông tin")</script>';
     }
 }
+
+_deleteSubmitForm('booking_cost', 'booking_cost_delete',6,6,35);
+
 $data['dk_find'] = $data_dk_fill;
 $url_bread = '<li class="active">Booking</li>';
 $data['breadcrumbs'] = $url_bread;

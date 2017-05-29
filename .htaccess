@@ -109,3 +109,5 @@ RewriteRule ^chuc-mung-sinh-nhat/sua  controller/default/email_marketing/themmoi
 RewriteRule ^chuc-mung-sinh-nhat/xoa  controller/default/email_marketing/delete.php
 RewriteRule ^cronjob-send-sms$ controller/default/email_marketing/cronjob_send_sms.php
 
+RewriteRule ^doanh-thu-don-hang/$ controller/default/thongke/doanh_thu_don_hang.php
+

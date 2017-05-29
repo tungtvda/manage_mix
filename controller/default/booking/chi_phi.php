@@ -106,6 +106,7 @@ if (isset($_POST['name_gia']) && isset($_POST['price_cost']) && isset($_POST['cr
                 $obj->name = $name_gia;
                 $obj->price = $price_cost;
                 $obj->description = $description;
+                $obj->created = date('Y-m-d', strtotime($created));
                 $obj->updated = _returnGetDateTime();
                 booking_cost_update($obj);
                 _insertLog($_SESSION['user_id'],6,6,33,_return_mc_decrypt(_returnPostParamSecurity('id_edit'), ENCRYPTION_KEY),'','',$_SESSION['user_name'].' đã sửa chi phí "'.$name_gia.'"');

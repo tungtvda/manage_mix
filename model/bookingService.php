@@ -90,3 +90,23 @@ function booking_count($where)
     }
    else return false;
 }
+function booking_thongke_doanh_thu($where){
+    $query="select bk.*, cs.name as name_customer ,";
+    $query.=" (select sum(price) from booking_cost where booking_id=bk.id) as total_cost";
+    $query.=" FROM booking bk ";
+    $query.=" LEFT JOIN customer cs on bk.id_customer = cs.id";
+    if($where!=''){
+        $query.=' where '.$where;
+    }
+    echo $query.=" ORDER BY id desc";
+    exit;
+    $result=mysqli_query(ConnectSql(),$query);
+    $array_result=array();
+    if($result!=false)while($row=mysqli_fetch_array($result))
+    {
+        array_push($array_result,$row);
+    }
+    print_r($array_result);
+    exit;
+//    return booking_Get($query);
+}

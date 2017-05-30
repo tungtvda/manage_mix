@@ -20,16 +20,27 @@
             <div class="col-xs-12">
                 <div class="clearfix">
                     <div class="col-md-6 col-sm-6 col-xs-12 pink" style="padding-left: 0px">
-                        <label>Chọn ngày thống kê</label>
-                        <div class="input-daterange input-group">
-                            <input type="text" class="input-sm form-control" name="start">
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <label>Chọn ngày thống kê</label>
+                            <div class="input-daterange input-group">
+                                <input type="text" value="30/05/2017" class="input-sm form-control" name="start">
 																	<span class="input-group-addon">
 																		<i class="fa fa-exchange"></i>
 																	</span>
 
-                            <input type="text" class="input-sm form-control" name="end">
+                                <input type="text" class="input-sm form-control" name="end">
 
+                            </div>
                         </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <label>Chọn trạng thái đơn hàng</label>
+                            <div class="form-group">
+                                <?php echo _returnInputSelect('status', '', $trang_thai_don_hang, 'valid', 'Trạng thái ...') ?>
+                                <label style="display: none" class="error-color  error-color-size"
+                                       id="error_status">Bạn vui lòng chọn trạng thái đơn hàng</label>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-12 " style="padding-left: 0px">
                         <div class="pull-right tableTools-container"></div>
@@ -56,14 +67,14 @@
                                 </label>
                             </th>
                             <th>#</th>
-                            <th>Họ tên</th>
-                            <th>Avatar</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Mobile</th>
-                            <th>Skype</th>
-                            <th>Address</th>
-                            <th>Status</th>
+                            <th>Mã đơn hàng</th>
+                            <th>Tour</th>
+                            <th>Khách hàng</th>
+                            <th>Đơn giá</th>
+                            <th>Số người</th>
+                            <th>Tổng tiền</th>
+                            <th>Chi phí</th>
+                            <th></th>
 
                             <th>Action</th>
 
@@ -373,7 +384,7 @@
                 </div>
             </div>
         </div><!-- PAGE CONTENT ENDS -->
-        
+
 
     </div><!-- /.col -->
 

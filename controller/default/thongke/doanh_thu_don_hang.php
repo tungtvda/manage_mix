@@ -17,16 +17,18 @@ $url_bread='<li class="active">Thống kê</li>';
 $data['breadcrumbs']=$url_bread;
 $data['title']='Doanh thu đơn hàng';
 $count=9;
-$data_dk_fill='';
+$data_dk_fill=' bk.id>0 ';
 if($_SESSION['user_role']==0)
 {
-    $data['dk_find'] = "created_by=".$_SESSION['user_id'];
-    $data_dk_fill='created_by='.$_SESSION['user_id'];
+    $data_dk_fill='bk.created_by='.$_SESSION['user_id'];
 }
-
+//$data['list']=booking_thongke_doanh_thu($data_dk_fill);
+//print_r($data['list']);
+//exit;
 $data['list']=customer_getByTop('',$data_dk_fill,'updated desc');
 $data['module_valid'] = "thong-ke";
 $data['title_print'] = "Doanh thu đơn hàng";
+$data['trang_thai_don_hang']=trang_thai_don_hang_getByTop('','','position desc');
 show_header($data);
 show_left($data,'thong-ke','doanh_thu_don_hang');
 show_breadcrumb($data);

@@ -11,11 +11,12 @@
     <h1>
         Thống kê doanh thu đơn hàng
     </h1>
-<style>
-    .input-daterange .input-sm{
-        height: 34px!important;
-    }
-</style>
+    <style>
+        .input-daterange .input-sm {
+            height: 34px;
+        }
+    </style>
+
 </div><!-- /.page-header -->
 <div class="row">
     <div class="col-xs-12">
@@ -26,14 +27,14 @@
                     <div class="clearfix">
                         <div class="col-md-6 col-sm-6 col-xs-12 pink" style="padding-left: 0px">
                             <div class="col-md-6 col-sm-12 col-xs-12">
-                                <label>Chọn ngày thống kê</label>
+                                <label>Ngày thống kê</label>
                                 <div class="input-daterange input-group">
-                                    <input type="text" value="30-05-2017" class="input-sm form-control" name="start">
+                                    <input type="text" value="<?php echo $start?>" class="input-sm form-control" name="start">
 																	<span class="input-group-addon">
 																		<i class="fa fa-exchange"></i>
 																	</span>
 
-                                    <input type="text" class="input-sm form-control" name="end">
+                                    <input type="text" value="<?php echo $end?>" class="input-sm form-control" name="end">
 
                                 </div>
                             </div>
@@ -41,17 +42,18 @@
                                 <label>Trạng thái đơn hàng</label>
                                 <div class="form-group">
                                     <?php echo _returnInputSelect('status', '', $trang_thai_don_hang, 'valid', 'Trạng thái ...') ?>
-                                    <label style="display: none" class="error-color  error-color-size"
-                                           id="error_status">Bạn vui lòng chọn trạng thái đơn hàng</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-12 col-xs-12">
+                                <label>&nbsp;</label>
+                                <div class="form-group">
+                                    <button type="submit"
+                                            class="btn btn-white  btn-create-new-tab btn-create-new-tab-hover">
+                                        Thống kê
+                                    </button>
                                 </div>
                             </div>
 
-                            <div class="col-md-2 col-sm-12 col-xs-12">
-                                <label>&nbsp;</label>
-                                <button type="submit" class="green btn btn-white btn-create btn-hover-white">
-                                    Thống kê
-                                </button>
-                            </div>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-12 " style="padding-left: 0px">
                             <div class="pull-right tableTools-container"></div>
@@ -68,9 +70,16 @@
                     <!-- div.dataTables_borderWrap -->
                     <div>
                         <form action="" method="post" id="form_submit_delete">
-                            <table id="dynamic-table" class="table table-striped table-bordered table-hover table-responsive">
+                            <table id="dynamic-table"
+                                   class="table table-striped table-bordered table-hover table-responsive">
                                 <thead>
                                 <tr>
+                                    <th class="center">
+                                        <label class="pos-rel">
+                                            <input type="checkbox" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </th>
                                     <th>#</th>
                                     <th>Mã đơn hàng</th>
                                     <th>Tour</th>
@@ -90,10 +99,12 @@
                                 <?php if (count($list) > 0 && _returnCheckAction(16) == 1) { ?>
                                     <?php $dem = 1; ?>
                                     <?php foreach ($list as $row) { ?>
-                                        <tr class="row_<?php echo $row->id?>">
+                                        <tr class="row_<?php echo $row->id ?>">
                                             <td class="center">
                                                 <label class="pos-rel">
-                                                    <input type="checkbox" class="ace click_check_list" name_record="<?php echo $row->name ?>" id="check_<?php echo $dem ?>" name="check_box_action[]"
+                                                    <input type="checkbox" class="ace click_check_list"
+                                                           name_record="<?php echo $row->name ?>"
+                                                           id="check_<?php echo $dem ?>" name="check_box_action[]"
                                                            value="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"/>
                                                     <span class="lbl"></span>
                                                 </label>
@@ -102,7 +113,7 @@
                                                 <?php echo $dem; ?>
                                             </td>
                                             <td>
-                                                <a href="<?php echo SITE_NAME ?>/khach-hang/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"><?php echo $row->name.' - '.$row->code ?></a>
+                                                <a href="<?php echo SITE_NAME ?>/khach-hang/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"><?php echo $row->name . ' - ' . $row->code ?></a>
                                             </td>
                                             <td style="text-align: center">
                                                 <?php
@@ -120,7 +131,7 @@
                                             <td><?php echo $row->phone ?></td>
                                             <td><?php echo $row->mobi ?></td>
                                             <td><?php echo $row->skype ?></td>
-                                            <td >
+                                            <td>
                                                 <?php echo $row->address ?>
                                             </td>
                                             <td>
@@ -131,14 +142,16 @@
                                                         <input <?php if ($row->status) echo 'checked' ?>
                                                             id="checkbox_status_<?php echo $row->id ?>"
                                                             countid="<?php echo $row->id ?>"
-                                                            name_record="<?php echo $row->name ?>" table="customer" field="status" action="customer_update"
-                                                            class="ace ace-switch ace-switch-7 checkbox_status" type="checkbox">
+                                                            name_record="<?php echo $row->name ?>" table="customer"
+                                                            field="status" action="customer_update"
+                                                            class="ace ace-switch ace-switch-7 checkbox_status"
+                                                            type="checkbox">
                                                         <span class="lbl"></span>
                                                     </label>
-                                                <?php }else{?>
+                                                <?php } else { ?>
                                                     <?php if ($row->status == 0) echo '<i  style="font-size: 20px;" class="fa fa-check-square-o "></i>' ?>
                                                     <?php if ($row->status == 1) echo ' <i  style="font-size: 20px;color:green" class="fa fa-check-square-o "></i>' ?>
-                                                <?php }?>
+                                                <?php } ?>
                                             </td>
                                             <!--                                        <td>-->
                                             <?php //echo _returnDateFormatConvert($row->created) ?><!--</td>-->
@@ -147,7 +160,10 @@
                                                 <div class="hidden-sm hidden-xs action-buttons">
 
                                                     <?php if (_returnCheckAction(18) == 1) { ?>
-                                                        <a class="blue view_popup_detail" role="button" name_record="<?php echo $row->name ?>" data-toggle="modal" table="customer" countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                        <a class="blue view_popup_detail" role="button"
+                                                           name_record="<?php echo $row->name ?>" data-toggle="modal"
+                                                           table="customer"
+                                                           countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
                                                            href="#modal-form"
                                                            title="Chi tiết">
                                                             <i class="ace-icon fa fa-eye-slash bigger-130"></i>
@@ -162,7 +178,8 @@
                                                         </a>
                                                     <?php } ?>
                                                     <?php if (_returnCheckAction(19) == 1) { ?>
-                                                        <a title="Xóa" class="red delete_record" href="javascript:void(0)"
+                                                        <a title="Xóa" class="red delete_record"
+                                                           href="javascript:void(0)"
                                                            deleteid="<?php echo $row->id ?>"
                                                            name_record_delete="<?php echo $row->name ?>"
                                                            url_delete="<?php echo SITE_NAME ?>/khach-hang/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
@@ -182,7 +199,10 @@
 
                                                             <?php if (_returnCheckAction(18) == 1) { ?>
                                                                 <li>
-                                                                    <a class="blue view_popup_detail" role="button" name_record="<?php echo $row->name ?>" data-toggle="modal" table="customer" countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                                    <a class="blue view_popup_detail" role="button"
+                                                                       name_record="<?php echo $row->name ?>"
+                                                                       data-toggle="modal" table="customer"
+                                                                       countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
                                                                        href="#modal-form"
                                                                        title="Chi tiết">
                                                                         <i class="ace-icon fa fa-eye-slash bigger-130"></i>
@@ -237,7 +257,8 @@
                         <ul class="dropdown-menu dropdown-danger">
                             <?php if (_returnCheckAction(18) == 1) { ?>
                                 <li>
-                                    <a href="#modal-form"  role="button"  data-toggle="modal" class="edit_function">Sửa</a>
+                                    <a href="#modal-form" role="button" data-toggle="modal"
+                                       class="edit_function">Sửa</a>
                                 </li>
                             <?php } ?>
                             <?php if (_returnCheckAction(19) == 1) { ?>
@@ -256,7 +277,6 @@
                     </div>
                 </div>
             </form>
-
         </div>
     </div><!-- /.col -->
 

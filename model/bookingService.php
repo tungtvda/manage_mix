@@ -98,15 +98,13 @@ function booking_thongke_doanh_thu($where){
     if($where!=''){
         $query.=' where '.$where;
     }
-    echo $query.=" ORDER BY id desc";
-    exit;
+    $query.=" ORDER BY id desc";
     $result=mysqli_query(ConnectSql(),$query);
     $array_result=array();
     if($result!=false)while($row=mysqli_fetch_array($result))
     {
         array_push($array_result,$row);
     }
-    print_r($array_result);
-    exit;
+    return $array_result;
 //    return booking_Get($query);
 }

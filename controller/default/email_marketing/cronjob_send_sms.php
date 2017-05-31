@@ -1,10 +1,10 @@
 <?php
-define("SITE_NAME", "http://manage.mixtourist.com.vn");
+define("SITE_NAME", "http://manage.mixmedia.vn");
 define("DIR", str_replace('/controller/default/email_marketing','',dirname(__FILE__)));
 define('SERVER','localhost');
-define('DB_USERNAME','mixtourvn_manage');
-define('DB_PASSWORD','m2SjhVJT6R');
-define('DB_NAME','mixtourvn_manage');
+define('DB_USERNAME','mixmedia_manage');
+define('DB_PASSWORD','rMzRBcBd');
+define('DB_NAME','mixmedia_manage');
 define('CACHE',false);
 define('DATETIME_FORMAT',"y-m-d H:i:s");
 define('DATETIME_FORMAT_VN',"d-m-y H:i:s");

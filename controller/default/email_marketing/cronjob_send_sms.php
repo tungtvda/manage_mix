@@ -9,19 +9,20 @@ define('CACHE',false);
 define('DATETIME_FORMAT',"y-m-d H:i:s");
 define('DATETIME_FORMAT_VN',"d-m-y H:i:s");
 define('PRIVATE_KEY','hoidinhnvbk');
-
+// setup cronjob
+//  /usr/local/bin/php /home/mixmedia/domains/manage.mixmedia.vn/public_html/controller/default/email_marketing/cronjob_send_sms.php
 require_once DIR . '/model/userService.php';
 require_once DIR . '/model/customerService.php';
 require_once DIR . '/model/sms_emailService.php';
 require_once DIR . '/model/short_codeService.php';
 require_once DIR . '/model/logService.php';
 require_once DIR . '/common/class.phpmailer.php';
-
 date_default_timezone_set('Asia/Ho_Chi_Minh');
-$time_now=gmdate("Y-m-d H:i:s", time());
+// tùy chỉnh thời gian trên server
+//$time_now=gmdate("Y-m-d H:i:s", time());
+$time_now=date("Y-m-d H:i:s");
 $data_short_code_cus=short_code_getByTop('','type=1','position asc');
 $data_short_code_user=short_code_getByTop('','type=2','position asc');
-
 $dk_find="status=1 and date_time_send<='".$time_now."'";
 $data_email=sms_email_getByTop('',$dk_find,'id desc');
 $content_email_customer='';

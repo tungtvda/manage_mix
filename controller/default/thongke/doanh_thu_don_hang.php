@@ -22,6 +22,7 @@ if($_SESSION['user_role']==0)
 {
     $data_dk_fill='bk.created_by='.$_SESSION['user_id'];
 }
+if(isset($_GET['start'])&&$_GET['start']!='')
 //$data['list']=booking_thongke_doanh_thu($data_dk_fill);
 //print_r($data['list']);
 //exit;

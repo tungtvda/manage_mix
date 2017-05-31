@@ -106,7 +106,6 @@ function booking_thongke_doanh_thu($where){
     {
         array_push($array_result,$row);
     }
-    print_r($array_result);
-    exit;
+    return $array_result;
 //    return booking_Get($query);
 }

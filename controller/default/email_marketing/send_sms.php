@@ -103,7 +103,7 @@ if (isset($_POST['message_birthday']) && isset($_POST['customer_birthday'])) {
         $insert->customer =$string_cus;
         $insert->title = $title;
         $insert->content_sms = $message_sms;
-        $insert->content_email = $content_email;
+        $insert->content_email = addslashes($content_email);
         $insert->status = $status;
         $insert->count_cus = $count_cus;
         $insert->date_send = $date_send;

@@ -19,11 +19,11 @@ $array_res=array(
     'mess'=>'Bạn vui lòng kiểu tra thông tin đăng ký'
 );
 if (isset($_POST['email_dangky']) && isset($_POST['username_dangky'])&& isset($_POST['password_dangky'])&& isset($_POST['confirm_password_dangky'])&& isset($_POST['confirm_res'])) {
-    $user_email = _return_mc_decrypt(_returnPostParamSecurity('email_dangky'), '');
-    $name = _return_mc_decrypt(_returnPostParamSecurity('username_dangky'), '');
-    $password = _return_mc_decrypt(_returnPostParamSecurity('password_dangky'), '');
-    $password_confirm = _return_mc_decrypt(_returnPostParamSecurity('confirm_password_dangky'), '');
-    $confirm_res = _return_mc_decrypt(_returnPostParamSecurity('confirm_res'), '');
+    $user_email = _returnPostParamSecurity('email_dangky');
+    $name =_returnPostParamSecurity('username_dangky');
+    $password =_returnPostParamSecurity('password_dangky');
+    $password_confirm =_returnPostParamSecurity('confirm_password_dangky');
+    $confirm_res = _returnPostParamSecurity('confirm_res');
     if($user_email!=''&&$name!=''&&$password!=''&&$password_confirm!=''&&$confirm_res==1){
         $dk_check_user = "user_email ='" . $user_email . "'";
         $data_check_exist_user = user_getByTop('', $dk_check_user, 'id desc');
@@ -35,13 +35,17 @@ if (isset($_POST['email_dangky']) && isset($_POST['username_dangky'])&& isset($_
             }else{
                 $dangky = new user();
                 $dangky->name=$name;
-                $dangky->user_email=$email;
+                $dangky->user_code=_randomBooking('az','user_count');;
+                $dangky->user_email=$user_email;
                 $Pass=hash_pass($password);
                 $dangky->password=$Pass;
                 $dangky->created=_returnGetDateTime();
                 $dangky->login_two_steps=1;
                 $dangky->user_role=2;
 //                user_insert($dangky);
+                sleep(5);
+                $array_res['success']=1;
+                $array_res['mess']='Azbooking.vn cảm ơn quý khách đã đăng ký tài khoản tiếp thị liên kết. Quý khách vui lòng truy cập email <b style="color: #2e7ec7">'.$user_email.'</b>  để xác thực tài khoản.';
             }
         }
     }

@@ -18,8 +18,10 @@ $array_res=array(
     'success'=>0,
     'mess'=>'Bạn vui lòng kiểu tra thông tin đăng ký'
 );
-if (isset($_POST['email_dangky']) && isset($_POST['username_dangky'])&& isset($_POST['password_dangky'])&& isset($_POST['confirm_password_dangky'])&& isset($_POST['confirm_res'])) {
+if (isset($_POST['mail_create']) && isset($_POST['email_dangky']) && isset($_POST['username_dangky'])&& isset($_POST['password_dangky'])&& isset($_POST['confirm_password_dangky'])&& isset($_POST['confirm_res'])) {
+
     $user_email = _returnPostParamSecurity('email_dangky');
+    $mail_create = _return_mc_decrypt(_returnPostParamSecurity('mail_create'),'');
     $name =_returnPostParamSecurity('username_dangky');
     $password =_returnPostParamSecurity('password_dangky');
     $password_confirm =_returnPostParamSecurity('confirm_password_dangky');

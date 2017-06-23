@@ -6,7 +6,7 @@
  */
 
 require_once('class.phpmailer.php');  
-function SendMail($Sendto,$Body,$Subject)
+function SendMail($Sendto,$Body,$Subject, $return='')
 {
     $mail = new PHPMailer();
     $mail->CharSet = "UTF-8";
@@ -32,9 +32,15 @@ function SendMail($Sendto,$Body,$Subject)
     $mail->AltBody = "" . $Subject . "";
 
     if (!$mail->Send()) {
+        if($return==1){
+            return 0;
+        }
 //        $loi = "Đã xảy ra lỗi khi đặt tour, Quý khách vui lòng thực hiện lại: " . $mail->ErrorInfo;
 //        echo "<script>alert('{$loi}');</script>";
     } else {
+        if($return==1){
+            return 1;
+        }
 //        echo "<script>alert('Quý khách đã đặt tour thành công, chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất, Xin cảm ơn!')</script>";
 
     }

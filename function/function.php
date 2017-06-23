@@ -149,13 +149,15 @@ function _returnPostParamSecurity($param)
 function _returnGetDate()
 {
     date_default_timezone_set('Asia/Ho_Chi_Minh');
-    return gmdate('Y-m-d',time());
+    return gmdate('Y-m-d', time());
 }
+
 function _returnGetDateMouth()
 {
     date_default_timezone_set('Asia/Ho_Chi_Minh');
-    return gmdate('m-d',time());
+    return gmdate('m-d', time());
 }
+
 function _returnGetDateTime()
 {
     date_default_timezone_set('Asia/Ho_Chi_Minh');
@@ -255,49 +257,56 @@ function _returnLogin($data_arr, $user_update)
 define('ENCRYPTION_KEY', '5a9adddba4556e4784ec17246552f2033c3f6df767516ef92a55efed1408772b');
 
 // Code mã hóa
-function _return_mc_encrypt($encrypt, $key)
+function _return_mc_encrypt($encrypt, $key, $code_key = '')
 {
-//    $encrypt = serialize($encrypt);
-//    $iv = mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC), MCRYPT_DEV_URANDOM);
-//    $key = pack('H*', $key);
-//    $mac = hash_hmac('sha256', $encrypt, substr(bin2hex($key), -32));
-//    $passcrypt = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $encrypt . $mac, MCRYPT_MODE_CBC, $iv);
-//    $encoded = base64_encode($passcrypt) . '|' . base64_encode($iv);
-    $encode = base64_encode($encrypt);
-    $encode = base64_encode($encode);
-    $encode = base64_encode($encode);
-    $encode = base64_encode($encode);
-    $encode = base64_encode($encode);
-    $encode = base64_encode($encode);
-    $encode = base64_encode($encode);
+    if ($code_key == 1) {
+        $encrypt = serialize($encrypt);
+        $iv = mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC), MCRYPT_DEV_URANDOM);
+        $key = pack('H*', $key);
+        $mac = hash_hmac('sha256', $encrypt, substr(bin2hex($key), -32));
+        $passcrypt = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $encrypt . $mac, MCRYPT_MODE_CBC, $iv);
+        $encode = base64_encode($passcrypt) . '|' . base64_encode($iv);
+
+    } else {
+        $encode = base64_encode($encrypt);
+        $encode = base64_encode($encode);
+        $encode = base64_encode($encode);
+        $encode = base64_encode($encode);
+        $encode = base64_encode($encode);
+        $encode = base64_encode($encode);
+        $encode = base64_encode($encode);
+    }
     return $encode;
 }
 
 // Code giải mã
-function _return_mc_decrypt($decrypt, $key)
+function _return_mc_decrypt($decrypt, $key, $code_key = '')
 {
-//    $decrypt = explode('|', $decrypt);
-//    $decoded = base64_decode($decrypt[0]);
-//    $iv = base64_decode($decrypt[1]);
-//    if (strlen($iv) !== mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC)) {
-//        return false;
-//    }
-//    $key = pack('H*', $key);
-//    $decrypted = trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $key, $decoded, MCRYPT_MODE_CBC, $iv));
-//    $mac = substr($decrypted, -64);
-//    $decrypted = substr($decrypted, 0, -64);
-//    $calcmac = hash_hmac('sha256', $decrypted, substr(bin2hex($key), -32));
-//    if ($calcmac !== $mac) {
-//        return false;
-//    }
-//    $decrypted = unserialize($decrypted);
-    $decoded = base64_decode($decrypt);
-    $decoded = base64_decode($decoded);
-    $decoded = base64_decode($decoded);
-    $decoded = base64_decode($decoded);
-    $decoded = base64_decode($decoded);
-    $decoded = base64_decode($decoded);
-    $decoded = base64_decode($decoded);
+    if ($code_key == 1) {
+        $decrypt = explode('|', $decrypt);
+        $decoded = base64_decode($decrypt[0]);
+        $iv = base64_decode($decrypt[1]);
+        if (strlen($iv) !== mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC)) {
+            return false;
+        }
+        $key = pack('H*', $key);
+        $decrypted = trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $key, $decoded, MCRYPT_MODE_CBC, $iv));
+        $mac = substr($decrypted, -64);
+        $decrypted = substr($decrypted, 0, -64);
+        $calcmac = hash_hmac('sha256', $decrypted, substr(bin2hex($key), -32));
+        if ($calcmac !== $mac) {
+            return false;
+        }
+        $decoded = unserialize($decrypted);
+    } else {
+        $decoded = base64_decode($decrypt);
+        $decoded = base64_decode($decoded);
+        $decoded = base64_decode($decoded);
+        $decoded = base64_decode($decoded);
+        $decoded = base64_decode($decoded);
+        $decoded = base64_decode($decoded);
+        $decoded = base64_decode($decoded);
+    }
     return $decoded;
 }
 
@@ -563,7 +572,7 @@ function _returnCreateUser($check_redict)
     }
 }
 
-function _deleteSubmitForm($model, $action_delete,$module,$form, $action)
+function _deleteSubmitForm($model, $action_delete, $module, $form, $action)
 {
     if (isset($_POST['check_box_action'])) {
         $check_box_action = $_POST['check_box_action'];
@@ -575,7 +584,7 @@ function _deleteSubmitForm($model, $action_delete,$module,$form, $action)
                     $new_obj = new $model();
                     $new_obj->id = $id;
                     $action_delete($new_obj);
-                    _insertLog($_SESSION['user_id'],$module,$form,$action,$id,'','',$_SESSION['user_name'].' đã xóa bản ghi "'.$id.'"');
+                    _insertLog($_SESSION['user_id'], $module, $form, $action, $id, '', '', $_SESSION['user_name'] . ' đã xóa bản ghi "' . $id . '"');
                 }
             }
         }
@@ -875,10 +884,10 @@ function _returnDataEditAdd($data, $field)
     }
 }
 
-function _returnInput($name, $value = '', $valid = '', $icon_input = '', $disabled = '', $mess_err = '', $width = '', $type='text')
+function _returnInput($name, $value = '', $valid = '', $icon_input = '', $disabled = '', $mess_err = '', $width = '', $type = 'text')
 {
     return '  <span class="input-icon width_100" style="' . $width . '">
-                                                    <input ' . $disabled . ' name="' . $name . '" type="'.$type.'" id="input_' . $name . '"
+                                                    <input ' . $disabled . ' name="' . $name . '" type="' . $type . '" id="input_' . $name . '"
                                                            value="' . $value . '"
                                                            class="width_100 ' . $valid . '" >
                                                     <i class="ace-icon fa fa-' . $icon_input . ' blue"></i>
@@ -1000,21 +1009,21 @@ function _returnDataAutoCompleteTour()
                 $price_format = number_format((int)$row_kh->price, 0, ",", ".") . ' vnđ';
                 $price = $row_kh->price;
             }
-            if($row_kh->price_2==''){
-                $price_2_format=$price_format;
-                $price_2=$price;
-            }else{
-                $price_2_format=number_format((int)$row_kh->price_2, 0, ",", ".") . ' vnđ';
-                $price_2=$row_kh->price_2;
+            if ($row_kh->price_2 == '') {
+                $price_2_format = $price_format;
+                $price_2 = $price;
+            } else {
+                $price_2_format = number_format((int)$row_kh->price_2, 0, ",", ".") . ' vnđ';
+                $price_2 = $row_kh->price_2;
             }
-            if($row_kh->price_3==''){
-                $price_3_format=$price_format;
-                $price_3=$price;
-            }else{
-                $price_3_format=number_format((int)$row_kh->price_3, 0, ",", ".") . ' vnđ';
-                $price_3=$row_kh->price_3;
+            if ($row_kh->price_3 == '') {
+                $price_3_format = $price_format;
+                $price_3 = $price;
+            } else {
+                $price_3_format = number_format((int)$row_kh->price_3, 0, ",", ".") . ' vnđ';
+                $price_3 = $row_kh->price_3;
             }
-            $so_cho=$row_kh->so_cho;
+            $so_cho = $row_kh->so_cho;
 //            $price_number= $row_kh->price_number;
 //            $price_number_2= $row_kh->price_number_2;
 //            $price_number_3= $row_kh->price_number_3;
@@ -1023,17 +1032,17 @@ function _returnDataAutoCompleteTour()
 //            $list_price_tre_em_511=returnInput_price($price_number_2,'price_tre_em_511_');
 //            $list_price_tre_em_5=returnInput_price($price_number_3,'price_tre_em_5_');
 
-            $name_price='Giá người lớn';
-            $name_price_2='Giá trẻ em 5-11 tuổi';
-            $name_price_3='Giá trẻ em dưới 5 tuổi';
-            if($row_kh->name_price!=''){
-                $name_price=$row_kh->name_price;
+            $name_price = 'Giá người lớn';
+            $name_price_2 = 'Giá trẻ em 5-11 tuổi';
+            $name_price_3 = 'Giá trẻ em dưới 5 tuổi';
+            if ($row_kh->name_price != '') {
+                $name_price = $row_kh->name_price;
             }
-            if($row_kh->name_price_2!=''){
-                $name_price_2=$row_kh->name_price_2;
+            if ($row_kh->name_price_2 != '') {
+                $name_price_2 = $row_kh->name_price_2;
             }
-            if($row_kh->name_price_3!=''){
-                $name_price_3=$row_kh->name_price_3;
+            if ($row_kh->name_price_3 != '') {
+                $name_price_3 = $row_kh->name_price_3;
             }
 
             $durations = $row_kh->durations;
@@ -1053,24 +1062,26 @@ function _returnDataAutoCompleteTour()
     $string_data .= '];';
     return $string_data;
 }
-function returnInput_price($price,$name_price){
-    $string='';
-    if($price!=''){
-        $array_price=explode(',',$price);
-        if(count($array_price)>0){
-            foreach($array_price as $row){
-                if($row!=''){
-                    $array_item=explode('-',$row);
-                    if(count($array_item)>0){
-                        if(isset($array_item[0])&&isset($array_item[1])&&$array_item[0]!=''&&$array_item[1]!=''){
-                            $check_lon_hon=strstr($array_item[0],">");
-                            $input_lon_hon='';
-                            if($check_lon_hon!=''){
-                                $number_lonhon=str_replace('>','',$check_lon_hon);
-                                $input_lon_hon='<input hidden value="'.$number_lonhon.'" id="input_'.$name_price.'tu" class="valid" name="'.$name_price.'tu">';
-                                $array_item[0]=str_replace('>','lon_hon_',$array_item[0]);
+
+function returnInput_price($price, $name_price)
+{
+    $string = '';
+    if ($price != '') {
+        $array_price = explode(',', $price);
+        if (count($array_price) > 0) {
+            foreach ($array_price as $row) {
+                if ($row != '') {
+                    $array_item = explode('-', $row);
+                    if (count($array_item) > 0) {
+                        if (isset($array_item[0]) && isset($array_item[1]) && $array_item[0] != '' && $array_item[1] != '') {
+                            $check_lon_hon = strstr($array_item[0], ">");
+                            $input_lon_hon = '';
+                            if ($check_lon_hon != '') {
+                                $number_lonhon = str_replace('>', '', $check_lon_hon);
+                                $input_lon_hon = '<input hidden value="' . $number_lonhon . '" id="input_' . $name_price . 'tu" class="valid" name="' . $name_price . 'tu">';
+                                $array_item[0] = str_replace('>', 'lon_hon_', $array_item[0]);
                             }
-                            $string.='<input hidden value="'.$array_item[1].'" id="input_'.$name_price.$array_item[0].'" class="valid" name="'.$name_price.$array_item[0].'">'.$input_lon_hon;
+                            $string .= '<input hidden value="' . $array_item[1] . '" id="input_' . $name_price . $array_item[0] . '" class="valid" name="' . $name_price . $array_item[0] . '">' . $input_lon_hon;
 
                         }
                     }
@@ -1080,6 +1091,7 @@ function returnInput_price($price,$name_price){
     }
     return $string;
 }
+
 function _returnDataAutoCompleteUser()
 {
     if ($_SESSION['user_role'] == 1) {
@@ -1171,10 +1183,10 @@ function _insertLog($user_id, $module_id, $form_id, $action_id, $item_id, $value
     log_insert($log_model);
 }
 
-function _updateCustomerBooking($name_customer_sub, $email_customer, $phone_customer, $address_customer, $do_tuoi_customer,$tuoi_number_customer_sub, $birthday_customer_sub, $passport_customer_sub, $date_passport_customer_sub, $id_booking, $created_by = '')
+function _updateCustomerBooking($name_customer_sub, $email_customer, $phone_customer, $address_customer, $do_tuoi_customer, $tuoi_number_customer_sub, $birthday_customer_sub, $passport_customer_sub, $date_passport_customer_sub, $id_booking, $created_by = '')
 {
-    $booking_cus=new customer_booking();
-    $booking_cus->booking_id=$id_booking;
+    $booking_cus = new customer_booking();
+    $booking_cus->booking_id = $id_booking;
     customer_booking_delete_all($booking_cus);
     if (count($name_customer_sub) > 0) {
         foreach ($name_customer_sub as $key => $value) {
@@ -1204,9 +1216,9 @@ function _updateCustomerBooking($name_customer_sub, $email_customer, $phone_cust
 
             $ngaysinh_sub = '';
             if (isset($birthday_customer_sub[$key])) {
-                if($birthday_customer_sub[$key]!=''){
-                    $birthday_customer_sub[$key]=str_replace('/','-',$birthday_customer_sub[$key]);
-                    $ngaysinh_sub=date("Y-m-d", strtotime($birthday_customer_sub[$key]));
+                if ($birthday_customer_sub[$key] != '') {
+                    $birthday_customer_sub[$key] = str_replace('/', '-', $birthday_customer_sub[$key]);
+                    $ngaysinh_sub = date("Y-m-d", strtotime($birthday_customer_sub[$key]));
                 }
             }
             $pass_sub = '';
@@ -1215,9 +1227,9 @@ function _updateCustomerBooking($name_customer_sub, $email_customer, $phone_cust
             }
             $date_pass_sub = '';
             if (isset($date_passport_customer_sub[$key])) {
-                if($date_passport_customer_sub[$key]!=''){
-                    $date_passport_customer_sub[$key]=str_replace('/','-',$date_passport_customer_sub[$key]);
-                    $date_pass_sub=date("Y-m-d", strtotime($date_passport_customer_sub[$key]));
+                if ($date_passport_customer_sub[$key] != '') {
+                    $date_passport_customer_sub[$key] = str_replace('/', '-', $date_passport_customer_sub[$key]);
+                    $date_pass_sub = date("Y-m-d", strtotime($date_passport_customer_sub[$key]));
                 }
             }
             if ($value != '') {
@@ -1253,31 +1265,35 @@ function _updateStatusNoti()
         }
     }
 }
-function _returnLinkBooking($status){
-    $action_link='';
-    switch($status){
+
+function _returnLinkBooking($status)
+{
+    $action_link = '';
+    switch ($status) {
         case '2':
-            $action_link='booking-giao-dich';
+            $action_link = 'booking-giao-dich';
             break;
         case '3':
-            $action_link='booking-tam-dung';
+            $action_link = 'booking-tam-dung';
             break;
         case '4':
-            $action_link='booking-no-tien';
+            $action_link = 'booking-no-tien';
             break;
         case '5':
-            $action_link='booking-ket-thuc';
+            $action_link = 'booking-ket-thuc';
             break;
         case '6':
-            $action_link='booking-ban-nhap';
+            $action_link = 'booking-ban-nhap';
             break;
         default:
-            $action_link='booking-new';
+            $action_link = 'booking-new';
     }
     return $action_link;
 
 }
-function _returnGetAge($birthdate = '0000-00-00') {
+
+function _returnGetAge($birthdate = '0000-00-00')
+{
     if ($birthdate == '0000-00-00') return '';
 
     $bits = explode('-', $birthdate);
@@ -1295,14 +1311,14 @@ function _returnGetAge($birthdate = '0000-00-00') {
             ++$age;
             break;
         }
-        if(!isset($arr[$i+1])){
+        if (!isset($arr[$i + 1])) {
             break;
         }
     }
-    if($age<-1){
+    if ($age < -1) {
         return '';
-    }else{
-        return str_replace('-','',$age+1);
+    } else {
+        return str_replace('-', '', $age + 1);
     }
 
 }

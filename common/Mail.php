@@ -6,7 +6,7 @@
  */
 
 require_once('class.phpmailer.php');  
-function SendMail($Sendto,$Body,$Subject, $return='')
+function SendMail($Sendto,$Body,$Subject, $return='', $title_mail='Hệ thống quản lý MIXTOURIST')
 {
     $mail = new PHPMailer();
     $mail->CharSet = "UTF-8";
@@ -24,7 +24,7 @@ function SendMail($Sendto,$Body,$Subject, $return='')
 //    $mail->Password = 'edbhqegduzpmwuui';
     $mail->Username = 'manage.system.mixtourist@gmail.com';
     $mail->Password = 'ttulgbiqnksxueze';
-    $mail->SetFrom('thanhtuyen@mixmedia.vn', 'Hệ thống quản lý MIXTOURIST');
+    $mail->SetFrom('thanhtuyen@mixmedia.vn', $title_mail);
     $mail->AddReplyTo('thanhtuyen@mixmedia.vn', "");
     $mail->AddAddress($Sendto,'');
     $mail->Subject = "" . $Subject . "";

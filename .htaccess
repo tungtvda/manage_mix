@@ -112,4 +112,5 @@ RewriteRule ^cronjob-send-sms$ controller/default/email_marketing/cronjob_send_s
 RewriteRule ^doanh-thu-don-hang/$ controller/default/thongke/doanh_thu_don_hang.php
 
 RewriteRule ^azbooking-dang-ky.html$ controller/default/user/az_dang_ky_ajax.php
+RewriteRule ^azbooking-confirm-email controller/default/user/check_confirm_email.php
 

@@ -114,4 +114,5 @@ RewriteRule ^doanh-thu-don-hang/$ controller/default/thongke/doanh_thu_don_hang.
 RewriteRule ^azbooking-dang-ky.html$ controller/default/user/az_dang_ky_ajax.php
 RewriteRule ^azbooking-confirm-email.html controller/default/user/check_confirm_email.php
 RewriteRule ^azbooking-reset-password.html controller/default/user/reset_pass_ajax.php
+RewriteRule ^azbooking-login.html controller/default/user/az_login.php
 

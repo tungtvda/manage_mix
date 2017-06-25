@@ -1320,5 +1320,13 @@ function _returnGetAge($birthdate = '0000-00-00')
     } else {
         return str_replace('-', '', $age + 1);
     }
-
+}
+function _returnRandomString($length = 10) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
 }

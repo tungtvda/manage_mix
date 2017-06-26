@@ -44,7 +44,7 @@ if (isset($_POST['mail_create']) && isset($_POST['email_dangky']) && isset($_POS
                 $Pass = hash_pass($password);
                 $dangky->password = $Pass;
                 $dangky->created = _returnGetDateTime();
-                $dangky->login_two_steps = 1;
+                $dangky->login_two_steps = 0;
                 $dangky->user_role = 2;
                 $subject = "Thông báo đăng ký tài khoản tại AZBOOKING.VN";
                 if (SendMail($user_email, $mail_create, $subject, 1, 'AZBOOKING.VN')) {

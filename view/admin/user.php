@@ -29,7 +29,7 @@ function view_user($data)
 //
 function showTableHeader()
 {
-    return '<th>id</th><th>name</th><th>user_role</th><th>user_name</th><th>user_code</th><th>user_email</th><th>gender</th><th>avatar</th>';
+    return '<th>id</th><th>name</th>';
 }
 //
 function showTableBody($data)
@@ -40,12 +40,6 @@ function showTableBody($data)
         $TableBody.="<tr><td><input type=\"checkbox\" name=\"check_".$obj->id."\"/></td>";
         $TableBody.="<td>".$obj->id."</td>";
         $TableBody.="<td>".$obj->name."</td>";
-        $TableBody.="<td>".$obj->user_role."</td>";
-        $TableBody.="<td>".$obj->user_name."</td>";
-        $TableBody.="<td>".$obj->user_code."</td>";
-        $TableBody.="<td>".$obj->user_email."</td>";
-        $TableBody.="<td>".$obj->gender."</td>";
-        $TableBody.="<td><img src=\"".$obj->avatar."\" width=\"50px\" height=\"50px\"/> </td>";
         $TableBody.="<td><a href=\"?action=edit&id=".$obj->id."\" title=\"Edit\"><img src=\"".SITE_NAME."/view/admin/Themes/images/pencil.png\" alt=\"Edit\"></a>";
         $TableBody.="<a href=\"?action=delete&id=".$obj->id."\" title=\"Delete\" onClick=\"return confirm('Bạn có chắc chắc muốn xóa?')\"><img src=\"".SITE_NAME."/view/admin/Themes/images/cross.png\" alt=\"Delete\"></a> ";
         $TableBody.="</td>";
@@ -58,7 +52,7 @@ function showFrom($form,$ListKey=array())
 {
     $str_from='';
     $str_from.='<p><label>name</label><input class="text-input small-input" type="text"  name="name" value="'.(($form!=false)?$form->name:'').'" /></p>';
-    $str_from.='<p><label>user_role</label><input  type="checkbox"  name="user_role" value="1" '.(($form!=false)?(($form->user_role=='1')?'checked':''):'').' /></p>';
+    $str_from.='<p><label>user_role</label><input class="text-input small-input" type="text"  name="user_role" value="'.(($form!=false)?$form->user_role:'').'" /></p>';
     $str_from.='<p><label>permison_module</label><input class="text-input small-input" type="text"  name="permison_module" value="'.(($form!=false)?$form->permison_module:'').'" /></p>';
     $str_from.='<p><label>permison_form</label><input class="text-input small-input" type="text"  name="permison_form" value="'.(($form!=false)?$form->permison_form:'').'" /></p>';
     $str_from.='<p><label>permison_action</label><input class="text-input small-input" type="text"  name="permison_action" value="'.(($form!=false)?$form->permison_action:'').'" /></p>';
@@ -75,9 +69,13 @@ function showFrom($form,$ListKey=array())
     $str_from.='<p><label>phong_ban</label><input class="text-input small-input" type="text"  name="phong_ban" value="'.(($form!=false)?$form->phong_ban:'').'" /></p>';
     $str_from.='<p><label>chuc_vu</label><input class="text-input small-input" type="text"  name="chuc_vu" value="'.(($form!=false)?$form->chuc_vu:'').'" /></p>';
     $str_from.='<p><label>nganh_nghe</label><input class="text-input small-input" type="text"  name="nganh_nghe" value="'.(($form!=false)?$form->nganh_nghe:'').'" /></p>';
-    $str_from.='<p><label>gender</label><input  type="checkbox"  name="gender" value="1" '.(($form!=false)?(($form->gender=='1')?'checked':''):'').' /></p>';
+    $str_from.='<p><label>gender</label><input class="text-input small-input" type="text"  name="gender" value="'.(($form!=false)?$form->gender:'').'" /></p>';
     $str_from.='<p><label>birthday</label><input class="text-input small-input" type="text"  name="birthday" value="'.(($form!=false)?$form->birthday:'').'" /></p>';
-    $str_from.='<p><label>avatar</label><input class="text-input small-input" type="text"  name="avatar" value="'.(($form!=false)?$form->avatar:'').'"/><a class="button" onclick="openKcEditor(\'avatar\');">Upload ảnh</a></p>';
+    $str_from.='<p><label>avatar</label><input class="text-input small-input" type="text"  name="avatar" value="'.(($form!=false)?$form->avatar:'').'" /></p>';
+    $str_from.='<p><label>skype</label><input class="text-input small-input" type="text"  name="skype" value="'.(($form!=false)?$form->skype:'').'" /></p>';
+    $str_from.='<p><label>facebook</label><input class="text-input small-input" type="text"  name="facebook" value="'.(($form!=false)?$form->facebook:'').'" /></p>';
+    $str_from.='<p><label>ngay_lam_viec</label><input class="text-input small-input" type="text"  name="ngay_lam_viec" value="'.(($form!=false)?$form->ngay_lam_viec:'').'" /></p>';
+    $str_from.='<p><label>ngay_chinh_thuc</label><input class="text-input small-input" type="text"  name="ngay_chinh_thuc" value="'.(($form!=false)?$form->ngay_chinh_thuc:'').'" /></p>';
     $str_from.='<p><label>guides</label><input class="text-input small-input" type="text"  name="guides" value="'.(($form!=false)?$form->guides:'').'" /></p>';
     $str_from.='<p><label>guide_card_number</label><input class="text-input small-input" type="text"  name="guide_card_number" value="'.(($form!=false)?$form->guide_card_number:'').'" /></p>';
     $str_from.='<p><label>tax_code</label><input class="text-input small-input" type="text"  name="tax_code" value="'.(($form!=false)?$form->tax_code:'').'" /></p>';
@@ -98,12 +96,13 @@ function showFrom($form,$ListKey=array())
     $str_from.='<p><label>open_bank</label><input class="text-input small-input" type="text"  name="open_bank" value="'.(($form!=false)?$form->open_bank:'').'" /></p>';
     $str_from.='<p><label>religion</label><input class="text-input small-input" type="text"  name="religion" value="'.(($form!=false)?$form->religion:'').'" /></p>';
     $str_from.='<p><label>note</label><textarea name="note">'.(($form!=false)?$form->note:'').'</textarea><script type="text/javascript">CKEDITOR.replace(\'note\'); </script></p>';
-    $str_from.='<p><label>status</label><input  type="checkbox"  name="status" value="1" '.(($form!=false)?(($form->status=='1')?'checked':''):'').' /></p>';
+    $str_from.='<p><label>status</label><input class="text-input small-input" type="text"  name="status" value="'.(($form!=false)?$form->status:'').'" /></p>';
     $str_from.='<p><label>created</label><input class="text-input small-input" type="text"  name="created" value="'.(($form!=false)?$form->created:'').'" /></p>';
     $str_from.='<p><label>token_code</label><input class="text-input small-input" type="text"  name="token_code" value="'.(($form!=false)?$form->token_code:'').'" /></p>';
     $str_from.='<p><label>time_token</label><input class="text-input small-input" type="text"  name="time_token" value="'.(($form!=false)?$form->time_token:'').'" /></p>';
+    $str_from.='<p><label>memori_login</label><input class="text-input small-input" type="text"  name="memori_login" value="'.(($form!=false)?$form->memori_login:'').'" /></p>';
     $str_from.='<p><label>updated</label><input class="text-input small-input" type="text"  name="updated" value="'.(($form!=false)?$form->updated:'').'" /></p>';
-    $str_from.='<p><label>updated_by</label><input class="text-input small-input" type="text"  name="updated_by" value="'.(($form!=false)?$form->updated_by:'').'" /></p>';
     $str_from.='<p><label>created_by</label><input class="text-input small-input" type="text"  name="created_by" value="'.(($form!=false)?$form->created_by:'').'" /></p>';
+    $str_from.='<p><label>updated_by</label><input class="text-input small-input" type="text"  name="updated_by" value="'.(($form!=false)?$form->updated_by:'').'" /></p>';
     return $str_from;
 }

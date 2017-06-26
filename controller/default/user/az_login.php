@@ -30,7 +30,7 @@ if(isset($_POST['username_login'])&&isset($_POST['password_login'])){
         if(count($data_check_exist_user)>0){
             if($data_check_exist_user[0]->status==1){
                 $user_login=new user((array)$data_check_exist_user[0]);
-                $user_login->rememberme=$rememberme;
+                $user_login->memori_login=$rememberme;
                 $user_login->time_token=_returnGetDateTime();
                 if($data_check_exist_user[0]->login_two_steps==1){
                     $rand_string=_returnRandString(15);
@@ -41,7 +41,7 @@ if(isset($_POST['username_login'])&&isset($_POST['password_login'])){
                         user_update($user_login);
                         $res['success'] = 2;
                         $res['user_sec'] = array(
-                            'email'=>$data_check_exist_user[0]->user_email
+                            'email'=>_return_mc_encrypt($data_check_exist_user[0]->user_email,ENCRYPTION_KEY,1)
                         );
                         $res['mess'] = 'Azbooking.vn đã gửi mã đăng nhập về mail của bạn, bạn vui lòng kiểm tra email';
                     }
@@ -49,11 +49,11 @@ if(isset($_POST['username_login'])&&isset($_POST['password_login'])){
                     user_update($user_login);
                     $res['success'] = 1;
                     $res['user_sec'] = array(
-                       'id'=>$data_check_exist_user[0]->id,
-                       'name'=>$data_check_exist_user[0]->name,
-                       'user_email'=>$data_check_exist_user[0]->user_email,
-                       'user_code'=>$data_check_exist_user[0]->user_code,
-                       'created'=>$data_check_exist_user[0]->created,
+                       'id'=>_return_mc_encrypt($data_check_exist_user[0]->id,ENCRYPTION_KEY,1),
+                       'name'=>_return_mc_encrypt($data_check_exist_user[0]->name,ENCRYPTION_KEY,1),
+                       'user_email'=>_return_mc_encrypt($data_check_exist_user[0]->user_email,ENCRYPTION_KEY,1),
+                       'user_code'=>_return_mc_encrypt($data_check_exist_user[0]->user_code,ENCRYPTION_KEY,1),
+                       'created'=>_return_mc_encrypt($data_check_exist_user[0]->created,ENCRYPTION_KEY,1),
                     );
                     $res['mess']='';
                 }

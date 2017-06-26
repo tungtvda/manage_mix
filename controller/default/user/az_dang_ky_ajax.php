@@ -35,7 +35,7 @@ if (isset($_POST['mail_create']) && isset($_POST['email_dangky']) && isset($_POS
             if ($password != $password_confirm) {
                 $array_res['mess'] = 'Hai mật khẩu không khớp';
             } else {
-                $link_check = 'xac-nhan-dang-ky/?type=' . base64_encode(base64_encode(base64_encode(base64_encode(base64_encode($user_email)))));
+                $link_check = 'tiep-thi-lien-ket/thanh-vien/?type=xac-nhan&key=' . base64_encode(base64_encode(base64_encode(base64_encode(base64_encode($user_email)))));
                 $mail_create = str_replace('[username_dangky]', $name, $mail_create);
                 $mail_create = str_replace('[link_dangky]', $link_check, $mail_create);
                 $dangky = new user();

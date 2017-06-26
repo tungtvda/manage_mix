@@ -30,7 +30,7 @@ if (isset($_POST['mail_confirm']) && isset($_POST['mail_send'])) {
         if (count($data_check_exist_user) > 0) {
             $dangky = new user((array)$data_check_exist_user[0]);
             $dangky->status=1;
-            $link_check = 'thanh-vien/';
+            $link_check = 'tiep-thi-lien-ket/thanh-vien/';
             $mail_confirm = str_replace('[username_dangky]', $data_check_exist_user[0]->name, $mail_confirm);
             $mail_confirm = str_replace('[link_dangky]', $link_check, $mail_confirm);
             $subject = "Thông báo xác nhận tài khoản AZBOOKING.VN";

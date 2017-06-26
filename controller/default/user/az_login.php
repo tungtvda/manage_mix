@@ -14,32 +14,71 @@ require_once(DIR . "/common/hash_pass.php");
 require_once DIR . '/common/class.phpmailer.php';
 require_once(DIR . "/common/Mail.php");
 $data = array();
-$res ='';
+$res =array(
+    'success'=>0,
+    'mess'=>'Đăng nhập thất bại, bạn vui kiểm tra email và mật khẩu đăng nhập'
+);
 if(isset($_POST['username_login'])&&isset($_POST['password_login'])){
     $username_login=_returnPostParamSecurity('username_login');
     $password_login=_returnPostParamSecurity('password_login');
+    $mail_confirm = _return_mc_decrypt(_returnPostParamSecurity('mail_confirm'), '');
+    $rememberme=_returnPostParamSecurity('rememberme');
     if($username_login!=''&&$password_login!=''){
         $Pass = hash_pass($password_login);
         $dk_check_user = "user_email ='" . $username_login . "' and password='".$Pass."'";
         $data_check_exist_user = user_getByTop('', $dk_check_user, 'id desc');
         if(count($data_check_exist_user)>0){
-            $res=1;
-        }else{
-            $res='Đăng nhập thất bại, bạn vui lòng nhập email và mật khẩu đăng nhập';
+            if($data_check_exist_user[0]->status==1){
+                $user_login=new user((array)$data_check_exist_user[0]);
+                $user_login->rememberme=$rememberme;
+                $user_login->time_token=_returnGetDateTime();
+                if($data_check_exist_user[0]->login_two_steps==1){
+                    $rand_string=_returnRandString(15);
+                    $user_login->code_login=$rand_string;
+                    $mail_confirm = str_replace('[pass_code]', $rand_string, $mail_confirm);
+                    $subject = "Mã đăng nhập vào hệ thống AZBOOKING.VN";
+                    if (SendMail($data_check_exist_user[0]->user_email, $mail_confirm, $subject, 1, 'AZBOOKING.VN')) {
+                        user_update($user_login);
+                        $res['success'] = 2;
+                        $res['user_sec'] = array(
+                            'email'=>$data_check_exist_user[0]->user_email
+                        );
+                        $res['mess'] = 'Azbooking.vn đã gửi mã đăng nhập về mail của bạn, bạn vui lòng kiểm tra email';
+                    }
+                }else{
+                    user_update($user_login);
+                    $res['success'] = 1;
+                    $res['user_sec'] = array(
+                       'id'=>$data_check_exist_user[0]->id,
+                       'name'=>$data_check_exist_user[0]->name,
+                       'user_email'=>$data_check_exist_user[0]->user_email,
+                       'user_code'=>$data_check_exist_user[0]->user_code,
+                       'created'=>$data_check_exist_user[0]->created,
+                    );
+                    $res['mess']='';
+                }
+            }else{
+                if($data_check_exist_user[0]->status==2){
+                    $res['mess']='Tài khoản của bạn đã bị khóa, bạn vui lòng liên hệ với AZBOOKING.VN để được giải đáp';
+                }else{
+                    $res['mess']='Tài khoản của bạn chưa được kích hoạt, bạn vui lòng thử lại sau';
+                }
+            }
+
         }
     }else{
         if($username_login==''&&$password_login==''){
-            $res='Bạn vui lòng nhập email và mật khẩu đăng nhập';
+            $res['mess']='Bạn vui lòng nhập email và mật khẩu đăng nhập';
         }else{
             if($username_login==''){
-                $res='Bạn vui lòng nhập nhập email đăng nhập';
+                $res['mess']='Bạn vui lòng nhập nhập email đăng nhập';
             }
             if($password_login==''){
-                $res='Bạn vui lòng nhập nhập mật khẩu đăng nhập';
+                $res['mess']='Bạn vui lòng nhập nhập mật khẩu đăng nhập';
             }
         }
     }
 }else{
-    $res='Bạn vui lòng nhập email và mật khẩu đăng nhập';
+    $res['mess']='Bạn vui lòng nhập email và mật khẩu đăng nhập';
 }
-echo $res;
+echo json_encode($res);

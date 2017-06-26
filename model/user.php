@@ -1,7 +1,7 @@
 <?php
 class user
 {
-    public $id,$name,$user_role,$permison_module,$permison_form,$permison_action,$mr,$address,$phone,$mobi,$user_name,$user_code,$user_email,$password,$login_two_steps,$code_login,$phong_ban,$chuc_vu,$nganh_nghe,$gender,$birthday,$avatar,$guides,$guide_card_number,$tax_code,$cmnd,$date_range_cmnd,$issued_by_cmnd,$number_passport,$date_range_passport,$issued_by_passport,$expiration_date_passport,$dan_toc,$ho_khau_tt,$hon_nhan,$bang_cap,$language,$account_number_bank,$bank,$open_bank,$religion,$note,$status,$created,$token_code,$time_token,$updated, $updated_by,$created_by, $skype, $facebook, $ngay_lam_viec, $ngay_chinh_thuc;
+    public $id,$name,$user_role,$permison_module,$permison_form,$permison_action,$mr,$address,$phone,$mobi,$user_name,$user_code,$user_email,$password,$login_two_steps,$code_login,$phong_ban,$chuc_vu,$nganh_nghe,$gender,$birthday,$avatar,$skype,$facebook,$ngay_lam_viec,$ngay_chinh_thuc,$guides,$guide_card_number,$tax_code,$cmnd,$date_range_cmnd,$issued_by_cmnd,$number_passport,$date_range_passport,$issued_by_passport,$expiration_date_passport,$dan_toc,$ho_khau_tt,$hon_nhan,$bang_cap,$language,$account_number_bank,$bank,$open_bank,$religion,$note,$status,$created,$token_code,$time_token,$memori_login,$updated,$created_by,$updated_by;
     public function user($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
@@ -26,6 +26,10 @@ class user
     $this->gender=isset($data['gender'])?$data['gender']:'';
     $this->birthday=isset($data['birthday'])?$data['birthday']:'';
     $this->avatar=isset($data['avatar'])?$data['avatar']:'';
+    $this->skype=isset($data['skype'])?$data['skype']:'';
+    $this->facebook=isset($data['facebook'])?$data['facebook']:'';
+    $this->ngay_lam_viec=isset($data['ngay_lam_viec'])?$data['ngay_lam_viec']:'';
+    $this->ngay_chinh_thuc=isset($data['ngay_chinh_thuc'])?$data['ngay_chinh_thuc']:'';
     $this->guides=isset($data['guides'])?$data['guides']:'';
     $this->guide_card_number=isset($data['guide_card_number'])?$data['guide_card_number']:'';
     $this->tax_code=isset($data['tax_code'])?$data['tax_code']:'';
@@ -50,15 +54,10 @@ class user
     $this->created=isset($data['created'])?$data['created']:'';
     $this->token_code=isset($data['token_code'])?$data['token_code']:'';
     $this->time_token=isset($data['time_token'])?$data['time_token']:'';
+    $this->memori_login=isset($data['memori_login'])?$data['memori_login']:'';
     $this->updated=isset($data['updated'])?$data['updated']:'';
-        $this->updated_by=isset($data['updated_by'])?$data['updated_by']:'';
-        $this->created_by=isset($data['created_by'])?$data['created_by']:'';
-
-        $this->skype=isset($data['skype'])?$data['skype']:'';
-        $this->facebook=isset($data['facebook'])?$data['facebook']:'';
-        $this->ngay_lam_viec=isset($data['ngay_lam_viec'])?$data['ngay_lam_viec']:'';
-        $this->ngay_chinh_thuc=isset($data['ngay_chinh_thuc'])?$data['ngay_chinh_thuc']:'';
-
+    $this->created_by=isset($data['created_by'])?$data['created_by']:'';
+    $this->updated_by=isset($data['updated_by'])?$data['updated_by']:'';
           $this->encode();
     }
     public function encode()
@@ -85,6 +84,10 @@ class user
             $this->gender=addslashes($this->gender);
             $this->birthday=addslashes($this->birthday);
             $this->avatar=addslashes($this->avatar);
+            $this->skype=addslashes($this->skype);
+            $this->facebook=addslashes($this->facebook);
+            $this->ngay_lam_viec=addslashes($this->ngay_lam_viec);
+            $this->ngay_chinh_thuc=addslashes($this->ngay_chinh_thuc);
             $this->guides=addslashes($this->guides);
             $this->guide_card_number=addslashes($this->guide_card_number);
             $this->tax_code=addslashes($this->tax_code);
@@ -109,14 +112,10 @@ class user
             $this->created=addslashes($this->created);
             $this->token_code=addslashes($this->token_code);
             $this->time_token=addslashes($this->time_token);
+            $this->memori_login=addslashes($this->memori_login);
             $this->updated=addslashes($this->updated);
-            $this->updated_by=addslashes($this->updated_by);
             $this->created_by=addslashes($this->created_by);
-
-            $this->skype=addslashes($this->skype);
-            $this->facebook=addslashes($this->facebook);
-            $this->ngay_lam_viec=addslashes($this->ngay_lam_viec);
-            $this->ngay_chinh_thuc=addslashes($this->ngay_chinh_thuc);
+            $this->updated_by=addslashes($this->updated_by);
         }
     public function decode()
         {
@@ -142,6 +141,10 @@ class user
             $this->gender=stripslashes($this->gender);
             $this->birthday=stripslashes($this->birthday);
             $this->avatar=stripslashes($this->avatar);
+            $this->skype=stripslashes($this->skype);
+            $this->facebook=stripslashes($this->facebook);
+            $this->ngay_lam_viec=stripslashes($this->ngay_lam_viec);
+            $this->ngay_chinh_thuc=stripslashes($this->ngay_chinh_thuc);
             $this->guides=stripslashes($this->guides);
             $this->guide_card_number=stripslashes($this->guide_card_number);
             $this->tax_code=stripslashes($this->tax_code);
@@ -166,12 +169,9 @@ class user
             $this->created=stripslashes($this->created);
             $this->token_code=stripslashes($this->token_code);
             $this->time_token=stripslashes($this->time_token);
+            $this->memori_login=stripslashes($this->memori_login);
             $this->updated=stripslashes($this->updated);
+            $this->created_by=stripslashes($this->created_by);
             $this->updated_by=stripslashes($this->updated_by);
-
-            $this->skype=stripslashes($this->skype);
-            $this->facebook=stripslashes($this->facebook);
-            $this->ngay_lam_viec=stripslashes($this->ngay_lam_viec);
-            $this->ngay_chinh_thuc=stripslashes($this->ngay_chinh_thuc);
         }
 }

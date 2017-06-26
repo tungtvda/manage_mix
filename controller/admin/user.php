@@ -54,7 +54,7 @@ if(isset($_SESSION["Admin"]))
             header('Location: '.SITE_NAME.'/controller/admin/user.php');
         }
     }
-    if(isset($_POST["name"])&&isset($_POST["permison_module"])&&isset($_POST["permison_form"])&&isset($_POST["permison_action"])&&isset($_POST["mr"])&&isset($_POST["address"])&&isset($_POST["phone"])&&isset($_POST["mobi"])&&isset($_POST["user_name"])&&isset($_POST["user_code"])&&isset($_POST["user_email"])&&isset($_POST["password"])&&isset($_POST["login_two_steps"])&&isset($_POST["code_login"])&&isset($_POST["phong_ban"])&&isset($_POST["chuc_vu"])&&isset($_POST["nganh_nghe"])&&isset($_POST["birthday"])&&isset($_POST["avatar"])&&isset($_POST["guides"])&&isset($_POST["guide_card_number"])&&isset($_POST["tax_code"])&&isset($_POST["cmnd"])&&isset($_POST["date_range_cmnd"])&&isset($_POST["issued_by_cmnd"])&&isset($_POST["number_passport"])&&isset($_POST["date_range_passport"])&&isset($_POST["issued_by_passport"])&&isset($_POST["expiration_date_passport"])&&isset($_POST["dan_toc"])&&isset($_POST["ho_khau_tt"])&&isset($_POST["hon_nhan"])&&isset($_POST["bang_cap"])&&isset($_POST["language"])&&isset($_POST["account_number_bank"])&&isset($_POST["bank"])&&isset($_POST["open_bank"])&&isset($_POST["religion"])&&isset($_POST["note"])&&isset($_POST["created"])&&isset($_POST["token_code"])&&isset($_POST["time_token"])&&isset($_POST["updated"]))
+    if(isset($_POST["name"])&&isset($_POST["user_role"])&&isset($_POST["permison_module"])&&isset($_POST["permison_form"])&&isset($_POST["permison_action"])&&isset($_POST["mr"])&&isset($_POST["address"])&&isset($_POST["phone"])&&isset($_POST["mobi"])&&isset($_POST["user_name"])&&isset($_POST["user_code"])&&isset($_POST["user_email"])&&isset($_POST["password"])&&isset($_POST["login_two_steps"])&&isset($_POST["code_login"])&&isset($_POST["phong_ban"])&&isset($_POST["chuc_vu"])&&isset($_POST["nganh_nghe"])&&isset($_POST["gender"])&&isset($_POST["birthday"])&&isset($_POST["avatar"])&&isset($_POST["skype"])&&isset($_POST["facebook"])&&isset($_POST["ngay_lam_viec"])&&isset($_POST["ngay_chinh_thuc"])&&isset($_POST["guides"])&&isset($_POST["guide_card_number"])&&isset($_POST["tax_code"])&&isset($_POST["cmnd"])&&isset($_POST["date_range_cmnd"])&&isset($_POST["issued_by_cmnd"])&&isset($_POST["number_passport"])&&isset($_POST["date_range_passport"])&&isset($_POST["issued_by_passport"])&&isset($_POST["expiration_date_passport"])&&isset($_POST["dan_toc"])&&isset($_POST["ho_khau_tt"])&&isset($_POST["hon_nhan"])&&isset($_POST["bang_cap"])&&isset($_POST["language"])&&isset($_POST["account_number_bank"])&&isset($_POST["bank"])&&isset($_POST["open_bank"])&&isset($_POST["religion"])&&isset($_POST["note"])&&isset($_POST["status"])&&isset($_POST["created"])&&isset($_POST["token_code"])&&isset($_POST["time_token"])&&isset($_POST["memori_login"])&&isset($_POST["updated"])&&isset($_POST["created_by"])&&isset($_POST["updated_by"]))
     {
        $array=$_POST;
        if(!isset($array['id']))
@@ -101,6 +101,14 @@ if(isset($_SESSION["Admin"]))
        $array['birthday']='0';
        if(!isset($array['avatar']))
        $array['avatar']='0';
+       if(!isset($array['skype']))
+       $array['skype']='0';
+       if(!isset($array['facebook']))
+       $array['facebook']='0';
+       if(!isset($array['ngay_lam_viec']))
+       $array['ngay_lam_viec']='0';
+       if(!isset($array['ngay_chinh_thuc']))
+       $array['ngay_chinh_thuc']='0';
        if(!isset($array['guides']))
        $array['guides']='0';
        if(!isset($array['guide_card_number']))
@@ -149,22 +157,14 @@ if(isset($_SESSION["Admin"]))
        $array['token_code']='0';
        if(!isset($array['time_token']))
        $array['time_token']='0';
+       if(!isset($array['memori_login']))
+       $array['memori_login']='0';
        if(!isset($array['updated']))
        $array['updated']='0';
-        if(!isset($array['skype']))
-            $array['skype']='0';
-        if(!isset($array['facebook']))
-            $array['facebook']='0';
-        if(!isset($array['ngay_lam_viec']))
-            $array['ngay_lam_viec']='0';
-        if(!isset($array['ngay_chinh_thuc']))
-            $array['ngay_chinh_thuc']='0';
-
-        if(!isset($array['updated_by']))
-            $array['updated_by']='0';
-        if(!isset($array['created_by']))
-            $array['created_by']='0';
-
+       if(!isset($array['created_by']))
+       $array['created_by']='0';
+       if(!isset($array['updated_by']))
+       $array['updated_by']='0';
       $new_obj=new user($array);
         if($insert)
         {

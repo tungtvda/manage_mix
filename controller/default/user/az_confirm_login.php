@@ -16,7 +16,7 @@ require_once(DIR . "/common/Mail.php");
 $data = array();
 $res =array(
     'success'=>0,
-    'mess'=>'Đăng nhập thất bại, bạn vui kiểm tra email và mật khẩu đăng nhập'
+    'mess'=>'Xác nhận thất bại, bạn vui lòng kiểm tra lại mã xác nhận'
 );
 if(isset($_POST['ma_xac_nhan'])&&isset($_POST['email'])){
     $code_login=_returnPostParamSecurity('ma_xac_nhan');
@@ -42,7 +42,6 @@ if(isset($_POST['ma_xac_nhan'])&&isset($_POST['email'])){
                     $res['mess']='Tài khoản của bạn chưa được kích hoạt, bạn vui lòng thử lại sau';
                 }
             }
-
         }
     }else{
         $res['mess']='Mã xác nhận không đúng, vui lòng thử lại';

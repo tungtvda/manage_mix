@@ -257,7 +257,7 @@ function _returnLogin($data_arr, $user_update)
 define('ENCRYPTION_KEY', '5a9adddba4556e4784ec17246552f2033c3f6df767516ef92a55efed1408772b');
 
 // Code mã hóa
-function _return_mc_encrypt($encrypt, $key, $code_key = '')
+function _return_mc_encrypt($encrypt, $key='', $code_key = '')
 {
     if ($code_key == 1) {
         $encrypt = serialize($encrypt);
@@ -280,7 +280,7 @@ function _return_mc_encrypt($encrypt, $key, $code_key = '')
 }
 
 // Code giải mã
-function _return_mc_decrypt($decrypt, $key, $code_key = '')
+function _return_mc_decrypt($decrypt, $key='', $code_key = '')
 {
     if ($code_key == 1) {
         $decrypt = explode('|', $decrypt);

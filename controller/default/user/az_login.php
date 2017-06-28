@@ -48,12 +48,20 @@ if(isset($_POST['username_login'])&&isset($_POST['password_login'])){
                 }else{
                     user_update($user_login);
                     $res['success'] = 1;
+                    if($data_check_exist_user[0]->avatar=="")
+                    {
+                        $avatar=SITE_NAME.'/view/default/themes/images/no-avatar.png';
+                    }
+                    else{
+                        $avatar=SITE_NAME.$data_check_exist_user[0]->avatar;
+                    }
                     $res['user_sec'] = array(
                        'id'=>_return_mc_encrypt($data_check_exist_user[0]->id,ENCRYPTION_KEY,1),
                        'name'=>_return_mc_encrypt($data_check_exist_user[0]->name,ENCRYPTION_KEY,1),
                        'user_email'=>_return_mc_encrypt($data_check_exist_user[0]->user_email,ENCRYPTION_KEY,1),
                        'user_code'=>_return_mc_encrypt($data_check_exist_user[0]->user_code,ENCRYPTION_KEY,1),
                        'created'=>_return_mc_encrypt($data_check_exist_user[0]->created,ENCRYPTION_KEY,1),
+                       'avatar'=>_return_mc_encrypt($avatar,ENCRYPTION_KEY,1),
                     );
                     $res['mess']='';
                 }

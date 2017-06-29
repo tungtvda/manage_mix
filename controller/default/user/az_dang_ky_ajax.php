@@ -41,6 +41,7 @@ if (isset($_POST['mail_create']) && isset($_POST['email_dangky']) && isset($_POS
                 $dangky = new user();
                 $dangky->name = $name;
                 $dangky->user_email = $user_email;
+                $dangky->user_name = $user_email;
                 $Pass = hash_pass($password);
                 $dangky->password = $Pass;
                 $dangky->created = _returnGetDateTime();

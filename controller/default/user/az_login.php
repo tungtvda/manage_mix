@@ -65,6 +65,7 @@ if(isset($_POST['username_login'])&&isset($_POST['password_login'])){
                        'created'=>_return_mc_encrypt($data_check_exist_user[0]->created,ENCRYPTION_KEY,1),
                        'avatar'=>_return_mc_encrypt($avatar,ENCRYPTION_KEY,1),
                        'token_code'=>_return_mc_encrypt($rand_token_code,ENCRYPTION_KEY,1),
+                       'time_token'=>_return_mc_encrypt($user_login->time_token,ENCRYPTION_KEY,1),
                     );
                     $res['mess']='';
                 }

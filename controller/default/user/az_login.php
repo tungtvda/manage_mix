@@ -32,6 +32,8 @@ if(isset($_POST['username_login'])&&isset($_POST['password_login'])){
                 $user_login=new user((array)$data_check_exist_user[0]);
                 $user_login->memori_login=$rememberme;
                 $user_login->time_token=_returnGetDateTime();
+                $rand_token_code=_return_mc_encrypt(_returnRandString(15));
+                $user_login->token_code=$rand_token_code;
                 if($data_check_exist_user[0]->login_two_steps==1){
                     $rand_string=_returnRandString(15);
                     $user_login->code_login=$rand_string;
@@ -62,6 +64,7 @@ if(isset($_POST['username_login'])&&isset($_POST['password_login'])){
                        'user_code'=>_return_mc_encrypt($data_check_exist_user[0]->user_code,ENCRYPTION_KEY,1),
                        'created'=>_return_mc_encrypt($data_check_exist_user[0]->created,ENCRYPTION_KEY,1),
                        'avatar'=>_return_mc_encrypt($avatar,ENCRYPTION_KEY,1),
+                       'token_code'=>_return_mc_encrypt($rand_token_code,ENCRYPTION_KEY,1),
                     );
                     $res['mess']='';
                 }

@@ -41,6 +41,7 @@ if(isset($_POST['ma_xac_nhan'])&&isset($_POST['email'])){
                     'user_code'=>_return_mc_encrypt($data_check_exist_user[0]->user_code,ENCRYPTION_KEY,1),
                     'created'=>_return_mc_encrypt($data_check_exist_user[0]->created,ENCRYPTION_KEY,1),
                     'avatar'=>_return_mc_encrypt($avatar,ENCRYPTION_KEY,1),
+                    'token_code'=>_return_mc_encrypt($data_check_exist_user[0]->token_code,ENCRYPTION_KEY,1),
                 );
                 $res['mess']='';
             }else{

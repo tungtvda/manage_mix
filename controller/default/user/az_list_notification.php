@@ -27,8 +27,8 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['user_email']) 
     $data_check_exist_user = user_getByTop('', $dk_check_user, 'id desc');
     if (count($data_check_exist_user) > 0) {
         if(isset($_POST['top_5'])){
-            $count_active=notification_count('status=0');
-            $count_un_read=notification_count('status=2');
+            $count_active=notification_count('status=0 and user_id='.$id);
+            $count_un_read=notification_count('status=2 and user_id='.$id);
             $data_noti=notification_getByTop('5','user_id='.$id,'id desc');
             $res['success']=1;
             $res['count_active']=$count_active;
@@ -38,6 +38,5 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['user_email']) 
 
         }
     }
-
 }
 echo json_encode($res);

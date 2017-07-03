@@ -90,3 +90,7 @@ function notification_count($where)
     }
    else return false;
 }
+function notification_update_list($obj,$dk='')
+{
+    return exe_query("update notification set status='$obj->status' where ".$dk,'notification');
+}

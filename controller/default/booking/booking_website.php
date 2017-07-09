@@ -58,6 +58,9 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
     $number_3=_return_mc_decrypt(_returnPostParamSecurity('number_3'), '');
     $gen=_return_mc_decrypt(_returnPostParamSecurity('gen'), '');
     $tol=_return_mc_decrypt(_returnPostParamSecurity('tol'), '');
+    $key_user=_return_mc_decrypt(_returnPostParamSecurity('key_user'), '');
+    echo $key_user;
+    exit;
     if($nguon_tour!=''){
         $data_nguon_tour=nguon_tour_getByTop('1','name="'.$nguon_tour.'"','id desc');
         if(count($data_nguon_tour)>0){

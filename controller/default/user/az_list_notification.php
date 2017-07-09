@@ -29,11 +29,15 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['user_email']) 
         if(isset($_POST['top_5'])){
             $count_active=notification_count('status=0 and user_id='.$id);
             $count_un_read=notification_count('status=2 and user_id='.$id);
-            $data_noti=notification_getByTop('5','user_id='.$id,'id desc');
+            $current=isset($_POST['page'])?$_POST['page']:'1';;
+            $pagesize=5;
+            $data_noti=notification_getByPaging($current,$pagesize,'id desc','user_id='.$id);
             $res['success']=1;
             $res['count_active']=$count_active;
             $res['count_un_read']=$count_un_read;
             $res['data_noti']=$data_noti;
+            $res['current']=$current+1;
+            $res['pagesize']=$pagesize;
         }else{
 
         }

@@ -36,7 +36,11 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['user_email']) 
             $res['count_active']=$count_active;
             $res['count_un_read']=$count_un_read;
             $res['data_noti']=$data_noti;
-            $res['current']=$current+1;
+            if(count($data_noti)>0){
+                $res['current']=$current+1;
+            }else{
+                $res['current']=$current;
+            }
             $res['pagesize']=$pagesize;
         }else{
 

@@ -1188,7 +1188,7 @@ function _updateCustomerBooking($name_customer_sub, $email_customer, $phone_cust
     $booking_cus = new customer_booking();
     $booking_cus->booking_id = $id_booking;
     customer_booking_delete_all($booking_cus);
-    if (count($name_customer_sub) > 0) {
+    if (count($name_customer_sub) > 0 && $name_customer_sub!='') {
         foreach ($name_customer_sub as $key => $value) {
             $name_sub = $value;
             $email_sub = '';

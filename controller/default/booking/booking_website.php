@@ -102,6 +102,14 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
                 exit;
             }
         }
+        if($key_user!=''&&$key_user!=0){
+            $data_user_tiep_thi=user_getById($key_user);
+            if(count($data_user_tiep_thi)==0){
+                $key_user=0;
+            }
+        }else{
+            $key_user=0;
+        }
 
         $booking_model=new booking();
         $booking_model->id_tour=$id_tour;
@@ -126,7 +134,7 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
         $booking_model->num_tre_em_5=$num_tre_em_5;
         $booking_model->total_price=$tol;
         $booking_model->tien_thanh_toan='';
-        $booking_model->user_id=0;
+        $booking_model->user_id=$key_user;
         $booking_model->note=$note;
         $booking_model->status=1;
         $booking_model->confirm_admin=0;
@@ -142,7 +150,11 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
         $data_booking=booking_getByTop('1','code_booking="'.$code_booking.'"','');
         if(count($data_booking)>0){
             $id_booking=$data_booking[0]->id;
+            if($key_user!=0){
+                _insertNotification('Khách hàng '.$name_customer.' đã đặt tour được gắn mã tiếp thị của bạn',0,$key_user,'/tiep-thi-lien-ket/booking-detail/?noti=1&confirm=1&id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY).'',0,'');
+            }
         }
+
 
         _updateCustomerBooking($name_customer_sub,$email_customer_sub,$phone_customer_sub,$address_customer_sub,$tuoi_customer_sub,$tuoi_number_customer_sub,$birthday_customer_sub,$passport_customer_sub,$date_passport_customer_sub,$id_booking);
         $message='';
@@ -157,7 +169,7 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
         $subject='Xác nhận đơn hàng '.$code_booking;
         $message.='<p>Khách hàng '.$name_customer.' đã thêm một đơn hàng từ '.$nguon_tour.'</p>';
         $message.='<a>Bạn vui lòng truy cập <a href="'.$link_noti.'">đường link</a> để xác nhận đơn hàng</p>';
-         SendMail('info@mixtourist.com.vn', $message, $subject);
+//         SendMail('info@mixtourist.com.vn', $message, $subject);
 //        SendMail('tungtv.soict@gmail.com', $message, $subject);
         $mess_log='Khách hàng '.$name_customer.' đã thêm một đơn hàng từ '.$nguon_tour;
         _insertLog(0,6,6,21,$id_booking,'','',$mess_log);

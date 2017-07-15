@@ -148,13 +148,15 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
         $booking_model->code_booking=$code_booking;
         booking_insert($booking_model);
         $data_booking=booking_getByTop('1','code_booking="'.$code_booking.'"','');
+        $array_user=array();
         if(count($data_booking)>0){
             $id_booking=$data_booking[0]->id;
             if($key_user!=0){
+                $array_user['user_name']=$data_user_tiep_thi[0]->name;
+                $array_user['user_email']=$data_user_tiep_thi[0]->user_email;
                 _insertNotification('Khách hàng '.$name_customer.' đã đặt tour được gắn mã tiếp thị của bạn',0,$key_user,'/tiep-thi-lien-ket/booking-detail/?noti=1&confirm=1&id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY).'',0,'');
             }
         }
-
 
         _updateCustomerBooking($name_customer_sub,$email_customer_sub,$phone_customer_sub,$address_customer_sub,$tuoi_customer_sub,$tuoi_number_customer_sub,$birthday_customer_sub,$passport_customer_sub,$date_passport_customer_sub,$id_booking);
         $message='';
@@ -173,7 +175,12 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
 //        SendMail('tungtv.soict@gmail.com', $message, $subject);
         $mess_log='Khách hàng '.$name_customer.' đã thêm một đơn hàng từ '.$nguon_tour;
         _insertLog(0,6,6,21,$id_booking,'','',$mess_log);
-        echo $code_booking;
+        $item_res=array(
+            'code_booking'=>$code_booking,
+            'user'=>$array_user,
+            'id_booking'=>_return_mc_encrypt($id_booking, ENCRYPTION_KEY)
+        );
+        echo json_encode($item_res);
     }
 
 

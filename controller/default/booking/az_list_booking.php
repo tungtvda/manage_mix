@@ -9,10 +9,7 @@ if (!defined('SITE_NAME')) {
     require_once '../../../config.php';
 }
 require_once DIR . '/controller/default/public.php';
-require_once DIR . '/common/locdautiengviet.php';
-require_once(DIR . "/common/hash_pass.php");
-require_once DIR . '/common/class.phpmailer.php';
-require_once(DIR . "/common/Mail.php");
+require_once DIR . '/common/paging.php';
 $data = array();
 $res = array(
     'success' => 0,
@@ -26,9 +23,31 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['user_email']) 
     $dk_check_user = "id=" . $id . " and user_email ='" . $user_email . "' and name='" . $name . "' and user_code='" . $user_code . "' and token_code ='" . $token_code . "'";
     $data_check_exist_user = user_getByTop('', $dk_check_user, 'id desc');
     if (count($data_check_exist_user) > 0) {
-        $res['moi']=booking_count('status=1 or status=2 or status=4');
-        $res['ket_thuc']=booking_count('status=5');
-        $res['huy']=booking_count('status=3');
+        if(isset($_POST['type'])){
+            $type=_returnGetParamSecurity('type');
+        }else{
+            $type=0;
+        }
+        $data['current']=isset($_POST['page'])?$_POST['page']:'1';
+        $data['pagesize']=isset($_POST['pagesize'])?$_POST['pagesize']:'10';
+        $data['site_name']=isset($_POST['site_name'])?$_POST['site_name']:SITE_NAME;
+        $link='/tiep-thi-lien-ket/don-hang?type='.$type;
+        $dk='user_id='.$id;
+        switch($type){
+            case '1':
+                $dk .=' and (status=1 or status=2 and status=4)';
+                break;
+            case '2':
+                $dk .=' and status=5';
+                break;
+            case '3':
+                $dk .=' and status=3';
+                break;
+        }
+
+        $data['count']=booking_count($dk);
+        $res['danhsach']=booking_getByPaging($data['current'],$data['pagesize'],'id desc',$dk);
+        $res['PAGING'] = showPagingAtLinkTiepThi($data['count'], $data['pagesize'], $data['current'], '' .  $data['site_name'] . $link);
     }
 }
 echo json_encode($res);

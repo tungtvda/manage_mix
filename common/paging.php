@@ -52,6 +52,29 @@ function showPagingAtLink($countRecord,$PageSize,$currentPage,$Link,$order='')
     }
     return $result;
 }
+function showPagingAtLinkTiepThi($countRecord,$PageSize,$currentPage,$Link)
+{
+    $result="";
+    if($PageSize>=$countRecord) return $result;
+    if($currentPage!=1)
+    {
+        $result=$result."<li><a  href=\"".$Link."&page=1\" title=\"First Page\"> << </a></li><li><a href=\"".$Link."&page=".($currentPage-1)."\" title=\"Previous Page\"> «</a></li>";
+    }
+    for($i=1;$i<=($countRecord/$PageSize+1);$i++)
+    {
+        if($i==$currentPage) $result=$result."<li class=\"active\"><span  href=\"".$Link."&page=".$i."\"   title=\"".$i."\">".$i."</span></li>";
+        else
+        {
+            $result=$result."<li><a href=\"".$Link."&page=".$i."\" class=\"number \" title=\"".$i."\">".$i."</a></li>";
+        }
+
+    }
+    if($currentPage!=intval($countRecord/$PageSize+1))
+    {
+        $result=$result."<li><a href=\"".$Link."&page=".($currentPage+1)."\" title=\"Next Page\">»</a></li><li><a href=\"".$Link."&page=".intval($countRecord/$PageSize+1)."\" title=\"Last Page\"> >> </a></li>";
+    }
+    return $result;
+}
 function showPagingPart($count,$currentPage,$Link)
 {
     $result="";

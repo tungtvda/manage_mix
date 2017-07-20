@@ -14,6 +14,8 @@ $data = array();
 $res = array(
     'success' => 0,
 );
+//echo json_encode($_POST);
+//exit;
 if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['user_email']) && isset($_POST['user_code']) && isset($_POST['token_code'])) {
     $id = _return_mc_decrypt(_returnPostParamSecurity('id'));
     $name = _return_mc_decrypt(_returnPostParamSecurity('name'));
@@ -24,13 +26,13 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['user_email']) 
     $data_check_exist_user = user_getByTop('', $dk_check_user, 'id desc');
     if (count($data_check_exist_user) > 0) {
         if(isset($_POST['type'])){
-            $type=_returnGetParamSecurity('type');
+            $type=_returnPostParamSecurity('type');
         }else{
             $type=0;
         }
-        $data['current']=isset($_POST['page'])?$_POST['page']:'1';
-        $data['pagesize']=isset($_POST['pagesize'])?$_POST['pagesize']:'10';
-        $data['site_name']=isset($_POST['site_name'])?$_POST['site_name']:SITE_NAME;
+        $data['current']=isset($_POST['page'])?_returnPostParamSecurity('page'):'1';
+        $data['pagesize']=isset($_POST['pagesize'])?_returnPostParamSecurity('pagesize'):'10';
+        $data['site_name']=isset($_POST['site_name'])?_returnPostParamSecurity('site_name'):SITE_NAME;
         $link='/tiep-thi-lien-ket/don-hang?type='.$type;
         $dk='user_id='.$id;
         switch($type){

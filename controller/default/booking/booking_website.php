@@ -19,6 +19,7 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
     $ngay_khoi_hanh = _return_mc_decrypt(_returnPostParamSecurity('ngay_khoi_hanh'), '');
     $name_tour = _return_mc_decrypt(_returnPostParamSecurity('name_tour'), '');
     $code_tour = _return_mc_decrypt(_returnPostParamSecurity('code_tour'), '');
+    $price_tiep_thi = _return_mc_decrypt(_returnPostParamSecurity('price_tiep_thi'), '');
     $id_tour = _return_mc_decrypt(_returnPostParamSecurity('id_tour'), '');
     $nguon_tour = _return_mc_decrypt(_returnPostParamSecurity('ng_tour'), '');
     $phuong_tien= _return_mc_decrypt(_returnPostParamSecurity('phuong_tien'), '');
@@ -116,6 +117,7 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
         $booking_model->name_tour=$name_tour;
         $booking_model->code_tour=$code_tour;
         $booking_model->price_tour=$price;
+        $booking_model->price_tiep_thi=$price_tiep_thi;
         $booking_model->price_11=$price_511;
         $booking_model->price_5=$price_5;
         $booking_model->price_new=$price_new;

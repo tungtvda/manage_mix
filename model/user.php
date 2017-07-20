@@ -1,7 +1,7 @@
 <?php
 class user
 {
-    public $id,$name,$user_role,$permison_module,$permison_form,$permison_action,$mr,$address,$phone,$mobi,$user_name,$user_code,$user_email,$password,$login_two_steps,$code_login,$phong_ban,$chuc_vu,$nganh_nghe,$gender,$birthday,$avatar,$skype,$facebook,$ngay_lam_viec,$ngay_chinh_thuc,$guides,$guide_card_number,$tax_code,$cmnd,$date_range_cmnd,$issued_by_cmnd,$number_passport,$date_range_passport,$issued_by_passport,$expiration_date_passport,$dan_toc,$ho_khau_tt,$hon_nhan,$bang_cap,$language,$account_number_bank,$bank,$open_bank,$religion,$note,$status,$created,$token_code,$time_token,$memori_login,$updated,$created_by,$updated_by;
+    public $id,$name,$user_role,$permison_module,$permison_form,$permison_action,$mr,$hoa_hong,$address,$phone,$mobi,$user_name,$user_code,$user_email,$password,$login_two_steps,$code_login,$phong_ban,$chuc_vu,$nganh_nghe,$gender,$birthday,$avatar,$skype,$facebook,$ngay_lam_viec,$ngay_chinh_thuc,$guides,$guide_card_number,$tax_code,$cmnd,$date_range_cmnd,$issued_by_cmnd,$number_passport,$date_range_passport,$issued_by_passport,$expiration_date_passport,$dan_toc,$ho_khau_tt,$hon_nhan,$bang_cap,$language,$account_number_bank,$bank,$open_bank,$religion,$note,$status,$created,$token_code,$time_token,$memori_login,$updated,$created_by,$updated_by;
     public function user($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
@@ -11,6 +11,7 @@ class user
     $this->permison_form=isset($data['permison_form'])?$data['permison_form']:'';
     $this->permison_action=isset($data['permison_action'])?$data['permison_action']:'';
     $this->mr=isset($data['mr'])?$data['mr']:'';
+    $this->hoa_hong=isset($data['hoa_hong'])?$data['hoa_hong']:'';
     $this->address=isset($data['address'])?$data['address']:'';
     $this->phone=isset($data['phone'])?$data['phone']:'';
     $this->mobi=isset($data['mobi'])?$data['mobi']:'';
@@ -69,6 +70,7 @@ class user
             $this->permison_form=addslashes($this->permison_form);
             $this->permison_action=addslashes($this->permison_action);
             $this->mr=addslashes($this->mr);
+            $this->hoa_hong=addslashes($this->hoa_hong);
             $this->address=addslashes($this->address);
             $this->phone=addslashes($this->phone);
             $this->mobi=addslashes($this->mobi);
@@ -126,6 +128,7 @@ class user
             $this->permison_form=stripslashes($this->permison_form);
             $this->permison_action=stripslashes($this->permison_action);
             $this->mr=stripslashes($this->mr);
+            $this->hoa_hong=stripslashes($this->hoa_hong);
             $this->address=stripslashes($this->address);
             $this->phone=stripslashes($this->phone);
             $this->mobi=stripslashes($this->mobi);

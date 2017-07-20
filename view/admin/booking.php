@@ -98,6 +98,7 @@ function showFrom($form,$ListKey=array())
     $str_from.='<p><label>name_tour</label><input class="text-input small-input" type="text"  name="name_tour" value="'.(($form!=false)?$form->name_tour:'').'" /></p>';
     $str_from.='<p><label>code_tour</label><input class="text-input small-input" type="text"  name="code_tour" value="'.(($form!=false)?$form->code_tour:'').'" /></p>';
     $str_from.='<p><label>price_tour</label><input class="text-input small-input" type="text"  name="price_tour" value="'.(($form!=false)?$form->price_tour:'').'" /></p>';
+    $str_from.='<p><label>price_tiep_thi</label><input class="text-input small-input" type="text"  name="price_tiep_thi" value="'.(($form!=false)?$form->price_tiep_thi:'').'" /></p>';
     $str_from.='<p><label>price_11</label><input class="text-input small-input" type="text"  name="price_11" value="'.(($form!=false)?$form->price_11:'').'" /></p>';
     $str_from.='<p><label>price_5</label><input class="text-input small-input" type="text"  name="price_5" value="'.(($form!=false)?$form->price_5:'').'" /></p>';
     $str_from.='<p><label>price_new</label><input class="text-input small-input" type="text"  name="price_new" value="'.(($form!=false)?$form->price_new:'').'" /></p>';

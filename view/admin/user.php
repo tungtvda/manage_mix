@@ -57,6 +57,7 @@ function showFrom($form,$ListKey=array())
     $str_from.='<p><label>permison_form</label><input class="text-input small-input" type="text"  name="permison_form" value="'.(($form!=false)?$form->permison_form:'').'" /></p>';
     $str_from.='<p><label>permison_action</label><input class="text-input small-input" type="text"  name="permison_action" value="'.(($form!=false)?$form->permison_action:'').'" /></p>';
     $str_from.='<p><label>mr</label><input class="text-input small-input" type="text"  name="mr" value="'.(($form!=false)?$form->mr:'').'" /></p>';
+    $str_from.='<p><label>hoa_hong</label><input class="text-input small-input" type="text"  name="hoa_hong" value="'.(($form!=false)?$form->hoa_hong:'').'" /></p>';
     $str_from.='<p><label>address</label><input class="text-input small-input" type="text"  name="address" value="'.(($form!=false)?$form->address:'').'" /></p>';
     $str_from.='<p><label>phone</label><input class="text-input small-input" type="text"  name="phone" value="'.(($form!=false)?$form->phone:'').'" /></p>';
     $str_from.='<p><label>mobi</label><input class="text-input small-input" type="text"  name="mobi" value="'.(($form!=false)?$form->mobi:'').'" /></p>';

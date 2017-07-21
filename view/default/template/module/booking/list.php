@@ -226,7 +226,7 @@
                                         </td>
                                         <td>
                                             <?php
-                                            if ($row->price_tiep_thi != '' && $row->name_user != '' && $row->type_user==2) {
+                                            if ($row->price_tiep_thi != '' && $row->name_user != '' && $row->type_user==2 && $row->status!=3&&$row->status!=5&&$row->status!=6) {
                                                 $price_tiep_thi = number_format((int)$row->price_tiep_thi, 0, ",", ".") . ' vnđ';
                                                 $function_='hidden';
                                                 if($row->status_tiep_thi==1){

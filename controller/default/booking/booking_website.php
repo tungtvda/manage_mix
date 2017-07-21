@@ -156,7 +156,7 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
             if($key_user!=0){
                 $array_user['user_name']=$data_user_tiep_thi[0]->name;
                 $array_user['user_email']=$data_user_tiep_thi[0]->user_email;
-                _insertNotification('Khách hàng '.$name_customer.' đã đặt tour được gắn mã tiếp thị của bạn',0,$key_user,'/tiep-thi-lien-ket/booking-detail/?noti=1&confirm=1&id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY).'',0,'');
+                _insertNotification('Khách hàng '.$name_customer.' đã đặt tour được gắn mã tiếp thị của bạn',0,$key_user,'/tiep-thi-lien-ket/don-hang/chi-tiet?noti=1&confirm=1&id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY).'',0,'');
             }
         }
 

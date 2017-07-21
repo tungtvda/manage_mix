@@ -72,6 +72,8 @@ RewriteRule ^booking-ket-thuc/sua$ controller/default/booking/themmoi.php
 RewriteRule ^booking-ban-nhap/sua$ controller/default/booking/themmoi.php
 
 RewriteRule ^booking/confirm-order$ controller/default/booking/confirm_order.php
+RewriteRule ^booking/confirm-tiepthi$ controller/default/booking/confirm_tiepthi.php
+
 RewriteRule ^booking-new/confirm-order$ controller/default/booking/confirm_order.php
 RewriteRule ^booking-giao-dich/confirm-order$ controller/default/booking/confirm_order.php
 RewriteRule ^booking-tam-dung/confirm-order$ controller/default/booking/confirm_order.php

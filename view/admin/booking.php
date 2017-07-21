@@ -44,6 +44,7 @@ function showTableBody($data)
         $TableBody.="<td>".$obj->name_tour."</td>";
         $TableBody.="<td>".$obj->code_tour."</td>";
         $TableBody.="<td>".$obj->price_tour."</td>";
+        $TableBody.="<td>".$obj->price_tour."</td>";
         $TableBody.="<td>".$obj->price_11."</td>";
         $TableBody.="<td>".$obj->price_5."</td>";
         $TableBody.="<td>".$obj->price_new."</td>";
@@ -99,6 +100,8 @@ function showFrom($form,$ListKey=array())
     $str_from.='<p><label>code_tour</label><input class="text-input small-input" type="text"  name="code_tour" value="'.(($form!=false)?$form->code_tour:'').'" /></p>';
     $str_from.='<p><label>price_tour</label><input class="text-input small-input" type="text"  name="price_tour" value="'.(($form!=false)?$form->price_tour:'').'" /></p>';
     $str_from.='<p><label>price_tiep_thi</label><input class="text-input small-input" type="text"  name="price_tiep_thi" value="'.(($form!=false)?$form->price_tiep_thi:'').'" /></p>';
+    $str_from.='<p><label>status_tiep_thi</label><input class="text-input small-input" type="text"  name="status_tiep_thi" value="'.(($form!=false)?$form->status_tiep_thi:'').'" /></p>';
+    $str_from.='<p><label>confirm_admin_tiep_thi</label><input class="text-input small-input" type="text"  name="confirm_admin_tiep_thi" value="'.(($form!=false)?$form->confirm_admin_tiep_thi:'').'" /></p>';
     $str_from.='<p><label>price_11</label><input class="text-input small-input" type="text"  name="price_11" value="'.(($form!=false)?$form->price_11:'').'" /></p>';
     $str_from.='<p><label>price_5</label><input class="text-input small-input" type="text"  name="price_5" value="'.(($form!=false)?$form->price_5:'').'" /></p>';
     $str_from.='<p><label>price_new</label><input class="text-input small-input" type="text"  name="price_new" value="'.(($form!=false)?$form->price_new:'').'" /></p>';

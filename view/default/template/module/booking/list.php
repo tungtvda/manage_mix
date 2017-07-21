@@ -21,7 +21,7 @@
                 <div class="clearfix">
                     <div class="col-md-6 col-sm-6 col-xs-12 pink" style="padding-left: 0px">
                         <?php if (_returnCheckAction(21) == 1) { ?>
-                            <a href="<?php echo SITE_NAME.'/'.$action_link ?>/dat-tour"
+                            <a href="<?php echo SITE_NAME . '/' . $action_link ?>/dat-tour"
                                class="btn btn-white  btn-create-new-tab btn-create-new-tab-hover">
                                 <i class="ace-icon fa fa-plane bigger-120 "></i>
                                 Đặt tour
@@ -54,7 +54,7 @@
                                 <li class="divider"></li>
                                 <?php if (_returnCheckAction(21) == 1) { ?>
                                     <li>
-                                        <a href="<?php echo SITE_NAME.'/'.$action_link ?>/dat-tour">Đặt tour</a>
+                                        <a href="<?php echo SITE_NAME . '/' . $action_link ?>/dat-tour">Đặt tour</a>
                                     </li>
                                 <?php } ?>
                             </ul>
@@ -96,6 +96,7 @@
                                 <th>Sales</th>
                                 <th>Người tạo</th>
                                 <th>Xác nhận</th>
+                                <th>Xác nhận hoa hồng</th>
                                 <th>Action</th>
 
                             </tr>
@@ -119,10 +120,10 @@
                                             <?php echo $dem; ?>
                                         </td>
                                         <td>
-                                            <a href="<?php echo SITE_NAME.'/'.$action_link ?>/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"><?php echo $row->code_booking ?></a>
+                                            <a href="<?php echo SITE_NAME . '/' . $action_link ?>/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"><?php echo $row->code_booking ?></a>
                                         </td>
                                         <td style="text-align: center">
-                                            <a href="<?php echo SITE_NAME.'/'.$action_link ?>/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"><?php echo $row->name_tour ?></a>
+                                            <a href="<?php echo SITE_NAME . '/' . $action_link ?>/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"><?php echo $row->name_tour ?></a>
                                         </td>
                                         <td><?php
                                             $data_customer = customer_getById($row->id_customer);
@@ -176,9 +177,9 @@
                                         </td>
                                         <td>
                                             <?php
-                                            $data_sales = user_getById($row->user_id);
-                                            if (count($data_sales) > 0) {
-                                                echo '<a href="' . SITE_NAME . '/nhan-vien/sua?id=' . _return_mc_encrypt($data_sales[0]->id, ENCRYPTION_KEY) . '">' . $data_sales[0]->name . '</a>';
+                                            //                                            $data_sales = user_getById($row->user_id);
+                                            if ($row->name_user != '') {
+                                                echo '<a href="' . SITE_NAME . '/nhan-vien/sua?id=' . _return_mc_encrypt($row->user_id, ENCRYPTION_KEY) . '">' . $row->name_user . '</a>';
                                             }
                                             ?>
 
@@ -195,42 +196,62 @@
                                             <span hidden><?php echo (int)$row->confirm_admin ?></span>
                                             <?php if ($row->confirm_admin > 0) { ?>
                                                 <?php
-                                                $data_user_confirm=user_getById($row->confirm_admin);
-                                                $name_user_confirm='';
-                                                if(count($data_user_confirm)>0){
-                                                    $name_user_confirm=$data_user_confirm[0]->name;
+                                                $data_user_confirm = user_getById($row->confirm_admin);
+                                                $name_user_confirm = '';
+                                                if (count($data_user_confirm) > 0) {
+                                                    $name_user_confirm = $data_user_confirm[0]->name;
                                                 }
                                                 ?>
                                                 <label title="<?php echo $name_user_confirm ?>">
-                                                    <input disabled checked name="switch-field-1" class="ace ace-switch ace-switch-3" type="checkbox">
+                                                    <input disabled checked name="switch-field-1"
+                                                           class="ace ace-switch ace-switch-3" type="checkbox">
                                                     <span class="lbl"></span>
                                                 </label>
                                             <?php } else { ?>
                                                 <label title="Chưa được xác nhận">
-                                                    <input  name="switch-field-1"
-                                                            class="ace ace-switch ace-switch-3 <?php if($_SESSION['user_role']==1){?> confirm_booking_list<?php }?>"
-                                                            <?php if($_SESSION['user_role']==1){?>
-                                                            count_id="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY)  ?>"
-                                                                id_filed="<?php echo $row->id  ?>"
+                                                    <input name="switch-field-1"
+                                                           class="ace ace-switch ace-switch-3 <?php if ($_SESSION['user_role'] == 1) { ?> confirm_booking_list<?php } ?>"
+                                                        <?php if ($_SESSION['user_role'] == 1) { ?>
+                                                            count_id="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY) ?>"
+                                                            id_filed="<?php echo $row->id ?>"
                                                             code="<?php echo $row->code_booking ?>"
-                                                                id="confirm_booking_<?php echo $row->id ?>"
-                                                            <?php }?>
-                                                            type="checkbox">
+                                                            id="confirm_booking_<?php echo $row->id ?>"
+                                                        <?php } ?>
+                                                           type="checkbox">
 
                                                     <span class="lbl"></span>
                                                 </label>
 
                                             <?php } ?>
                                         </td>
-                                        <!--                                        <td>-->
-                                        <?php //echo _returnDateFormatConvert($row->created) ?><!--</td>-->
+                                        <td>
+                                            <?php
+                                            if ($row->price_tiep_thi != '' && $row->name_user != '' && $row->type_user==2) {
+                                                $price_tiep_thi = number_format((int)$row->price_tiep_thi, 0, ",", ".") . ' vnđ';
+                                                $function_='hidden';
+                                                if($row->status_tiep_thi==1){
+                                                    $class='green';
+                                                }else{
+                                                    $class='red';
+                                                }
+                                                if($_SESSION['user_role'] == 1 && $row->status_tiep_thi==0){
+                                                echo '<label id="remove_btn_tiepthi_'.$row->id.'" title="Chưa được xác nhận">
+                                                    <input name="switch-field-1" class="ace ace-switch ace-switch-3  confirm_tiep_thi" user="'.$row->name_user.' - '.$row->user_code.'"
+                                                    count_id="'._return_mc_encrypt($row->id, ENCRYPTION_KEY).'" id_filed="'.$row->id.'" code="'.$row->code_booking.'" id="confirm_tiep_thi_'.$row->id.'" type="checkbox">
+                                                    <span class="lbl"></span>
+                                                </label>';
+                                                }
+                                                echo '<span id="change_color_'.$row->id.'" class="'.$class.'"><b>' . $price_tiep_thi . '</b></span>';
+                                            }
+                                            ?>
+                                        </td>
 
                                         <td>
                                             <div class="hidden-sm hidden-xs action-buttons">
 
                                                 <?php if (_returnCheckAction(18) == 1) { ?>
                                                     <a title="Danh sách chi phí" class="red"
-                                                       href="<?php echo SITE_NAME.'/'.$action_link ?>/chi-phi?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
+                                                       href="<?php echo SITE_NAME . '/' . $action_link ?>/chi-phi?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
                                                         <i class="ace-icon fa fa-usd bigger-130"></i>
                                                     </a>
                                                 <?php } ?>
@@ -245,7 +266,7 @@
                                                     </a>
 
                                                     <a title="Sửa tab mới" class="green"
-                                                       href="<?php echo SITE_NAME.'/'.$action_link ?>/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
+                                                       href="<?php echo SITE_NAME . '/' . $action_link ?>/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
                                                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                                                     </a>
                                                 <?php } ?>
@@ -253,7 +274,7 @@
                                                     <a title="Xóa" class="red delete_record" href="javascript:void(0)"
                                                        deleteid="<?php echo $row->id ?>"
                                                        name_record_delete="<?php echo $row->code_booking ?>"
-                                                       url_delete="<?php echo SITE_NAME.'/'.$action_link ?>/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
+                                                       url_delete="<?php echo SITE_NAME . '/' . $action_link ?>/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
                                                         <i class="ace-icon fa fa-trash-o bigger-130"></i>
                                                     </a>
                                                 <?php } ?>
@@ -269,8 +290,8 @@
                                                     <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 
                                                         <?php if (_returnCheckAction(18) == 1) { ?>
-                                                            <li  class="red">
-                                                                <a href="<?php echo SITE_NAME.'/'.$action_link ?>/chi-phi?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                            <li class="red">
+                                                                <a href="<?php echo SITE_NAME . '/' . $action_link ?>/chi-phi?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
                                                                    class="tooltip-success" data-rel="tooltip"
                                                                    title="Danh sách chi phí">
 																				<span class="">
@@ -292,7 +313,7 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="<?php echo SITE_NAME.'/'.$action_link ?>/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                                <a href="<?php echo SITE_NAME . '/' . $action_link ?>/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
                                                                    class="tooltip-success" data-rel="tooltip"
                                                                    title="Sửa tab mới">
 																				<span class="">
@@ -306,7 +327,7 @@
                                                                 <a href="javascript:void(0)"
                                                                    deleteid="<?php echo $row->id ?>"
                                                                    name_record_delete="<?php echo $row->code_booking ?>"
-                                                                   url_delete="<?php echo SITE_NAME.'/'.$action_link ?>/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                                   url_delete="<?php echo SITE_NAME . '/' . $action_link ?>/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
                                                                    class="tooltip-error delete_record" title="Xóa">
 																				<span class="red">
 																					<i class="ace-icon fa fa-trash-o bigger-120"></i>
@@ -351,7 +372,7 @@
                         <li class="divider"></li>
                         <?php if (_returnCheckAction(21) == 1) { ?>
                             <li>
-                                <a href="<?php echo SITE_NAME.'/'.$action_link ?>/them-moi">Đặt tour</a>
+                                <a href="<?php echo SITE_NAME . '/' . $action_link ?>/them-moi">Đặt tour</a>
                             </li>
                         <?php } ?>
                     </ul>

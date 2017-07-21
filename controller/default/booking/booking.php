@@ -29,7 +29,7 @@ switch($action_link){
         if($data_dk_fill!=''){
             $data_dk_fill.=' and ';
         }
-        $data_dk_fill.=' status=1';
+        $data_dk_fill.=' bk.status=1';
         break;
     case 'booking-giao-dich':
         $data['title']='Danh sách đơn hàng đang giao dịch';
@@ -37,7 +37,7 @@ switch($action_link){
         if($data_dk_fill!=''){
             $data_dk_fill.=' and ';
         }
-        $data_dk_fill.=' status=2 ';
+        $data_dk_fill.=' bk.status=2 ';
         break;
     case 'booking-tam-dung':
         $data['title']='Danh sách đơn hàng tạm dừng';
@@ -45,7 +45,7 @@ switch($action_link){
         if($data_dk_fill!=''){
             $data_dk_fill.=' and ';
         }
-        $data_dk_fill.=' status=3 ';
+        $data_dk_fill.=' bk.status=3 ';
         break;
     case 'booking-no-tien':
         $data['title']='Danh sách đơn hàng còn nợ tiền';
@@ -53,7 +53,7 @@ switch($action_link){
         if($data_dk_fill!=''){
             $data_dk_fill.=' and ';
         }
-        $data_dk_fill.=' status=4 ';
+        $data_dk_fill.=' bk.status=4 ';
         break;
     case 'booking-ket-thuc':
         $data['title']='Danh sách đơn hàng kết thúc';
@@ -61,7 +61,7 @@ switch($action_link){
         if($data_dk_fill!=''){
             $data_dk_fill.=' and ';
         }
-        $data_dk_fill.=' status=5 ';
+        $data_dk_fill.=' bk.status=5 ';
         break;
     case 'booking-ban-nhap':
         $data['title']='Danh sách đơn hàng nháp';
@@ -69,7 +69,7 @@ switch($action_link){
         if($data_dk_fill!=''){
             $data_dk_fill.=' and ';
         }
-        $data_dk_fill.=' status=6 ';
+        $data_dk_fill.=' bk.status=6 ';
         break;
     default:
         $data['title']='Danh sách đặt tour';
@@ -80,13 +80,14 @@ $data['dk_find'] =$data_dk_fill;
 $url_bread='<li class="active">Booking</li>';
 $data['breadcrumbs']=$url_bread;
 $data['action_link']=$action_link;
-$count=11;
+$count=12;
 //_returnCreateCustomer(1);
 //_deleteSubmitForm('customer', 'customer_delete');
 
 
 
-$data['list']=booking_getByTop('',$data_dk_fill,'updated desc');
+//$data['list']=booking_getByTop('','','updated desc');
+$data['list']=bookingAllDongHang($data_dk_fill);
 $data['module_valid'] = "booking";
 $data['title_print'] = $data['title'];
 show_header($data);

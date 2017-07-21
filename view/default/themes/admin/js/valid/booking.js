@@ -475,7 +475,7 @@ jQuery(function ($) {
 
         var id=$(this).attr('count_id');
         var code=$(this).attr('code');
-        var link = url + '/booking/confirm-order/';
+        var link = url + '/booking/confirm-order';
 
         if(id==''||link==''||code==''){
             lnv.alert({
@@ -529,7 +529,7 @@ jQuery(function ($) {
         var id_filed=$(this).attr('id_filed');
         var id=$(this).attr('count_id');
         var code=$(this).attr('code');
-        var link = url + '/booking/confirm-order/';
+        var link = url + '/booking/confirm-order';
         var field_check = "confirm_booking_" + id_filed;
         if(id==''||link==''||code==''||id_filed==''){
             lnv.alert({
@@ -565,6 +565,63 @@ jQuery(function ($) {
                                 });
                             }else{
                                 document.getElementById(field_check).disabled = true;
+                            }
+                        }
+                    });
+
+                },
+                cancelBtnText: 'Cancel',
+                cancelHandler: function () {
+                    document.getElementById(field_check).checked = false;
+                }
+            })
+        }
+
+    });
+
+    $('body').on("click", '.confirm_tiep_thi', function () {
+        var id_filed=$(this).attr('id_filed');
+        var id=$(this).attr('count_id');
+        var code=$(this).attr('code');
+        var user=$(this).attr('user');
+        var link = url + '/booking/confirm-tiepthi';
+        var field_check = "confirm_tiep_thi_" + id_filed;
+        if(id==''||link==''||code==''||id_filed==''||user==''){
+            lnv.alert({
+                title: 'Lỗi',
+                content: 'Các thông tin cập nhật không hợp lệ',
+                alertBtnText: 'Ok',
+                iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                alertHandler: function () {
+
+                }
+            });
+        }else{
+            lnv.confirm({
+                title: '<label class="orange">Xác nhận hoa hồng</label>',
+                content: 'Bạn chắc chắn rằng muốn xác nhận hoa hồng đơn hàng <b>"'+code+'"</b> cho thành viên <b>"'+user+'"</b> ?',
+                confirmBtnText: 'Ok',
+                iconBtnText:'<i style="color: #669fc7;" class="ace-icon fa fa-question orange"></i>',
+                confirmHandler: function () {
+                    $.ajax({
+                        method: "GET",
+                        url: link,
+                        data: "id=" + id,
+                        success: function (response) {
+                            if (response != 1) {
+                                lnv.alert({
+                                    title: 'Lỗi',
+                                    content: response,
+                                    alertBtnText: 'Ok',
+                                    iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                                    alertHandler: function () {
+                                        document.getElementById(field_check).checked = false;
+                                    }
+                                });
+                            }else{
+                                $('#remove_btn_tiepthi_'+id_filed).remove();
+                                $('#change_color_'+id_filed).removeClass('red');
+                                $('#change_color_'+id_filed).addClass('green');
                             }
                         }
                     });

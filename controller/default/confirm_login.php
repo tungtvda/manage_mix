@@ -14,6 +14,7 @@ require_once DIR . '/common/class.phpmailer.php';
 require_once(DIR . "/common/Mail.php");
 require_once DIR.'/model/userService.php';
 require_once(DIR."/common/hash_pass.php");
+
 if(isset($_SESSION['show_email'])&&isset($_SESSION['show_id'])){
     $email=$_SESSION['show_email'];
     $id=$_SESSION['show_id'];

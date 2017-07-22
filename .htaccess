@@ -1,6 +1,9 @@
 #php_value upload_max_filesize 40M
 #php_value post_max_size 42M
 #Options +FollowSymLinks
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin *
+</IfModule>
 RewriteEngine on
 RewriteCond %{HTTP_HOST} ^.kzone.vn
 ErrorDocument 404 /404.php

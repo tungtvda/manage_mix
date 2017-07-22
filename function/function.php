@@ -1144,8 +1144,19 @@ function _randomBooking($code_module, $function_count, $field = 'code_booking')
     if (isset($_SESSION['user_id'])) {
         $user_id = $_SESSION['user_id'];
     }
+    if($code_module=='az'){
+        $code=implode('', _getRandomNumbers(1, 1000, $rand_number));
+        if(strlen($code)<=3){
+            $code=$code.rand(1000,10000);
+        }
+        $key=array("68","86","69","99","66",'88','66','55','26','28','83','39','79','456','486','456','569','686','868','656','1618','8888','6666');
+        $code=substr($code,rand(2,3),rand(3,4));
+        $code= $code.$key[array_rand($key)];;
+        $rand = $code_module .'_'. $code;
+    }else{
+        $rand = $code_module .'_'. (implode('', _getRandomNumbers(1, 99, $rand_number))) . $user_id;
+    }
 
-    $rand = $code_module . (implode('', _getRandomNumbers(1, 99, $rand_number))) . $user_id;
     $data_booking = $function_count($field . '="' . $rand . '"');
     if ($data_booking > 0) {
         _randomBooking($code_module, $function_count, $field);

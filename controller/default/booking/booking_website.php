@@ -136,7 +136,8 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
         $booking_model->num_tre_em_5=$num_tre_em_5;
         $booking_model->total_price=$tol;
         $booking_model->tien_thanh_toan='';
-        $booking_model->user_id=$key_user;
+        $booking_model->user_id=0;
+        $booking_model->user_tiep_thi_id=$key_user;
         $booking_model->note=$note;
         $booking_model->status=1;
         $booking_model->confirm_admin=0;

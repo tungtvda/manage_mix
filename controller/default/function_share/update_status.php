@@ -24,8 +24,8 @@ if (isset($_GET['id']) && isset($_GET['table']) && isset($_GET['field']) && isse
             $new = new $table($array);
             switch($table){
                 case 'booking':
-                    if($data_check[0]->price_tiep_thi!=''&&$data_check[0]->status_tiep_thi!=1&&$data_check[0]->confirm_admin_tiep_thi==0&&$data_check[0]->user_id!='' && $status==5){
-                        $data_user = user_getById($data_check[0]->user_id);
+                    if($data_check[0]->price_tiep_thi!=''&&$data_check[0]->status_tiep_thi!=1&&$data_check[0]->confirm_admin_tiep_thi==0&&$data_check[0]->user_tiep_thi_id!='' && $status==5){
+                        $data_user = user_getById($data_check[0]->user_tiep_thi_id);
                         if(count($data_user)>0){
                             if($data_user[0]->user_role==2){
                                 $new->confirm_admin_tiep_thi = $_SESSION['user_id'];
@@ -35,7 +35,7 @@ if (isset($_GET['id']) && isset($_GET['table']) && isset($_GET['field']) && isse
                                 $new_user = new user($array_user);
                                 $new_user->hoa_hong=$hoa_hong;
                                 user_update($new_user);
-                                $name_noti=$_SESSION['user_name'].' đã xác nhận hoa hồng đơn hàng "'.$data_check[0]->code_booking.'" cho thành viên "'.$data_user[0]->name.' - '.$data_user[0]->user_code.'"';
+                                $name_noti=$_SESSION['user_name'].' đã xác nhận hoa hồng cho đơn hàng "'.$data_check[0]->code_booking.'"';
                                 $link_noti='/tiep-thi-lien-ket/don-hang/chi-tiet?noti=1&id='._return_mc_encrypt($data_check[0]->id, ENCRYPTION_KEY);
                                 _insertNotification($name_noti,$_SESSION['user_id'],$data_check[0]->user_id,$link_noti,0,'');
                                 _insertLog($_SESSION['user_id'],6,6,22,$data_check[0]->id,'','',$name_noti);

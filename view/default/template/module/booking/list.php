@@ -94,6 +94,7 @@
                                 <th>Thanh toán</th>
                                 <th>Còn lại</th>
                                 <th>Sales</th>
+                                <th>Tiếp thị</th>
                                 <th>Người tạo</th>
                                 <th>Xác nhận</th>
                                 <th>Xác nhận hoa hồng</th>
@@ -177,18 +178,22 @@
                                         </td>
                                         <td>
                                             <?php
-                                            //                                            $data_sales = user_getById($row->user_id);
                                             if ($row->name_user != '') {
                                                 echo '<a href="' . SITE_NAME . '/nhan-vien/sua?id=' . _return_mc_encrypt($row->user_id, ENCRYPTION_KEY) . '">' . $row->name_user . '</a>';
                                             }
                                             ?>
-
                                         </td>
                                         <td>
                                             <?php
-                                            $data_created_by = user_getById($row->created_by);
-                                            if (count($data_created_by) > 0) {
-                                                echo '<a href="' . SITE_NAME . '/nhan-vien/sua?id=' . _return_mc_encrypt($data_created_by[0]->id, ENCRYPTION_KEY) . '">' . $data_created_by[0]->name . '</a>';
+                                            if ($row->name_user_tt != '') {
+                                                echo '<a href="' . SITE_NAME . '/nhan-vien/sua?id=' . _return_mc_encrypt($row->user_tiep_thi_id, ENCRYPTION_KEY) . '">' . $row->name_user_tt . '</a>';
+                                            }
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            if ($row->name_user_cr != '') {
+                                                echo '<a href="' . SITE_NAME . '/nhan-vien/sua?id=' . _return_mc_encrypt($row->created_by, ENCRYPTION_KEY) . '">' . $row->name_user_cr . '</a>';
                                             }
                                             ?>
                                         </td>
@@ -226,7 +231,7 @@
                                         </td>
                                         <td>
                                             <?php
-                                            if ($row->price_tiep_thi != '' && $row->name_user != '' && $row->type_user==2 && $row->status!=3&&$row->status!=5&&$row->status!=6) {
+                                            if ($row->price_tiep_thi != '' && $row->name_user_tt != '' && $row->type_user_tt==2 && $row->status!=3&&$row->status!=5&&$row->status!=6) {
                                                 $price_tiep_thi = number_format((int)$row->price_tiep_thi, 0, ",", ".") . ' vnđ';
                                                 $function_='hidden';
                                                 if($row->status_tiep_thi==1){
@@ -236,7 +241,7 @@
                                                 }
                                                 if($_SESSION['user_role'] == 1 && $row->status_tiep_thi==0){
                                                 echo '<label id="remove_btn_tiepthi_'.$row->id.'" title="Chưa được xác nhận">
-                                                    <input name="switch-field-1" class="ace ace-switch ace-switch-3  confirm_tiep_thi" user="'.$row->name_user.' - '.$row->user_code.'"
+                                                    <input name="switch-field-1" class="ace ace-switch ace-switch-3  confirm_tiep_thi" user="'.$row->name_user_tt.' - '.$row->user_code_tt.'"
                                                     count_id="'._return_mc_encrypt($row->id, ENCRYPTION_KEY).'" id_filed="'.$row->id.'" code="'.$row->code_booking.'" id="confirm_tiep_thi_'.$row->id.'" type="checkbox">
                                                     <span class="lbl"></span>
                                                 </label>';

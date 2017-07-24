@@ -34,7 +34,7 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['user_email']) 
         $data['pagesize']=isset($_POST['pagesize'])?_returnPostParamSecurity('pagesize'):'10';
         $data['site_name']=isset($_POST['site_name'])?_returnPostParamSecurity('site_name'):SITE_NAME;
         $link='/tiep-thi-lien-ket/don-hang?type='.$type;
-        $dk='user_id='.$id;
+        $dk='user_tiep_thi_id='.$id;
         switch($type){
             case '1':
                 $dk .=' and (status=1 or status=2 and status=4)';

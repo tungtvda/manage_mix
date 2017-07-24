@@ -110,10 +110,12 @@ function booking_thongke_doanh_thu($where){
 }
 function bookingAllDongHang($where){
     $query="select bk.*, us.name as name_user, us.user_role as type_user, us.user_code, ";
-    $query.="  us_tt.name as name_user_tt, us_tt.user_role as type_user_tt, us_tt.user_code as user_code_tt";
+    $query.="  us_tt.name as name_user_tt, us_tt.user_role as type_user_tt, us_tt.user_code as user_code_tt ,";
+    $query.="  us_cr.name as name_user_cr, us_cr.user_role as type_user_cr, us_cr.user_code as user_code_cr ";
     $query.=" FROM booking bk ";
     $query.=" LEFT JOIN user us on bk.user_id = us.id";
     $query.=" LEFT JOIN user us_tt on bk.user_tiep_thi_id = us_tt.id";
+    $query.=" LEFT JOIN user us_cr on bk.created_by = us_cr.id";
     if($where!=''){
         $query.=' where '.$where;
     }
@@ -126,6 +128,15 @@ function bookingAllDongHang($where){
         $new_obj->name_user=$row['name_user'];
         $new_obj->type_user=$row['type_user'];
         $new_obj->user_code=$row['user_code'];
+
+        $new_obj->name_user_tt=$row['name_user_tt'];
+        $new_obj->type_user_tt=$row['type_user_tt'];
+        $new_obj->user_code_tt=$row['user_code_tt'];
+
+        $new_obj->name_user_cr=$row['name_user_cr'];
+        $new_obj->type_user_cr=$row['type_user_cr'];
+        $new_obj->user_code_cr=$row['user_code_cr'];
+
         $new_obj->decode();
         array_push($array_result,$new_obj);
     }

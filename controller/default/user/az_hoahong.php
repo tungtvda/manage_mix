@@ -26,10 +26,11 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['user_email']) 
         if($data_check_exist_user[0]->hoa_hong==''||$data_check_exist_user[0]->hoa_hong==null)
         {
             $res['hoa_hong']=0;
+
         }else{
             $res['hoa_hong']=$data_check_exist_user[0]->hoa_hong;
         }
-
+        $res['success']=1;
     }
 }
 echo json_encode($res);

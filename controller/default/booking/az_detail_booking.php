@@ -28,6 +28,10 @@ if (isset($_POST['id']) && isset($_POST['id_noti'])) {
     $data_booking=booking_getById($id);
     if(count($data_booking)>0){
         $res['success']=1;
+        $data_cus=customer_getById($data_booking[0]->id_customer);
+        if(count($data_cus)>0){
+            $data_booking[0]->customer=$data_cus[0];
+        }
         $res['data']=$data_booking;
 
     }

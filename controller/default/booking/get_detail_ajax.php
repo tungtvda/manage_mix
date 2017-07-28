@@ -25,6 +25,7 @@ if (isset($_POST['id']) && isset($_POST['table'])) {
             if(count($user_data)>0){
                 $data_check[0]->user_id=$user_data[0]->id;
                 $data_check[0]->user_name=$user_data[0]->name;
+                $data_check[0]->user_name="<a href='".SITE_NAME."/nhan-vien/sua?id="._return_mc_encrypt($user_data[0]->id)."'>".$data_check[0]->user_name."</a>";
             }
             $tiente_data=tien_te_getById($data_check[0]->tien_te);
             $data_check[0]->tien_te_name='';
@@ -91,6 +92,7 @@ if (isset($_POST['id']) && isset($_POST['table'])) {
                 if(count($data_cate)>0){
                     $data_check[0]->nhom_customer=$data_cate[0]->name;
                 }
+                $data_check[0]->name_customer="<a href='".SITE_NAME."/khach-hang/sua?id="._return_mc_encrypt($data_check[0]->id_customer)."'>".$khach_hang[0]->name."</a>";
             }
 
             if($data_check[0]->ngay_khoi_hanh!='0000-00-00 00:00:00'){
@@ -171,7 +173,22 @@ if (isset($_POST['id']) && isset($_POST['table'])) {
             $data_check[0]->total_format=number_format((int)$total,0,",",".").' vnđ';
             $data_check[0]->vat_price_format=number_format((int)$vat_price,0,",",".").' vnđ';
             $data_check[0]->conlai_format=number_format((int)$conlai,0,",",".").' vnđ';
-
+            $data_check[0]->user_tiepthi='';
+            $data_check[0]->status_tiepthi='';
+            if($data_check[0]->user_tiep_thi_id!=0&&$data_check[0]->price_tiep_thi!=''){
+                $data_user_tiep_thi=user_getById($data_check[0]->user_tiep_thi_id);
+                if(count($data_user_tiep_thi)>0){
+                    $data_check[0]->user_tiepthi="<a href='".SITE_NAME."/nhan-vien/sua?id="._return_mc_encrypt($data_check[0]->user_tiep_thi_id)."'>".$data_user_tiep_thi[0]->name."</a>";
+                }
+                if($data_check[0]->status_tiep_thi==1){
+                    $data_check[0]->status_tiepthi='<b class="green">Đã xác nhận</b>';
+                }else{
+                    $data_check[0]->status_tiepthi='<b class="orange"> Đang chờ...</b>';
+                }
+                if($data_check[0]->price_tiep_thi!=''){
+                    $data_check[0]->price_tiep_thi="<b class='red'>".number_format((int)$data_check[0]->price_tiep_thi,0,",",".").' vnđ </b>';
+                }
+            }
           echo $data=json_encode($data_check[0]);
         } else {
             echo 0;

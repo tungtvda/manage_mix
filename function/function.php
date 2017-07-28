@@ -1095,10 +1095,11 @@ function returnInput_price($price, $name_price)
 function _returnDataAutoCompleteUser()
 {
     if ($_SESSION['user_role'] == 1) {
-        $data_user = user_getByTop('', 'status=1', 'name asc');
+        $data_user = user_getByTop('', 'status=1 and user_role !=2', 'name asc');
     } else {
-        $data_user = user_getByTop('', 'status=1 and (id=' . $_SESSION['user_id'] . ' or created_by=' . $_SESSION['user_id'] . ')', 'name asc');
+        $data_user = user_getByTop('', 'user_role !=2 and status=1 and (id=' . $_SESSION['user_id'] . ' or created_by=' . $_SESSION['user_id'] . ')', 'name asc');
     }
+
 
     $string_data = '[';
     if (count($data_user) > 0) {
@@ -1120,6 +1121,26 @@ function _returnDataAutoCompleteUser()
     $string_data .= '];';
     return $string_data;
 }
+
+function _returnDataAutoCompleteUserTiepThi()
+{
+    $data_user = user_getByTop('', 'status=1 and user_role =2', 'name asc');
+
+    $string_data = '[';
+    if (count($data_user) > 0) {
+        foreach ($data_user as $row_user) {
+            $id = $row_user->id;
+            $user_code = $row_user->user_code;
+            $name = $row_user->name;
+            $email = $row_user->user_email;
+            $phone = $row_user->phone;
+            $string_data .= "['" . $id . "','" . $user_code . "','" . $name . "','" . $email . "','" . $phone . "'],";
+        }
+    }
+    $string_data .= '];';
+    return $string_data;
+}
+
 
 function _getRandomNumbers($min, $max, $count)
 {

@@ -34,6 +34,7 @@
                             padding-right: 0px;
                         }
                     </style>
+
                     <div class="col-xs-12 col-sm-12 col-md-12 ">
                         <h3 class="row header smaller lighter blue">
                             <i class="ace-icon fa fa-user blue bigger-125"></i>
@@ -437,6 +438,47 @@
 
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 ">
+                        <h3 class="row header smaller lighter green">
+                            <i class="ace-icon fa fa-dollar green bigger-125"></i>
+                            Hoa hồng
+                        </h3>
+                        <div class="row col-xs-12 div_content">
+                            <div class="profile-user-info profile-user-info-striped">
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Thành viên</div>
+                                    <div class="profile-info-value">
+                                        <div style="float: left;width: 66%">
+                                           <span class="input-icon width_100">
+                                                <input <?php echo $readonly_name_customer ?>
+                                                    class="<?php echo $valid_name_user ?>" id="input_name_user_tiepthi"
+                                                    autofocus type="text" name="name_user_tiepthi"
+                                                    value="<?php echo $name_user ?>"
+                                                    placeholder="Nhập mã thành viên ..."
+                                                    style="width:100%;max-width:600px;outline:0" autocomplete="off">
+                                                 <i class="ace-icon fa fa-user blue"></i>
+                                             </span>
+                                            <input class="valid" hidden id="input_id_user_tt" type="text"
+                                                   name="id_user_tt" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Tiền hoa hồng</div>
+                                    <div class="profile-info-value">
+                                        <span class="editable editable-click price_tiep_thi"></span>
+                                    </div>
+                                </div>
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Trạng thái</div>
+                                    <div class="profile-info-value">
+                                        <span class="editable editable-click status_tiep_thi"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr hr8 hr-double hr-dotted"></div>
                         </div>
                     </div>
                     <input class="valid" hidden name="check_edit" id="input_check_edit"

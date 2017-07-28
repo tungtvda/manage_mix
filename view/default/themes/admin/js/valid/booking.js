@@ -1046,7 +1046,6 @@ function show_booking(Id,name){
             .done(function (data) {
                 if(data!=0)
                 {
-                    console.log(data);
                     var obj = jQuery.parseJSON(data);
                     $('.name_sales').html(obj.user_name);
                     $('.tien_te').html(obj.tien_te_name+' - '+obj.ty_gia);
@@ -1074,6 +1073,18 @@ function show_booking(Id,name){
                     $('.vat_thanh_tien').html(obj.vat_price_format);
                     $('.dat_coc').html(obj.tien_thanh_toan_format);
                     $('.con_lai').html(obj.conlai_format);
+
+                    if(obj.user_tiepthi!=''){
+                        $('.name_tiepthi').html(obj.user_tiepthi);
+                        $('.status_tiep_thi').html(obj.status_tiepthi);
+                        $('.price_tiep_thi').html(obj.price_tiep_thi);
+                        $('.show_hoa_hong').show();
+                    }else{
+                        $('.show_hoa_hong').hide();
+                        $('.name_tiepthi').html('');
+                        $('.status_tiep_thi').html('');
+                        $('.price_tiep_thi').html('');
+                    }
 
                     //var output = document.getElementById('show_img_upload');
                     //if(obj.avatar!=''){

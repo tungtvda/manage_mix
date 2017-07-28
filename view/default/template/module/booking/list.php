@@ -94,9 +94,9 @@
                                 <th>Thanh toán</th>
                                 <th>Còn lại</th>
                                 <th>Sales</th>
-                                <th>Tiếp thị</th>
-                                <th>Người tạo</th>
-                                <th>Xác nhận</th>
+<!--                                <th>Tiếp thị</th>-->
+<!--                                <th>Người tạo</th>-->
+                                <th>Xác nhận đơn hàng</th>
                                 <th>Xác nhận hoa hồng</th>
                                 <th>Action</th>
 
@@ -183,20 +183,20 @@
                                             }
                                             ?>
                                         </td>
-                                        <td>
-                                            <?php
-                                            if ($row->name_user_tt != '') {
-                                                echo '<a href="' . SITE_NAME . '/nhan-vien/sua?id=' . _return_mc_encrypt($row->user_tiep_thi_id, ENCRYPTION_KEY) . '">' . $row->name_user_tt . '</a>';
-                                            }
-                                            ?>
-                                        </td>
-                                        <td>
-                                            <?php
-                                            if ($row->name_user_cr != '') {
-                                                echo '<a href="' . SITE_NAME . '/nhan-vien/sua?id=' . _return_mc_encrypt($row->created_by, ENCRYPTION_KEY) . '">' . $row->name_user_cr . '</a>';
-                                            }
-                                            ?>
-                                        </td>
+<!--                                        <td>-->
+<!--                                            --><?php
+//                                            if ($row->name_user_tt != '') {
+//                                                echo '<a href="' . SITE_NAME . '/nhan-vien/sua?id=' . _return_mc_encrypt($row->user_tiep_thi_id, ENCRYPTION_KEY) . '">' . $row->name_user_tt . '</a>';
+//                                            }
+//                                            ?>
+<!--                                        </td>-->
+<!--                                        <td>-->
+<!--                                            --><?php
+//                                            if ($row->name_user_cr != '') {
+//                                                echo '<a href="' . SITE_NAME . '/nhan-vien/sua?id=' . _return_mc_encrypt($row->created_by, ENCRYPTION_KEY) . '">' . $row->name_user_cr . '</a>';
+//                                            }
+//                                            ?>
+<!--                                        </td>-->
                                         <td>
                                             <span hidden><?php echo (int)$row->confirm_admin ?></span>
                                             <?php if ($row->confirm_admin > 0) { ?>
@@ -231,7 +231,7 @@
                                         </td>
                                         <td>
                                             <?php
-                                            if ($row->price_tiep_thi != '' && $row->name_user_tt != '' && $row->type_user_tt==2 && $row->status!=3&&$row->status!=5&&$row->status!=6) {
+                                            if ($row->price_tiep_thi != '' && $row->name_user_tt != '' && $row->type_user_tt==2 && $row->status!=3 && $row->status!=6 ) {
                                                 $price_tiep_thi = number_format((int)$row->price_tiep_thi, 0, ",", ".") . ' vnđ';
                                                 $function_='hidden';
                                                 if($row->status_tiep_thi==1){
@@ -408,6 +408,39 @@
                     <form id="submit_form" role="form" action="" method="post" enctype="multipart/form-data">
 
                         <div class="modal-body">
+                            <div class="row show_hoa_hong">
+                                <h3 style="margin-right: 0px; margin-left: 0px;    font-size: 14px;    margin-top: 0px;"
+                                    class="row header smaller lighter green">
+											<span class="col-sm-8">
+												<i class="ace-icon fa fa-dollar"></i>
+												Hoa hồng
+											</span>
+                                </h3>
+                                <div class="col-xs-12">
+                                    <div class="profile-user-info profile-user-info-striped">
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Thành viên</div>
+                                            <div class="profile-info-value">
+                                                <span style="font-weight: bold; color:#478fca !important; "
+                                                      class="editable editable-click name_tiepthi"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Tiền hoa hồng</div>
+                                            <div class="profile-info-value">
+                                                <span class="editable editable-click price_tiep_thi"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Trạng thái</div>
+                                            <div class="profile-info-value">
+                                                <span class="editable editable-click status_tiep_thi"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="space-6"></div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <h3 style="margin-right: 0px; margin-left: 0px;    font-size: 14px;"
                                     class="row header smaller lighter orange">

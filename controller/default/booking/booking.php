@@ -76,11 +76,11 @@ switch($action_link){
         $active_tab_left='booking_list';
 
 }
-$data['dk_find'] =$data_dk_fill;
+//$data['dk_find'] =$data_dk_fill;
 $url_bread='<li class="active">Booking</li>';
 $data['breadcrumbs']=$url_bread;
 $data['action_link']=$action_link;
-$count=13;
+$count=11;
 //_returnCreateCustomer(1);
 //_deleteSubmitForm('customer', 'customer_delete');
 

@@ -1031,7 +1031,10 @@ function _returnDataAutoCompleteTour()
 //            $list_price_nguoi_lon=json_encode(returnInput_price($price_number,'price_nguoi_lon_'));
 //            $list_price_tre_em_511=returnInput_price($price_number_2,'price_tre_em_511_');
 //            $list_price_tre_em_5=returnInput_price($price_number_3,'price_tre_em_5_');
-
+            $price_tiep_thi_format = '';
+            if ($row_kh->price_tiep_thi != '' && $row_kh->price_tiep_thi>0) {
+                $price_tiep_thi_format = number_format((int)$row_kh->price_tiep_thi, 0, ",", ".") . ' vnđ';
+            }
             $name_price = 'Giá người lớn';
             $name_price_2 = 'Giá trẻ em 5-11 tuổi';
             $name_price_3 = 'Giá trẻ em dưới 5 tuổi';
@@ -1056,7 +1059,7 @@ function _returnDataAutoCompleteTour()
                     $departure_id = $data_departure[0]->id;
                 }
             }
-            $string_data .= "['" . $id . "','" . $name . "','" . $price_format . "','" . $durations . "','" . $vehicle . "','" . $departure_id . "','" . $departure_name . "','" . $price . "','" . $name_price . "','" . $price_2 . "','" . $price_2_format . "','" . $name_price_2 . "','" . $price_3 . "','" . $price_3_format . "','" . $name_price_3 . "','" . $so_cho . "'],";
+            $string_data .= "['" . $id . "','" . $name . "','" . $price_format . "','" . $durations . "','" . $vehicle . "','" . $departure_id . "','" . $departure_name . "','" . $price . "','" . $name_price . "','" . $price_2 . "','" . $price_2_format . "','" . $name_price_2 . "','" . $price_3 . "','" . $price_3_format . "','" . $name_price_3 . "','" . $so_cho . "','" . $price_tiep_thi_format . "'],";
         }
     }
     $string_data .= '];';

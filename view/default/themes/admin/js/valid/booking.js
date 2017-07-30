@@ -28,6 +28,15 @@ jQuery(function ($) {
         }
     });
 
+    $('body').on("input", '#input_name_user_tiepthi', function () {
+        $('#input_id_user_tt').val('');
+    });
+    $('body').on("keyup", '#input_name_user_tiepthi', function (event) {
+        if (event.keyCode != "13") {
+            $('#input_id_user_tt').val('');
+        }
+    });
+
 
     $('body').on("input", '#input_dat_coc', function () {
         returnDatCoc();
@@ -1579,6 +1588,7 @@ function removeValueTour() {
     $('#input_price_submit').val('');
     $('#input_price_511_submit').val('');
     $('#input_price_5_submit').val('');
+    $('.price_tiep_thi').html('');
     $('#input_id_tour').removeClass("valid").addClass("input-error");
     $('#input_name_tour').removeClass("valid").addClass("input-error");
     var error_name_tour=$("#error_name_tour" );

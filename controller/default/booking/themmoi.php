@@ -108,6 +108,8 @@ if(isset($_POST['code_booking']))
     }else{
         if ($vat === "on" || $vat === 1||$vat === "On") {
             $vat = 1;
+        }else{
+            $vat=0;
         }
     }
     $name_customer=_returnPostParamSecurity('name_customer');
@@ -129,7 +131,17 @@ if(isset($_POST['code_booking']))
     $check_edit=_returnPostParamSecurity('check_edit');
     $id_edit=_returnPostParamSecurity('id_edit');
     $note=_returnPostParamSecurity('note');
-
+    $user_tiep_thi_id=_returnPostParamSecurity('id_user_tt');
+    $confirm_admin_tiep_thi=_returnPostParamSecurity('confirm_admin_tiep_thi');
+    if($confirm_admin_tiep_thi==''){
+        $confirm_admin_tiep_thi=0;
+    }else{
+        if ($confirm_admin_tiep_thi === "on" || $confirm_admin_tiep_thi === 1||$confirm_admin_tiep_thi === "On") {
+            $confirm_admin_tiep_thi = 1;
+        }else{
+            $confirm_admin_tiep_thi = 0;
+        }
+    }
     $price_submit=str_replace('.','',$price_submit);
     $price_submit=str_replace(',','',$price_submit);
     $price_511_submit=str_replace('.','',$price_511_submit);
@@ -194,6 +206,7 @@ if(isset($_POST['code_booking']))
         $string_value_new='';
        $data_detail=$data['data_user'];
         $array_detail=((array)$data_detail[0]);
+
         $booking_update=new booking($array_detail);
         if($data_detail[0]->confirm_admin==0||$_SESSION['user_role']==1){
             if($id_user!=$array_detail['user_id']){
@@ -423,6 +436,7 @@ if(isset($_POST['code_booking']))
                 exit;
             }
             $price_old=$check_data_tour[0]->price;
+            $price_tiep_thi=$check_data_tour[0]->price_tiep_thi;
 
 
 
@@ -463,6 +477,15 @@ if(isset($_POST['code_booking']))
             $booking_model->user_id=$id_user;
             $booking_model->note=$note;
             $booking_model->vat=$vat;
+            $booking_model->price_tiep_thi=$price_tiep_thi;
+            if($user_tiep_thi_id!=''){
+                $check_data_user_tt=user_getById($user_tiep_thi_id);
+                if(count($check_data_user)>0 && $price_tiep_thi!=''){
+                    $booking_model->user_tiep_thi_id=$user_tiep_thi_id;
+//                    $booking_model->status_tiep_thi=$confirm_admin_tiep_thi;
+                    $save_tiepthi=1;
+                }
+            }
             if($status==''){
                 $status=1;
             }
@@ -497,6 +520,18 @@ if(isset($_POST['code_booking']))
             }
             _updateCustomerBooking($name_customer_sub,$email_customer_sub,$phone_customer_sub,$address_customer_sub,$tuoi_customer_sub,$tuoi_number_customer_sub,$birthday_customer_sub,$passport_customer_sub,$date_passport_customer_sub,$id_booking, $_SESSION['user_id']);
 
+            // tiep thi lien ket
+            if(isset($save_tiepthi) && $save_tiepthi==1){
+                $array_user['user_name']=$check_data_user_tt[0]->name;
+                $array_user['user_email']=$check_data_user_tt[0]->user_email;
+                _insertNotification('Khách hàng '.$name_customer.' đã đặt tour được gắn mã tiếp thị của bạn',0,$check_data_user_tt[0]->id,'/tiep-thi-lien-ket/don-hang/chi-tiet?noti=1&confirm=1&id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY).'',0,'');
+                $subject='Thông báo đơn hàng tiếp thị liên kết';
+                $message.='<p>Chào '.$check_data_user_tt[0]->name.'!</p>';
+                $message.='<p>Khách hàng '.$name_customer.' vừa đặt đơn hàng <a href="'.SITE_NAME_AZ.'/tiep-thi-lien-ket/don-hang/chi-tiet?id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY).'">"'.$code_booking.'"</a> được gắn mã tiếp thị liên kết của bạn. Bạn hãy truy cập thông tin đơn hàng để theo dõi tiến trình và nhận hoa hồng</p>';
+                $message.='<p style="text-align:center"><a href="'.SITE_NAME_AZ.'/tiep-thi-lien-ket/don-hang/chi-tiet?id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY).'" style="text-decoration:none;color:#ffffff;background-color:#f36f21;padding:10px 10px" >"Thông tin đơn hàng"</a></p>';
+                SendMail($check_data_user_tt[0]->user_email, $message, $subject,'AZbOOKING.VN');
+            }
+
             $message='';
             if($_SESSION['user_role']!=1){
                 $name_noti=$_SESSION['user_name'].' đã thêm một đơn hàng';
@@ -510,7 +545,7 @@ if(isset($_POST['code_booking']))
                 $subject='Xác nhận đơn hàng '.$code_booking;
                 $message.='<p>Nhân viên '.$check_data_user[0]->name.' vừa tạo đơn hàng mã '.$code_booking.'</p>';
                 $message.='<a>Bạn vui lòng truy cập <a href="'.$link_noti.'">đường link</a> để xác nhận đơn hàng</p>';
-                SendMail('info@mixtourist.com.vn', $message, $subject);
+//                SendMail('info@mixtourist.com.vn', $message, $subject);
 //                SendMail('tungtv.soict@gmail.com', $message, $subject);
                 $mess_log='Nhân viên '.$check_data_user[0]->name.' đã thực hiện việc tạo đơn hàng';
             }else{

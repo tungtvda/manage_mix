@@ -93,7 +93,7 @@ $string_data_user_tiep_thi=_returnDataAutoCompleteUserTiepThi();
                 search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
                 var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
 
-                return '<div data-so-cho="' + item[15] + '" data-name-price-3="' + item[14] + '" data-price-3-format="' + item[13] + '" data-price-3="' + item[12] + '" data-name-price-2="' + item[11] + '" data-price-2-format="' + item[10] + '" data-price-2="' + item[9] + '" data-name-price="' + item[8] + '" title="' + item[0] + '-'+item[3]+'-'+item[4]+'" class="autocomplete-suggestion" data-departure_name="' + item[6] + '" data-vehicle="' + item[4] + '" data-durations="' + item[3] + '" data-name="' + item[1] + '" data-price-format="' + item[2] + '" data-price="' + item[7] + '" data-id="' + item[0] + '" > ' + item[1]+'</div>';
+                return '<div data-price-tiep-thi="' + item[16] + '" data-so-cho="' + item[15] + '" data-name-price-3="' + item[14] + '" data-price-3-format="' + item[13] + '" data-price-3="' + item[12] + '" data-name-price-2="' + item[11] + '" data-price-2-format="' + item[10] + '" data-price-2="' + item[9] + '" data-name-price="' + item[8] + '" title="' + item[0] + '-'+item[3]+'-'+item[4]+'" class="autocomplete-suggestion" data-departure_name="' + item[6] + '" data-vehicle="' + item[4] + '" data-durations="' + item[3] + '" data-name="' + item[1] + '" data-price-format="' + item[2] + '" data-price="' + item[7] + '" data-id="' + item[0] + '" > ' + item[1]+'</div>';
             },
             onSelect: function (e, term, item) {
                 $('#input_list_price').html();
@@ -111,6 +111,7 @@ $string_data_user_tiep_thi=_returnDataAutoCompleteUserTiepThi();
                 $('#name_price_nguoi_lon').html(item.data('name-price'));
                 $('#name_price_tre_em_511').html(item.data('name-price-2'));
                 $('#name_price_tre_em_5').html(item.data('name-price-3'));
+                $('.price_tiep_thi').html('<b class="red">'+item.data('price-tiep-thi')+'</b>');
                 var Id=item.data('id');
                 var url = $('#url_input').val();
 //                if(Id!=''){
@@ -238,7 +239,7 @@ $string_data_user_tiep_thi=_returnDataAutoCompleteUserTiepThi();
                 return '<div title="' + item[1] + '-'+item[2]+'-'+item[3]+'" class="autocomplete-suggestion" data-user-id-tt="' + item[0] + '" data-user-code-tt="' + item[1] + '" data-user-name-tt="' + item[2] + '" data-user-email-tt="' + item[3] + '" data-user-phone-tt="' + item[4] + '"> ' + item[1]+' - ' + item[2]+'  - ' + item[3]+'</div>';
             },
             onSelect: function (e, term, item) {
-                $('#input_name_user_tiepthi').val(item.data('user-name-tt'));
+                $('#input_name_user_tiepthi').val(item.data('user-code-tt'));
                 $('#input_id_user_tt').val(item.data('user-id-tt'));
 //                var table_user="<tr> <td class='center'>1</td><td><a>"+item.data('user_name')+"</a></td><td>" +
 //                    "<span >"+item.data('user-email')+"</span>" +

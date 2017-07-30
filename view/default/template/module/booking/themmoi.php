@@ -452,29 +452,29 @@
                                     <div class="profile-info-value">
                                         <div style="float: left;width: 66%">
                                            <span class="input-icon width_100">
-                                                <input <?php echo $readonly_name_customer ?>
-                                                    class="<?php echo $valid_name_user ?>" id="input_name_user_tiepthi"
+                                                <input <?php echo $readonly_name_user_tt ?>
+                                                    class="valid" id="input_name_user_tiepthi"
                                                     autofocus type="text" name="name_user_tiepthi"
-                                                    value="<?php echo $name_user ?>"
+                                                    value="<?php echo $name_user_tt ?>"
                                                     placeholder="Nhập mã thành viên ..."
                                                     style="width:100%;max-width:600px;outline:0" autocomplete="off">
                                                  <i class="ace-icon fa fa-user blue"></i>
                                              </span>
                                             <input class="valid" hidden id="input_id_user_tt" type="text"
-                                                   name="id_user_tt" value="">
+                                                   name="id_user_tt" value="<?php echo $id_user_tt?>">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="profile-info-row">
                                     <div class="profile-info-name"> Tiền hoa hồng</div>
                                     <div class="profile-info-value">
-                                        <span class="editable editable-click price_tiep_thi"></span>
+                                        <span class="editable editable-click price_tiep_thi"><?php echo $price_tiep_thi?></span>
                                     </div>
                                 </div>
                                 <div class="profile-info-row">
                                     <div class="profile-info-name"> Trạng thái</div>
                                     <div class="profile-info-value">
-                                        <span class="editable editable-click status_tiep_thi"></span>
+                                        <?php echo _returnInputCheck('confirm_admin_tiep_thi', 'valid', '', $confirm_admin_tiep_thi) ?>
                                     </div>
                                 </div>
                             </div>

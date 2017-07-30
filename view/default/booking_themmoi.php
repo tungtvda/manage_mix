@@ -23,12 +23,18 @@ function show_booking_themmoi($data = array())
     $ngay_ket_thuc='';
     $readonly_name_tour='';
     $readonly_name_customer='';
+    $readonly_name_user_tt='';
     $booking_id='';
     $ngay_bat_dau_valid='';
     $han_thanh_toan_valid='';
     $ngay_khoi_hanh_valid='';
     $ngay_ket_thuc_valid='';
     $email_customer_valid='';
+    $name_user_tt='';
+    $id_user_tt='';
+    $confirm_admin_tiep_thi='';
+    $confirm_admin_tiep_thi='';
+    $price_tiep_thi ='';
     if($action==2){
 
         if($_SESSION['user_role']!=1){
@@ -76,7 +82,22 @@ function show_booking_themmoi($data = array())
             $ngay_ket_thuc_valid='valid';
         }
 
+// data user tiepthi
 
+        $data_sales_tt=user_getById($data['data_user'][0]->user_tiep_thi_id);
+        if(count($data_sales_tt)>0){
+            $name_user_tt=$data_sales_tt[0]->user_code;
+            $id_user_tt=$data_sales_tt[0]->id;
+        }
+        $price_tiep_thi=_returnDataEditAdd($data['data_user'],'price_tiep_thi');
+        if(is_numeric($price_tiep_thi)&&$price_tiep_thi>0){
+            $price_tiep_thi="<b class='red'>".number_format((int)$price_tiep_thi,0,",",".").' vnđ </b>';
+        }
+        $confirm_tiep_thi=_returnDataEditAdd($data['data_user'],'confirm_admin_tiep_thi');
+
+        if($confirm_tiep_thi==1){
+            $confirm_admin_tiep_thi='checked';
+        }
 
     }else{
         $action_name='add';
@@ -158,6 +179,7 @@ function show_booking_themmoi($data = array())
 
     }else{
         $readonly_name_customer='disabled';
+        $readonly_name_user_tt='disabled';
     }
     $show_add_tour='';
     $so_cho='';
@@ -371,6 +393,7 @@ function show_booking_themmoi($data = array())
             }
         }
     }
+
     require_once DIR . '/view/default/template/module/booking/themmoi.php';
 }
 

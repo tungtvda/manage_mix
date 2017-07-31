@@ -205,6 +205,8 @@ if(isset($_POST['code_booking']))
         $string_value_old='';
         $string_value_new='';
        $data_detail=$data['data_user'];
+        $user_tiep_thi_id_old=$data_detail[0]->user_tiep_thi_id;
+        $price_tiep_thi=$data_detail[0]->price_tiep_thi;
         $array_detail=((array)$data_detail[0]);
 
         $booking_update=new booking($array_detail);
@@ -234,9 +236,13 @@ if(isset($_POST['code_booking']))
                     echo '<script>window.location="'.$link.'";</script>';
                     exit;
                 }
+                $price_tiep_thi=$check_data_tour[0]->price_tiep_thi;
                 $booking_update->price_tour=$check_data_tour[0]->price;
                 $booking_update->price_11=$check_data_tour[0]->price;
                 $booking_update->price_5=$check_data_tour[0]->price;
+                $booking_update->name_tour=$check_data_tour[0]->name;
+                $booking_update->id_tour=$id_tour;
+                $booking_update->code_tour=$check_data_tour[0]->code;
             }
             if($price_submit!=$array_detail['price_new']){
                 $booking_update->price_new=$price_submit;
@@ -345,13 +351,34 @@ if(isset($_POST['code_booking']))
             $string_value_old.=' Chú ý: "'.$array_detail['note'].'" - ';
             $string_value_new.=' Chú ý: "'.$note.'" - ';
         }
+        if($price_tiep_thi!=''&&$user_tiep_thi_id_old==0){
+            if($user_tiep_thi_id!=''){
+                $check_data_user_tt=user_getById($user_tiep_thi_id);
+                if(count($check_data_user_tt)>0){
+                    $booking_update->user_tiep_thi_id=$user_tiep_thi_id;
+                    $save_tiepthi=1;
+                }
+            }
+        }
+        $booking_update->price_tiep_thi=$price_tiep_thi;
         $customer_update=new customer();
         $customer_update->booking_id=0;
         customer_update_booking($customer_update,$array_detail['id']);
         _updateCustomerBooking($name_customer_sub,$email_customer_sub,$phone_customer_sub,$address_customer_sub,$tuoi_customer_sub,$tuoi_number_customer_sub,$birthday_customer_sub,$passport_customer_sub,$date_passport_customer_sub,$array_detail['id'], $_SESSION['user_id']);
         $booking_update->updated=_returnGetDateTime();
         booking_update($booking_update);
-        
+
+        if(isset($save_tiepthi) && $save_tiepthi==1){
+            $array_user['user_name']=$check_data_user_tt[0]->name;
+            $array_user['user_email']=$check_data_user_tt[0]->user_email;
+            _insertNotification('Khách hàng '.$name_customer.' đã đặt tour được gắn mã tiếp thị của bạn',0,$check_data_user_tt[0]->id,'/tiep-thi-lien-ket/don-hang/chi-tiet?noti=1&confirm=1&id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY).'',0,'');
+            $subject='Thông báo đơn hàng tiếp thị liên kết';
+            $message_tt='<p>Chào '.$check_data_user_tt[0]->name.'!</p>';
+            $message_tt.='<p>Khách hàng '.$name_customer.' vừa đặt đơn hàng <a href="'.SITE_NAME_AZ.'/tiep-thi-lien-ket/don-hang/chi-tiet?id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY).'">"'.$code_booking.'"</a> được gắn mã tiếp thị liên kết của bạn. Bạn hãy truy cập thông tin đơn hàng để theo dõi tiến trình và nhận hoa hồng</p>';
+            $message_tt.='<p style="text-align:center"><a href="'.SITE_NAME_AZ.'/tiep-thi-lien-ket/don-hang/chi-tiet?id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY).'" style="text-decoration:none;color:#ffffff;background-color:#f36f21;padding:10px 10px" >"Thông tin đơn hàng"</a></p>';
+            SendMail($check_data_user_tt[0]->user_email, $message_tt, $subject,'AZbOOKING.VN');
+        }
+
         if($string_value_old!=''){
 
             $arr_send_noti=array();
@@ -480,7 +507,7 @@ if(isset($_POST['code_booking']))
             $booking_model->price_tiep_thi=$price_tiep_thi;
             if($user_tiep_thi_id!=''){
                 $check_data_user_tt=user_getById($user_tiep_thi_id);
-                if(count($check_data_user)>0 && $price_tiep_thi!=''){
+                if(count($check_data_user_tt)>0 && $price_tiep_thi!=''){
                     $booking_model->user_tiep_thi_id=$user_tiep_thi_id;
 //                    $booking_model->status_tiep_thi=$confirm_admin_tiep_thi;
                     $save_tiepthi=1;
@@ -522,14 +549,15 @@ if(isset($_POST['code_booking']))
 
             // tiep thi lien ket
             if(isset($save_tiepthi) && $save_tiepthi==1){
+                print_r($save_tiepthi);
                 $array_user['user_name']=$check_data_user_tt[0]->name;
                 $array_user['user_email']=$check_data_user_tt[0]->user_email;
                 _insertNotification('Khách hàng '.$name_customer.' đã đặt tour được gắn mã tiếp thị của bạn',0,$check_data_user_tt[0]->id,'/tiep-thi-lien-ket/don-hang/chi-tiet?noti=1&confirm=1&id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY).'',0,'');
                 $subject='Thông báo đơn hàng tiếp thị liên kết';
-                $message.='<p>Chào '.$check_data_user_tt[0]->name.'!</p>';
-                $message.='<p>Khách hàng '.$name_customer.' vừa đặt đơn hàng <a href="'.SITE_NAME_AZ.'/tiep-thi-lien-ket/don-hang/chi-tiet?id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY).'">"'.$code_booking.'"</a> được gắn mã tiếp thị liên kết của bạn. Bạn hãy truy cập thông tin đơn hàng để theo dõi tiến trình và nhận hoa hồng</p>';
-                $message.='<p style="text-align:center"><a href="'.SITE_NAME_AZ.'/tiep-thi-lien-ket/don-hang/chi-tiet?id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY).'" style="text-decoration:none;color:#ffffff;background-color:#f36f21;padding:10px 10px" >"Thông tin đơn hàng"</a></p>';
-                SendMail($check_data_user_tt[0]->user_email, $message, $subject,'AZbOOKING.VN');
+                $message_tt.='<p>Chào '.$check_data_user_tt[0]->name.'!</p>';
+                $message_tt.='<p>Khách hàng '.$name_customer.' vừa đặt đơn hàng <a href="'.SITE_NAME_AZ.'/tiep-thi-lien-ket/don-hang/chi-tiet?id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY).'">"'.$code_booking.'"</a> được gắn mã tiếp thị liên kết của bạn. Bạn hãy truy cập thông tin đơn hàng để theo dõi tiến trình và nhận hoa hồng</p>';
+                $message_tt.='<p style="text-align:center"><a href="'.SITE_NAME_AZ.'/tiep-thi-lien-ket/don-hang/chi-tiet?id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY).'" style="text-decoration:none;color:#ffffff;background-color:#f36f21;padding:10px 10px" >"Thông tin đơn hàng"</a></p>';
+                SendMail($check_data_user_tt[0]->user_email, $message_tt, $subject,'AZbOOKING.VN');
             }
 
             $message='';

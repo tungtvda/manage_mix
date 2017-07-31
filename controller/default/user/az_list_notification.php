@@ -13,10 +13,12 @@ require_once DIR . '/common/locdautiengviet.php';
 require_once(DIR . "/common/hash_pass.php");
 require_once DIR . '/common/class.phpmailer.php';
 require_once(DIR . "/common/Mail.php");
+require_once DIR . '/common/paging.php';
 $data = array();
 $res = array(
     'success' => 0,
 );
+
 if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['user_email']) && isset($_POST['user_code']) && isset($_POST['token_code'])) {
     $id = _return_mc_decrypt(_returnPostParamSecurity('id'));
     $name = _return_mc_decrypt(_returnPostParamSecurity('name'));
@@ -43,7 +45,28 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['user_email']) 
             }
             $res['pagesize']=$pagesize;
         }else{
+            if(isset($_POST['type'])){
+                $type=_returnPostParamSecurity('type');
+            }else{
+                $type=0;
+            }
+            $data['current']=isset($_POST['page'])?_returnPostParamSecurity('page'):'1';
+            $data['pagesize']=isset($_POST['pagesize'])?_returnPostParamSecurity('pagesize'):'10';
+            $data['site_name']=isset($_POST['site_name'])?_returnPostParamSecurity('site_name'):SITE_NAME;
+            $link='/tiep-thi-lien-ket/thong-bao?type='.$type;
+            $dk='user_id='.$id;
+            switch($type){
+                case '1':
+                    $dk .=' and (status=0 or status=2';
+                    break;
+                case '2':
+                    $dk .=' and status=1';
+                    break;
+            }
 
+            $data['count']=notification_count($dk);
+            $res['danhsach']=notification_getByPaging($data['current'],$data['pagesize'],'id desc',$dk);
+            $res['PAGING'] = showPagingAtLinkTiepThi($data['count'], $data['pagesize'], $data['current'], '' .  $data['site_name'] . $link);
         }
     }
 }

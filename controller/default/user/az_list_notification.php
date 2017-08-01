@@ -57,7 +57,7 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['user_email']) 
             $dk='user_id='.$id;
             switch($type){
                 case '1':
-                    $dk .=' and (status=0 or status=2';
+                    $dk .=' and (status=0 or status=2)';
                     break;
                 case '2':
                     $dk .=' and status=1';

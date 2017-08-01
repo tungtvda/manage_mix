@@ -371,11 +371,11 @@ if(isset($_POST['code_booking']))
         if(isset($save_tiepthi) && $save_tiepthi==1){
             $array_user['user_name']=$check_data_user_tt[0]->name;
             $array_user['user_email']=$check_data_user_tt[0]->user_email;
-            _insertNotification('Khách hàng '.$name_customer.' đã đặt tour được gắn mã tiếp thị của bạn',0,$check_data_user_tt[0]->id,'/tiep-thi-lien-ket/don-hang/chi-tiet?noti=1&confirm=1&id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY).'',0,'');
+            _insertNotification('Khách hàng '.$name_customer.' đã đặt tour được gắn mã tiếp thị của bạn',0,$check_data_user_tt[0]->id,'/tiep-thi-lien-ket/don-hang/chi-tiet?noti=1&confirm=1&id='._return_mc_encrypt($booking_update->id, ENCRYPTION_KEY).'',0,'');
             $subject='Thông báo đơn hàng tiếp thị liên kết';
             $message_tt='<p>Chào '.$check_data_user_tt[0]->name.'!</p>';
-            $message_tt.='<p>Khách hàng '.$name_customer.' vừa đặt đơn hàng <a href="'.SITE_NAME_AZ.'/tiep-thi-lien-ket/don-hang/chi-tiet?id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY).'">"'.$code_booking.'"</a> được gắn mã tiếp thị liên kết của bạn. Bạn hãy truy cập thông tin đơn hàng để theo dõi tiến trình và nhận hoa hồng</p>';
-            $message_tt.='<p style="text-align:center"><a href="'.SITE_NAME_AZ.'/tiep-thi-lien-ket/don-hang/chi-tiet?id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY).'" style="text-decoration:none;color:#ffffff;background-color:#f36f21;padding:10px 10px" >"Thông tin đơn hàng"</a></p>';
+            $message_tt.='<p>Khách hàng '.$name_customer.' vừa đặt đơn hàng <a href="'.SITE_NAME_AZ.'/tiep-thi-lien-ket/don-hang/chi-tiet?id='._return_mc_encrypt($booking_update->id, ENCRYPTION_KEY).'">"'.$booking_update->code_booking.'"</a> được gắn mã tiếp thị liên kết của bạn. Bạn hãy truy cập thông tin đơn hàng để theo dõi tiến trình và nhận hoa hồng</p>';
+            $message_tt.='<p style="text-align:center"><a href="'.SITE_NAME_AZ.'/tiep-thi-lien-ket/don-hang/chi-tiet?id='._return_mc_encrypt($booking_update->id, ENCRYPTION_KEY).'" style="text-decoration:none;color:#ffffff;background-color:#f36f21;padding:10px 10px" >"Thông tin đơn hàng"</a></p>';
             SendMail($check_data_user_tt[0]->user_email, $message_tt, $subject,'AZbOOKING.VN');
         }
 

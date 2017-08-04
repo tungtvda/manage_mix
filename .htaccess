@@ -125,6 +125,7 @@ RewriteRule ^azbooking-check-login.html controller/default/user/az_check_login.p
 RewriteRule ^return-list-notification.html controller/default/user/az_list_notification.php
 RewriteRule ^azbooking-hoso.html controller/default/user/az_hoso.php
 RewriteRule ^azbooking-update-hoso.html controller/default/user/az_update_hoso.php
+RewriteRule ^azbooking-update-2buoc.html controller/default/user/az_update_2buoc.php
 RewriteRule ^update-notification.html controller/default/user/az_update_notification.php
 RewriteRule ^azbooking-get-dashboard.html controller/default/booking/az_list_dashboad.php
 RewriteRule ^azbooking-get-list-booking.html controller/default/booking/az_list_booking.php

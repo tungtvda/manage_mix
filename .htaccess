@@ -127,6 +127,7 @@ RewriteRule ^azbooking-hoso.html controller/default/user/az_hoso.php
 RewriteRule ^azbooking-update-hoso.html controller/default/user/az_update_hoso.php
 RewriteRule ^az-check-pass-old.html controller/default/user/az_check_pass_old.php
 RewriteRule ^az-update-pass.html controller/default/user/az_update_pass.php
+RewriteRule ^az-update-avatar.html controller/default/user/az_update_avatar.php
 RewriteRule ^azbooking-update-2buoc.html controller/default/user/az_update_2buoc.php
 RewriteRule ^update-notification.html controller/default/user/az_update_notification.php
 RewriteRule ^azbooking-get-dashboard.html controller/default/booking/az_list_dashboad.php

@@ -1,10 +1,11 @@
 <?php
 class rut_tien
 {
-    public $id,$user_tiep_thi_id,$admin_confirm_id,$name,$price,$price_confirm,$status,$yeu_cau,$yeu_cau_confirm,$date_send,$date_confirm;
+    public $id,$code,$user_tiep_thi_id,$admin_confirm_id,$name,$price,$price_confirm,$status,$yeu_cau,$yeu_cau_confirm,$date_send,$date_confirm;
     public function rut_tien($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
+    $this->code=isset($data['code'])?$data['code']:'';
     $this->user_tiep_thi_id=isset($data['user_tiep_thi_id'])?$data['user_tiep_thi_id']:'';
     $this->admin_confirm_id=isset($data['admin_confirm_id'])?$data['admin_confirm_id']:'';
     $this->name=isset($data['name'])?$data['name']:'';
@@ -20,6 +21,7 @@ class rut_tien
     public function encode()
         {
             $this->id=addslashes($this->id);
+            $this->code=addslashes($this->code);
             $this->user_tiep_thi_id=addslashes($this->user_tiep_thi_id);
             $this->admin_confirm_id=addslashes($this->admin_confirm_id);
             $this->name=addslashes($this->name);
@@ -34,6 +36,7 @@ class rut_tien
     public function decode()
         {
             $this->id=stripslashes($this->id);
+            $this->code=stripslashes($this->code);
             $this->user_tiep_thi_id=stripslashes($this->user_tiep_thi_id);
             $this->admin_confirm_id=stripslashes($this->admin_confirm_id);
             $this->name=stripslashes($this->name);

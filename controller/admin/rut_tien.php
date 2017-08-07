@@ -54,11 +54,13 @@ if(isset($_SESSION["Admin"]))
             header('Location: '.SITE_NAME.'/controller/admin/rut_tien.php');
         }
     }
-    if(isset($_POST["user_tiep_thi_id"])&&isset($_POST["admin_confirm_id"])&&isset($_POST["name"])&&isset($_POST["price"])&&isset($_POST["price_confirm"])&&isset($_POST["status"])&&isset($_POST["yeu_cau"])&&isset($_POST["yeu_cau_confirm"])&&isset($_POST["date_send"])&&isset($_POST["date_confirm"]))
+    if(isset($_POST["code"])&&isset($_POST["user_tiep_thi_id"])&&isset($_POST["admin_confirm_id"])&&isset($_POST["name"])&&isset($_POST["price"])&&isset($_POST["price_confirm"])&&isset($_POST["status"])&&isset($_POST["yeu_cau"])&&isset($_POST["yeu_cau_confirm"])&&isset($_POST["date_send"])&&isset($_POST["date_confirm"]))
     {
        $array=$_POST;
        if(!isset($array['id']))
        $array['id']='0';
+       if(!isset($array['code']))
+       $array['code']='0';
        if(!isset($array['user_tiep_thi_id']))
        $array['user_tiep_thi_id']='0';
        if(!isset($array['admin_confirm_id']))

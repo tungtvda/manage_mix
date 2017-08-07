@@ -62,17 +62,17 @@ function rut_tien_getByPaging($CurrentPage, $PageSize,$Order,$where)
 //
 function rut_tien_getByPagingReplace($CurrentPage, $PageSize,$Order,$where)
 {
-   return rut_tien_Get("SELECT rut_tien.id, rut_tien.user_tiep_thi_id, rut_tien.admin_confirm_id, rut_tien.name, rut_tien.price, rut_tien.price_confirm, rut_tien.status, rut_tien.yeu_cau, rut_tien.yeu_cau_confirm, rut_tien.date_send, rut_tien.date_confirm FROM  rut_tien ".(($where!='')?(' where '.$where):'')." Order By ".$Order." Limit ".(($CurrentPage-1)*$PageSize)." , ".$PageSize);
+   return rut_tien_Get("SELECT rut_tien.id, rut_tien.code, rut_tien.user_tiep_thi_id, rut_tien.admin_confirm_id, rut_tien.name, rut_tien.price, rut_tien.price_confirm, rut_tien.status, rut_tien.yeu_cau, rut_tien.yeu_cau_confirm, rut_tien.date_send, rut_tien.date_confirm FROM  rut_tien ".(($where!='')?(' where '.$where):'')." Order By ".$Order." Limit ".(($CurrentPage-1)*$PageSize)." , ".$PageSize);
 }
 //
 function rut_tien_insert($obj)
 {
-    return exe_query("insert into rut_tien (user_tiep_thi_id,admin_confirm_id,name,price,price_confirm,status,yeu_cau,yeu_cau_confirm,date_send,date_confirm) values ('$obj->user_tiep_thi_id','$obj->admin_confirm_id','$obj->name','$obj->price','$obj->price_confirm','$obj->status','$obj->yeu_cau','$obj->yeu_cau_confirm','$obj->date_send','$obj->date_confirm')",'rut_tien');
+    return exe_query("insert into rut_tien (code,user_tiep_thi_id,admin_confirm_id,name,price,price_confirm,status,yeu_cau,yeu_cau_confirm,date_send,date_confirm) values ('$obj->code','$obj->user_tiep_thi_id','$obj->admin_confirm_id','$obj->name','$obj->price','$obj->price_confirm','$obj->status','$obj->yeu_cau','$obj->yeu_cau_confirm','$obj->date_send','$obj->date_confirm')",'rut_tien');
 }
 //
 function rut_tien_update($obj)
 {
-    return exe_query("update rut_tien set user_tiep_thi_id='$obj->user_tiep_thi_id',admin_confirm_id='$obj->admin_confirm_id',name='$obj->name',price='$obj->price',price_confirm='$obj->price_confirm',status='$obj->status',yeu_cau='$obj->yeu_cau',yeu_cau_confirm='$obj->yeu_cau_confirm',date_send='$obj->date_send',date_confirm='$obj->date_confirm' where id=$obj->id",'rut_tien');
+    return exe_query("update rut_tien set code='$obj->code',user_tiep_thi_id='$obj->user_tiep_thi_id',admin_confirm_id='$obj->admin_confirm_id',name='$obj->name',price='$obj->price',price_confirm='$obj->price_confirm',status='$obj->status',yeu_cau='$obj->yeu_cau',yeu_cau_confirm='$obj->yeu_cau_confirm',date_send='$obj->date_send',date_confirm='$obj->date_confirm' where id=$obj->id",'rut_tien');
 }
 //
 function rut_tien_delete($obj)

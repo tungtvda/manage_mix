@@ -29,7 +29,7 @@ function view_rut_tien($data)
 //
 function showTableHeader()
 {
-    return '<th>id</th><th>user_tiep_thi_id</th><th>admin_confirm_id</th><th>name</th><th>price</th><th>price_confirm</th><th>status</th><th>yeu_cau</th><th>yeu_cau_confirm</th><th>date_send</th><th>date_confirm</th>';
+    return '<th>id</th><th>code</th><th>user_tiep_thi_id</th><th>admin_confirm_id</th><th>name</th><th>price</th><th>price_confirm</th><th>status</th><th>yeu_cau</th><th>yeu_cau_confirm</th><th>date_send</th><th>date_confirm</th>';
 }
 //
 function showTableBody($data)
@@ -39,6 +39,7 @@ function showTableBody($data)
     {
         $TableBody.="<tr><td><input type=\"checkbox\" name=\"check_".$obj->id."\"/></td>";
         $TableBody.="<td>".$obj->id."</td>";
+        $TableBody.="<td>".$obj->code."</td>";
         $TableBody.="<td>".$obj->user_tiep_thi_id."</td>";
         $TableBody.="<td>".$obj->admin_confirm_id."</td>";
         $TableBody.="<td>".$obj->name."</td>";
@@ -60,6 +61,7 @@ function showTableBody($data)
 function showFrom($form,$ListKey=array())
 {
     $str_from='';
+    $str_from.='<p><label>code</label><input class="text-input small-input" type="text"  name="code" value="'.(($form!=false)?$form->code:'').'" /></p>';
     $str_from.='<p><label>user_tiep_thi_id</label><input class="text-input small-input" type="text"  name="user_tiep_thi_id" value="'.(($form!=false)?$form->user_tiep_thi_id:'').'" /></p>';
     $str_from.='<p><label>admin_confirm_id</label><input class="text-input small-input" type="text"  name="admin_confirm_id" value="'.(($form!=false)?$form->admin_confirm_id:'').'" /></p>';
     $str_from.='<p><label>name</label><input class="text-input small-input" type="text"  name="name" value="'.(($form!=false)?$form->name:'').'" /></p>';

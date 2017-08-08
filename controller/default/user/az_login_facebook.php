@@ -22,8 +22,10 @@ if(isset($_POST['id'])&&isset($_POST['name'])&&isset($_POST['email'])){
     $id=_returnPostParamSecurity('id');
     $name=_returnPostParamSecurity('name');
     $email=_returnPostParamSecurity('email');
-    if($id!=''&&$name!=''&&$email!=''){
-        $Pass = hash_pass($password_login);
+    $mail_create = _return_mc_decrypt(_returnPostParamSecurity('mail_create'), '');
+    if($id!=''&&$name!=''&&$email!=''&&$mail_create!=''){
+        $pas_old='az_'.$id.rand(1,100);
+        $Pass = hash_pass($pas_old);
         $dk_check_user = "user_email ='" . $email . "'";
         $data_check_exist_user = user_getByTop('', $dk_check_user, 'id desc');
         if(count($data_check_exist_user)>0){
@@ -33,32 +35,26 @@ if(isset($_POST['id'])&&isset($_POST['name'])&&isset($_POST['email'])){
                 $user_login->time_token=_returnGetDateTime();
                 $rand_token_code=_return_mc_encrypt(_returnRandString(15));
                 $user_login->token_code=$rand_token_code;
-                if($data_check_exist_user[0]->login_two_steps==1){
-                    $rand_string=_returnRandString(15);
-                    $user_login->code_login=$rand_string;
-                    $mail_confirm = str_replace('[pass_code]', $rand_string, $mail_confirm);
-                    $subject = "Mã đăng nhập vào hệ thống AZBOOKING.VN";
-                    if (SendMail($data_check_exist_user[0]->user_email, $mail_confirm, $subject, 1, 'AZBOOKING.VN')) {
-                        user_update($user_login);
-                        $res['success'] = 2;
-                        $res['user_sec'] = array(
-                            'email'=>_return_mc_encrypt($data_check_exist_user[0]->user_email,ENCRYPTION_KEY,1)
-                        );
-                        $res['mess'] = 'Azbooking.vn đã gửi mã đăng nhập về mail của bạn, bạn vui lòng kiểm tra email';
-                    }
-                }else{
-                    user_update($user_login);
-                    $res['success'] = 1;
-                    if($data_check_exist_user[0]->avatar=="")
-                    {
-                        $avatar=SITE_NAME.'/view/default/themes/images/no-avatar.png';
-                    }
-                    else{
-                        $avatar=SITE_NAME.$data_check_exist_user[0]->avatar;
-                    }
-
-                    $res['mess']='';
+                user_update($user_login);
+                $res['success'] = 1;
+                $res['login'] = 1;
+                if($data_check_exist_user[0]->avatar=="")
+                {
+                    $avatar=SITE_NAME.'/view/default/themes/images/no-avatar.png';
                 }
+                else{
+                    $avatar=SITE_NAME.$data_check_exist_user[0]->avatar;
+                }
+                $res['user_sec'] = array(
+                    'id'=>_return_mc_encrypt($data_check_exist_user[0]->id,ENCRYPTION_KEY,1),
+                    'name'=>_return_mc_encrypt($data_check_exist_user[0]->name,ENCRYPTION_KEY,1),
+                    'user_email'=>_return_mc_encrypt($data_check_exist_user[0]->user_email,ENCRYPTION_KEY,1),
+                    'user_code'=>_return_mc_encrypt($data_check_exist_user[0]->user_code,ENCRYPTION_KEY,1),
+                    'created'=>_return_mc_encrypt($data_check_exist_user[0]->created,ENCRYPTION_KEY,1),
+                    'avatar'=>_return_mc_encrypt($avatar,ENCRYPTION_KEY,1),
+                    'token_code'=>_return_mc_encrypt($rand_token_code,ENCRYPTION_KEY,1),
+                    'time_token'=>_return_mc_encrypt($user_login->time_token,ENCRYPTION_KEY,1),
+                );
             }else{
                 if($data_check_exist_user[0]->status==2){
                     $res['mess']='Tài khoản của bạn đã bị khóa, bạn vui lòng liên hệ với AZBOOKING.VN để được giải đáp';
@@ -67,18 +63,43 @@ if(isset($_POST['id'])&&isset($_POST['name'])&&isset($_POST['email'])){
                 }
             }
 
+        }else{
+            $mail_create = str_replace('[username_dangky]', $name, $mail_create);
+            $mail_create = str_replace('[user_email]', $email, $mail_create);
+            $mail_create = str_replace('[user_password]', $pas_old, $mail_create);
+            $dangky = new user();
+            $dangky->name = $name;
+            $dangky->user_email = $email;
+            $dangky->user_name = $email;
+            $dangky->password = $Pass;
+            $dangky->created = _returnGetDateTime();
+            $dangky->login_two_steps = 0;
+            $dangky->status = 1;
+            $dangky->user_role = 2;
+            $dangky->time_token=_returnGetDateTime();
+            $rand_token_code=_return_mc_encrypt(_returnRandString(15));
+            $dangky->token_code=$rand_token_code;
+            $subject = "Thông báo đăng ký tài khoản tại AZBOOKING.VN";
+            if (SendMail($email, $mail_create, $subject, 1, 'AZBOOKING.VN')) {
+                $dangky->user_code = _randomBooking('az', 'user_count');
+                user_insert($dangky);
+                $dk_check_user = "user_email ='" . $email . "'";
+                $data_check_exist_user = user_getByTop('', $dk_check_user, 'id desc');
+                $res['success'] = 1;
+                $res['dang_ky'] = 1;
+                $res['mess'] = 'Azbooking.vn cảm ơn quý khách đã đăng ký tài khoản tiếp thị liên kết.';
+                $res['user_sec'] = array(
+                    'id'=>_return_mc_encrypt($data_check_exist_user[0]->id,ENCRYPTION_KEY,1),
+                    'name'=>_return_mc_encrypt($data_check_exist_user[0]->name,ENCRYPTION_KEY,1),
+                    'user_email'=>_return_mc_encrypt($data_check_exist_user[0]->user_email,ENCRYPTION_KEY,1),
+                    'user_code'=>_return_mc_encrypt($data_check_exist_user[0]->user_code,ENCRYPTION_KEY,1),
+                    'created'=>_return_mc_encrypt($data_check_exist_user[0]->created,ENCRYPTION_KEY,1),
+                    'avatar'=>_return_mc_encrypt(SITE_NAME.'/view/default/themes/images/no-avatar.png',ENCRYPTION_KEY,1),
+                    'token_code'=>_return_mc_encrypt($rand_token_code,ENCRYPTION_KEY,1),
+                    'time_token'=>_return_mc_encrypt($user_login->time_token,ENCRYPTION_KEY,1),
+                );
+            }
         }
-
-        $res['user_sec'] = array(
-            'id'=>_return_mc_encrypt($data_check_exist_user[0]->id,ENCRYPTION_KEY,1),
-            'name'=>_return_mc_encrypt($data_check_exist_user[0]->name,ENCRYPTION_KEY,1),
-            'user_email'=>_return_mc_encrypt($data_check_exist_user[0]->user_email,ENCRYPTION_KEY,1),
-            'user_code'=>_return_mc_encrypt($data_check_exist_user[0]->user_code,ENCRYPTION_KEY,1),
-            'created'=>_return_mc_encrypt($data_check_exist_user[0]->created,ENCRYPTION_KEY,1),
-            'avatar'=>_return_mc_encrypt($avatar,ENCRYPTION_KEY,1),
-            'token_code'=>_return_mc_encrypt($rand_token_code,ENCRYPTION_KEY,1),
-            'time_token'=>_return_mc_encrypt($user_login->time_token,ENCRYPTION_KEY,1),
-        );
 
     }else{
         if($username_login==''&&$password_login==''){

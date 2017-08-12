@@ -37,4 +37,24 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['user_email']) 
         $res['success']=1;
     }
 }
+else{
+    if(isset($_POST['id'])){
+        $id = _return_mc_decrypt(_returnPostParamSecurity('id'));
+        $data_check_exist_user = user_getById($id);
+        if (count($data_check_exist_user) > 0) {
+            unset($data_check_exist_user[0]->password);
+            unset($data_check_exist_user[0]->token_code);
+            unset($data_check_exist_user[0]->time_token);
+            if ($data_check_exist_user[0]->avatar == "") {
+                $data_check_exist_user[0]->avatar = SITE_NAME . '/view/default/themes/images/no-avatar.png';
+            } else {
+                $data_check_exist_user[0]->avatar = SITE_NAME . $data_check_exist_user[0]->avatar;
+            }
+            $res['user'] = array(
+                'code' => $data_check_exist_user[0]->user_code
+            );
+            $res['success'] = 1;
+        }
+    }
+}
 echo json_encode($res);

@@ -43,13 +43,13 @@ if (isset($_POST['mail_create']) && isset($_POST['email_dangky']) && isset($_POS
                 $dangky->user_email = $user_email;
                 $dangky->user_name = $user_email;
                 $dangky->type_tiep_thi = 0;
-                if(isset($_POST['user_tiep_thi'])){
-                     $user_tiep_thi=_return_mc_decrypt(_returnPostParamSecurity('user_tiep_thi'));
-                    $data_user=user_getById($user_tiep_thi);
-                    if($data_user){
-                        if($data_user[0]->type_tiep_thi==2){
+                if (isset($_POST['user_tiep_thi'])) {
+                    $user_tiep_thi = _return_mc_decrypt(_returnPostParamSecurity('user_tiep_thi'));
+                    $data_user = user_getById($user_tiep_thi);
+                    if ($data_user) {
+                        if ($data_user[0]->type_tiep_thi == 2) {
                             $dangky->user_tiep_thi_2 = $user_tiep_thi;
-                        }else{
+                        } else {
                             $dangky->user_tiep_thi_1 = $user_tiep_thi;
                         }
                     }
@@ -61,46 +61,18 @@ if (isset($_POST['mail_create']) && isset($_POST['email_dangky']) && isset($_POS
                 $dangky->login_two_steps = 0;
                 $dangky->user_role = 2;
                 $subject = "Thông báo đăng ký tài khoản tại AZBOOKING.VN";
-                if(isset($data_user)){
-                    if($data_user[0]->type_tiep_thi==0||$data_user[0]->type_tiep_thi==1){
-                        $created_user = date("Y-m-d",strtotime($data_user[0]->created));
-                        $today_user = date("Y-m-d");
-                        $first_date = strtotime($created_user);
-                        $second_date = strtotime($today_user);
-                        $datediff = abs($first_date - $second_date);
-                        $count_day= floor($datediff / (60*60*24));
-                        $count_day=round($count_day/30)+1;
-                        for($i=1;$i<=$count_day;$i++){
-                            $created_user = date('Y-m-d', strtotime('+3 months', strtotime($created_user)));
-                            if(strtotime($created_user)>=strtotime($today_user)){
-                                break;
-                            }
-                        }
-                        $start_date=date('Y-m-d', strtotime('-3 months', strtotime($created_user))).' 00:00:00';
-//                         $publisher=$start_date.'/'.$today_user;
-                         $dk_filter_user_3="created>='".$start_date."' and created<='".$today_user." 23:59:59' and type_tiep_thi=0 and user_tiep_thi_1=".$user_tiep_thi;
-                         $dk_filter_user_4="created>='".$start_date."' and created<='".$today_user." 23:59:59' and type_tiep_thi=1 and  user_tiep_thi_2=".$user_tiep_thi;
-                         $dk_filter_booking="created>='".$start_date."' and created<='".$today_user." 23:59:59' and  status=5 and user_tiep_thi_id=".$user_tiep_thi;
-                        $type_tiep_thi=$data_user[0]->type_tiep_thi;
-                        echo $publisher_count_3=user_count($dk_filter_user_3);
-                        echo '/';
-                        echo $publisher_count_4=user_count($dk_filter_user_4);
-                        $booking_count=booking_count($dk_filter_booking);
-                        if($type_tiep_thi==1){
-
-                        }else{
-
-                        }
-                    }
-
-                }
-                exit;
-//                if (SendMail($user_email, $mail_create, $subject, 1, 'AZBOOKING.VN')) {
-//                    $dangky->user_code = _randomBooking('az', 'user_count');
-//                    user_insert($dangky);
-//                    $array_res['success'] = 1;
-//                    $array_res['mess'] = 'Azbooking.vn cảm ơn quý khách đã đăng ký tài khoản tiếp thị liên kết. Quý khách vui lòng truy cập email <b style="color: #2e7ec7">' . $user_email . '</b>  để xác thực tài khoản.';
+//                if (isset($data_user)) {
+//                    _returnUpdateTypeTiepThi($data_user,$user_tiep_thi);
 //                }
+                if (SendMail($user_email, $mail_create, $subject, 1, 'AZBOOKING.VN')) {
+                    $dangky->user_code = _randomBooking('az', 'user_count');
+                    user_insert($dangky);
+                    $array_res['success'] = 1;
+                    $array_res['mess'] = 'Azbooking.vn cảm ơn quý khách đã đăng ký tài khoản tiếp thị liên kết. Quý khách vui lòng truy cập email <b style="color: #2e7ec7">' . $user_email . '</b>  để xác thực tài khoản.';
+                    if (isset($data_user)) {
+                        _returnUpdateTypeTiepThi($data_user,$user_tiep_thi);
+                    }
+                }
 
             }
         }

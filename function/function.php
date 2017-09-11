@@ -1386,3 +1386,50 @@ function _returnUpdateHoahong($data_check){
         }
     }
 }
+function _returnUpdateTypeTiepThi($data_user,$user_tiep_thi){
+    if ($data_user[0]->type_tiep_thi == 0 || $data_user[0]->type_tiep_thi == 1) {
+        $created_user = date("Y-m-d", strtotime($data_user[0]->created));
+        $today_user = date("Y-m-d");
+        $first_date = strtotime($created_user);
+        $second_date = strtotime($today_user);
+        $datediff = abs($first_date - $second_date);
+        $count_day = floor($datediff / (60 * 60 * 24));
+        $count_day = round($count_day / 30) + 1;
+        for ($i = 1; $i <= $count_day; $i++) {
+            $created_user = date('Y-m-d', strtotime('+3 months', strtotime($created_user)));
+            if (strtotime($created_user) >= strtotime($today_user)) {
+                break;
+            }
+        }
+        $start_date = date('Y-m-d', strtotime('-3 months', strtotime($created_user))) . ' 00:00:00';
+        $dk_filter_user_3 = "created>='" . $start_date . "' and created<='" . $today_user . " 23:59:59' and status=1 and type_tiep_thi=0 and user_tiep_thi_1=" . $user_tiep_thi;
+        $dk_filter_user_4 = "created>='" . $start_date . "' and created<='" . $today_user . " 23:59:59' and status=1 and type_tiep_thi=1 and  user_tiep_thi_2=" . $user_tiep_thi;
+        $dk_filter_booking = "created>='" . $start_date . "' and created<='" . $today_user . " 23:59:59' and  status=5 and user_tiep_thi_id=" . $user_tiep_thi;
+        $type_tiep_thi = $data_user[0]->type_tiep_thi;
+        $publisher_count_3 = user_count($dk_filter_user_3);
+        $publisher_count_4 = user_count($dk_filter_user_4);
+        $booking_count = booking_count($dk_filter_booking);
+        $type_tiep_thi_new=$type_tiep_thi;
+        if ($type_tiep_thi == 1) {
+            if($publisher_count_3>=10&&$booking_count>=10&&$publisher_count_4>=4){
+                $type_tiep_thi_new=2;
+            }
+        } else {
+            if($publisher_count_3>=10&&$booking_count>=20){
+                $type_tiep_thi_new=1;
+            }
+        }
+
+        if($type_tiep_thi_new!=$type_tiep_thi){
+            $user_share=new user((array)$data_user[0]);
+            $user_share->type_tiep_thi=$type_tiep_thi_new;
+            user_update($user_share);
+            if($type_tiep_thi_new==1){
+                $start='4 sao';
+            }else{
+                $start='5 sao';
+            }
+            _insertNotification('Chúc mừng bạn đã được thăng hạng lên '.$start.'. Bạn hãy click vào tin nhắn để xem tỷ lệ hoa hồng của '.$start,0,'',SITE_NAME_AZ.'/tiep-thi-lien-ket-info/hoi-dap.html',0,'');
+        }
+    }
+}

@@ -72,6 +72,18 @@ if(isset($_POST['id'])&&isset($_POST['name'])&&isset($_POST['email'])){
             $dangky->user_email = $email;
             $dangky->user_name = $email;
             $dangky->password = $Pass;
+            if (isset($_POST['key_id'])) {
+                $user_tiep_thi = _return_mc_decrypt(_returnPostParamSecurity('key_id'));
+                $data_user = user_getById($user_tiep_thi);
+                if ($data_user) {
+                    if ($data_user[0]->type_tiep_thi == 2) {
+                        $dangky->user_tiep_thi_2 = $user_tiep_thi;
+                    } else {
+                        $dangky->user_tiep_thi_1 = $user_tiep_thi;
+                    }
+                }
+
+            }
             $dangky->created = _returnGetDateTime();
             $dangky->login_two_steps = 0;
             $dangky->status = 1;
@@ -98,6 +110,9 @@ if(isset($_POST['id'])&&isset($_POST['name'])&&isset($_POST['email'])){
                     'token_code'=>_return_mc_encrypt($rand_token_code,ENCRYPTION_KEY,1),
                     'time_token'=>_return_mc_encrypt($user_login->time_token,ENCRYPTION_KEY,1),
                 );
+                if (isset($data_user)) {
+                    _returnUpdateTypeTiepThi($data_user,$user_tiep_thi);
+                }
             }
         }
 

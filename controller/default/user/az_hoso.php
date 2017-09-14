@@ -50,9 +50,14 @@ else{
             } else {
                 $data_check_exist_user[0]->avatar = SITE_NAME . $data_check_exist_user[0]->avatar;
             }
-            $res['user'] = array(
-                'code' => $data_check_exist_user[0]->user_code
-            );
+            if(isset($_POST['all'])){
+                $res['user'] = $data_check_exist_user[0];
+            }else{
+                $res['user'] = array(
+                    'code' => $data_check_exist_user[0]->user_code
+                );
+            }
+
             $res['success'] = 1;
         }
     }

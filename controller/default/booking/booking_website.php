@@ -19,7 +19,7 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
     $ngay_khoi_hanh = _return_mc_decrypt(_returnPostParamSecurity('ngay_khoi_hanh'), '');
     $name_tour = _return_mc_decrypt(_returnPostParamSecurity('name_tour'), '');
     $code_tour = _return_mc_decrypt(_returnPostParamSecurity('code_tour'), '');
-    $price_tiep_thi = _return_mc_decrypt(_returnPostParamSecurity('price_tiep_thi'), '');
+    $price_tiep_thi_thuc_te = _return_mc_decrypt(_returnPostParamSecurity('price_tiep_thi'), '');
     $id_tour = _return_mc_decrypt(_returnPostParamSecurity('id_tour'), '');
     $nguon_tour = _return_mc_decrypt(_returnPostParamSecurity('ng_tour'), '');
     $phuong_tien= _return_mc_decrypt(_returnPostParamSecurity('phuong_tien'), '');
@@ -103,21 +103,41 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
                 exit;
             }
         }
+        $booking_model=new booking();
         if($key_user!=''&&$key_user!=0){
             $data_user_tiep_thi=user_getById($key_user);
             if(count($data_user_tiep_thi)==0){
                 $key_user=0;
+            }else{
+                if($price_tiep_thi_thuc_te!=''){
+                    switch($data_user_tiep_thi[0]->type_tiep_thi){
+                        case '1':
+                            $price_tiep_thi = round(($price_tiep_thi_thuc_te * 50) / 100);
+                            break;
+                        case '2':
+                            $price_tiep_thi = round(($price_tiep_thi_thuc_te * 70) / 100);
+                            break;
+                        case '3':
+                            $price_tiep_thi = $price_tiep_thi_thuc_te;
+                            break;
+                        default;
+                            $price_tiep_thi = round(($price_tiep_thi_thuc_te * 30) / 100);
+                    }
+                    $booking_model->price_tiep_thi=$price_tiep_thi;
+                    $booking_model->level_tiep_thi=$data_user_tiep_thi[0]->type_tiep_thi;
+                }
+
             }
         }else{
             $key_user=0;
         }
 
-        $booking_model=new booking();
+
         $booking_model->id_tour=$id_tour;
         $booking_model->name_tour=$name_tour;
         $booking_model->code_tour=$code_tour;
         $booking_model->price_tour=$price;
-        $booking_model->price_tiep_thi=$price_tiep_thi;
+        $booking_model->price_tiep_thi_thuc_te=$price_tiep_thi_thuc_te;
         $booking_model->price_11=$price_511;
         $booking_model->price_5=$price_5;
         $booking_model->price_new=$price_new;
@@ -174,8 +194,8 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
         $subject='Xác nhận đơn hàng '.$code_booking;
         $message.='<p>Khách hàng '.$name_customer.' đã thêm một đơn hàng từ '.$nguon_tour.'</p>';
         $message.='<a>Bạn vui lòng truy cập <a href="'.$link_noti.'">đường link</a> để xác nhận đơn hàng</p>';
-         SendMail('info@mixtourist.com.vn', $message, $subject);
-//        SendMail('tungtv.soict@gmail.com', $message, $subject);
+//         SendMail('info@mixtourist.com.vn', $message, $subject);
+        SendMail('tungtv.soict@gmail.com', $message, $subject);
         $mess_log='Khách hàng '.$name_customer.' đã thêm một đơn hàng từ '.$nguon_tour;
         _insertLog(0,6,6,21,$id_booking,'','',$mess_log);
         $item_res=array(

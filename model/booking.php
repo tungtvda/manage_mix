@@ -1,7 +1,7 @@
 <?php
 class booking
 {
-    public $id,$code_booking,$id_tour,$name_tour,$code_tour,$price_tour, $price_tiep_thi,$status_tiep_thi,$confirm_admin_tiep_thi,$price_11,$price_5,$price_new,$price_11_new,$price_5_new,$vat,$nguon_tour,$tien_te,$ty_gia,$ngay_bat_dau,$han_thanh_toan,$loai_khach_hang,$hinh_thuc_thanh_toan,$id_customer,$diem_don,$diem_tra,$ngay_khoi_hanh,$ngay_ket_thuc,$phuong_tien,$num_nguoi_lon,$num_tre_em,$num_tre_em_5,$price_number,$price_number_2,$price_number_3,$name_price,$name_price_2,$name_price_3,$total_price,$tien_thanh_toan,$user_id,$user_tiep_thi_id,$status,$confirm_admin,$created_by,$updated_by,$created,$updated,$note;
+    public $id,$code_booking,$id_tour,$name_tour,$code_tour,$price_tour, $price_tiep_thi,$price_tiep_thi_thuc_te,$level_tiep_thi,$status_tiep_thi,$confirm_admin_tiep_thi,$price_11,$price_5,$price_new,$price_11_new,$price_5_new,$vat,$nguon_tour,$tien_te,$ty_gia,$ngay_bat_dau,$han_thanh_toan,$loai_khach_hang,$hinh_thuc_thanh_toan,$id_customer,$diem_don,$diem_tra,$ngay_khoi_hanh,$ngay_ket_thuc,$phuong_tien,$num_nguoi_lon,$num_tre_em,$num_tre_em_5,$price_number,$price_number_2,$price_number_3,$name_price,$name_price_2,$name_price_3,$total_price,$tien_thanh_toan,$user_id,$user_tiep_thi_id,$status,$confirm_admin,$created_by,$updated_by,$created,$updated,$note;
     public function booking($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
@@ -11,6 +11,8 @@ class booking
     $this->code_tour=isset($data['code_tour'])?$data['code_tour']:'';
     $this->price_tour=isset($data['price_tour'])?$data['price_tour']:'';
     $this->price_tiep_thi=isset($data['price_tiep_thi'])?$data['price_tiep_thi']:'';
+    $this->price_tiep_thi_thuc_te=isset($data['price_tiep_thi_thuc_te'])?$data['price_tiep_thi_thuc_te']:'';
+    $this->level_tiep_thi=isset($data['level_tiep_thi'])?$data['level_tiep_thi']:'';
     $this->status_tiep_thi=isset($data['status_tiep_thi'])?$data['status_tiep_thi']:'';
     $this->confirm_admin_tiep_thi=isset($data['confirm_admin_tiep_thi'])?$data['confirm_admin_tiep_thi']:'';
     $this->price_11=isset($data['price_11'])?$data['price_11']:'';
@@ -63,6 +65,8 @@ class booking
             $this->code_tour=addslashes($this->code_tour);
             $this->price_tour=addslashes($this->price_tour);
             $this->price_tiep_thi=addslashes($this->price_tiep_thi);
+            $this->price_tiep_thi_thuc_te=addslashes($this->price_tiep_thi_thuc_te);
+            $this->level_tiep_thi=addslashes($this->level_tiep_thi);
             $this->status_tiep_thi=addslashes($this->status_tiep_thi);
             $this->confirm_admin_tiep_thi=addslashes($this->confirm_admin_tiep_thi);
             $this->price_11=addslashes($this->price_11);
@@ -114,6 +118,8 @@ class booking
             $this->code_tour=stripslashes($this->code_tour);
             $this->price_tour=stripslashes($this->price_tour);
             $this->price_tiep_thi=stripslashes($this->price_tiep_thi);
+            $this->price_tiep_thi_thuc_te=stripslashes($this->price_tiep_thi_thuc_te);
+            $this->level_tiep_thi=stripslashes($this->level_tiep_thi);
             $this->status_tiep_thi=stripslashes($this->status_tiep_thi);
             $this->confirm_admin_tiep_thi=stripslashes($this->confirm_admin_tiep_thi);
             $this->price_11=stripslashes($this->price_11);

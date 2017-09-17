@@ -135,6 +135,7 @@ RewriteRule ^azbooking-update-2buoc.html controller/default/user/az_update_2buoc
 RewriteRule ^update-notification.html controller/default/user/az_update_notification.php
 RewriteRule ^azbooking-get-dashboard.html controller/default/booking/az_list_dashboad.php
 RewriteRule ^azbooking-get-list-booking.html controller/default/booking/az_list_booking.php
+RewriteRule ^azbooking-get-list-thanhvien.html controller/default/user/az_list_thanhvien.php
 RewriteRule ^azbooking-get-list-chart.html controller/default/user/az_list_chart.php
 RewriteRule ^azbooking-get-detail-booking.html controller/default/booking/az_detail_booking.php
 RewriteRule ^return-hoa-hong.html controller/default/user/az_hoahong.php

@@ -17,6 +17,8 @@ if (isset($_GET['id'])) {
     if ($id != '') {
         $data_check = booking_getById($id);
         if (count($data_check) > 0) {
+//           $res= _returnConfirmTiepthi($data_check, $return='');
+//            exit;
             if($data_check[0]->price_tiep_thi!=''&&$data_check[0]->status_tiep_thi==0){
                 if($data_check[0]->user_tiep_thi_id!=''){
                     $data_user = user_getById($data_check[0]->user_tiep_thi_id);

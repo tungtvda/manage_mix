@@ -1433,3 +1433,43 @@ function _returnUpdateTypeTiepThi($data_user,$user_tiep_thi){
         }
     }
 }
+
+function _returnConfirmTiepthi($data_check, $return=''){
+    $data_user = user_getById($data_check[0]->user_tiep_thi_id);
+    print_r($data_user);
+    exit;
+    $string_return='';
+    if(count($data_user)>0){
+        if($data_user[0]->user_role==2){
+            $array = (array)$data_check[0];
+            $new = new booking($array);
+            $new->id = $data_check[0]->id;
+            $new->confirm_admin_tiep_thi = $_SESSION['user_id'];
+            $new->status_tiep_thi = 1;
+            $new->updated = _returnGetDateTime();
+            booking_update($new);
+            $hoa_hong=$data_user[0]->hoa_hong+$data_check[0]->price_tiep_thi;
+            $array_user = (array)$data_user[0];
+            $new_user = new user($array_user);
+            $new_user->hoa_hong=$hoa_hong;
+            user_update($new_user);
+            $name_noti=$_SESSION['user_name'].' đã xác nhận hoa hồng đơn hàng "'.$data_check[0]->code_booking.'"';
+            $link_noti='/tiep-thi-lien-ket/don-hang/chi-tiet?noti=1&id='._return_mc_encrypt($data_check[0]->id, ENCRYPTION_KEY);
+            _insertNotification($name_noti,$_SESSION['user_id'],$data_check[0]->user_tiep_thi_id,$link_noti,0,'');
+            _insertLog($_SESSION['user_id'],6,6,22,$data_check[0]->id,'','',$name_noti);
+            $string_return= 1;
+        }else{
+            $string_return='Sales không có quyền nhận hoa hồng';
+        }
+
+    }else{
+        $string_return= 'Sales không tồn tại trong hệ thống';
+    }
+    if($return==1){
+        return $string_return;
+    }
+}
+
+function _returnHoahongGioiThieuTiepthi($data_user,$hoa_hong){
+//    if($data_user[0]->user_tiep_thi_1)
+}

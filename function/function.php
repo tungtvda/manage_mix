@@ -1473,3 +1473,27 @@ function _returnConfirmTiepthi($data_check, $return=''){
 function _returnHoahongGioiThieuTiepthi($data_user,$hoa_hong){
 //    if($data_user[0]->user_tiep_thi_1)
 }
+function _returnSettingHoaHong(){
+    $data=setting_hoa_hong_getByTop('1','','id desc');
+    if($data){
+        $res=$data[0];
+    }else{
+        $res=array(
+            'hoa_hong_3'=>'30',
+            'hoa_hong_4'=>'50',
+            'hoa_hong_5'=>'70',
+            'hoa_hong_dai_ly'=>'100',
+            'hoa_hong_gt_3'=>'0',
+            'hoa_hong_gt_4'=>'10',
+            'hoa_hong_gt_5_3'=>'5',
+            'hoa_hong_gt_5_4'=>'10',
+            'hoa_hong_gt_dl'=>'0',
+            'muc_4_don_hang'=>'20',
+            'muc_4_thanh_vien'=>'10',
+            'muc_5_don_hang'=>'10',
+            'muc_5_thanh_vien_3'=>'10',
+            'muc_5_thanh_vien_4'=>'5',
+        );
+    }
+    return $res;
+}

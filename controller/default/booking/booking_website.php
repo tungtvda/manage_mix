@@ -125,6 +125,15 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
                     }
                     $booking_model->price_tiep_thi=$price_tiep_thi;
                     $booking_model->level_tiep_thi=$data_user_tiep_thi[0]->type_tiep_thi;
+                    if($data_user_tiep_thi[0]->user_tiep_thi_2!=0){
+                        $booking_model->level_gioi_thieu_tiep_thi=2;
+                    }else{
+                        if($data_user_tiep_thi[0]->user_tiep_thi_1!=0){
+                            $booking_model->level_gioi_thieu_tiep_thi=1;
+                        }else{
+                            $booking_model->level_gioi_thieu_tiep_thi=0;
+                        }
+                    }
                 }
 
             }

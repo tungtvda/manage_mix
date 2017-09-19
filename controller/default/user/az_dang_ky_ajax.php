@@ -43,7 +43,7 @@ if (isset($_POST['mail_create']) && isset($_POST['email_dangky']) && isset($_POS
                 $dangky->user_email = $user_email;
                 $dangky->user_name = $user_email;
                 $dangky->type_tiep_thi = 0;
-                if (isset($_POST['user_tiep_thi'])) {
+                if (isset($_POST['user_tiep_thi']) && $_POST['user_tiep_thi']!='') {
                     $user_tiep_thi = _return_mc_decrypt(_returnPostParamSecurity('user_tiep_thi'));
                     $data_user = user_getById($user_tiep_thi);
                     if ($data_user) {

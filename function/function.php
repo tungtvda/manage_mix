@@ -1469,6 +1469,44 @@ function _returnConfirmTiepthi($data_check, $return=''){
         return $string_return;
     }
 }
+function _returnHoaHongBooking($booking_model,$data_user_tiep_thi,$price_tiep_thi_thuc_te){
+    $data_setting=_returnSettingHoaHong();
+    switch($data_user_tiep_thi[0]->type_tiep_thi){
+        case '1':
+            $price_tiep_thi = round(($price_tiep_thi_thuc_te * $data_setting['hoa_hong_4']) / 100);
+            break;
+        case '2':
+            $price_tiep_thi = round(($price_tiep_thi_thuc_te * $data_setting['hoa_hong_5']) / 100);
+            break;
+        case '3':
+            $price_tiep_thi = round(($price_tiep_thi_thuc_te * $data_setting['hoa_hong_dai_ly']) / 100);;
+            break;
+        default;
+            $price_tiep_thi = round(($price_tiep_thi_thuc_te * $data_setting['hoa_hong_3']) / 100);
+    }
+    $booking_model->price_tiep_thi=$price_tiep_thi;
+    $booking_model->level_tiep_thi=$data_user_tiep_thi[0]->type_tiep_thi;
+    $user_gioi_thieu=0;
+    if($data_user_tiep_thi[0]->user_tiep_thi_2!=0){
+        $user_gioi_thieu=$data_user_tiep_thi[0]->user_tiep_thi_2;
+//        $booking_model->level_gioi_thieu_tiep_thi=2;
+    }else{
+        if($data_user_tiep_thi[0]->user_tiep_thi_1!=0){
+            $user_gioi_thieu=$data_user_tiep_thi[0]->user_tiep_thi_1;
+//            $booking_model->level_gioi_thieu_tiep_thi=1;
+        }else{
+//            $booking_model->level_gioi_thieu_tiep_thi=0;
+            $user_gioi_thieu=$data_user_tiep_thi[0]->user_tiep_thi_0;
+        }
+    }
+    if($user_gioi_thieu){
+        $data_user_gioithieu=user_getById($user_gioi_thieu);
+        if($data_user_gioithieu){
+            $booking_model->level_gioi_thieu_tiep_thi=$data_user_gioithieu[0]->type_tiep_thi;
+        }
+    }
+    return $booking_model;
+}
 
 function _returnHoahongGioiThieuTiepthi($data_user,$hoa_hong){
 //    if($data_user[0]->user_tiep_thi_1)

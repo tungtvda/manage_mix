@@ -1,16 +1,14 @@
 <?php
 class user
 {
-    public $id,$name,$user_role,$type_tiep_thi,$user_tiep_thi_0,$user_tiep_thi_1,$user_tiep_thi_2,$permison_module,$permison_form,$permison_action,$mr,$hoa_hong,$address,$phone,$mobi,$user_name,$user_code,$user_email,$password,$login_two_steps,$code_login,$phong_ban,$chuc_vu,$nganh_nghe,$gender,$birthday,$avatar,$skype,$facebook,$ngay_lam_viec,$ngay_chinh_thuc,$guides,$guide_card_number,$tax_code,$cmnd,$date_range_cmnd,$issued_by_cmnd,$number_passport,$date_range_passport,$issued_by_passport,$expiration_date_passport,$dan_toc,$ho_khau_tt,$hon_nhan,$bang_cap,$language,$account_number_bank,$bank,$open_bank,$religion,$note,$status,$created,$token_code,$time_token,$memori_login,$updated,$created_by,$updated_by;
+    public $id,$name,$user_role,$type_tiep_thi,$user_gioi_thieu,$permison_module,$permison_form,$permison_action,$mr,$hoa_hong,$address,$phone,$mobi,$user_name,$user_code,$user_email,$password,$login_two_steps,$code_login,$phong_ban,$chuc_vu,$nganh_nghe,$gender,$birthday,$avatar,$skype,$facebook,$ngay_lam_viec,$ngay_chinh_thuc,$guides,$guide_card_number,$tax_code,$cmnd,$date_range_cmnd,$issued_by_cmnd,$number_passport,$date_range_passport,$issued_by_passport,$expiration_date_passport,$dan_toc,$ho_khau_tt,$hon_nhan,$bang_cap,$language,$account_number_bank,$bank,$open_bank,$religion,$note,$status,$created,$token_code,$time_token,$memori_login,$updated,$created_by,$updated_by;
     public function user($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
     $this->name=isset($data['name'])?$data['name']:'';
     $this->user_role=isset($data['user_role'])?$data['user_role']:'';
     $this->type_tiep_thi=isset($data['type_tiep_thi'])?$data['type_tiep_thi']:'';
-    $this->user_tiep_thi_0=isset($data['user_tiep_thi_0'])?$data['user_tiep_thi_0']:'';
-    $this->user_tiep_thi_1=isset($data['user_tiep_thi_1'])?$data['user_tiep_thi_1']:'';
-    $this->user_tiep_thi_2=isset($data['user_tiep_thi_2'])?$data['user_tiep_thi_2']:'';
+    $this->user_gioi_thieu=isset($data['user_gioi_thieu'])?$data['user_gioi_thieu']:'';
     $this->permison_module=isset($data['permison_module'])?$data['permison_module']:'';
     $this->permison_form=isset($data['permison_form'])?$data['permison_form']:'';
     $this->permison_action=isset($data['permison_action'])?$data['permison_action']:'';
@@ -71,9 +69,7 @@ class user
             $this->name=addslashes($this->name);
             $this->user_role=addslashes($this->user_role);
             $this->type_tiep_thi=addslashes($this->type_tiep_thi);
-            $this->user_tiep_thi_0=addslashes($this->user_tiep_thi_0);
-            $this->user_tiep_thi_1=addslashes($this->user_tiep_thi_1);
-            $this->user_tiep_thi_2=addslashes($this->user_tiep_thi_2);
+            $this->user_gioi_thieu=addslashes($this->user_gioi_thieu);
             $this->permison_module=addslashes($this->permison_module);
             $this->permison_form=addslashes($this->permison_form);
             $this->permison_action=addslashes($this->permison_action);
@@ -133,9 +129,7 @@ class user
             $this->name=stripslashes($this->name);
             $this->user_role=stripslashes($this->user_role);
             $this->type_tiep_thi=stripslashes($this->type_tiep_thi);
-            $this->user_tiep_thi_0=stripslashes($this->user_tiep_thi_0);
-            $this->user_tiep_thi_1=stripslashes($this->user_tiep_thi_1);
-            $this->user_tiep_thi_2=stripslashes($this->user_tiep_thi_2);
+            $this->user_gioi_thieu=stripslashes($this->user_gioi_thieu);
             $this->permison_module=stripslashes($this->permison_module);
             $this->permison_form=stripslashes($this->permison_form);
             $this->permison_action=stripslashes($this->permison_action);

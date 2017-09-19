@@ -47,16 +47,7 @@ if (isset($_POST['mail_create']) && isset($_POST['email_dangky']) && isset($_POS
                     $user_tiep_thi = _return_mc_decrypt(_returnPostParamSecurity('user_tiep_thi'));
                     $data_user = user_getById($user_tiep_thi);
                     if ($data_user) {
-                        if ($data_user[0]->type_tiep_thi == 2) {
-                            $dangky->user_tiep_thi_2 = $user_tiep_thi;
-                        } else {
-                            if ($data_user[0]->type_tiep_thi == 1) {
-                                $dangky->user_tiep_thi_1 = $user_tiep_thi;
-                            }else{
-                                $dangky->user_tiep_thi_0 = $user_tiep_thi;
-                            }
-
-                        }
+                        $dangky->user_gioi_thieu = $user_tiep_thi;
                     }
 
                 }

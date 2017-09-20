@@ -180,8 +180,7 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
         $subject='Xác nhận đơn hàng '.$code_booking;
         $message.='<p>Khách hàng '.$name_customer.' đã thêm một đơn hàng từ '.$nguon_tour.'</p>';
         $message.='<a>Bạn vui lòng truy cập <a href="'.$link_noti.'">đường link</a> để xác nhận đơn hàng</p>';
-//         SendMail('info@mixtourist.com.vn', $message, $subject);
-        SendMail('tungtv.soict@gmail.com', $message, $subject);
+        SendMail(SEND_EMAIL, $message, $subject);
         $mess_log='Khách hàng '.$name_customer.' đã thêm một đơn hàng từ '.$nguon_tour;
         _insertLog(0,6,6,21,$id_booking,'','',$mess_log);
         $item_res=array(

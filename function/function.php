@@ -1514,6 +1514,17 @@ function _returnHoaHongBooking($booking_model, $data_user_tiep_thi, $price_tiep_
                         break;
                     default;
                         $booking_model->level_gioi_thieu_tiep_thi_3 = $data_user_tiep_thi[0]->user_gioi_thieu;
+                        if($data_user_gioithieu[0]->user_gioi_thieu){
+                            $data_user_gioithieu_c1 = user_getById($data_user_gioithieu[0]->user_gioi_thieu);
+                            if($data_user_gioithieu_c1){
+                                if($data_user_gioithieu_c1[0]->type_tiep_thi==2){
+                                    $booking_model->level_gioi_thieu_tiep_thi_5 = $data_user_gioithieu[0]->user_gioi_thieu;
+                                }
+                                if($data_user_gioithieu_c1[0]->type_tiep_thi==1){
+                                    $booking_model->level_gioi_thieu_tiep_thi_4 = $data_user_gioithieu[0]->user_gioi_thieu;
+                                }
+                            }
+                        }
                 }
             }
     }
@@ -1529,7 +1540,7 @@ function _returnSettingHoaHong()
 {
     $data = setting_hoa_hong_getByTop('1', '', 'id desc');
     if ($data) {
-        $res = $data[0];
+        $res =(array) $data[0];
     } else {
         $res = array(
             'hoa_hong_3' => '30',

@@ -81,7 +81,7 @@ if (isset($_POST['price'])&&isset($_POST['input_yeu_cau']) && isset($_POST['form
                         $subject='Xác nhận rút tiền hoa hồng';
                         $message.=$name_noti='Thành viên  '.$name.' đã yêu cầu rút tiền hoa hồng '.number_format((int)$hoa_hong,0,",",".").' vnđ';
                         $message.='</br><a>Bạn vui lòng truy cập <a href="'.$link_noti.'">đường link</a> để xác nhận rút tiền hoa hồng</p>';
-                        SendMail('info@mixtourist.com.vn', $message, $subject);
+                        SendMail(SEND_EMAIL, $message, $subject);
 //                        SendMail('tungtv.soict@gmail.com', $message, $subject);
 //                        $mess_log='Khách hàng '.$name_customer.' đã thêm một đơn hàng từ '.$nguon_tour;
 //                        _insertLog(0,6,6,21,$id_booking,'','',$mess_log);

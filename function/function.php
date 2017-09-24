@@ -1419,7 +1419,7 @@ function _returnUpdateTypeTiepThi($data_user, $user_tiep_thi)
     }
 }
 
-function _returnConfirmTiepthi($data_check, $return = '')
+function _returnConfirmTiepthi($data_check, $return = '', $return_array=0)
 {
     if($data_check[0]->status_tiep_thi==0) {
         $data_user = user_getById($data_check[0]->user_tiep_thi_id);
@@ -1450,6 +1450,9 @@ function _returnConfirmTiepthi($data_check, $return = '')
                             $name_noti = 'AZBOOKING.VN đã xác nhận hoa hồng giới thiệu thành viên cho đơn hàng "' . $data_check[0]->code_booking . '"';
                             _returnUpdateHoahong($data_user_5, $data_check[0]->hoa_hong_gioi_thieu_4, $data_check, $name_noti,$data_check[0]->level_gioi_thieu_tiep_thi_5);
                         }
+                    }
+                    if($return_array==1){
+                        return $new;
                     }
                     $string_return = 1;
                 } else {

@@ -367,6 +367,12 @@ if(isset($_POST['code_booking']))
         _updateCustomerBooking($name_customer_sub,$email_customer_sub,$phone_customer_sub,$address_customer_sub,$tuoi_customer_sub,$tuoi_number_customer_sub,$birthday_customer_sub,$passport_customer_sub,$date_passport_customer_sub,$array_detail['id'], $_SESSION['user_id']);
         $booking_update->updated=_returnGetDateTime();
         booking_update($booking_update);
+        $data_detail=booking_getById($data_detail[0]->id);
+        if($data_detail){
+            if($data_detail[0]->price_tiep_thi!=''&&$data_detail[0]->status_tiep_thi!=1&&$data_detail[0]->confirm_admin_tiep_thi==0&&$data_detail[0]->user_tiep_thi_id!='' && $data_detail[0]->status==5 && $data_detail[0]->confirm_admin!=0){
+                _returnConfirmTiepthi($data_detail, 0);
+            }
+        }
 
         if(isset($save_tiepthi) && $save_tiepthi==1){
             $array_user['user_name']=$check_data_user_tt[0]->name;
@@ -416,13 +422,8 @@ if(isset($_POST['code_booking']))
                 }
             }
 
-
-
         }
         redict(SITE_NAME.'/'.$action_link.'/');
-
-
-//        print_r($_POST);
     }else{
         if($id_user!=''&&$name_user!=''&&$code_booking!=''&&$ngay_bat_dau!=''&&$han_thanh_toan!=''&&$hinh_thuc_thanh_toan!=''&&$num_nguoi_lon!=''&&$num_nguoi_lon!=0&&$name_customer!=''&&$email!='' &&$address!='' &&$phone!='' &&$diem_don!='' &&$name_tour!='' &&$id_tour!=''&&$price_submit!=''){
             // check thông tin khách hàng

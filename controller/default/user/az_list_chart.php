@@ -36,7 +36,7 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['user_email']) 
                 $dk_filter_booking = "created>='" . $date_total . " 00:00:00' and created<='" . $date_total . " 23:59:59' and  status=5 and user_tiep_thi_id=" . $data_check_exist_user[0]->id;
                 $count_booking = booking_count($dk_filter_booking);
                 $count_total_booking=$count_total_booking+$count_booking;
-                $dk_filter_user = "created>='" . $date_total . " 00:00:00' and created<='" . $date_total . " 23:59:59' and  status=1 and (user_tiep_thi_0=" . $data_check_exist_user[0]->id ." or user_tiep_thi_1=".$data_check_exist_user[0]->id." or user_tiep_thi_2=".$data_check_exist_user[0]->id.")";
+                $dk_filter_user = "created>='" . $date_total . " 00:00:00' and created<='" . $date_total . " 23:59:59' and  status=1 and user_gioi_thieu=" . $data_check_exist_user[0]->id;
                 $count_user = user_count($dk_filter_user);
                 $count_total_user=$count_total_user+$count_user;
                 $list_chart.='{"year": "'.date("d-m-Y", strtotime($date_total)).'",

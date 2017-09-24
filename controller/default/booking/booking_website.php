@@ -63,7 +63,7 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
     if($nguon_tour!=''){
         $data_nguon_tour=nguon_tour_getByTop('1','name="'.$nguon_tour.'"','id desc');
         if(count($data_nguon_tour)>0){
-            $nguon_tour=$data_nguon_tour[0]->id;
+            $nguon_tour_id=$data_nguon_tour[0]->id;
         }else{
             $nguon_tour_model=new nguon_tour();
             $nguon_tour_model->name=$nguon_tour;
@@ -71,7 +71,7 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
             nguon_tour_insert($nguon_tour_model);
             $data_nguon_tour=nguon_tour_getByTop('1','name="'.$nguon_tour.'"','id desc');
             if(count($data_nguon_tour)>0){
-                $nguon_tour=$data_nguon_tour[0]->id;
+                $nguon_tour_id=$data_nguon_tour[0]->id;
             }
         }
     }
@@ -129,7 +129,7 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
         $booking_model->price_new=$price_new;
         $booking_model->price_11_new=$price_511_new;
         $booking_model->price_5_new=$price_5_new;
-        $booking_model->nguon_tour=$nguon_tour;
+        $booking_model->nguon_tour=$nguon_tour_id;
         $booking_model->ngay_bat_dau=_returnGetDateTime();
         $booking_model->hinh_thuc_thanh_toan=$httt;
         $booking_model->id_customer=$id_customer;

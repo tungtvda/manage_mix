@@ -508,8 +508,8 @@ if(isset($_POST['code_booking']))
             if($user_tiep_thi_id!=''){
                 $check_data_user_tt=user_getById($user_tiep_thi_id);
                 if(count($check_data_user_tt)>0 && $price_tiep_thi!=''){
+                    $booking_model=_returnHoaHongBooking($booking_model, $check_data_user_tt, $price_tiep_thi);
                     $booking_model->user_tiep_thi_id=$user_tiep_thi_id;
-//                    $booking_model->status_tiep_thi=$confirm_admin_tiep_thi;
                     $save_tiepthi=1;
                 }
             }
@@ -581,10 +581,10 @@ if(isset($_POST['code_booking']))
                 $link_noti=SITE_NAME.'/'.$action_link.'/sua?noti=1&id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY);
                 _insertNotification($name_noti,$_SESSION['user_id'],$id_user,$link_noti,0,'');
 
-                $subject='Xác nhận đơn hàng '.$code_booking;
-                $message.='<p>Admin '.$_SESSION['user_name'].' vừa tạo đơn hàng mã '.$code_booking.'</p>';
-                $message.='<a>Bạn vui lòng truy cập <a href="'.$link_noti.'">đường link</a> để xác nhận đơn hàng</p>';
-                SendMail($check_data_user[0]->email, $message, $subject);
+//                $subject='Xác nhận đơn hàng '.$code_booking;
+//                $message.='<p>Admin '.$_SESSION['user_name'].' vừa tạo đơn hàng mã '.$code_booking.'</p>';
+//                $message.='<a>Bạn vui lòng truy cập <a href="'.$link_noti.'">đường link</a> để xác nhận đơn hàng</p>';
+//                SendMail($check_data_user[0]->email, $message, $subject);
                 $mess_log='Admin '.$_SESSION['user_name'].' đã thực hiện việc tạo đơn hàng';
             }
             _insertLog($_SESSION['user_id'],6,6,21,$id_booking,'','',$mess_log);

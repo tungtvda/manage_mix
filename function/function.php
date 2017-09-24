@@ -1368,27 +1368,7 @@ function _returnRandomString($length = 10)
     return $randomString;
 }
 
-function _returnUpdateHoahong($data_check)
-{
-    if ($data_check[0]->price_tiep_thi != '' && $data_check[0]->status_tiep_thi != 1 && $data_check[0]->confirm_admin_tiep_thi == 0 && $data_check[0]->user_id != '' && $status == 5) {
-        $data_user = user_getById($data_check[0]->user_id);
-        if (count($data_user) > 0) {
-            if ($data_user[0]->user_role == 2) {
-                $new->confirm_admin_tiep_thi = $_SESSION['user_id'];
-                $new->status_tiep_thi = 1;
-                $hoa_hong = $data_user[0]->hoa_hong + $data_check[0]->price_tiep_thi;
-                $array_user = (array)$data_user[0];
-                $new_user = new user($array_user);
-                $new_user->hoa_hong = $hoa_hong;
-                user_update($new_user);
-                $name_noti = $_SESSION['user_name'] . ' đã xác nhận hoa hồng đơn hàng "' . $data_check[0]->code_booking . '" cho thành viên "' . $data_user[0]->name . ' - ' . $data_user[0]->user_code . '"';
-                $link_noti = '/tiep-thi-lien-ket/don-hang/chi-tiet?noti=1&id=' . _return_mc_encrypt($data_check[0]->id, ENCRYPTION_KEY);
-                _insertNotification($name_noti, $_SESSION['user_id'], $data_check[0]->user_id, $link_noti, 0, '');
-                _insertLog($_SESSION['user_id'], 6, 6, 22, $data_check[0]->id, '', '', $name_noti);
-            }
-        }
-    }
-}
+
 
 function _returnUpdateTypeTiepThi($data_user, $user_tiep_thi)
 {
@@ -1441,47 +1421,77 @@ function _returnUpdateTypeTiepThi($data_user, $user_tiep_thi)
 
 function _returnConfirmTiepthi($data_check, $return = '')
 {
-    $data_user = user_getById($data_check[0]->user_tiep_thi_id);
-    print_r($data_user);
-    exit;
-    $string_return = '';
-    if (count($data_user) > 0) {
-        if ($data_user[0]->user_role == 2) {
-            $array = (array)$data_check[0];
-            $new = new booking($array);
-            $new->id = $data_check[0]->id;
-            $new->confirm_admin_tiep_thi = $_SESSION['user_id'];
-            $new->status_tiep_thi = 1;
-            $new->updated = _returnGetDateTime();
-            booking_update($new);
-            $hoa_hong = $data_user[0]->hoa_hong + $data_check[0]->price_tiep_thi;
-            $array_user = (array)$data_user[0];
-            $new_user = new user($array_user);
-            $new_user->hoa_hong = $hoa_hong;
-            user_update($new_user);
-            $name_noti = $_SESSION['user_name'] . ' đã xác nhận hoa hồng đơn hàng "' . $data_check[0]->code_booking . '"';
-            $link_noti = '/tiep-thi-lien-ket/don-hang/chi-tiet?noti=1&id=' . _return_mc_encrypt($data_check[0]->id, ENCRYPTION_KEY);
-            _insertNotification($name_noti, $_SESSION['user_id'], $data_check[0]->user_tiep_thi_id, $link_noti, 0, '');
-            _insertLog($_SESSION['user_id'], 6, 6, 22, $data_check[0]->id, '', '', $name_noti);
-            $string_return = 1;
-        } else {
-            $string_return = 'Sales không có quyền nhận hoa hồng';
-        }
+    if($data_check[0]->status_tiep_thi==0) {
+        $data_user = user_getById($data_check[0]->user_tiep_thi_id);
+        $string_return = '';
+        if (count($data_user) > 0) {
+            if ($data_user[0]->user_role == 2) {
+                if ($data_check[0]->price_tiep_thi != '') {
+                    $array = (array)$data_check[0];
+                    $new = new booking($array);
+                    $new->id = $data_check[0]->id;
+                    $new->confirm_admin_tiep_thi = $_SESSION['user_id'];
+                    $new->status_tiep_thi = 1;
+                    $new->updated = _returnGetDateTime();
+                    booking_update($new);
+//                $name_noti = $_SESSION['user_name'] . ' đã xác nhận hoa hồng đơn hàng "' . $data_check[0]->code_booking . '"';
+                    $name_noti = 'AZBOOKING.VN đã xác nhận hoa hồng đơn hàng "' . $data_check[0]->code_booking . '"';
+                    _returnUpdateHoahong($data_user, $data_check[0]->price_tiep_thi, $data_check, $name_noti,$data_check[0]->user_tiep_thi_id);
+                    if ($data_check[0]->level_gioi_thieu_tiep_thi_4 && $data_check[0]->hoa_hong_gioi_thieu_4 != '') {
+                        $data_user_4 = user_getById($data_check[0]->level_gioi_thieu_tiep_thi_4);
+                        if (count($data_user_4)) {
+                            $name_noti = 'AZBOOKING.VN đã xác nhận hoa hồng giới thiệu thành viên cho đơn hàng "' . $data_check[0]->code_booking . '"';
+                            _returnUpdateHoahong($data_user_4, $data_check[0]->hoa_hong_gioi_thieu_4, $data_check, $name_noti,$data_check[0]->level_gioi_thieu_tiep_thi_4);
+                        }
+                    }
+                    if ($data_check[0]->level_gioi_thieu_tiep_thi_5 && $data_check[0]->hoa_hong_gioi_thieu_5 != '') {
+                        $data_user_5 = user_getById($data_check[0]->level_gioi_thieu_tiep_thi_5);
+                        if (count($data_user_5)) {
+                            $name_noti = 'AZBOOKING.VN đã xác nhận hoa hồng giới thiệu thành viên cho đơn hàng "' . $data_check[0]->code_booking . '"';
+                            _returnUpdateHoahong($data_user_5, $data_check[0]->hoa_hong_gioi_thieu_4, $data_check, $name_noti,$data_check[0]->level_gioi_thieu_tiep_thi_5);
+                        }
+                    }
+                    $string_return = 1;
+                } else {
+                    $string_return = 'Đơn hàng không có hoa hồng';
+                }
+            } else {
+                $string_return = 'Thành viên không có quyền nhận hoa hồng';
+            }
 
-    } else {
-        $string_return = 'Sales không tồn tại trong hệ thống';
+
+        } else {
+            $string_return = 'Sales không tồn tại trong hệ thống';
+        }
+    }else{
+        $string_return = 'Hoa hồng đã được xác nhận';
     }
     if ($return == 1) {
         return $string_return;
     }
 }
+function _returnUpdateHoahong($data_user, $price_ho_hong, $data_check,$name_noti,$user_tiep_thi_id){
+    $hoa_hong = $data_user[0]->hoa_hong + $price_ho_hong;
+    $array_user = (array)$data_user[0];
+    $new_user = new user($array_user);
+    $new_user->hoa_hong = $hoa_hong;
+    user_update($new_user);
+//    $name_noti = $_SESSION['user_name'] . ' đã xác nhận hoa hồng đơn hàng "' . $data_check[0]->code_booking . '"';
+    $link_noti = '/tiep-thi-lien-ket/don-hang/chi-tiet?noti=1&id=' . _return_mc_encrypt($data_check[0]->id, ENCRYPTION_KEY);
+    _insertNotification($name_noti, $_SESSION['user_id'], $user_tiep_thi_id, $link_noti, 0, '');
+    _insertLog($_SESSION['user_id'], 6, 6, 22, $data_check[0]->id, '', '', $name_noti);
+}
 
 function _returnHoaHongBooking($booking_model, $data_user_tiep_thi, $price_tiep_thi_thuc_te)
 {
     $data_setting = _returnSettingHoaHong();
+    $hoa_hong_gioi_thieu_4='';
+    $hoa_hong_gioi_thieu_5_3='';
+    $hoa_hong_gioi_thieu_5_4='';
     switch ($data_user_tiep_thi[0]->type_tiep_thi) {
         case '1':
             $price_tiep_thi = round(($price_tiep_thi_thuc_te * $data_setting['hoa_hong_4']) / 100);
+            $hoa_hong_gioi_thieu_5_4 = round(($price_tiep_thi * $data_setting['hoa_hong_gt_5_4']) / 100);
             break;
         case '2':
             $price_tiep_thi = round(($price_tiep_thi_thuc_te * $data_setting['hoa_hong_5']) / 100);
@@ -1491,6 +1501,9 @@ function _returnHoaHongBooking($booking_model, $data_user_tiep_thi, $price_tiep_
             break;
         default;
             $price_tiep_thi = round(($price_tiep_thi_thuc_te * $data_setting['hoa_hong_3']) / 100);
+            $hoa_hong_gioi_thieu_4=round(($price_tiep_thi * $data_setting['hoa_hong_gt_4']) / 100);
+            $hoa_hong_gioi_thieu_5_4=round(($hoa_hong_gioi_thieu_4 * $data_setting['hoa_hong_gt_5_4']) / 100);
+            $hoa_hong_gioi_thieu_5_3=round(($price_tiep_thi * $data_setting['hoa_hong_gt_5_3']) / 100);
     }
     $booking_model->price_tiep_thi = $price_tiep_thi;
     $booking_model->level_tiep_thi = $data_user_tiep_thi[0]->type_tiep_thi;
@@ -1500,17 +1513,32 @@ function _returnHoaHongBooking($booking_model, $data_user_tiep_thi, $price_tiep_
                 switch ($data_user_gioithieu[0]->type_tiep_thi) {
                     case '1':
                         $booking_model->level_gioi_thieu_tiep_thi_4 = $data_user_tiep_thi[0]->user_gioi_thieu;
+                        if($data_user_tiep_thi[0]->type_tiep_thi<$data_user_gioithieu[0]->type_tiep_thi && $hoa_hong_gioi_thieu_4!=''){
+                            $booking_model->hoa_hong_gioi_thieu_4=$hoa_hong_gioi_thieu_4;
+                        }
                         if($data_user_gioithieu[0]->user_gioi_thieu){
                             $data_user_gioithieu_c1 = user_getById($data_user_gioithieu[0]->user_gioi_thieu);
                             if($data_user_gioithieu_c1){
                                 if($data_user_gioithieu_c1[0]->type_tiep_thi==2){
                                     $booking_model->level_gioi_thieu_tiep_thi_5 = $data_user_gioithieu[0]->user_gioi_thieu;
+                                    if($data_user_gioithieu_c1[0]->type_tiep_thi>$data_user_gioithieu[0]->type_tiep_thi && $hoa_hong_gioi_thieu_5_4!=''){
+                                        $booking_model->hoa_hong_gioi_thieu_5=$hoa_hong_gioi_thieu_5_4;
+                                    }
                                 }
                             }
                         }
                         break;
                     case '2':
                         $booking_model->level_gioi_thieu_tiep_thi_5 = $data_user_tiep_thi[0]->user_gioi_thieu;
+                        if($data_user_tiep_thi[0]->type_tiep_thi<$data_user_gioithieu[0]->type_tiep_thi){
+                            if($data_user_tiep_thi[0]->type_tiep_thi==0 && $hoa_hong_gioi_thieu_5_3!=''){
+                                $booking_model->hoa_hong_gioi_thieu_5=$hoa_hong_gioi_thieu_5_3;
+                            }
+                            if($data_user_tiep_thi[0]->type_tiep_thi==1 && $hoa_hong_gioi_thieu_5_4!=''){
+                                $booking_model->hoa_hong_gioi_thieu_5=$hoa_hong_gioi_thieu_5_4;
+                            }
+
+                        }
                         break;
                     default;
                         $booking_model->level_gioi_thieu_tiep_thi_3 = $data_user_tiep_thi[0]->user_gioi_thieu;

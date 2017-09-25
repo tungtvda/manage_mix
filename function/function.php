@@ -1372,6 +1372,8 @@ function _returnRandomString($length = 10)
 
 function _returnUpdateTypeTiepThi($data_user, $user_tiep_thi)
 {
+    $data_user=user_getById($user_tiep_thi);
+    $data_setting = _returnSettingHoaHong();
     if ($data_user[0]->type_tiep_thi == 0 || $data_user[0]->type_tiep_thi == 1) {
         $created_user = date("Y-m-d", strtotime($data_user[0]->created));
         $today_user = date("Y-m-d");
@@ -1387,8 +1389,8 @@ function _returnUpdateTypeTiepThi($data_user, $user_tiep_thi)
             }
         }
         $start_date = date('Y-m-d', strtotime('-3 months', strtotime($created_user))) . ' 00:00:00';
-        $dk_filter_user_3 = "created>='" . $start_date . "' and created<='" . $today_user . " 23:59:59' and status=1 and type_tiep_thi=0 and user_tiep_thi_1=" . $user_tiep_thi;
-        $dk_filter_user_4 = "created>='" . $start_date . "' and created<='" . $today_user . " 23:59:59' and status=1 and type_tiep_thi=1 and  user_tiep_thi_2=" . $user_tiep_thi;
+        $dk_filter_user_3 = "created>='" . $start_date . "' and created<='" . $today_user . " 23:59:59' and status=1 and type_tiep_thi=0 and user_gioi_thieu=" . $user_tiep_thi;
+        $dk_filter_user_4 = "created>='" . $start_date . "' and created<='" . $today_user . " 23:59:59' and status=1 and type_tiep_thi=1 and  user_gioi_thieu=" . $user_tiep_thi;
         $dk_filter_booking = "created>='" . $start_date . "' and created<='" . $today_user . " 23:59:59' and  status=5 and user_tiep_thi_id=" . $user_tiep_thi;
         $type_tiep_thi = $data_user[0]->type_tiep_thi;
         $publisher_count_3 = user_count($dk_filter_user_3);
@@ -1396,15 +1398,14 @@ function _returnUpdateTypeTiepThi($data_user, $user_tiep_thi)
         $booking_count = booking_count($dk_filter_booking);
         $type_tiep_thi_new = $type_tiep_thi;
         if ($type_tiep_thi == 1) {
-            if ($publisher_count_3 >= 10 && $booking_count >= 10 && $publisher_count_4 >= 4) {
+            if ($publisher_count_3 >=$data_setting['muc_5_thanh_vien_3'] && $booking_count >= $data_setting['muc_5_don_hang'] && $publisher_count_4>=$data_setting['muc_5_thanh_vien_4']) {
                 $type_tiep_thi_new = 2;
             }
         } else {
-            if ($publisher_count_3 >= 10 && $booking_count >= 20) {
+            if ($publisher_count_3 >=$data_setting['muc_4_thanh_vien'] && $booking_count >=$data_setting['muc_4_don_hang']) {
                 $type_tiep_thi_new = 1;
             }
         }
-
         if ($type_tiep_thi_new != $type_tiep_thi) {
             $user_share = new user((array)$data_user[0]);
             $user_share->type_tiep_thi = $type_tiep_thi_new;
@@ -1461,7 +1462,7 @@ function _returnConfirmTiepthi($data_check, $return = '', $return_array=0)
             } else {
                 $string_return = 'Thành viên không có quyền nhận hoa hồng';
             }
-
+            _returnUpdateTypeTiepThi(array(), $data_check[0]->user_tiep_thi_id);
 
         } else {
             $string_return = 'Sales không tồn tại trong hệ thống';
@@ -1483,6 +1484,7 @@ function _returnUpdateHoahong($data_user, $price_ho_hong, $data_check,$name_noti
     $link_noti = '/tiep-thi-lien-ket/don-hang/chi-tiet?noti=1&id=' . _return_mc_encrypt($data_check[0]->id, ENCRYPTION_KEY);
     _insertNotification($name_noti, $_SESSION['user_id'], $user_tiep_thi_id, $link_noti, 0, '');
     _insertLog($_SESSION['user_id'], 6, 6, 22, $data_check[0]->id, '', '', $name_noti);
+
 }
 
 function _returnHoaHongBooking($booking_model, $data_user_tiep_thi, $price_tiep_thi_thuc_te)

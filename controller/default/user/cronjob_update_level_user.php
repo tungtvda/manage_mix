@@ -23,6 +23,8 @@ define('PRIVATE_KEY','hoidinhnvbk');
 
 
 require_once DIR . '/model/userService.php';
+require_once DIR . '/model/notificationService.php';
+require_once DIR . '/model/bookingService.php';
 require_once DIR . '/model/setting_hoa_hongService.php';
 require_once DIR . '/function/function.php';
 
@@ -49,6 +51,42 @@ if($user_list){
             }
         }
         $start_date = date('Y-m-d', strtotime('-3 months', strtotime($created_user))) . ' 00:00:00';
-        echo $created_user.' - '.$start_date. ' <br> ';
+//        echo $created_user.' - '.$start_date. ' <br> ';
+        $dk_filter_user_3 = "created>='" . $start_date . "' and created<='" . $created_user . " 23:59:59' and status=1 and type_tiep_thi=0 and user_gioi_thieu=" . $data_user->id;
+        $dk_filter_user_4 = "created>='" . $start_date . "' and created<='" . $created_user . " 23:59:59' and status=1 and type_tiep_thi=1 and  user_gioi_thieu=" . $data_user->id;
+        $dk_filter_booking = "created>='" . $start_date . "' and created<='" . $created_user . " 23:59:59' and  status=5 and user_tiep_thi_id=" . $data_user->id;
+        $publisher_count_3 = user_count($dk_filter_user_3);
+        $publisher_count_4 = user_count($dk_filter_user_4);
+        $booking_count = booking_count($dk_filter_booking);
+        $type_tiep_thi_new =$data_user->type_tiep_thi;
+        if ($data_user->type_tiep_thi == 2) {
+            if ($publisher_count_3 >=$data_setting['muc_5_thanh_vien_3'] && $booking_count >= $data_setting['muc_5_don_hang'] && $publisher_count_4>=$data_setting['muc_5_thanh_vien_4']) {
+                $type_tiep_thi_new = 2;
+            }else{
+                $type_tiep_thi_new = 1;
+            }
+        } else {
+            if ($data_user->type_tiep_thi == 1)
+            {
+                if ($publisher_count_3 >=$data_setting['muc_4_thanh_vien'] && $booking_count >=$data_setting['muc_4_don_hang']) {
+                    $type_tiep_thi_new = 1;
+                }else{
+                    $type_tiep_thi_new = 0;
+                }
+            }
+
+        }
+        if ($type_tiep_thi_new != $data_user->type_tiep_thi && $today_user>=$created_user) {
+            $user_share = new user((array)$data_user);
+            $user_share->type_tiep_thi = $type_tiep_thi_new;
+            user_update($user_share);
+            if ($type_tiep_thi_new == 1) {
+                $start = '4 sao';
+            } else {
+                $start = '3 sao';
+            }
+            _insertNotification('Trong 3 tháng vừa qua từ ngày '.$start_date.' đến ngày '.$created_user.' bạn đã không giữ được thứ hạng, hiện tại thứ hạng của bạn là ' . $start . '. Bạn hãy click vào tin nhắn để xem tỷ lệ hoa hồng của ' . $start, 0, '', SITE_NAME_AZ . '/tiep-thi-lien-ket-info/hoi-dap.html', 0, '');
+        }
+
     }
 }

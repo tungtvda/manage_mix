@@ -170,7 +170,7 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
         _updateCustomerBooking($name_customer_sub,$email_customer_sub,$phone_customer_sub,$address_customer_sub,$tuoi_customer_sub,$tuoi_number_customer_sub,$birthday_customer_sub,$passport_customer_sub,$date_passport_customer_sub,$id_booking);
         $message='';
         $name_noti='Khách hàng '.$name_customer.' đã thêm một đơn hàng từ '.$nguon_tour;
-        $link_noti=SITE_NAME.'/booking-new/sua?noti=1&confirm=1&id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY);
+        $link_noti='/booking-new/sua?noti=1&confirm=1&id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY);
         $data_list_user_admin=user_getByTop('','user_role=1 and status=1','id desc');
         if(count($data_list_user_admin)>0){
             foreach($data_list_user_admin as $row_admin){

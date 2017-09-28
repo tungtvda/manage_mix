@@ -149,20 +149,22 @@ function _returnPostParamSecurity($param)
 function _returnGetDate()
 {
     date_default_timezone_set('Asia/Ho_Chi_Minh');
-    return gmdate('Y-m-d', time());
+    return date('Y-m-d', time());
+//    return gmdate('Y-m-d', time());
 }
 
 function _returnGetDateMouth()
 {
     date_default_timezone_set('Asia/Ho_Chi_Minh');
-    return gmdate('m-d', time());
+//    return gmdate('m-d', time());
+    return date('m-d', time());
 }
 
 function _returnGetDateTime()
 {
     date_default_timezone_set('Asia/Ho_Chi_Minh');
-    return gmdate("Y-m-d H:i:s", time());
-//    return date('Y-m-d H:i:s',time());
+//    return gmdate("Y-m-d H:i:s", time());
+    return date('Y-m-d H:i:s',time());
 }
 
 function _returnDateFormatEn($date)
@@ -1415,7 +1417,7 @@ function _returnUpdateTypeTiepThi($data_user, $user_tiep_thi)
             } else {
                 $start = '5 sao';
             }
-            _insertNotification('Chúc mừng bạn đã được thăng hạng lên ' . $start . '. Bạn hãy click vào tin nhắn để xem tỷ lệ hoa hồng của ' . $start, 0, '', SITE_NAME_AZ . '/tiep-thi-lien-ket-info/hoi-dap.html', 0, '');
+            _insertNotification('Chúc mừng bạn đã được thăng hạng lên ' . $start . '. Bạn hãy click vào tin nhắn để xem tỷ lệ hoa hồng của ' . $start, 0, '','/tiep-thi-lien-ket-info/hoi-dap.html', 0, '');
         }
     }
 }

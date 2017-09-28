@@ -389,7 +389,7 @@ if(isset($_POST['code_booking']))
 
             $arr_send_noti=array();
             _insertLog($_SESSION['user_id'],6,6,22,$data_detail[0]->id,$string_value_old,$string_value_new,'Cập nhật đơn hàng "'.$data_detail[0]->code_booking.'"');
-            $link_noti=SITE_NAME.'/'.$action_link.'/sua?noti=1&id='._return_mc_encrypt($data_detail[0]->id, ENCRYPTION_KEY);
+            $link_noti='/'.$action_link.'/sua?noti=1&id='._return_mc_encrypt($data_detail[0]->id, ENCRYPTION_KEY);
             $content_noti='__________Gía trị cũ_________'.$string_value_old.'__________Gía trị mới_________'.$string_value_new;
             $name_noti=$_SESSION['user_name'].' đã thay đổi thông tin đơn hàng "'.$booking_update->code_booking.'"';
             if($_SESSION['user_role']==1){
@@ -564,7 +564,7 @@ if(isset($_POST['code_booking']))
             $message='';
             if($_SESSION['user_role']!=1){
                 $name_noti=$_SESSION['user_name'].' đã thêm một đơn hàng';
-                $link_noti=SITE_NAME.'/'.$action_link.'/sua?noti=1&confirm=1&id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY);
+                $link_noti='/'.$action_link.'/sua?noti=1&confirm=1&id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY);
                 $data_list_user_admin=user_getByTop('','user_role=1 and status=1','id desc');
                 if(count($data_list_user_admin)>0){
                     foreach($data_list_user_admin as $row_admin){
@@ -573,7 +573,7 @@ if(isset($_POST['code_booking']))
                 }
                 $subject='Xác nhận đơn hàng '.$code_booking;
                 $message.='<p>Nhân viên '.$check_data_user[0]->name.' vừa tạo đơn hàng mã '.$code_booking.'</p>';
-                $message.='<a>Bạn vui lòng truy cập <a href="'.$link_noti.'">đường link</a> để xác nhận đơn hàng</p>';
+                $message.='<a>Bạn vui lòng truy cập <a href="'.SITE_NAME.$link_noti.'">đường link</a> để xác nhận đơn hàng</p>';
                 SendMail(SEND_EMAIL, $message, $subject);
 //                SendMail('tungtv.soict@gmail.com', $message, $subject);
                 $mess_log='Nhân viên '.$check_data_user[0]->name.' đã thực hiện việc tạo đơn hàng';

@@ -1,32 +1,20 @@
 <?php
-//define("SITE_NAME", "http://manage.mixtourist.com.vn");
+
 //define("DIR", str_replace('/controller/default/user','',dirname(__FILE__)));
-//define('SERVER','localhost');
-//define('DB_USERNAME','mixmedia_manage');
-//define('DB_PASSWORD','rMzRBcBd');
-//define('DB_NAME','mixmedia_manage');
-//define('CACHE',false);
-//define('DATETIME_FORMAT',"y-m-d H:i:s");
-//define('DATETIME_FORMAT_VN',"d-m-y H:i:s");
-//define('PRIVATE_KEY','hoidinhnvbk');
-
-define("SITE_NAME", "http://localhost/manage_mix");
-define("DIR", str_replace('\controller\default\user','',dirname(__FILE__)));
-define('SERVER','localhost');
-define('DB_USERNAME','root');
-define('DB_PASSWORD','');
-define('DB_NAME','manage_mix');
-define('CACHE',false);
-define('DATETIME_FORMAT',"y-m-d H:i:s");
-define('DATETIME_FORMAT_VN',"d-m-y H:i:s");
-define('PRIVATE_KEY','hoidinhnvbk');
+define("DIR", str_replace('/controller/default/user','',dirname(__FILE__)));
 
 
+require_once DIR . '/config.php';
 require_once DIR . '/model/userService.php';
 require_once DIR . '/model/notificationService.php';
 require_once DIR . '/model/bookingService.php';
 require_once DIR . '/model/setting_hoa_hongService.php';
 require_once DIR . '/function/function.php';
+
+//$data_user=user_getById(1);
+//$new=new user((array)$data_user[0]);
+//$new->address=$time_now;
+//user_update($new);
 
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 $time_now=_returnGetDateTime();
@@ -76,7 +64,7 @@ if($user_list){
             }
 
         }
-        if ($type_tiep_thi_new != $data_user->type_tiep_thi && $today_user>=$created_user) {
+        if ($type_tiep_thi_new != $data_user->type_tiep_thi && $today_user==$created_user) {
             $user_share = new user((array)$data_user);
             $user_share->type_tiep_thi = $type_tiep_thi_new;
             user_update($user_share);
@@ -85,7 +73,7 @@ if($user_list){
             } else {
                 $start = '3 sao';
             }
-            _insertNotification('Trong 3 tháng vừa qua từ ngày '.$start_date.' đến ngày '.$created_user.' bạn đã không giữ được thứ hạng, hiện tại thứ hạng của bạn là ' . $start . '. Bạn hãy click vào tin nhắn để xem tỷ lệ hoa hồng của ' . $start, 0, '', SITE_NAME_AZ . '/tiep-thi-lien-ket-info/hoi-dap.html', 0, '');
+            _insertNotification('Trong 3 tháng vừa qua từ ngày '.$start_date.' đến ngày '.$created_user.' bạn đã không giữ được thứ hạng, hiện tại thứ hạng của bạn là ' . $start . '. Bạn hãy click vào tin nhắn để xem tỷ lệ hoa hồng của ' . $start, 0, $data_user->id, '/tiep-thi-lien-ket-info/hoi-dap.html', 0, '');
         }
 
     }

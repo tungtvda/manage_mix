@@ -20,7 +20,7 @@ if (isset($_GET['id'])) {
             $new->updated = _returnGetDateTime();
             booking_update($new);
             $name_noti=$_SESSION['user_name'].' đã xác nhận đơn hàng "'.$data_check[0]->code_booking.'"';
-            $link_noti=SITE_NAME.'/booking/sua?noti=1&id='._return_mc_encrypt($data_check[0]->id, ENCRYPTION_KEY);
+            $link_noti='/booking/sua?noti=1&id='._return_mc_encrypt($data_check[0]->id, ENCRYPTION_KEY);
             _insertNotification($name_noti,$_SESSION['user_id'],$data_check[0]->user_id,$link_noti,0,'');
             _insertLog($_SESSION['user_id'],6,6,22,$data_check[0]->id,'','',$_SESSION['user_name'].'đã xác nhận đơn hàng "'.$data_check[0]->code_booking.'"');
             echo 1;

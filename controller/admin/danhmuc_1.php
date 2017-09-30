@@ -3,8 +3,10 @@ require_once '../../config.php';
 require_once DIR.'/model/danhmuc_1Service.php';
 require_once DIR.'/view/admin/danhmuc_1.php';
 require_once DIR.'/common/messenger.php';
+require_once DIR.'/common/locdautiengviet.php';
 $data=array();
 $insert=true;
+returnCountData();
 if(isset($_SESSION["Admin"]))
 {
     if(isset($_GET["action"])&&isset($_GET["id"]))
@@ -59,12 +61,11 @@ if(isset($_SESSION["Admin"]))
        $array=$_POST;
        if(!isset($array['id']))
        $array['id']='0';
-       if(!isset($array['tour_quoc_te']))
-       $array['tour_quoc_te']='0';
        if(!isset($array['name']))
        $array['name']='0';
        if(!isset($array['name_url']))
        $array['name_url']='0';
+        $array['name_url']=LocDau($array['name']);
        if(!isset($array['img']))
        $array['img']='0';
        if(!isset($array['position']))

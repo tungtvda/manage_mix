@@ -31,6 +31,12 @@ RewriteRule ^tree-phan-quyen$ controller/default/user/tree.php
 RewriteRule ^update-phan-quyen$ controller/default/user/phanquyen_update.php
 RewriteRule ^profile.html$ controller/default/user/hoso.php
 
+RewriteRule ^thanh-vien/$ controller/default/thanhvien/user.php
+RewriteRule ^thanh-vien/xoa$ controller/default/user/delete.php
+RewriteRule ^thanh-vien/them-moi controller/default/user/themmoi.php
+RewriteRule ^thanh-vien/sua controller/default/user/themmoi.php
+RewriteRule ^thanh-vien/phan-quyen$ controller/default/user/phanquyen.php
+
 RewriteRule ^khach-hang/$ controller/default/customer/customer.php
 RewriteRule ^khach-hang/them-moi controller/default/customer/themmoi.php
 RewriteRule ^khach-hang/sua controller/default/customer/themmoi.php

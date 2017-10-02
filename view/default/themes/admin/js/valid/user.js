@@ -111,6 +111,22 @@ jQuery(function ($) {
         resetForm("#submit_form");
     });
     $('body').on("click",'#create_popup', function () {
+        $.ajax({
+            method: "GET",
+            url: link,
+            data: "value=" + value,
+            success: function (response) {
+                if (response != 1) {
+                    var mess="Mật khẩu cũ không chính xác";
+                    showHiddenPasswordOldUser(0,mess)
+                }
+                else{
+                    var mess="";
+                    showHiddenPasswordOldUser(1,mess)
+                }
+            }
+        });
+
         $('#hidden_edit_pass').show();
         var output = document.getElementById('show_img_upload');
         output.src = url+'/view/default/themes/images/no-image.jpg';
@@ -121,7 +137,7 @@ jQuery(function ($) {
         document.getElementById("input_password_confirm").readOnly = false;
         resetForm("#submit_form");
         $( "#input_check_edit" ).val('add');
-        $( "#title_form" ).html('Tạo mới nhân viên');
+        $( "#title_form" ).html('Tạo mới thành viên');
     });
 
     $('body').on('click','.edit_function', function () {

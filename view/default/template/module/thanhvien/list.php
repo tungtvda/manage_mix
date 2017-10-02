@@ -354,7 +354,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="blue bigger" id="title_form">Tạo mới nhân viên</h4>
+                        <h4 class="blue bigger" id="title_form">Tạo mới thành viên</h4>
 
                     </div>
                     <form id="submit_form" role="form" action="" method="post" enctype="multipart/form-data">
@@ -376,7 +376,7 @@
                                     <div class="form-group" style="float: left; width: 100%">
 
 
-                                        <div style="float: left;width: 66%" >
+                                        <div style="float: left;width: 50%" >
                                             <label for="form-field-select-3">Mã nhân viên <span style="color: red">*</span></label>
                                            <span class="input-icon width_100">
 												<input readonly name="user_code" type="text" id="input_user_code"
@@ -396,12 +396,18 @@
                                             <label style="display: none" class="error-color  error-color-size"
                                                    id="error_user_code">Bạn vui lòng nhập mã nhân viên</label>
                                         </div>
-                                        <div style="float: left;width: 33%; text-align: center" >
-                                            <label for="form-field-select-3">Admin hệ thống</label>
-                                            <label>
-                                                <input id="input_user_role" name="user_role" class="ace ace-switch ace-switch-6" type="checkbox">
-                                                <span class="lbl"></span>
-                                            </label>
+                                        <div style="float: left;width: 50%;" >
+                                            <label for="form-field-select-3">Mức sao</label>
+                                            <select name="type_tiep_thi" class="chosen-select form-control type_tiep_thiuser"
+                                                    id="form-field-select-3" data-placeholder="Mức sao ..."
+                                                    style="display: none;width: 10px">
+                                                <option value="0"></option>
+                                                <option value="0">3 sao</option>
+                                                <option value="1">4 sao</option>
+                                                <option value="2">5 sao</option>
+                                                <option value="3">Đại lý</option>
+                                            </select>
+                                                <input hidden id="input_user_role" name="user_role" value="2" type="password">
                                         </div>
                                     </div>
 
@@ -536,34 +542,6 @@
 
 											</span>
                                                 <label  style="display: none" class="error-color  error-color-size" id="error_user_phone">Bạn vui lòng điền số điện thoại</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="float: left; width: 100%">
-                                    <div class="col-xs-12 col-sm-6 col-md-6">
-                                        <div class="form-group" style="float: left; width: 100%">
-                                            <label for="form-field-select-3">Ngày làm việc </label>
-                                            <div class="input-group" style="">
-                                                <input class="form-control date-picker width_100 valid" id="input_user_ngay_lam_viec"
-                                                       name="user_ngay_lam_viec" required type="text" data-date-format="dd-mm-yyyy">
-																	<span class="input-group-addon date_icon">
-																		<i class="fa fa-calendar bigger-110"></i>
-																	</span>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-6 col-md-6">
-                                        <div class="form-group" style="float: left; width: 100%">
-                                            <label for="form-field-select-3">Ngày chính thức </label>
-                                            <div class="input-group" style="">
-                                                <input class="form-control date-picker width_100 valid" id="input_user_ngay_chinh_thuc"
-                                                       name="user_ngay_chinh_thuc" required type="text" data-date-format="dd-mm-yyyy">
-																	<span class="input-group-addon date_icon">
-																		<i class="fa fa-calendar bigger-110"></i>
-																	</span>
-
                                             </div>
                                         </div>
                                     </div>

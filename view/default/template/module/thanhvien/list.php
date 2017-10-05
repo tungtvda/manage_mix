@@ -21,7 +21,7 @@
                 <div class="clearfix">
                     <div class="col-md-6 col-sm-6 col-xs-12 pink" style="padding-left: 0px">
                         <?php if (_returnCheckAction(37) == 1) { ?>
-                            <a href="#modal-form" role="button" data-toggle="modal" id="create_popup"
+                            <a href="#modal-form" role="button" data-toggle="modal" id="create_popup" data-type="az"
                                class="green btn btn-white btn-create btn-hover-white">
                                 <i class="ace-icon fa fa-plus bigger-120 "></i>
                                 Create popup
@@ -241,12 +241,6 @@
                                                         <i class="ace-icon fa fa-trash-o bigger-130"></i>
                                                     </a>
                                                 <?php } ?>
-                                                <?php if (_returnCheckAction(40) == 1) { ?>
-                                                    <a title="Phân quyền" class="blue"
-                                                       href="<?php echo SITE_NAME ?>/nhan-vien/phan-quyen?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
-                                                        <i class="ace-icon fa fa-cogs bigger-130"></i>
-                                                    </a>
-                                                <?php } ?>
                                             </div>
 
                                             <div class="hidden-md hidden-lg">
@@ -289,16 +283,7 @@
                                                                 </a>
                                                             </li>
                                                         <?php } ?>
-                                                        <?php if (_returnCheckAction(4) == 1) { ?>
-                                                            <li>
-                                                                <a href="<?php echo SITE_NAME?>/nhan-vien/phan-quyen?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>" class="tooltip-success " data-rel="tooltip"
-                                                                   title="Phân quyền">
-																				<span class="blue">
-																					<i class="ace-icon fa fa-cogs bigger-120"></i>
-																				</span>
-                                                                </a>
-                                                            </li>
-                                                        <?php } ?>
+
                                                     </ul>
                                                 </div>
                                             </div>

@@ -30,6 +30,7 @@ RewriteRule ^nhan-vien/update-pass$ controller/default/user/update_pass.php
 RewriteRule ^tree-phan-quyen$ controller/default/user/tree.php
 RewriteRule ^update-phan-quyen$ controller/default/user/phanquyen_update.php
 RewriteRule ^profile.html$ controller/default/user/hoso.php
+RewriteRule ^return-user-code.html$ controller/default/user/returnCodeUser.php
 
 RewriteRule ^thanh-vien/$ controller/default/thanhvien/user.php
 RewriteRule ^thanh-vien/xoa$ controller/default/user/delete.php

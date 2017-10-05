@@ -111,26 +111,31 @@ jQuery(function ($) {
         resetForm("#submit_form");
     });
     $('body').on("click",'#create_popup', function () {
-        $.ajax({
-            method: "GET",
-            url: link,
-            data: "value=" + value,
-            success: function (response) {
-                if (response != 1) {
-                    var mess="Mật khẩu cũ không chính xác";
-                    showHiddenPasswordOldUser(0,mess)
-                }
-                else{
-                    var mess="";
-                    showHiddenPasswordOldUser(1,mess)
-                }
-            }
-        });
+        var key_code=$(this).attr('data-type');
 
+        if(key_code){
+            $.ajax({
+                method: "GET",
+                url: url+'/return-user-code.html',
+                data: "key_code=" + key_code,
+                success: function (response) {
+                    if (response == 0) {
+                        $('#modal-form').modal('hide');
+                    }
+                    else{
+                        $( "#input_user_code" ).val(response);
+                        $( "#input_user_code" ).addClass('valid');
+                        document.getElementById("input_user_code").readOnly = true;
+                    }
+                }
+            });
+        }else{
+            document.getElementById("input_user_code").readOnly = false;
+        }
         $('#hidden_edit_pass').show();
         var output = document.getElementById('show_img_upload');
         output.src = url+'/view/default/themes/images/no-image.jpg';
-        document.getElementById("input_user_code").readOnly = false;
+
         document.getElementById("input_email_user").readOnly = false;
         document.getElementById("input_user_name").readOnly = false;
         document.getElementById("input_password").readOnly = false;
@@ -138,6 +143,7 @@ jQuery(function ($) {
         resetForm("#submit_form");
         $( "#input_check_edit" ).val('add');
         $( "#title_form" ).html('Tạo mới thành viên');
+
     });
 
     $('body').on('click','.edit_function', function () {

@@ -381,9 +381,9 @@
                                             <label style="display: none" class="error-color  error-color-size"
                                                    id="error_user_code">Bạn vui lòng nhập mã nhân viên</label>
                                         </div>
-                                        <div style="float: left;width: 50%;" >
+                                        <div style="float: left;width: 50%;" id="type_user_select">
                                             <label for="form-field-select-3">Mức sao</label>
-                                            <select name="type_tiep_thi" class="chosen-select form-control type_tiep_thiuser"
+                                            <select name="type_tiep_thi" class="chosen-select form-control type_tiep_thi_user"
                                                     id="form-field-select-3" data-placeholder="Mức sao ..."
                                                     style="display: none;width: 10px">
                                                 <option value="0"></option>
@@ -413,7 +413,7 @@
 
                                                 }
                                             </style>
-                                            <div style="float: left;width: 33%;" >
+                                            <div style="float: left;width: 33%;" id="mr_user_select">
                                             <select name="mr" class="chosen-select form-control mr_user"
                                                     id="form-field-select-3" data-placeholder="Danh xưng ..."
                                                     style="display: none;width: 10px">

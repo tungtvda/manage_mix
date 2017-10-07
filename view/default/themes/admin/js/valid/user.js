@@ -78,7 +78,7 @@ jQuery(function ($) {
             var form_data=$("#submit_form").serializeArray();
             var error_free=true;
             for (var input in form_data){
-                if(form_data[input]['name']!="mr"&&form_data[input]['name']!="file-format"&&form_data[input]['name']!="avatar"&&form_data[input]['name']!="user_role")
+                if(form_data[input]['name']!="mr" && form_data[input]['name']!="type_tiep_thi" &&form_data[input]['name']!="file-format"&&form_data[input]['name']!="avatar"&&form_data[input]['name']!="user_role")
                 {
                     var element=$("#input_"+form_data[input]['name']);
                     var error=$("#error_"+form_data[input]['name']);
@@ -455,13 +455,26 @@ function show_edit_nhanvien(Id,name){
                     var mr=obj.mr;
                     if(mr!='')
                     {
-                        $(".chosen-default span").html(mr);
-                        //$('.mr_user option').each(function() {
-                        //
-                        //    if($(this).val() == mr) {
-                        //        $(this).prop("selected", true);
-                        //    }
-                        //});
+                        $("#mr_user_select  span").html(mr);
+                    }
+                    var type_tiep_thi=obj.type_tiep_thi;
+                    if(type_tiep_thi!='')
+                    {
+                        switch(type_tiep_thi){
+                            case '1':
+                                type_tiep_thi='4 sao';
+                                break;
+                            case '2':
+                                type_tiep_thi='5 sao';
+                                break;
+                            case '3':
+                                type_tiep_thi='Đại lý';
+                                break;
+                            default:
+                                type_tiep_thi='3 sao';
+
+                        }
+                        $("#type_user_select  span").html(type_tiep_thi);
                     }
                     if(obj.birthday!=''){
                         $('#input_birthday').val(obj.birthday);

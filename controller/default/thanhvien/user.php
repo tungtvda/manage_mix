@@ -17,7 +17,7 @@ $url_bread='<li class="active">Nhân viên</li>';
 $data['breadcrumbs']=$url_bread;
 $data['title']='Danh sách nhân viên';
 $count=9;
-_returnCreateUser(1);
+_returnCreateUser(1,'/thanh-vien/');
 _deleteSubmitForm('user', 'user_delete',3,2,3);
 $data_dk_fill='user_role=2';
 if($_SESSION['user_role']==0)

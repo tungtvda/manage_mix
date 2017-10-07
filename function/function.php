@@ -419,10 +419,11 @@ function _returnUploadImg($target_dir, $file_name, $link_img)
     }
 }
 
-function _returnCreateUser($check_redict)
+function _returnCreateUser($check_redict,$ridict='/nhan-vien/')
 {
     if (isset($_POST['user_code']) && isset($_POST['full_name']) && isset($_POST['birthday']) && isset($_POST['email_user']) && isset($_POST['address_user']) && isset($_POST['user_name']) && isset($_POST['password']) && isset($_POST['password_confirm'])) {
         $user_code = _returnPostParamSecurity('user_code');
+        $type_tiep_thi = _returnPostParamSecurity('type_tiep_thi');
         $mr = _returnPostParamSecurity('mr');
         $full_name = _returnPostParamSecurity('full_name');
         $input_birthday = _returnPostParamSecurity('birthday');
@@ -474,7 +475,7 @@ function _returnCreateUser($check_redict)
                     user_update($new_obj);
 //                    _insertLog($_SESSION['user_id'],3,2,1,$data_get_user[0]->id,'','',$_SESSION['user_name'].' đã tạo nhân viên mã "'.$user_code.'"');
                     if ($check_redict == 1) {
-                        redict(SITE_NAME . '/nhan-vien/');
+                        redict(SITE_NAME . $ridict);
                     } else {
                         return 1;
                     }
@@ -503,6 +504,7 @@ function _returnCreateUser($check_redict)
                         $dangky = new user();
                         $dangky->name = $full_name;
                         $dangky->user_code = $user_code;
+                        $dangky->type_tiep_thi = $type_tiep_thi;
                         $dangky->user_name = $user_name;
                         $dangky->mr = $mr;
                         $dangky->birthday = date("Y-m-d", strtotime($input_birthday));

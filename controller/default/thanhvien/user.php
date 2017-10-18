@@ -10,6 +10,8 @@ if(!defined('SITE_NAME'))
     require_once '../../../config.php';
 }
 require_once DIR.'/controller/default/public.php';
+require_once DIR.'/email_template/tem_smt/register.php';
+$email_tem=returnEmailRegister();
 $data=array();
 _returnCheckPermison(9,16);
 $_SESSION['link_redict']='http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
@@ -17,7 +19,7 @@ $url_bread='<li class="active">Nhân viên</li>';
 $data['breadcrumbs']=$url_bread;
 $data['title']='Danh sách nhân viên';
 $count=9;
-_returnCreateUser(1,'/thanh-vien/');
+_returnCreateUser(1,'/thanh-vien/',$email_tem);
 _deleteSubmitForm('user', 'user_delete',3,2,3);
 $data_dk_fill='user_role=2';
 if($_SESSION['user_role']==0)

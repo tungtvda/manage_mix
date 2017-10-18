@@ -419,7 +419,7 @@ function _returnUploadImg($target_dir, $file_name, $link_img)
     }
 }
 
-function _returnCreateUser($check_redict,$ridict='/nhan-vien/')
+function _returnCreateUser($check_redict,$ridict='/nhan-vien/',$email_tem='')
 {
     if (isset($_POST['user_code']) && isset($_POST['full_name']) && isset($_POST['birthday']) && isset($_POST['email_user']) && isset($_POST['address_user']) && isset($_POST['user_name']) && isset($_POST['password']) && isset($_POST['password_confirm'])) {
         $user_code = _returnPostParamSecurity('user_code');

@@ -122,8 +122,7 @@ function returnEmailRegister(){
 
                                         <p style="font-family: \'Roboto Mono\', monospace !important; box-sizing: border-box; font-size: 20px; margin-bottom: 20px; margin-top: 0px">
                                             Hi <b>__FULL_NAME__</b></p>
-                                        <p style="margin-bottom: 5px;margin-top: 0px;"> Chào mừng bạn đến với hệ thống tiếp thị liên kết của <b>AZBOOKING.VN</b>.</p>
-                                        <p style="margin-bottom: 5px;margin-top: 0px;"> <b>AZBOOKING.VN</b> vừa tạo thành công tài khoản cho bạn. Giờ đây bạn có thể đăng nhập và tạo chiến dịch tiếp thị cho mình</p>
+                                       __CONTENT_BOTTOM__
                                         <div style="    background-image: linear-gradient(-42deg, #003db1 0%, #34b7fc 100%); color: #ffffff;padding: 15px;border-radius: 5px;    margin-top: 15px;">
                                             <p style="    text-transform: uppercase;font-size: 20px;    margin-top: 0px;margin-bottom: 0px;">Thông tin đăng nhập</p>
                                             <p style="margin-top: 0px;margin-bottom: 0px;"><a style="color: #ffffff" href="__HTML_URL__">__HTML_URL__</a>

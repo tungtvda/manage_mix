@@ -501,6 +501,9 @@ function _returnCreateUser($check_redict,$ridict='/nhan-vien/',$email_tem='')
                         if ($avatar === 0) {
                             $avatar = '';
                         }
+                        if($user_name==''){
+                            $user_name=$email_user;
+                        }
                         $dangky = new user();
                         $dangky->name = $full_name;
                         $dangky->user_code = $user_code;
@@ -520,7 +523,7 @@ function _returnCreateUser($check_redict,$ridict='/nhan-vien/',$email_tem='')
                         $dangky->phone = $phone;
                         $dangky->user_role = $user_role;
                         $dangky->created_by = $_SESSION['user_id'];
-                        $dangky->login_two_steps = 1;
+                        $dangky->login_two_steps = 0;
                         if ($ngay_lam_viec != '') {
                             $dangky->ngay_lam_viec = date("Y-m-d", strtotime($ngay_lam_viec));
                         }
@@ -532,30 +535,66 @@ function _returnCreateUser($check_redict,$ridict='/nhan-vien/',$email_tem='')
                         if (count($data_get_user) > 0) {
                             _insertLog($_SESSION['user_id'], 3, 2, 1, $data_get_user[0]->id, '', '', $_SESSION['user_name'] . ' đã tạo nhân viên mã "' . $user_code . '"');
                         }
+                        if($ridict=='/nhan-vien/'){
+                            $title_mail='';
+                            $type_tiep_thi_name='';
+                            $subject = "Thông báo đăng ký tài khoản tại hệ thống quản lý MIXTOURIST";
+                            $title = "Chào mừng bạn đến với hệ thống quản lý MIXTOURIST";
+                            $link_dang_nhap=SITE_NAME.'/dang-nhap.html';
+                            $content_bottom=' <p style="margin-bottom: 5px;margin-top: 0px;"> Hệ thống quản lý MIXTOURIST đã tạo thành công tài khoản của bạn</p>';
+                        }else{
+                            $title_mail='Hệ thống tiếp thị liên kết AZBOOKING.VN';
+                            switch($type_tiep_thi){
+                                case '3':
+                                    $type_tiep_thi_name='Đại lý';
+                                    break;
+                                case '2':
+                                    $type_tiep_thi_name='5 sao';
+                                    break;
+                                case '1':
+                                    $type_tiep_thi_name='4 sao';
+                                    break;
+                                default:
+                                    $type_tiep_thi_name='3 sao';
 
-                        $subject = "Thông báo đăng ký tài khoản tại hệ thống quản lý MIXTOURIST";
+                            }
+                            $subject = "Thông báo đăng ký tài khoản tiếp thị liên kết AZBOOKING.VN";
+                            $title = "Chào mừng bạn đến với hệ thống quản lý MIXTOURIST";
+                            $link_dang_nhap=SITE_NAME_AZ.'/tiep-thi-lien-ket/thanh-vien/';
+                            $content_bottom=' <p style="margin-bottom: 5px;margin-top: 0px;"> Chào mừng bạn đến với hệ thống tiếp thị liên kết của <b>AZBOOKING.VN</b>.</p>
+                                        <p style="margin-bottom: 5px;margin-top: 0px;"> <b>AZBOOKING.VN</b> vừa tạo thành công tài khoản cho bạn. Giờ đây bạn có thể đăng nhập và tạo chiến dịch tiếp thị cho mình</p>';
+                        }
+                        $email_tem=str_replace('__TITLE__',$title,$email_tem);
                         $message = '';
                         if ($mr == '') {
                             $name_full_mer = $full_name;
                         } else {
                             $name_full_mer = $mr . '.' . $full_name;
                         }
-
-                        $message .= '<div style="float: left; width: 100%">
-                            <p>Xin chào: <span style="color: #132fff; font-weight: bold"> ' . $name_full_mer . '</span>!</p>
-                            <p>Chúng tôi đã tạo thành công tài khoản của bạn, giờ đây bạn có thể truy cập và sử dụng hệ thống quản lý MIXTOURIST</p>
-                            <p>Link đăng nhập: <span style="color: #132fff; font-weight: bold">' . SITE_NAME . '/dang-nhap.html</span>,</p>
-                            <p>Mã nhân viên: <span style="color: #132fff; font-weight: bold">' . $user_code . '</span>,</p>
-                            <p>Email: <span style="color: #132fff; font-weight: bold">' . $email_user . '</span>,</p>
-                            <p>Username: <span style="color: #132fff; font-weight: bold">' . $user_name . '</span>,</p>
-                            <p>Mật khẩu: <span style="color: #132fff; font-weight: bold">' . $password . '</span>,</p>
-                            <p>Ngày sinh: <span style="color: #132fff; font-weight: bold">' . $input_birthday . '</span>,</p>
-                            <p>Địa chỉ: <span style="color: #132fff; font-weight: bold">' . $address_user . '</span>,</p>
-                            <p>Ngày gửi: <span style="color: #132fff; font-weight: bold">' . date("d-m-Y H:i:s", strtotime(_returnGetDateTime())) . '</span>,</p>
-                        </div>';
-                        SendMail($email_user, $message, $subject);
+                        $email_tem=str_replace('__FULL_NAME__',$name_full_mer,$email_tem);
+                        $email_tem=str_replace('__HTML_URL__',$link_dang_nhap,$email_tem);
+                        $email_tem=str_replace('__EMAIL_TO__',$email_user,$email_tem);
+                        $email_tem=str_replace('__PASSWORD__',$password,$email_tem);
+                        $email_tem=str_replace('__CODE__',$user_code,$email_tem);
+                        $email_tem=str_replace('__LEVEL__',$type_tiep_thi_name,$email_tem);
+                        $email_tem=str_replace('__CONTENT_BOTTOM__',$content_bottom,$email_tem);
+                        $email_tem=str_replace('__CREATED__',date("d-m-Y H:i:s", strtotime(_returnGetDateTime())),$email_tem);
+                        $message=$email_tem;
+//                        $message .= '<div style="float: left; width: 100%">
+//                            <p>Xin chào: <span style="color: #132fff; font-weight: bold"> ' . $name_full_mer . '</span>!</p>
+//                            <p>Chúng tôi đã tạo thành công tài khoản của bạn, giờ đây bạn có thể truy cập và sử dụng hệ thống quản lý MIXTOURIST</p>
+//                            <p>Link đăng nhập: <span style="color: #132fff; font-weight: bold">' . SITE_NAME . '/dang-nhap.html</span>,</p>
+//                            <p>Mã nhân viên: <span style="color: #132fff; font-weight: bold">' . $user_code . '</span>,</p>
+//                            <p>Email: <span style="color: #132fff; font-weight: bold">' . $email_user . '</span>,</p>
+//                            <p>Username: <span style="color: #132fff; font-weight: bold">' . $user_name . '</span>,</p>
+//                            <p>Mật khẩu: <span style="color: #132fff; font-weight: bold">' . $password . '</span>,</p>
+//                            <p>Ngày sinh: <span style="color: #132fff; font-weight: bold">' . $input_birthday . '</span>,</p>
+//                            <p>Địa chỉ: <span style="color: #132fff; font-weight: bold">' . $address_user . '</span>,</p>
+//                            <p>Ngày gửi: <span style="color: #132fff; font-weight: bold">' . date("d-m-Y H:i:s", strtotime(_returnGetDateTime())) . '</span>,</p>
+//                        </div>';
+                        SendMail($email_user, $message, $subject,'',$title_mail);
                         if ($check_redict == 1) {
-                            redict(SITE_NAME . '/nhan-vien/');
+                            redict(SITE_NAME .$ridict);
                         } else {
                             return 1;
                         }

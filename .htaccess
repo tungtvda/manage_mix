@@ -107,6 +107,7 @@ RewriteRule ^booking-no-tien/xoa-chi-phi$ controller/default/booking/delete_cost
 RewriteRule ^booking-ket-thuc/xoa-chi-phi$ controller/default/booking/delete_cost.php
 RewriteRule ^booking-ban-nhap/xoa-chi-phi$ controller/default/booking/delete_cost.php
 
+RewriteRule ^rut-tien/$ controller/default/rut_tien/rut_tien.php
 
 RewriteRule ^return-input-price-booking/$ controller/default/booking/list_price_input.php
 

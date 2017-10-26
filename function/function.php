@@ -436,6 +436,18 @@ function _returnCreateUser($check_redict,$ridict='/nhan-vien/',$email_tem='')
         $user_role = _returnPostParamSecurity('user_role');
         $ngay_lam_viec = _returnPostParamSecurity('user_ngay_lam_viec');
         $ngay_chinh_thuc = _returnPostParamSecurity('user_ngay_chinh_thuc');
+        $mobi = _returnPostParamSecurity('mobi');
+        $gender= _returnPostParamSecurity('gender');
+        $skype= _returnPostParamSecurity('skype');
+        $facebook= _returnPostParamSecurity('facebook');
+        $address= _returnPostParamSecurity('address');
+        $cmnd= _returnPostParamSecurity('cmnd');
+        $date_range_cmnd= _returnPostParamSecurity('date_range_cmnd');
+        $account_number_bank= _returnPostParamSecurity('account_number_bank');
+        $bank= _returnPostParamSecurity('bank');
+        $issued_by_cmnd= _returnPostParamSecurity('issued_by_cmnd');
+        $open_bank= _returnPostParamSecurity('open_bank');
+        $id_thanhvien= _returnPostParamSecurity('id_thanhvien');
         if ($user_role === "on" || $user_role === 1) {
             $user_role = 1;
         } else {
@@ -468,6 +480,22 @@ function _returnCreateUser($check_redict,$ridict='/nhan-vien/',$email_tem='')
                     $avatar = _returnUploadImg($target_dir, 'avatar', "/view/default/themes/uploads/users/" . $folder . '/');
                     if ($avatar != '') {
                         $new_obj->avatar = $avatar;
+                    }
+                    if($id_thanhvien){
+                        $new_obj->mobi = $mobi;
+                        $new_obj->gender = $gender;
+                        $new_obj->skype = $skype;
+                        $new_obj->facebook = $facebook;
+                        $new_obj->address = $address;
+                        $new_obj->cmnd = $cmnd;
+                        if($date_range_cmnd!=''){
+                            $new_obj->date_range_cmnd = date("Y-m-d", strtotime($date_range_cmnd));
+                        }
+                        $new_obj->account_number_bank = $account_number_bank;
+                        $new_obj->type_tiep_thi = $type_tiep_thi;
+                        $new_obj->bank = $bank;
+                        $new_obj->open_bank = $open_bank;
+                        $new_obj->issued_by_cmnd = $issued_by_cmnd;
                     }
 
                     $new_obj->updated = _returnGetDateTime();
@@ -836,7 +864,7 @@ function _returnCreateCustomerFull($check_redict)
                         $new_obj->bank = $bank;
                         $new_obj->open_bank = $open_bank;
                         $new_obj->cmnd = $cmnd;
-                        $new_obj->date_range_cmnd = date("Y-m-d", strtotime($date_range_cmnd));;
+                        $new_obj->date_range_cmnd = date("Y-m-d", strtotime($date_range_cmnd));
                         $new_obj->issued_by_cmnd = $issued_by_cmnd;
                         $new_obj->note = $note;
                         customer_update($new_obj);

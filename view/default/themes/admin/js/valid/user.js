@@ -78,12 +78,13 @@ jQuery(function ($) {
             var form_data=$("#submit_form").serializeArray();
             var error_free=true;
             for (var input in form_data){
-                if(form_data[input]['name']!="mr" && form_data[input]['name']!="type_tiep_thi" &&form_data[input]['name']!="file-format"&&form_data[input]['name']!="avatar"&&form_data[input]['name']!="user_role")
+                if(form_data[input]['name']!="mr" && form_data[input]['name']!="gender" && form_data[input]['name']!="type_tiep_thi" &&form_data[input]['name']!="file-format"&&form_data[input]['name']!="avatar"&&form_data[input]['name']!="user_role")
                 {
                     var element=$("#input_"+form_data[input]['name']);
                     var error=$("#error_"+form_data[input]['name']);
                     var valid=element.hasClass("valid");
                     if (valid==false){
+                        console.log(form_data[input]['name']);
                         element.addClass("input-error").removeClass("valid");
                         error.show();
                         error_free=false
@@ -104,6 +105,7 @@ jQuery(function ($) {
         document.getElementById("input_password_confirm").readOnly = true;
         var Id = $(this).attr("countid");
         var name = $(this).attr("name_record");
+        $('.show_edit').css('display','block');
         show_edit_nhanvien(Id,name);
     });
     $('body').on("click",'#reset_form_popup', function () {
@@ -112,7 +114,7 @@ jQuery(function ($) {
     });
     $('body').on("click",'#create_popup', function () {
         var key_code=$(this).attr('data-type');
-
+        $('.show_edit').css('display','none');
         if(key_code){
             $.ajax({
                 method: "GET",
@@ -511,8 +513,37 @@ function show_edit_nhanvien(Id,name){
                     else{
                         $('#input_user_phone').addClass("input-error").removeClass("valid");
                     }
+
                     $('#input_user_ngay_lam_viec').val(obj.ngay_lam_viec);
                     $('#input_user_ngay_chinh_thuc').val(obj.ngay_chinh_thuc);
+
+                    // thanh vien
+                    $('#input_mobi').val(obj.mobi);
+                    $('#input_skype').val(obj.skype);
+                    $('#input_facebook').val(obj.facebook);
+                    $('#input_address').val(obj.address);
+                    $('#input_address').val(obj.address);
+                    $('#input_cmnd').val(obj.cmnd);
+                    $('#input_issued_by_cmnd').val(obj.issued_by_cmnd);
+                    $('#input_account_number_bank').val(obj.account_number_bank);
+                    $('#input_bank').val(obj.bank);
+                    $('#input_open_bank').val(obj.open_bank);
+                    $('#input_date_range_cmnd').val(obj.date_range_cmnd);
+                    var gender=obj.gender;
+
+                        switch(gender){
+                            case '1':
+                                gender='Nam';
+                                break;
+                            case '2':
+                                gender='Nữ';
+                                break;
+                            default:
+                                gender='Chưa xác định';
+
+                        }
+                        $("#gioi_tinh_user_select  span").html(gender);
+
 
                     $('#input_password').val('code');
                     $('#input_password').removeClass("input-error").addClass("valid");

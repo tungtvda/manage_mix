@@ -27,12 +27,12 @@
                                 Create popup
                                 <i class="ace-icon fa fa-external-link"></i>
                             </a>
-                            <a href="<?php echo SITE_NAME ?>/nhan-vien/them-moi"
-                               class="btn btn-white  btn-create-new-tab btn-create-new-tab-hover">
-                                <i class="ace-icon fa fa-plus bigger-120 "></i>
-                                Create new tab
-                                <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-                            </a>
+<!--                            <a href="--><?php //echo SITE_NAME ?><!--/nhan-vien/them-moi"-->
+<!--                               class="btn btn-white  btn-create-new-tab btn-create-new-tab-hover">-->
+<!--                                <i class="ace-icon fa fa-plus bigger-120 "></i>-->
+<!--                                Create new tab-->
+<!--                                <i class="ace-icon fa fa-arrow-right icon-on-right"></i>-->
+<!--                            </a>-->
                         <?php } ?>
                         <a href="" class="btn btn-white  btn-refresh">
                             <i class="ace-icon fa fa-refresh"></i>
@@ -228,10 +228,10 @@
 <!--                                                        <i class="ace-icon glyphicon glyphicon-edit"></i>-->
 <!--                                                    </a>-->
 
-                                                    <a title="Sửa tab mới" class="green"
-                                                       href="<?php echo SITE_NAME ?>/nhan-vien/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
-                                                        <i class="ace-icon fa fa-pencil bigger-130"></i>
-                                                    </a>
+<!--                                                    <a title="Sửa tab mới" class="green"-->
+<!--                                                       href="--><?php //echo SITE_NAME ?><!--/nhan-vien/sua?id=--><?php //echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?><!--">-->
+<!--                                                        <i class="ace-icon fa fa-pencil bigger-130"></i>-->
+<!--                                                    </a>-->
                                                 <?php } ?>
                                                 <?php if (_returnCheckAction(40) == 1) { ?>
                                                     <a title="Xóa" class="red delete_record" href="javascript:void(0)"
@@ -260,15 +260,15 @@
                                                                     <i class="ace-icon fa fa-eye-slash bigger-130"></i>
                                                                 </a>
                                                             </li>
-                                                            <li>
-                                                                <a  href="<?php echo SITE_NAME ?>/nhan-vien/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
-                                                                   class="tooltip-success" data-rel="tooltip"
-                                                                   title="Sửa tab mới">
-																				<span class="green">
-																					<i class="ace-icon fa fa-pencil bigger-120"></i>
-																				</span>
-                                                                </a>
-                                                            </li>
+<!--                                                            <li>-->
+<!--                                                                <a  href="--><?php //echo SITE_NAME ?><!--/nhan-vien/sua?id=--><?php //echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?><!--"-->
+<!--                                                                   class="tooltip-success" data-rel="tooltip"-->
+<!--                                                                   title="Sửa tab mới">-->
+<!--																				<span class="green">-->
+<!--																					<i class="ace-icon fa fa-pencil bigger-120"></i>-->
+<!--																				</span>-->
+<!--                                                                </a>-->
+<!--                                                            </li>-->
                                                         <?php } ?>
                                                         <?php if (_returnCheckAction(40) == 1) { ?>
                                                             <li>
@@ -357,6 +357,7 @@
                                 </div>
                                 <input class="valid" hidden name="check_edit" id="input_check_edit" value="">
                                 <input class="valid" hidden name="id_edit" id="input_id_edit" value="">
+                                <input class="valid" hidden name="id_thanhvien" id="input_id_thanhvien" value="1">
                                 <div class="col-xs-12 col-sm-8">
                                     <div class="form-group" style="float: left; width: 100%">
 
@@ -522,11 +523,151 @@
                                             <div>
                                           <span class="input-icon width_100">
 												<input name="user_phone" type="text" id="input_user_phone" class="width_100" required>
-												<i class="ace-icon fa fa-mobile blue"></i>
+												<i class="ace-icon fa fa-phone blue"></i>
                                                 <i id="error_icon_user_phone" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " title="Bạn vui lòng điền số điện thoại"></i>
 
 											</span>
                                                 <label  style="display: none" class="error-color  error-color-size" id="error_user_phone">Bạn vui lòng điền số điện thoại</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="float: left; width: 100%" class="show_edit">
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <label for="form-field-select-3">Di động</label>
+                                            <div>
+                                          <span class="input-icon width_100">
+												<input name="mobi" type="text" id="input_mobi" class="width_100 valid" >
+												<i class="ace-icon fa fa-mobile  blue"></i>
+											</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-6" id="gioi_tinh_user_select">
+                                        <label for="form-field-select-3">Giới tính</label>
+                                        <select name="gender" class="chosen-select form-control gioi_tinh valid"
+                                                id="form-field-select-3" data-placeholder="Mức sao ..."
+                                                style="display: none;width: 10px">
+                                            <option  value="">Chưa xác định</option>
+                                            <option value="1">Nam</option>
+                                            <option value="2">Nữ</option>
+                                        </select>
+                                    </div>
+
+
+                                </div>
+
+                                <div style="float: left; width: 100%" class="show_edit">
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <label for="form-field-select-3">Skype</label>
+                                            <div>
+                                          <span class="input-icon width_100">
+												<input name="skype" type="text" id="input_skype" class="width_100 valid" >
+												<i class="ace-icon fa fa-skype  blue"></i>
+											</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <label for="form-field-select-3">Facebook</label>
+                                            <div>
+                                          <span class="input-icon width_100">
+												<input name="facebook" type="text" id="input_facebook" class="width_100 valid" >
+												<i class="ace-icon fa fa-facebook  blue"></i>
+											</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="float: left; width: 100%" class="show_edit">
+                                    <div class="col-xs-12 col-sm-12 col-md-12">
+                                        <div class="form-group">
+                                            <label for="form-field-select-3">Địa chỉ</label>
+                                            <div>
+                                          <span class="input-icon width_100">
+												<input name="address" type="text" id="input_address" class="width_100 valid" >
+												<i class="ace-icon fa fa-map-marker  blue"></i>
+											</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="float: left; width: 100%" class="show_edit">
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <label for="form-field-select-3">CMTND</label>
+                                            <div>
+                                          <span class="input-icon width_100">
+												<input name="cmnd" type="text" id="input_cmnd" class="width_100 valid" >
+												<i class="ace-icon fa fa-skype  blue"></i>
+											</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <div class="form-group" style="float: left; width: 100%">
+                                            <label for="form-field-select-3">Ngày cấp<span
+                                                    style="color: red">*</span></label>
+                                            <div class="input-group" style="">
+                                                <input class="form-control date-picker width_100 valid" id="input_date_range_cmnd"
+                                                       name="date_range_cmnd"  type="text" data-date-format="dd-mm-yyyy">
+																	<span class="input-group-addon date_icon">
+																		<i class="fa fa-calendar bigger-110"></i>
+																	</span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="float: left; width: 100%" class="show_edit">
+                                    <div class="col-xs-12 col-sm-12 col-md-12">
+                                        <div class="form-group">
+                                            <label for="form-field-select-3">Nơi cấp CMTND</label>
+                                            <div>
+                                          <span class="input-icon width_100">
+												<input name="issued_by_cmnd" type="text" id="input_issued_by_cmnd" class="width_100 valid" >
+												<i class="ace-icon fa fa-map-marker  blue"></i>
+											</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="float: left; width: 100%" class="show_edit">
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <label for="form-field-select-3">Số tài khoản</label>
+                                            <div>
+                                          <span class="input-icon width_100">
+												<input name="account_number_bank" type="text" id="input_account_number_bank" class="width_100 valid" >
+												<i class="ace-icon fa fa-credit-card  blue"></i>
+											</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <label for="form-field-select-3">Ngân hàng</label>
+                                            <div>
+                                          <span class="input-icon width_100">
+												<input name="bank" type="text" id="input_bank" class="width_100 valid" >
+												<i class="ace-icon fa fa-university  blue"></i>
+											</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="float: left; width: 100%" class="show_edit">
+                                    <div class="col-xs-12 col-sm-12 col-md-12">
+                                        <div class="form-group">
+                                            <label for="form-field-select-3">Chi nhánh</label>
+                                            <div>
+                                          <span class="input-icon width_100">
+												<input name="open_bank" type="text" id="input_open_bank" class="width_100 valid" >
+												<i class="ace-icon fa fa-map-marker  blue"></i>
+											</span>
                                             </div>
                                         </div>
                                     </div>

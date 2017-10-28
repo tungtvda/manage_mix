@@ -865,6 +865,44 @@ jQuery(function ($) {
         var code = $(this).attr("name_record");
         show_info_cost(Id,code);
     });
+
+    // show lịch sử giao dịch
+    $('body').on("click", '.view_lich_su_giao_dich', function () {
+        $('#show_loading_giao_dich').show();
+        $('#list_giao_dich').html('').hide();
+        var code=$(this).attr('data-code');
+        var id=$(this).attr('data-id');
+        if(code && id){
+            $('#name-detail-code-booking').html(code);
+            var link = url + '/booking-list-giao-dich.html';
+            $.ajax({
+                method: "GET",
+                url: link,
+                data: "id=" + id,
+                success: function (response) {
+                    console.log(response);
+                    if (response == 1) {
+                        //lnv.alert({
+                        //    title: 'Lỗi',
+                        //    content: response,
+                        //    alertBtnText: 'Ok',
+                        //    iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                        //    alertHandler: function () {
+                        //
+                        //    }
+                        //});
+                        //$("#status_"+id).val(value_old);
+                    }else{
+                        $('#show_red_none_giao_dich').show().html('<h4>Đơn hàng "'+code+'" không có giao dịch nào<p>');
+                    }
+                    $('#show_loading_giao_dich').hide();
+                }
+            });
+
+        }else{
+            $('#modal-form').modal('hide');
+        }
+    });
 });
 function show_info_cost(Id,name){
     $( "#title_form" ).html('Thôn tin chi tiết "<b>'+name+'</b>"');

@@ -80,7 +80,7 @@ switch($action_link){
 $url_bread='<li class="active">Booking</li>';
 $data['breadcrumbs']=$url_bread;
 $data['action_link']=$action_link;
-$count=11;
+$count=12;
 //_returnCreateCustomer(1);
 //_deleteSubmitForm('customer', 'customer_delete');
 

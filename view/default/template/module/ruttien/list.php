@@ -20,11 +20,11 @@
             <div class="col-xs-12">
                 <div class="clearfix">
                     <div class="col-md-6 col-sm-6 col-xs-12 pink" style="padding-left: 0px">
-                        <?php if (_returnCheckAction(37) == 1) { ?>
+                        <?php if (_returnCheckAction(42) == 1) { ?>
                             <a href="#modal-form" role="button" data-toggle="modal" id="create_popup" data-type="az"
                                class="green btn btn-white btn-create btn-hover-white">
                                 <i class="ace-icon fa fa-plus bigger-120 "></i>
-                                Create popup
+                               Rút tiền
                                 <i class="ace-icon fa fa-external-link"></i>
                             </a>
 <!--                            <a href="--><?php //echo SITE_NAME ?><!--/nhan-vien/them-moi"-->
@@ -46,21 +46,10 @@
                             </button>
 
                             <ul class="dropdown-menu dropdown-danger">
-                                <?php if (_returnCheckAction(39) == 1) { ?>
-                                    <li>
-                                        <a href="#modal-form"  role="button"  data-toggle="modal" class="edit_function">Sửa</a>
-                                    </li>
-                                <?php } ?>
-                                <?php if (_returnCheckAction(40) == 1) { ?>
+                                <?php if (_returnCheckAction(44) == 1) { ?>
                                     <li>
                                         <a class="delete_function"
                                            href="javascript:void()">Xóa</a>
-                                    </li>
-                                <?php } ?>
-                                <li class="divider"></li>
-                                <?php if (_returnCheckAction(38) == 1) { ?>
-                                    <li>
-                                        <a href="<?php echo SITE_NAME ?>/nhan-vien/them-moi">Thêm</a>
                                     </li>
                                 <?php } ?>
                             </ul>
@@ -92,28 +81,16 @@
                             </th>
                             <th>#</th>
                             <th>Họ tên</th>
-                            <th>Avatar</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Thứ hạng</th>
-                            <th>Hoa hồng</th>
-                            <th>Status</th>
-
-                            <!--<th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1"
-                                aria-label="
-
-															Update
-														: activate to sort column ascending">
-                                <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
-                                Created
-                            </th>-->
+                            <th>Hình ảnh</th>
+                            <th>Tiền yêu cầu</th>
+                            <th>Trạng thái</th>
                             <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1"
                                 aria-label="
 
 															Update
 														: activate to sort column ascending">
                                 <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
-                                Ngày đăng ký
+                                Ngày gửi
                             </th>
                             <th>Action</th>
 
@@ -127,7 +104,7 @@
                                     <tr class="row_<?php echo $row->id?>">
                                         <td class="center">
                                             <label class="pos-rel">
-                                                <input type="checkbox" class="ace click_check_list" name_record="<?php echo $row->name ?>" id="check_<?php echo $dem ?>" name="check_box_action[]"
+                                                <input type="checkbox" class="ace click_check_list" name_record="<?php echo $row->name_user ?>" id="check_<?php echo $dem ?>" name="check_box_action[]"
                                                        value="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"/>
                                                 <span class="lbl"></span>
                                             </label>
@@ -136,59 +113,25 @@
                                             <?php echo $dem; ?>
                                         </td>
                                         <td>
-                                            <a href="<?php echo SITE_NAME ?>/thanh-vien/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"><?php echo $row->name.' - '.$row->user_code ?></a>
+                                            <a href="<?php echo SITE_NAME ?>/thanh-vien/sua?id=<?php echo _return_mc_encrypt($row->user_tiep_thi_id, ENCRYPTION_KEY); ?>"><?php echo $row->name_user.' - '.$row->user_code ?></a>
                                         </td>
                                         <td style="text-align: center">
                                             <?php
-                                            if ($row->avatar == '') {
+                                            if ($row->avatar_tt == '') {
                                                 $link_ava = SITE_NAME . '/view/default/themes/images/no-avatar.png';
                                             } else {
-                                                $link_ava = SITE_NAME . $row->avatar;
+                                                $link_ava = SITE_NAME . $row->avatar_tt;
                                             }
                                             ?>
-                                            <img title="<?php echo $row->name ?>" style="width: 50px"
+                                            <img title="<?php echo $row->name_user ?>" style="width: 50px"
                                                  src="<?php echo $link_ava ?>"><label
-                                                style="display: none"><?php echo $row->name ?></label>
+                                                style="display: none"><?php echo $row->name_user ?></label>
                                         </td>
-                                        <td><?php echo $row->user_email ?></td>
-                                        <td><?php echo $row->phone ?></td>
-                                        <td >
-                                            <?php
-                                            switch($row->type_tiep_thi){
-                                                case '3':
-                                                    echo '<span class="label label-xlg label-pink arrowed arrowed-right">Đại lý</span>';
-                                                    break;
-                                                case '2':
-                                                    echo '<span class="label label-xlg label-success arrowed arrowed-right">5 sao</span>';
-                                                    break;
-                                                case '1':
-                                                    echo '<span class="label label-xlg label-primary arrowed arrowed-right">4 sao</span>';
-                                                    break;
-                                                default:
-                                                    echo '<span class="label label-xlg label-warning arrowed arrowed-right">3 sao</span>';
-                                                    break;
 
-                                            }
-                                            ?>
-
-<!--                                            <span hidden>--><?php //echo (int)$row->user_role ?><!--</span>-->
-<!--                                            --><?php //if ($row->user_role == 0) echo '<i id="user-md-active-'.$row->id.'" style="font-size: 20px;" class="fa fa-user-md hidden-xs"></i>' ?>
-<!--                                            --><?php //if ($row->user_role == 1) echo ' <i id="user-md-active-'.$row->id.'" style="font-size: 20px;" class="fa fa-user-md active-user-role hidden-xs"></i>' ?>
-<!--                                            --><?php //if (_returnCheckAction(39) == 1) { ?>
-<!--                                            <label>-->
-<!--                                                <input --><?php //if ($row->user_role) echo 'checked' ?>
-<!--                                                    id="checkbox_user_role_--><?php //echo $row->id ?><!--"-->
-<!--                                                    countid="--><?php //echo $row->id ?><!--"-->
-<!--                                                    name_record="--><?php //echo $row->name ?><!--" table="user" field="user_role" action="user_update"-->
-<!--                                                    class=" ace ace-switch ace-switch-7 checkbox_user_role" type="checkbox">-->
-<!--                                                <span class="lbl"></span>-->
-<!--                                            </label>-->
-<!--                                        --><?php //}?>
-                                        </td>
                                         <td>
                                             <?php
-                                            if($row->hoa_hong!=''&&$row->hoa_hong!=null){
-                                                echo '<b class="red">'.number_format((int)$row->hoa_hong,0,",",".").' vnđ </b>';
+                                            if($row->price!=''&&$row->price!=null){
+                                                echo '<b class="red">'.number_format((int)$row->price,0,",",".").' vnđ </b>';
                                             }else{
                                                 echo '<b class="red">0 vnđ</b>';
                                             }
@@ -213,25 +156,17 @@
                                         </td>
                                         <!--                                        <td>-->
                                         <?php //echo _returnDateFormatConvert($row->created) ?><!--</td>-->
-                                        <td><?php echo _returnDateFormatConvert($row->created) ?></td>
+                                        <td><?php echo _returnDateFormatConvert($row->date_send) ?></td>
 
                                         <td>
                                             <div class="hidden-sm hidden-xs action-buttons">
 
                                                 <?php if (_returnCheckAction(39) == 1) { ?>
-                                                    <a class="blue view_popup_detail" role="button" name_record="<?php echo $row->name ?>" data-toggle="modal" table="user" countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                    <a class="blue view_popup_detail" role="button" name_record="<?php echo $row->name_user ?>" data-toggle="modal" table="user" countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
                                                        href="#modal-form"
                                                        title="Chi tiết">
                                                         <i class="ace-icon fa fa-eye-slash bigger-130"></i>
                                                     </a>
-<!--                                                    <a class="" href="#" title="Sửa popup">-->
-<!--                                                        <i class="ace-icon glyphicon glyphicon-edit"></i>-->
-<!--                                                    </a>-->
-
-<!--                                                    <a title="Sửa tab mới" class="green"-->
-<!--                                                       href="--><?php //echo SITE_NAME ?><!--/nhan-vien/sua?id=--><?php //echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?><!--">-->
-<!--                                                        <i class="ace-icon fa fa-pencil bigger-130"></i>-->
-<!--                                                    </a>-->
                                                 <?php } ?>
                                                 <?php if (_returnCheckAction(40) == 1) { ?>
                                                     <a title="Xóa" class="red delete_record" href="javascript:void(0)"
@@ -316,6 +251,12 @@
                             <li>
                                 <a class="delete_function"
                                    href="javascript:void()">Xóa</a>
+                            </li>
+                        <?php } ?>
+                        <li class="divider"></li>
+                        <?php if (_returnCheckAction(1) == 1) { ?>
+                            <li>
+                                <a href="<?php echo SITE_NAME ?>/nhan-vien/them-moi">Thêm</a>
                             </li>
                         <?php } ?>
                     </ul>

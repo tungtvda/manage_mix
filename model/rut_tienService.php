@@ -90,3 +90,34 @@ function rut_tien_count($where)
     }
    else return false;
 }
+
+function ruttienAllDongHang($where){
+    $query="select rt.*, us.name as name_user, us.user_role as type_user, us.user_code, us.avatar as avatar_tt, ";
+    $query.="  us_cr.name as name_user_cr, us_cr.user_role as type_user_cr, us_cr.user_code as user_code_cr ";
+    $query.=" FROM rut_tien rt ";
+    $query.=" INNER JOIN user us on rt.user_tiep_thi_id = us.id";
+    $query.=" LEFT JOIN user us_cr on rt.admin_confirm_id = us_cr.id";
+    if($where!=''){
+        $query.=' where '.$where;
+    }
+    $query.=" ORDER BY id desc";
+    $result=mysqli_query(ConnectSql(),$query);
+    $array_result=array();
+    if($result!=false)while($row=mysqli_fetch_array($result))
+    {
+        $new_obj=new rut_tien($row);
+        $new_obj->name_user=$row['name_user'];
+        $new_obj->type_user=$row['type_user'];
+        $new_obj->user_code=$row['user_code'];
+        $new_obj->avatar_tt=$row['avatar_tt'];
+
+        $new_obj->name_user_cr=$row['name_user_cr'];
+        $new_obj->type_user_cr=$row['type_user_cr'];
+        $new_obj->user_code_cr=$row['user_code_cr'];
+
+        $new_obj->decode();
+        array_push($array_result,$new_obj);
+    }
+    return $array_result;
+}
+

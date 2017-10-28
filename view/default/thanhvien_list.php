@@ -13,7 +13,13 @@ function show_thanhvien_list($data = array())
     $list=$data['list'];
     $title_module=$data['title_print'];
     require_once DIR . '/view/default/template/module/thanhvien/list.php';
-//    require_once DIR . '/view/default/template/module/user/list_demo.php';
+}
+function show_ruttien_list($data = array())
+{
+    $asign = array();
+    $list=$data['list'];
+    $title_module=$data['title_print'];
+    require_once DIR . '/view/default/template/module/ruttien/list.php';
 }
 
 

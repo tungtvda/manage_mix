@@ -93,11 +93,10 @@
                                 <th>Tổng tiền</th>
                                 <th>Thanh toán</th>
                                 <th>Còn lại</th>
-                                <th>Sales</th>
-<!--                                <th>Tiếp thị</th>-->
-<!--                                <th>Người tạo</th>-->
                                 <th>Xác nhận đơn hàng</th>
                                 <th>Xác nhận hoa hồng</th>
+                                <th>Lịch sử giao dịch</th>
+                                <th>Chi phí</th>
                                 <th>Action</th>
 
                             </tr>
@@ -176,24 +175,11 @@
                                             echo number_format((int)$con_lai, 0, ",", ".") . ' vnđ';
                                             ?>
                                         </td>
-                                        <td>
-                                            <?php
-                                            if ($row->name_user != '') {
-                                                echo '<a href="' . SITE_NAME . '/nhan-vien/sua?id=' . _return_mc_encrypt($row->user_id, ENCRYPTION_KEY) . '">' . $row->name_user . '</a>';
-                                            }
-                                            ?>
-                                        </td>
+
 <!--                                        <td>-->
 <!--                                            --><?php
-//                                            if ($row->name_user_tt != '') {
-//                                                echo '<a href="' . SITE_NAME . '/nhan-vien/sua?id=' . _return_mc_encrypt($row->user_tiep_thi_id, ENCRYPTION_KEY) . '">' . $row->name_user_tt . '</a>';
-//                                            }
-//                                            ?>
-<!--                                        </td>-->
-<!--                                        <td>-->
-<!--                                            --><?php
-//                                            if ($row->name_user_cr != '') {
-//                                                echo '<a href="' . SITE_NAME . '/nhan-vien/sua?id=' . _return_mc_encrypt($row->created_by, ENCRYPTION_KEY) . '">' . $row->name_user_cr . '</a>';
+//                                            if ($row->name_user != '') {
+//                                                echo '<a href="' . SITE_NAME . '/nhan-vien/sua?id=' . _return_mc_encrypt($row->user_id, ENCRYPTION_KEY) . '">' . $row->name_user . '</a>';
 //                                            }
 //                                            ?>
 <!--                                        </td>-->
@@ -250,16 +236,26 @@
                                             }
                                             ?>
                                         </td>
-
+                                        <td style="text-align: center">
+                                            <?php if (_returnCheckAction(18) == 1) { ?>
+                                                <a title="Lịch sử giao dịch" class="red view_lich_su_giao_dich" href="#modal-form-giaodich" role="button" data-toggle="modal" data-code="<?php echo $row->code_booking ?>" data-id="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                  >
+                                                    <i class="ace-icon fa fa-sliders bigger-130"></i>
+                                                </a>
+                                            <?php } ?>
+                                        </td>
+                                        <td style="text-align: center">
+                                            <?php if (_returnCheckAction(18) == 1) { ?>
+                                                <a title="Danh sách chi phí" class="red"
+                                                   href="<?php echo SITE_NAME . '/' . $action_link ?>/chi-phi?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
+                                                    <i class="ace-icon fa fa-usd bigger-130"></i>
+                                                </a>
+                                            <?php } ?>
+                                        </td>
                                         <td>
                                             <div class="hidden-sm hidden-xs action-buttons">
 
-                                                <?php if (_returnCheckAction(18) == 1) { ?>
-                                                    <a title="Danh sách chi phí" class="red"
-                                                       href="<?php echo SITE_NAME . '/' . $action_link ?>/chi-phi?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
-                                                        <i class="ace-icon fa fa-usd bigger-130"></i>
-                                                    </a>
-                                                <?php } ?>
+
                                                 <?php if (_returnCheckAction(18) == 1) { ?>
                                                     <a class="blue view_popup_detail" role="button"
                                                        name_record="<?php echo $row->code_booking ?>"
@@ -294,17 +290,17 @@
 
                                                     <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 
-                                                        <?php if (_returnCheckAction(18) == 1) { ?>
-                                                            <li class="red">
-                                                                <a href="<?php echo SITE_NAME . '/' . $action_link ?>/chi-phi?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
-                                                                   class="tooltip-success" data-rel="tooltip"
-                                                                   title="Danh sách chi phí">
-																				<span class="">
-																					<i class="ace-icon fa fa-usd bigger-120"></i>
-																				</span>
-                                                                </a>
-                                                            </li>
-                                                        <?php } ?>
+<!--                                                        --><?php //if (_returnCheckAction(18) == 1) { ?>
+<!--                                                            <li class="red">-->
+<!--                                                                <a href="--><?php //echo SITE_NAME . '/' . $action_link ?><!--/chi-phi?id=--><?php //echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?><!--"-->
+<!--                                                                   class="tooltip-success" data-rel="tooltip"-->
+<!--                                                                   title="Danh sách chi phí">-->
+<!--																				<span class="">-->
+<!--																					<i class="ace-icon fa fa-usd bigger-120"></i>-->
+<!--																				</span>-->
+<!--                                                                </a>-->
+<!--                                                            </li>-->
+<!--                                                        --><?php //} ?>
                                                         <?php if (_returnCheckAction(20) == 1) { ?>
                                                             <li>
                                                                 <a class="blue view_popup_detail" role="button"
@@ -680,6 +676,375 @@
             </div>
         </div><!-- PAGE CONTENT ENDS -->
 
+<!--        Lịch sử giao dịch-->
+        <div id="modal-form-giaodich" class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="blue bigger" id="title_form">Lịch sử giao dịch đơn hàng "<b id="name-detail-code-booking" class="red"></b>"</h4>
+                    </div>
+                    <form id="submit_form" role="form" action="" method="post" enctype="multipart/form-data">
+
+                        <div class="modal-body">
+                            <div class="row">
+                                <div id="show_loading_giao_dich" style="text-align: center">
+                                    <img src="<?php echo SITE_NAME.'/view/default/themes/images/loading_1.gif'?>">
+                                </div>
+                                <div hidden id="show_red_none_giao_dich" style="text-align: center">
+
+                                </div>
+
+                                <div id="show_list_giao_dich" class="col-xs-12">
+                                    <div class="widget-box">
+                                        <div class="widget-body">
+                                            <div class="widget-main no-padding">
+                                                <div class="dialogs" id="list_giao_dich" style="height: 350px; overflow: scroll">
+                                                    <div class="itemdiv dialogdiv">
+                                                        <div class="user">
+                                                            <img alt="Alexa's Avatar"
+                                                                 src="assets/images/avatars/avatar1.png"/>
+                                                        </div>
+
+                                                        <div class="body">
+                                                            <div class="time">
+                                                                <i class="ace-icon fa fa-clock-o"></i>
+                                                                <span class="green">4 sec</span>
+                                                            </div>
+
+                                                            <div class="name">
+                                                                <a href="#">Alexa</a>
+                                                            </div>
+                                                            <div class="text">Lorem ipsum dolor sit amet, consectetur
+                                                                adipiscing elit. Quisque commodo massa sed
+                                                            </div>
+
+                                                            <div class="tools">
+                                                                <a href="#" class="btn btn-minier btn-info">
+                                                                    <i class="icon-only ace-icon fa fa-share"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="itemdiv dialogdiv">
+                                                        <div class="user">
+                                                            <img alt="John's Avatar"
+                                                                 src="assets/images/avatars/avatar.png"/>
+                                                        </div>
+
+                                                        <div class="body">
+                                                            <div class="time">
+                                                                <i class="ace-icon fa fa-clock-o"></i>
+                                                                <span class="blue">38 sec</span>
+                                                            </div>
+
+                                                            <div class="name">
+                                                                <a href="#">John</a>
+                                                            </div>
+                                                            <div class="text">Raw denim you probably haven&#39;t heard of
+                                                                them jean shorts Austin.
+                                                            </div>
+
+                                                            <div class="tools">
+                                                                <a href="#" class="btn btn-minier btn-info">
+                                                                    <i class="icon-only ace-icon fa fa-share"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="itemdiv dialogdiv">
+                                                        <div class="user">
+                                                            <img alt="Bob's Avatar" src="assets/images/avatars/user.jpg"/>
+                                                        </div>
+
+                                                        <div class="body">
+                                                            <div class="time">
+                                                                <i class="ace-icon fa fa-clock-o"></i>
+                                                                <span class="orange">2 min</span>
+                                                            </div>
+
+                                                            <div class="name">
+                                                                <a href="#">Bob</a>
+                                                                <span class="label label-info arrowed arrowed-in-right">admin</span>
+                                                            </div>
+                                                            <div class="text">Lorem ipsum dolor sit amet, consectetur
+                                                                adipiscing elit. Q
+                                                            </div>
+
+                                                            <div class="tools">
+                                                                <a href="#" class="btn btn-minier btn-info">
+                                                                    <i class="icon-only ace-icon fa fa-share"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="itemdiv dialogdiv">
+                                                        <div class="user">
+                                                            <img alt="Jim's Avatar"
+                                                                 src="assets/images/avatars/avatar4.png"/>
+                                                        </div>
+
+                                                        <div class="body">
+                                                            <div class="time">
+                                                                <i class="ace-icon fa fa-clock-o"></i>
+                                                                <span class="grey">3 min</span>
+                                                            </div>
+
+                                                            <div class="name">
+                                                                <a href="#">Jim</a>
+                                                            </div>
+                                                            <div class="text">Raw denim you probably haven&#39;t heard of
+                                                                them jean shorts Austin.
+                                                            </div>
+
+                                                            <div class="tools">
+                                                                <a href="#" class="btn btn-minier btn-info">
+                                                                    <i class="icon-only ace-icon fa fa-share"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="itemdiv dialogdiv">
+                                                        <div class="user">
+                                                            <img alt="Alexa's Avatar"
+                                                                 src="assets/images/avatars/avatar1.png"/>
+                                                        </div>
+
+                                                        <div class="body">
+                                                            <div class="time">
+                                                                <i class="ace-icon fa fa-clock-o"></i>
+                                                                <span class="green">4 min</span>
+                                                            </div>
+
+                                                            <div class="name">
+                                                                <a href="#">Alexa</a>
+                                                            </div>
+                                                            <div class="text">Lorem ipsum dolor sit amet, consectetur
+                                                                adipiscing elit.
+                                                            </div>
+
+                                                            <div class="tools">
+                                                                <a href="#" class="btn btn-minier btn-info">
+                                                                    <i class="icon-only ace-icon fa fa-share"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="itemdiv dialogdiv">
+                                                        <div class="user">
+                                                            <img alt="Alexa's Avatar"
+                                                                 src="assets/images/avatars/avatar1.png"/>
+                                                        </div>
+
+                                                        <div class="body">
+                                                            <div class="time">
+                                                                <i class="ace-icon fa fa-clock-o"></i>
+                                                                <span class="green">4 min</span>
+                                                            </div>
+
+                                                            <div class="name">
+                                                                <a href="#">Alexa</a>
+                                                            </div>
+                                                            <div class="text">Lorem ipsum dolor sit amet, consectetur
+                                                                adipiscing elit.
+                                                            </div>
+
+                                                            <div class="tools">
+                                                                <a href="#" class="btn btn-minier btn-info">
+                                                                    <i class="icon-only ace-icon fa fa-share"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="itemdiv dialogdiv">
+                                                        <div class="user">
+                                                            <img alt="Alexa's Avatar"
+                                                                 src="assets/images/avatars/avatar1.png"/>
+                                                        </div>
+
+                                                        <div class="body">
+                                                            <div class="time">
+                                                                <i class="ace-icon fa fa-clock-o"></i>
+                                                                <span class="green">4 min</span>
+                                                            </div>
+
+                                                            <div class="name">
+                                                                <a href="#">Alexa</a>
+                                                            </div>
+                                                            <div class="text">Lorem ipsum dolor sit amet, consectetur
+                                                                adipiscing elit.
+                                                            </div>
+
+                                                            <div class="tools">
+                                                                <a href="#" class="btn btn-minier btn-info">
+                                                                    <i class="icon-only ace-icon fa fa-share"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="itemdiv dialogdiv">
+                                                        <div class="user">
+                                                            <img alt="Alexa's Avatar"
+                                                                 src="assets/images/avatars/avatar1.png"/>
+                                                        </div>
+
+                                                        <div class="body">
+                                                            <div class="time">
+                                                                <i class="ace-icon fa fa-clock-o"></i>
+                                                                <span class="green">4 min</span>
+                                                            </div>
+
+                                                            <div class="name">
+                                                                <a href="#">Alexa</a>
+                                                            </div>
+                                                            <div class="text">Lorem ipsum dolor sit amet, consectetur
+                                                                adipiscing elit.
+                                                            </div>
+
+                                                            <div class="tools">
+                                                                <a href="#" class="btn btn-minier btn-info">
+                                                                    <i class="icon-only ace-icon fa fa-share"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="itemdiv dialogdiv">
+                                                        <div class="user">
+                                                            <img alt="Alexa's Avatar"
+                                                                 src="assets/images/avatars/avatar1.png"/>
+                                                        </div>
+
+                                                        <div class="body">
+                                                            <div class="time">
+                                                                <i class="ace-icon fa fa-clock-o"></i>
+                                                                <span class="green">4 min</span>
+                                                            </div>
+
+                                                            <div class="name">
+                                                                <a href="#">Alexa</a>
+                                                            </div>
+                                                            <div class="text">Lorem ipsum dolor sit amet, consectetur
+                                                                adipiscing elit.
+                                                            </div>
+
+                                                            <div class="tools">
+                                                                <a href="#" class="btn btn-minier btn-info">
+                                                                    <i class="icon-only ace-icon fa fa-share"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="itemdiv dialogdiv">
+                                                        <div class="user">
+                                                            <img alt="Alexa's Avatar"
+                                                                 src="assets/images/avatars/avatar1.png"/>
+                                                        </div>
+
+                                                        <div class="body">
+                                                            <div class="time">
+                                                                <i class="ace-icon fa fa-clock-o"></i>
+                                                                <span class="green">4 min</span>
+                                                            </div>
+
+                                                            <div class="name">
+                                                                <a href="#">Alexa</a>
+                                                            </div>
+                                                            <div class="text">Lorem ipsum dolor sit amet, consectetur
+                                                                adipiscing elit.
+                                                            </div>
+
+                                                            <div class="tools">
+                                                                <a href="#" class="btn btn-minier btn-info">
+                                                                    <i class="icon-only ace-icon fa fa-share"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="itemdiv dialogdiv">
+                                                        <div class="user">
+                                                            <img alt="Alexa's Avatar"
+                                                                 src="assets/images/avatars/avatar1.png"/>
+                                                        </div>
+
+                                                        <div class="body">
+                                                            <div class="time">
+                                                                <i class="ace-icon fa fa-clock-o"></i>
+                                                                <span class="green">4 min</span>
+                                                            </div>
+
+                                                            <div class="name">
+                                                                <a href="#">Alexa</a>
+                                                            </div>
+                                                            <div class="text">Lorem ipsum dolor sit amet, consectetur
+                                                                adipiscing elit.
+                                                            </div>
+
+                                                            <div class="tools">
+                                                                <a href="#" class="btn btn-minier btn-info">
+                                                                    <i class="icon-only ace-icon fa fa-share"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="itemdiv dialogdiv">
+                                                        <div class="user">
+                                                            <img alt="Alexa's Avatar"
+                                                                 src="assets/images/avatars/avatar1.png"/>
+                                                        </div>
+
+                                                        <div class="body">
+                                                            <div class="time">
+                                                                <i class="ace-icon fa fa-clock-o"></i>
+                                                                <span class="green">4 min</span>
+                                                            </div>
+
+                                                            <div class="name">
+                                                                <a href="#">Alexa</a>
+                                                            </div>
+                                                            <div class="text">Lorem ipsum dolor sit amet, consectetur
+                                                                adipiscing elit.
+                                                            </div>
+
+                                                            <div class="tools">
+                                                                <a href="#" class="btn btn-minier btn-info">
+                                                                    <i class="icon-only ace-icon fa fa-share"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <form>
+                                                    <div class="form-actions" style="margin-top: 0px; margin-bottom: 0px">
+                                                        <div class="input-group">
+                                                            <textarea class="form-control" placeholder="Type your message here ..."></textarea>
+<!--                                                            <textarea placeholder="Type your message here ..." type="text"-->
+<!--                                                                   class="form-control" name="message"/>-->
+																<span style="vertical-align: top;" class="input-group-btn">
+																	<button class="btn btn-sm btn-info no-radius"
+                                                                            type="button">
+                                                                        <i class="ace-icon fa fa-floppy-o"></i>
+                                                                        Lưu
+                                                                    </button>
+																</span>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div><!-- /.widget-main -->
+                                        </div><!-- /.widget-body -->
+                                    </div><!-- /.widget-box -->
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div><!-- PAGE CONTENT ENDS -->
 
     </div><!-- /.col -->
 

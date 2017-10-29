@@ -93,7 +93,7 @@ function booking_transactions_count($where)
 
 function booking_giao_dich($where){
     $query="select bk.* , ";
-    $query.=" us.name as name_user, us.avatar ";
+    $query.=" us.name as name_user, us.avatar, us.user_role ";
     $query.=" FROM booking_transactions bk ";
     $query.=" INNER JOIN user us on us.id=bk.user_id";
     if($where!=''){

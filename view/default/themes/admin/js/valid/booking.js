@@ -881,19 +881,10 @@ jQuery(function ($) {
                 data: "id=" + id,
                 success: function (response) {
                     console.log(response);
-                    if (response == 1) {
-                        //lnv.alert({
-                        //    title: 'Lỗi',
-                        //    content: response,
-                        //    alertBtnText: 'Ok',
-                        //    iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
-                        //    alertHandler: function () {
-                        //
-                        //    }
-                        //});
-                        //$("#status_"+id).val(value_old);
-                    }else{
+                    if (response ==0) {
                         $('#show_red_none_giao_dich').show().html('<h4>Đơn hàng "'+code+'" không có giao dịch nào<p>');
+                    }else{
+                        $('#list_giao_dich').html(response).show();
                     }
                     $('#show_loading_giao_dich').hide();
                 }
@@ -901,6 +892,25 @@ jQuery(function ($) {
 
         }else{
             $('#modal-form').modal('hide');
+        }
+    });
+    // show hide text
+    $('body').on("click",'.show_content_full', function () {
+        var Id = $(this).attr("countid");
+        if(Id){
+
+            var hide = $(this).attr("data-hide");
+            if(hide=='show'){
+                $('#short_text_'+Id).hide();
+                $('#long_text_'+Id).show();
+                $('#icon_show_hide_'+Id).removeClass('fa-expand').addClass('fa-compress');
+                $(this).attr("data-hide",'hide');
+            }else{
+                $('#short_text_'+Id).show();
+                $('#long_text_'+Id).hide();
+                $('#icon_show_hide_'+Id).removeClass('fa-compress').addClass('fa-expand');
+                $(this).attr("data-hide",'show');
+            }
         }
     });
 });

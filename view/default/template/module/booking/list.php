@@ -758,24 +758,25 @@
                                                         <div class="user">
                                                             <img alt="Bob's Avatar" src="assets/images/avatars/user.jpg"/>
                                                         </div>
-
                                                         <div class="body">
                                                             <div class="time">
                                                                 <i class="ace-icon fa fa-clock-o"></i>
-                                                                <span class="orange">2 min</span>
+                                                                <span class="orange">2 10-10-2017 01:00</span>
                                                             </div>
 
-                                                            <div class="name">
-                                                                <a href="#">Bob</a>
+                                                            <div class="name" style="">
+                                                                <a  href="#">Bob</a>
                                                                 <span class="label label-info arrowed arrowed-in-right">admin</span>
                                                             </div>
-                                                            <div class="text">Lorem ipsum dolor sit amet, consectetur
+                                                            <div class="text" id="short_text_1">Lorem ipsum dolor sit amet, consectetur
                                                                 adipiscing elit. Q
                                                             </div>
-
+                                                            <div hidden id="long_text_1">
+                                                                ádfasdfasdfsdaf asldfklh asdfl;h asdkljhf kljsadhf kljasdhf kljjasdhf kljasdhf kljasdhfjklashfjklasdhfjklasdhfjklasdfhjklashfjklasdfhkasdf
+                                                            </div>
                                                             <div class="tools">
-                                                                <a href="#" class="btn btn-minier btn-info">
-                                                                    <i class="icon-only ace-icon fa fa-share"></i>
+                                                                <a href="javascript:void(0)" countid="1" data-hide="show" class="btn btn-minier btn-info show_content_full">
+                                                                    <i id="icon_show_hide_1" class="icon-only ace-icon fa fa-expand"></i>
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -829,7 +830,7 @@
 
                                                             <div class="tools">
                                                                 <a href="#" class="btn btn-minier btn-info">
-                                                                    <i class="icon-only ace-icon fa fa-share"></i>
+                                                                    <i class="icon-only ace-icon fa fa-eye "></i>
                                                                 </a>
                                                             </div>
                                                         </div>

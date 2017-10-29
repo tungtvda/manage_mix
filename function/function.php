@@ -207,6 +207,17 @@ function _returnDateFormatConvert($date)
     return $DatesRemainder;
 }
 
+function _returnDateFormatConvertVN($date)
+{
+    if ($date == '') {
+        $DatesRemainder = '';
+    } else {
+        $DatesRemainder = date("d-m-Y H:i:s", strtotime($date));
+    }
+    return $DatesRemainder;
+}
+
+
 function _returnDateNotTimieFormatConvertVn($date)
 {
     if ($date == '0000-00-00') {

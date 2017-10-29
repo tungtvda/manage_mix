@@ -54,13 +54,15 @@ if(isset($_SESSION["Admin"]))
             header('Location: '.SITE_NAME.'/controller/admin/booking_transactions.php');
         }
     }
-    if(isset($_POST["booking_id"])&&isset($_POST["user_id"])&&isset($_POST["name"])&&isset($_POST["description"])&&isset($_POST["created"])&&isset($_POST["updated"]))
+    if(isset($_POST["booking_id"])&&isset($_POST["customer_id"])&&isset($_POST["user_id"])&&isset($_POST["name"])&&isset($_POST["description"])&&isset($_POST["created"])&&isset($_POST["updated"]))
     {
        $array=$_POST;
        if(!isset($array['id']))
        $array['id']='0';
        if(!isset($array['booking_id']))
        $array['booking_id']='0';
+       if(!isset($array['customer_id']))
+       $array['customer_id']='0';
        if(!isset($array['user_id']))
        $array['user_id']='0';
        if(!isset($array['name']))

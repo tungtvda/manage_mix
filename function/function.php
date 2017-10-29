@@ -1676,3 +1676,96 @@ function _returnSettingHoaHong()
     }
     return $res;
 }
+function _returnListGiaodich($id){
+    $data=booking_giao_dich('bk.booking_id='.$id);
+    if($data){
+        $array_data=[];
+        $string_res='';
+        $count=0;
+        foreach($data as $row){
+            $admin_icon='';
+            if($row['customer_id']){
+                if ($row['avatar_cus'] == '') {
+                    $link_ava = SITE_NAME . '/view/default/themes/images/no-avatar.png';
+                } else {
+                    $link_ava = SITE_NAME .$row['avatar_cus'];
+                }
+                $name_user=$row['name_cus'].' '.$row['code_cus'];
+                $link=SITE_NAME.'/khach-hang/sua?id='._return_mc_encrypt($row['customer_id']);
+                $admin_icon=' <span class="label label-info arrowed arrowed-in-right">Khách hàng</span>';
+            }else{
+                if ($row['avatar'] == '') {
+                    $link_ava = SITE_NAME . '/view/default/themes/images/no-avatar.png';
+                } else {
+                    $link_ava = SITE_NAME .$row['avatar'];
+                }
+                $name_user=$row['name_user'].' '.$row['user_code'];;
+                $link=SITE_NAME.'/nhan-vien/sua?id='._return_mc_encrypt($row['user_id']);
+                if($row['user_role']==1){
+                    $admin_icon=' <span class="label label-info arrowed arrowed-in-right">admin</span>';
+                }
+            }
+
+            $content=$row['description'];
+            $hidde_btn_show='display: none!important;';
+
+            if (strlen($content) > 100) {
+                $ten1=strip_tags($content);
+                $ten = substr($ten1, 0, 100);
+                $name = substr($ten, 0, strrpos($ten, ' ')) . "...";
+                $content=$name;
+                $hidde_btn_show='';
+            }
+
+
+            $backgroup='';
+            if($count%2==0){
+                $backgroup='background: #f1f9ee;';
+            }
+            $string_res.='<div class="itemdiv dialogdiv">
+                                                        <div class="user">
+                                                            <img alt="'.$name_user.'" src="'.$link_ava.'"/>
+                                                        </div>
+                                                        <div style="'.$backgroup.'" class="body">
+                                                            <div class="time">
+                                                                <i class="ace-icon fa fa-clock-o"></i>
+                                                                <span class="orange">'._returnDateFormatConvertVN($row['created']).'</span>
+                                                            </div>
+
+                                                            <div class="name">
+                                                                <a target="_blank" href="'.$link.'">'.$name_user.'</a>
+                                                               '.$admin_icon.'
+                                                            </div>
+                                                            <div class="text" id="short_text_'.$row['id'].'">'.$content.'</div>
+                                                            <div hidden id="long_text_'.$row['id'].'">
+                                                               '.$row['description'].'
+                                                            </div>
+                                                            <div style="display:block; '.$hidde_btn_show.'" class="tools">
+                                                                <a title="Xem chi tiết" href="javascript:void(0)" countid="'.$row['id'].'" data-hide="show" class="show_content_full">
+                                                                    <i id="icon_show_hide_'.$row['id'].'" class="icon-only ace-icon fa fa-expand"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>';
+            $item=array(
+                'id'=>$row['id'],
+                'booking_id'=>$row['booking_id'],
+                'user_id'=>$row['user_id'],
+                'name'=>$row['name'],
+                'description'=>$row['description'],
+                'created'=>$row['created'],
+                'name_user'=>$row['name_user'],
+                'avatar'=>$link_ava
+            );
+            array_push($array_data,$item);
+            $count++;
+        }
+        if($array_data){
+            return $string_res;
+        }else{
+            return 0;
+        }
+    }else{
+        return 0;
+    }
+}

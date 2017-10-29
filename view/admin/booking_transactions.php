@@ -29,7 +29,7 @@ function view_booking_transactions($data)
 //
 function showTableHeader()
 {
-    return '<th>id</th><th>booking_id</th><th>user_id</th><th>name</th><th>created</th><th>updated</th>';
+    return '<th>id</th><th>booking_id</th><th>customer_id</th><th>user_id</th><th>name</th><th>description</th><th>created</th><th>updated</th>';
 }
 //
 function showTableBody($data)
@@ -40,8 +40,10 @@ function showTableBody($data)
         $TableBody.="<tr><td><input type=\"checkbox\" name=\"check_".$obj->id."\"/></td>";
         $TableBody.="<td>".$obj->id."</td>";
         $TableBody.="<td>".$obj->booking_id."</td>";
+        $TableBody.="<td>".$obj->customer_id."</td>";
         $TableBody.="<td>".$obj->user_id."</td>";
         $TableBody.="<td>".$obj->name."</td>";
+        $TableBody.="<td>".$obj->description."</td>";
         $TableBody.="<td>".$obj->created."</td>";
         $TableBody.="<td>".$obj->updated."</td>";
         $TableBody.="<td><a href=\"?action=edit&id=".$obj->id."\" title=\"Edit\"><img src=\"".SITE_NAME."/view/admin/Themes/images/pencil.png\" alt=\"Edit\"></a>";
@@ -56,6 +58,7 @@ function showFrom($form,$ListKey=array())
 {
     $str_from='';
     $str_from.='<p><label>booking_id</label><input class="text-input small-input" type="text"  name="booking_id" value="'.(($form!=false)?$form->booking_id:'').'" /></p>';
+    $str_from.='<p><label>customer_id</label><input class="text-input small-input" type="text"  name="customer_id" value="'.(($form!=false)?$form->customer_id:'').'" /></p>';
     $str_from.='<p><label>user_id</label><input class="text-input small-input" type="text"  name="user_id" value="'.(($form!=false)?$form->user_id:'').'" /></p>';
     $str_from.='<p><label>name</label><input class="text-input small-input" type="text"  name="name" value="'.(($form!=false)?$form->name:'').'" /></p>';
     $str_from.='<p><label>description</label><textarea name="description">'.(($form!=false)?$form->description:'').'</textarea><script type="text/javascript">CKEDITOR.replace(\'description\'); </script></p>';

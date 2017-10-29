@@ -62,17 +62,17 @@ function booking_transactions_getByPaging($CurrentPage, $PageSize,$Order,$where)
 //
 function booking_transactions_getByPagingReplace($CurrentPage, $PageSize,$Order,$where)
 {
-   return booking_transactions_Get("SELECT booking_transactions.id, booking_transactions.booking_id, booking_transactions.user_id, booking_transactions.name, booking_transactions.description, booking_transactions.created, booking_transactions.updated FROM  booking_transactions ".(($where!='')?(' where '.$where):'')." Order By ".$Order." Limit ".(($CurrentPage-1)*$PageSize)." , ".$PageSize);
+   return booking_transactions_Get("SELECT booking_transactions.id, booking_transactions.booking_id, booking_transactions.customer_id, booking_transactions.user_id, booking_transactions.name, booking_transactions.description, booking_transactions.created, booking_transactions.updated FROM  booking_transactions ".(($where!='')?(' where '.$where):'')." Order By ".$Order." Limit ".(($CurrentPage-1)*$PageSize)." , ".$PageSize);
 }
 //
 function booking_transactions_insert($obj)
 {
-    return exe_query("insert into booking_transactions (booking_id,user_id,name,description,created,updated) values ('$obj->booking_id','$obj->user_id','$obj->name','$obj->description','$obj->created','$obj->updated')",'booking_transactions');
+    return exe_query("insert into booking_transactions (booking_id,customer_id,user_id,name,description,created,updated) values ('$obj->booking_id','$obj->customer_id','$obj->user_id','$obj->name','$obj->description','$obj->created','$obj->updated')",'booking_transactions');
 }
 //
 function booking_transactions_update($obj)
 {
-    return exe_query("update booking_transactions set booking_id='$obj->booking_id',user_id='$obj->user_id',name='$obj->name',description='$obj->description',created='$obj->created',updated='$obj->updated' where id=$obj->id",'booking_transactions');
+    return exe_query("update booking_transactions set booking_id='$obj->booking_id',customer_id='$obj->customer_id',user_id='$obj->user_id',name='$obj->name',description='$obj->description',created='$obj->created',updated='$obj->updated' where id=$obj->id",'booking_transactions');
 }
 //
 function booking_transactions_delete($obj)
@@ -90,12 +90,13 @@ function booking_transactions_count($where)
     }
    else return false;
 }
-
 function booking_giao_dich($where){
     $query="select bk.* , ";
-    $query.=" us.name as name_user, us.avatar, us.user_role ";
+    $query.=" us.name as name_user, us.avatar, us.user_role, us.user_code , ";
+    $query.=" ctm.name as name_cus, ctm.avatar as avatar_cus, ctm.code as code_cus ";
     $query.=" FROM booking_transactions bk ";
-    $query.=" INNER JOIN user us on us.id=bk.user_id";
+    $query.=" LEFT JOIN user us on us.id = bk.user_id  ";
+    $query.=" LEFT JOIN customer ctm on ctm.id = bk.customer_id ";
     if($where!=''){
         $query.=' where '.$where;
     }
@@ -107,5 +108,4 @@ function booking_giao_dich($where){
         array_push($array_result,$row);
     }
     return $array_result;
-//    return booking_Get($query);
 }

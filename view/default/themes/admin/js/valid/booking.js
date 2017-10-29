@@ -80,7 +80,8 @@ jQuery(function ($) {
         $('#price_format_span_511').hide();
     });
     $('body').on("click", '#input_vat', function () {
-        $('#tong_cong').html('');    $('#tong_cong').html('');
+        $('#tong_cong').html('');
+        $('#tong_cong').html('');
         $('#vat').html('');
         //$('#dat_coc_format').html('');
         $('#con_lai').html('');
@@ -201,12 +202,12 @@ jQuery(function ($) {
 
     });
     $('body').on("click", '.btn_add_customer', function () {
-        var price=$('#input_price_submit').val();
-        var price_2=$('#input_price_511_submit').val();
-        var price_3=$('#input_price_5_submit').val();
-        if(price!=''){
-            returnGenDanhSachDoan(price,price_2,price_3);
-        }else{
+        var price = $('#input_price_submit').val();
+        var price_2 = $('#input_price_511_submit').val();
+        var price_3 = $('#input_price_5_submit').val();
+        if (price != '') {
+            returnGenDanhSachDoan(price, price_2, price_3);
+        } else {
             lnv.alert({
                 title: 'Lỗi',
                 content: 'Bạn vui lòng chọn tour',
@@ -245,7 +246,7 @@ jQuery(function ($) {
         var number_nguoi_lon = $('#input_num_nguoi_lon').val();
         var number_tre_em_511 = $('#input_num_tre_em').val();
         var number_tre_em_5 = $('#input_num_tre_em_5').val();
-        if(numberRegex.test(price_nguoi_lon)&&numberRegex.test(price_tre_em_511)&&numberRegex.test(price_tre_em_5)) {
+        if (numberRegex.test(price_nguoi_lon) && numberRegex.test(price_tre_em_511) && numberRegex.test(price_tre_em_5)) {
             if (number_nguoi_lon > 0 && number_nguoi_lon != '') {
                 if (price_nguoi_lon == undefined) {
                     lnv.alert({
@@ -313,7 +314,7 @@ jQuery(function ($) {
                 });
             }
 
-        }else{
+        } else {
             lnv.alert({
                 title: 'Lỗi',
                 content: 'Bạn vui lòng kiểm tra đơn giá',
@@ -371,8 +372,6 @@ jQuery(function ($) {
     });
 
 
-
-
     $('body').on("input", '#input_email', function () {
         checkEmailCustomer();
     });
@@ -423,49 +422,49 @@ jQuery(function ($) {
 
     $('body').on("change", '.select_status', function () {
 
-        var id=$(this).attr('count_id');
-        var code=$(this).attr('code');
-        var status=$(this).val();
+        var id = $(this).attr('count_id');
+        var code = $(this).attr('code');
+        var status = $(this).val();
         var table = 'booking';
         var field = 'status';
         var link = url + '/update-status/';
-        var action='booking_update';
-        if(id==''||table==''||field==''||code==''||link==''){
+        var action = 'booking_update';
+        if (id == '' || table == '' || field == '' || code == '' || link == '') {
             lnv.alert({
                 title: 'Lỗi',
                 content: 'Các thông tin cập nhật không hợp lệ',
                 alertBtnText: 'Ok',
-                iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
                 alertHandler: function () {
 
                 }
             });
-        }else{
-            var value_old=$('#status_old_'+id).val();
+        } else {
+            var value_old = $('#status_old_' + id).val();
             lnv.confirm({
                 title: '<label class="orange">Xác nhận cập nhật trạng thái</label>',
-                content: 'Bạn chắc chắn rằng muốn cập nhật trạng thái của đơn hàng </br><b>"'+code+'"</b> ?',
+                content: 'Bạn chắc chắn rằng muốn cập nhật trạng thái của đơn hàng </br><b>"' + code + '"</b> ?',
                 confirmBtnText: 'Ok',
-                iconBtnText:'<i style="color: #669fc7;" class="ace-icon fa fa-question orange"></i>',
+                iconBtnText: '<i style="color: #669fc7;" class="ace-icon fa fa-question orange"></i>',
                 confirmHandler: function () {
                     $.ajax({
                         method: "GET",
                         url: link,
-                        data: "id=" + id + '&table=' + table + '&field=' + field + '&status=' + status+'&action='+action,
+                        data: "id=" + id + '&table=' + table + '&field=' + field + '&status=' + status + '&action=' + action,
                         success: function (response) {
                             if (response != 1) {
                                 lnv.alert({
                                     title: 'Lỗi',
                                     content: response,
                                     alertBtnText: 'Ok',
-                                    iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                                    iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
                                     alertHandler: function () {
 
                                     }
                                 });
-                                $("#status_"+id).val(value_old);
-                            }else{
-                                $('#status_old_'+id).val(status);
+                                $("#status_" + id).val(value_old);
+                            } else {
+                                $('#status_old_' + id).val(status);
                             }
                         }
                     });
@@ -473,7 +472,7 @@ jQuery(function ($) {
                 },
                 cancelBtnText: 'Cancel',
                 cancelHandler: function () {
-                    $("#status_"+id).val(value_old);
+                    $("#status_" + id).val(value_old);
                 }
             })
         }
@@ -482,26 +481,26 @@ jQuery(function ($) {
 
     $('body').on("click", '#confirm_order', function () {
 
-        var id=$(this).attr('count_id');
-        var code=$(this).attr('code');
+        var id = $(this).attr('count_id');
+        var code = $(this).attr('code');
         var link = url + '/booking/confirm-order';
 
-        if(id==''||link==''||code==''){
+        if (id == '' || link == '' || code == '') {
             lnv.alert({
                 title: 'Lỗi',
                 content: 'Các thông tin cập nhật không hợp lệ',
                 alertBtnText: 'Ok',
-                iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
                 alertHandler: function () {
 
                 }
             });
-        }else{
+        } else {
             lnv.confirm({
                 title: '<label class="orange">Xác nhận đơn hàng</label>',
-                content: 'Bạn chắc chắn rằng muốn xác đơn hàng </br><b>"'+code+'"</b> ?',
+                content: 'Bạn chắc chắn rằng muốn xác đơn hàng </br><b>"' + code + '"</b> ?',
                 confirmBtnText: 'Ok',
-                iconBtnText:'<i style="color: #669fc7;" class="ace-icon fa fa-question orange"></i>',
+                iconBtnText: '<i style="color: #669fc7;" class="ace-icon fa fa-question orange"></i>',
                 confirmHandler: function () {
                     $.ajax({
                         method: "GET",
@@ -513,12 +512,12 @@ jQuery(function ($) {
                                     title: 'Lỗi',
                                     content: response,
                                     alertBtnText: 'Ok',
-                                    iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                                    iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
                                     alertHandler: function () {
 
                                     }
                                 });
-                            }else{
+                            } else {
                                 $('#confirm_order').remove();
                             }
                         }
@@ -535,27 +534,27 @@ jQuery(function ($) {
     });
 
     $('body').on("click", '.confirm_booking_list', function () {
-        var id_filed=$(this).attr('id_filed');
-        var id=$(this).attr('count_id');
-        var code=$(this).attr('code');
+        var id_filed = $(this).attr('id_filed');
+        var id = $(this).attr('count_id');
+        var code = $(this).attr('code');
         var link = url + '/booking/confirm-order';
         var field_check = "confirm_booking_" + id_filed;
-        if(id==''||link==''||code==''||id_filed==''){
+        if (id == '' || link == '' || code == '' || id_filed == '') {
             lnv.alert({
                 title: 'Lỗi',
                 content: 'Các thông tin cập nhật không hợp lệ',
                 alertBtnText: 'Ok',
-                iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
                 alertHandler: function () {
 
                 }
             });
-        }else{
+        } else {
             lnv.confirm({
                 title: '<label class="orange">Xác nhận đơn hàng</label>',
-                content: 'Bạn chắc chắn rằng muốn xác đơn hàng </br><b>"'+code+'"</b> ?',
+                content: 'Bạn chắc chắn rằng muốn xác đơn hàng </br><b>"' + code + '"</b> ?',
                 confirmBtnText: 'Ok',
-                iconBtnText:'<i style="color: #669fc7;" class="ace-icon fa fa-question orange"></i>',
+                iconBtnText: '<i style="color: #669fc7;" class="ace-icon fa fa-question orange"></i>',
                 confirmHandler: function () {
                     $.ajax({
                         method: "GET",
@@ -567,12 +566,12 @@ jQuery(function ($) {
                                     title: 'Lỗi',
                                     content: response,
                                     alertBtnText: 'Ok',
-                                    iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                                    iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
                                     alertHandler: function () {
                                         document.getElementById(field_check).checked = false;
                                     }
                                 });
-                            }else{
+                            } else {
                                 document.getElementById(field_check).disabled = true;
                             }
                         }
@@ -589,28 +588,28 @@ jQuery(function ($) {
     });
 
     $('body').on("click", '.confirm_tiep_thi', function () {
-        var id_filed=$(this).attr('id_filed');
-        var id=$(this).attr('count_id');
-        var code=$(this).attr('code');
-        var user=$(this).attr('user');
+        var id_filed = $(this).attr('id_filed');
+        var id = $(this).attr('count_id');
+        var code = $(this).attr('code');
+        var user = $(this).attr('user');
         var link = url + '/booking/confirm-tiepthi';
         var field_check = "confirm_tiep_thi_" + id_filed;
-        if(id==''||link==''||code==''||id_filed==''||user==''){
+        if (id == '' || link == '' || code == '' || id_filed == '' || user == '') {
             lnv.alert({
                 title: 'Lỗi',
                 content: 'Các thông tin cập nhật không hợp lệ',
                 alertBtnText: 'Ok',
-                iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
                 alertHandler: function () {
 
                 }
             });
-        }else{
+        } else {
             lnv.confirm({
                 title: '<label class="orange">Xác nhận hoa hồng</label>',
-                content: 'Bạn chắc chắn rằng muốn xác nhận hoa hồng đơn hàng <b>"'+code+'"</b> cho thành viên <b>"'+user+'"</b> ?',
+                content: 'Bạn chắc chắn rằng muốn xác nhận hoa hồng đơn hàng <b>"' + code + '"</b> cho thành viên <b>"' + user + '"</b> ?',
                 confirmBtnText: 'Ok',
-                iconBtnText:'<i style="color: #669fc7;" class="ace-icon fa fa-question orange"></i>',
+                iconBtnText: '<i style="color: #669fc7;" class="ace-icon fa fa-question orange"></i>',
                 confirmHandler: function () {
                     $.ajax({
                         method: "GET",
@@ -622,15 +621,15 @@ jQuery(function ($) {
                                     title: 'Lỗi',
                                     content: response,
                                     alertBtnText: 'Ok',
-                                    iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                                    iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
                                     alertHandler: function () {
                                         document.getElementById(field_check).checked = false;
                                     }
                                 });
-                            }else{
-                                $('#remove_btn_tiepthi_'+id_filed).remove();
-                                $('#change_color_'+id_filed).removeClass('red');
-                                $('#change_color_'+id_filed).addClass('green');
+                            } else {
+                                $('#remove_btn_tiepthi_' + id_filed).remove();
+                                $('#change_color_' + id_filed).removeClass('red');
+                                $('#change_color_' + id_filed).addClass('green');
                             }
                         }
                     });
@@ -650,25 +649,25 @@ jQuery(function ($) {
         var form_data = $("#submit_form").serializeArray();
         var error_free = true;
         for (var input in form_data) {
-            var name_input=form_data[input]['name'];
-            if (name_input != "tien_te"&&name_input != "note"&&name_input != "nguon_tour"&&name_input!='category'&&name_input!='nhom_khach_hang'&&name_input!='name_customer_sub[]'&&name_input!='email_customer[]'&&name_input!='phone_customer[]'&&name_input!='address_customer[]'&&name_input!='birthday_customer[]'&&name_input!='tuoi_number_customer[]'&&name_input!='tuoi_customer[]'&&name_input!='date_passport_customer[]'&&name_input!='passport_customer[]') {
+            var name_input = form_data[input]['name'];
+            if (name_input != "tien_te" && name_input != "note" && name_input != "nguon_tour" && name_input != 'category' && name_input != 'nhom_khach_hang' && name_input != 'name_customer_sub[]' && name_input != 'email_customer[]' && name_input != 'phone_customer[]' && name_input != 'address_customer[]' && name_input != 'birthday_customer[]' && name_input != 'tuoi_number_customer[]' && name_input != 'tuoi_customer[]' && name_input != 'date_passport_customer[]' && name_input != 'passport_customer[]') {
                 var element = $("#input_" + name_input);
                 var error = $("#error_" + name_input);
                 var valid = element.hasClass("valid");
-                if(name_input=="hinh_thuc_thanh_toan"){
-                   var httt= $( ".hinh_thuc_thanh_toan option:selected" ).val();
-                   if(httt==''){
-                       valid=false;
-                   }else{
-                       valid=true;
-                   }
+                if (name_input == "hinh_thuc_thanh_toan") {
+                    var httt = $(".hinh_thuc_thanh_toan option:selected").val();
+                    if (httt == '') {
+                        valid = false;
+                    } else {
+                        valid = true;
+                    }
                 }
-                if(name_input=="status"){
-                    var status= $( ".status option:selected" ).val();
-                    if(status==''){
-                        valid=false;
-                    }else{
-                        valid=true;
+                if (name_input == "status") {
+                    var status = $(".status option:selected").val();
+                    if (status == '') {
+                        valid = false;
+                    } else {
+                        valid = true;
                     }
                 }
                 if (valid == false) {
@@ -684,41 +683,41 @@ jQuery(function ($) {
 
     });
 
-    $('body').on("click",'.view_popup_detail', function () {
+    $('body').on("click", '.view_popup_detail', function () {
         var Id = $(this).attr("countid");
         var code = $(this).attr("name_record");
-        show_booking(Id,code);
+        show_booking(Id, code);
     });
 
     $('body').on("click", '#submit_form_tour_action', function () {
-        var name_tour_add=$('#input_name_tour_add').val();
-        var price_tour_add=$('#input_price_tour_add').val();
-        var price_tour_511_add=$('#input_price_tour_511_add').val();
-        var price_tour_5_add=$('#input_price_tour_5_add').val();
-        var diem_khoi_hanh=$('#input_diem_khoi_hanh').val();
+        var name_tour_add = $('#input_name_tour_add').val();
+        var price_tour_add = $('#input_price_tour_add').val();
+        var price_tour_511_add = $('#input_price_tour_511_add').val();
+        var price_tour_5_add = $('#input_price_tour_5_add').val();
+        var diem_khoi_hanh = $('#input_diem_khoi_hanh').val();
         var link = url + '/check-validate.html';
-        if(name_tour_add!=''&&price_tour_add!=''&&price_tour_511_add!=''&&price_tour_5_add!=''){
+        if (name_tour_add != '' && price_tour_add != '' && price_tour_511_add != '' && price_tour_5_add != '') {
             $.ajax({
                 method: "GET",
                 url: link,
                 data: "value=" + name_tour_add + '&key=name&table=tour',
                 success: function (response) {
-                    var error=true;
-                    if(response==1){
+                    var error = true;
+                    if (response == 1) {
                         $('#error_name_tour_add').hide().html('');
                         var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
                         if (numberRegex.test(price_tour_add)) {
                             $('#error_price_tour_add').hide().html('');
                         }
                         else {
-                            error=false;
+                            error = false;
                             $('#error_price_tour_add').show().html('Đơn giá phải là kiểu số');
                         }
                         if (numberRegex.test(price_tour_511_add)) {
                             $('#error_price_tour_511_add').hide().html('');
                         }
                         else {
-                            error=false;
+                            error = false;
                             $('#error_price_tour_511_add').show().html('Đơn giá phải là kiểu số');
                         }
 
@@ -726,16 +725,16 @@ jQuery(function ($) {
                             $('#error_price_tour_5_add').hide().html('');
                         }
                         else {
-                            error=false;
+                            error = false;
                             $('#error_price_tour_5_add').show().html('Đơn giá phải là kiểu số');
                         }
-                        if(error==true){
+                        if (error == true) {
                             var link = url + '/booking/insert-tour';
                             $.ajax({
                                 method: "POST",
                                 url: link,
-                                data : { // Danh sách các thuộc tính sẽ gửi đi
-                                    name_tour_add : name_tour_add,
+                                data: { // Danh sách các thuộc tính sẽ gửi đi
+                                    name_tour_add: name_tour_add,
                                     price_tour_add: price_tour_add,
                                     price_tour_511_add: price_tour_511_add,
                                     price_tour_5_add: price_tour_5_add,
@@ -745,20 +744,20 @@ jQuery(function ($) {
                                         var price_tour_add_format = price_tour_add.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
                                         var price_tour_511_add_format = price_tour_511_add.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
                                         var price_tour_5_add_format = price_tour_5_add.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
-                                        var table_insert='<tr> <td class="center">1</td>' +
-                                            '<td><a>'+name_tour_add+'</a></td>' +
-                                            '<td><span id="price_format_span">'+price_tour_add_format+'</span>' +
-                                            '<input hidden="" id="input_price_format" value="'+price_tour_add_format+'">' +
-                                            '<input hidden="" title="giá sửa" id="input_price" value="'+price_tour_add+'">' +
-                                            '<input hidden="" id="input_price_old" title="giá cũ" value="'+price_tour_add+'">  | <a id="edit_price" href="javascript:void(0)"> <i class="fa fa-edit" title="Sửa đơn giá"></i></a>' +
+                                        var table_insert = '<tr> <td class="center">1</td>' +
+                                            '<td><a>' + name_tour_add + '</a></td>' +
+                                            '<td><span id="price_format_span">' + price_tour_add_format + '</span>' +
+                                            '<input hidden="" id="input_price_format" value="' + price_tour_add_format + '">' +
+                                            '<input hidden="" title="giá sửa" id="input_price" value="' + price_tour_add + '">' +
+                                            '<input hidden="" id="input_price_old" title="giá cũ" value="' + price_tour_add + '">  | <a id="edit_price" href="javascript:void(0)"> <i class="fa fa-edit" title="Sửa đơn giá"></i></a>' +
                                             '<a id="reset_price" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a></td>' +
-                                            '<td><span id="price_format_span_511">'+price_tour_511_add_format+'</span>' +
-                                            '<input hidden="" title="giá sửa" id="input_price_511" value="'+price_tour_511_add+'"> | <a id="edit_price_511" href="javascript:void(0)"> <i class="fa fa-edit" title="Sửa đơn giá"></i></a>' +
+                                            '<td><span id="price_format_span_511">' + price_tour_511_add_format + '</span>' +
+                                            '<input hidden="" title="giá sửa" id="input_price_511" value="' + price_tour_511_add + '"> | <a id="edit_price_511" href="javascript:void(0)"> <i class="fa fa-edit" title="Sửa đơn giá"></i></a>' +
                                             '<a id="reset_price_511" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a></td>' +
-                                            '<td><span id="price_format_span_5">'+price_tour_5_add_format+'</span>' +
-                                            '<input hidden="" title="giá sửa" id="input_price_5" value="'+price_tour_5_add+'"> | <a id="edit_price_5" href="javascript:void(0)"> <i class="fa fa-edit" title="Sửa đơn giá"></i></a>' +
+                                            '<td><span id="price_format_span_5">' + price_tour_5_add_format + '</span>' +
+                                            '<input hidden="" title="giá sửa" id="input_price_5" value="' + price_tour_5_add + '"> | <a id="edit_price_5" href="javascript:void(0)"> <i class="fa fa-edit" title="Sửa đơn giá"></i></a>' +
                                             '<a id="reset_price_5" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a></td>' +
-                                            '<td>'+diem_khoi_hanh+'</td>' +
+                                            '<td>' + diem_khoi_hanh + '</td>' +
                                             '</tr>'
                                         $('.table_booking_tour').html(table_insert);
                                         $('#input_name_tour').val(name_tour_add);
@@ -770,12 +769,12 @@ jQuery(function ($) {
                                         $('#input_id_tour').removeClass("input-error").addClass("valid");
                                         $('#input_name_tour').removeClass("input-error").addClass("valid");
                                     }
-                                    else{
+                                    else {
                                         lnv.alert({
                                             title: 'Lỗi',
                                             content: response,
                                             alertBtnText: 'Ok',
-                                            iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                                            iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
                                             alertHandler: function () {
                                             }
                                         });
@@ -784,24 +783,24 @@ jQuery(function ($) {
                             });
 
                         }
-                    }else{
+                    } else {
                         var mess = 'Tên tour "' + name_tour_add + '" đã tồn tại trong hệ thống';
                         $('#error_name_tour_add').show().html(mess);
                     }
                 }
             });
 
-        }else{
-            if(name_tour_add==''){
+        } else {
+            if (name_tour_add == '') {
                 $('#error_name_tour_add').show().html('Bạn vui lòng nhập tên tour');
             }
-            if(price_tour_add==''){
+            if (price_tour_add == '') {
                 $('#error_price_tour_add').show().html('Bạn vui lòng nhập giá người lớn');
             }
-            if(price_tour_511_add==''){
+            if (price_tour_511_add == '') {
                 $('#error_price_tour_511_add').show().html('Bạn vui lòng nhập giá trẻ em 5-11 tuổi');
             }
-            if(price_tour_5_add==''){
+            if (price_tour_5_add == '') {
                 $('#error_price_tour_5_add').show().html('Bạn vui lòng nhập giá trẻ em dưới 5 tuổi');
             }
         }
@@ -822,8 +821,8 @@ jQuery(function ($) {
         var form_data = $("#submit_form_cot").serializeArray();
         var error_free = true;
         for (var input in form_data) {
-            var name_input=form_data[input]['name'];
-            if(name_input!='description'){
+            var name_input = form_data[input]['name'];
+            if (name_input != 'description') {
                 var element = $("#input_" + name_input);
                 var error = $("#error_" + name_input);
                 var valid = element.hasClass("valid");
@@ -852,111 +851,170 @@ jQuery(function ($) {
         checkNgayThanhToan();
     });
     $('body').on("click", '#create_popup_cost', function () {
-       $('#input_name_gia').val('');
-       $('#input_price_cost').val('');
-       $('#input_created').val('');
-       $('#description_input').val('');
-       $('#price_format_cost').hide().html('');
+        $('#input_name_gia').val('');
+        $('#input_price_cost').val('');
+        $('#input_created').val('');
+        $('#description_input').val('');
+        $('#price_format_cost').hide().html('');
         $('#title_form').html('Thêm chi phí');
         $('.error-color').hide();
     });
-    $('body').on("click",'.view_popup_detail_cost', function () {
+    $('body').on("click", '.view_popup_detail_cost', function () {
         var Id = $(this).attr("countid");
         var code = $(this).attr("name_record");
-        show_info_cost(Id,code);
+        show_info_cost(Id, code);
     });
 
     // show lịch sử giao dịch
     $('body').on("click", '.view_lich_su_giao_dich', function () {
         $('#show_loading_giao_dich').show();
         $('#list_giao_dich').html('').hide();
-        var code=$(this).attr('data-code');
-        var id=$(this).attr('data-id');
-        if(code && id){
+        $('#show_red_none_giao_dich').html('').hide();
+        $('#content_giaodich').val('');
+        $('#show_mess_content').hide();
+        var code = $(this).attr('data-code');
+        var id = $(this).attr('data-id');
+        if (code && id) {
             $('#name-detail-code-booking').html(code);
+            $('#save_giao_dich').attr('data-id',id);
+            $('#save_giao_dich').attr('data-code',code);
             var link = url + '/booking-list-giao-dich.html';
             $.ajax({
                 method: "GET",
                 url: link,
                 data: "id=" + id,
                 success: function (response) {
-                    console.log(response);
-                    if (response ==0) {
-                        $('#show_red_none_giao_dich').show().html('<h4>Đơn hàng "'+code+'" không có giao dịch nào<p>');
-                    }else{
+                    if (response == 0) {
+                        $('#show_red_none_giao_dich').show().html('<h4>Đơn hàng "' + code + '" không có giao dịch nào<p>');
+                    } else {
                         $('#list_giao_dich').html(response).show();
                     }
                     $('#show_loading_giao_dich').hide();
                 }
             });
 
-        }else{
+        } else {
             $('#modal-form').modal('hide');
         }
     });
     // show hide text
-    $('body').on("click",'.show_content_full', function () {
+    $('body').on("click", '.show_content_full', function () {
         var Id = $(this).attr("countid");
-        if(Id){
+        if (Id) {
 
             var hide = $(this).attr("data-hide");
-            if(hide=='show'){
-                $('#short_text_'+Id).hide();
-                $('#long_text_'+Id).show();
-                $('#icon_show_hide_'+Id).removeClass('fa-expand').addClass('fa-compress');
-                $(this).attr("data-hide",'hide');
-            }else{
-                $('#short_text_'+Id).show();
-                $('#long_text_'+Id).hide();
-                $('#icon_show_hide_'+Id).removeClass('fa-compress').addClass('fa-expand');
-                $(this).attr("data-hide",'show');
+            if (hide == 'show') {
+                $('#short_text_' + Id).hide();
+                $('#long_text_' + Id).show();
+                $('#icon_show_hide_' + Id).removeClass('fa-expand').addClass('fa-compress');
+                $(this).attr("data-hide", 'hide');
+            } else {
+                $('#short_text_' + Id).show();
+                $('#long_text_' + Id).hide();
+                $('#icon_show_hide_' + Id).removeClass('fa-compress').addClass('fa-expand');
+                $(this).attr("data-hide", 'show');
             }
         }
     });
+
+    // show hide text
+    $('body').on("click", '#save_giao_dich', function () {
+        var value = $('#content_giaodich').val();
+        if (value) {
+            $('#show_mess_content').hide();
+            var code = $(this).attr('data-code');
+            var id = $(this).attr('data-id');
+            if(code && id){
+                $(this).hide();
+                $('#show_loading_btn').show();
+                var link = url + '/booking-save-giao-dich.html';
+                $.ajax({
+                    method: "POST",
+                    url: link,
+                    data: {
+                        id:id,
+                        code:code,
+                        value:value
+                    },
+                    success: function (response) {
+                        if (response == 0) {
+                            lnv.alert({
+                                title: 'Lỗi',
+                                content: 'Không thể thêm được giao dịch. Bạn vui lòng ctrl+f5 và thử lại',
+                                alertBtnText: 'Ok',
+                                iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                                alertHandler: function () {
+                                }
+                            });
+                        } else {
+                            $('#list_giao_dich').html('');
+                            $('#list_giao_dich').html(response).show();
+                            $('#back_to_top_giao_dich').animate({scrollTop : 0},1500);
+
+                        }
+                        $('#content_giaodich').val('');
+                        $('#save_giao_dich').show();
+                        $('#show_loading_btn').hide();
+                    }
+                });
+
+            }else{
+                lnv.alert({
+                    title: 'Lỗi',
+                    content: 'Không thể thêm được giao dịch. Bạn vui lòng ctrl+f5 và thử lại',
+                    alertBtnText: 'Ok',
+                    iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                    alertHandler: function () {
+                    }
+                });
+            }
+        }else {
+            $('#show_mess_content').show();
+        }
+    });
 });
-function show_info_cost(Id,name){
-    $( "#title_form" ).html('Thôn tin chi tiết "<b>'+name+'</b>"');
-    $( "#input_check_edit" ).val('edit');
-    if(Id!=''){
-        jQuery.post(url+"/get-detail-ajax/",
+function show_info_cost(Id, name) {
+    $("#title_form").html('Thôn tin chi tiết "<b>' + name + '</b>"');
+    $("#input_check_edit").val('edit');
+    if (Id != '') {
+        jQuery.post(url + "/get-detail-ajax/",
             {
                 id: Id,
-                table:'booking_cost'
+                table: 'booking_cost'
             }
             )
             .done(function (data) {
-                if(data!=0)
-                {
+                if (data != 0) {
                     var obj = jQuery.parseJSON(data);
                     $('#input_id_edit').val(Id);
                     $('#input_name_gia').val(obj.name);
                     $('#input_price_cost').val(obj.price);
                     $('#input_created').val(obj.created);
                     $('#description_input').val(obj.description);
-                    if(obj.price!=''){
+                    if (obj.price != '') {
                         var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
                         if (numberRegex.test(obj.price)) {
                             var price_format = obj.price.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
                             $('#price_format_cost').show().html(price_format);
                         }
-                    }else{
+                    } else {
                         $('#price_format_cost').hide().html('');
                     }
-                    if(obj.name!=''){
+                    if (obj.name != '') {
                         $('#input_name_gia').removeClass("input-error").addClass("valid");
                     }
-                    if(obj.name!=''){
+                    if (obj.name != '') {
                         $('#input_price_cost').removeClass("input-error").addClass("valid");
                     }
-                    if(obj.name!=''){
+                    if (obj.name != '') {
                         $('#input_created').removeClass("input-error").addClass("valid");
                     }
-                }else{
+                } else {
                     lnv.alert({
                         title: 'Lỗi',
-                        content: 'Ban không thể xem chi tiết chi phí"'+name+'"',
+                        content: 'Ban không thể xem chi tiết chi phí"' + name + '"',
                         alertBtnText: 'Ok',
-                        iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                        iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
                         alertHandler: function () {
                             $('#modal-form').modal('hide');
                         }
@@ -964,12 +1022,12 @@ function show_info_cost(Id,name){
                 }
             });
     }
-    else{
+    else {
         lnv.alert({
             title: 'Lỗi',
-            content: 'Ban không thể xem chi tiết chi phí "'+name+'"',
+            content: 'Ban không thể xem chi tiết chi phí "' + name + '"',
             alertBtnText: 'Ok',
-            iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+            iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
             alertHandler: function () {
                 $('#modal-form').modal('hide');
             }
@@ -1022,7 +1080,7 @@ function checkPriceCost() {
         if (numberRegex.test(value)) {
             var price_format = value.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
             $('#price_format_cost').show().html(price_format);
-        }else{
+        } else {
             $("#input_price_cost").val();
             $('#price_format_cost').hide().html('');
         }
@@ -1080,32 +1138,31 @@ function showHiddenNameGia(res, mess) {
 }
 
 
-function checkSoNguoi(){
+function checkSoNguoi() {
 
-    var price=$('#input_price_submit').val();
-    var price_2=$('#input_price_511_submit').val();
-    var price_3=$('#input_price_5_submit').val();
-    if(price!=''){
-        returnGenDanhSachDoan(price,price_2,price_3);
+    var price = $('#input_price_submit').val();
+    var price_2 = $('#input_price_511_submit').val();
+    var price_3 = $('#input_price_5_submit').val();
+    if (price != '') {
+        returnGenDanhSachDoan(price, price_2, price_3);
     }
 
 }
-function show_booking(Id,name){
-    $( "#title_form" ).html('Thôn tin chi tiết đơn hàng "<b>'+name+'</b>"');
-    $( "#input_check_edit" ).val('edit');
-    if(Id!=''){
-        jQuery.post(url+"/get-detail-ajax-booking/",
+function show_booking(Id, name) {
+    $("#title_form").html('Thôn tin chi tiết đơn hàng "<b>' + name + '</b>"');
+    $("#input_check_edit").val('edit');
+    if (Id != '') {
+        jQuery.post(url + "/get-detail-ajax-booking/",
             {
                 id: Id,
-                table:'booking'
+                table: 'booking'
             }
             )
             .done(function (data) {
-                if(data!=0)
-                {
+                if (data != 0) {
                     var obj = jQuery.parseJSON(data);
                     $('.name_sales').html(obj.user_name);
-                    $('.tien_te').html(obj.tien_te_name+' - '+obj.ty_gia);
+                    $('.tien_te').html(obj.tien_te_name + ' - ' + obj.ty_gia);
                     $('.ngay_bat_dau').html(obj.ngay_bat_dau);
                     $('.han_thanh_toan').html(obj.han_thanh_toan);
                     $('.tinh_trang').html(obj.status_name);
@@ -1131,12 +1188,12 @@ function show_booking(Id,name){
                     $('.dat_coc').html(obj.tien_thanh_toan_format);
                     $('.con_lai').html(obj.conlai_format);
 
-                    if(obj.user_tiepthi!=''){
+                    if (obj.user_tiepthi != '') {
                         $('.name_tiepthi').html(obj.user_tiepthi);
                         $('.status_tiep_thi').html(obj.status_tiepthi);
                         $('.price_tiep_thi').html(obj.price_tiep_thi);
                         $('.show_hoa_hong').show();
-                    }else{
+                    } else {
                         $('.show_hoa_hong').hide();
                         $('.name_tiepthi').html('');
                         $('.status_tiep_thi').html('');
@@ -1229,12 +1286,12 @@ function show_booking(Id,name){
                     ////$('.mr_user').val(mr).prop('selected', true);
                     ////$(".chosen-default span").val(mr);
 
-                }else{
+                } else {
                     lnv.alert({
                         title: 'Lỗi',
-                        content: 'Ban không thể xem chi tiết đơn hàng "'+name+'"',
+                        content: 'Ban không thể xem chi tiết đơn hàng "' + name + '"',
                         alertBtnText: 'Ok',
-                        iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                        iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
                         alertHandler: function () {
                             $('#modal-form').modal('hide');
                         }
@@ -1242,12 +1299,12 @@ function show_booking(Id,name){
                 }
             });
     }
-    else{
+    else {
         lnv.alert({
             title: 'Lỗi',
-            content: 'Ban không thể xem chi tiết đơn hàng "'+name+'"',
+            content: 'Ban không thể xem chi tiết đơn hàng "' + name + '"',
             alertBtnText: 'Ok',
-            iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+            iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
             alertHandler: function () {
                 $('#modal-form').modal('hide');
             }
@@ -1256,22 +1313,22 @@ function show_booking(Id,name){
 }
 function returnDatCoc() {
     var value = $('#input_dat_coc').val();
-    if(value!=''){
+    if (value != '') {
         var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
         if (numberRegex.test(value)) {
             var value_format = value.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
             $('#dat_coc_format').html(value_format);
 
-        }else{
+        } else {
             $('#input_dat_coc').focus().select().val();
             $('#dat_coc_format').html('');
         }
     }
-    var price=$('#input_price_submit').val();
-    var price_2=$('#input_price_511_submit').val();
-    var price_3=$('#input_price_5_submit').val();
-    if(price!=''){
-        returnTinhTien(price,price_2,price_3);
+    var price = $('#input_price_submit').val();
+    var price_2 = $('#input_price_511_submit').val();
+    var price_3 = $('#input_price_5_submit').val();
+    if (price != '') {
+        returnTinhTien(price, price_2, price_3);
     }
 
 }
@@ -1628,7 +1685,8 @@ function removeValueTour() {
     $('#input_list_price').html('');
     $('.table_booking_tour').html('');
     $('#input_id_tour').val('');
-    $('#tong_cong').html('');    $('#tong_cong').html('');
+    $('#tong_cong').html('');
+    $('#tong_cong').html('');
     $('#vat').html('');
     $('#dat_coc_format').html('');
     $('#con_lai').html('');
@@ -1639,7 +1697,7 @@ function removeValueTour() {
     $('.price_tiep_thi').html('');
     $('#input_id_tour').removeClass("valid").addClass("input-error");
     $('#input_name_tour').removeClass("valid").addClass("input-error");
-    var error_name_tour=$("#error_name_tour" );
+    var error_name_tour = $("#error_name_tour");
     error_name_tour.removeClass("success-color");
     error_name_tour.addClass("error-color");
     error_name_tour.html("Bạn vui lòng nhập và chọn tour");
@@ -1650,7 +1708,7 @@ function removeValueUser() {
     $('#input_id_user').val('');
     $('#input_id_user').removeClass("valid").addClass("input-error");
     $('#input_name_user').removeClass("valid").addClass("input-error");
-    var error_name_user=$("#error_name_user" );
+    var error_name_user = $("#error_name_user");
     error_name_user.removeClass("success-color");
     error_name_user.addClass("error-color");
     error_name_user.html("Bạn vui lòng nhập và chọn sales");
@@ -1668,111 +1726,111 @@ function formatNumber(nStr, decSeperate, groupSeperate) {
     }
     return x1 + x2;
 }
-function returnDanhSachDoan(){
-    var numbe_1=parseInt($('#input_num_nguoi_lon').val());
-    var numbe_2=parseInt($('#input_num_tre_em').val());
-    var numbe_3=parseInt($('#input_num_tre_em_5').val());
+function returnDanhSachDoan() {
+    var numbe_1 = parseInt($('#input_num_nguoi_lon').val());
+    var numbe_2 = parseInt($('#input_num_tre_em').val());
+    var numbe_3 = parseInt($('#input_num_tre_em_5').val());
 
     //var id=$(id_field).attr('id_title');
-    var name_1=$('#name_price_nguoi_lon').html();
-    var name_2=$('#name_price_tre_em_511').html();
-    var name_3=$('#name_price_tre_em_5').html();
-    if(numbe_1==0){
-        numbe_1=1;
+    var name_1 = $('#name_price_nguoi_lon').html();
+    var name_2 = $('#name_price_tre_em_511').html();
+    var name_3 = $('#name_price_tre_em_5').html();
+    if (numbe_1 == 0) {
+        numbe_1 = 1;
         $('#input_num_nguoi_lon').val(1);
     }
 
-    var so_cho=$('#input_so_cho').val();
-    var check_show_table=true;
-    var total=numbe_1+numbe_2+numbe_3;
+    var so_cho = $('#input_so_cho').val();
+    var check_show_table = true;
+    var total = numbe_1 + numbe_2 + numbe_3;
     //$('#input_total_num').val(total);
-    if(so_cho!=undefined){
-        so_cho=parseInt(so_cho);
-        if(total>so_cho){
-            check_show_table=false;
+    if (so_cho != undefined) {
+        so_cho = parseInt(so_cho);
+        if (total > so_cho) {
+            check_show_table = false;
             $('#input_num_nguoi_lon').addClass("input-error").removeClass("valid");
             $('#error_so_nguoi').show().html('Số người bạn vừa nhập đã vượt quá số chỗ, bạn vui lòng nhập lại số người');
-        }else{
-            check_show_table=true;
+        } else {
+            check_show_table = true;
             $('#input_num_nguoi_lon').addClass("valid").removeClass("input-error");
             $('#error_so_nguoi').hide().html('Bạn vui lòng kiểm tra lại số người');
         }
     }
-    var row='';
-    var stt=1;
-    var price= $('#input_price').val();
-    if(price===''||price===0){
-        price==='Liên hệ'
+    var row = '';
+    var stt = 1;
+    var price = $('#input_price').val();
+    if (price === '' || price === 0) {
+        price === 'Liên hệ'
     }
-    var price_2= $('#input_price_511').val();
-    if(price_2===''||price_2===0){
-        price_2==price
+    var price_2 = $('#input_price_511').val();
+    if (price_2 === '' || price_2 === 0) {
+        price_2 == price
     }
-    var price_3= $('#input_price_5').val();
-    if(price_3===''||price_3===0){
-        price_3==price
+    var price_3 = $('#input_price_5').val();
+    if (price_3 === '' || price_3 === 0) {
+        price_3 == price
     }
-    var total_nguoi_lon=0;
-    var ti_le_nguoi_lon='';
-    if(check_show_table==true){
+    var total_nguoi_lon = 0;
+    var ti_le_nguoi_lon = '';
+    if (check_show_table == true) {
         $(".show_hide_table").html('');
-        if(numbe_1>0){
-            if(price==='Liên hệ'){
-                total_nguoi_lon='Liên hệ';
-                var price_item='Liên hệ';
-            }else{
-                var price_item= price.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
-                total_nguoi_lon=price*numbe_1;
+        if (numbe_1 > 0) {
+            if (price === 'Liên hệ') {
+                total_nguoi_lon = 'Liên hệ';
+                var price_item = 'Liên hệ';
+            } else {
+                var price_item = price.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                total_nguoi_lon = price * numbe_1;
             }
 
-            if(numbe_1>1){
+            if (numbe_1 > 1) {
 
-                var price_in_array=$('#input_price_nguoi_lon_'+numbe_1).val();
+                var price_in_array = $('#input_price_nguoi_lon_' + numbe_1).val();
                 alert(price_in_array);
 
                 //alert(price_in_array);
-                if(price_in_array!=undefined){
-                    if(price_in_array==='Liên hệ'){
-                        total_nguoi_lon='Liên hệ'
-                    }else{
-                        price_item= price_in_array.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
-                        total_nguoi_lon=(price_in_array*numbe_1);
+                if (price_in_array != undefined) {
+                    if (price_in_array === 'Liên hệ') {
+                        total_nguoi_lon = 'Liên hệ'
+                    } else {
+                        price_item = price_in_array.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                        total_nguoi_lon = (price_in_array * numbe_1);
 
-                        ti_le_nguoi_lon=((price-price_in_array)/price)*100;
+                        ti_le_nguoi_lon = ((price - price_in_array) / price) * 100;
                         ti_le_nguoi_lon = Math.round(ti_le_nguoi_lon);
-                        if(ti_le_nguoi_lon!=0){
-                            ti_le_nguoi_lon='(<i class="fa fa-long-arrow-down"></i>'+ti_le_nguoi_lon+'%)';
-                        }else{
-                            ti_le_nguoi_lon='';
+                        if (ti_le_nguoi_lon != 0) {
+                            ti_le_nguoi_lon = '(<i class="fa fa-long-arrow-down"></i>' + ti_le_nguoi_lon + '%)';
+                        } else {
+                            ti_le_nguoi_lon = '';
                         }
 
 
                     }
-                }else{
-                    var price_tu=$('#input_price_nguoi_lon_tu').val();
-                    if(price_tu!=undefined){
-                        if(parseInt(numbe_1)>=parseInt(price_tu)){
-                            var price_in_array=$('#input_price_nguoi_lon_lon_hon_'+price_tu).val();
-                            if(price_in_array==='Liên hệ'){
-                                total_nguoi_lon='Liên hệ'
-                            }else{
-                                price_item= price_in_array.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
-                                total_nguoi_lon=(price_in_array*numbe_1);
+                } else {
+                    var price_tu = $('#input_price_nguoi_lon_tu').val();
+                    if (price_tu != undefined) {
+                        if (parseInt(numbe_1) >= parseInt(price_tu)) {
+                            var price_in_array = $('#input_price_nguoi_lon_lon_hon_' + price_tu).val();
+                            if (price_in_array === 'Liên hệ') {
+                                total_nguoi_lon = 'Liên hệ'
+                            } else {
+                                price_item = price_in_array.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                                total_nguoi_lon = (price_in_array * numbe_1);
 
-                                ti_le_nguoi_lon=((price-price_in_array)/price)*100;
+                                ti_le_nguoi_lon = ((price - price_in_array) / price) * 100;
                                 ti_le_nguoi_lon = Math.round(ti_le_nguoi_lon);
-                                if(ti_le_nguoi_lon!=0){
-                                    ti_le_nguoi_lon='(<i class="fa fa-long-arrow-down"></i>'+ti_le_nguoi_lon+'%)';
-                                }else{
-                                    ti_le_nguoi_lon='';
+                                if (ti_le_nguoi_lon != 0) {
+                                    ti_le_nguoi_lon = '(<i class="fa fa-long-arrow-down"></i>' + ti_le_nguoi_lon + '%)';
+                                } else {
+                                    ti_le_nguoi_lon = '';
                                 }
                             }
                         }
                     }
                 }
             }
-            for(var i=1;i<=numbe_1;i++){
-                row =row+'<tr id="row_customer_' + stt+ '"><td class="center stt_cus">' + stt + '</td>' +
+            for (var i = 1; i <= numbe_1; i++) {
+                row = row + '<tr id="row_customer_' + stt + '"><td class="center stt_cus">' + stt + '</td>' +
                     '<td><input style="height: 30px" name="name_customer_sub[]" id="input_name_customer_sub_' + stt + '" type="text"class="valid input_table"></td>' +
                     '<td><input style="height: 30px" name="birthday_customer[]" id="input_birthday_customer_sub_' + stt + '" type="date" placeholder="dd/MM/yyyy" class="valid input_table datepicker"></td>' +
                     '<td><input style="height: 30px" name="email_customer[]" id="input_email_customer_' + stt + '" type="text" class="valid input_table"></td>' +
@@ -1780,58 +1838,58 @@ function returnDanhSachDoan(){
                     '<td><input  style="height: 30px" name="address_customer[]" id="input_address_customer_' + stt + '" type="text" class="valid input_table"></td>' +
                     '<td>' +
                     '<input hidden style="height: 30px" name="tuoi_number_customer[]" value="1"  id="input_tuoi_number_customer_' + stt + '" type="text"  class="valid input_table">' +
-                    '<input hidden value="'+name_1+'"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table"><span style="font-size: 12px;">'+name_1+'</span></td>' +
+                    '<input hidden value="' + name_1 + '"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table"><span style="font-size: 12px;">' + name_1 + '</span></td>' +
                     '<td><input style="height: 30px" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text" class="valid input_table "></td>' +
                     '<td><input style="height: 30px" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date" class="valid input_table datepicker"></td>' +
-                    '<td style="width: 130px"><span style="font-size: 12px;color: red">'+price_item+' '+ti_le_nguoi_lon+'</span></td>' +
+                    '<td style="width: 130px"><span style="font-size: 12px;color: red">' + price_item + ' ' + ti_le_nguoi_lon + '</span></td>' +
                     '</tr>';
-                stt=stt+1;
+                stt = stt + 1;
             }
         }
-        var ti_le_tre_em_511='';
-        var total_tre_em_511=0;
-        if(numbe_2>0){
-            if(price_2==='Liên hệ'){
-                total_tre_em_511='Liên hệ';
-                var price_item='Liên hệ';
-            }else{
-                var price_item= price_2.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
-                total_tre_em_511=price_2*numbe_2;
+        var ti_le_tre_em_511 = '';
+        var total_tre_em_511 = 0;
+        if (numbe_2 > 0) {
+            if (price_2 === 'Liên hệ') {
+                total_tre_em_511 = 'Liên hệ';
+                var price_item = 'Liên hệ';
+            } else {
+                var price_item = price_2.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                total_tre_em_511 = price_2 * numbe_2;
             }
-            if(numbe_2>1){
-                var price_in_array=$('#input_price_tre_em_511_'+numbe_2).val();
-                if(price_in_array!=undefined){
-                    if(price_in_array==='Liên hệ'){
-                        total_tre_em_511='Liên hệ'
-                    }else{
-                        price_item= price_in_array.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
-                        total_tre_em_511=(price_in_array*numbe_2);
+            if (numbe_2 > 1) {
+                var price_in_array = $('#input_price_tre_em_511_' + numbe_2).val();
+                if (price_in_array != undefined) {
+                    if (price_in_array === 'Liên hệ') {
+                        total_tre_em_511 = 'Liên hệ'
+                    } else {
+                        price_item = price_in_array.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                        total_tre_em_511 = (price_in_array * numbe_2);
 
-                        ti_le_tre_em_511=((price_2-price_in_array)/price_2)*100;
+                        ti_le_tre_em_511 = ((price_2 - price_in_array) / price_2) * 100;
                         ti_le_tre_em_511 = Math.round(ti_le_tre_em_511);
-                        if(ti_le_tre_em_511!=0){
-                            ti_le_tre_em_511='(<i class="fa fa-long-arrow-down"></i>'+ti_le_tre_em_511+'%)';
-                        }else{
-                            ti_le_tre_em_511='';
+                        if (ti_le_tre_em_511 != 0) {
+                            ti_le_tre_em_511 = '(<i class="fa fa-long-arrow-down"></i>' + ti_le_tre_em_511 + '%)';
+                        } else {
+                            ti_le_tre_em_511 = '';
                         }
                     }
-                }else{
-                    var price_tu=$('#input_price_tre_em_511_tu').val();
-                    if(price_tu!=undefined){
-                        if(parseInt(numbe_2)>=parseInt(price_tu)){
-                            var price_in_array=$('#input_price_tre_em_511_lon_hon_'+price_tu).val();
-                            if(price_in_array==='Liên hệ'){
-                                total_tre_em_511='Liên hệ'
-                            }else{
-                                price_item= price_in_array.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
-                                total_tre_em_511=(price_in_array*numbe_2);
+                } else {
+                    var price_tu = $('#input_price_tre_em_511_tu').val();
+                    if (price_tu != undefined) {
+                        if (parseInt(numbe_2) >= parseInt(price_tu)) {
+                            var price_in_array = $('#input_price_tre_em_511_lon_hon_' + price_tu).val();
+                            if (price_in_array === 'Liên hệ') {
+                                total_tre_em_511 = 'Liên hệ'
+                            } else {
+                                price_item = price_in_array.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                                total_tre_em_511 = (price_in_array * numbe_2);
 
-                                ti_le_tre_em_511=((price_2-price_in_array)/price_2)*100;
+                                ti_le_tre_em_511 = ((price_2 - price_in_array) / price_2) * 100;
                                 ti_le_tre_em_511 = Math.round(ti_le_tre_em_511);
-                                if(ti_le_tre_em_511!=0){
-                                    ti_le_tre_em_511='(<i class="fa fa-long-arrow-down"></i>'+ti_le_tre_em_511+'%)';
-                                }else{
-                                    ti_le_tre_em_511='';
+                                if (ti_le_tre_em_511 != 0) {
+                                    ti_le_tre_em_511 = '(<i class="fa fa-long-arrow-down"></i>' + ti_le_tre_em_511 + '%)';
+                                } else {
+                                    ti_le_tre_em_511 = '';
                                 }
                             }
                         }
@@ -1839,8 +1897,8 @@ function returnDanhSachDoan(){
                 }
             }
 
-            for(var j=1;j<=numbe_2;j++){
-                row =row+'<tr id="row_customer_' + stt+ '"><td class="center stt_cus">' + stt + '</td>' +
+            for (var j = 1; j <= numbe_2; j++) {
+                row = row + '<tr id="row_customer_' + stt + '"><td class="center stt_cus">' + stt + '</td>' +
                     '<td><input style="height: 30px" name="name_customer_sub[]" id="input_name_customer_sub_' + stt + '" type="text"class="valid input_table"></td>' +
                     '<td><input style="height: 30px" name="birthday_customer[]" id="input_birthday_customer_sub_' + stt + '" type="date" class="valid input_table datepicker"></td>' +
                     '<td><input style="height: 30px" name="email_customer[]" id="input_email_customer_' + stt + '" type="text" class="valid input_table"></td>' +
@@ -1848,66 +1906,66 @@ function returnDanhSachDoan(){
                     '<td><input  style="height: 30px" name="address_customer[]" id="input_address_customer_' + stt + '" type="text" class="valid input_table"></td>' +
                     '<td>' +
                     '<input hidden style="height: 30px" name="tuoi_number_customer[]" value="2"  id="input_tuoi_number_customer_' + stt + '" type="text"  class="valid input_table">' +
-                    '<input hidden value="'+name_2+'"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table"><span style="font-size: 12px;">'+name_2+'</span></td>' +
+                    '<input hidden value="' + name_2 + '"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table"><span style="font-size: 12px;">' + name_2 + '</span></td>' +
                     '<td><input style="height: 30px" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text"class="valid input_table "></td>' +
                     '<td><input style="height: 30px" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date"class="valid input_table datepicker"></td>' +
-                    '<td><span style="font-size: 12px;color: red">'+price_item+' '+ti_le_tre_em_511+'</span></td>' +
+                    '<td><span style="font-size: 12px;color: red">' + price_item + ' ' + ti_le_tre_em_511 + '</span></td>' +
                     '</tr>';
-                stt=stt+1;
+                stt = stt + 1;
             }
         }
-        var ti_le_tre_em_5='';
-        var total_tre_em_5=0;
-        if(numbe_3>0){
-            if(price_3==='Liên hệ'){
-                total_tre_em_5='Liên hệ';
-                var price_item='Liên hệ';
-            }else{
-                var price_item= price_3.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
-                total_tre_em_5=price_3*numbe_3;
+        var ti_le_tre_em_5 = '';
+        var total_tre_em_5 = 0;
+        if (numbe_3 > 0) {
+            if (price_3 === 'Liên hệ') {
+                total_tre_em_5 = 'Liên hệ';
+                var price_item = 'Liên hệ';
+            } else {
+                var price_item = price_3.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                total_tre_em_5 = price_3 * numbe_3;
             }
-            if(numbe_3>1){
-                var price_in_array=$('#input_price_tre_em_5_'+numbe_3).val();
-                if(price_in_array!=undefined){
-                    if(price_in_array==='Liên hệ'){
-                        total_tre_em_5='Liên hệ'
-                    }else{
-                        price_item= price_in_array.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
-                        total_tre_em_5=(price_in_array*numbe_3);
+            if (numbe_3 > 1) {
+                var price_in_array = $('#input_price_tre_em_5_' + numbe_3).val();
+                if (price_in_array != undefined) {
+                    if (price_in_array === 'Liên hệ') {
+                        total_tre_em_5 = 'Liên hệ'
+                    } else {
+                        price_item = price_in_array.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                        total_tre_em_5 = (price_in_array * numbe_3);
 
-                        ti_le_tre_em_5=((price_3-price_in_array)/price_3)*100;
+                        ti_le_tre_em_5 = ((price_3 - price_in_array) / price_3) * 100;
                         ti_le_tre_em_5 = Math.round(ti_le_tre_em_5);
-                        if(ti_le_tre_em_5!=0){
-                            ti_le_tre_em_5='(<i class="fa fa-long-arrow-down"></i>'+ti_le_tre_em_5+'%)';
-                        }else{
-                            ti_le_tre_em_5='';
+                        if (ti_le_tre_em_5 != 0) {
+                            ti_le_tre_em_5 = '(<i class="fa fa-long-arrow-down"></i>' + ti_le_tre_em_5 + '%)';
+                        } else {
+                            ti_le_tre_em_5 = '';
                         }
                     }
-                }else{
-                    var price_tu=$('#input_price_tre_em_5_tu').val();
-                    if(price_tu!=undefined){
-                        if(parseInt(numbe_3)>=parseInt(price_tu)){
-                            var price_in_array=$('#input_price_tre_em_5_lon_hon_'+price_tu).val();
-                            if(price_in_array==='Liên hệ'){
-                                total_tre_em_5='Liên hệ'
-                            }else{
-                                price_item= price_in_array.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
-                                total_tre_em_5=(price_in_array*numbe_3);
+                } else {
+                    var price_tu = $('#input_price_tre_em_5_tu').val();
+                    if (price_tu != undefined) {
+                        if (parseInt(numbe_3) >= parseInt(price_tu)) {
+                            var price_in_array = $('#input_price_tre_em_5_lon_hon_' + price_tu).val();
+                            if (price_in_array === 'Liên hệ') {
+                                total_tre_em_5 = 'Liên hệ'
+                            } else {
+                                price_item = price_in_array.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+                                total_tre_em_5 = (price_in_array * numbe_3);
 
-                                ti_le_tre_em_5=((price_3-price_in_array)/price_3)*100;
+                                ti_le_tre_em_5 = ((price_3 - price_in_array) / price_3) * 100;
                                 ti_le_tre_em_5 = Math.round(ti_le_tre_em_5);
-                                if(ti_le_tre_em_5!=0){
-                                    ti_le_tre_em_5='(<i class="fa fa-long-arrow-down"></i>'+ti_le_tre_em_5+'%)';
-                                }else{
-                                    ti_le_tre_em_5='';
+                                if (ti_le_tre_em_5 != 0) {
+                                    ti_le_tre_em_5 = '(<i class="fa fa-long-arrow-down"></i>' + ti_le_tre_em_5 + '%)';
+                                } else {
+                                    ti_le_tre_em_5 = '';
                                 }
                             }
                         }
                     }
                 }
             }
-            for(var k=1;k<=numbe_3;k++){
-                row =row+'<tr id="row_customer_' + stt+ '"><td class="center stt_cus">' + stt + '</td>' +
+            for (var k = 1; k <= numbe_3; k++) {
+                row = row + '<tr id="row_customer_' + stt + '"><td class="center stt_cus">' + stt + '</td>' +
                     '<td><input style="height: 30px" name="name_customer_sub[]" id="input_name_customer_sub_' + stt + '" type="text"class="valid input_table"></td>' +
                     '<td><input style="height: 30px" name="birthday_customer[]" id="input_birthday_customer_sub_' + stt + '" type="date" class="valid input_table datepicker"></td>' +
                     '<td><input style="height: 30px" name="email_customer[]" id="input_email_customer_' + stt + '" type="text" class="valid input_table"></td>' +
@@ -1915,23 +1973,22 @@ function returnDanhSachDoan(){
                     '<td><input  style="height: 30px" name="address_customer[]" id="input_address_customer_' + stt + '" type="text" class="valid input_table"></td>' +
                     '<td>' +
                     '<input hidden style="height: 30px" name="tuoi_number_customer[]" value="3"  id="input_tuoi_number_customer_' + stt + '" type="text"  class="valid input_table">' +
-                    '<input hidden value="'+name_3+'"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table"><span style="font-size: 12px;">'+name_3+'</span></td>' +
+                    '<input hidden value="' + name_3 + '"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table"><span style="font-size: 12px;">' + name_3 + '</span></td>' +
                     '<td><input style="height: 30px" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text"class="valid input_table "></td>' +
                     '<td><input style="height: 30px" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date"class="valid input_table datepicker"></td>' +
-                    '<td><span style="font-size: 12px;color: red">'+price_item+' '+ti_le_tre_em_5+'</span></td>' +
+                    '<td><span style="font-size: 12px;color: red">' + price_item + ' ' + ti_le_tre_em_5 + '</span></td>' +
                     '</tr>';
-                stt=stt+1;
+                stt = stt + 1;
             }
         }
 
         $(".show_hide_table").html(row);
 
-        if(total_nguoi_lon==="Liên hệ"||total_tre_em_511==="Liên hệ"||total_tre_em_5==="Liên hệ")
-        {
+        if (total_nguoi_lon === "Liên hệ" || total_tre_em_511 === "Liên hệ" || total_tre_em_5 === "Liên hệ") {
             $('#amount_total').html('Liên hệ');
-        }else{
-            var total_price=total_nguoi_lon+total_tre_em_511+total_tre_em_5;
-            total_price= total_price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+        } else {
+            var total_price = total_nguoi_lon + total_tre_em_511 + total_tre_em_5;
+            total_price = total_price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
             $('#amount_total').html(total_price);
         }
     }
@@ -1939,236 +1996,236 @@ function returnDanhSachDoan(){
 
 }
 
-function returnGenDanhSachDoan(price,price_2,price_3){
-    var numbe_1=parseInt($('#input_num_nguoi_lon').val());
-    var numbe_2=parseInt($('#input_num_tre_em').val());
-    var numbe_3=parseInt($('#input_num_tre_em_5').val());
+function returnGenDanhSachDoan(price, price_2, price_3) {
+    var numbe_1 = parseInt($('#input_num_nguoi_lon').val());
+    var numbe_2 = parseInt($('#input_num_tre_em').val());
+    var numbe_3 = parseInt($('#input_num_tre_em_5').val());
 
     //var id=$(id_field).attr('id_title');
-    var name_1=$('#name_price_nguoi_lon').html();
-    var name_2=$('#name_price_tre_em_511').html();
-    var name_3=$('#name_price_tre_em_5').html();
-    if(numbe_1==0){
-        numbe_1=1;
+    var name_1 = $('#name_price_nguoi_lon').html();
+    var name_2 = $('#name_price_tre_em_511').html();
+    var name_3 = $('#name_price_tre_em_5').html();
+    if (numbe_1 == 0) {
+        numbe_1 = 1;
         $('#input_num_nguoi_lon').val(1);
     }
 
-    var so_cho=$('#input_so_cho').val();
-    var check_show_table=true;
-    var total=numbe_1+numbe_2+numbe_3;
+    var so_cho = $('#input_so_cho').val();
+    var check_show_table = true;
+    var total = numbe_1 + numbe_2 + numbe_3;
     //$('#input_total_num').val(total);
-    if(so_cho!=undefined){
-        so_cho=parseInt(so_cho);
-        if(total>so_cho){
-            check_show_table=false;
+    if (so_cho != undefined) {
+        so_cho = parseInt(so_cho);
+        if (total > so_cho) {
+            check_show_table = false;
             $('#input_num_nguoi_lon').addClass("input-error").removeClass("valid");
             $('#error_so_nguoi').show().html('Số người bạn vừa nhập đã vượt quá số chỗ, bạn vui lòng nhập lại số người');
-        }else{
-            check_show_table=true;
+        } else {
+            check_show_table = true;
             $('#input_num_nguoi_lon').addClass("valid").removeClass("input-error");
             $('#error_so_nguoi').hide().html('Bạn vui lòng kiểm tra lại số người');
         }
     }
-    var row='';
-    var stt=1;
+    var row = '';
+    var stt = 1;
     //var price= $('#input_price').val();
-    if(price===''||price===0){
-        price==='Liên hệ'
+    if (price === '' || price === 0) {
+        price === 'Liên hệ'
     }
     //var price_2= $('#input_price_511').val();
-    if(price_2===''||price_2===0){
-        price_2==price
+    if (price_2 === '' || price_2 === 0) {
+        price_2 == price
     }
     //var price_3= $('#input_price_5').val();
-    if(price_3===''||price_3===0){
-        price_3==price
+    if (price_3 === '' || price_3 === 0) {
+        price_3 == price
     }
-    if(check_show_table==true){
+    if (check_show_table == true) {
 
-        if(numbe_1>0){
-            if(price==='Liên hệ'){
-                var price_item='Liên hệ';
-            }else{
-                var price_item= price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+        if (numbe_1 > 0) {
+            if (price === 'Liên hệ') {
+                var price_item = 'Liên hệ';
+            } else {
+                var price_item = price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
             }
-            for(var i=1;i<=numbe_1;i++){
-                var name_customer_sub='';
-                if($('#input_name_customer_sub_'+ stt).length){
-                    name_customer_sub=$('#input_name_customer_sub_'+ stt).val();
+            for (var i = 1; i <= numbe_1; i++) {
+                var name_customer_sub = '';
+                if ($('#input_name_customer_sub_' + stt).length) {
+                    name_customer_sub = $('#input_name_customer_sub_' + stt).val();
                 }
-                var birthday_customer='';
-                if($('#input_birthday_customer_sub_'+ stt).length){
-                    birthday_customer=$('#input_birthday_customer_sub_'+ stt).val();
+                var birthday_customer = '';
+                if ($('#input_birthday_customer_sub_' + stt).length) {
+                    birthday_customer = $('#input_birthday_customer_sub_' + stt).val();
                 }
-                var email_customer='';
-                if($('#input_email_customer_'+ stt).length){
-                    email_customer=$('#input_email_customer_'+ stt).val();
+                var email_customer = '';
+                if ($('#input_email_customer_' + stt).length) {
+                    email_customer = $('#input_email_customer_' + stt).val();
                 }
-                var phone_customer='';
-                if($('#input_phone_customer_'+ stt).length){
-                    phone_customer=$('#input_phone_customer_'+ stt).val();
+                var phone_customer = '';
+                if ($('#input_phone_customer_' + stt).length) {
+                    phone_customer = $('#input_phone_customer_' + stt).val();
                 }
-                var address_customer='';
-                if($('#input_phone_customer_'+ stt).length){
-                    address_customer=$('#input_address_customer_'+ stt).val();
+                var address_customer = '';
+                if ($('#input_phone_customer_' + stt).length) {
+                    address_customer = $('#input_address_customer_' + stt).val();
                 }
-                var tuoi_customer='';
-                if($('#input_tuoi_customer_'+ stt).length){
-                    tuoi_customer=$('#input_tuoi_customer_'+ stt).val();
+                var tuoi_customer = '';
+                if ($('#input_tuoi_customer_' + stt).length) {
+                    tuoi_customer = $('#input_tuoi_customer_' + stt).val();
                 }
-                if(tuoi_customer==''){
-                    tuoi_customer=name_1;
+                if (tuoi_customer == '') {
+                    tuoi_customer = name_1;
                 }
-                var passport_customer='';
-                if($('#input_passport_customer_'+ stt).length){
-                    passport_customer=$('#input_passport_customer_'+ stt).val();
+                var passport_customer = '';
+                if ($('#input_passport_customer_' + stt).length) {
+                    passport_customer = $('#input_passport_customer_' + stt).val();
                 }
-                var date_passport_customer='';
-                if($('#input_date_passport_customer_'+ stt).length){
-                    date_passport_customer=$('#input_date_passport_customer_'+ stt).val();
+                var date_passport_customer = '';
+                if ($('#input_date_passport_customer_' + stt).length) {
+                    date_passport_customer = $('#input_date_passport_customer_' + stt).val();
                 }
-                row =row+'<tr id="row_customer_' + stt+ '"><td class="center stt_cus">' + stt + '</td>' +
-                    '<td><input style="height: 30px" value="'+name_customer_sub+'" name="name_customer_sub[]" id="input_name_customer_sub_' + stt + '" type="text"class="valid input_table"></td>' +
-                    '<td><input style="height: 30px" value="'+birthday_customer+'" name="birthday_customer[]" id="input_birthday_customer_sub_' + stt + '" type="date"  class="valid input_table"></td>' +
-                    '<td><input style="height: 30px" value="'+email_customer+'" name="email_customer[]" id="input_email_customer_' + stt + '" type="text" class="valid input_table"></td>' +
-                    '<td><input style="height: 30px" value="'+phone_customer+'" name="phone_customer[]" id="input_phone_customer_' + stt + '" type="text" class="valid input_table"></td>' +
-                    '<td><input  style="height: 30px"  value="'+address_customer+'" name="address_customer[]" id="input_address_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                row = row + '<tr id="row_customer_' + stt + '"><td class="center stt_cus">' + stt + '</td>' +
+                    '<td><input style="height: 30px" value="' + name_customer_sub + '" name="name_customer_sub[]" id="input_name_customer_sub_' + stt + '" type="text"class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" value="' + birthday_customer + '" name="birthday_customer[]" id="input_birthday_customer_sub_' + stt + '" type="date"  class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" value="' + email_customer + '" name="email_customer[]" id="input_email_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" value="' + phone_customer + '" name="phone_customer[]" id="input_phone_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td><input  style="height: 30px"  value="' + address_customer + '" name="address_customer[]" id="input_address_customer_' + stt + '" type="text" class="valid input_table"></td>' +
                     '<td>' +
 
                     '<input hidden style="height: 30px"  name="tuoi_number_customer[]" value="1"  id="input_tuoi_number_customer_' + stt + '" type="text"  class="valid input_table">' +
-                    '<input  value="'+tuoi_customer+'" style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table">' +
-                    '<td><input style="height: 30px" value="'+passport_customer+'" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text" class="valid input_table "></td>' +
-                    '<td><input style="height: 30px" value="'+date_passport_customer+'" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date" class="valid input_table"></td>' +
-                    '<td style="width: 150px"><span style="font-size: 12px;color: red">'+price_item+'</span></td>' +
+                    '<input  value="' + tuoi_customer + '" style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table">' +
+                    '<td><input style="height: 30px" value="' + passport_customer + '" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text" class="valid input_table "></td>' +
+                    '<td><input style="height: 30px" value="' + date_passport_customer + '" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date" class="valid input_table"></td>' +
+                    '<td style="width: 150px"><span style="font-size: 12px;color: red">' + price_item + '</span></td>' +
                     '</tr>';
-                stt=stt+1;
+                stt = stt + 1;
             }
         }
-        if(numbe_2>0){
-            if(price==='Liên hệ'){
-                var price_item='Liên hệ';
-            }else{
-                var price_item= price_2.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+        if (numbe_2 > 0) {
+            if (price === 'Liên hệ') {
+                var price_item = 'Liên hệ';
+            } else {
+                var price_item = price_2.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
             }
-            for(var j=1;j<=numbe_2;j++){
-                var name_customer_sub='';
-                if($('#input_name_customer_sub_'+ stt).length){
-                    name_customer_sub=$('#input_name_customer_sub_'+ stt).val();
+            for (var j = 1; j <= numbe_2; j++) {
+                var name_customer_sub = '';
+                if ($('#input_name_customer_sub_' + stt).length) {
+                    name_customer_sub = $('#input_name_customer_sub_' + stt).val();
                 }
-                var birthday_customer='';
-                if($('#input_birthday_customer_sub_'+ stt).length){
-                    birthday_customer=$('#input_birthday_customer_sub_'+ stt).val();
+                var birthday_customer = '';
+                if ($('#input_birthday_customer_sub_' + stt).length) {
+                    birthday_customer = $('#input_birthday_customer_sub_' + stt).val();
                 }
-                var email_customer='';
-                if($('#input_email_customer_'+ stt).length){
-                    email_customer=$('#input_email_customer_'+ stt).val();
+                var email_customer = '';
+                if ($('#input_email_customer_' + stt).length) {
+                    email_customer = $('#input_email_customer_' + stt).val();
                 }
-                var phone_customer='';
-                if($('#input_phone_customer_'+ stt).length){
-                    phone_customer=$('#input_phone_customer_'+ stt).val();
+                var phone_customer = '';
+                if ($('#input_phone_customer_' + stt).length) {
+                    phone_customer = $('#input_phone_customer_' + stt).val();
                 }
-                var address_customer='';
-                if($('#input_phone_customer_'+ stt).length){
-                    address_customer=$('#input_address_customer_'+ stt).val();
+                var address_customer = '';
+                if ($('#input_phone_customer_' + stt).length) {
+                    address_customer = $('#input_address_customer_' + stt).val();
                 }
-                var tuoi_customer='';
-                if($('#input_tuoi_customer_'+ stt).length){
-                    tuoi_customer=$('#input_tuoi_customer_'+ stt).val();
+                var tuoi_customer = '';
+                if ($('#input_tuoi_customer_' + stt).length) {
+                    tuoi_customer = $('#input_tuoi_customer_' + stt).val();
                 }
-                if(tuoi_customer==''){
-                    tuoi_customer=name_2;
+                if (tuoi_customer == '') {
+                    tuoi_customer = name_2;
                 }
-                var passport_customer='';
-                if($('#input_passport_customer_'+ stt).length){
-                    passport_customer=$('#input_passport_customer_'+ stt).val();
+                var passport_customer = '';
+                if ($('#input_passport_customer_' + stt).length) {
+                    passport_customer = $('#input_passport_customer_' + stt).val();
                 }
-                var date_passport_customer='';
-                if($('#input_date_passport_customer_'+ stt).length){
-                    date_passport_customer=$('#input_date_passport_customer_'+ stt).val();
+                var date_passport_customer = '';
+                if ($('#input_date_passport_customer_' + stt).length) {
+                    date_passport_customer = $('#input_date_passport_customer_' + stt).val();
                 }
-                row =row+'<tr id="row_customer_' + stt+ '"><td class="center stt_cus">' + stt + '</td>' +
-                    '<td><input style="height: 30px" value="'+name_customer_sub+'" name="name_customer_sub[]" id="input_name_customer_sub_' + stt + '" type="text"class="valid input_table"></td>' +
-                    '<td><input style="height: 30px" value="'+birthday_customer+'" name="birthday_customer[]" id="input_birthday_customer_sub_' + stt + '" type="date" class="valid input_table date-picker" data-date-format="dd-mm-yyyy"></td>' +
-                    '<td><input style="height: 30px" value="'+email_customer+'" name="email_customer[]" id="input_email_customer_' + stt + '" type="text" class="valid input_table"></td>' +
-                    '<td><input style="height: 30px" value="'+phone_customer+'" name="phone_customer[]" id="input_phone_customer_' + stt + '" type="text" class="valid input_table"></td>' +
-                    '<td><input  style="height: 30px" value="'+address_customer+'" name="address_customer[]" id="input_address_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                row = row + '<tr id="row_customer_' + stt + '"><td class="center stt_cus">' + stt + '</td>' +
+                    '<td><input style="height: 30px" value="' + name_customer_sub + '" name="name_customer_sub[]" id="input_name_customer_sub_' + stt + '" type="text"class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" value="' + birthday_customer + '" name="birthday_customer[]" id="input_birthday_customer_sub_' + stt + '" type="date" class="valid input_table date-picker" data-date-format="dd-mm-yyyy"></td>' +
+                    '<td><input style="height: 30px" value="' + email_customer + '" name="email_customer[]" id="input_email_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" value="' + phone_customer + '" name="phone_customer[]" id="input_phone_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td><input  style="height: 30px" value="' + address_customer + '" name="address_customer[]" id="input_address_customer_' + stt + '" type="text" class="valid input_table"></td>' +
                     '<td>' +
                     '<input hidden style="height: 30px"  name="tuoi_number_customer[]" value="2"  id="input_tuoi_number_customer_' + stt + '" type="text"  class="valid input_table">' +
-                    '<input   value="'+tuoi_customer+'"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table">' +
-                    '<td><input style="height: 30px" value="'+passport_customer+'" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text"class="valid input_table "></td>' +
-                    '<td><input style="height: 30px" value="'+date_passport_customer+'" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date" class="valid input_table date-picker"></td>' +
-                    '<td style="width: 150px"><span style="font-size: 12px;color: red">'+price_item+'</span></td>' +
+                    '<input   value="' + tuoi_customer + '"  style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table">' +
+                    '<td><input style="height: 30px" value="' + passport_customer + '" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text"class="valid input_table "></td>' +
+                    '<td><input style="height: 30px" value="' + date_passport_customer + '" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date" class="valid input_table date-picker"></td>' +
+                    '<td style="width: 150px"><span style="font-size: 12px;color: red">' + price_item + '</span></td>' +
                     '</tr>';
-                stt=stt+1;
+                stt = stt + 1;
             }
         }
-        if(numbe_3>0){
-            if(price==='Liên hệ'){
-                var price_item='Liên hệ';
-            }else{
-                var price_item= price_3.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+        if (numbe_3 > 0) {
+            if (price === 'Liên hệ') {
+                var price_item = 'Liên hệ';
+            } else {
+                var price_item = price_3.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
             }
-            for(var k=1;k<=numbe_3;k++){
-                var name_customer_sub='';
-                if($('#input_name_customer_sub_'+ stt).length){
-                    name_customer_sub=$('#input_name_customer_sub_'+ stt).val();
+            for (var k = 1; k <= numbe_3; k++) {
+                var name_customer_sub = '';
+                if ($('#input_name_customer_sub_' + stt).length) {
+                    name_customer_sub = $('#input_name_customer_sub_' + stt).val();
                 }
-                var birthday_customer='';
-                if($('#input_birthday_customer_sub_'+ stt).length){
-                    birthday_customer=$('#input_birthday_customer_sub_'+ stt).val();
+                var birthday_customer = '';
+                if ($('#input_birthday_customer_sub_' + stt).length) {
+                    birthday_customer = $('#input_birthday_customer_sub_' + stt).val();
                 }
-                var email_customer='';
-                if($('#input_email_customer_'+ stt).length){
-                    email_customer=$('#input_email_customer_'+ stt).val();
+                var email_customer = '';
+                if ($('#input_email_customer_' + stt).length) {
+                    email_customer = $('#input_email_customer_' + stt).val();
                 }
-                var phone_customer='';
-                if($('#input_phone_customer_'+ stt).length){
-                    phone_customer=$('#input_phone_customer_'+ stt).val();
+                var phone_customer = '';
+                if ($('#input_phone_customer_' + stt).length) {
+                    phone_customer = $('#input_phone_customer_' + stt).val();
                 }
-                var address_customer='';
-                if($('#input_phone_customer_'+ stt).length){
-                    address_customer=$('#input_address_customer_'+ stt).val();
+                var address_customer = '';
+                if ($('#input_phone_customer_' + stt).length) {
+                    address_customer = $('#input_address_customer_' + stt).val();
                 }
-                var tuoi_customer='';
-                if($('#input_tuoi_customer_'+ stt).length){
-                    tuoi_customer=$('#input_tuoi_customer_'+ stt).val();
+                var tuoi_customer = '';
+                if ($('#input_tuoi_customer_' + stt).length) {
+                    tuoi_customer = $('#input_tuoi_customer_' + stt).val();
                 }
-                if(tuoi_customer==''){
-                    tuoi_customer=name_3;
+                if (tuoi_customer == '') {
+                    tuoi_customer = name_3;
                 }
-                var passport_customer='';
-                if($('#input_passport_customer_'+ stt).length){
-                    passport_customer=$('#input_passport_customer_'+ stt).val();
+                var passport_customer = '';
+                if ($('#input_passport_customer_' + stt).length) {
+                    passport_customer = $('#input_passport_customer_' + stt).val();
                 }
-                var date_passport_customer='';
-                if($('#input_date_passport_customer_'+ stt).length){
-                    date_passport_customer=$('#input_date_passport_customer_'+ stt).val();
+                var date_passport_customer = '';
+                if ($('#input_date_passport_customer_' + stt).length) {
+                    date_passport_customer = $('#input_date_passport_customer_' + stt).val();
                 }
-                row =row+'<tr id="row_customer_' + stt+ '"><td class="center stt_cus">' + stt + '</td>' +
-                    '<td><input style="height: 30px" value="'+name_customer_sub+'" name="name_customer_sub[]" id="input_name_customer_sub_' + stt + '" type="text"class="valid input_table"></td>' +
-                    '<td><input style="height: 30px" value="'+birthday_customer+'" name="birthday_customer[]" id="input_birthday_customer_sub_' + stt + '" type="date" class="valid input_table date-picker"></td>' +
-                    '<td><input style="height: 30px" value="'+email_customer+'" name="email_customer[]" id="input_email_customer_' + stt + '" type="text" class="valid input_table"></td>' +
-                    '<td><input style="height: 30px" value="'+phone_customer+'" name="phone_customer[]" id="input_phone_customer_' + stt + '" type="text" class="valid input_table"></td>' +
-                    '<td><input  style="height: 30px" value="'+address_customer+'" name="address_customer[]" id="input_address_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                row = row + '<tr id="row_customer_' + stt + '"><td class="center stt_cus">' + stt + '</td>' +
+                    '<td><input style="height: 30px" value="' + name_customer_sub + '" name="name_customer_sub[]" id="input_name_customer_sub_' + stt + '" type="text"class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" value="' + birthday_customer + '" name="birthday_customer[]" id="input_birthday_customer_sub_' + stt + '" type="date" class="valid input_table date-picker"></td>' +
+                    '<td><input style="height: 30px" value="' + email_customer + '" name="email_customer[]" id="input_email_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td><input style="height: 30px" value="' + phone_customer + '" name="phone_customer[]" id="input_phone_customer_' + stt + '" type="text" class="valid input_table"></td>' +
+                    '<td><input  style="height: 30px" value="' + address_customer + '" name="address_customer[]" id="input_address_customer_' + stt + '" type="text" class="valid input_table"></td>' +
                     '<td>' +
                     '<input hidden style="height: 30px" name="tuoi_number_customer[]" value="3"  id="input_tuoi_number_customer_' + stt + '" type="text"  class="valid input_table">' +
-                    '<input  value="'+tuoi_customer+'" style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table">' +
-                    '<td><input style="height: 30px" value="'+passport_customer+'" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text"class="valid input_table "></td>' +
-                    '<td><input style="height: 30px" value="'+date_passport_customer+'" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date" class="valid input_table date-picker" data-date-format="dd-mm-yyyy"></td>' +
-                    '<td style="width: 150px"><span style="font-size: 12px;color: red">'+price_item+'</span></td>' +
+                    '<input  value="' + tuoi_customer + '" style="height: 30px" name="tuoi_customer[]" id="input_tuoi_customer_' + stt + '" type="text" class="valid input_table">' +
+                    '<td><input style="height: 30px" value="' + passport_customer + '" name="passport_customer[]" id="input_passport_customer_' + stt + '" type="text"class="valid input_table "></td>' +
+                    '<td><input style="height: 30px" value="' + date_passport_customer + '" name="date_passport_customer[]" id="input_date_passport_customer_' + stt + '" type="date" class="valid input_table date-picker" data-date-format="dd-mm-yyyy"></td>' +
+                    '<td style="width: 150px"><span style="font-size: 12px;color: red">' + price_item + '</span></td>' +
                     '</tr>';
-                stt=stt+1;
+                stt = stt + 1;
             }
         }
         $(".show_hide_table").html('');
         $(".show_hide_table").html(row);
-        returnTinhTien(price,price_2,price_3);
+        returnTinhTien(price, price_2, price_3);
     }
 
 
 }
 
-function  returnTinhTien(price_nguoi_lon,price_tre_em_511,price_tre_em_5){
+function returnTinhTien(price_nguoi_lon, price_tre_em_511, price_tre_em_5) {
     var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
     //var price_nguoi_lon = $('#input_price').val();
     //var price_tre_em_511 = $('#input_price_511').val();
@@ -2177,7 +2234,7 @@ function  returnTinhTien(price_nguoi_lon,price_tre_em_511,price_tre_em_5){
     var number_nguoi_lon = $('#input_num_nguoi_lon').val();
     var number_tre_em_511 = $('#input_num_tre_em').val();
     var number_tre_em_5 = $('#input_num_tre_em_5').val();
-    if(numberRegex.test(price_nguoi_lon)&&numberRegex.test(price_tre_em_511)&&numberRegex.test(price_tre_em_5)) {
+    if (numberRegex.test(price_nguoi_lon) && numberRegex.test(price_tre_em_511) && numberRegex.test(price_tre_em_5)) {
         if (number_nguoi_lon > 0 && number_nguoi_lon != '') {
             if (price_nguoi_lon == undefined) {
                 lnv.alert({
@@ -2245,7 +2302,7 @@ function  returnTinhTien(price_nguoi_lon,price_tre_em_511,price_tre_em_5){
             });
         }
 
-    }else{
+    } else {
         lnv.alert({
             title: 'Lỗi',
             content: 'Bạn vui lòng kiểm tra đơn giá',

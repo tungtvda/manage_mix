@@ -22,6 +22,9 @@ function view_valid_form($data = array())
         case 'email':
             require_once DIR . '/view/default/template/module/email_marketing/valid.php';
             break;
+        case 'ruttien':
+            require_once DIR . '/view/default/template/module/ruttien/valid.php';
+            break;
     }
 
 }

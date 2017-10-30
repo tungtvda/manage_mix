@@ -1,0 +1,1 @@
+<script src="<?php echo SITE_NAME?>/view/default/themes/admin/js/valid/rut_tien.js"></script>

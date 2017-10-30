@@ -81,7 +81,6 @@
                             </th>
                             <th>#</th>
                             <th>Họ tên</th>
-                            <th>Hình ảnh</th>
                             <th>Tiền yêu cầu</th>
                             <th>Trạng thái</th>
                             <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1"
@@ -112,22 +111,83 @@
                                         <td style="text-align: center">
                                             <?php echo $dem; ?>
                                         </td>
-                                        <td>
-                                            <a href="<?php echo SITE_NAME ?>/thanh-vien/sua?id=<?php echo _return_mc_encrypt($row->user_tiep_thi_id, ENCRYPTION_KEY); ?>"><?php echo $row->name_user.' - '.$row->user_code ?></a>
-                                        </td>
-                                        <td style="text-align: center">
-                                            <?php
-                                            if ($row->avatar_tt == '') {
-                                                $link_ava = SITE_NAME . '/view/default/themes/images/no-avatar.png';
-                                            } else {
-                                                $link_ava = SITE_NAME . $row->avatar_tt;
-                                            }
-                                            ?>
-                                            <img title="<?php echo $row->name_user ?>" style="width: 50px"
-                                                 src="<?php echo $link_ava ?>"><label
-                                                style="display: none"><?php echo $row->name_user ?></label>
-                                        </td>
+                                        <td style="position: relative">
+                                            <p>
+                                                <a   href="<?php echo SITE_NAME ?>/thanh-vien/sua?id=<?php echo _return_mc_encrypt($row->user_tiep_thi_id, ENCRYPTION_KEY); ?>"><?php echo $row->name_user.' - '.$row->user_code ?></a>
+                                                <a data-id="<?php echo $row->id?>" class="show_info" href="javascript:void(0)"><i class="fa fa-expand "></i></a>
+                                            </p>
+                                            <div class="pop-up-table pop-up-table-user-rut-tien" id="info_user_<?php echo $row->id?>">
+                                                <div class="profile-user-info profile-user-info-striped">
 
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Họ tên</div>
+
+                                                        <div class="profile-info-value form-group">
+                                                            <span class="editable editable-click hidden_edit">Mrs.Trần Văn Tùng - media_002</span>
+
+
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Email</div>
+
+                                                        <div class="profile-info-value">
+                                                            <span class="editable editable-click">tungtv.soict1@gmail.com</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Địa chỉ</div>
+
+                                                        <div class="profile-info-value">
+                                                            <i class="fa fa-map-marker light-orange bigger-110"></i>
+                                                            <span class="editable editable-click">Đông Anh, Hà Nội</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Điện thoại</div>
+
+                                                        <div class="profile-info-value">
+                                                            <span class="editable editable-click">0981.572.390</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Di động</div>
+
+                                                        <div class="profile-info-value">
+                                                            <span class="editable editable-click">valid</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name">Số tài khoản</div>
+
+                                                        <div class="profile-info-value">
+                                                        123123123123123
+                                                        </div>
+                                                    </div>
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Ngân hàng</div>
+
+                                                        <div class="profile-info-value">
+                                                           <span style="font-style: italic;color: #ff892a; font-size: 12px">  Ngân hàng: VietComBank</span></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Chi nhánh</div>
+
+                                                        <div class="profile-info-value">
+                                                            <span style="font-style: italic;color: #ff892a; font-size: 12px">  Ngân hàng: VietComBank</span></span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </td>
                                         <td>
                                             <?php
                                             if($row->price!=''&&$row->price!=null){
@@ -142,11 +202,8 @@
                                     <?php if (_returnCheckAction(39) == 1) { ?>
                                             <label>
 
-                                                <input <?php if ($row->status) echo 'checked' ?>
-                                                    id="checkbox_status_<?php echo $row->id ?>"
-                                                    countid="<?php echo $row->id ?>"
-                                                    name_record="<?php echo $row->name ?>" table="user" field="status" action="user_update"
-                                                    class="ace ace-switch ace-switch-7 checkbox_status" type="checkbox">
+                                                <input disabled <?php if ($row->status) echo 'checked' ?>
+                                                    id="checkbox_status_<?php echo $row->id ?>" class="ace ace-switch ace-switch-7" type="checkbox">
                                                 <span class="lbl"></span>
                                             </label>
                                     <?php }else{?>

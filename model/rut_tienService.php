@@ -92,8 +92,8 @@ function rut_tien_count($where)
 }
 
 function ruttienAllDongHang($where){
-    $query="select rt.*, us.name as name_user, us.user_role as type_user, us.user_code, us.avatar as avatar_tt, ";
-    $query.="  us_cr.name as name_user_cr, us_cr.user_role as type_user_cr, us_cr.user_code as user_code_cr ";
+    $query="select rt.*, us.name as name_user, us.user_role as type_user, us.user_code, us.avatar as avatar_tt,us.user_email,us.phone, us.mobi, us.account_number_bank, us.bank, us.open_bank,";
+    $query.="  us_cr.name as name_user_cr, us_cr.user_role as type_user_cr, us_cr.user_code as user_code_cr  ";
     $query.=" FROM rut_tien rt ";
     $query.=" INNER JOIN user us on rt.user_tiep_thi_id = us.id";
     $query.=" LEFT JOIN user us_cr on rt.admin_confirm_id = us_cr.id";

@@ -705,7 +705,7 @@
                                                 <form>
                                                     <div class="form-actions" style="margin-top: 0px; margin-bottom: 0px">
                                                         <div class="input-group" style="width: 100%">
-                                                            <textarea id="content_giaodich" class="form-control" placeholder="Bạn hãy nhập nội dung gia dịch ..."></textarea>
+                                                            <textarea id="content_giaodich" class="form-control" placeholder="Bạn hãy nhập nội dung giao dịch ..."></textarea>
                                                             <p hidden id="show_mess_content" class="red">Bạn vui lòng nhập nội dung giao dịch</p>
                                                         </div>
                                                     </div>

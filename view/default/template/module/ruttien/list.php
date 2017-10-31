@@ -114,7 +114,7 @@
                                         <td style="position: relative">
                                             <p>
                                                 <a   href="<?php echo SITE_NAME ?>/thanh-vien/sua?id=<?php echo _return_mc_encrypt($row->user_tiep_thi_id, ENCRYPTION_KEY); ?>"><?php echo $row->name_user.' - '.$row->user_code ?></a>
-                                                <a data-id="<?php echo $row->id?>" class="show_info" href="javascript:void(0)"><i class="fa fa-expand "></i></a>
+                                                <a data-id="<?php echo $row->id?>"  data-show="show" class="show_info" href="javascript:void(0)"><i  id="icon_show_<?php echo $row->id?>" class="fa fa-arrows-alt icon_show"></i></a>
                                             </p>
                                             <div class="pop-up-table pop-up-table-user-rut-tien" id="info_user_<?php echo $row->id?>">
                                                 <div class="profile-user-info profile-user-info-striped">
@@ -185,6 +185,7 @@
                                                     </div>
 
                                                 </div>
+                                                <a data-id="<?php echo $row->id?>"   class="close_pop_up" href="javascript:void(0)"><i class="fa fa-times" aria-hidden="true"></i></a>
                                             </div>
 
                                         </td>

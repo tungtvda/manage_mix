@@ -1703,6 +1703,10 @@ function _returnListGiaodich($id){
                 $link=SITE_NAME.'/nhan-vien/sua?id='._return_mc_encrypt($row['user_id']);
                 if($row['user_role']==1){
                     $admin_icon=' <span class="label label-info arrowed arrowed-in-right">admin</span>';
+                }else{
+                    if($row['user_role']==2){
+                        $admin_icon=' <span class="label label-info arrowed arrowed-in-right">Thành viên tiếp thị</span>';
+                    }
                 }
             }
 

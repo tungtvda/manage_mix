@@ -152,18 +152,23 @@ div.pop-up-table {
      display: none;
     position: absolute;
     width: 400px;
-    padding: 10px;
+    padding: 15px;
     background: #ffffff;
     color: #000000;
-    border: 1px solid #dedddd;
+    border: 2px solid #dedddd;
     font-size: 90%;
     z-index: 11;
     border-radius: 4px;
-
 }
 .pop-up-table-user-rut-tien{
     top: -250px;
 }
 .show_info{
     float: right;
+}
+.close_pop_up{
+    position: absolute;
+    right: 3px;
+    bottom: -3px;
+    font-size: 18px;
 }

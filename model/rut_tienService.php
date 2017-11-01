@@ -92,7 +92,7 @@ function rut_tien_count($where)
 }
 
 function ruttienAllDongHang($where){
-    $query="select rt.*, us.name as name_user, us.user_role as type_user, us.user_code, us.avatar as avatar_tt,us.user_email,us.phone, us.mobi, us.account_number_bank, us.bank, us.open_bank,";
+    $query="select rt.*, us.name as name_user, us.user_role as type_user, us.user_code,us.address, us.avatar as avatar_tt,us.user_email,us.phone, us.mobi, us.account_number_bank, us.bank, us.open_bank,";
     $query.="  us_cr.name as name_user_cr, us_cr.user_role as type_user_cr, us_cr.user_code as user_code_cr  ";
     $query.=" FROM rut_tien rt ";
     $query.=" INNER JOIN user us on rt.user_tiep_thi_id = us.id";
@@ -110,6 +110,13 @@ function ruttienAllDongHang($where){
         $new_obj->type_user=$row['type_user'];
         $new_obj->user_code=$row['user_code'];
         $new_obj->avatar_tt=$row['avatar_tt'];
+        $new_obj->user_email=$row['user_email'];
+        $new_obj->address=$row['address'];
+        $new_obj->phone=$row['phone'];
+        $new_obj->mobi=$row['mobi'];
+        $new_obj->account_number_bank=$row['account_number_bank'];
+        $new_obj->bank=$row['bank'];
+        $new_obj->open_bank=$row['open_bank'];
 
         $new_obj->name_user_cr=$row['name_user_cr'];
         $new_obj->type_user_cr=$row['type_user_cr'];

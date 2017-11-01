@@ -18,7 +18,7 @@ $_SESSION['link_redict']='http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']
 $url_bread='<li class="active">Yêu cầu rút tiền</li>';
 $data['breadcrumbs']=$url_bread;
 $data['title']='Yêu cầu rút tiền';
-$count=5;
+$count=7;
 //_returnCreateUser(1,'/thanh-vien/',$email_tem);
 _deleteSubmitForm('rut_tien', 'rut_tien_delete',9,17,44);
 $data_dk_fill='user_role=2';

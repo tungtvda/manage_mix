@@ -44,19 +44,14 @@ jQuery(function ($) {
     var moveDown = -150;
     $('body').on("click",'.show_info', function (e) {
         var id=$(this).attr('data-id');
-        var show=$(this).attr('data-show');
-        $('.pop-up-table').hide();
-        $('.icon_show').removeClass('fa-compress').addClass('fa-arrows-alt');
-        if(show=='show'){
-            $('#info_user_'+id).show();
-            $(this).attr('data-show','hide');
-            $('#icon_show_'+id).removeClass('fa-arrows-alt').addClass('fa-compress');
+        var name=$(this).attr('data-name');
+        if(id && name){
+            $('#title_form_detail').html('Thông tin thành viên "'+name+'"');
+            var content=$('#info_user_'+id).html();
+            $('#content_form_detail').html(content);
         }else{
-            $('#info_user_'+id).hide();
-            $(this).attr('data-show','show');
-            $('#icon_show_'+id).removeClass('fa-compress').addClass('fa-arrows-alt');
+            $('#modal-form').modal('hide');
         }
-        //$('#info_user_'+id).show().css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
     });
 
     $('body').on("click",'.close_pop_up', function (e) {
@@ -69,26 +64,6 @@ jQuery(function ($) {
 
 });
 
-
-
-$(function() {
-    var moveLeft = 20;
-    var moveDown = 10;
-
-    $('a#trigger').hover(function(e) {
-        $('div#pop-up').show();
-        //.css('top', e.pageY + moveDown)
-        //.css('left', e.pageX + moveLeft)
-        //.appendTo('body');
-    }, function() {
-        $('div#pop-up').hide();
-    });
-
-    $('a#trigger').mousemove(function(e) {
-        $("div#pop-up").css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
-    });
-
-});
 
 
 

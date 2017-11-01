@@ -83,6 +83,8 @@
                             <th>Họ tên</th>
                             <th>Tiền yêu cầu</th>
                             <th>Trạng thái</th>
+                            <th>Xác nhận</th>
+                            <th>Ghi chú</th>
                             <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1"
                                 aria-label="
 
@@ -114,78 +116,61 @@
                                         <td style="position: relative">
                                             <p>
                                                 <a   href="<?php echo SITE_NAME ?>/thanh-vien/sua?id=<?php echo _return_mc_encrypt($row->user_tiep_thi_id, ENCRYPTION_KEY); ?>"><?php echo $row->name_user.' - '.$row->user_code ?></a>
-                                                <a data-id="<?php echo $row->id?>"  data-show="show" class="show_info" href="javascript:void(0)"><i  id="icon_show_<?php echo $row->id?>" class="fa fa-arrows-alt icon_show"></i></a>
+                                                <a data-name="<?php echo $row->name_user ?> - <?php echo $row->user_code?>" data-id="<?php echo $row->id?>" role="button" data-toggle="modal"   class="show_info" href="#modal-form-info"><i  id="icon_show_<?php echo $row->id?>" class="fa fa-arrows-alt icon_show"></i></a>
                                             </p>
-                                            <div class="pop-up-table pop-up-table-user-rut-tien" id="info_user_<?php echo $row->id?>">
+                                            <div style="display: none" id="info_user_<?php echo $row->id?>">
                                                 <div class="profile-user-info profile-user-info-striped">
-
-
                                                     <div class="profile-info-row">
                                                         <div class="profile-info-name"> Họ tên</div>
-
                                                         <div class="profile-info-value form-group">
-                                                            <span class="editable editable-click hidden_edit">Mrs.Trần Văn Tùng - media_002</span>
-
-
+                                                            <span class="editable editable-click hidden_edit"><?php echo $row->name_user?> - <?php echo $row->user_code?></span>
                                                         </div>
                                                     </div>
-
-
-
                                                     <div class="profile-info-row">
                                                         <div class="profile-info-name"> Email</div>
-
                                                         <div class="profile-info-value">
-                                                            <span class="editable editable-click">tungtv.soict1@gmail.com</span>
+                                                            <span class="editable editable-click"><?php echo $row->user_email?></span>
                                                         </div>
                                                     </div>
-
                                                     <div class="profile-info-row">
                                                         <div class="profile-info-name"> Địa chỉ</div>
-
                                                         <div class="profile-info-value">
                                                             <i class="fa fa-map-marker light-orange bigger-110"></i>
-                                                            <span class="editable editable-click">Đông Anh, Hà Nội</span>
+                                                            <span class="editable editable-click"><?php echo $row->address?></span>
                                                         </div>
                                                     </div>
                                                     <div class="profile-info-row">
                                                         <div class="profile-info-name"> Điện thoại</div>
-
                                                         <div class="profile-info-value">
-                                                            <span class="editable editable-click">0981.572.390</span>
+                                                            <span class="editable editable-click"><?php echo $row->phone?></span>
                                                         </div>
                                                     </div>
                                                     <div class="profile-info-row">
                                                         <div class="profile-info-name"> Di động</div>
 
                                                         <div class="profile-info-value">
-                                                            <span class="editable editable-click">valid</span>
+                                                            <span class="editable editable-click"><?php echo $row->mobi?></span>
                                                         </div>
                                                     </div>
                                                     <div class="profile-info-row">
                                                         <div class="profile-info-name">Số tài khoản</div>
-
                                                         <div class="profile-info-value">
-                                                        123123123123123
+                                                            <?php echo $row->account_number_bank?>
                                                         </div>
                                                     </div>
                                                     <div class="profile-info-row">
                                                         <div class="profile-info-name"> Ngân hàng</div>
-
                                                         <div class="profile-info-value">
-                                                           <span style="font-style: italic;color: #ff892a; font-size: 12px">  Ngân hàng: VietComBank</span></span>
+                                                           <span style="font-style: italic;color: #ff892a; font-size: 12px">  <?php echo $row->bank?></span></span>
                                                         </div>
                                                     </div>
                                                     <div class="profile-info-row">
                                                         <div class="profile-info-name"> Chi nhánh</div>
-
                                                         <div class="profile-info-value">
-                                                            <span style="font-style: italic;color: #ff892a; font-size: 12px">  Ngân hàng: VietComBank</span></span>
+                                                            <span style="font-style: italic;color: #ff892a; font-size: 12px">  <?php echo $row->open_bank?></span></span>
                                                         </div>
                                                     </div>
-
                                                 </div>
-                                                <a data-id="<?php echo $row->id?>"   class="close_pop_up" href="javascript:void(0)"><i class="fa fa-times" aria-hidden="true"></i></a>
                                             </div>
 
                                         </td>
@@ -198,6 +183,7 @@
                                             }
                                             ?>
                                         </td>
+
                                         <td>
                                             <span hidden><?php echo (int)$row->status ?></span>
                                     <?php if (_returnCheckAction(39) == 1) { ?>
@@ -212,8 +198,8 @@
                                         <?php if ($row->status == 1) echo ' <i  style="font-size: 20px;color:green" class="fa fa-check-square-o "></i>' ?>
                                         <?php }?>
                                         </td>
-                                        <!--                                        <td>-->
-                                        <?php //echo _returnDateFormatConvert($row->created) ?><!--</td>-->
+                                        <td></td>
+                                        <td></td>
                                         <td><?php echo _returnDateFormatConvert($row->date_send) ?></td>
 
                                         <td>
@@ -726,3 +712,94 @@
         margin-bottom: 8px;
     }
 </style>
+
+<div id="modal-form-info" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="blue bigger" id="title_form_detail"></h4>
+            </div>
+
+
+            <div id="content_form_detail" class="modal-body">
+                    <div class="profile-user-info profile-user-info-striped">
+
+
+                        <div class="profile-info-row">
+                            <div class="profile-info-name"> Họ tên</div>
+
+                            <div class="profile-info-value form-group">
+                                <span class="editable editable-click hidden_edit">Mrs.Trần Văn Tùng - media_002</span>
+
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="profile-info-row">
+                            <div class="profile-info-name"> Email</div>
+
+                            <div class="profile-info-value">
+                                <span class="editable editable-click">tungtv.soict1@gmail.com</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-info-row">
+                            <div class="profile-info-name"> Địa chỉ</div>
+
+                            <div class="profile-info-value">
+                                <i class="fa fa-map-marker light-orange bigger-110"></i>
+                                <span class="editable editable-click">Đông Anh, Hà Nội</span>
+                            </div>
+                        </div>
+                        <div class="profile-info-row">
+                            <div class="profile-info-name"> Điện thoại</div>
+
+                            <div class="profile-info-value">
+                                <span class="editable editable-click">0981.572.390</span>
+                            </div>
+                        </div>
+                        <div class="profile-info-row">
+                            <div class="profile-info-name"> Di động</div>
+
+                            <div class="profile-info-value">
+                                <span class="editable editable-click">valid</span>
+                            </div>
+                        </div>
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">Số tài khoản</div>
+
+                            <div class="profile-info-value">
+                                123123123123123
+                            </div>
+                        </div>
+                        <div class="profile-info-row">
+                            <div class="profile-info-name"> Ngân hàng</div>
+
+                            <div class="profile-info-value">
+                                <span style="font-style: italic;color: #ff892a; font-size: 12px">  Ngân hàng: VietComBank</span></span>
+                            </div>
+                        </div>
+                        <div class="profile-info-row">
+                            <div class="profile-info-name"> Chi nhánh</div>
+
+                            <div class="profile-info-value">
+                                <span style="font-style: italic;color: #ff892a; font-size: 12px">  Ngân hàng: VietComBank</span></span>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="reset" class="btn btn-sm" data-dismiss="modal" id="reset_form_popup">
+                    <i class="ace-icon fa fa-times"></i>
+                    Close
+                </button>
+            </div>
+
+
+        </div>
+    </div>
+</div><!-- PAGE CONTENT ENDS -->

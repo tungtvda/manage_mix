@@ -920,8 +920,11 @@ jQuery(function ($) {
     // show hide text
     $('body').on("click", '#save_giao_dich', function () {
         var value = $('#content_giaodich').val();
-        if (value) {
+        var created = $('#created_giaodich').val();
+        var time = $('.time_giaodich').val();
+        if (value && created && time) {
             $('#show_mess_content').hide();
+            $('#error_created').hide();
             var code = $(this).attr('data-code');
             var id = $(this).attr('data-id');
             if(code && id){
@@ -934,7 +937,9 @@ jQuery(function ($) {
                     data: {
                         id:id,
                         code:code,
-                        value:value
+                        value:value,
+                        created:created,
+                        time:time
                     },
                     success: function (response) {
                         if (response == 0) {
@@ -952,6 +957,11 @@ jQuery(function ($) {
                             $('#back_to_top_giao_dich').animate({scrollTop : 0},1500);
 
                         }
+                        var currentDate = new Date();
+                        $("#created_giaodich").datepicker("setDate",currentDate);
+                        $('#timepicker1').timepicker();
+                        //$("#created_giaodich").val('');
+                        //$("#timepicker1").val('');
                         $('#content_giaodich').val('');
                         $('#save_giao_dich').show();
                         $('#show_loading_btn').hide();
@@ -969,9 +979,17 @@ jQuery(function ($) {
                 });
             }
         }else {
-            $('#show_mess_content').show();
+            if(value==''){
+                $('#show_mess_content').show();
+            }
+            if(created==''||time==''){
+                $('#error_created').show();
+            }
         }
     });
+
+    var currentDate = new Date();
+    $("#created_giaodich").datepicker("setDate",currentDate);
 });
 function show_info_cost(Id, name) {
     $("#title_form").html('Thôn tin chi tiết "<b>' + name + '</b>"');

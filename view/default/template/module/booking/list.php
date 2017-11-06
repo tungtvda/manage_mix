@@ -176,13 +176,13 @@
                                             ?>
                                         </td>
 
-<!--                                        <td>-->
-<!--                                            --><?php
-//                                            if ($row->name_user != '') {
-//                                                echo '<a href="' . SITE_NAME . '/nhan-vien/sua?id=' . _return_mc_encrypt($row->user_id, ENCRYPTION_KEY) . '">' . $row->name_user . '</a>';
-//                                            }
-//                                            ?>
-<!--                                        </td>-->
+                                        <!--                                        <td>-->
+                                        <!--                                            --><?php
+                                        //                                            if ($row->name_user != '') {
+                                        //                                                echo '<a href="' . SITE_NAME . '/nhan-vien/sua?id=' . _return_mc_encrypt($row->user_id, ENCRYPTION_KEY) . '">' . $row->name_user . '</a>';
+                                        //                                            }
+                                        //                                            ?>
+                                        <!--                                        </td>-->
                                         <td>
                                             <span hidden><?php echo (int)$row->confirm_admin ?></span>
                                             <?php if ($row->confirm_admin > 0) { ?>
@@ -217,29 +217,32 @@
                                         </td>
                                         <td>
                                             <?php
-                                            if ($row->price_tiep_thi != '' && $row->name_user_tt != '' && $row->type_user_tt==2 && $row->status!=3 && $row->status!=6 ) {
+                                            if ($row->price_tiep_thi != '' && $row->name_user_tt != '' && $row->type_user_tt == 2 && $row->status != 3 && $row->status != 6) {
                                                 $price_tiep_thi = number_format((int)$row->price_tiep_thi, 0, ",", ".") . ' vnđ';
-                                                $function_='hidden';
-                                                if($row->status_tiep_thi==1){
-                                                    $class='green';
-                                                }else{
-                                                    $class='red';
+                                                $function_ = 'hidden';
+                                                if ($row->status_tiep_thi == 1) {
+                                                    $class = 'green';
+                                                } else {
+                                                    $class = 'red';
                                                 }
-                                                if($_SESSION['user_role'] == 1 && $row->status_tiep_thi==0){
-                                                echo '<label id="remove_btn_tiepthi_'.$row->id.'" title="Chưa được xác nhận">
-                                                    <input name="switch-field-1" class="ace ace-switch ace-switch-3  confirm_tiep_thi" user="'.$row->name_user_tt.' - '.$row->user_code_tt.'"
-                                                    count_id="'._return_mc_encrypt($row->id, ENCRYPTION_KEY).'" id_filed="'.$row->id.'" code="'.$row->code_booking.'" id="confirm_tiep_thi_'.$row->id.'" type="checkbox">
+                                                if ($_SESSION['user_role'] == 1 && $row->status_tiep_thi == 0) {
+                                                    echo '<label id="remove_btn_tiepthi_' . $row->id . '" title="Chưa được xác nhận">
+                                                    <input name="switch-field-1" class="ace ace-switch ace-switch-3  confirm_tiep_thi" user="' . $row->name_user_tt . ' - ' . $row->user_code_tt . '"
+                                                    count_id="' . _return_mc_encrypt($row->id, ENCRYPTION_KEY) . '" id_filed="' . $row->id . '" code="' . $row->code_booking . '" id="confirm_tiep_thi_' . $row->id . '" type="checkbox">
                                                     <span class="lbl"></span>
                                                 </label>';
                                                 }
-                                                echo '<span id="change_color_'.$row->id.'" class="'.$class.'"><b>' . $price_tiep_thi . '</b></span>';
+                                                echo '<span id="change_color_' . $row->id . '" class="' . $class . '"><b>' . $price_tiep_thi . '</b></span>';
                                             }
                                             ?>
                                         </td>
                                         <td style="text-align: center">
                                             <?php if (_returnCheckAction(18) == 1) { ?>
-                                                <a title="Lịch sử giao dịch" class="red view_lich_su_giao_dich" href="#modal-form-giaodich" role="button" data-toggle="modal" data-code="<?php echo $row->code_booking ?>" data-id="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
-                                                  >
+                                                <a title="Lịch sử giao dịch" class="red view_lich_su_giao_dich"
+                                                   href="#modal-form-giaodich" role="button" data-toggle="modal"
+                                                   data-code="<?php echo $row->code_booking ?>"
+                                                   data-id="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                >
                                                     <i class="ace-icon fa fa-sliders bigger-130"></i>
                                                 </a>
                                             <?php } ?>
@@ -290,17 +293,19 @@
 
                                                     <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 
-<!--                                                        --><?php //if (_returnCheckAction(18) == 1) { ?>
-<!--                                                            <li class="red">-->
-<!--                                                                <a href="--><?php //echo SITE_NAME . '/' . $action_link ?><!--/chi-phi?id=--><?php //echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?><!--"-->
-<!--                                                                   class="tooltip-success" data-rel="tooltip"-->
-<!--                                                                   title="Danh sách chi phí">-->
-<!--																				<span class="">-->
-<!--																					<i class="ace-icon fa fa-usd bigger-120"></i>-->
-<!--																				</span>-->
-<!--                                                                </a>-->
-<!--                                                            </li>-->
-<!--                                                        --><?php //} ?>
+                                                        <!--                                                        --><?php //if (_returnCheckAction(18) == 1) { ?>
+                                                        <!--                                                            <li class="red">-->
+                                                        <!--                                                                <a href="-->
+                                                        <?php //echo SITE_NAME . '/' . $action_link ?><!--/chi-phi?id=-->
+                                                        <?php //echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?><!--"-->
+                                                        <!--                                                                   class="tooltip-success" data-rel="tooltip"-->
+                                                        <!--                                                                   title="Danh sách chi phí">-->
+                                                        <!--																				<span class="">-->
+                                                        <!--																					<i class="ace-icon fa fa-usd bigger-120"></i>-->
+                                                        <!--																				</span>-->
+                                                        <!--                                                                </a>-->
+                                                        <!--                                                            </li>-->
+                                                        <!--                                                        --><?php //} ?>
                                                         <?php if (_returnCheckAction(20) == 1) { ?>
                                                             <li>
                                                                 <a class="blue view_popup_detail" role="button"
@@ -676,60 +681,95 @@
             </div>
         </div><!-- PAGE CONTENT ENDS -->
 
-<!--        Lịch sử giao dịch-->
+        <!--        Lịch sử giao dịch-->
         <div id="modal-form-giaodich" class="modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="blue bigger" id="title_form">Lịch sử giao dịch đơn hàng "<b id="name-detail-code-booking" class="red"></b>"</h4>
+                        <h4 class="blue bigger" id="title_form">Lịch sử giao dịch đơn hàng "<b
+                                id="name-detail-code-booking" class="red"></b>"</h4>
                     </div>
 
 
-                        <div class="modal-body">
-                            <div class="row">
-                                <div id="show_loading_giao_dich" style="text-align: center">
-                                    <img src="<?php echo SITE_NAME.'/view/default/themes/images/loading_1.gif'?>">
-                                </div>
-                                <div hidden id="show_red_none_giao_dich" style="text-align: center">
-                                </div>
-                                <div id="show_list_giao_dich" class="col-xs-12">
-                                    <div class="widget-box">
-                                        <div class="widget-body">
-                                            <div class="widget-main no-padding">
-                                                <div id="back_to_top_giao_dich">
-                                                </div>
-                                                <div class="dialogs" id="list_giao_dich" style="height: 350px; overflow: scroll">
-                                                </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div id="show_loading_giao_dich" style="text-align: center">
+                                <img src="<?php echo SITE_NAME . '/view/default/themes/images/loading_1.gif' ?>">
+                            </div>
+                            <div hidden id="show_red_none_giao_dich" style="text-align: center">
+                            </div>
+                            <div id="show_list_giao_dich" class="col-xs-12">
+                                <div class="widget-box">
+                                    <div class="widget-body">
+                                        <div class="widget-main no-padding">
+                                            <div id="back_to_top_giao_dich">
+                                            </div>
+                                            <div class="dialogs" id="list_giao_dich"
+                                                 style="height: 350px; overflow: scroll">
+                                            </div>
 
-                                                <form>
-                                                    <div class="form-actions" style="margin-top: 0px; margin-bottom: 0px">
-                                                        <div class="input-group" style="width: 100%">
-                                                            <textarea id="content_giaodich" class="form-control" placeholder="Bạn hãy nhập nội dung giao dịch ..."></textarea>
-                                                            <p hidden id="show_mess_content" class="red">Bạn vui lòng nhập nội dung giao dịch</p>
+                                            <form>
+                                                <div class="profile-user-info profile-user-info-striped" style="width: 100%;">
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Ngày giao dịch <span
+                                                                style="color: red">*</span></div>
+                                                        <div class="profile-info-value">
+                                                            <div class="input-group" style="">
+                                                                <input value=""
+                                                                       class="form-control date-picker width_100 "
+                                                                       id="created_giaodich" name="created"
+                                                                       type="text" data-date-format="dd-mm-yyyy">
+																	<span class="input-group-addon date_icon">
+																		<i class="fa fa-calendar bigger-110"></i>
+																	</span>
+                                                                <input value=""
+                                                                       class="form-control  width_100 time_giaodich"
+                                                                       id="timepicker1" name="time"
+                                                                       type="text" >
+																	<span class="input-group-addon date_icon">
+																		<i class="fa fa-calendar bigger-110"></i>
+																	</span>
+                                                            </div>
+                                                            <label hidden
+                                                                   class="error-color  error-color-size"
+                                                                   id="error_created">Bạn vui lòng chọn ngày giao dịch</label>
                                                         </div>
                                                     </div>
-                                                </form>
-                                            </div><!-- /.widget-main -->
-                                        </div><!-- /.widget-body -->
-                                    </div><!-- /.widget-box -->
-                                </div>
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> Mô tả <span
+                                                                style="color: red">*</span></div>
+                                                        <div class="profile-info-value">
+                                                            <textarea id="content_giaodich" class="form-control"
+                                                                      placeholder="Bạn hãy nhập nội dung giao dịch ..."></textarea>
+                                                            <p hidden id="show_mess_content" class="red">Bạn vui lòng nhập
+                                                                nội dung giao dịch</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div><!-- /.widget-main -->
+                                    </div><!-- /.widget-body -->
+                                </div><!-- /.widget-box -->
                             </div>
                         </div>
+                    </div>
 
-                        <div class="modal-footer">
-                            <button class="btn btn-sm btn-primary" id="save_giao_dich" data-id="" data-code="" type="button">
-                                <i class="ace-icon fa fa-check"></i>
-                                Save
-                            </button>
-                            <button style="display: none" class="btn btn-sm btn-primary" id="show_loading_btn"  type="button">
-                                Loding...
-                            </button>
-                            <button type="reset" class="btn btn-sm" data-dismiss="modal" id="reset_form_popup">
-                                <i class="ace-icon fa fa-times"></i>
-                                Cancel
-                            </button>
-                        </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-sm btn-primary" id="save_giao_dich" data-id="" data-code=""
+                                type="button">
+                            <i class="ace-icon fa fa-check"></i>
+                            Save
+                        </button>
+                        <button style="display: none" class="btn btn-sm btn-primary" id="show_loading_btn"
+                                type="button">
+                            Loding...
+                        </button>
+                        <button type="reset" class="btn btn-sm" data-dismiss="modal" id="reset_form_popup">
+                            <i class="ace-icon fa fa-times"></i>
+                            Cancel
+                        </button>
+                    </div>
 
 
                 </div>
@@ -743,6 +783,9 @@
 <style>
     .form-group {
         margin-bottom: 8px;
+    }
+    .bootstrap-timepicker-widget.dropdown-menu{
+        z-index: 11111111111;
     }
 </style>
 

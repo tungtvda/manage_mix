@@ -90,8 +90,6 @@ jQuery(function ($) {
                 var date_send=$('#id-date-picker-1').val();
                 var id=$('#input_id').val();
                 var status=$('.status_sms').val();
-                console.log(id);
-                console.log(status);
                 var time_send=$('#timepicker1').val();
                 var message_birthday=$('#message_birthday').val();
                 var content_email=CKEDITOR.instances['content_email'].getData();

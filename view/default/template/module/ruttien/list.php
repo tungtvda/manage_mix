@@ -198,7 +198,9 @@
                                         <?php if ($row->status == 1) echo ' <i  style="font-size: 20px;color:green" class="fa fa-check-square-o "></i>' ?>
                                         <?php }?>
                                         </td>
-                                        <td><a href="#modal-form" role="button" data-toggle="modal"><i class="fa fa-check-square-o" aria-hidden="true"></i> Xác nhận</a></td>
+                                        <td>
+                                            <a href="#modal-form" data-id="<?php echo $row->id ?>" data-code="<?php echo $row->code ?>" data-name="<?php echo $row->name_user?> - <?php echo $row->user_code?>" role="button" data-toggle="modal"><i class="fa fa-check-square-o" aria-hidden="true"></i> Xác nhận</a>
+                                        </td>
                                         <td></td>
                                         <td><?php echo _returnDateFormatConvert($row->date_send) ?></td>
 
@@ -318,7 +320,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="blue bigger" id="title_form">Tạo mới thành viên</h4>
+                        <h4 class="blue bigger" id="title_form">Xác nhận rút tiền</h4>
 
                     </div>
                     <form id="submit_form" role="form" action="" method="post" enctype="multipart/form-data">

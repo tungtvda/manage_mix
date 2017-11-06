@@ -320,7 +320,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="blue bigger" id="title_form">Xác nhận rút tiền</h4>
+                        <h4 class="blue bigger" id="title_form">Xác nhận rút tiền "<span id="info_user"></span>"</h4>
 
                     </div>
                     <form id="submit_form" role="form" action="" method="post" enctype="multipart/form-data">
@@ -331,8 +331,8 @@
                                     <div class="profile-info-name"> Tiền yêu cầu <span style="color: red">*</span></div>
                                     <div class="profile-info-value">
                                                   <span class="input-icon width_100" style="">
-                                                    <input disabled name="name_gia" type="text" id="input_name_gia" value="" class="width_100 ">
-                                                    <i class="ace-icon fa fa-qrcode blue"></i>
+                                                    <input disabled name="price" type="text" id="input_price" value="" class="width_100 ">
+                                                    <i class="ace-icon fa fa-usd blue"></i>
                                                 </span>
                                     </div>
                                 </div>
@@ -340,31 +340,60 @@
                                     <div class="profile-info-name"> Tiền xác nhận <span style="color: red">*</span></div>
                                     <div class="profile-info-value">
                                                   <span class="input-icon width_100" style="">
-                                                    <input name="price_cost" type="number" id="input_price_cost" value="" class="width_100 ">
+                                                    <input name="price_confirm" type="number" id="input_price_confirm" value="" class="width_100 ">
                                                     <i class="ace-icon fa fa-usd blue"></i>
-                                                    <i id="icon_error_price_cost" style="display: none" class="ace-icon fa fa-times-circle icon-right error-color " data-toggle="ggtooltip" data-title="" data-trigger="hover" data-placement="bottom" data-backcolor="red" data-textcolor="#ffffff" title=""></i>
-                                                    <i id="icon_success_price_cost" style="display: none" class="ace-icon fa fa-check-circle icon-right success-color" data-toggle="ggtooltip" data-title="" data-trigger="hover" data-placement="bottom" data-backcolor="green" data-textcolor="#000000" title="Bạn vui lòng nhập chi phí"></i>
                                                 </span>
-                                        <label style="display: none" class="error-color  error-color-size" id="error_price_cost">Bạn vui lòng nhập chi phí</label>                                                <label style="display: none" class="  error-color-size" id="price_format_cost"></label>
+                                        <label style="display: none" class="error-color  error-color-size" id="error_price_confirm">Bạn vui lòng xác nhận tiền thanh toán</label>                                                <label style="display: none" class="  error-color-size" id="price_format_cost"></label>
+                                    </div>
+                                </div>
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Ngày yêu cầu </div>
+                                    <div class="profile-info-value">
+                                        <div class="input-group" style="">
+                                            <input value=""
+                                                   class="form-control width_100 " disabled
+                                                   id="input_send"
+                                                   type="text">
+																	<span class="input-group-addon date_icon">
+																		<i class="fa fa-calendar bigger-110"></i>
+																	</span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="profile-info-row">
                                     <div class="profile-info-name"> Ngày thanh toán <span style="color: red">*</span></div>
                                     <div class="profile-info-value">
                                         <div class="input-group" style="">
-                                            <input value="" class="form-control date-picker width_100 " id="input_created" name="created" required="" type="text" data-date-format="dd-mm-yyyy">
-                                            <span class="input-group-addon date_icon">
+                                            <input value=""
+                                                   class="form-control date-picker width_100 "
+                                                   id="input_date_confirm" name="date_confirm"
+                                                   type="text" data-date-format="dd-mm-yyyy">
+																	<span class="input-group-addon date_icon">
 																		<i class="fa fa-calendar bigger-110"></i>
 																	</span>
-
+                                            <input value=""
+                                                   class="form-control  width_100 time_confirm"
+                                                   id="timepicker1" name="time_confirm"
+                                                   type="text" >
+																	<span class="input-group-addon date_icon">
+																		<i class="fa fa-clock-o bigger-110"></i>
+																	</span>
                                         </div>
-                                        <label style="display: none" class="error-color  error-color-size" id="error_created">Bạn vui lòng chọn ngày thanh toán</label>
+                                        <label hidden
+                                               class="error-color  error-color-size"
+                                               id="error_created">Bạn vui lòng chọn ngày giao dịch</label>
+                                    </div>
+                                </div>
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Yêu cầu</div>
+                                    <div class="profile-info-value">
+                                        <textarea disabled id="input_yeu_cau" style="width: 100%" rows="5">sdfsdfsdfsdfsdfsdf askldfhlksadjkhfjkl asdlkjfh klasjdfh jklasdfhjklasdfhjklasdfh jklasđfhkljádfhjkládfhjkládfhjkládfh kljasdh kjasdfhuiashfjkasdghfjkhasgdfasdfjk asgfjkgfasdhfasdjkhgfjkasdgh jkasdgfashdfjkasdgh fjkasgdhf</textarea>
                                     </div>
                                 </div>
                                 <div class="profile-info-row">
                                     <div class="profile-info-name"> Mô tả</div>
                                     <div class="profile-info-value">
-                                        <textarea id="description_input" style="width: 100%" name="description" rows="8"></textarea>
+                                        <textarea id="input_yeu_cau" style="width: 100%" name="yeu_cau" rows="5"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -407,73 +436,7 @@
 
 
             <div id="content_form_detail" class="modal-body">
-                    <div class="profile-user-info profile-user-info-striped">
 
-
-                        <div class="profile-info-row">
-                            <div class="profile-info-name"> Họ tên</div>
-
-                            <div class="profile-info-value form-group">
-                                <span class="editable editable-click hidden_edit">Mrs.Trần Văn Tùng - media_002</span>
-
-
-                            </div>
-                        </div>
-
-
-
-                        <div class="profile-info-row">
-                            <div class="profile-info-name"> Email</div>
-
-                            <div class="profile-info-value">
-                                <span class="editable editable-click">tungtv.soict1@gmail.com</span>
-                            </div>
-                        </div>
-
-                        <div class="profile-info-row">
-                            <div class="profile-info-name"> Địa chỉ</div>
-
-                            <div class="profile-info-value">
-                                <i class="fa fa-map-marker light-orange bigger-110"></i>
-                                <span class="editable editable-click">Đông Anh, Hà Nội</span>
-                            </div>
-                        </div>
-                        <div class="profile-info-row">
-                            <div class="profile-info-name"> Điện thoại</div>
-
-                            <div class="profile-info-value">
-                                <span class="editable editable-click">0981.572.390</span>
-                            </div>
-                        </div>
-                        <div class="profile-info-row">
-                            <div class="profile-info-name"> Di động</div>
-
-                            <div class="profile-info-value">
-                                <span class="editable editable-click">valid</span>
-                            </div>
-                        </div>
-                        <div class="profile-info-row">
-                            <div class="profile-info-name">Số tài khoản</div>
-
-                            <div class="profile-info-value">
-                                123123123123123
-                            </div>
-                        </div>
-                        <div class="profile-info-row">
-                            <div class="profile-info-name"> Ngân hàng</div>
-
-                            <div class="profile-info-value">
-                                <span style="font-style: italic;color: #ff892a; font-size: 12px">  Ngân hàng: VietComBank</span></span>
-                            </div>
-                        </div>
-                        <div class="profile-info-row">
-                            <div class="profile-info-name"> Chi nhánh</div>
-
-                            <div class="profile-info-value">
-                                <span style="font-style: italic;color: #ff892a; font-size: 12px">  Ngân hàng: VietComBank</span></span>
-                            </div>
-                        </div>
-                    </div>
             </div>
 
             <div class="modal-footer">
@@ -487,3 +450,9 @@
         </div>
     </div>
 </div><!-- PAGE CONTENT ENDS -->
+
+<style>
+    .bootstrap-timepicker-widget.dropdown-menu{
+        z-index: 11111111111;
+    }
+</style>

@@ -728,7 +728,7 @@
                                                                        id="timepicker1" name="time"
                                                                        type="text" >
 																	<span class="input-group-addon date_icon">
-																		<i class="fa fa-calendar bigger-110"></i>
+																		<i class="fa fa-clock-o bigger-110"></i>
 																	</span>
                                                             </div>
                                                             <label hidden

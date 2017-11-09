@@ -9,7 +9,7 @@
 <div class="page-header">
 
     <h1>
-        <?php echo $title_module?>
+        <?php echo $title_module ?>
     </h1>
 
 </div><!-- /.page-header -->
@@ -24,15 +24,15 @@
                             <a href="#modal-form" role="button" data-toggle="modal" id="create_popup" data-type="az"
                                class="green btn btn-white btn-create btn-hover-white">
                                 <i class="ace-icon fa fa-plus bigger-120 "></i>
-                               Rút tiền
+                                Rút tiền
                                 <i class="ace-icon fa fa-external-link"></i>
                             </a>
-<!--                            <a href="--><?php //echo SITE_NAME ?><!--/nhan-vien/them-moi"-->
-<!--                               class="btn btn-white  btn-create-new-tab btn-create-new-tab-hover">-->
-<!--                                <i class="ace-icon fa fa-plus bigger-120 "></i>-->
-<!--                                Create new tab-->
-<!--                                <i class="ace-icon fa fa-arrow-right icon-on-right"></i>-->
-<!--                            </a>-->
+                            <!--                            <a href="--><?php //echo SITE_NAME ?><!--/nhan-vien/them-moi"-->
+                            <!--                               class="btn btn-white  btn-create-new-tab btn-create-new-tab-hover">-->
+                            <!--                                <i class="ace-icon fa fa-plus bigger-120 "></i>-->
+                            <!--                                Create new tab-->
+                            <!--                                <i class="ace-icon fa fa-arrow-right icon-on-right"></i>-->
+                            <!--                            </a>-->
                         <?php } ?>
                         <a href="" class="btn btn-white  btn-refresh">
                             <i class="ace-icon fa fa-refresh"></i>
@@ -70,42 +70,45 @@
                 <!-- div.dataTables_borderWrap -->
                 <div>
                     <form action="" method="post" id="form_submit_delete">
-                    <table id="dynamic-table" class="table table-striped table-bordered table-hover table-responsive">
-                        <thead>
-                        <tr>
-                            <th class="center">
-                                <label class="pos-rel">
-                                    <input type="checkbox" class="ace"/>
-                                    <span class="lbl"></span>
-                                </label>
-                            </th>
-                            <th>#</th>
-                            <th>Họ tên</th>
-                            <th>Tiền yêu cầu</th>
-                            <th>Trạng thái</th>
-                            <th>Xác nhận</th>
-                            <th>Ghi chú</th>
-                            <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1"
-                                aria-label="
+                        <table id="dynamic-table"
+                               class="table table-striped table-bordered table-hover table-responsive">
+                            <thead>
+                            <tr>
+                                <th class="center">
+                                    <label class="pos-rel">
+                                        <input type="checkbox" class="ace"/>
+                                        <span class="lbl"></span>
+                                    </label>
+                                </th>
+                                <th>#</th>
+                                <th>Họ tên</th>
+                                <th>Tiền yêu cầu</th>
+                                <th>Trạng thái</th>
+                                <th>Xác nhận</th>
+                                <th>Ghi chú</th>
+                                <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1"
+                                    aria-label="
 
 															Update
 														: activate to sort column ascending">
-                                <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
-                                Ngày gửi
-                            </th>
-                            <th>Action</th>
+                                    <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+                                    Ngày gửi
+                                </th>
+                                <th>Action</th>
 
-                        </tr>
-                        </thead>
+                            </tr>
+                            </thead>
 
                             <tbody>
                             <?php if (count($list) > 0 && _returnCheckAction(37) == 1) { ?>
                                 <?php $dem = 1; ?>
                                 <?php foreach ($list as $row) { ?>
-                                    <tr class="row_<?php echo $row->id?>">
+                                    <tr class="row_<?php echo $row->id ?>">
                                         <td class="center">
                                             <label class="pos-rel">
-                                                <input type="checkbox" class="ace click_check_list" name_record="<?php echo $row->name_user ?>" id="check_<?php echo $dem ?>" name="check_box_action[]"
+                                                <input type="checkbox" class="ace click_check_list"
+                                                       name_record="<?php echo $row->name_user ?>"
+                                                       id="check_<?php echo $dem ?>" name="check_box_action[]"
                                                        value="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"/>
                                                 <span class="lbl"></span>
                                             </label>
@@ -115,59 +118,71 @@
                                         </td>
                                         <td style="position: relative">
                                             <p>
-                                                <a   href="<?php echo SITE_NAME ?>/thanh-vien/sua?id=<?php echo _return_mc_encrypt($row->user_tiep_thi_id, ENCRYPTION_KEY); ?>"><?php echo $row->name_user.' - '.$row->user_code ?></a>
-                                                <a data-name="<?php echo $row->name_user ?> - <?php echo $row->user_code?>" data-id="<?php echo $row->id?>" role="button" data-toggle="modal"   class="show_info" href="#modal-form-info"><i  id="icon_show_<?php echo $row->id?>" class="fa fa-arrows-alt icon_show"></i></a>
+                                                <a href="<?php echo SITE_NAME ?>/thanh-vien/sua?id=<?php echo _return_mc_encrypt($row->user_tiep_thi_id, ENCRYPTION_KEY); ?>"><?php echo $row->name_user . ' - ' . $row->user_code ?></a>
+                                                <a data-name="<?php echo $row->name_user ?> - <?php echo $row->user_code ?>"
+                                                   data-id="<?php echo $row->id ?>" role="button" data-toggle="modal"
+                                                   class="show_info" href="#modal-form-info"><i
+                                                        id="icon_show_<?php echo $row->id ?>"
+                                                        class="fa fa-arrows-alt icon_show"></i></a>
                                             </p>
-                                            <div style="display: none" id="info_user_<?php echo $row->id?>">
+                                            <div style="display: none" id="info_user_<?php echo $row->id ?>">
                                                 <div class="profile-user-info profile-user-info-striped">
                                                     <div class="profile-info-row">
                                                         <div class="profile-info-name"> Họ tên</div>
                                                         <div class="profile-info-value form-group">
-                                                            <span class="editable editable-click hidden_edit"><?php echo $row->name_user?> - <?php echo $row->user_code?></span>
+                                                            <span
+                                                                class="editable editable-click hidden_edit"><?php echo $row->name_user ?>
+                                                                - <?php echo $row->user_code ?></span>
                                                         </div>
                                                     </div>
                                                     <div class="profile-info-row">
                                                         <div class="profile-info-name"> Email</div>
                                                         <div class="profile-info-value">
-                                                            <span class="editable editable-click"><?php echo $row->user_email?></span>
+                                                            <span
+                                                                class="editable editable-click"><?php echo $row->user_email ?></span>
                                                         </div>
                                                     </div>
                                                     <div class="profile-info-row">
                                                         <div class="profile-info-name"> Địa chỉ</div>
                                                         <div class="profile-info-value">
                                                             <i class="fa fa-map-marker light-orange bigger-110"></i>
-                                                            <span class="editable editable-click"><?php echo $row->address?></span>
+                                                            <span
+                                                                class="editable editable-click"><?php echo $row->address ?></span>
                                                         </div>
                                                     </div>
                                                     <div class="profile-info-row">
                                                         <div class="profile-info-name"> Điện thoại</div>
                                                         <div class="profile-info-value">
-                                                            <span class="editable editable-click"><?php echo $row->phone?></span>
+                                                            <span
+                                                                class="editable editable-click"><?php echo $row->phone ?></span>
                                                         </div>
                                                     </div>
                                                     <div class="profile-info-row">
                                                         <div class="profile-info-name"> Di động</div>
 
                                                         <div class="profile-info-value">
-                                                            <span class="editable editable-click"><?php echo $row->mobi?></span>
+                                                            <span
+                                                                class="editable editable-click"><?php echo $row->mobi ?></span>
                                                         </div>
                                                     </div>
                                                     <div class="profile-info-row">
                                                         <div class="profile-info-name">Số tài khoản</div>
                                                         <div class="profile-info-value">
-                                                            <?php echo $row->account_number_bank?>
+                                                            <?php echo $row->account_number_bank ?>
                                                         </div>
                                                     </div>
                                                     <div class="profile-info-row">
                                                         <div class="profile-info-name"> Ngân hàng</div>
                                                         <div class="profile-info-value">
-                                                           <span style="font-style: italic;color: #ff892a; font-size: 12px">  <?php echo $row->bank?></span></span>
+                                                            <span
+                                                                style="font-style: italic;color: #ff892a; font-size: 12px">  <?php echo $row->bank ?></span></span>
                                                         </div>
                                                     </div>
                                                     <div class="profile-info-row">
                                                         <div class="profile-info-name"> Chi nhánh</div>
                                                         <div class="profile-info-value">
-                                                            <span style="font-style: italic;color: #ff892a; font-size: 12px">  <?php echo $row->open_bank?></span></span>
+                                                            <span
+                                                                style="font-style: italic;color: #ff892a; font-size: 12px">  <?php echo $row->open_bank ?></span></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -176,9 +191,9 @@
                                         </td>
                                         <td>
                                             <?php
-                                            if($row->price!=''&&$row->price!=null){
-                                                echo '<b class="red">'.number_format((int)$row->price,0,",",".").' vnđ </b>';
-                                            }else{
+                                            if ($row->price != '' && $row->price != null) {
+                                                echo '<b class="red">' . number_format((int)$row->price, 0, ",", ".") . ' vnđ </b>';
+                                            } else {
                                                 echo '<b class="red">0 vnđ</b>';
                                             }
                                             ?>
@@ -186,26 +201,30 @@
 
                                         <td>
                                             <span hidden><?php echo (int)$row->status ?></span>
-                                    <?php if (_returnCheckAction(39) == 1) { ?>
-                                            <label>
+                                            <?php if (_returnCheckAction(39) == 1) { ?>
+                                                <label>
 
-                                                <input disabled <?php if ($row->status) echo 'checked' ?>
-                                                    id="checkbox_status_<?php echo $row->id ?>" class="ace ace-switch ace-switch-7" type="checkbox">
-                                                <span class="lbl"></span>
-                                            </label>
-                                    <?php }else{?>
-                                        <?php if ($row->status == 0) echo '<i  style="font-size: 20px;" class="fa fa-check-square-o "></i>' ?>
-                                        <?php if ($row->status == 1) echo ' <i  style="font-size: 20px;color:green" class="fa fa-check-square-o "></i>' ?>
-                                        <?php }?>
+                                                    <input disabled <?php if ($row->status) echo 'checked' ?>
+                                                           id="checkbox_status_<?php echo $row->id ?>"
+                                                           class="ace ace-switch ace-switch-7" type="checkbox">
+                                                    <span class="lbl"></span>
+                                                </label>
+                                            <?php } else { ?>
+                                                <?php if ($row->status == 0) echo '<i  style="font-size: 20px;" class="fa fa-check-square-o "></i>' ?>
+                                                <?php if ($row->status == 1) echo ' <i  style="font-size: 20px;color:green" class="fa fa-check-square-o "></i>' ?>
+                                            <?php } ?>
                                         </td>
                                         <td>
-                                            <a class="btn_confirm" href="#modal-form" data-id="<?php echo $row->id ?>" data-code="<?php echo $row->code ?>" data-name="<?php echo $row->name_user?> - <?php echo $row->user_code?>" role="button" data-toggle="modal"><i class="fa fa-check-square-o" aria-hidden="true"></i> Xác nhận</a>
-                                            <div hidden id="cmt_yeu_cau_<?php echo $row->id ?>">
-                                                <?php echo $row->yeu_cau ?>
-                                            </div>
-                                            <div hidden id="date_send_<?php echo $row->id ?>">
-                                                <?php echo date('d-m-Y',strtotime($row->date_send)) ?>
-                                            </div>
+                                            <a class="btn_confirm" href="#modal-form" data-id="<?php echo $row->id ?>"
+                                               data-code="<?php echo $row->code ?>"
+                                               data-name="<?php echo $row->name_user ?> - <?php echo $row->user_code ?>"
+                                               role="button" data-toggle="modal"><i class="fa fa-check-square-o"
+                                                                                    aria-hidden="true"></i> Xác nhận</a>
+                                            <textarea hidden id="cmt_yeu_cau_<?php echo $row->id ?>"><?php echo $row->yeu_cau ?></textarea>
+                                            <input hidden id="date_send_<?php echo $row->id ?>" value="<?php echo date('d-m-Y', strtotime($row->date_send)) ?>">
+                                            <input hidden id="price_send_format_<?php echo $row->id ?>" value="<?php echo number_format((int)$row->price,0,",",".").' vnđ' ?>">
+                                            <input hidden id="price_send_<?php echo $row->id ?>" value="<?php echo $row->price?>">
+
                                         </td>
                                         <td></td>
                                         <td><?php echo _returnDateFormatConvert($row->date_send) ?></td>
@@ -214,7 +233,10 @@
                                             <div class="hidden-sm hidden-xs action-buttons">
 
                                                 <?php if (_returnCheckAction(39) == 1) { ?>
-                                                    <a class="blue view_popup_detail" role="button" name_record="<?php echo $row->name_user ?>" data-toggle="modal" table="user" countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                    <a class="blue view_popup_detail" role="button"
+                                                       name_record="<?php echo $row->name_user ?>" data-toggle="modal"
+                                                       table="user"
+                                                       countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
                                                        href="#modal-form"
                                                        title="Chi tiết">
                                                         <i class="ace-icon fa fa-eye-slash bigger-130"></i>
@@ -241,21 +263,24 @@
 
                                                         <?php if (_returnCheckAction(39) == 1) { ?>
                                                             <li>
-                                                                <a class="blue view_popup_detail" role="button" name_record="<?php echo $row->name ?>" data-toggle="modal" table="user" countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                                <a class="blue view_popup_detail" role="button"
+                                                                   name_record="<?php echo $row->name ?>"
+                                                                   data-toggle="modal" table="user"
+                                                                   countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
                                                                    href="#modal-form"
                                                                    title="Chi tiết">
                                                                     <i class="ace-icon fa fa-eye-slash bigger-130"></i>
                                                                 </a>
                                                             </li>
-<!--                                                            <li>-->
-<!--                                                                <a  href="--><?php //echo SITE_NAME ?><!--/nhan-vien/sua?id=--><?php //echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?><!--"-->
-<!--                                                                   class="tooltip-success" data-rel="tooltip"-->
-<!--                                                                   title="Sửa tab mới">-->
-<!--																				<span class="green">-->
-<!--																					<i class="ace-icon fa fa-pencil bigger-120"></i>-->
-<!--																				</span>-->
-<!--                                                                </a>-->
-<!--                                                            </li>-->
+                                                            <!--                                                            <li>-->
+                                                            <!--                                                                <a  href="--><?php //echo SITE_NAME ?><!--/nhan-vien/sua?id=--><?php //echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?><!--"-->
+                                                            <!--                                                                   class="tooltip-success" data-rel="tooltip"-->
+                                                            <!--                                                                   title="Sửa tab mới">-->
+                                                            <!--																				<span class="green">-->
+                                                            <!--																					<i class="ace-icon fa fa-pencil bigger-120"></i>-->
+                                                            <!--																				</span>-->
+                                                            <!--                                                                </a>-->
+                                                            <!--                                                            </li>-->
                                                         <?php } ?>
                                                         <?php if (_returnCheckAction(40) == 1) { ?>
                                                             <li>
@@ -282,7 +307,7 @@
                             </tbody>
 
 
-                    </table>
+                        </table>
                     </form>
                 </div>
                 <div class="hr hr-18 dotted hr-double"></div>
@@ -296,7 +321,7 @@
                     <ul class="dropdown-menu dropdown-danger">
                         <?php if (_returnCheckAction(2) == 1) { ?>
                             <li>
-                                <a href="#modal-form"  role="button"  data-toggle="modal" class="edit_function">Sửa</a>
+                                <a href="#modal-form" role="button" data-toggle="modal" class="edit_function">Sửa</a>
                             </li>
                         <?php } ?>
                         <?php if (_returnCheckAction(3) == 1) { ?>
@@ -317,16 +342,17 @@
         </div>
 
         <style>
-            .modal-backdrop{
+            .modal-backdrop {
                 height: 1000px !important;
             }
         </style>
-        <div  id="modal-form" class="modal" tabindex="-1">
+        <div id="modal-form" class="modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="blue bigger" id="title_form_confirm">Xác nhận rút tiền "<span id="info_user"></span>"</h4>
+                        <h4 class="blue bigger" id="title_form_confirm">Xác nhận rút tiền "<span id="info_user"></span>"
+                        </h4>
 
                     </div>
                     <form id="submit_form" role="form" action="" method="post" enctype="multipart/form-data">
@@ -337,23 +363,29 @@
                                     <div class="profile-info-name"> Tiền yêu cầu <span style="color: red">*</span></div>
                                     <div class="profile-info-value">
                                                   <span class="input-icon width_100" style="">
-                                                    <input disabled name="price" type="text" id="input_price" value="" class="width_100 ">
+                                                    <input disabled name="price" type="text" id="input_price" value=""
+                                                           class="width_100 ">
                                                     <i class="ace-icon fa fa-usd blue"></i>
                                                 </span>
                                     </div>
                                 </div>
                                 <div class="profile-info-row">
-                                    <div class="profile-info-name"> Tiền xác nhận <span style="color: red">*</span></div>
+                                    <div class="profile-info-name"> Tiền xác nhận <span style="color: red">*</span>
+                                    </div>
                                     <div class="profile-info-value">
                                                   <span class="input-icon width_100" style="">
-                                                    <input name="price_confirm" type="number" id="input_price_confirm" value="" class="width_100 ">
+                                                    <input name="price_confirm" type="number" id="input_price_confirm"
+                                                           value="" class="width_100 ">
                                                     <i class="ace-icon fa fa-usd blue"></i>
                                                 </span>
-                                        <label style="display: none" class="error-color  error-color-size" id="error_price_confirm">Bạn vui lòng xác nhận tiền thanh toán</label>                                                <label style="display: none" class="  error-color-size" id="price_format_cost"></label>
+                                        <label style="display: none" class="error-color  error-color-size"
+                                               id="error_price_confirm">Bạn vui lòng xác nhận tiền thanh toán</label>
+                                        <label style="display: none" class="blue" id="price_confirm_format"></label>
+                                        <input hidden id="input_price_send">
                                     </div>
                                 </div>
                                 <div class="profile-info-row">
-                                    <div class="profile-info-name"> Ngày yêu cầu </div>
+                                    <div class="profile-info-name"> Ngày yêu cầu</div>
                                     <div class="profile-info-value">
                                         <div class="input-group" style="">
                                             <input value=""
@@ -367,7 +399,8 @@
                                     </div>
                                 </div>
                                 <div class="profile-info-row">
-                                    <div class="profile-info-name"> Ngày thanh toán <span style="color: red">*</span></div>
+                                    <div class="profile-info-name"> Ngày thanh toán <span style="color: red">*</span>
+                                    </div>
                                     <div class="profile-info-value">
                                         <div class="input-group" style="">
                                             <input value=""
@@ -380,7 +413,7 @@
                                             <input value=""
                                                    class="form-control  width_100 time_confirm"
                                                    id="timepicker1" name="time_confirm"
-                                                   type="text" >
+                                                   type="text">
 																	<span class="input-group-addon date_icon">
 																		<i class="fa fa-clock-o bigger-110"></i>
 																	</span>
@@ -393,13 +426,14 @@
                                 <div class="profile-info-row">
                                     <div class="profile-info-name"> Yêu cầu</div>
                                     <div class="profile-info-value">
-                                        <textarea disabled id="input_yeu_cau" style="width: 100%" rows="5">sdfsdfsdfsdfsdfsdf askldfhlksadjkhfjkl asdlkjfh klasjdfh jklasdfhjklasdfhjklasdfh jklasđfhkljádfhjkládfhjkládfhjkládfh kljasdh kjasdfhuiashfjkasdghfjkhasgdfasdfjk asgfjkgfasdhfasdjkhgfjkasdgh jkasdgfashdfjkasdgh fjkasgdhf</textarea>
+                                        <textarea disabled id="input_yeu_cau" style="width: 100%" rows="5"></textarea>
                                     </div>
                                 </div>
                                 <div class="profile-info-row">
                                     <div class="profile-info-name"> Mô tả</div>
                                     <div class="profile-info-value">
-                                        <textarea id="input_yeu_cau" style="width: 100%" name="yeu_cau" rows="5"></textarea>
+                                        <textarea id="input_yeu_cau" style="width: 100%" name="yeu_cau"
+                                                  rows="5"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -420,7 +454,7 @@
                 </div>
             </div>
         </div><!-- PAGE CONTENT ENDS -->
-        
+
 
     </div><!-- /.col -->
 
@@ -458,7 +492,7 @@
 </div><!-- PAGE CONTENT ENDS -->
 
 <style>
-    .bootstrap-timepicker-widget.dropdown-menu{
+    .bootstrap-timepicker-widget.dropdown-menu {
         z-index: 11111111111;
     }
 </style>

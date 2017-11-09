@@ -61,6 +61,18 @@ jQuery(function ($) {
         $('.show_info').attr('data-show','show');
         //$('#info_user_'+id).show().css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
     });
+    $('body').on("click",'.btn_confirm', function (e) {
+        var id=$(this).attr('data-id');
+        var code=$(this).attr('data-code');
+        var name=$(this).attr('data-name');
+        if(id && code && name){
+            var cmt_yeu_cau=$('#cmt_yeu_cau_'+id).html();
+            var date_send=$('#date_send_'+id).html();
+            $('#title_form_confirm').html('Xác nhận rút tiền cho thành viên "<span class="red">'+name+'</span>"');
+        }else{
+            $('#modal-form').modal('hide');
+        }
+    });
 
 });
 

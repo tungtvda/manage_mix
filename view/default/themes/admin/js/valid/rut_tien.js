@@ -66,11 +66,50 @@ jQuery(function ($) {
         var code=$(this).attr('data-code');
         var name=$(this).attr('data-name');
         if(id && code && name){
-            var cmt_yeu_cau=$('#cmt_yeu_cau_'+id).html();
-            var date_send=$('#date_send_'+id).html();
+            var cmt_yeu_cau=$('#cmt_yeu_cau_'+id).val();
+            var price_send_format=$('#price_send_format_'+id).val();
+            var price_send=$('#price_send_'+id).val();
+            var date_send=$('#date_send_'+id).val();
             $('#title_form_confirm').html('Xác nhận rút tiền cho thành viên "<span class="red">'+name+'</span>"');
+            $('#input_send').val(date_send);
+            $('#input_yeu_cau').html(cmt_yeu_cau);
+            $('#input_price').val(price_send_format);
+            $('#input_price_send').val(price_send);
+            var currentDate = new Date();
+            $("#input_date_confirm").datepicker("setDate",currentDate);
         }else{
             $('#modal-form').modal('hide');
+        }
+    });
+
+    $('body').on("blur",'#input_price_confirm', function (e) {
+        var price_confirm=$(this).val();
+        var price_send=$('#input_price_send').val();
+        var mess_error='';
+        if(price_send!='' && price_send!=''){
+            var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
+            if (numberRegex.test(price_send)) {
+               console.log('Số');
+            }else{
+                mess_error='Bạn vui lòng ctrl+F5 để thử lại'
+            }
+        }else{
+            if(price_send==''){
+                mess_error='Bạn vui lòng ctrl+F5 để thử lại'
+            }
+            if(price_confirm==''){
+                mess_error='Bạn vui lòng xác nhận số tiền'
+            }
+        }
+        if(mess_error!=''){
+            lnv.alert({
+                title: 'Lỗi',
+                content: mess_error,
+                alertBtnText: 'Ok',
+                iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                alertHandler: function () {
+                }
+            });
         }
     });
 

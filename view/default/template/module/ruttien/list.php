@@ -199,7 +199,13 @@
                                         <?php }?>
                                         </td>
                                         <td>
-                                            <a href="#modal-form" data-id="<?php echo $row->id ?>" data-code="<?php echo $row->code ?>" data-name="<?php echo $row->name_user?> - <?php echo $row->user_code?>" role="button" data-toggle="modal"><i class="fa fa-check-square-o" aria-hidden="true"></i> Xác nhận</a>
+                                            <a class="btn_confirm" href="#modal-form" data-id="<?php echo $row->id ?>" data-code="<?php echo $row->code ?>" data-name="<?php echo $row->name_user?> - <?php echo $row->user_code?>" role="button" data-toggle="modal"><i class="fa fa-check-square-o" aria-hidden="true"></i> Xác nhận</a>
+                                            <div hidden id="cmt_yeu_cau_<?php echo $row->id ?>">
+                                                <?php echo $row->yeu_cau ?>
+                                            </div>
+                                            <div hidden id="date_send_<?php echo $row->id ?>">
+                                                <?php echo date('d-m-Y',strtotime($row->date_send)) ?>
+                                            </div>
                                         </td>
                                         <td></td>
                                         <td><?php echo _returnDateFormatConvert($row->date_send) ?></td>
@@ -320,7 +326,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="blue bigger" id="title_form">Xác nhận rút tiền "<span id="info_user"></span>"</h4>
+                        <h4 class="blue bigger" id="title_form_confirm">Xác nhận rút tiền "<span id="info_user"></span>"</h4>
 
                     </div>
                     <form id="submit_form" role="form" action="" method="post" enctype="multipart/form-data">

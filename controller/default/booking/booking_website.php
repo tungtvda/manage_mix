@@ -21,6 +21,7 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
     $code_tour = _return_mc_decrypt(_returnPostParamSecurity('code_tour'), '');
     $price_tiep_thi_thuc_te = _return_mc_decrypt(_returnPostParamSecurity('price_tiep_thi'), '');
     $id_tour = _return_mc_decrypt(_returnPostParamSecurity('id_tour'), '');
+    $dieuhanh_id = _return_mc_decrypt(_returnPostParamSecurity('dieuhanh_id'), '');
     $nguon_tour = _return_mc_decrypt(_returnPostParamSecurity('ng_tour'), '');
     $phuong_tien= _return_mc_decrypt(_returnPostParamSecurity('phuong_tien'), '');
 
@@ -60,6 +61,7 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
     $gen=_return_mc_decrypt(_returnPostParamSecurity('gen'), '');
     $tol=_return_mc_decrypt(_returnPostParamSecurity('tol'), '');
     $key_user=_return_mc_decrypt(_returnPostParamSecurity('key_user'), '');
+    $nguon_tour_id=0;
     if($nguon_tour!=''){
         $data_nguon_tour=nguon_tour_getByTop('1','name="'.$nguon_tour.'"','id desc');
         if(count($data_nguon_tour)>0){
@@ -143,6 +145,7 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
         $booking_model->total_price=$tol;
         $booking_model->tien_thanh_toan='';
         $booking_model->user_id=0;
+        $booking_model->dieuhanh_id=$dieuhanh_id;
         $booking_model->user_tiep_thi_id=$key_user;
         $booking_model->note=$note;
         $booking_model->status=1;
@@ -163,6 +166,9 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
             if($key_user!=0){
                 $array_user['user_name']=$data_user_tiep_thi[0]->name;
                 $array_user['user_email']=$data_user_tiep_thi[0]->user_email;
+                if($booking_model->price_tiep_thi){
+                    _returnInsertChiphiBooking($id_booking, $dieuhanh_id, 'Tiền hoa hồng',$booking_model->price_tiep_thi,'Hệ thống tự động lưu số tiền hoa hồng cho thành viên tiếp thị "'.$data_user_tiep_thi[0]->name.'"',_returnGetDateTime(), ' Hệ thống đã thêm chi phí hoa hồng cho thành viên tiếp thị "'.$data_user_tiep_thi[0]->name.'"');
+                }
                 _insertNotification('Khách hàng '.$name_customer.' đã đặt tour được gắn mã tiếp thị của bạn',0,$key_user,'/tiep-thi-lien-ket/don-hang/chi-tiet?noti=1&confirm=1&id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY).'',0,'');
             }
         }

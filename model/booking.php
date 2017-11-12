@@ -1,7 +1,7 @@
 <?php
 class booking
 {
-    public $id,$code_booking,$id_tour,$name_tour,$code_tour,$price_tour, $price_tiep_thi,$price_tiep_thi_thuc_te,$level_tiep_thi,$level_gioi_thieu_tiep_thi_3,$level_gioi_thieu_tiep_thi_4,$level_gioi_thieu_tiep_thi_5,$hoa_hong_gioi_thieu_4,$hoa_hong_gioi_thieu_5,$status_tiep_thi,$confirm_admin_tiep_thi,$price_11,$price_5,$price_new,$price_11_new,$price_5_new,$vat,$nguon_tour,$tien_te,$ty_gia,$ngay_bat_dau,$han_thanh_toan,$loai_khach_hang,$hinh_thuc_thanh_toan,$id_customer,$diem_don,$diem_tra,$ngay_khoi_hanh,$ngay_ket_thuc,$phuong_tien,$num_nguoi_lon,$num_tre_em,$num_tre_em_5,$price_number,$price_number_2,$price_number_3,$name_price,$name_price_2,$name_price_3,$total_price,$tien_thanh_toan,$user_id,$user_tiep_thi_id,$status,$confirm_admin,$created_by,$updated_by,$created,$updated,$note;
+    public $id,$code_booking,$id_tour,$name_tour,$code_tour,$price_tour, $price_tiep_thi,$price_tiep_thi_thuc_te,$level_tiep_thi,$level_gioi_thieu_tiep_thi_3,$level_gioi_thieu_tiep_thi_4,$level_gioi_thieu_tiep_thi_5,$hoa_hong_gioi_thieu_4,$hoa_hong_gioi_thieu_5,$status_tiep_thi,$confirm_admin_tiep_thi,$price_11,$price_5,$price_new,$price_11_new,$price_5_new,$vat,$nguon_tour,$tien_te,$ty_gia,$ngay_bat_dau,$han_thanh_toan,$loai_khach_hang,$hinh_thuc_thanh_toan,$id_customer,$diem_don,$diem_tra,$ngay_khoi_hanh,$ngay_ket_thuc,$phuong_tien,$num_nguoi_lon,$num_tre_em,$num_tre_em_5,$price_number,$price_number_2,$price_number_3,$name_price,$name_price_2,$name_price_3,$total_price,$tien_thanh_toan,$user_id,$dieuhanh_id,$user_tiep_thi_id,$status,$confirm_admin,$created_by,$updated_by,$created,$updated,$note;
     public function booking($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
@@ -51,6 +51,7 @@ class booking
     $this->total_price=isset($data['total_price'])?$data['total_price']:'';
     $this->tien_thanh_toan=isset($data['tien_thanh_toan'])?$data['tien_thanh_toan']:'';
     $this->user_id=isset($data['user_id'])?$data['user_id']:'';
+    $this->dieuhanh_id=isset($data['dieuhanh_id'])?$data['dieuhanh_id']:'';
     $this->user_tiep_thi_id=isset($data['user_tiep_thi_id'])?$data['user_tiep_thi_id']:'';
     $this->status=isset($data['status'])?$data['status']:'';
     $this->confirm_admin=isset($data['confirm_admin'])?$data['confirm_admin']:'';
@@ -110,6 +111,7 @@ class booking
             $this->total_price=addslashes($this->total_price);
             $this->tien_thanh_toan=addslashes($this->tien_thanh_toan);
             $this->user_id=addslashes($this->user_id);
+            $this->dieuhanh_id=addslashes($this->dieuhanh_id);
             $this->user_tiep_thi_id=addslashes($this->user_tiep_thi_id);
             $this->status=addslashes($this->status);
             $this->confirm_admin=addslashes($this->confirm_admin);
@@ -168,6 +170,7 @@ class booking
             $this->total_price=stripslashes($this->total_price);
             $this->tien_thanh_toan=stripslashes($this->tien_thanh_toan);
             $this->user_id=stripslashes($this->user_id);
+            $this->dieuhanh_id=stripslashes($this->dieuhanh_id);
             $this->user_tiep_thi_id=stripslashes($this->user_tiep_thi_id);
             $this->status=stripslashes($this->status);
             $this->confirm_admin=stripslashes($this->confirm_admin);

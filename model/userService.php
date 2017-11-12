@@ -155,3 +155,7 @@ function userAll($where){
     }
     return $array_result;
 }
+function user_getByTopCustomField($file='*',$top,$where,$order)
+{
+    return user_Get("select ".$file." from user ".(($where!='')?(' where '.$where):'').(($order!='')?" Order By ".$order:'').(($top!='')?' limit '.$top:''));
+}

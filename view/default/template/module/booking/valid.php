@@ -222,6 +222,42 @@ $string_data_user_tiep_thi=_returnDataAutoCompleteUserTiepThi();
                 }
             }
         });
+        $('#input_name_dieuhanh').autoComplete({
+            minChars: 0,
+            source: function (term, suggest) {
+                term = term.toLowerCase();
+                var choices =<?php echo $string_data_user?>
+                var suggestions = [];
+                for (i = 0; i < choices.length; i++)
+                    if (~(choices[i][0] + ' ' + choices[i][1]).toLowerCase().indexOf(term)) suggestions.push(choices[i]);
+                suggest(suggestions);
+            },
+            renderItem: function (item, search) {
+                search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+                var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
+                return '<div title="' + item[1] + '-'+item[2]+'-'+item[3]+'" class="autocomplete-suggestion" data-user_id="' + item[0] + '" data-user_name="' + item[1] + '" data-user-email="' + item[2] + '" data-user-phone="' + item[3] + '" data-user-phong-ban="' + item[4] + '" data-number-tour="' + item[5] + '" > ' + item[1]+' - ' + item[2]+'  - ' + item[3]+'</div>';
+            },
+            onSelect: function (e, term, item) {
+                $('#input_name_dieuhanh').val(item.data('user_name'));
+                $('#input_dieuhanh_id').val(item.data('user_id'));
+                var table_user="<tr> <td class='center'>1</td><td><a>"+item.data('user_name')+"</a></td><td>" +
+                    "<span >"+item.data('user-email')+"</span>" +
+                    "</td> " +
+                    "<td>" +
+                    "<span>"+item.data('user-phone')+"</span>" +
+                    "</td><td>" +
+                    "<span >"+item.data('user-phong-ban')+"</span>" +
+                    "</td><td>"+item.data('number-tour')+"" +
+                    "</td></tr>";
+                $('.table_booking_dieuhanh').html(table_user);
+                if(item.data('user_id')!=''){
+                    $('#input_dieuhanh_id').removeClass("input-error").addClass("valid");
+                    $("#error_name_dieuhanh").hide();
+                    $('#icon_error_name_dieuhanh').hide();
+                    $('#input_name_dieuhanh').removeClass("input-error").addClass("valid");
+                }
+            }
+        });
 
         $('#input_name_user_tiepthi').autoComplete({
             minChars: 0,
@@ -241,22 +277,6 @@ $string_data_user_tiep_thi=_returnDataAutoCompleteUserTiepThi();
             onSelect: function (e, term, item) {
                 $('#input_name_user_tiepthi').val(item.data('user-code-tt'));
                 $('#input_id_user_tt').val(item.data('user-id-tt'));
-//                var table_user="<tr> <td class='center'>1</td><td><a>"+item.data('user_name')+"</a></td><td>" +
-//                    "<span >"+item.data('user-email')+"</span>" +
-//                    "</td> " +
-//                    "<td>" +
-//                    "<span>"+item.data('user-phone')+"</span>" +
-//                    "</td><td>" +
-//                    "<span >"+item.data('user-phong-ban')+"</span>" +
-//                    "</td><td>"+item.data('number-tour')+"" +
-//                    "</td></tr>";
-//                $('.table_booking_user').html(table_user);
-//                if(item.data('user_id')!=''){
-//                    $('#input_id_user').removeClass("input-error").addClass("valid");
-//                    $("#error_name_user").hide();
-//                    $('#icon_error_name_user').hide();
-//                    $('#input_name_user').removeClass("input-error").addClass("valid");
-//                }
             }
         });
     });

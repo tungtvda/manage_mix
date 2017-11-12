@@ -28,6 +28,15 @@ jQuery(function ($) {
         }
     });
 
+    $('body').on("input", '#input_name_dieuhanh', function () {
+        removeValueDieuhanh();
+    });
+    $('body').on("keyup", '#input_name_dieuhanh', function (event) {
+        if (event.keyCode != "13") {
+            removeValueDieuhanh();
+        }
+    });
+
     $('body').on("input", '#input_name_user_tiepthi', function () {
         $('#input_id_user_tt').val('');
     });
@@ -1731,6 +1740,17 @@ function removeValueUser() {
     error_name_user.addClass("error-color");
     error_name_user.html("Bạn vui lòng nhập và chọn sales");
     error_name_user.show();
+}
+function removeValueDieuhanh() {
+    $('.table_booking_dieuhanh').html('');
+    $('#input_dieuhanh_id').val('');
+    $('#input_dieuhanh_id').removeClass("valid").addClass("input-error");
+    $('#input_name_dieuhanh').removeClass("valid").addClass("input-error");
+    var error_name_dieuhanh = $("#error_name_dieuhanh");
+    error_name_dieuhanh.removeClass("success-color");
+    error_name_dieuhanh.addClass("error-color");
+    error_name_dieuhanh.html("Bạn vui lòng nhập và chọn điều hành");
+    error_name_dieuhanh.show();
 }
 
 function formatNumber(nStr, decSeperate, groupSeperate) {

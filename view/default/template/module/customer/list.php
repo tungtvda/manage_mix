@@ -99,7 +99,7 @@
                             <th>Skype</th>
                             <th>Address</th>
                             <th>Status</th>
-
+                            <th>Lịch sử giao dịch</th>
                             <th>Action</th>
 
                         </tr>
@@ -161,6 +161,15 @@
                                         </td>
                                         <!--                                        <td>-->
                                         <?php //echo _returnDateFormatConvert($row->created) ?><!--</td>-->
+                                        <td>
+
+                                                <a title="Lịch sử giao dịch" class="red view_lich_su_giao_dich"
+                                                   href="#modal-form-giaodich" role="button" data-toggle="modal"
+                                                   data-id="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                >
+                                                    <i class="ace-icon fa fa-sliders bigger-130"></i>
+                                                </a>
+                                        </td>
 
                                         <td>
                                             <div class="hidden-sm hidden-xs action-buttons">
@@ -420,12 +429,97 @@
     }
 </style>
 
-<!--<script type=”text/javascript” src=”http://kbeezie.com/jquery13.js”></script>-->
-<!--<script src=”http://kbeezie.com/fancybox/jquery.fancybox-1.3.1.pack.js” type=”text/javascript”></script>-->
-<!--<link rel=”stylesheet” href=”http://kbeezie.com/fancybox/jquery.fancybox-1.3.1.css” type=”text/css” media=”screen”/>-->
-<!--<div style="display: none;">-->
-<!--    <a id=”trigger” href=”#popup”>&nbsp;</a>-->
-<!--    <div id=”popup” style="width: 250px; height: 400px;">-->
-<!--        <p> Write you message here</p>-->
-<!--    </div>-->
-<!--</div>-->
+<!--        Lịch sử giao dịch-->
+<div id="modal-form-giaodich" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="blue bigger" id="title_form">Lịch sử giao dịch đơn hàng "<b
+                        id="name-detail-code-booking" class="red"></b>"</h4>
+            </div>
+
+
+            <div class="modal-body">
+                <div class="row">
+                    <div id="show_loading_giao_dich" style="text-align: center">
+                        <img src="<?php echo SITE_NAME . '/view/default/themes/images/loading_1.gif' ?>">
+                    </div>
+                    <div hidden id="show_red_none_giao_dich" style="text-align: center">
+                    </div>
+                    <div id="show_list_giao_dich" class="col-xs-12">
+                        <div class="widget-box">
+                            <div class="widget-body">
+                                <div class="widget-main no-padding">
+                                    <div id="back_to_top_giao_dich">
+                                    </div>
+                                    <div class="dialogs" id="list_giao_dich"
+                                         style="height: 350px; overflow: scroll">
+                                    </div>
+
+                                    <form>
+                                        <div class="profile-user-info profile-user-info-striped" style="width: 100%;">
+                                            <div class="profile-info-row">
+                                                <div class="profile-info-name"> Ngày giao dịch <span
+                                                        style="color: red">*</span></div>
+                                                <div class="profile-info-value">
+                                                    <div class="input-group" style="">
+                                                        <input value=""
+                                                               class="form-control date-picker width_100 "
+                                                               id="created_giaodich" name="created"
+                                                               type="text" data-date-format="dd-mm-yyyy">
+																	<span class="input-group-addon date_icon">
+																		<i class="fa fa-calendar bigger-110"></i>
+																	</span>
+                                                        <input value=""
+                                                               class="form-control  width_100 time_giaodich"
+                                                               id="timepicker1" name="time"
+                                                               type="text" >
+																	<span class="input-group-addon date_icon">
+																		<i class="fa fa-clock-o bigger-110"></i>
+																	</span>
+                                                    </div>
+                                                    <label hidden
+                                                           class="error-color  error-color-size"
+                                                           id="error_created">Bạn vui lòng chọn ngày giao dịch</label>
+                                                </div>
+                                            </div>
+                                            <div class="profile-info-row">
+                                                <div class="profile-info-name"> Mô tả <span
+                                                        style="color: red">*</span></div>
+                                                <div class="profile-info-value">
+                                                            <textarea id="content_giaodich" class="form-control"
+                                                                      placeholder="Bạn hãy nhập nội dung giao dịch ..."></textarea>
+                                                    <p hidden id="show_mess_content" class="red">Bạn vui lòng nhập
+                                                        nội dung giao dịch</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div><!-- /.widget-main -->
+                            </div><!-- /.widget-body -->
+                        </div><!-- /.widget-box -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-primary" id="save_giao_dich" data-id="" data-code=""
+                        type="button">
+                    <i class="ace-icon fa fa-check"></i>
+                    Save
+                </button>
+                <button style="display: none" class="btn btn-sm btn-primary" id="show_loading_btn"
+                        type="button">
+                    Loding...
+                </button>
+                <button type="reset" class="btn btn-sm" data-dismiss="modal" id="reset_form_popup">
+                    <i class="ace-icon fa fa-times"></i>
+                    Cancel
+                </button>
+            </div>
+
+
+        </div>
+    </div>
+</div><!-- PAGE CONTENT ENDS -->

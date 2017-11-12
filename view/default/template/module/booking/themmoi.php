@@ -6,7 +6,7 @@
  * Time: 8:04 AM
  */
 ?>
-<div class="page-header">
+<div class="page-header" style="margin-bottom: 0px">
 
     <h1>
         <?php echo $tieude ?>
@@ -36,7 +36,51 @@
                     </style>
 
                     <div class="col-xs-12 col-sm-12 col-md-12 ">
-                        <h3 class="row header smaller lighter blue">
+                        <h3 class="row header smaller lighter blue" style="margin-top: 0px">
+                            <i class="ace-icon fa fa-user blue bigger-125"></i>
+                            Chọn điều hành
+                        </h3>
+                        <div class="row col-xs-12 div_content">
+                            <div class="form-group border-sloid-1-x"
+                                 style="float: left; width: 100%;    margin-left: 0px;margin-right: 0px;">
+                                <div style="float: left;width: 66%">
+                                           <span class="input-icon width_100">
+                                                <input <?php echo $readonly_name_customer ?>
+                                                    class="<?php echo $valid_name_user ?>" id="input_name_dieuhanh"
+                                                    autofocus type="text" name="name_dieuhanh"
+                                                    value="<?php echo $name_user ?>"
+                                                    placeholder="Nhập tên sales ..."
+                                                    style="width:100%;max-width:600px;outline:0" autocomplete="off">
+                                                 <i class="ace-icon fa fa-user blue"></i>
+                                             </span>
+                                    <input class="<?php echo $valid_id_dieuhanh ?>" hidden id="input_dieuhanh_id" type="text"
+                                           name="dieuhanh_id" value="<?php echo $id_dieuhanh ?>">
+                                    <label style="display: none" class="error-color  error-color-size"
+                                           id="error_name_dieuhanh">Bạn vui lòng chọn điều hành</label>
+                                </div>
+                            </div>
+                            <table class="table table-striped tablget_detail.phpe-bordered">
+                                <thead>
+                                <tr>
+                                    <th class="center">#</th>
+                                    <th>Tên điều hành</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Phòng ban</th>
+                                    <th>Tour đang điều hành</th>
+                                </tr>
+                                </thead>
+
+                                <tbody class="table_booking_dieuhanh">
+                                <?php echo $table_dieuhanh ?>
+                                </tbody>
+                            </table>
+                            <div class="hr hr8 hr-double hr-dotted"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-12 ">
+                        <h3 class="row header smaller lighter blue" style="margin-top: 0px">
                             <i class="ace-icon fa fa-user blue bigger-125"></i>
                             Chọn sales
                         </h3>

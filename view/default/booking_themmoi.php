@@ -13,10 +13,14 @@ function show_booking_themmoi($data = array())
     $tieude=$data['title'];
     $action=$data['action'];
     $valid_name_user="";
+    $valid_name_dieuhanh="";
     $valid_id_user="";
+    $valid_id_dieuhanh="";
     $name_user='';
+    $name_dieuhanh='';
     $id_user='';
     $table_user='';
+    $table_dieuhanh='';
     $ngay_bat_dau='';
     $han_thanh_toan='';
     $ngay_khoi_hanh='';
@@ -36,11 +40,9 @@ function show_booking_themmoi($data = array())
     $confirm_admin_tiep_thi='';
     $price_tiep_thi ='';
     if($action==2){
-
         if($_SESSION['user_role']!=1){
             $readonly_name_tour='disabled';
         }
-
         $action_name='edit';
         $readonly="readonly";
         $hidden="hidden";
@@ -64,6 +66,24 @@ function show_booking_themmoi($data = array())
             $valid_id_user="valid";
             $table_user='<tr> <td class="center">1</td><td><a>'.$name_user.'</a></td><td><span>'.$data_sales[0]->user_email.'</span></td> <td><span>'.$data_sales[0]->phone.'</span></td><td><span>'.$phong_ban.'</span></td><td>'.$number_tour.'</td></tr>';
         }
+        $data_dieuhanh=user_getById($data['data_user'][0]->dieuhanh_id);
+        if(count($data_dieuhanh)>0){
+            if($data_dieuhanh[0]->name!=''){
+                $valid_name_dieuhanh='valid';
+                $name_dieuhanh=$data_dieuhanh[0]->name;
+            }
+            $phong_ban='';
+            $number_tour=0;
+            $data_phongban=user_phongban_getByTop('','id='.$data_dieuhanh[0]->phong_ban,'');
+            $number_tour=booking_count('user_id='.$data_dieuhanh[0]->id.' and status!=5');
+            if(count($data_phongban)>0){
+                $phong_ban=$data_phongban[0]->name;
+            }
+            $id_dieuhanh=$data_dieuhanh[0]->id;
+            $valid_id_dieuhanh="valid";
+            $table_dieuhanh='<tr> <td class="center">1</td><td><a>'.$name_user.'</a></td><td><span>'.$data_sales[0]->user_email.'</span></td> <td><span>'.$data_sales[0]->phone.'</span></td><td><span>'.$phong_ban.'</span></td><td>'.$number_tour.'</td></tr>';
+        }
+
         $Random=_returnDataEditAdd($data['data_user'],'code_booking');
         $ngay_bat_dau=date("d-m-Y", strtotime(_returnDataEditAdd($data['data_user'],'ngay_bat_dau')));
         if($ngay_bat_dau!=''){

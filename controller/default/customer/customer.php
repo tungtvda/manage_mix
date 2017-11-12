@@ -16,7 +16,7 @@ $_SESSION['link_redict']='http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']
 $url_bread='<li class="active">Khách hàng</li>';
 $data['breadcrumbs']=$url_bread;
 $data['title']='Danh sách khách hàng';
-$count=9;
+$count=10;
 _returnCreateCustomer(1);
 _deleteSubmitForm('customer', 'customer_delete',2,5,19);
 $data_dk_fill='';

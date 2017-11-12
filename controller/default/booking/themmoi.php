@@ -83,6 +83,7 @@ if(isset($_POST['code_booking']))
 
     $name_user=_returnPostParamSecurity('name_user');
     $id_user=_returnPostParamSecurity('id_user');
+    $dieuhanh_id=_returnPostParamSecurity('dieuhanh_id');
      $code_booking=_returnPostParamSecurity('code_booking');
     $tien_te=_returnPostParamSecurity('tien_te');
     $ty_gia='';
@@ -503,6 +504,7 @@ if(isset($_POST['code_booking']))
             $booking_model->total_price=$total;
             $booking_model->tien_thanh_toan=$dat_coc;
             $booking_model->user_id=$id_user;
+            $booking_model->dieuhanh_id=$dieuhanh_id;
             $booking_model->note=$note;
             $booking_model->vat=$vat;
             $booking_model->price_tiep_thi=$price_tiep_thi;

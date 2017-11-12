@@ -1773,3 +1773,16 @@ function _returnListGiaodich($id){
         return 0;
     }
 }
+
+function _returnInsertChiphiBooking($booking_id, $user_id, $name,$price,$description,$created, $mess_log){
+    $obj = new booking_cost();
+    $obj->booking_id = $booking_id;
+    $obj->user_id = $user_id;
+    $obj->name = $name;
+    $obj->price = $price;
+    $obj->description = $description;
+    $obj->created = date('Y-m-d', strtotime($created));
+    $obj->created_by = $_SESSION['user_id'];
+    booking_cost_insert($obj);
+    _insertLog($_SESSION['user_id'],6,6,33,0,'','',$mess_log);
+}

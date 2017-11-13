@@ -49,7 +49,7 @@
                                                     class="<?php echo $valid_name_user ?>" id="input_name_dieuhanh"
                                                     autofocus type="text" name="name_dieuhanh"
                                                     value="<?php echo $name_user ?>"
-                                                    placeholder="Nhập tên sales ..."
+                                                    placeholder="Nhập tên điều hành ..."
                                                     style="width:100%;max-width:600px;outline:0" autocomplete="off">
                                                  <i class="ace-icon fa fa-user blue"></i>
                                              </span>

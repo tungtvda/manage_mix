@@ -429,6 +429,122 @@ jQuery(function ($) {
         checkDiemDon();
     });
 
+    $('body').on("change", '.type_tour', function () {
+        var value=$(this).val();
+        $('.show_type_tour').hide();
+        if(value==1){
+            $('#tour_custom').show();
+            $('#input_chuong_trinh').val('').removeClass('valid');
+            $('#input_thoi_gian').val('').removeClass('valid');
+            $('#input_chuong_trinh_price').val(0);
+            $('#input_thoi_gian_price').val(0);
+            $('#price_chuong_trinh_price').html('0 vnđ');
+            $('#price_thoi_gian_price').html('0 vnđ');
+        }
+        if(value==0){
+            $('#tour_in_system').show();
+
+        }
+    });
+
+    $('#input_num_nguoi_lon').ace_spinner({
+//                value: 1,
+            min: 1,
+            max: 200,
+            step: 1,
+            btn_up_class: 'btn-info',
+            btn_down_class: 'btn-info'
+        })
+        .closest('.ace-spinner')
+        .on('input.fu.spinbox', function () {
+            var error_so_nguoi = $("#error_so_nguoi");
+            var value_get=$('#input_num_nguoi_lon').val();
+            if(value_get<1){
+                $('#input_num_nguoi_lon').val(1);
+                value_get=1;
+
+                //$('#input_num_nguoi_lon').addClass("input-error").removeClass("valid");
+                //error_so_nguoi.removeClass("success-color");
+                //error_so_nguoi.addClass("error-color");
+                //error_so_nguoi.html('Bạn vui lòng nhập số người lớn');
+                //error_so_nguoi.show();
+            }else{
+                $('#input_num_nguoi_lon').addClass("valid").removeClass("input-error");
+                error_so_nguoi.hide();
+                checkSoNguoi();
+            }
+        });
+    $('#input_num_tre_em').ace_spinner({
+//                value: '',
+            min: 0,
+            max: 200,
+            step: 1,
+            btn_up_class: 'btn-info',
+            btn_down_class: 'btn-info'
+        })
+        .closest('.ace-spinner')
+        .on('changed.fu.spinbox', function () {
+            //console.log($('#spinner1').val())
+            checkSoNguoi()
+        });
+    $('#input_num_tre_em_5').ace_spinner({
+//                value: '',
+            min: 0,
+            max: 200,
+            step: 1,
+            btn_up_class: 'btn-info',
+            btn_down_class: 'btn-info'
+        })
+        .closest('.ace-spinner')
+        .on('changed.fu.spinbox', function () {
+            //console.log($('#spinner1').val())
+            checkSoNguoi()
+        });
+    $('#input_nguoi_lon').ace_spinner({
+            min: 1,
+            max: 200,
+            step: 1,
+            btn_up_class: 'btn-info',
+            btn_down_class: 'btn-info'
+        })
+        .closest('.ace-spinner')
+        .on('input.fu.spinbox', function () {
+            var error_so_nguoi = $("#error_so_nguoi_cus");
+            var value_get=$('#input_nguoi_lon').val();
+            if(value_get<1){
+                $('#input_nguoi_lon').val(1);
+//                    $('#input_nguoi_lon').addClass("input-error").removeClass("valid");
+//                    error_so_nguoi.removeClass("success-color");
+//                    error_so_nguoi.addClass("error-color");
+//                    error_so_nguoi.html('Bạn vui lòng nhập số người lớn');
+//                    error_so_nguoi.show();
+            }else{
+                $('#input_nguoi_lon').addClass("valid").removeClass("input-error");
+                error_so_nguoi.hide();
+            }
+        });
+    $('#input_tre_em_5').ace_spinner({
+            min: 0,
+            max: 200,
+            step: 1,
+            btn_up_class: 'btn-info',
+            btn_down_class: 'btn-info'
+        })
+        .closest('.ace-spinner')
+        .on('changed.fu.spinbox', function () {
+        });
+    $('#input_tre_em').ace_spinner({
+            min: 0,
+            max: 200,
+            step: 1,
+            btn_up_class: 'btn-info',
+            btn_down_class: 'btn-info'
+        })
+        .closest('.ace-spinner')
+        .on('changed.fu.spinbox', function () {
+        });
+
+
     $('body').on("change", '.select_status', function () {
 
         var id = $(this).attr('count_id');
@@ -999,6 +1115,8 @@ jQuery(function ($) {
 
     var currentDate = new Date();
     $("#created_giaodich").datepicker("setDate",currentDate);
+
+
 });
 function show_info_cost(Id, name) {
     $("#title_form").html('Thôn tin chi tiết "<b>' + name + '</b>"');
@@ -1551,6 +1669,9 @@ function showHiddenNgayKhoiHanh(res, mess) {
         error_ngay_khoi_hanh.hide();
         $('#input_ngay_khoi_hanh').removeClass("input-error").addClass("valid");
         $('#icon_ngay_khoi_hanh').removeClass("error-color");
+        var date_khoihanh = $("#input_ngay_khoi_hanh").val();
+        $('#input_ngay_khoi_hanh_cus').val(date_khoihanh);
+        $('#input_ngay_khoi_hanh_cus').removeClass("input-error").addClass("valid");
     }
     else {
         if (res != 0) {
@@ -1562,6 +1683,7 @@ function showHiddenNgayKhoiHanh(res, mess) {
         error_ngay_khoi_hanh.addClass("error-color");
         error_ngay_khoi_hanh.html(mess);
         error_ngay_khoi_hanh.show();
+        $('#input_ngay_khoi_hanh_cus').val('');
     }
 }
 

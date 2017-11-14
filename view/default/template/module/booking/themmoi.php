@@ -359,13 +359,11 @@
                             <div class="row col-xs-12 div_content">
                                 <div class="profile-user-info profile-user-info-striped">
                                     <div class="profile-info-row">
-                                        <div class="profile-info-name"> Ghi chú</div>
+                                        <div class="profile-info-name"> Ghi chú </div>
 
                                         <div class="profile-info-value form-group">
                                          <span class="input-icon width_100">
-                                            <textarea class="valid" name="note" id="input_note" style="width: 100%">
-                                            <?php echo $note ?>
-                                            </textarea>
+                                            <textarea class="valid" name="note" id="input_note" style="width: 100%"><?php echo $note ?></textarea>
                                          </span>
                                         </div>
                                     </div>
@@ -380,7 +378,197 @@
                             Thông tin tour
                         </h3>
                         <div class="row col-xs-12 div_content">
-                            <div class="form-group border-sloid-1-x"
+                           <h5>Loại tour <span
+                                   style="color: red; font-size: 12px">*</span></h5>
+
+                            <div style="float: left;width: 100%; margin-bottom: 20px" >
+                                <select name="type_tour" class="chosen-select form-control type_tour"
+                                        id="form-field-select-3" data-placeholder="Chọn loại tour ..."
+                                        style="display: none;width: 10px">
+                                    <option value=""></option>
+                                    <option value="0">Tour trong hệ thống</option>
+                                    <option value="1">Tour theo yêu cầu khách hàng</option>
+                                </select>
+                            </div>
+                            <div hidden id="tour_custom" class="show_type_tour form-group border-sloid-1-x" style="float: left; width: 100%;background: #ffffff;  margin-left: 0px;margin-right: 0px;">
+                                   <div class="profile-user-info profile-user-info-striped">
+                                       <div class="profile-info-row">
+                                           <div class="profile-info-name">
+                                               <p>Chương trình <span style="color: red; font-size: 12px">*</span></p>
+                                               </br>
+                                               <p>Đơn giá <span style="color: red; font-size: 12px">*</span></p>
+                                           </div>
+                                           <div class="profile-info-value">
+                                               <div class="row col-xs-12">
+                                                   <span class="input-icon width_100">
+                                                    <textarea name="chuong_trinh" id="input_chuong_trinh" placeholder="Chương trình tour" style="width: 100%"></textarea>
+                                                    <label style="display: none" class="error-color  error-color-size" id="error_chuong_trinh">Bạn vui lòng nhập chương trình tour</label>
+                                                    </span>
+                                               </div>
+                                               <div class="row col-xs-12">
+                                                   <span class="input-icon width_100">
+                                                <input id="input_chuong_trinh_price" type="text" name="chuong_trinh_price" value="0" class="valid" placeholder="Đơn giá chương trình ..." >
+                                                 <i class="ace-icon fa fa-dollar blue"></i>
+                                                 <span id="price_chuong_trinh_price">0 vnđ</span>
+                                                </span>
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <div class="profile-info-row">
+                                           <div class="profile-info-name">
+                                               <p>Thời gian <span style="color: red; font-size: 12px">*</span></p>
+                                               <p>Đơn giá <span style="color: red; font-size: 12px">*</span></p>
+                                           </div>
+                                           <div class="profile-info-value">
+                                               <div class="row col-xs-12">
+                                                 <span class="input-icon width_100">
+                                                    <input id="input_thoi_gian" type="text" name="thoi_gian" class="width_100" value="" placeholder="Thời gian tour ..." >
+                                                    <i class="ace-icon fa fa-clock-o blue"></i>
+                                                     <label style="display: none" class="error-color  error-color-size" id="error_chuong_trinh">Bạn vui lòng nhập thời gian tour</label>
+                                                 </span>
+                                               </div>
+                                               <div class="row col-xs-12" style="padding-top: 5px">
+                                                  <span class="input-icon width_100">
+                                                    <input id="input_thoi_gian_price" type="text" name="thoi_gian_price" value="0" class="valid" placeholder="Đơn giá thời gian ..." >
+                                                     <i class="ace-icon fa fa-dollar blue"></i>
+                                                    <span id="price_thoi_gian_price">0 vnđ</span>
+                                                 </span>
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <div class="profile-info-row">
+                                           <div class="profile-info-name">
+                                               <p>Số người <span style="color: red; font-size: 12px">*</span></p>
+                                               <p>Đơn giá <span style="color: red; font-size: 12px">*</span></p>
+                                           </div>
+                                           <div class="profile-info-value form-group">
+                                               <div class="row col-xs-12">
+                                                   <input  name="nguoi_lon" value="1" type="text"
+                                                          id="input_nguoi_lon"
+                                                          title="Số người lớn"
+                                                          class="spinbox-input form-control text-center valid"
+                                                          placeholder="Người lớn">
+                                                   <input name="tre_em" type="text" id="input_tre_em"
+                                                          value="0"
+                                                          title="Số trẻ em từ 5 đến 11 tuổi"
+                                                          class="spinbox-input form-control text-center valid"
+                                                          placeholder="Trẻ em  5-11 tuổi">
+                                                   <input name="tre_em_5" type="text" id="input_tre_em_5"
+                                                          value="0"
+                                                          title="Số trẻ em dưới 5 tuổi"
+                                                          class="spinbox-input form-control text-center valid"
+                                                          placeholder="Trẻ em dưới 5 tuổi">
+                                                   <label style="display: none"
+                                                          class="error-color  error-color-size"
+                                                          id="error_so_nguoi_cus">Bạn vui lòng nhập số người lớn</label>
+                                               </div>
+                                               <div class="row col-xs-12" style="padding-top: 5px">
+                                                  <span class="input-icon width_100">
+                                                    <input id="input_so_nguoi_price" type="text" name="so_nguoi_price" value="0" class="valid" placeholder="Đơn giá số người ..." >
+                                                     <i class="ace-icon fa fa-dollar blue"></i>
+                                                    <span id="price_so_nguoi_price">0 vnđ</span>
+                                                 </span>
+                                               </div>
+
+                                           </div>
+                                       </div>
+
+                                       <div class="profile-info-row">
+                                           <div class="profile-info-name">
+                                               <p>Khách sạn </p>
+                                               <p>Đơn giá </p>
+                                           </div>
+                                           <div class="profile-info-value">
+                                               <div class="row col-xs-12">
+                                                 <span class="input-icon width_100">
+                                                    <input id="input_khach_san" type="text" name="khach_san" class="width_100 valid" value="" placeholder="Loại khách sạn ..." >
+                                                    <i class="ace-icon fa fa-home  blue"></i>
+                                                 </span>
+                                               </div>
+                                               <div class="row col-xs-12" style="padding-top: 5px">
+                                                  <span class="input-icon width_100">
+                                                    <input id="input_khach_san_price" type="text" name="khach_san_price" value="0" class="valid" placeholder="Đơn giá khách sạn ..." >
+                                                     <i class="ace-icon fa fa-dollar blue"></i>
+                                                    <span id="price_khach_san_price">0 vnđ</span>
+                                                 </span>
+                                               </div>
+                                           </div>
+                                       </div>
+
+                                       <div class="profile-info-row">
+                                           <div class="profile-info-name">
+                                               <p>Khởi hành <span style="color: red; font-size: 12px">*</span></p>
+                                               <p>Đơn giá <span style="color: red; font-size: 12px">*</span></p>
+                                           </div>
+                                           <div class="profile-info-value">
+                                               <div class="row col-xs-12">
+                                                 <span class="input-icon width_100">
+                                                    <div class="input-group" style="">
+                                                        <input value="" class="form-control date-picker width_100 " id="input_ngay_khoi_hanh_cus" name="ngay_khoi_hanh_cus" required="" type="text" data-date-format="dd-mm-yyyy">
+																	<span id="icon_ngay_khoi_hanh_cus" class="input-group-addon date_icon">
+																		<i class="fa fa-calendar bigger-110"></i>
+																	</span>
+
+                                                    </div>
+                                                     <label style="display: none" class="error-color  error-color-size" id="error_ngay_khoi_hanh_cus">Bạn vui lòng nhập ngày khởi hàng</label>
+                                                 </span>
+                                               </div>
+                                               <div class="row col-xs-12" style="padding-top: 5px">
+                                                  <span class="input-icon width_100">
+                                                    <input id="input_ngay_khoi_hanh_price" type="text" name="ngay_khoi_hanh_price" value="0" class="valid" placeholder="Đơn giá ngày khởi hành ..." >
+                                                     <i class="ace-icon fa fa-dollar blue"></i>
+                                                    <span id="price_ngay_khoi_hanh_price">0 vnđ</span>
+                                                 </span>
+                                               </div>
+                                           </div>
+                                       </div>
+
+                                       <div class="profile-info-row">
+                                           <div class="profile-info-name">
+                                               <p>Hãng bay</p>
+                                               <p>Đơn giá </p>
+                                           </div>
+                                           <div class="profile-info-value">
+                                               <div class="row col-xs-12">
+                                                 <span class="input-icon width_100">
+                                                    <input id="input_hang_bay" type="text" name="hang_bay" class="width_100 valid" value="" placeholder="Hãng hàng không ..." >
+                                                    <i class="ace-icon fa fa-plane  blue"></i>
+                                                 </span>
+                                               </div>
+                                               <div class="row col-xs-12" style="padding-top: 5px">
+                                                  <span class="input-icon width_100">
+                                                    <input id="input_hang_bay_price" type="text" name="hang_bay_price" value="0" class="valid" placeholder="Đơn giá hãng hàng không ..." >
+                                                     <i class="ace-icon fa fa-dollar blue"></i>
+                                                    <span id="price_hang_bay_price">0 vnđ</span>
+                                                 </span>
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <div class="profile-info-row">
+                                           <div class="profile-info-name">
+                                               <p>Dịch vụ khác</p>
+                                               </br>
+                                               <p>Đơn giá</p>
+                                           </div>
+                                           <div class="profile-info-value">
+                                               <div class="row col-xs-12">
+                                                   <span class="input-icon width_100">
+                                                    <textarea class="valid" name="khac" id="input_khac" placeholder="Dịch vụ khác" style="width: 100%"></textarea>
+                                                    </span>
+                                               </div>
+                                               <div class="row col-xs-12">
+                                                   <span class="input-icon width_100">
+                                                <input id="input_khac_price" type="text" name="khac_price" value="0" class="valid" placeholder="Đơn giá dịch vụ khác ..." >
+                                                 <i class="ace-icon fa fa-dollar blue"></i>
+                                                 <span id="price_khac_price">0 vnđ</span>
+                                                </span>
+                                               </div>
+                                           </div>
+                                       </div>
+
+                                   </div>
+                            </div>
+                            <div hidden id="tour_in_system" class="form-group border-sloid-1-x show_type_tour"
                                  style="float: left; width: 100%;    margin-left: 0px;margin-right: 0px;">
                                 <div style="float: left;width: 50%">
                                            <span class="input-icon width_100">

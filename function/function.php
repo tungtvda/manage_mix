@@ -1679,7 +1679,7 @@ function _returnSettingHoaHong()
 function _returnListGiaodich($id){
     $data=booking_giao_dich('bk.booking_id='.$id);
     if($data){
-        $array_data=[];
+        $array_data=array();
         $string_res='';
         $count=0;
         foreach($data as $row){

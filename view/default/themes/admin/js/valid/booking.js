@@ -436,6 +436,7 @@ jQuery(function ($) {
             $('#tour_custom').show();
             $('#input_chuong_trinh').val('').removeClass('valid');
             $('#input_thoi_gian').val('').removeClass('valid');
+            $('#input_ngay_khoi_hanh_cus').val('').removeClass('valid');
             $('#input_chuong_trinh_price').val(0);
             $('#input_thoi_gian_price').val(0);
             $('#price_chuong_trinh_price').html('0 vnđ');
@@ -443,7 +444,9 @@ jQuery(function ($) {
         }
         if(value==0){
             $('#tour_in_system').show();
-
+            $('#input_chuong_trinh').val('').addClass('valid');
+            $('#input_thoi_gian').val('').addClass('valid');
+            $('#input_ngay_khoi_hanh_cus').val('').addClass('valid');
         }
     });
 

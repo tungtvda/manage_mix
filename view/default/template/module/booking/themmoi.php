@@ -401,13 +401,13 @@
                                            <div class="profile-info-value">
                                                <div class="row col-xs-12">
                                                    <span class="input-icon width_100">
-                                                    <textarea name="chuong_trinh" id="input_chuong_trinh" placeholder="Chương trình tour" style="width: 100%"></textarea>
+                                                    <textarea class="valid-input" name="chuong_trinh" data-valid="required" id="input_chuong_trinh" placeholder="Chương trình tour" style="width: 100%"></textarea>
                                                     <label style="display: none" class="error-color  error-color-size" id="error_chuong_trinh">Bạn vui lòng nhập chương trình tour</label>
                                                     </span>
                                                </div>
                                                <div class="row col-xs-12">
                                                    <span class="input-icon width_100">
-                                                <input id="input_chuong_trinh_price" type="text" name="chuong_trinh_price" value="0" class="valid" placeholder="Đơn giá chương trình ..." >
+                                                <input id="input_chuong_trinh_price" type="text" name="chuong_trinh_price" value="0" class="valid input_price_cus" placeholder="Đơn giá chương trình ..." >
                                                  <i class="ace-icon fa fa-dollar blue"></i>
                                                  <span id="price_chuong_trinh_price">0 vnđ</span>
                                                 </span>
@@ -422,14 +422,14 @@
                                            <div class="profile-info-value">
                                                <div class="row col-xs-12">
                                                  <span class="input-icon width_100">
-                                                    <input id="input_thoi_gian" type="text" name="thoi_gian" class="width_100" value="" placeholder="Thời gian tour ..." >
+                                                    <input id="input_thoi_gian" type="text" name="thoi_gian" class="width_100 valid-input" data-valid="required" value="" placeholder="Thời gian tour ..." >
                                                     <i class="ace-icon fa fa-clock-o blue"></i>
-                                                     <label style="display: none" class="error-color  error-color-size" id="error_chuong_trinh">Bạn vui lòng nhập thời gian tour</label>
+                                                     <label style="display: none" class="error-color  error-color-size" id="error_thoi_gian">Bạn vui lòng nhập thời gian tour</label>
                                                  </span>
                                                </div>
                                                <div class="row col-xs-12" style="padding-top: 5px">
                                                   <span class="input-icon width_100">
-                                                    <input id="input_thoi_gian_price" type="text" name="thoi_gian_price" value="0" class="valid" placeholder="Đơn giá thời gian ..." >
+                                                    <input id="input_thoi_gian_price" type="text" name="thoi_gian_price" value="0" class="valid input_price_cus" placeholder="Đơn giá thời gian ..." >
                                                      <i class="ace-icon fa fa-dollar blue"></i>
                                                     <span id="price_thoi_gian_price">0 vnđ</span>
                                                  </span>
@@ -464,7 +464,7 @@
                                                </div>
                                                <div class="row col-xs-12" style="padding-top: 5px">
                                                   <span class="input-icon width_100">
-                                                    <input id="input_so_nguoi_price" type="text" name="so_nguoi_price" value="0" class="valid" placeholder="Đơn giá số người ..." >
+                                                    <input id="input_so_nguoi_price" type="text" name="so_nguoi_price" value="0" class="valid input_price_cus" placeholder="Đơn giá số người ..." >
                                                      <i class="ace-icon fa fa-dollar blue"></i>
                                                     <span id="price_so_nguoi_price">0 vnđ</span>
                                                  </span>
@@ -487,7 +487,7 @@
                                                </div>
                                                <div class="row col-xs-12" style="padding-top: 5px">
                                                   <span class="input-icon width_100">
-                                                    <input id="input_khach_san_price" type="text" name="khach_san_price" value="0" class="valid" placeholder="Đơn giá khách sạn ..." >
+                                                    <input id="input_khach_san_price" type="text" name="khach_san_price" value="0" class="valid input_price_cus" placeholder="Đơn giá khách sạn ..." >
                                                      <i class="ace-icon fa fa-dollar blue"></i>
                                                     <span id="price_khach_san_price">0 vnđ</span>
                                                  </span>
@@ -504,7 +504,7 @@
                                                <div class="row col-xs-12">
                                                  <span class="input-icon width_100">
                                                     <div class="input-group" style="">
-                                                        <input value="" class="form-control date-picker width_100 " id="input_ngay_khoi_hanh_cus" name="ngay_khoi_hanh_cus" required="" type="text" data-date-format="dd-mm-yyyy">
+                                                        <input value="" class="form-control date-picker width_100 valid-input" data-valid="required" id="input_ngay_khoi_hanh_cus" name="ngay_khoi_hanh_cus" required="" type="text" data-date-format="dd-mm-yyyy">
 																	<span id="icon_ngay_khoi_hanh_cus" class="input-group-addon date_icon">
 																		<i class="fa fa-calendar bigger-110"></i>
 																	</span>
@@ -515,7 +515,7 @@
                                                </div>
                                                <div class="row col-xs-12" style="padding-top: 5px">
                                                   <span class="input-icon width_100">
-                                                    <input id="input_ngay_khoi_hanh_price" type="text" name="ngay_khoi_hanh_price" value="0" class="valid" placeholder="Đơn giá ngày khởi hành ..." >
+                                                    <input id="input_ngay_khoi_hanh_price" type="text" name="ngay_khoi_hanh_price" value="0" class="valid input_price_cus" placeholder="Đơn giá ngày khởi hành ..." >
                                                      <i class="ace-icon fa fa-dollar blue"></i>
                                                     <span id="price_ngay_khoi_hanh_price">0 vnđ</span>
                                                  </span>
@@ -537,7 +537,7 @@
                                                </div>
                                                <div class="row col-xs-12" style="padding-top: 5px">
                                                   <span class="input-icon width_100">
-                                                    <input id="input_hang_bay_price" type="text" name="hang_bay_price" value="0" class="valid" placeholder="Đơn giá hãng hàng không ..." >
+                                                    <input id="input_hang_bay_price" type="text" name="hang_bay_price" value="0" class="valid input_price_cus" placeholder="Đơn giá hãng hàng không ..." >
                                                      <i class="ace-icon fa fa-dollar blue"></i>
                                                     <span id="price_hang_bay_price">0 vnđ</span>
                                                  </span>
@@ -558,7 +558,7 @@
                                                </div>
                                                <div class="row col-xs-12">
                                                    <span class="input-icon width_100">
-                                                <input id="input_khac_price" type="text" name="khac_price" value="0" class="valid" placeholder="Đơn giá dịch vụ khác ..." >
+                                                <input id="input_khac_price" type="text" name="khac_price" value="0" class="valid input_price_cus" placeholder="Đơn giá dịch vụ khác ..." >
                                                  <i class="ace-icon fa fa-dollar blue"></i>
                                                  <span id="price_khac_price">0 vnđ</span>
                                                 </span>

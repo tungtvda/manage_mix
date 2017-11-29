@@ -224,9 +224,18 @@ function show_booking_themmoi($data = array())
     $price_5_new=_returnDataEditAdd($data['data_user'],'price_5_new');
     $price_5_new_format=number_format((int)$price_5_new,0,",",".").' vnđ';
 
-    $table_tour='<tr> <td class="center">1</td><td><a>'.$so_cho.'</a></td>
+    $table_tour='<tr> <td class="center">1</td><td><a id="name_tour_table">'.$so_cho.'</a></td>
         <td><span id="price_format_span">'.$price_new_format.'</span>';
 
+    if($price_new==''){
+        $price_new=0;
+    }
+    if($price_11_new==''){
+        $price_11_new=0;
+    }
+    if($price_5_new==''){
+        $price_5_new=0;
+    }
     $table_tour.='<input hidden="" id="input_price_format" value="'.$price_new_format.'">
         <input hidden="" title="giá sửa" id="input_price" value="'.$price_new.'">
         <input hidden="" id="input_price_old" title="giá cũ" value="'.$price_new.'"> ';

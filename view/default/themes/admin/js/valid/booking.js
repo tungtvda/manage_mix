@@ -448,6 +448,13 @@ jQuery(function ($) {
             $('#input_thoi_gian').val('').addClass('valid');
             $('#input_ngay_khoi_hanh_cus').val('').addClass('valid');
         }
+        $('#input_price').val(0);
+        $('#input_price_511').val(0);
+        $('#input_price_5').val(0);
+        $('#price_format_span').html('0 vnđ');
+        $('#input_price_format').html('0 vnđ');
+        $('#price_format_span_511').html('0 vnđ');
+        $('#price_format_span_5').html('0 vnđ');
     });
 
     $('#input_num_nguoi_lon').ace_spinner({

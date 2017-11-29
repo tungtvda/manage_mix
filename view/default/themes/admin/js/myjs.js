@@ -522,8 +522,8 @@ jQuery(function ($) {
     $('body').on("change", '.valid-input', function () {
         var name = $(this).attr('name');
         var valid = $(this).attr('data-valid');
+        var value=$(this).val();
         if(valid=='required'){
-            var value=$(this).val();
             if(value && name){
                 $('#error_'+name).hide();
                 $(this).addClass('valid');
@@ -532,13 +532,19 @@ jQuery(function ($) {
                 $(this).removeClass('valid');
             }
         }
+        switch (name){
+            case 'name_tour_cus':
+                if(value!=''){
+                    $('#name_tour_table').html(value)
+                }
+                break;
+        }
     });
     $('body').on("click", '.input_price_cus', function () {
        $(this).select();
     });
     $('body').on("input", '.input_price_cus', function () {
         var name = $(this).attr('name');
-
         var price = $(this).val();
         var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
 
@@ -550,6 +556,20 @@ jQuery(function ($) {
             price_format='0 vnđ';
         }
         $('#price_'+name).html(price_format);
+        var total_price=0;
+        $(".input_price_cus").each(function( index ) {
+          var value_price=parseInt($(this).val());
+            total_price=total_price+value_price;
+        });
+        total_price=total_price.toString();
+        $('#input_price').val(total_price);
+        $('#input_price_511').val(total_price);
+        $('#input_price_5').val(total_price);
+        var total_price = total_price.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+        $('#price_format_span').html(total_price);
+        $('#input_price_format').html(total_price);
+        $('#price_format_span_511').html(total_price);
+        $('#price_format_span_5').html(total_price);
     });
 
 // Select all tabs

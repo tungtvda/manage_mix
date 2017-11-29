@@ -394,6 +394,21 @@
                                    <div class="profile-user-info profile-user-info-striped">
                                        <div class="profile-info-row">
                                            <div class="profile-info-name">
+                                               <p>Tên tour <span style="color: red; font-size: 12px">*</span></p>
+                                           </div>
+                                           <div class="profile-info-value">
+                                               <div class="row col-xs-12">
+                                                   <span class="input-icon width_100">
+                                                <input id="input_name_tour_cus" type="text" data-valid="required" name="name_tour_cus" value="" class="width_100 valid-input" placeholder="Tên tour..." >
+                                                 <i class="ace-icon fa fa-plane  blue"></i>
+                                                </span>
+                                                   <label style="display: none" class="error-color  error-color-size" id="error_name_tour_cus">Bạn vui lòng nhập tên tour</label>
+                                                   </span>
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <div class="profile-info-row">
+                                           <div class="profile-info-name">
                                                <p>Chương trình <span style="color: red; font-size: 12px">*</span></p>
                                                </br>
                                                <p>Đơn giá <span style="color: red; font-size: 12px">*</span></p>

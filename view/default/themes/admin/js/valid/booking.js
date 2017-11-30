@@ -441,13 +441,21 @@ jQuery(function ($) {
             $('#input_thoi_gian_price').val(0);
             $('#price_chuong_trinh_price').html('0 vnđ');
             $('#price_thoi_gian_price').html('0 vnđ');
+            $('#input_name_tour').removeClass('input-error').addClass('valid');
         }
         if(value==0){
             $('#tour_in_system').show();
             $('#input_chuong_trinh').val('').addClass('valid');
             $('#input_thoi_gian').val('').addClass('valid');
             $('#input_ngay_khoi_hanh_cus').val('').addClass('valid');
+            $('#input_name_tour').removeClass('valid');
+            $('#input_name_tour_cus').val('').addClass('valid');
         }
+        $('#error_name_tour').hide();
+        $('#error_name_tour_cus').hide();
+        $('#error_chuong_trinh').hide();
+        $('#error_thoi_gian').hide();
+        $('#error_ngay_khoi_hanh_cus').hide();
         $('#input_price').val(0);
         $('#input_price_511').val(0);
         $('#input_price_5').val(0);
@@ -455,6 +463,8 @@ jQuery(function ($) {
         $('#input_price_format').html('0 vnđ');
         $('#price_format_span_511').html('0 vnđ');
         $('#price_format_span_5').html('0 vnđ');
+        $('#input_name_tour').val('');
+        $('#name_tour_table').html('');
     });
 
     $('#input_num_nguoi_lon').ace_spinner({
@@ -1842,7 +1852,6 @@ function removeValueCustomer() {
 
 function removeValueTour() {
     $('#input_list_price').html('');
-    $('.table_booking_tour').html('');
     $('#input_id_tour').val('');
     $('#tong_cong').html('');
     $('#tong_cong').html('');
@@ -1861,6 +1870,16 @@ function removeValueTour() {
     error_name_tour.addClass("error-color");
     error_name_tour.html("Bạn vui lòng nhập và chọn tour");
     error_name_tour.show();
+
+    //$('.table_booking_tour').html('');
+    $('#input_price').val(0);
+    $('#input_price_511').val(0);
+    $('#input_price_5').val(0);
+    $('#price_format_span').html('0 vnđ');
+    $('#input_price_format').html('0 vnđ');
+    $('#price_format_span_511').html('0 vnđ');
+    $('#price_format_span_5').html('0 vnđ');
+    $('#name_tour_table').html('');
 }
 function removeValueUser() {
     $('.table_booking_user').html('');

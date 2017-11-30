@@ -124,7 +124,7 @@ $string_data_user_tiep_thi=_returnDataAutoCompleteUserTiepThi();
 //                            $('#input_list_price').html(res)
 //                        });
 //                }
-                var table_tour="<tr> <td class='center'>1</td><td><a>"+item.data('name')+"</a></td><td>" +
+                var table_tour="<tr> <td class='center'>1</td><td><a id='name_tour_table'>"+item.data('name')+"</a></td><td>" +
                     "<span id='price_format_span'>"+item.data('price-format')+"</span>" +
                     "<input hidden id='input_price_format' value='"+item.data('price-format')+"'>" +
                     "<input  hidden title='giá sửa' id='input_price' value='"+item.data('price')+"'>" +

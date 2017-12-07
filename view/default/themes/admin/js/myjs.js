@@ -513,6 +513,7 @@ jQuery(function ($) {
            if(value && name){
                $('#error_'+name).hide();
                $(this).addClass('valid');
+               $(this).removeClass('input-error');
            }else{
                $('#error_'+name).show();
                $(this).removeClass('valid');
@@ -527,6 +528,7 @@ jQuery(function ($) {
             if(value && name){
                 $('#error_'+name).hide();
                 $(this).addClass('valid');
+                $(this).removeClass('input-error');
             }else{
                 $('#error_'+name).show();
                 $(this).removeClass('valid');

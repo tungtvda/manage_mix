@@ -793,6 +793,8 @@ jQuery(function ($) {
     $('body').on("click", '#submit_form_action', function () {
         var form_data = $("#submit_form").serializeArray();
         var error_free = true;
+        var type_tour=$('.type_tour').val();
+        console.log(type_tour);
         for (var input in form_data) {
             var name_input = form_data[input]['name'];
             if (name_input != "tien_te" && name_input != "note" && name_input != "nguon_tour" && name_input != 'category' && name_input != 'nhom_khach_hang' && name_input != 'name_customer_sub[]' && name_input != 'email_customer[]' && name_input != 'phone_customer[]' && name_input != 'address_customer[]' && name_input != 'birthday_customer[]' && name_input != 'tuoi_number_customer[]' && name_input != 'tuoi_customer[]' && name_input != 'date_passport_customer[]' && name_input != 'passport_customer[]') {
@@ -820,10 +822,11 @@ jQuery(function ($) {
                     error.show();
                     error_free = false
                 }
+                console.log( form_data[input]['name']);
             }
         }
         if (error_free != false) {
-            $("#submit_form").submit();
+            //$("#submit_form").submit();
         }
 
     });

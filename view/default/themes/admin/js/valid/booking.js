@@ -442,6 +442,7 @@ jQuery(function ($) {
             $('#price_chuong_trinh_price').html('0 vnđ');
             $('#price_thoi_gian_price').html('0 vnđ');
             $('#input_name_tour').removeClass('input-error').addClass('valid');
+            $('#id_tour').removeClass('input-error').addClass('valid');
         }
         if(value==0){
             $('#tour_in_system').show();
@@ -450,6 +451,7 @@ jQuery(function ($) {
             $('#input_ngay_khoi_hanh_cus').val('').addClass('valid');
             $('#input_name_tour').removeClass('valid');
             $('#input_name_tour_cus').val('').addClass('valid');
+            $('#id_tour').removeClass('valid');
         }
         $('#error_name_tour').hide();
         $('#error_name_tour_cus').hide();
@@ -465,6 +467,7 @@ jQuery(function ($) {
         $('#price_format_span_5').html('0 vnđ');
         $('#input_name_tour').val('');
         $('#name_tour_table').html('');
+        $('#error_type_tour').hide();
     });
 
     $('#input_num_nguoi_lon').ace_spinner({
@@ -794,7 +797,7 @@ jQuery(function ($) {
         var form_data = $("#submit_form").serializeArray();
         var error_free = true;
         var type_tour=$('.type_tour').val();
-        console.log(type_tour);
+
         for (var input in form_data) {
             var name_input = form_data[input]['name'];
             if (name_input != "tien_te" && name_input != "note" && name_input != "nguon_tour" && name_input != 'category' && name_input != 'nhom_khach_hang' && name_input != 'name_customer_sub[]' && name_input != 'email_customer[]' && name_input != 'phone_customer[]' && name_input != 'address_customer[]' && name_input != 'birthday_customer[]' && name_input != 'tuoi_number_customer[]' && name_input != 'tuoi_customer[]' && name_input != 'date_passport_customer[]' && name_input != 'passport_customer[]') {
@@ -817,12 +820,20 @@ jQuery(function ($) {
                         valid = true;
                     }
                 }
+                if(!type_tour){
+                    $('#error_type_tour').show();
+                    error_free = false;
+                }else{
+                    $('#error_type_tour').hide();
+                    valid = true;
+                }
                 if (valid == false) {
                     element.addClass("input-error").removeClass("valid");
                     error.show();
-                    error_free = false
+                    error_free = false;
+                    console.log( form_data[input]['name']);
                 }
-                console.log( form_data[input]['name']);
+
             }
         }
         if (error_free != false) {

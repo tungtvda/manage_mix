@@ -45,10 +45,10 @@
                                  style="float: left; width: 100%;    margin-left: 0px;margin-right: 0px;">
                                 <div style="float: left;width: 66%">
                                            <span class="input-icon width_100">
-                                                <input <?php echo $readonly_name_customer ?>
-                                                    class="<?php echo $valid_name_user ?>" id="input_name_dieuhanh"
+                                                <input <?php echo $readonly_name_dieuhanh ?>
+                                                    class="<?php echo $valid_name_dieuhanh ?>" id="input_name_dieuhanh"
                                                     autofocus type="text" name="name_dieuhanh"
-                                                    value="<?php echo $name_user ?>"
+                                                    value="<?php echo $name_dieuhanh ?>"
                                                     placeholder="Nhập tên điều hành ..."
                                                     style="width:100%;max-width:600px;outline:0" autocomplete="off">
                                                  <i class="ace-icon fa fa-user blue"></i>
@@ -389,6 +389,8 @@
                                     <option value="0">Tour trong hệ thống</option>
                                     <option value="1">Tour theo yêu cầu khách hàng</option>
                                 </select>
+                                <label style="display: none" class="error-color  error-color-size" id="error_type_tour">Bạn vui lòng chọn loại tour</label>
+                                </span>
                             </div>
                             <div hidden id="tour_custom" class="show_type_tour form-group border-sloid-1-x" style="float: left; width: 100%;background: #ffffff;  margin-left: 0px;margin-right: 0px;">
                                    <div class="profile-user-info profile-user-info-striped">

@@ -1,11 +1,13 @@
 <?php
 class booking_tour_custom
 {
-    public $id,$booking_id,$chuong_trinh,$chuong_trinh_price,$thoi_gian,$thoi_gian_price,$nguoi_lon,$tre_em,$tre_em_5,$so_nguoi_price,$khach_san,$khach_san_price,$ngay_khoi_hanh,$ngay_khoi_hanh_price,$hang_bay,$hang_bay_price,$khac,$khac_price,$note;
+    public $id,$booking_id,$name,$code,$chuong_trinh,$chuong_trinh_price,$thoi_gian,$thoi_gian_price,$nguoi_lon,$tre_em,$tre_em_5,$so_nguoi_price,$khach_san,$khach_san_price,$ngay_khoi_hanh_cus,$ngay_khoi_hanh_price,$hang_bay,$hang_bay_price,$khac,$khac_price,$note;
     public function booking_tour_custom($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
     $this->booking_id=isset($data['booking_id'])?$data['booking_id']:'';
+    $this->name=isset($data['name'])?$data['name']:'';
+    $this->code=isset($data['code'])?$data['code']:'';
     $this->chuong_trinh=isset($data['chuong_trinh'])?$data['chuong_trinh']:'';
     $this->chuong_trinh_price=isset($data['chuong_trinh_price'])?$data['chuong_trinh_price']:'';
     $this->thoi_gian=isset($data['thoi_gian'])?$data['thoi_gian']:'';
@@ -16,7 +18,7 @@ class booking_tour_custom
     $this->so_nguoi_price=isset($data['so_nguoi_price'])?$data['so_nguoi_price']:'';
     $this->khach_san=isset($data['khach_san'])?$data['khach_san']:'';
     $this->khach_san_price=isset($data['khach_san_price'])?$data['khach_san_price']:'';
-    $this->ngay_khoi_hanh=isset($data['ngay_khoi_hanh'])?$data['ngay_khoi_hanh']:'';
+    $this->ngay_khoi_hanh_cus=isset($data['ngay_khoi_hanh_cus'])?$data['ngay_khoi_hanh_cus']:'';
     $this->ngay_khoi_hanh_price=isset($data['ngay_khoi_hanh_price'])?$data['ngay_khoi_hanh_price']:'';
     $this->hang_bay=isset($data['hang_bay'])?$data['hang_bay']:'';
     $this->hang_bay_price=isset($data['hang_bay_price'])?$data['hang_bay_price']:'';
@@ -29,6 +31,8 @@ class booking_tour_custom
         {
             $this->id=addslashes($this->id);
             $this->booking_id=addslashes($this->booking_id);
+            $this->name=addslashes($this->name);
+            $this->code=addslashes($this->code);
             $this->chuong_trinh=addslashes($this->chuong_trinh);
             $this->chuong_trinh_price=addslashes($this->chuong_trinh_price);
             $this->thoi_gian=addslashes($this->thoi_gian);
@@ -39,7 +43,7 @@ class booking_tour_custom
             $this->so_nguoi_price=addslashes($this->so_nguoi_price);
             $this->khach_san=addslashes($this->khach_san);
             $this->khach_san_price=addslashes($this->khach_san_price);
-            $this->ngay_khoi_hanh=addslashes($this->ngay_khoi_hanh);
+            $this->ngay_khoi_hanh_cus=addslashes($this->ngay_khoi_hanh_cus);
             $this->ngay_khoi_hanh_price=addslashes($this->ngay_khoi_hanh_price);
             $this->hang_bay=addslashes($this->hang_bay);
             $this->hang_bay_price=addslashes($this->hang_bay_price);
@@ -51,6 +55,8 @@ class booking_tour_custom
         {
             $this->id=stripslashes($this->id);
             $this->booking_id=stripslashes($this->booking_id);
+            $this->name=stripslashes($this->name);
+            $this->code=stripslashes($this->code);
             $this->chuong_trinh=stripslashes($this->chuong_trinh);
             $this->chuong_trinh_price=stripslashes($this->chuong_trinh_price);
             $this->thoi_gian=stripslashes($this->thoi_gian);
@@ -61,7 +67,7 @@ class booking_tour_custom
             $this->so_nguoi_price=stripslashes($this->so_nguoi_price);
             $this->khach_san=stripslashes($this->khach_san);
             $this->khach_san_price=stripslashes($this->khach_san_price);
-            $this->ngay_khoi_hanh=stripslashes($this->ngay_khoi_hanh);
+            $this->ngay_khoi_hanh_cus=stripslashes($this->ngay_khoi_hanh_cus);
             $this->ngay_khoi_hanh_price=stripslashes($this->ngay_khoi_hanh_price);
             $this->hang_bay=stripslashes($this->hang_bay);
             $this->hang_bay_price=stripslashes($this->hang_bay_price);

@@ -54,13 +54,17 @@ if(isset($_SESSION["Admin"]))
             header('Location: '.SITE_NAME.'/controller/admin/booking_tour_custom.php');
         }
     }
-    if(isset($_POST["booking_id"])&&isset($_POST["chuong_trinh"])&&isset($_POST["chuong_trinh_price"])&&isset($_POST["thoi_gian"])&&isset($_POST["thoi_gian_price"])&&isset($_POST["nguoi_lon"])&&isset($_POST["tre_em"])&&isset($_POST["tre_em_5"])&&isset($_POST["so_nguoi_price"])&&isset($_POST["khach_san"])&&isset($_POST["khach_san_price"])&&isset($_POST["ngay_khoi_hanh"])&&isset($_POST["ngay_khoi_hanh_price"])&&isset($_POST["hang_bay"])&&isset($_POST["hang_bay_price"])&&isset($_POST["khac"])&&isset($_POST["khac_price"])&&isset($_POST["note"]))
+    if(isset($_POST["booking_id"])&&isset($_POST["name"])&&isset($_POST["code"])&&isset($_POST["chuong_trinh"])&&isset($_POST["chuong_trinh_price"])&&isset($_POST["thoi_gian"])&&isset($_POST["thoi_gian_price"])&&isset($_POST["nguoi_lon"])&&isset($_POST["tre_em"])&&isset($_POST["tre_em_5"])&&isset($_POST["so_nguoi_price"])&&isset($_POST["khach_san"])&&isset($_POST["khach_san_price"])&&isset($_POST["ngay_khoi_hanh_cus"])&&isset($_POST["ngay_khoi_hanh_price"])&&isset($_POST["hang_bay"])&&isset($_POST["hang_bay_price"])&&isset($_POST["khac"])&&isset($_POST["khac_price"])&&isset($_POST["note"]))
     {
        $array=$_POST;
        if(!isset($array['id']))
        $array['id']='0';
        if(!isset($array['booking_id']))
        $array['booking_id']='0';
+       if(!isset($array['name']))
+       $array['name']='0';
+       if(!isset($array['code']))
+       $array['code']='0';
        if(!isset($array['chuong_trinh']))
        $array['chuong_trinh']='0';
        if(!isset($array['chuong_trinh_price']))
@@ -81,8 +85,8 @@ if(isset($_SESSION["Admin"]))
        $array['khach_san']='0';
        if(!isset($array['khach_san_price']))
        $array['khach_san_price']='0';
-       if(!isset($array['ngay_khoi_hanh']))
-       $array['ngay_khoi_hanh']='0';
+       if(!isset($array['ngay_khoi_hanh_cus']))
+       $array['ngay_khoi_hanh_cus']='0';
        if(!isset($array['ngay_khoi_hanh_price']))
        $array['ngay_khoi_hanh_price']='0';
        if(!isset($array['hang_bay']))

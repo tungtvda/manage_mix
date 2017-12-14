@@ -567,6 +567,9 @@ jQuery(function ($) {
         $('#input_price').val(total_price);
         $('#input_price_511').val(total_price);
         $('#input_price_5').val(total_price);
+        $('#input_price_submit').val(total_price);
+        $('#input_price_511_submit').val(total_price);
+        $('#input_price_5_submit').val(total_price);
         var total_price = total_price.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
         $('#price_format_span').html(total_price);
         $('#input_price_format').html(total_price);

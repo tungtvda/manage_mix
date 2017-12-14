@@ -280,10 +280,14 @@ jQuery(function ($) {
                     var total_tre_em_511 = parseInt(number_tre_em_511) * parseInt(price_tre_em_511);
                     var total_tre_em_5 = parseInt(number_tre_em_5) * parseInt(price_tre_em_5);
                     total = total_nguoi_lon + total_tre_em_511 + total_tre_em_5;
+
                     var vat = 0;
                     if ($("#input_vat").is(':checked')) {
-                        vat = total * 0.1
+                       vat = parseFloat(total * 0.1);
+                        vat = Math.round(vat * 1000)/1000;
                     }
+                    console.log(total);
+                    console.log(vat);
                     con_lai = total + vat;
                     var dat_coc = $("#input_dat_coc").val();
                     if (dat_coc != '' && dat_coc > 0) {
@@ -831,13 +835,22 @@ jQuery(function ($) {
                     element.addClass("input-error").removeClass("valid");
                     error.show();
                     error_free = false;
-                    console.log( form_data[input]['name']);
                 }
 
             }
         }
         if (error_free != false) {
-            //$("#submit_form").submit();
+            $("#submit_form").submit();
+        }else{
+            lnv.alert({
+                title: '<label class="red">Lỗi</label>',
+                content: 'Bạn vui lòng điền đầy đủ thông tin bắt buộc',
+                alertBtnText: 'Ok',
+                iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                alertHandler: function () {
+
+                }
+            });
         }
 
     });
@@ -2465,6 +2478,8 @@ function returnTinhTien(price_nguoi_lon, price_tre_em_511, price_tre_em_5) {
                 var vat = 0;
                 if ($("#input_vat").is(':checked')) {
                     vat = total * 0.1
+                    vat = parseFloat(total * 0.1);
+                    vat = Math.round(vat * 1000)/1000;
                 }
                 con_lai = total + vat;
                 var dat_coc = $("#input_dat_coc").val();

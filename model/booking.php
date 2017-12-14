@@ -1,12 +1,13 @@
 <?php
 class booking
 {
-    public $id,$code_booking,$id_tour,$name_tour,$code_tour,$price_tour, $price_tiep_thi,$price_tiep_thi_thuc_te,$level_tiep_thi,$level_gioi_thieu_tiep_thi_3,$level_gioi_thieu_tiep_thi_4,$level_gioi_thieu_tiep_thi_5,$hoa_hong_gioi_thieu_4,$hoa_hong_gioi_thieu_5,$status_tiep_thi,$confirm_admin_tiep_thi,$price_11,$price_5,$price_new,$price_11_new,$price_5_new,$vat,$nguon_tour,$tien_te,$ty_gia,$ngay_bat_dau,$han_thanh_toan,$loai_khach_hang,$hinh_thuc_thanh_toan,$id_customer,$diem_don,$diem_tra,$ngay_khoi_hanh,$ngay_ket_thuc,$phuong_tien,$num_nguoi_lon,$num_tre_em,$num_tre_em_5,$price_number,$price_number_2,$price_number_3,$name_price,$name_price_2,$name_price_3,$total_price,$tien_thanh_toan,$user_id,$dieuhanh_id,$user_tiep_thi_id,$status,$confirm_admin, $confirm_dieuhanh, $confirm_sales,$created_by,$updated_by,$created,$updated,$note;
+    public $id,$code_booking,$id_tour,$tour_custom,$name_tour,$code_tour,$price_tour, $price_tiep_thi,$price_tiep_thi_thuc_te,$level_tiep_thi,$level_gioi_thieu_tiep_thi_3,$level_gioi_thieu_tiep_thi_4,$level_gioi_thieu_tiep_thi_5,$hoa_hong_gioi_thieu_4,$hoa_hong_gioi_thieu_5,$status_tiep_thi,$confirm_admin_tiep_thi,$price_11,$price_5,$price_new,$price_11_new,$price_5_new,$vat,$nguon_tour,$tien_te,$ty_gia,$ngay_bat_dau,$han_thanh_toan,$loai_khach_hang,$hinh_thuc_thanh_toan,$id_customer,$diem_don,$diem_tra,$ngay_khoi_hanh,$ngay_ket_thuc,$phuong_tien,$num_nguoi_lon,$num_tre_em,$num_tre_em_5,$price_number,$price_number_2,$price_number_3,$name_price,$name_price_2,$name_price_3,$total_price,$tien_thanh_toan,$user_id,$dieuhanh_id,$user_tiep_thi_id,$status,$confirm_admin, $confirm_dieuhanh, $confirm_sales,$created_by,$updated_by,$created,$updated,$note;
     public function booking($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
     $this->code_booking=isset($data['code_booking'])?$data['code_booking']:'';
     $this->id_tour=isset($data['id_tour'])?$data['id_tour']:'';
+    $this->tour_custom=isset($data['tour_custom'])?$data['tour_custom']:'';
     $this->name_tour=isset($data['name_tour'])?$data['name_tour']:'';
     $this->code_tour=isset($data['code_tour'])?$data['code_tour']:'';
     $this->price_tour=isset($data['price_tour'])?$data['price_tour']:'';
@@ -69,6 +70,7 @@ class booking
             $this->id=addslashes($this->id);
             $this->code_booking=addslashes($this->code_booking);
             $this->id_tour=addslashes($this->id_tour);
+            $this->tour_custom=addslashes($this->tour_custom);
             $this->name_tour=addslashes($this->name_tour);
             $this->code_tour=addslashes($this->code_tour);
             $this->price_tour=addslashes($this->price_tour);
@@ -130,6 +132,7 @@ class booking
             $this->id=stripslashes($this->id);
             $this->code_booking=stripslashes($this->code_booking);
             $this->id_tour=stripslashes($this->id_tour);
+            $this->tour_custom=stripslashes($this->tour_custom);
             $this->name_tour=stripslashes($this->name_tour);
             $this->code_tour=stripslashes($this->code_tour);
             $this->price_tour=stripslashes($this->price_tour);

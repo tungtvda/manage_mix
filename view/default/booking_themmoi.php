@@ -133,6 +133,9 @@ function show_booking_themmoi($data = array())
     }
 
      $num_nguoi_lon=_returnDataEditAdd($data['data_user'],'num_nguoi_lon');
+    if(!$num_nguoi_lon){
+        $num_nguoi_lon=1;
+    }
      $num_tre_em=_returnDataEditAdd($data['data_user'],'num_tre_em');
      $num_tre_em_5=_returnDataEditAdd($data['data_user'],'num_tre_em_5');
     $note=_returnDataEditAdd($data['data_user'],'note');
@@ -426,6 +429,7 @@ function show_booking_themmoi($data = array())
         }
     }
 
+    $user_current=$_SESSION['user_id'];
     require_once DIR . '/view/default/template/module/booking/themmoi.php';
 }
 

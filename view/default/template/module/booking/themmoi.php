@@ -10,6 +10,7 @@
 
     <h1>
         <?php echo $tieude ?>
+        <input hidden id="current" value="<?php echo $user_current?>">
     </h1>
 
 </div><!-- /.page-header -->
@@ -157,8 +158,7 @@
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
-                                        <div class="profile-info-name"> Tiền tệ <span
-                                                style="color: red; font-size: 12px">*</span></div>
+                                        <div class="profile-info-name"> Tiền tệ</div>
 
                                         <div class="profile-info-value form-group">
                                             <?php echo _returnInputSelect('tien_te', $tien_te, $data_list_tien_tee, 'valid', 'Tiền tệ ...') ?>
@@ -489,29 +489,6 @@
 
                                            </div>
                                        </div>
-
-                                       <div class="profile-info-row">
-                                           <div class="profile-info-name">
-                                               <p>Khách sạn </p>
-                                               <p>Đơn giá </p>
-                                           </div>
-                                           <div class="profile-info-value">
-                                               <div class="row col-xs-12">
-                                                 <span class="input-icon width_100">
-                                                    <input id="input_khach_san" type="text" name="khach_san" class="width_100 valid" value="" placeholder="Loại khách sạn ..." >
-                                                    <i class="ace-icon fa fa-home  blue"></i>
-                                                 </span>
-                                               </div>
-                                               <div class="row col-xs-12" style="padding-top: 5px">
-                                                  <span class="input-icon width_100">
-                                                    <input id="input_khach_san_price" type="text" name="khach_san_price" value="0" class="valid input_price_cus" placeholder="Đơn giá khách sạn ..." >
-                                                     <i class="ace-icon fa fa-dollar blue"></i>
-                                                    <span id="price_khach_san_price">0 vnđ</span>
-                                                 </span>
-                                               </div>
-                                           </div>
-                                       </div>
-
                                        <div class="profile-info-row">
                                            <div class="profile-info-name">
                                                <p>Khởi hành <span style="color: red; font-size: 12px">*</span></p>
@@ -539,6 +516,29 @@
                                                </div>
                                            </div>
                                        </div>
+                                       <div class="profile-info-row">
+                                           <div class="profile-info-name">
+                                               <p>Khách sạn </p>
+                                               <p>Đơn giá </p>
+                                           </div>
+                                           <div class="profile-info-value">
+                                               <div class="row col-xs-12">
+                                                 <span class="input-icon width_100">
+                                                    <input id="input_khach_san" type="text" name="khach_san" class="width_100 valid" value="" placeholder="Loại khách sạn ..." >
+                                                    <i class="ace-icon fa fa-home  blue"></i>
+                                                 </span>
+                                               </div>
+                                               <div class="row col-xs-12" style="padding-top: 5px">
+                                                  <span class="input-icon width_100">
+                                                    <input id="input_khach_san_price" type="text" name="khach_san_price" value="0" class="valid input_price_cus" placeholder="Đơn giá khách sạn ..." >
+                                                     <i class="ace-icon fa fa-dollar blue"></i>
+                                                    <span id="price_khach_san_price">0 vnđ</span>
+                                                 </span>
+                                               </div>
+                                           </div>
+                                       </div>
+
+
 
                                        <div class="profile-info-row">
                                            <div class="profile-info-name">
@@ -579,6 +579,19 @@
                                                  <i class="ace-icon fa fa-dollar blue"></i>
                                                  <span id="price_khac_price">0 vnđ</span>
                                                 </span>
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <div class="profile-info-row">
+                                           <div class="profile-info-name">
+                                               <p>Note</p>
+
+                                           </div>
+                                           <div class="profile-info-value">
+                                               <div class="row col-xs-12">
+                                                   <span class="input-icon width_100">
+                                                    <textarea class="valid" name="note_cus" id="input_note_cus" placeholder="Ghi chú" style="width: 100%"></textarea>
+                                                    </span>
                                                </div>
                                            </div>
                                        </div>

@@ -210,6 +210,7 @@ function show_booking_themmoi($data = array())
 
             }
             if ($confirm_dieuhanh == 2) {
+
                 $confirm_dieuhanh = '  <button filed="confirm_dieuhanh" class="btn btn-sm btn-danger confirm_booking">
                                         <i class="ace-icon fa fa-times bigger-110"></i>
                                         <span class="bigger-110 no-text-shadow">Đã hủy</span>
@@ -353,6 +354,7 @@ function show_booking_themmoi($data = array())
 
         if($_SESSION['user_role']==1){
             $readonly_tour_custom='';
+            $readonly_info_order='';
         }
 
     } else {

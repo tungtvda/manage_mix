@@ -718,7 +718,7 @@
 
                                             <div class="profile-info-value form-group">
                                                      <span class="input-icon width_100">
-                                                        <input class="valid" id="input_dat_coc" type="number"
+                                                        <input <?php echo $readonly_info_order?> class="valid" id="input_dat_coc" type="number"
                                                                name="dat_coc" value="<?php echo $dat_coc ?>">
                                                           <span class="red"
                                                                 id="dat_coc_format"><?php echo $dat_coc_format ?></span>

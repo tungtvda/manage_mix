@@ -152,6 +152,8 @@ if (isset($_POST['code_booking'])) {
     $khac = _returnPostParamSecurity('khac');
     $khac_price = _returnPostParamSecurity('khac_price');
     $note_cus = _returnPostParamSecurity('note_cus');
+    $confirm_dieuhanh = _returnPostParamSecurity('confirm_dieuhanh');
+    $confirm_sales = _returnPostParamSecurity('confirm_sales');
 
 
     if ($confirm_admin_tiep_thi == '') {
@@ -232,6 +234,10 @@ if (isset($_POST['code_booking'])) {
         $array_detail = ((array)$data_detail[0]);
 
         $booking_update = new booking($array_detail);
+        // thay đổi điều hành
+        if($array_detail['confirm_dieuhanh']!=1 || $_SESSION['user_role']==1){
+            
+        }
         if ($data_detail[0]->confirm_admin == 0 || $_SESSION['user_role'] == 1) {
             if ($id_user != $array_detail['user_id']) {
                 $booking_update->user_id = $id_user;

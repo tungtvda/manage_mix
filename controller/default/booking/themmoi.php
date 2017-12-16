@@ -499,7 +499,7 @@ if (isset($_POST['code_booking'])) {
                     $tour_custom->so_nguoi_price = $so_nguoi_price;
                     $tour_custom->khach_san = $khach_san;
                     $tour_custom->khach_san_price = $khach_san_price;
-                    $tour_custom->ngay_khoi_hanh_cus = $ngay_khoi_hanh_cus;
+                    $tour_custom->ngay_khoi_hanh_cus = date("d-m-Y", strtotime($ngay_khoi_hanh_cus));
                     $tour_custom->ngay_khoi_hanh_price = $ngay_khoi_hanh_price;
                     $tour_custom->hang_bay = $hang_bay;
                     $tour_custom->hang_bay_price = $hang_bay_price;
@@ -520,7 +520,7 @@ if (isset($_POST['code_booking'])) {
                     $booking_model->price_11 = $price_511_submit;
                     $booking_model->price_5 = $price_5_submit;
                     $booking_model->phuong_tien = $hang_bay;
-                    $booking_model->code_booking = 1;
+                    $booking_model->tour_custom = 1;
 
                 } else {
                     $check_data_tour = tour_getById($id_tour);

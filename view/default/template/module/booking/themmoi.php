@@ -42,9 +42,14 @@
                             Chọn điều hành
                         </h3>
                         <div class="row col-xs-12 div_content">
-                            <div class="form-group border-sloid-1-x"
-                                 style="float: left; width: 100%;    margin-left: 0px;margin-right: 0px;">
-                                <div style="float: left;width: 60%">
+                            <div class="row col-xs-12 div_content">
+                                <div class="form-group border-sloid-1-x"
+                                     style="float: left; width: 100%;    margin-left: 0px;margin-right: 0px;background: none">
+                                    <div class="profile-user-info profile-user-info-striped">
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Điều hành</div>
+                                            <div class="profile-info-value form-group">
+                                            <div style="float: left;width: 60%">
                                            <span class="input-icon width_100">
                                                 <input <?php echo $readonly_name_dieuhanh ?>
                                                     class="<?php echo $valid_name_dieuhanh ?>" id="input_name_dieuhanh"
@@ -54,15 +59,23 @@
                                                     style="width:100%;max-width:600px;outline:0" autocomplete="off">
                                                  <i class="ace-icon fa fa-user blue"></i>
                                              </span>
-                                    <input class="<?php echo $valid_id_dieuhanh ?>" hidden id="input_dieuhanh_id" type="text"
-                                           name="dieuhanh_id" value="<?php echo $id_dieuhanh ?>">
-                                    <label style="display: none" class="error-color  error-color-size"
-                                           id="error_name_dieuhanh">Bạn vui lòng chọn điều hành</label>
+                                                <input class="<?php echo $valid_id_dieuhanh ?>" hidden id="input_dieuhanh_id" type="text"
+                                                       name="dieuhanh_id" value="<?php echo $id_dieuhanh ?>">
+                                                <label style="display: none" class="error-color  error-color-size"
+                                                       id="error_name_dieuhanh">Bạn vui lòng chọn điều hành</label>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Trạng thái</div>
+                                            <div class="profile-info-value form-group">
+                                                <?php echo $confirm_dieuhanh?>
+                                            </div>
+                                        </div>
+<!--                                        Hiện button xác nhận điều hành-->
+                                        <?php echo $show_update_dieuhanh?>
+                                    </div>
                                 </div>
-                                <div style="float: left; width: 40%">
-                                  <?php echo $confirm_dieuhanh?>
-                                </div>
-
                             </div>
                             <table class="table table-striped tablget_detail.phpe-bordered">
                                 <thead>
@@ -91,8 +104,13 @@
                         </h3>
                         <div class="row col-xs-12 div_content">
                             <div class="form-group border-sloid-1-x"
-                                 style="float: left; width: 100%;    margin-left: 0px;margin-right: 0px;">
-                                <div style="float: left;width: 60%">
+                                 style="float: left; width: 100%;    margin-left: 0px;margin-right: 0px;background: none">
+                                <div class="profile-user-info profile-user-info-striped">
+                                    <div class="profile-info-row">
+                                            <div class="profile-info-name"> Sales</div>
+
+                                            <div class="profile-info-value form-group">
+                                                <div style="float: left;width: 60%">
                                            <span class="input-icon width_100">
                                                 <input <?php echo $readonly_name_customer ?>
                                                     class="<?php echo $valid_name_user ?>" id="input_name_user"
@@ -102,13 +120,22 @@
                                                     style="width:100%;max-width:600px;outline:0" autocomplete="off">
                                                  <i class="ace-icon fa fa-user blue"></i>
                                              </span>
-                                    <input class="<?php echo $valid_id_user ?>" hidden id="input_id_user" type="text"
-                                           name="id_user" value="<?php echo $id_user ?>">
-                                    <label style="display: none" class="error-color  error-color-size"
-                                           id="error_name_user">Bạn vui lòng chọn sales</label>
-                                </div>
-                                <div style="float: left; width: 40%">
-                                    <?php echo $confirm_sales?>
+                                                    <input class="<?php echo $valid_id_user ?>" hidden id="input_id_user" type="text"
+                                                           name="id_user" value="<?php echo $id_user ?>">
+                                                    <label style="display: none" class="error-color  error-color-size"
+                                                           id="error_name_user">Bạn vui lòng chọn sales</label>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name"> Trạng thái</div>
+                                        <div class="profile-info-value form-group">
+                                            <?php echo $confirm_sales?>
+                                        </div>
+                                    </div>
+                                    <!--                                        Hiện button xác nhận sales-->
+                                    <?php echo  $show_update_sales?>
+
                                 </div>
                             </div>
                             <table class="table table-striped tablget_detail.phpe-bordered">
@@ -138,7 +165,7 @@
 												Thông tin booking
 											</span>
                             </h3>
-                            <div class="col-xs-12 row div_content">
+                            <div disabled="disabled" class="col-xs-12 row div_content">
                                 <div class="profile-user-info profile-user-info-striped">
                                     <div class="profile-info-row">
                                         <div class="profile-info-name"> Mã booking <span
@@ -168,14 +195,14 @@
                                         <div class="profile-info-name"> Tiền tệ</div>
 
                                         <div class="profile-info-value form-group">
-                                            <?php echo _returnInputSelect('tien_te', $tien_te, $data_list_tien_tee, 'valid', 'Tiền tệ ...') ?>
+                                            <?php echo _returnInputSelect('tien_te', $tien_te, $data_list_tien_tee, 'valid', 'Tiền tệ ...',$readonly_info_order) ?>
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
                                         <div class="profile-info-name"> Nguồn đơn hàng</div>
 
                                         <div class="profile-info-value form-group">
-                                            <?php echo _returnInputSelect('nguon_tour', $nguon_tour, $data_list_nguon_tour, 'valid', 'Nguồn đơn hàng ...') ?>
+                                            <?php echo _returnInputSelect('nguon_tour', $nguon_tour, $data_list_nguon_tour, 'valid', 'Nguồn đơn hàng ...',$readonly_info_order) ?>
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
@@ -183,7 +210,7 @@
                                                 style="color: red; font-size: 12px">*</span></div>
 
                                         <div class="profile-info-value form-group">
-                                            <?php echo _returnInputDate('ngay_bat_dau', $ngay_bat_dau, $ngay_bat_dau_valid, '', 'Bạn vui lòng chọn ngày bắt đầu', '') ?>
+                                            <?php echo _returnInputDate('ngay_bat_dau', $ngay_bat_dau, $ngay_bat_dau_valid, '', 'Bạn vui lòng chọn ngày bắt đầu', '',$readonly_info_order) ?>
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
@@ -191,14 +218,14 @@
                                                 style="color: red; font-size: 12px">*</span></div>
 
                                         <div class="profile-info-value form-group">
-                                            <?php echo _returnInputDate('han_thanh_toan', $han_thanh_toan, $han_thanh_toan_valid, '', 'Bạn vui lòng chọn ngày thanh toán', '') ?>
+                                            <?php echo _returnInputDate('han_thanh_toan', $han_thanh_toan, $han_thanh_toan_valid, '', 'Bạn vui lòng chọn ngày thanh toán', '',$readonly_info_order) ?>
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
                                         <div class="profile-info-name"> Tình trạng</div>
 
                                         <div class="profile-info-value form-group">
-                                            <?php echo _returnInputSelect('status', $status, $data_list_status, 'valid', 'Trạng thái ...') ?>
+                                            <?php echo _returnInputSelect('status', $status, $data_list_status, 'valid', 'Trạng thái ...',$readonly_info_order) ?>
                                             <label style="display: none" class="error-color  error-color-size"
                                                    id="error_status">Bạn vui lòng chọn trạng thái đơn hàng</label>
                                         </div>
@@ -208,7 +235,7 @@
                                                 style="color: red; font-size: 12px">*</span></div>
 
                                         <div class="profile-info-value form-group">
-                                            <?php echo _returnInputSelect('hinh_thuc_thanh_toan', $hinh_thuc_thanh_toan, $data_list_httt, 'valid', 'Hình thức thanh toán ...') ?>
+                                            <?php echo _returnInputSelect('hinh_thuc_thanh_toan', $hinh_thuc_thanh_toan, $data_list_httt, 'valid', 'Hình thức thanh toán ...',$readonly_info_order) ?>
                                             <label style="display: none" class="error-color  error-color-size"
                                                    id="error_hinh_thuc_thanh_toan">Bạn vui lòng chọn hình thức thanh
                                                 toán</label>
@@ -229,17 +256,17 @@
                                                     margin-top: 5px;
                                                 }
                                             </style>
-                                            <input name="num_nguoi_lon" value="<?php echo $num_nguoi_lon ?>" type="text"
+                                            <input name="num_nguoi_lon" value="<?php echo $num_nguoi_lon ?>" type="text" <?php echo $readonly_info_order?>
                                                    id="input_num_nguoi_lon"
                                                    title="Số người lớn"
                                                    class="spinbox-input form-control text-center valid"
                                                    placeholder="Người lớn">
-                                            <input name="num_tre_em" type="text" id="input_num_tre_em"
+                                            <input name="num_tre_em" type="text" id="input_num_tre_em" <?php echo $readonly_info_order?>
                                                    value="<?php echo $num_tre_em ?>"
                                                    title="Số trẻ em từ 5 đến 11 tuổi"
                                                    class="spinbox-input form-control text-center valid"
                                                    placeholder="Trẻ em  5-11 tuổi">
-                                            <input name="num_tre_em_5" type="text" id="input_num_tre_em_5"
+                                            <input name="num_tre_em_5" type="text" id="input_num_tre_em_5" <?php echo $readonly_info_order?>
                                                    value="<?php echo $num_tre_em_5 ?>"
                                                    title="Số trẻ em dưới 5 tuổi"
                                                    class="spinbox-input form-control text-center valid"
@@ -255,7 +282,7 @@
                                         <div class="profile-info-name"> Thuế VAT(10%)</div>
 
                                         <div class="profile-info-value form-group">
-                                            <?php echo _returnInputCheck('vat', 'valid', '', $checked_vat) ?>
+                                            <?php echo _returnInputCheck('vat', 'valid', '', $checked_vat,$readonly_info_order) ?>
                                         </div>
                                     </div>
 
@@ -307,40 +334,40 @@
                                         <div class="profile-info-name"> Email <span style="color: red; font-size: 12px">*</span>
                                         </div>
                                         <div class="profile-info-value form-group">
-                                            <?php echo _returnInput('email', $email_customer, $email_customer_valid, 'envelope', '', 'Bạn vui lòng nhập email khách hàng', '') ?>
+                                            <?php echo _returnInput('email', $email_customer, $email_customer_valid, 'envelope', $readonly_info_order, 'Bạn vui lòng nhập email khách hàng', '') ?>
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
                                         <div class="profile-info-name"> Địa chỉ <span
                                                 style="color: red; font-size: 12px">*</span></div>
                                         <div class="profile-info-value form-group">
-                                            <?php echo _returnInput('address', $address_customer, $address_customer_valid, 'map-marker', '', 'Bạn vui lòng nhập địa chỉ khách hàng', '') ?>
+                                            <?php echo _returnInput('address', $address_customer, $address_customer_valid, 'map-marker', $readonly_info_order, 'Bạn vui lòng nhập địa chỉ khách hàng', '') ?>
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
                                         <div class="profile-info-name"> Điện thoại<span
                                                 style="color: red; font-size: 12px">*</span></div>
                                         <div class="profile-info-value form-group">
-                                            <?php echo _returnInput('phone', $phone_customer, $phone_customer_valid, 'phone', '', 'Bạn vui lòng nhập số điện thoai', '') ?>
+                                            <?php echo _returnInput('phone', $phone_customer, $phone_customer_valid, 'phone', $readonly_info_order, 'Bạn vui lòng nhập số điện thoai', '') ?>
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
                                         <div class="profile-info-name"> Fax</div>
                                         <div class="profile-info-value form-group">
-                                            <?php echo _returnInput('fax', $fax_customer, 'valid', 'fax', '', '', '') ?>
+                                            <?php echo _returnInput('fax', $fax_customer, 'valid', 'fax', $readonly_info_order, '', '') ?>
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
                                         <div class="profile-info-name"> Nhóm</div>
                                         <div class="profile-info-value form-group nhom_khach_hang">
-                                            <?php echo _returnInputSelect('nhom_khach_hang', $nhom_kh, $data_list_customer_category, 'valid', 'Nhóm khách hàng ...') ?>
+                                            <?php echo _returnInputSelect('nhom_khach_hang', $nhom_kh, $data_list_customer_category, 'valid', 'Nhóm khách hàng ...',$readonly_info_order) ?>
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
                                         <div class="profile-info-name"> Điểm đón <span
                                                 style="color: red; font-size: 12px">*</span></div>
                                         <div class="profile-info-value form-group">
-                                            <?php echo _returnInput('diem_don', $diem_don, $diem_don_customer_valid, 'map-marker', '', 'Bạn vui lòng nhập điểm đón', '') ?>
+                                            <?php echo _returnInput('diem_don', $diem_don, $diem_don_customer_valid, 'map-marker', $readonly_info_order, 'Bạn vui lòng nhập điểm đón', '') ?>
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
@@ -348,7 +375,7 @@
                                                 style="color: red; font-size: 12px">*</span></div>
 
                                         <div class="profile-info-value form-group">
-                                            <?php echo _returnInputDate('ngay_khoi_hanh', $ngay_khoi_hanh, $ngay_khoi_hanh_valid, '', 'Bạn vui lòng chọn ngày khởi hành', '') ?>
+                                            <?php echo _returnInputDate('ngay_khoi_hanh', $ngay_khoi_hanh, $ngay_khoi_hanh_valid, '', 'Bạn vui lòng chọn ngày khởi hành', '',$readonly_info_order) ?>
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
@@ -356,7 +383,7 @@
                                                 style="color: red; font-size: 12px">*</span></div>
 
                                         <div class="profile-info-value form-group">
-                                            <?php echo _returnInputDate('ngay_ket_thuc', $ngay_ket_thuc, $ngay_ket_thuc_valid, '', 'Bạn vui lòng chọn ngày kết thúc', '') ?>
+                                            <?php echo _returnInputDate('ngay_ket_thuc', $ngay_ket_thuc, $ngay_ket_thuc_valid, '', 'Bạn vui lòng chọn ngày kết thúc', '',$readonly_info_order) ?>
                                         </div>
                                     </div>
                                 </div>
@@ -385,21 +412,24 @@
                             Thông tin tour
                         </h3>
                         <div class="row col-xs-12 div_content">
-                           <h5>Loại tour <span
-                                   style="color: red; font-size: 12px">*</span></h5>
+                            <div style="background-color: #EDF3F4;float: left;width: 100%;">
+                                <h5>Loại tour <span
+                                        style="color: red; font-size: 12px">*</span></h5>
 
-                            <div style="float: left;width: 100%; margin-bottom: 20px" >
-                                <select name="type_tour" class="chosen-select form-control type_tour"
-                                        id="form-field-select-3" data-placeholder="Chọn loại tour ..."
-                                        style="display: none;width: 10px">
-                                    <option value=""></option>
-                                    <option value="0">Tour trong hệ thống</option>
-                                    <option value="1">Tour theo yêu cầu khách hàng</option>
-                                </select>
-                                <label style="display: none" class="error-color  error-color-size" id="error_type_tour">Bạn vui lòng chọn loại tour</label>
-                                </span>
+                                <div style="float: left;width: 100%; margin-bottom: 20px" >
+                                    <select <?php echo $readonly_type_tour?> name="type_tour" class="chosen-select form-control type_tour"
+                                            id="form-field-select-3" data-placeholder="Chọn loại tour ..."
+                                            style="display: none;width: 10px">
+                                        <option value=""></option>
+                                        <option <?php echo $select_type_hethong?> value="0">Tour trong hệ thống</option>
+                                        <option <?php echo $select_type_custom?> value="1">Tour theo yêu cầu khách hàng</option>
+                                    </select>
+                                    <label style="display: none" class="error-color  error-color-size" id="error_type_tour">Bạn vui lòng chọn loại tour</label>
+                                    </span>
+                                </div>
                             </div>
-                            <div hidden id="tour_custom" class="show_type_tour form-group border-sloid-1-x" style="float: left; width: 100%;background: #ffffff;  margin-left: 0px;margin-right: 0px;">
+
+                            <div <?php echo $show_tour_custom?> id="tour_custom" class="show_type_tour form-group border-sloid-1-x" style="float: left; width: 100%;background: #ffffff;  margin-left: 0px;margin-right: 0px;">
                                    <div class="profile-user-info profile-user-info-striped">
                                        <div class="profile-info-row">
                                            <div class="profile-info-name">
@@ -408,7 +438,7 @@
                                            <div class="profile-info-value">
                                                <div class="row col-xs-12">
                                                    <span class="input-icon width_100">
-                                                <input id="input_name_tour_cus" type="text" data-valid="required" name="name_tour_cus" value="" class="width_100 valid-input" placeholder="Tên tour..." >
+                                                <input <?php echo $readonly_tour_custom?> id="input_name_tour_cus" type="text" data-valid="required" name="name_tour_cus" value="<?php echo $name_tour?>" class="width_100 valid-input <?php echo $valid_name_tour ?>" placeholder="Tên tour..." >
                                                  <i class="ace-icon fa fa-plane  blue"></i>
                                                 </span>
                                                    <label style="display: none" class="error-color  error-color-size" id="error_name_tour_cus">Bạn vui lòng nhập tên tour</label>
@@ -425,15 +455,15 @@
                                            <div class="profile-info-value">
                                                <div class="row col-xs-12">
                                                    <span class="input-icon width_100">
-                                                    <textarea class="valid-input" name="chuong_trinh" data-valid="required" id="input_chuong_trinh" placeholder="Chương trình tour" style="width: 100%"></textarea>
+                                                    <textarea <?php echo $readonly_tour_custom?> class="valid-input <?php echo $chuong_trinh_valid?>" name="chuong_trinh" data-valid="required" id="input_chuong_trinh" placeholder="Chương trình tour" style="width: 100%"><?php echo $chuong_trinh?></textarea>
                                                     <label style="display: none" class="error-color  error-color-size" id="error_chuong_trinh">Bạn vui lòng nhập chương trình tour</label>
                                                     </span>
                                                </div>
                                                <div class="row col-xs-12">
                                                    <span class="input-icon width_100">
-                                                <input id="input_chuong_trinh_price" type="text" name="chuong_trinh_price" value="0" class="valid input_price_cus" placeholder="Đơn giá chương trình ..." >
+                                                <input <?php echo $readonly_tour_custom?> id="input_chuong_trinh_price" type="text" name="chuong_trinh_price" value="<?php echo $chuong_trinh_price?>" class="valid input_price_cus" placeholder="Đơn giá chương trình ..." >
                                                  <i class="ace-icon fa fa-dollar blue"></i>
-                                                 <span id="price_chuong_trinh_price">0 vnđ</span>
+                                                 <span id="price_chuong_trinh_price"><?php echo $chuong_trinh_price_format?></span>
                                                 </span>
                                                </div>
                                            </div>
@@ -446,16 +476,16 @@
                                            <div class="profile-info-value">
                                                <div class="row col-xs-12">
                                                  <span class="input-icon width_100">
-                                                    <input id="input_thoi_gian" type="text" name="thoi_gian" class="width_100 valid-input" data-valid="required" value="" placeholder="Thời gian tour ..." >
+                                                    <input <?php echo $readonly_tour_custom?> id="input_thoi_gian" type="text" name="thoi_gian" class="width_100 valid-input <?php echo $thoi_gian_valid?>" data-valid="required" value="<?php echo $thoi_gian?>" placeholder="Thời gian tour ..." >
                                                     <i class="ace-icon fa fa-clock-o blue"></i>
                                                      <label style="display: none" class="error-color  error-color-size" id="error_thoi_gian">Bạn vui lòng nhập thời gian tour</label>
                                                  </span>
                                                </div>
                                                <div class="row col-xs-12" style="padding-top: 5px">
                                                   <span class="input-icon width_100">
-                                                    <input id="input_thoi_gian_price" type="text" name="thoi_gian_price" value="0" class="valid input_price_cus" placeholder="Đơn giá thời gian ..." >
+                                                    <input <?php echo $readonly_tour_custom?> id="input_thoi_gian_price" type="text" name="thoi_gian_price" value="<?php echo $thoi_gian_price?>" class="valid input_price_cus" placeholder="Đơn giá thời gian ..." >
                                                      <i class="ace-icon fa fa-dollar blue"></i>
-                                                    <span id="price_thoi_gian_price">0 vnđ</span>
+                                                    <span id="price_thoi_gian_price"><?php echo $thoi_gian_price_format?></span>
                                                  </span>
                                                </div>
                                            </div>
@@ -467,18 +497,18 @@
                                            </div>
                                            <div class="profile-info-value form-group">
                                                <div class="row col-xs-12">
-                                                   <input  name="nguoi_lon" value="1" type="text"
+                                                   <input <?php echo $readonly_tour_custom?>  name="nguoi_lon" value="<?php echo $nguoi_lon?>" type="text"
                                                           id="input_nguoi_lon"
                                                           title="Số người lớn"
                                                           class="spinbox-input form-control text-center valid"
                                                           placeholder="Người lớn">
-                                                   <input name="tre_em" type="text" id="input_tre_em"
-                                                          value="0"
+                                                   <input <?php echo $readonly_tour_custom?> name="tre_em" type="text" id="input_tre_em"
+                                                          value="<?php echo $tre_em?>"
                                                           title="Số trẻ em từ 5 đến 11 tuổi"
                                                           class="spinbox-input form-control text-center valid"
                                                           placeholder="Trẻ em  5-11 tuổi">
-                                                   <input name="tre_em_5" type="text" id="input_tre_em_5"
-                                                          value="0"
+                                                   <input <?php echo $readonly_tour_custom?> name="tre_em_5" type="text" id="input_tre_em_5"
+                                                          value="<?php echo $tre_em_5?>"
                                                           title="Số trẻ em dưới 5 tuổi"
                                                           class="spinbox-input form-control text-center valid"
                                                           placeholder="Trẻ em dưới 5 tuổi">
@@ -488,9 +518,9 @@
                                                </div>
                                                <div class="row col-xs-12" style="padding-top: 5px">
                                                   <span class="input-icon width_100">
-                                                    <input id="input_so_nguoi_price" type="text" name="so_nguoi_price" value="0" class="valid input_price_cus" placeholder="Đơn giá số người ..." >
+                                                    <input <?php echo $readonly_tour_custom?> id="input_so_nguoi_price" type="text" name="so_nguoi_price" value="<?php echo $so_nguoi_price?>" class="valid input_price_cus" placeholder="Đơn giá số người ..." >
                                                      <i class="ace-icon fa fa-dollar blue"></i>
-                                                    <span id="price_so_nguoi_price">0 vnđ</span>
+                                                    <span id="price_so_nguoi_price"><?php echo $so_nguoi_price_format?></span>
                                                  </span>
                                                </div>
 
@@ -505,7 +535,7 @@
                                                <div class="row col-xs-12">
                                                  <span class="input-icon width_100">
                                                     <div class="input-group" style="">
-                                                        <input value="" class="form-control date-picker width_100 valid-input" data-valid="required" id="input_ngay_khoi_hanh_cus" name="ngay_khoi_hanh_cus" required="" type="text" data-date-format="dd-mm-yyyy">
+                                                        <input <?php echo $readonly_tour_custom?> value="<?php echo $ngay_khoi_hanh_cus?>" class="form-control date-picker width_100 valid-input <?php echo $ngay_khoi_hanh_cus_valid?>" data-valid="required" id="input_ngay_khoi_hanh_cus" name="ngay_khoi_hanh_cus" required="" type="text" data-date-format="dd-mm-yyyy">
 																	<span id="icon_ngay_khoi_hanh_cus" class="input-group-addon date_icon">
 																		<i class="fa fa-calendar bigger-110"></i>
 																	</span>
@@ -516,9 +546,9 @@
                                                </div>
                                                <div class="row col-xs-12" style="padding-top: 5px">
                                                   <span class="input-icon width_100">
-                                                    <input id="input_ngay_khoi_hanh_price" type="text" name="ngay_khoi_hanh_price" value="0" class="valid input_price_cus" placeholder="Đơn giá ngày khởi hành ..." >
+                                                    <input <?php echo $readonly_tour_custom?> id="input_ngay_khoi_hanh_price" type="text" name="ngay_khoi_hanh_price" value="<?php echo $ngay_khoi_hanh_price?>" class="valid input_price_cus" placeholder="Đơn giá ngày khởi hành ..." >
                                                      <i class="ace-icon fa fa-dollar blue"></i>
-                                                    <span id="price_ngay_khoi_hanh_price">0 vnđ</span>
+                                                    <span id="price_ngay_khoi_hanh_price"><?php echo $ngay_khoi_hanh_price_format?></span>
                                                  </span>
                                                </div>
                                            </div>
@@ -531,15 +561,15 @@
                                            <div class="profile-info-value">
                                                <div class="row col-xs-12">
                                                  <span class="input-icon width_100">
-                                                    <input id="input_khach_san" type="text" name="khach_san" class="width_100 valid" value="" placeholder="Loại khách sạn ..." >
+                                                    <input <?php echo $readonly_tour_custom?> id="input_khach_san" type="text" name="khach_san" class="width_100 valid" value="<?php echo $khach_san?>" placeholder="Loại khách sạn ..." >
                                                     <i class="ace-icon fa fa-home  blue"></i>
                                                  </span>
                                                </div>
                                                <div class="row col-xs-12" style="padding-top: 5px">
                                                   <span class="input-icon width_100">
-                                                    <input id="input_khach_san_price" type="text" name="khach_san_price" value="0" class="valid input_price_cus" placeholder="Đơn giá khách sạn ..." >
+                                                    <input <?php echo $readonly_tour_custom?> id="input_khach_san_price" type="text" name="khach_san_price" value="<?php echo $khach_san_price?>" class="valid input_price_cus" placeholder="Đơn giá khách sạn ..." >
                                                      <i class="ace-icon fa fa-dollar blue"></i>
-                                                    <span id="price_khach_san_price">0 vnđ</span>
+                                                    <span id="price_khach_san_price"><?php echo $khach_san_price_format?></span>
                                                  </span>
                                                </div>
                                            </div>
@@ -555,15 +585,15 @@
                                            <div class="profile-info-value">
                                                <div class="row col-xs-12">
                                                  <span class="input-icon width_100">
-                                                    <input id="input_hang_bay" type="text" name="hang_bay" class="width_100 valid" value="" placeholder="Hãng hàng không ..." >
+                                                    <input <?php echo $readonly_tour_custom?> id="input_hang_bay" type="text" name="hang_bay" class="width_100 valid" value="<?php echo $hang_bay?>" placeholder="Hãng hàng không ..." >
                                                     <i class="ace-icon fa fa-plane  blue"></i>
                                                  </span>
                                                </div>
                                                <div class="row col-xs-12" style="padding-top: 5px">
                                                   <span class="input-icon width_100">
-                                                    <input id="input_hang_bay_price" type="text" name="hang_bay_price" value="0" class="valid input_price_cus" placeholder="Đơn giá hãng hàng không ..." >
+                                                    <input <?php echo $readonly_tour_custom?> id="input_hang_bay_price" type="text" name="hang_bay_price" value="<?php echo $hang_bay_price?>" class="valid input_price_cus" placeholder="Đơn giá hãng hàng không ..." >
                                                      <i class="ace-icon fa fa-dollar blue"></i>
-                                                    <span id="price_hang_bay_price">0 vnđ</span>
+                                                    <span id="price_hang_bay_price"><?php echo $hang_bay_price_format?></span>
                                                  </span>
                                                </div>
                                            </div>
@@ -577,14 +607,14 @@
                                            <div class="profile-info-value">
                                                <div class="row col-xs-12">
                                                    <span class="input-icon width_100">
-                                                    <textarea class="valid" name="khac" id="input_khac" placeholder="Dịch vụ khác" style="width: 100%"></textarea>
+                                                    <textarea <?php echo $readonly_tour_custom?> class="valid" name="khac" id="input_khac" placeholder="Dịch vụ khác" style="width: 100%"><?php echo $khac?></textarea>
                                                     </span>
                                                </div>
                                                <div class="row col-xs-12">
                                                    <span class="input-icon width_100">
-                                                <input id="input_khac_price" type="text" name="khac_price" value="0" class="valid input_price_cus" placeholder="Đơn giá dịch vụ khác ..." >
+                                                <input <?php echo $readonly_tour_custom?> id="input_khac_price" type="text" name="khac_price" value="<?php echo $khac_price?>" class="valid input_price_cus" placeholder="Đơn giá dịch vụ khác ..." >
                                                  <i class="ace-icon fa fa-dollar blue"></i>
-                                                 <span id="price_khac_price">0 vnđ</span>
+                                                 <span id="price_khac_price"><?php echo $khac_price_format?></span>
                                                 </span>
                                                </div>
                                            </div>
@@ -597,7 +627,7 @@
                                            <div class="profile-info-value">
                                                <div class="row col-xs-12">
                                                    <span class="input-icon width_100">
-                                                    <textarea class="valid" name="note_cus" id="input_note_cus" placeholder="Ghi chú" style="width: 100%"></textarea>
+                                                    <textarea <?php echo $readonly_tour_custom?>  class="valid" name="note_cus" id="input_note_cus" placeholder="Ghi chú" style="width: 100%"><?php echo $note_cus?></textarea>
                                                     </span>
                                                </div>
                                            </div>
@@ -605,7 +635,7 @@
 
                                    </div>
                             </div>
-                            <div hidden id="tour_in_system" class="form-group border-sloid-1-x show_type_tour"
+                            <div <?php echo $show_tour_system?> id="tour_in_system" class="form-group border-sloid-1-x show_type_tour"
                                  style="float: left; width: 100%;    margin-left: 0px;margin-right: 0px;">
                                 <div style="float: left;width: 50%">
                                            <span class="input-icon width_100">

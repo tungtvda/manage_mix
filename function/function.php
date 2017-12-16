@@ -990,10 +990,10 @@ function _returnInput($name, $value = '', $valid = '', $icon_input = '', $disabl
                                                                            id="error_' . $name . '">' . $mess_err . '</label>';
 }
 
-function _returnInputDate($name, $value = '', $valid = '', $disabled = '', $mess_err = '', $width = '')
+function _returnInputDate($name, $value = '', $valid = '', $disabled = '', $mess_err = '', $width = '',$readonly='')
 {
     return '<div ' . $disabled . '  class="input-group" style="' . $width . '">
-                                                                            <input value="' . $value . '"
+                                                                            <input '.$readonly.' value="' . $value . '"
                                                                                    class="form-control date-picker width_100 ' . $valid . '"
                                                                                    id="input_' . $name . '" name="' . $name . '"
                                                                                    required
@@ -1009,10 +1009,10 @@ function _returnInputDate($name, $value = '', $valid = '', $disabled = '', $mess
                                                                                id="error_' . $name . '">' . $mess_err . '</label>';
 }
 
-function _returnInputCheck($name, $valid = '', $disabled = '', $checked = '')
+function _returnInputCheck($name, $valid = '', $disabled = '', $checked = '',$readonly='')
 {
     return ' <label>
-                                                                        <input ' . $checked . '
+                                                                        <input ' . $checked . $readonly.'
                                                                             id="input_' . $name . '" ' . $disabled . '
                                                                             name="' . $name . '"
                                                                             class="ace ace-switch ace-switch-6 ' . $valid . '"
@@ -1021,9 +1021,9 @@ function _returnInputCheck($name, $valid = '', $disabled = '', $checked = '')
                                                                     </label>';
 }
 
-function _returnInputSelect($name, $value, $data_list, $valid = '', $name_title)
+function _returnInputSelect($name, $value, $data_list, $valid = '', $name_title,$readonly='')
 {
-    $string = '<select name="' . $name . '"
+    $string = '<select name="' . $name . '" '.$readonly.'
                                                                             class="chosen-select form-control ' . $valid . ' ' . $name . '"
                                                                             id="form-field-select-3"
                                                                             data-placeholder="' . $name_title . '"

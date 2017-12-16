@@ -27,7 +27,8 @@ function SendMail($Sendto,$Body,$Subject, $return='', $title_mail='Hệ thống 
         $mail->Password = 'rhypxfkzxcxdfkjy';
     }else{
         $mail->Username = 'manage.system.mixtourist@gmail.com';
-        $mail->Password = 'ttulgbiqnksxueze';
+//        $mail->Password = 'ttulgbiqnksxueze';
+        $mail->Password = 'bgogoyjwpkpemdns';
     }
 
     $mail->SetFrom('thanhtuyen@mixmedia.vn', $title_mail);

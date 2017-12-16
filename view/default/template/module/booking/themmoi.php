@@ -44,7 +44,7 @@
                         <div class="row col-xs-12 div_content">
                             <div class="form-group border-sloid-1-x"
                                  style="float: left; width: 100%;    margin-left: 0px;margin-right: 0px;">
-                                <div style="float: left;width: 66%">
+                                <div style="float: left;width: 60%">
                                            <span class="input-icon width_100">
                                                 <input <?php echo $readonly_name_dieuhanh ?>
                                                     class="<?php echo $valid_name_dieuhanh ?>" id="input_name_dieuhanh"
@@ -59,6 +59,10 @@
                                     <label style="display: none" class="error-color  error-color-size"
                                            id="error_name_dieuhanh">Bạn vui lòng chọn điều hành</label>
                                 </div>
+                                <div style="float: left; width: 40%">
+                                  <?php echo $confirm_dieuhanh?>
+                                </div>
+
                             </div>
                             <table class="table table-striped tablget_detail.phpe-bordered">
                                 <thead>
@@ -88,7 +92,7 @@
                         <div class="row col-xs-12 div_content">
                             <div class="form-group border-sloid-1-x"
                                  style="float: left; width: 100%;    margin-left: 0px;margin-right: 0px;">
-                                <div style="float: left;width: 66%">
+                                <div style="float: left;width: 60%">
                                            <span class="input-icon width_100">
                                                 <input <?php echo $readonly_name_customer ?>
                                                     class="<?php echo $valid_name_user ?>" id="input_name_user"
@@ -102,6 +106,9 @@
                                            name="id_user" value="<?php echo $id_user ?>">
                                     <label style="display: none" class="error-color  error-color-size"
                                            id="error_name_user">Bạn vui lòng chọn sales</label>
+                                </div>
+                                <div style="float: left; width: 40%">
+                                    <?php echo $confirm_sales?>
                                 </div>
                             </div>
                             <table class="table table-striped tablget_detail.phpe-bordered">

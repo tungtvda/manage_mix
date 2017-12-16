@@ -397,7 +397,7 @@
 
                                         <div class="profile-info-value form-group">
                                          <span class="input-icon width_100">
-                                            <textarea class="valid" name="note" id="input_note" style="width: 100%"><?php echo $note ?></textarea>
+                                            <textarea <?php echo $readonly_info_order?> class="valid" name="note" id="input_note" style="width: 100%"><?php echo $note ?></textarea>
                                          </span>
                                         </div>
                                     </div>

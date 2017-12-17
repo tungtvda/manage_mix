@@ -216,9 +216,13 @@ function show_booking_themmoi($data = array())
                                         <span class="bigger-110 no-text-shadow">Đã hủy</span>
                                     </button> ';
             } else {
+                $text_dieu_hanh='Đang đợi xác nhận';
+                if($data['data_user'][0]->dieuhanh_id==0){
+                    $text_dieu_hanh='Chưa chọn điều hành';
+                }
                 $confirm_dieuhanh = '  <button filed="confirm_dieuhanh" class="btn btn-sm btn-warning confirm_booking">
                                         <i class="ace-icon fa fa-exclamation-triangle bigger-110"></i>
-                                        <span class="bigger-110 no-text-shadow">Đang đợi xác nhận</span>
+                                        <span class="bigger-110 no-text-shadow">'.$text_dieu_hanh.'</span>
                                     </button>
                                     ';
             }
@@ -253,9 +257,13 @@ function show_booking_themmoi($data = array())
                                         <span class="bigger-110 no-text-shadow">Đã hủy</span>
                                     </button> ';
             }else{
+                $text_sales='Đang đợi xác nhận';
+                if($data['data_user'][0]->user_id==0){
+                    $text_sales='Chưa chọn sales';
+                }
                 $confirm_sales = '  <button filed="confirm_sales" class="btn btn-sm btn-warning confirm_booking">
                                         <i class="ace-icon fa fa-exclamation-triangle bigger-110"></i>
-                                        <span class="bigger-110 no-text-shadow">Đang đợi xác nhận</span>
+                                        <span class="bigger-110 no-text-shadow">'.$text_sales.'</span>
                                     </button>';
             }
             if ($data['data_user'][0]->user_id == $_SESSION['user_id']) {

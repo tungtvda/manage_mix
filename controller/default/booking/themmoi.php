@@ -243,6 +243,7 @@ if (isset($_POST['code_booking'])) {
                     $check_data_dieuhanh = user_getById($dieuhanh_id);
                     if (count($check_data_dieuhanh) >0) {
                         $booking_update->dieuhanh_id = $dieuhanh_id;
+                        $booking_update->confirm_dieuhanh=0;
                         $string_value_old .= ' Điều hành: "' .$array_detail['dieuhanh_id'] . '" </br>';
                         $string_value_new .= ' Điều hành mới: "' . $name_dieuhanh.'_'.$dieuhanh_id . '" </br> ';
                         $edit_dieuhanh = $array_detail['dieuhanh_id'];
@@ -271,6 +272,7 @@ if (isset($_POST['code_booking'])) {
                     $check_data_user = user_getById($id_user);
                     if (count($check_data_user) > 0) {
                         $booking_update->user_id = $id_user;
+                        $booking_update->confirm_sales=0;
                         $string_value_old .= ' Sales: "' . $array_detail['user_id'] . '" </br> ';
                         $string_value_new .= ' Sales mới: "' . $name_user.'_'.$id_user . '" </br> ';
                         $edit_user = $array_detail['user_id'];

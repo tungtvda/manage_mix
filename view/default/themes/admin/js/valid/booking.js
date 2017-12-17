@@ -2452,10 +2452,20 @@ function returnTinhTien(price_nguoi_lon, price_tre_em_511, price_tre_em_5) {
     //var price_nguoi_lon = $('#input_price').val();
     //var price_tre_em_511 = $('#input_price_511').val();
     //var price_tre_em_5 = $('#input_price_5').val();
-
     var number_nguoi_lon = $('#input_num_nguoi_lon').val();
     var number_tre_em_511 = $('#input_num_tre_em').val();
     var number_tre_em_5 = $('#input_num_tre_em_5').val();
+    if(price_nguoi_lon=='Liên hệ'){
+        price_nguoi_lon=0;
+    }
+    if(price_tre_em_511=='Liên hệ'){
+        price_tre_em_511=0;
+    }
+    if(price_tre_em_5=='Liên hệ'){
+        price_tre_em_5=0;
+    }
+
+    console.log(price_nguoi_lon);
     if (numberRegex.test(price_nguoi_lon) && numberRegex.test(price_tre_em_511) && numberRegex.test(price_tre_em_5)) {
         if (number_nguoi_lon > 0 && number_nguoi_lon != '') {
             if (price_nguoi_lon == undefined) {

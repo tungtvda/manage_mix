@@ -219,7 +219,7 @@ function show_booking_themmoi($data = array())
                 $confirm_dieuhanh = '  <button filed="confirm_dieuhanh" class="btn btn-sm btn-warning confirm_booking">
                                         <i class="ace-icon fa fa-exclamation-triangle bigger-110"></i>
                                         <span class="bigger-110 no-text-shadow">Đang đợi xác nhận</span>
-                                    </button>>
+                                    </button>
                                     ';
             }
 
@@ -248,12 +248,12 @@ function show_booking_themmoi($data = array())
                                     </button>';
         } else {
             if($confirm_sales==2){
-                $confirm_sales = ' <button filed="confirm_dieuhanh" class="btn btn-sm btn-danger confirm_booking">
+                $confirm_sales = ' <button filed="confirm_sales" class="btn btn-sm btn-danger confirm_booking">
                                         <i class="ace-icon fa fa-times bigger-110"></i>
                                         <span class="bigger-110 no-text-shadow">Đã hủy</span>
                                     </button> ';
             }else{
-                $confirm_sales = '  <button filed="confirm_dieuhanh" class="btn btn-sm btn-warning confirm_booking">
+                $confirm_sales = '  <button filed="confirm_sales" class="btn btn-sm btn-warning confirm_booking">
                                         <i class="ace-icon fa fa-exclamation-triangle bigger-110"></i>
                                         <span class="bigger-110 no-text-shadow">Đang đợi xác nhận</span>
                                     </button>';
@@ -265,7 +265,7 @@ function show_booking_themmoi($data = array())
                                             <div class="profile-info-value form-group">
                                                 <label><input
                                                                             id="input_confirm_dieuhanh"
-                                                                            name="confirm_dieuhanh"
+                                                                            name="confirm_sales"
                                                                             class="ace ace-switch ace-switch-6"
                                                                             type="checkbox">
                                                                         <span class="lbl"></span>
@@ -280,7 +280,7 @@ function show_booking_themmoi($data = array())
             $select_type_custom = 'selected="selected"';
             $show_tour_custom = '';
             $show_tour_system = 'hidden';
-
+            $valid_name_tour='valid';
             // thông tin tour custom
             $data_tour = booking_tour_custom_getById(_returnDataEditAdd($data['data_user'], 'id_tour'));
             if (count($data_tour) > 0) {
@@ -355,6 +355,10 @@ function show_booking_themmoi($data = array())
         if($_SESSION['user_role']==1){
             $readonly_tour_custom='';
             $readonly_info_order='';
+        }
+        if($data['data_user'][0]->status==5){
+            $readonly_tour_custom='disabled';
+            $readonly_info_order='disabled';
         }
 
     } else {

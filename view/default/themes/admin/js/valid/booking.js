@@ -286,8 +286,6 @@ jQuery(function ($) {
                        vat = parseFloat(total * 0.1);
                         vat = Math.round(vat * 1000)/1000;
                     }
-                    console.log(total);
-                    console.log(vat);
                     con_lai = total + vat;
                     var dat_coc = $("#input_dat_coc").val();
                     if (dat_coc != '' && dat_coc > 0) {
@@ -795,7 +793,13 @@ jQuery(function ($) {
         }
 
     });
-
+    $('#submit_form').on('keyup keypress', function(e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode === 13) {
+            e.preventDefault();
+            return false;
+        }
+    });
 
     $('body').on("click", '#submit_form_action', function () {
         var form_data = $("#submit_form").serializeArray();
@@ -841,6 +845,7 @@ jQuery(function ($) {
             $('#error_type_tour').hide();
         }
         if (error_free != false) {
+            $('#submit_form_action').hide();
             $("#submit_form").submit();
         }else{
             lnv.alert({

@@ -52,7 +52,12 @@ function view_left($data=array())
                                     $dk_count='';
                                     if(isset($data['dk_find']))
                                     {
-                                        $dk_count=$data['dk_find'];
+                                        if($row_form->dk_count!=''){
+                                            $dk_count=$row_form->dk_count.' and '.$data['dk_find'];
+                                        }else{
+                                            $dk_count=$data['dk_find'];
+                                        }
+
                                     }else{
                                         $dk_count=$row_form->dk_count;
                                     }

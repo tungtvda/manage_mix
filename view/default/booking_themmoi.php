@@ -74,7 +74,7 @@ function show_booking_themmoi($data = array())
     $thoi_gian_price_format = '0 vnđ';
     $nguoi_lon = 1;
     $tre_em = 0;
-    $tre_em = 0;
+    $tre_em_5 = 0;
     $so_nguoi_price = 0;
     $so_nguoi_price_format = '0 vnđ';
     $khach_san = '';
@@ -336,6 +336,9 @@ function show_booking_themmoi($data = array())
             $select_type_hethong = 'selected="selected"';
             $show_tour_system = '';
             $show_tour_custom = 'hidden';
+            $chuong_trinh_valid = 'valid';
+            $thoi_gian_valid = 'valid';
+            $ngay_khoi_hanh_cus_valid = 'valid';
             $data_tour = tour_getById(_returnDataEditAdd($data['data_user'], 'id_tour'));
             if (count($data_tour) > 0) {
                 if ($data_tour[0]->name != '') {
@@ -463,7 +466,7 @@ function show_booking_themmoi($data = array())
     $table_tour .= '<input hidden="" id="input_price_format" value="' . $price_new_format . '">
         <input hidden="" title="giá sửa" id="input_price" value="' . $price_new . '">
         <input hidden="" id="input_price_old" title="giá cũ" value="' . $price_new . '"> ';
-    if ($_SESSION['user_role'] == 1 || $data['data_user'][0]->dieuhanh_id==$_SESSION['user_id'] ) {
+    if ($_SESSION['user_role'] == 1 || (isset($data['data_user'][0]->dieuhanh_id)&& $data['data_user'][0]->dieuhanh_id==$_SESSION['user_id']) ) {
         $table_tour .= '| <a id="edit_price" href="javascript:void(0)"><i class="fa fa-edit" title="Sửa đơn giá"></i></a>
         <a id="reset_price" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a>';
     } else {
@@ -474,7 +477,7 @@ function show_booking_themmoi($data = array())
         <td><span id="price_format_span_511">' . $price_11_new_format . '</span>';
 
     $table_tour .= '<input hidden="" title="giá sửa" id="input_price_511" value="' . $price_11_new . '"> <input hidden="" id="input_price_511_old" title="giá cũ" value="' . $price_11_new . '">';
-    if ($_SESSION['user_role'] == 1 || $data['data_user'][0]->dieuhanh_id==$_SESSION['user_id'] ) {
+    if ($_SESSION['user_role'] == 1 || (isset($data['data_user'][0]->dieuhanh_id)&& $data['data_user'][0]->dieuhanh_id==$_SESSION['user_id']) ) {
         $table_tour .= '| <a id="edit_price_511" href="javascript:void(0)">
         <i class="fa fa-edit" title="Sửa đơn giá"></i></a>
         <a id="reset_price_511" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a>';
@@ -483,7 +486,7 @@ function show_booking_themmoi($data = array())
         <td><span id="price_format_span_5">' . $price_5_new_format . '</span>';
 
     $table_tour .= '<input hidden="" title="giá sửa" id="input_price_5" value="' . $price_5_new . '"> <input hidden="" id="input_price_5_old" title="giá cũ" value="' . $price_5_new . '"> ';
-    if ($_SESSION['user_role'] == 1 || $data['data_user'][0]->dieuhanh_id==$_SESSION['user_id'] ) {
+    if ($_SESSION['user_role'] == 1 || (isset($data['data_user'][0]->dieuhanh_id)&& $data['data_user'][0]->dieuhanh_id==$_SESSION['user_id']) ) {
         $table_tour .= '| <a id="edit_price_5" href="javascript:void(0)">
         <i class="fa fa-edit" title="Sửa đơn giá"></i></a><a id="reset_price_5" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a>';
     }

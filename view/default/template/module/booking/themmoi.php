@@ -42,7 +42,7 @@
                             Chọn điều hành
                         </h3>
                         <div class="row col-xs-12 div_content">
-                            <div class="row col-xs-12 div_content">
+
                                 <div class="form-group border-sloid-1-x"
                                      style="float: left; width: 100%;    margin-left: 0px;margin-right: 0px;background: none">
                                     <div class="profile-user-info profile-user-info-striped">
@@ -76,7 +76,7 @@
                                         <?php echo $show_update_dieuhanh?>
                                     </div>
                                 </div>
-                            </div>
+
                             <table class="table table-striped tablget_detail.phpe-bordered">
                                 <thead>
                                 <tr>

@@ -44,7 +44,9 @@ switch ($action_link) {
         $active_tab_left = 'booking_list';
 
 }
-
+if($_SESSION['user_role']!=1){
+    $data['dk_find']=' user_id='.$_SESSION['user_id'].' or dieuhanh_id='.$_SESSION['user_id'].' or created_by='.$_SESSION['user_id'];
+}
 if (isset($_GET['id']) && $_GET['id'] != '') {
     $data['action'] = 2;
     if (_returnCheckAction(22) == 0) {
@@ -55,6 +57,10 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
     $data['data_user'] = booking_getById($id);
 
     if (count($data['data_user']) == 0) {
+        redict(SITE_NAME . '/' . $action_link . '/');
+    }
+    if ($_SESSION['user_role']!=1) {
+        if($data['data_user'][0]->created_by !=$_SESSION['user_id'] && $data['data_user'][0]->dieuhanh_id !=$_SESSION['user_id']&& $data['data_user'][0]->user_id !=$_SESSION['user_id'])
         redict(SITE_NAME . '/' . $action_link . '/');
     }
     $url_bread = '<li><a href="' . SITE_NAME . '/' . $action_link . '/">Danh sách đặt tour</a></li><li class="active">Chỉnh sửa đơn hàng "' . $data['data_user'][0]->code_booking . '"</li>';
@@ -316,6 +322,21 @@ if (isset($_POST['code_booking'])) {
                     $string_value_old .= ' Giá trẻ em dưới 5 tuổi: "' . $array_detail['price_5_new'] . '" </br> ';
                     $string_value_new .= ' Giá trẻ em dưới 5 tuổi mới: "' . $price_5_submit . '" </br> ';
                 }
+                $total = 0;
+                if (is_numeric($num_nguoi_lon) && is_numeric($price_submit)) {
+                    $total = $total + ($num_nguoi_lon * $price_submit);
+                }
+                if (is_numeric($num_tre_em) && is_numeric($price_511_submit)) {
+                    $total = $total + ($num_tre_em * $price_511_submit);
+                }
+                if (is_numeric($num_tre_em_5) && is_numeric($price_5_submit)) {
+                    $total = $total + ($num_tre_em_5 * $price_5_submit);
+                }
+                if ($vat == 1) {
+                    $vat_price = ($total * 0.1);
+                    $total = $total + $vat_price;
+                }
+                $booking_update->total_price=$total;
                 if($array_detail['tour_custom']==1){
                     if($array_detail['name_tour']!=$name_tour_cus && isset($_POST['name_tour_cus'])){
                         $booking_update->name_tour = $name_tour_cus;
@@ -579,6 +600,9 @@ if (isset($_POST['code_booking'])) {
                 }
 
 
+            }
+            if($booking_update->created_by==0){
+                $booking_update->created_by=$_SESSION['user_id'];
             }
             $booking_update->updated = _returnGetDateTime();
             booking_update($booking_update);

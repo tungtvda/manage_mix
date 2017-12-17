@@ -138,7 +138,7 @@
                                             <label style="display: none"><?php echo $row->status ?></label>
                                             <?php
                                             $disabled = 'disabled';
-                                            if ($row->confirm_admin == 1 || $_SESSION['user_role'] == 1) {
+                                            if ($row->user_id == $_SESSION['user_id'] || $_SESSION['user_role'] == 1) {
                                                 $disabled = '';
                                             }
                                             ?>

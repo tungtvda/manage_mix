@@ -17,10 +17,10 @@ $_SESSION['link_redict']='http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']
 $action_link=str_replace('/','',$action_link);
 $data_dk_fill='';
 $active_tab_left='booking_list';
-if($_SESSION['user_role']==0)
-{
-    $data_dk_fill='user_id='.$_SESSION['user_id'];
-}
+//if($_SESSION['user_role']==0)
+//{
+//    $data_dk_fill='user_id='.$_SESSION['user_id'];
+//}
 
 switch($action_link){
     case 'booking-new':
@@ -76,7 +76,13 @@ switch($action_link){
         $active_tab_left='booking_list';
 
 }
-//$data['dk_find'] =$data_dk_fill;
+if($_SESSION['user_role']!=1){
+    $data_dk_fill=$data_dk_fill.' and  (bk.user_id='.$_SESSION['user_id'].' or bk.dieuhanh_id='.$_SESSION['user_id'].' or bk.created_by='.$_SESSION['user_id'].')';
+    $data['dk_find']=' (user_id='.$_SESSION['user_id'].' or dieuhanh_id='.$_SESSION['user_id'].' or created_by='.$_SESSION['user_id'].')';
+}else{
+
+}
+
 $url_bread='<li class="active">Booking</li>';
 $data['breadcrumbs']=$url_bread;
 $data['action_link']=$action_link;

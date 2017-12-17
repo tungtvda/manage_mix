@@ -510,8 +510,6 @@ jQuery(function ($) {
         var valid = $(this).attr('data-valid');
         if(valid=='required'){
             var value=$(this).val();
-            console.log(value);
-
            if(value && name){
                $('#error_'+name).hide();
                $(this).addClass('valid');
@@ -520,6 +518,16 @@ jQuery(function ($) {
                $('#error_'+name).show();
                $(this).removeClass('valid');
            }
+        }
+        switch (name){
+            case 'name_tour_cus':
+                if(value!=''){
+                    $('#name_tour_table').html(value)
+                    $('#input_id_tour').addClass('valid');
+                }else{
+                    $('#input_id_tour').removeClass('valid');
+                }
+                break;
         }
     });
     $('body').on("change", '.valid-input', function () {
@@ -540,6 +548,9 @@ jQuery(function ($) {
             case 'name_tour_cus':
                 if(value!=''){
                     $('#name_tour_table').html(value)
+                    $('#input_id_tour').addClass('valid');
+                }else{
+                    $('#input_id_tour').removeClass('valid');
                 }
                 break;
         }

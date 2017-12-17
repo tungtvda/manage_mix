@@ -510,6 +510,8 @@ jQuery(function ($) {
         var valid = $(this).attr('data-valid');
         if(valid=='required'){
             var value=$(this).val();
+            console.log(value);
+
            if(value && name){
                $('#error_'+name).hide();
                $(this).addClass('valid');

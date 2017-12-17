@@ -751,7 +751,7 @@
                                     <div class="profile-info-value">
                                         <div style="float: left;width: 66%">
                                            <span class="input-icon width_100">
-                                                <input <?php echo $readonly_name_user_tt ?>
+                                                <input <?php echo $readonly_name_user_tt ?> <?php echo $readonly_info_order?>
                                                     class="valid" id="input_name_user_tiepthi"
                                                     autofocus type="text" name="name_user_tiepthi"
                                                     value="<?php echo $name_user_tt ?>"
@@ -773,7 +773,7 @@
                                 <div class="profile-info-row">
                                     <div class="profile-info-name"> Trạng thái</div>
                                     <div class="profile-info-value">
-                                        <?php echo _returnInputCheck('confirm_admin_tiep_thi', 'valid', '', $confirm_admin_tiep_thi) ?>
+                                        <?php echo _returnInputCheck('confirm_admin_tiep_thi', 'valid', '', $confirm_admin_tiep_thi,$readonly_info_order) ?>
                                     </div>
                                 </div>
                             </div>
@@ -813,7 +813,7 @@
                                         padding: 5px;
                                     }
                                 </style>
-                                <tbody class="show_hide_table">
+                                <tbody  class="show_hide_table">
                                 <?php echo $string_cus_tommer?>
                                 </tbody>
                             </table>

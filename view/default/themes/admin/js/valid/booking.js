@@ -801,10 +801,9 @@ jQuery(function ($) {
         var form_data = $("#submit_form").serializeArray();
         var error_free = true;
         var type_tour=$('.type_tour').val();
-
         for (var input in form_data) {
             var name_input = form_data[input]['name'];
-            if (name_input != "tien_te" && name_input != "note" && name_input != "nguon_tour" && name_input != 'category' && name_input != 'nhom_khach_hang' && name_input != 'name_customer_sub[]' && name_input != 'email_customer[]' && name_input != 'phone_customer[]' && name_input != 'address_customer[]' && name_input != 'birthday_customer[]' && name_input != 'tuoi_number_customer[]' && name_input != 'tuoi_customer[]' && name_input != 'date_passport_customer[]' && name_input != 'passport_customer[]') {
+            if (name_input != "type_tour" && name_input != "confirm_sales" && name_input != "confirm_dieuhanh" && name_input != "tien_te" && name_input != "note" && name_input != "nguon_tour" && name_input != 'category' && name_input != 'nhom_khach_hang' && name_input != 'name_customer_sub[]' && name_input != 'email_customer[]' && name_input != 'phone_customer[]' && name_input != 'address_customer[]' && name_input != 'birthday_customer[]' && name_input != 'tuoi_number_customer[]' && name_input != 'tuoi_customer[]' && name_input != 'date_passport_customer[]' && name_input != 'passport_customer[]') {
                 var element = $("#input_" + name_input);
                 var error = $("#error_" + name_input);
                 var valid = element.hasClass("valid");
@@ -824,20 +823,22 @@ jQuery(function ($) {
                         valid = true;
                     }
                 }
-                if(!type_tour){
-                    $('#error_type_tour').show();
-                    error_free = false;
-                }else{
-                    $('#error_type_tour').hide();
-                    valid = true;
-                }
-                if (valid == false) {
+
+                if (valid === false) {
                     element.addClass("input-error").removeClass("valid");
                     error.show();
                     error_free = false;
+                    console.log(form_data[input]['name']);
                 }
 
             }
+        }
+
+        if(!type_tour){
+            $('#error_type_tour').show();
+            error_free = false;
+        }else{
+            $('#error_type_tour').hide();
         }
         if (error_free != false) {
             $("#submit_form").submit();

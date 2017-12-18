@@ -88,8 +88,9 @@
                                 <th>#</th>
                                 <th>Mã booking</th>
                                 <th>Tên Tour</th>
-                                <th>Tên khách hàng</th>
+                                <th>Khách hàng</th>
                                 <th>Trạng thái</th>
+                                <th>Quyền</th>
                                 <th>Tổng tiền</th>
                                 <th>Thanh toán</th>
                                 <th>Còn lại</th>
@@ -157,6 +158,23 @@
                                                 }
                                                 ?>
                                             </select>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            if($row->dieuhanh_id==$row->user_id && $row->user_id==$_SESSION['user_id']){
+                                                echo 'Điều hành + Sales';
+                                            }else{
+                                                if($row->dieuhanh_id==$_SESSION['user_id']){
+                                                    echo 'Điều hành';
+                                                }else{
+                                                    if($row->user_id==$_SESSION['user_id']){
+                                                        echo 'Sales';
+                                                    }else{
+                                                        echo 'Người tạo';
+                                                    }
+                                                }
+                                            }
+                                            ?>
                                         </td>
                                         <td><?php echo number_format((int)$row->total_price, 0, ",", ".") . ' vnđ'; ?></td>
                                         <td>
@@ -444,6 +462,60 @@
                             </div>
                             <div class="row">
                                 <h3 style="margin-right: 0px; margin-left: 0px;    font-size: 14px;"
+                                    class="row header smaller lighter blue">
+											<span class="col-sm-8">
+												<i class="ace-icon fa fa-users"></i>
+												Điều hành
+											</span>
+                                </h3>
+                                <div class="col-xs-12">
+                                    <div class="profile-user-info profile-user-info-striped">
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Tên điều hành</div>
+                                            <div class="profile-info-value">
+                                                    <span style="font-weight: bold; color:#478fca !important; "
+                                                          class="editable editable-click dieuhanh_name_link"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Trạng thái</div>
+                                            <div class="profile-info-value">
+                                                    <span style="font-weight: bold; color:#478fca !important; "
+                                                          class="editable editable-click dieuhanh_text_confirm">đang xác nhận</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <h3 style="margin-right: 0px; margin-left: 0px;    font-size: 14px;"
+                                    class="row header smaller lighter blue">
+											<span class="col-sm-8">
+												<i class="ace-icon fa fa-users"></i>
+												Sales
+											</span>
+                                </h3>
+                                <div class="col-xs-12">
+                                    <div class="profile-user-info profile-user-info-striped">
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Tên sales</div>
+                                            <div class="profile-info-value">
+                                                    <span style="font-weight: bold; color:#478fca !important; "
+                                                          class="editable editable-click user_name_link"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Trạng thái</div>
+                                            <div class="profile-info-value">
+                                                    <span style="font-weight: bold; color:#478fca !important; "
+                                                          class="editable editable-click user_text_confirm"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <h3 style="margin-right: 0px; margin-left: 0px;    font-size: 14px;"
                                     class="row header smaller lighter orange">
 											<span class="col-sm-8">
 												<i class="ace-icon fa fa-shopping-cart"></i>
@@ -452,13 +524,6 @@
                                 </h3>
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="profile-user-info profile-user-info-striped">
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> Sales</div>
-                                            <div class="profile-info-value">
-                                                <span style="font-weight: bold; color:#478fca !important; "
-                                                      class="editable editable-click name_sales"></span>
-                                            </div>
-                                        </div>
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Tiề tệ</div>
                                             <div class="profile-info-value">

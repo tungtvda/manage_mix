@@ -22,10 +22,47 @@ if (isset($_POST['id']) && isset($_POST['table'])) {
         if (count($data_check) > 0) {
             $user_data=user_getById($data_check[0]->user_id);
             $data_check[0]->user_name='';
+            $data_check[0]->dieuhanh_name='';
+            $data_check[0]->user_name_link='';
+            $data_check[0]->dieuhanh_name_link='';
+            $data_check[0]->user_text_confirm='<b class="orange">Chưa có sales</b>';
+            $data_check[0]->dieuhanh_text_confirm='<b class="orange">Chưa có điều hành</b>';
             if(count($user_data)>0){
                 $data_check[0]->user_id=$user_data[0]->id;
                 $data_check[0]->user_name=$user_data[0]->name;
-                $data_check[0]->user_name="<a href='".SITE_NAME."/nhan-vien/sua?id="._return_mc_encrypt($user_data[0]->id)."'>".$data_check[0]->user_name."</a>";
+                $data_check[0]->user_name_link="<a href='".SITE_NAME."/nhan-vien/profile?id="._return_mc_encrypt($user_data[0]->id)."'>".$user_data[0]->name."</a>";
+                if( $data_check[0]->confirm_sales==1){
+                    $data_check[0]->user_text_confirm='<b class="green">Đã xác nhận</b>';
+                }else{
+                    if( $data_check[0]->confirm_sales==2){
+                        $data_check[0]->user_text_confirm='<b class="red">Đã hủy</b>';
+                    }else{
+                        $data_check[0]->user_text_confirm='<b class="orange">Đang đợi xác nhận</b>';
+                    }
+                }
+            }else{
+                if($data_check[0]->user_id){
+                    $data_check[0]->user_text_confirm='<b class="red">Sales không còn tồn tại trong hệ thống</b>';
+                }
+            }
+            $dieuhanh_data=user_getById($data_check[0]->dieuhanh_id);
+            if($dieuhanh_data){
+                $data_check[0]->dieuhanh_id=$dieuhanh_data[0]->id;
+                $data_check[0]->dieuhanh_name=$dieuhanh_data[0]->name;
+                $data_check[0]->dieuhanh_name_link="<a href='".SITE_NAME."/nhan-vien/profile?id="._return_mc_encrypt($dieuhanh_data[0]->id)."'>".$dieuhanh_data[0]->name."</a>";
+                if( $data_check[0]->confirm_dieuhanh==1){
+                    $data_check[0]->dieuhanh_text_confirm='<b class="green">Đã xác nhận</b>';
+                }else{
+                    if( $data_check[0]->confirm_dieuhanh==2){
+                        $data_check[0]->dieuhanh_text_confirm='<b class="red">Đã hủy</b>';
+                    }else{
+                        $data_check[0]->dieuhanh_text_confirm='<b class="orange">Đang đợi xác nhận</b>';
+                    }
+                }
+            }else{
+                if($data_check[0]->dieuhanh_id){
+                    $data_check[0]->dieuhanh_text_confirm='<b class="red">Điều hành không còn tồn tại trong hệ thống</b>';
+                }
             }
             $tiente_data=tien_te_getById($data_check[0]->tien_te);
             $data_check[0]->tien_te_name='';

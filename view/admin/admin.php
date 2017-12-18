@@ -53,6 +53,6 @@ function showFrom($form,$ListKey=array())
     $str_from='';
     $str_from.='<p><label>TenDangNhap</label><input class="text-input small-input" type="text"  name="TenDangNhap" value="'.(($form!=false)?$form->TenDangNhap:'').'" /></p>';
     $str_from.='<p><label>Full_name</label><input class="text-input small-input" type="text"  name="Full_name" value="'.(($form!=false)?$form->Full_name:'').'" /></p>';
-    $str_from.='<p><label>MatKhau</label><input class="text-input small-input" type="text"  name="MatKhau" value="'.(($form!=false)?$form->MatKhau:'').'" /></p>';
+    $str_from.='<p><label>MatKhau</label><input class="text-input small-input" type="password"   name="MatKhau" value="'.(($form!=false)?$form->MatKhau:'').'" /></p>';
     return $str_from;
 }

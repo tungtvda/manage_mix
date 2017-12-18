@@ -247,8 +247,9 @@
 
                                         <div class="profile-info-value form-group">
                                             <style>
-                                                .ace-spinner {
+                                                .spinbox-input  {
                                                     width: 32% !important;
+                                                    float: left;
                                                 }
 
                                                 .check_div label {
@@ -256,17 +257,18 @@
                                                     margin-top: 5px;
                                                 }
                                             </style>
-                                            <input name="num_nguoi_lon" value="<?php echo $num_nguoi_lon ?>" type="text" <?php echo $readonly_info_order?>
+
+                                            <input name="num_nguoi_lon" min="1" value="<?php echo $num_nguoi_lon ?>" type="number" <?php echo $readonly_info_order?>
                                                    id="input_num_nguoi_lon"
                                                    title="Số người lớn"
                                                    class="spinbox-input form-control text-center valid"
                                                    placeholder="Người lớn">
-                                            <input name="num_tre_em" type="text" id="input_num_tre_em" <?php echo $readonly_info_order?>
+                                            <input name="num_tre_em" type="number" min="0" id="input_num_tre_em" <?php echo $readonly_info_order?>
                                                    value="<?php echo $num_tre_em ?>"
                                                    title="Số trẻ em từ 5 đến 11 tuổi"
                                                    class="spinbox-input form-control text-center valid"
                                                    placeholder="Trẻ em  5-11 tuổi">
-                                            <input name="num_tre_em_5" type="text" id="input_num_tre_em_5" <?php echo $readonly_info_order?>
+                                            <input name="num_tre_em_5" min="0" type="number" id="input_num_tre_em_5" <?php echo $readonly_info_order?>
                                                    value="<?php echo $num_tre_em_5 ?>"
                                                    title="Số trẻ em dưới 5 tuổi"
                                                    class="spinbox-input form-control text-center valid"
@@ -497,17 +499,17 @@
                                            </div>
                                            <div class="profile-info-value form-group">
                                                <div class="row col-xs-12">
-                                                   <input <?php echo $readonly_tour_custom?>  name="nguoi_lon" value="<?php echo $nguoi_lon?>" type="text"
+                                                   <input <?php echo $readonly_tour_custom?>  name="nguoi_lon" value="<?php echo $nguoi_lon?>" type="number" mmin="1"
                                                           id="input_nguoi_lon"
                                                           title="Số người lớn"
                                                           class="spinbox-input form-control text-center valid"
                                                           placeholder="Người lớn">
-                                                   <input <?php echo $readonly_tour_custom?> name="tre_em" type="text" id="input_tre_em"
+                                                   <input <?php echo $readonly_tour_custom?> name="tre_em" type="number" id="input_tre_em" min="0"
                                                           value="<?php echo $tre_em?>"
                                                           title="Số trẻ em từ 5 đến 11 tuổi"
                                                           class="spinbox-input form-control text-center valid"
                                                           placeholder="Trẻ em  5-11 tuổi">
-                                                   <input <?php echo $readonly_tour_custom?> name="tre_em_5" type="text" id="input_tre_em_5"
+                                                   <input <?php echo $readonly_tour_custom?> name="tre_em_5" type="number" id="input_tre_em_5" min="0"
                                                           value="<?php echo $tre_em_5?>"
                                                           title="Số trẻ em dưới 5 tuổi"
                                                           class="spinbox-input form-control text-center valid"
@@ -850,7 +852,7 @@
                 </div>
             </div>
 
-            <div class="modal-footer">
+            <div class="modal-footer modal-footer-custom">
                 <?php echo $confirm_admin_tring ?>
                 <button class="btn btn-sm btn-primary" id="submit_form_action" type="button">
                     <i class="ace-icon fa fa-check"></i>

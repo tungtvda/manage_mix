@@ -63,8 +63,8 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
         if($data['data_user'][0]->created_by !=$_SESSION['user_id'] && $data['data_user'][0]->dieuhanh_id !=$_SESSION['user_id']&& $data['data_user'][0]->user_id !=$_SESSION['user_id'])
         redict(SITE_NAME . '/' . $action_link . '/');
     }
-    $url_bread = '<li><a href="' . SITE_NAME . '/' . $action_link . '/">Danh sách đặt tour</a></li><li class="active">Chỉnh sửa đơn hàng "' . $data['data_user'][0]->code_booking . '"</li>';
-    $data['title'] = 'Chỉnh sửa đơn hàng "' . $data['data_user'][0]->code_booking . '"';
+    $url_bread = '<li><a href="' . SITE_NAME . '/' . $action_link . '/">Danh sách đặt tour</a></li><li class="active">Thông tin đơn hàng "' . $data['data_user'][0]->code_booking . '"</li>';
+    $data['title'] = 'Thông tin đơn hàng "' . $data['data_user'][0]->code_booking . '"';
     _updateStatusNoti();
 
 } else {
@@ -283,20 +283,20 @@ if (isset($_POST['code_booking'])) {
                             $link_noti = SITE_NAME . '/' . $action_link . '/sua?noti=1&id=' . _return_mc_encrypt($array_detail['id'], ENCRYPTION_KEY);
                             _insertNotification($name_noti, $_SESSION['user_id'], $id_user, $link_noti, 0, '');
 
-//                            $subject = 'Xác nhận đơn hàng ' . $code_booking;
-//                            $mess_log = 'Nhân viên ' . $_SESSION['user_name'] . ' đã thực hiện việc sửa đơn hàng';
-//                            $message = '<p>Nhân viên ' . $_SESSION['user_name']  . ' đã chọn bạn làm sales cho đơn hàng '.$code_booking.'. Bạn hãy xác nhận đơn hàng</p>';
-//                            $message .= '<a>Bạn vui lòng truy cập <a href="' . SITE_NAME . $link_noti . '">đường link</a> để xác nhận đơn hàng</p>';
-//                            SendMail($check_data_user[0]->user_email , $message, $subject);
+                            $subject = 'Xác nhận đơn hàng ' . $code_booking;
+                            $mess_log = 'Nhân viên ' . $_SESSION['user_name'] . ' đã thực hiện việc sửa đơn hàng';
+                            $message = '<p>Nhân viên ' . $_SESSION['user_name']  . ' đã chọn bạn làm sales cho đơn hàng '.$code_booking.'. Bạn hãy xác nhận đơn hàng</p>';
+                            $message .= '<a>Bạn vui lòng truy cập <a href="' . $link_noti . '">đường link</a> để xác nhận đơn hàng</p>';
+                            SendMail($check_data_user[0]->user_email , $message, $subject);
                         }else{
                             $name_noti = 'Bạn đã tạo thành công đơn hàng '.$code_booking;
                             $link_noti = SITE_NAME . '/' . $action_link . '/sua?noti=1&id=' . _return_mc_encrypt($array_detail['id'], ENCRYPTION_KEY);
                             _insertNotification($name_noti, $_SESSION['user_id'], $id_user, $link_noti, 0, '');
 
-//                            $subject = 'Thông báo sửa đơn hàng ' . $code_booking.' thành công';
-//                            $message = '<p>Bạn vừa tạo thành công đơn hàng mã ' . $code_booking . '</p>';
-//                            SendMail($check_data_user[0]->user_email, $message, $subject);
-//                            $mess_log = 'Nhân viên ' . $check_data_user[0]->name . ' đã thực hiện việc sửa đơn hàng';
+                            $subject = 'Thông báo sửa đơn hàng ' . $code_booking.' thành công';
+                            $message = '<p>Bạn vừa tạo thành công đơn hàng mã ' . $code_booking . '</p>';
+                            SendMail($check_data_user[0]->user_email, $message, $subject);
+                            $mess_log = 'Nhân viên ' . $check_data_user[0]->name . ' đã thực hiện việc sửa đơn hàng';
                         }
                         if($array_detail['user_id']!=''){
                             $name_noti = $_SESSION['user_name'] . ' đã hủy quyền sales cho đơn hàng '.$code_booking.'';
@@ -878,7 +878,7 @@ if (isset($_POST['code_booking'])) {
 
             $subject = 'Xác nhận đơn hàng ' . $code_booking;
             $message = '<p>Nhân viên ' . $_SESSION['user_name'] . ' đã chọn bạn làm điều hành cho đơn hàng '.$code_booking.'. Bạn hãy xác nhận đơn hàng</p>';
-            $message .= '<a>Bạn vui lòng truy cập <a href="' . SITE_NAME . $link_noti . '">đường link</a> để xác nhận đơn hàng</p>';
+            $message .= '<a>Bạn vui lòng truy cập <a href="' . $link_noti . '">đường link</a> để xác nhận đơn hàng</p>';
             SendMail($check_data_dieuhanh[0]->user_email, $message, $subject);
 
             // gửi đơn hàng tới sales
@@ -891,7 +891,7 @@ if (isset($_POST['code_booking'])) {
                 $subject = 'Xác nhận đơn hàng ' . $code_booking;
                 $mess_log = 'Nhân viên ' . $_SESSION['user_name'] . ' đã thực hiện việc tạo đơn hàng';
                 $message = '<p>Nhân viên ' . $_SESSION['user_name']  . ' đã chọn bạn làm sales cho đơn hàng '.$code_booking.'. Bạn hãy xác nhận đơn hàng</p>';
-                $message .= '<a>Bạn vui lòng truy cập <a href="' . SITE_NAME . $link_noti . '">đường link</a> để xác nhận đơn hàng</p>';
+                $message .= '<a>Bạn vui lòng truy cập <a href="' . $link_noti . '">đường link</a> để xác nhận đơn hàng</p>';
                 SendMail($check_data_user[0]->user_email , $message, $subject);
             }else{
                 $name_noti = 'Bạn đã tạo thành công đơn hàng '.$code_booking;

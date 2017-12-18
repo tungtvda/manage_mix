@@ -470,9 +470,86 @@ jQuery(function ($) {
         $('#input_name_tour').val('');
         $('#name_tour_table').html('');
         $('#error_type_tour').hide();
+        $('#tong_cong').html('0 vnđ');
+        $('#con_lai').html('0 vnđ');
+        $('#vat').html('0 vnđ');
+        $('#input_dat_coc').val('');
     });
 
-    $('#input_num_nguoi_lon').ace_spinner({
+    //spinner
+    var spinner = $( "#spinner" ).spinner({
+        create: function( event, ui ) {
+            //add custom classes and icons
+            $(this)
+                .next().addClass('btn btn-success').html('<i class="ace-icon fa fa-plus"></i>')
+                .next().addClass('btn btn-danger').html('<i class="ace-icon fa fa-minus"></i>')
+
+            //larger buttons on touch devices
+            if('touchstart' in document.documentElement)
+                $(this).closest('.ui-spinner').addClass('ui-spinner-touch');
+        }
+    });
+    $('form').on('focus', '.spinbox-input', function (e) {
+        $(this).on('mousewheel.disableScroll', function (e) {
+            e.preventDefault()
+        })
+    })
+    $('form').on('blur', '.spinbox-input', function (e) {
+        $(this).off('mousewheel.disableScroll')
+    })
+    $('body').on("change", '#input_num_nguoi_lon', function () {
+        var error_so_nguoi = $("#error_so_nguoi");
+        var value_get=$('#input_num_nguoi_lon').val();
+        if(value_get<1){
+            $('#input_num_nguoi_lon').val(1);
+            value_get=1;
+        }else{
+            $('#input_num_nguoi_lon').addClass("valid").removeClass("input-error");
+            error_so_nguoi.hide();
+            checkSoNguoi();
+        }
+    });
+    $('body').on("change", '#input_num_tre_em', function () {
+        var value_get=$('#input_num_tre_em').val();
+        if(value_get=='' ||value_get<0){
+            $('#input_num_tre_em').val(0);
+        }
+        checkSoNguoi()
+    });
+    $('body').on("change", '#input_num_tre_em_5', function () {
+        var value_get=$('#input_num_tre_em_5').val();
+        if(value_get=='' ||value_get<0){
+            $('#input_num_tre_em_5').val(0);
+        }
+        checkSoNguoi()
+    });
+
+    $('body').on("change", '#input_nguoi_lon', function () {
+        var error_so_nguoi = $("#error_so_nguoi_cus");
+        var value_get=$('#input_nguoi_lon').val();
+        if(value_get<1){
+            $('#input_nguoi_lon').val(1);
+            value_get=1;
+        }else{
+            $('#input_nguoi_lon').addClass("valid").removeClass("input-error");
+            error_so_nguoi.hide();
+        }
+    });
+    $('body').on("change", '#input_tre_em', function () {
+        var value_get=$('#input_tre_em').val();
+        if(value_get=='' ||value_get<0){
+            $('#input_tre_em').val(0);
+        }
+    });
+    $('body').on("change", '#input_tre_em_5', function () {
+        var value_get=$('#input_tre_em_5').val();
+        if(value_get=='' ||value_get<0){
+            $('#input_tre_em_5').val(0);
+        }
+    });
+
+
+    $('#input_num_nguoi_lon_bk').ace_spinner({
 //                value: 1,
             min: 1,
             max: 200,
@@ -499,7 +576,7 @@ jQuery(function ($) {
                 checkSoNguoi();
             }
         });
-    $('#input_num_tre_em').ace_spinner({
+    $('#input_num_tre_em_bk').ace_spinner({
 //                value: '',
             min: 0,
             max: 200,
@@ -512,7 +589,7 @@ jQuery(function ($) {
             //console.log($('#spinner1').val())
             checkSoNguoi()
         });
-    $('#input_num_tre_em_5').ace_spinner({
+    $('#input_num_tre_em_5_bk').ace_spinner({
 //                value: '',
             min: 0,
             max: 200,
@@ -525,7 +602,7 @@ jQuery(function ($) {
             //console.log($('#spinner1').val())
             checkSoNguoi()
         });
-    $('#input_nguoi_lon').ace_spinner({
+    $('#input_nguoi_lon_bk').ace_spinner({
             min: 1,
             max: 200,
             step: 1,
@@ -548,7 +625,7 @@ jQuery(function ($) {
                 error_so_nguoi.hide();
             }
         });
-    $('#input_tre_em_5').ace_spinner({
+    $('#input_tre_em_5_bk').ace_spinner({
             min: 0,
             max: 200,
             step: 1,
@@ -558,7 +635,7 @@ jQuery(function ($) {
         .closest('.ace-spinner')
         .on('changed.fu.spinbox', function () {
         });
-    $('#input_tre_em').ace_spinner({
+    $('#input_tre_em_bk').ace_spinner({
             min: 0,
             max: 200,
             step: 1,
@@ -1169,6 +1246,16 @@ jQuery(function ($) {
     var currentDate = new Date();
     $("#created_giaodich").datepicker("setDate",currentDate);
 
+    // $('form').on('focus', '.spinbox-input', function (e) {
+    //     $(this).on('mousewheel.disableScroll', function (e) {
+    //         e.preventDefault()
+    //     })
+    // })
+    // $('form').on('blur', '.spinbox-input', function (e) {
+    //     $(this).off('mousewheel.disableScroll')
+    // })
+
+
 
 });
 function show_info_cost(Id, name) {
@@ -1359,7 +1446,10 @@ function show_booking(Id, name) {
             .done(function (data) {
                 if (data != 0) {
                     var obj = jQuery.parseJSON(data);
-                    $('.name_sales').html(obj.user_name);
+                    $('.user_name_link').html(obj.user_name_link);
+                    $('.user_text_confirm').html(obj.user_text_confirm);
+                    $('.dieuhanh_name_link').html(obj.dieuhanh_name_link);
+                    $('.dieuhanh_text_confirm').html(obj.dieuhanh_text_confirm);
                     $('.tien_te').html(obj.tien_te_name + ' - ' + obj.ty_gia);
                     $('.ngay_bat_dau').html(obj.ngay_bat_dau);
                     $('.han_thanh_toan').html(obj.han_thanh_toan);
@@ -2465,7 +2555,7 @@ function returnTinhTien(price_nguoi_lon, price_tre_em_511, price_tre_em_5) {
         price_tre_em_5=0;
     }
 
-    console.log(price_nguoi_lon);
+
     if (numberRegex.test(price_nguoi_lon) && numberRegex.test(price_tre_em_511) && numberRegex.test(price_tre_em_5)) {
         if (number_nguoi_lon > 0 && number_nguoi_lon != '') {
             if (price_nguoi_lon == undefined) {
@@ -2509,7 +2599,7 @@ function returnTinhTien(price_nguoi_lon, price_tre_em_511, price_tre_em_5) {
                             alertBtnText: 'Ok',
                             iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
                             alertHandler: function () {
-                                $('#input_dat_coc').show().focus().select();
+                                $('#input_dat_coc').show().focus().select().val(0);
                             }
                         });
                     } else {

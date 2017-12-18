@@ -172,3 +172,14 @@ div.pop-up-table {
     bottom: -3px;
     font-size: 18px;
 }
+.modal-footer-custom{
+    position: fixed;
+    bottom: 0px;
+    width: 101%;
+    float: left;
+    text-align: left;
+    z-index: 3;
+}
+.form-horizontal{
+    position: relative;
+}

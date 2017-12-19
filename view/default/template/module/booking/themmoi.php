@@ -744,14 +744,14 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 ">
                         <h3 class="row header smaller lighter green">
                             <i class="ace-icon fa fa-dollar green bigger-125"></i>
-                            Hoa hồng
+                            Hoa hồng <span style="color: red; font-size: 14px">(Dành cho thành viên tiếp thị liên kết và thành viên của sales)</span>
                         </h3>
                         <div class="row col-xs-12 div_content">
                             <div class="profile-user-info profile-user-info-striped">
                                 <div class="profile-info-row">
                                     <div class="profile-info-name"> Thành viên</div>
                                     <div class="profile-info-value">
-                                        <div style="float: left;width: 66%">
+                                        <div class="col-xs-12 row">
                                            <span class="input-icon width_100">
                                                 <input <?php echo $readonly_name_user_tt ?> <?php echo $readonly_info_order?>
                                                     class="valid" id="input_name_user_tiepthi"
@@ -763,6 +763,38 @@
                                              </span>
                                             <input class="valid" hidden id="input_id_user_tt" type="text"
                                                    name="id_user_tt" value="<?php echo $id_user_tt?>">
+                                        </div>
+                                        <div class="info_thanhvien col-xs-12 row" style="margin-top: 15px;">
+                                            <div class="col-xs-4" style="padding-left: 0px">
+                                                    <label for="form-field-select-3">Họ tên <span style="color: red; display: none" class="required_label">*</span></label>
+                                                    <div>
+                                                       <span class="input-icon width_100">
+                                                            <input  name="name_thanh_vien" type="text" id="input_name_thanh_vien" class="width_100 valid" >
+                                                            <i class="ace-icon fa fa-user blue"></i>
+                                                        </span>
+                                                        <label style="display: none" class="error-color  error-color-size" id="error_email_user">Bạn vui lòng nhập tên thành viên</label>
+                                                    </div>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <label for="form-field-select-3">Email <span style="color: red ; display: none" class="required_label">*</span></label>
+                                                <div>
+                                                       <span class="input-icon width_100">
+                                                            <input name="email_thanh_vien" type="email" id="input_email_thanh_vien" class="width_100 valid">
+                                                            <i class="ace-icon fa fa-envelope blue"></i>
+                                                        </span>
+                                                    <label style="display: none" class="error-color  error-color-size" id="error_email_thanh_vien">Bạn vui lòng nhập email thành viên</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <label for="form-field-select-3">Điện thoại <span style="color: red ; display: none" class="required_label">*</span></label>
+                                                <div>
+                                                       <span class="input-icon width_100">
+                                                            <input name="phone_thanh_vien" type="text" id="input_phone_thanh_vien" class="width_100 valid">
+                                                            <i class="ace-icon fa fa-envelope blue"></i>
+                                                        </span>
+                                                    <label style="display: none" class="error-color  error-color-size" id="error_phone_thanh_vien">Bạn vui lòng nhập điện thoại thành viên</label>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

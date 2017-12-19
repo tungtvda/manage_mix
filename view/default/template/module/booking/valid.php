@@ -272,11 +272,14 @@ $string_data_user_tiep_thi=_returnDataAutoCompleteUserTiepThi();
             renderItem: function (item, search) {
                 search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
                 var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
-                return '<div title="' + item[1] + '-'+item[2]+'-'+item[3]+'" class="autocomplete-suggestion" data-user-id-tt="' + item[0] + '" data-user-code-tt="' + item[1] + '" data-user-name-tt="' + item[2] + '" data-user-email-tt="' + item[3] + '" data-user-phone-tt="' + item[4] + '"> ' + item[1]+' - ' + item[2]+'  - ' + item[3]+'</div>';
+                return '<div title="' + item[1] + '-'+item[2]+'-'+item[3]+'" class="autocomplete-suggestion" data-user-id-tt="' + item[0] + '" data-user-code-tt="' + item[1] + '" data-user-name-tt="' + item[2] + '" data-user-email-tt="' + item[3] + '" data-user-phone-tt="' + item[4] + '"> ' + item[1]+' - ' + item[2]+'  - ' + item[3]+' - '+item[4]+'</div>';
             },
             onSelect: function (e, term, item) {
                 $('#input_name_user_tiepthi').val(item.data('user-code-tt'));
                 $('#input_id_user_tt').val(item.data('user-id-tt'));
+                $('#input_name_thanh_vien').val(item.data('user-name-tt')).attr('disabled','disabled').addClass('valid');
+                $('#input_email_thanh_vien').val(item.data('user-email-tt')).attr('disabled','disabled').addClass('valid');
+                $('#input_phone_thanh_vien').val(item.data('user-phone-tt')).attr('disabled','disabled').addClass('valid');
             }
         });
     });

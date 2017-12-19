@@ -38,13 +38,71 @@ jQuery(function ($) {
     });
 
     $('body').on("input", '#input_name_user_tiepthi', function () {
-        $('#input_id_user_tt').val('');
+        removeInfoTiepthi()
     });
     $('body').on("keyup", '#input_name_user_tiepthi', function (event) {
         if (event.keyCode != "13") {
-            $('#input_id_user_tt').val('');
+            removeInfoTiepthi()
         }
     });
+    // $('body').on("blur", '#input_name_user_tiepthi', function (event) {
+    //     removeInfoTiepthi()
+    // });
+    function removeInfoTiepthi() {
+        if($('#input_name_user_tiepthi').val()!=''){
+            if($('#input_id_user_tt').val()!=''){
+                $('#input_name_thanh_vien').val('').removeClass('valid').removeAttr('disabled');;
+                $('#input_email_thanh_vien').val('').removeClass('valid').removeAttr('disabled');;
+                $('#input_phone_thanh_vien').val('').removeClass('valid').removeAttr('disabled');;
+            }else{
+                if($('#input_name_thanh_vien').val()!=''){
+                    $('#input_name_thanh_vien').addClass('valid');
+                }else{
+                    $('#input_name_thanh_vien').removeClass('valid');
+                }
+                if($('#input_email_thanh_vien').val()!=''){
+                    checkEmailThanhVien();
+                }else{
+                    $('#input_email_thanh_vien').removeClass('valid');
+                }
+                if($('#input_phone_thanh_vien')!=''){
+                    $('#input_phone_thanh_vien').addClass('valid');
+                }else{
+                    $('#input_phone_thanh_vien').removeClass('valid');
+                }
+            }
+            $('#input_id_user_tt').val('');
+            $('.required_label').show();
+        }else{
+            $('#input_id_user_tt').val('');
+            $('#input_name_thanh_vien').val('').addClass('valid');
+            $('#input_email_thanh_vien').val('').addClass('valid');
+            $('#input_phone_thanh_vien').val('').addClass('valid');
+            $('.required_label').hide();
+            $('#error_email_thanh_vien').hide().html('Bạn vui lòng nhập email');
+        }
+    }
+
+    function checkEmailThanhVien() {
+        var value = $("#input_email_thanh_vien").val();
+        if (value != '') {
+            var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+            var is_email = re.test(value);
+            console.log(is_email);
+            if (is_email) {
+                $('#error_email_thanh_vien').hide().html('Bạn vui lòng nhập email');
+                $('#input_email_thanh_vien').addClass('valid');
+            }
+            else {
+                $('#error_email_thanh_vien').show().html('Email không đúng định dạng');
+                $('#input_email_thanh_vien').removeClass('valid');
+            }
+        }
+        else {
+            $('#error_email_thanh_vien').show().html('Bạn vui lòng nhập email');
+            $('#input_email_thanh_vien').removeClass('valid');
+        }
+    }
 
 
     $('body').on("input", '#input_dat_coc', function () {

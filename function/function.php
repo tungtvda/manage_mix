@@ -459,6 +459,8 @@ function _returnCreateUser($check_redict,$ridict='/nhan-vien/',$email_tem='')
         $issued_by_cmnd= _returnPostParamSecurity('issued_by_cmnd');
         $open_bank= _returnPostParamSecurity('open_bank');
         $id_thanhvien= _returnPostParamSecurity('id_thanhvien');
+        $phong_ban= _returnPostParamSecurity('phong_ban');
+        $truong_phong= _returnPostParamSecurity('truong_phong');
         if ($user_role === "on" || $user_role === 1) {
             $user_role = 1;
         } else {
@@ -510,6 +512,8 @@ function _returnCreateUser($check_redict,$ridict='/nhan-vien/',$email_tem='')
                     }
 
                     $new_obj->updated = _returnGetDateTime();
+                    $new_obj->truong_phong_id = $truong_phong;
+                    $new_obj->phong_ban = $phong_ban;
                     $new_obj->id = $id;
                     user_update($new_obj);
 //                    _insertLog($_SESSION['user_id'],3,2,1,$data_get_user[0]->id,'','',$_SESSION['user_name'].' đã tạo nhân viên mã "'.$user_code.'"');
@@ -569,6 +573,8 @@ function _returnCreateUser($check_redict,$ridict='/nhan-vien/',$email_tem='')
                         if ($ngay_chinh_thuc != '') {
                             $dangky->ngay_chinh_thuc = date("Y-m-d", strtotime($ngay_chinh_thuc));
                         }
+                        $dangky->truong_phong_id = $truong_phong;
+                        $dangky->phong_ban = $phong_ban;
                         user_insert($dangky);
                         $data_get_user = user_getByTop('1', 'user_code="' . $user_code . '""', 'id desc');
                         if (count($data_get_user) > 0) {
@@ -1024,7 +1030,7 @@ function _returnInputCheck($name, $valid = '', $disabled = '', $checked = '',$re
 function _returnInputSelect($name, $value, $data_list, $valid = '', $name_title,$readonly='')
 {
     $string = '<select name="' . $name . '" '.$readonly.'
-                                                                            class="chosen-select form-control ' . $valid . ' ' . $name . '"
+                                                                            class="select-custom chosen-select form-control ' . $valid . ' ' . $name . '"
                                                                             id="form-field-select-3"
                                                                             data-placeholder="' . $name_title . '"
                                                                             style="display: none;width: 10px">';
@@ -1141,7 +1147,7 @@ function _returnDataAutoCompleteTour()
                     $departure_id = $data_departure[0]->id;
                 }
             }
-            $string_data .= "['" . $id . "','" . $name . "','" . $price_format . "','" . $durations . "','" . $vehicle . "','" . $departure_id . "','" . $departure_name . "','" . $price . "','" . $name_price . "','" . $price_2 . "','" . $price_2_format . "','" . $name_price_2 . "','" . $price_3 . "','" . $price_3_format . "','" . $name_price_3 . "','" . $so_cho . "','" . $price_tiep_thi_format . "'],";
+            $string_data .= "['" . $id . "','" . $name . "','" . $price_format . "','" . $durations . "','" . $vehicle . "','" . $departure_id . "','" . $departure_name . "','" . $price . "','" . $name_price . "','" . $price_2 . "','" . $price_2_format . "','" . $name_price_2 . "','" . $price_3 . "','" . $price_3_format . "','" . $name_price_3 . "','" . $so_cho . "','" . $price_tiep_thi_format . "','".$row_kh->price_tiep_thi."'],";
         }
     }
     $string_data .= '];';

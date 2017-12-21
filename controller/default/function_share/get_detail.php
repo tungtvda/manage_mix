@@ -85,6 +85,21 @@ if (isset($_POST['id']) && isset($_POST['table'])) {
                     break;
                 case 'user':
                     $data_check[0]->created=date('d-m-Y', strtotime($data_check[0]->date_range_cmnd));
+                    $data_check[0]->phong_ban_name='';
+                    $data_check[0]->truong_phong_name='';
+                    if($data_check[0]->truong_phong_id){
+                        $data_truong_phong=user_getById($data_check[0]->truong_phong_id);
+                        if($data_truong_phong){
+                            $data_check[0]->truong_phong_name=$data_truong_phong[0]->name;
+                        }
+                    }
+                    if($data_check[0]->phong_ban){
+                        require_once DIR . '/model/user_phongbanService.php';
+                        $data_phong_ban=user_phongban_getById($data_check[0]->phong_ban);
+                        if($data_phong_ban){
+                            $data_check[0]->phong_ban_name=$data_phong_ban[0]->name;
+                        }
+                    }
                     break;
             }
           echo $data=json_encode($data_check[0]);

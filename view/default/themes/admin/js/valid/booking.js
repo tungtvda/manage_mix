@@ -51,9 +51,9 @@ jQuery(function ($) {
     function removeInfoTiepthi() {
         if($('#input_name_user_tiepthi').val()!=''){
             if($('#input_id_user_tt').val()!=''){
-                $('#input_name_thanh_vien').val('').removeClass('valid').removeAttr('disabled');;
-                $('#input_email_thanh_vien').val('').removeClass('valid').removeAttr('disabled');;
-                $('#input_phone_thanh_vien').val('').removeClass('valid').removeAttr('disabled');;
+                $('#input_name_thanh_vien').val('').removeClass('valid').removeAttr('disabled');
+                $('#input_email_thanh_vien').val('').removeClass('valid').removeAttr('disabled');
+                $('#input_phone_thanh_vien').val('').removeClass('valid').removeAttr('disabled');
             }else{
                 if($('#input_name_thanh_vien').val()!=''){
                     $('#input_name_thanh_vien').addClass('valid');
@@ -478,7 +478,6 @@ jQuery(function ($) {
         $('#error_status').hide();
     });
 
-
     $('body').on("input", '#input_diem_don', function () {
         checkDiemDon();
     });
@@ -532,6 +531,8 @@ jQuery(function ($) {
         $('#con_lai').html('0 vnđ');
         $('#vat').html('0 vnđ');
         $('#input_dat_coc').val('');
+        $('#input_hoa_hong_thanh_vien').val('').removeAttr('disabled');
+        $('.price_tiep_thi').html('');
     });
 
     //spinner

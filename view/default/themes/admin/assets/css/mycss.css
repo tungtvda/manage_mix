@@ -183,3 +183,6 @@ div.pop-up-table {
 .form-horizontal{
     position: relative;
 }
+.select-custom{
+    width: 100% !important;
+}

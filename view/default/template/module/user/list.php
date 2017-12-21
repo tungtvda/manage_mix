@@ -349,7 +349,7 @@
 
 
                                         <div style="float: left;width: 66%" >
-                                            <label for="form-field-select-3">Mã nhân viên <span style="color: red">*</span></label>
+                                            <label >Mã nhân viên <span style="color: red">*</span></label>
                                            <span class="input-icon width_100">
 												<input readonly name="user_code" type="text" id="input_user_code"
                                                        class="width_100" required>
@@ -369,7 +369,7 @@
                                                    id="error_user_code">Bạn vui lòng nhập mã nhân viên</label>
                                         </div>
                                         <div style="float: left;width: 33%; text-align: center" >
-                                            <label for="form-field-select-3">Admin hệ thống</label>
+                                            <label >Admin hệ thống</label>
                                             <label>
                                                 <input id="input_user_role" name="user_role" class="ace ace-switch ace-switch-6" type="checkbox">
                                                 <span class="lbl"></span>
@@ -380,7 +380,7 @@
                                     <div class="space-4"></div>
 
                                     <div class="form-group" style="float: left; width: 100%">
-                                        <label for="form-field-select-3">Họ tên <span
+                                        <label >Họ tên <span
                                                 style="color: red">*</span></label>
                                         <div>
                                             <style>
@@ -394,9 +394,9 @@
 
                                                 }
                                             </style>
-                                            <div style="float: left;width: 33%;" >
-                                            <select name="mr" class="chosen-select form-control mr_user"
-                                                    id="form-field-select-3" data-placeholder="Danh xưng ..."
+                                            <div style="float: left;width: 100px;" class="mr_user_div" >
+                                            <select name="mr" class="select-custom chosen-select form-control mr_user"
+                                                     data-placeholder="Danh xưng ..."
                                                     style="display: none;width: 10px">
                                                 <option value=""></option>
                                                 <option value="Mr">Mr</option>
@@ -424,7 +424,7 @@
                                     <div class="space-4"></div>
 
                                     <div class="form-group" style="float: left; width: 100%">
-                                        <label for="form-field-select-3">Ngày sinh <span
+                                        <label >Ngày sinh <span
                                                 style="color: red">*</span></label>
                                         <div class="input-group" style="">
                                             <input class="form-control date-picker width_100" id="input_birthday"
@@ -446,7 +446,7 @@
                                 <div style="float: left; width: 100%">
                                     <div class="col-xs-12 col-sm-6 col-md-6">
                                         <div class="form-group">
-                                            <label for="form-field-select-3">Email <span
+                                            <label >Email <span
                                                     style="color: red">*</span></label>
                                             <div>
                                            <span class="input-icon width_100">
@@ -467,7 +467,7 @@
                                     </div>
                                     <div class="col-xs-12 col-sm-6 col-md-6">
                                         <div class="form-group">
-                                            <label for="form-field-select-3">Địa chỉ <span
+                                            <label >Địa chỉ <span
                                                     style="color: red">*</span></label>
                                             <div>
                                             <span class="input-icon width_100">
@@ -483,7 +483,7 @@
                                 <div style="float: left; width: 100%">
                                     <div class="col-xs-12 col-sm-6 col-md-6">
                                         <div class="form-group">
-                                            <label for="form-field-select-3">Tên đăng nhập <span
+                                            <label >Tên đăng nhập <span
                                                     style="color: red">*</span></label>
                                             <div>
                                           <span class="input-icon width_100">
@@ -498,7 +498,7 @@
                                     </div>
                                     <div class="col-xs-12 col-sm-6 col-md-6">
                                         <div class="form-group">
-                                            <label for="form-field-select-3">Số điện thoại <span
+                                            <label >Số điện thoại <span
                                                     style="color: red">*</span></label>
                                             <div>
                                           <span class="input-icon width_100">
@@ -514,36 +514,23 @@
                                 </div>
                                 <div style="float: left; width: 100%">
                                     <div class="col-xs-12 col-sm-6 col-md-6">
-                                        <div class="form-group" style="float: left; width: 100%">
-                                            <label for="form-field-select-3">Ngày làm việc </label>
-                                            <div class="input-group" style="">
-                                                <input class="form-control date-picker width_100 valid" id="input_user_ngay_lam_viec"
-                                                       name="user_ngay_lam_viec" required type="text" data-date-format="dd-mm-yyyy">
-																	<span class="input-group-addon date_icon">
-																		<i class="fa fa-calendar bigger-110"></i>
-																	</span>
-
-                                            </div>
+                                        <div class="form-group phong_ban_div" style="float: left; width: 100%">
+                                            <label>Phòng ban <i style="color: red">*</i></label>
+                                            <?php echo _returnInputSelect('phong_ban','',$data_list_phongban,'valid', 'Phòng ban ...')?>
+                                            <label  style="display: none" class="error-color  error-color-size" id="error_phong_ban">Bạn vui lòng chọn phòng ban</label>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-6 col-md-6">
-                                        <div class="form-group" style="float: left; width: 100%">
-                                            <label for="form-field-select-3">Ngày chính thức </label>
-                                            <div class="input-group" style="">
-                                                <input class="form-control date-picker width_100 valid" id="input_user_ngay_chinh_thuc"
-                                                       name="user_ngay_chinh_thuc" required type="text" data-date-format="dd-mm-yyyy">
-																	<span class="input-group-addon date_icon">
-																		<i class="fa fa-calendar bigger-110"></i>
-																	</span>
-
-                                            </div>
+                                        <div class="form-group truong_phong_div" style="float: left; width: 100%" >
+                                            <label >Trưởng phòng</label>
+                                            <?php echo _returnInputSelect('truong_phong','',$data_list_user,'valid', 'Trưởng phòng ...')?>
                                         </div>
                                     </div>
                                 </div>
                                 <div style="float: left; width: 100%" id="hidden_edit_pass">
                                     <div class="col-xs-12 col-sm-6 col-md-6">
                                         <div class="form-group">
-                                            <label for="form-field-select-3">Mật khẩu <span
+                                            <label >Mật khẩu <span
                                                     style="color: red">*</span></label>
                                             <div>
                                          <span class="input-icon width_100">
@@ -557,7 +544,7 @@
                                     </div>
                                     <div class="col-xs-12 col-sm-6 col-md-6">
                                         <div class="form-group">
-                                            <label for="form-field-select-3">Xác nhận mật khẩu <span
+                                            <label >Xác nhận mật khẩu <span
                                                     style="color: red">*</span></label>
                                             <div>
                                          <span class="input-icon width_100">

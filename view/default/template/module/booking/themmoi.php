@@ -801,7 +801,14 @@
                                 <div class="profile-info-row">
                                     <div class="profile-info-name"> Tiền hoa hồng</div>
                                     <div class="profile-info-value">
-                                        <span class="editable editable-click price_tiep_thi"><?php echo $price_tiep_thi?></span>
+
+                                         <span class="input-icon width_50">
+                                                            <input name="hoa_hong_thanh_vien" type="number" id="input_hoa_hong_thanh_vien" class="width_100 valid">
+                                                            <i class="ace-icon fa fa-dollar blue"></i>
+                                                        </span>
+                                        <span class="editable editable-click price_tiep_thi">
+                                            <?php echo $price_tiep_thi?>
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="profile-info-row">

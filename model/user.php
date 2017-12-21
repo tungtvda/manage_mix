@@ -1,10 +1,11 @@
 <?php
 class user
 {
-    public $id,$name,$user_role,$type_tiep_thi,$user_gioi_thieu,$permison_module,$permison_form,$permison_action,$mr,$hoa_hong,$address,$phone,$mobi,$user_name,$user_code,$user_email,$password,$login_two_steps,$code_login,$phong_ban,$chuc_vu,$nganh_nghe,$gender,$birthday,$avatar,$skype,$facebook,$ngay_lam_viec,$ngay_chinh_thuc,$guides,$guide_card_number,$tax_code,$cmnd,$date_range_cmnd,$issued_by_cmnd,$number_passport,$date_range_passport,$issued_by_passport,$expiration_date_passport,$dan_toc,$ho_khau_tt,$hon_nhan,$bang_cap,$language,$account_number_bank,$bank,$open_bank,$religion,$note,$status,$created,$token_code,$time_token,$memori_login,$updated,$created_by,$updated_by;
+    public $id, $truong_phong_id,$name,$user_role,$type_tiep_thi,$user_gioi_thieu,$permison_module,$permison_form,$permison_action,$mr,$hoa_hong,$address,$phone,$mobi,$user_name,$user_code,$user_email,$password,$login_two_steps,$code_login,$phong_ban,$chuc_vu,$nganh_nghe,$gender,$birthday,$avatar,$skype,$facebook,$ngay_lam_viec,$ngay_chinh_thuc,$guides,$guide_card_number,$tax_code,$cmnd,$date_range_cmnd,$issued_by_cmnd,$number_passport,$date_range_passport,$issued_by_passport,$expiration_date_passport,$dan_toc,$ho_khau_tt,$hon_nhan,$bang_cap,$language,$account_number_bank,$bank,$open_bank,$religion,$note,$status,$created,$token_code,$time_token,$memori_login,$updated,$created_by,$updated_by;
     public function user($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
+    $this->truong_phong_id=isset($data['truong_phong_id'])?$data['truong_phong_id']:'';
     $this->name=isset($data['name'])?$data['name']:'';
     $this->user_role=isset($data['user_role'])?$data['user_role']:'';
     $this->type_tiep_thi=isset($data['type_tiep_thi'])?$data['type_tiep_thi']:'';
@@ -66,6 +67,7 @@ class user
     public function encode()
         {
             $this->id=addslashes($this->id);
+            $this->truong_phong_id=addslashes($this->truong_phong_id);
             $this->name=addslashes($this->name);
             $this->user_role=addslashes($this->user_role);
             $this->type_tiep_thi=addslashes($this->type_tiep_thi);
@@ -126,6 +128,7 @@ class user
     public function decode()
         {
             $this->id=stripslashes($this->id);
+            $this->truong_phong_id=stripslashes($this->truong_phong_id);
             $this->name=stripslashes($this->name);
             $this->user_role=stripslashes($this->user_role);
             $this->type_tiep_thi=stripslashes($this->type_tiep_thi);

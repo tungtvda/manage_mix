@@ -1,103 +1,139 @@
 jQuery(function ($) {
     url = $('#url_input').val();
 
-    $('body').on("input",'#input_user_code', function () {
+    $('body').on("input", '#input_user_code', function () {
         ajaxCheckUserCode();
     });
-    $('body').on("keyup",'#input_user_code', function () {
+    $('body').on("keyup", '#input_user_code', function () {
         ajaxCheckUserCode();
     });
     // check name
-    $('body').on("input",'#input_full_name', function () {
+    $('body').on("input", '#input_full_name', function () {
         checkNameUser();
     });
-    $('body').on("keyup",'#input_full_name', function () {
+    $('body').on("keyup", '#input_full_name', function () {
         checkNameUser();
     });
 
     // check name
-    $('body').on("input",'#input_birthday', function () {
+    $('body').on("input", '#input_birthday', function () {
         checkBirthdayUser();
     });
-    $('body').on("keyup",'#input_birthday', function () {
+    $('body').on("keyup", '#input_birthday', function () {
         checkBirthdayUser();
     });
-    $('body').on("change",'#input_birthday', function () {
+    $('body').on("change", '#input_birthday', function () {
         checkBirthdayUser();
     });
 
     // check email
-    $('body').on("input",'#input_email_user', function () {
+    $('body').on("input", '#input_email_user', function () {
         checkEmailUser();
     });
-    $('body').on("keyup",'#input_email_user', function () {
+    $('body').on("keyup", '#input_email_user', function () {
         checkEmailUser();
     });
 
     // check address
-    $('body').on("input",'#input_address_user', function () {
+    $('body').on("input", '#input_address_user', function () {
         checkAddressUser();
     });
-    $('body').on("keyup",'#input_address_user', function () {
+    $('body').on("keyup", '#input_address_user', function () {
         checkAddressUser();
     });
 
     // check address
-    $('body').on("input",'#input_user_phone', function () {
+    $('body').on("input", '#input_user_phone', function () {
         checkPhoneUser();
     });
-    $('body').on("keyup",'#input_user_phone', function () {
+    $('body').on("keyup", '#input_user_phone', function () {
         checkPhoneUser();
     });
 
 
     // check address
-    $('body').on("input",'#input_user_name', function () {
+    $('body').on("input", '#input_user_name', function () {
         checkUserName();
     });
-    $('body').on("keyup",'#input_user_name', function () {
+    $('body').on("keyup", '#input_user_name', function () {
         checkUserName();
     });
 
     // check pass
-    $('body').on("input",'#input_password', function () {
+    $('body').on("input", '#input_password', function () {
         checkUserPassword();
     });
-    $('body').on("keyup",'#input_password', function () {
+    $('body').on("keyup", '#input_password', function () {
         checkUserPassword();
     });
     // check pass confirm
-    $('body').on("input",'#input_password_confirm', function () {
+    $('body').on("input", '#input_password_confirm', function () {
         checkUserPasswordConfirm();
     });
-    $('body').on("keyup",'#input_password_confirm', function () {
+    $('body').on("keyup", '#input_password_confirm', function () {
         checkUserPasswordConfirm();
+    });
+    $('body').on("change", '.phong_ban', function () {
+        var Id = $(this).val();
+        if (Id) {
+            $('#error_phong_ban').hide();
+            $.ajax({
+                method: "GET",
+                url: url + '/return-user-list-phong-ban.html',
+                data: "Id=" + Id,
+                success: function (response) {
+                    response = jQuery.parseJSON(response);
+                    //$('.chosen-results').html(response);
+                    //if(response.success==0){
+                    //    $('.truong_phong').html(response.string_select);
+                    //    $('.chosen-results').html(response.string_li);
+                    //}else{
+                    //
+                    //}
+
+                    //$('.truong_phong').html(response.string_select);
+                    //$('.chosen-results').html(response.string_li);
+                }
+            });
+        }
+
     });
 
-    $('body').on("click",'#submit_form_action', function () {
-            var form_data=$("#submit_form").serializeArray();
-            var error_free=true;
-            for (var input in form_data){
-                if(form_data[input]['name']!="mr" && form_data[input]['name']!="gender" && form_data[input]['name']!="type_tiep_thi" &&form_data[input]['name']!="file-format"&&form_data[input]['name']!="avatar"&&form_data[input]['name']!="user_role")
-                {
-                    var element=$("#input_"+form_data[input]['name']);
-                    var error=$("#error_"+form_data[input]['name']);
-                    var valid=element.hasClass("valid");
-                    if (valid==false){
-                        console.log(form_data[input]['name']);
+    $('body').on("click", '#submit_form_action', function () {
+        var form_data = $("#submit_form").serializeArray();
+        var error_free = true;
+        for (var input in form_data) {
+            if (form_data[input]['name'] != "truong_phong" && form_data[input]['name'] != "phong_ban" && form_data[input]['name'] != "mr" && form_data[input]['name'] != "gender" && form_data[input]['name'] != "type_tiep_thi" && form_data[input]['name'] != "file-format" && form_data[input]['name'] != "avatar" && form_data[input]['name'] != "user_role") {
+                var element = $("#input_" + form_data[input]['name']);
+                var error = $("#error_" + form_data[input]['name']);
+                var valid = element.hasClass("valid");
+                if (valid == false) {
+                    //console.log(form_data[input]['name']);
+                    element.addClass("input-error").removeClass("valid");
+                    error.show();
+                    error_free = false
+                }
+            } else {
+                //console.log(form_data[input]['name']);
+                if (form_data[input]['name'] == "phong_ban") {
+                    if ($('.phong_ban').val() == '') {
+                        var element = $("#input_" + form_data[input]['name']);
+                        var error = $("#error_" + form_data[input]['name']);
                         element.addClass("input-error").removeClass("valid");
                         error.show();
-                        error_free=false
+                        error_free = false
                     }
                 }
             }
-            if (error_free!=false){
-                $( "#submit_form" ).submit();
-            }
+
+        }
+        if (error_free != false) {
+            $("#submit_form").submit();
+        }
 
     });
 
-    $('body').on("click",'.view_popup_detail', function () {
+    $('body').on("click", '.view_popup_detail', function () {
         document.getElementById("input_user_code").readOnly = true;
         document.getElementById("input_email_user").readOnly = true;
         document.getElementById("input_user_name").readOnly = true;
@@ -105,50 +141,50 @@ jQuery(function ($) {
         document.getElementById("input_password_confirm").readOnly = true;
         var Id = $(this).attr("countid");
         var name = $(this).attr("name_record");
-        $('.show_edit').css('display','block');
-        show_edit_nhanvien(Id,name);
+        $('.show_edit').css('display', 'block');
+        show_edit_nhanvien(Id, name);
     });
-    $('body').on("click",'#reset_form_popup', function () {
-        $( "#input_check_edit" ).val('add');
+    $('body').on("click", '#reset_form_popup', function () {
+        $("#input_check_edit").val('add');
         resetForm("#submit_form");
     });
-    $('body').on("click",'#create_popup', function () {
-        var key_code=$(this).attr('data-type');
-        $('.show_edit').css('display','none');
-        if(key_code){
+    $('body').on("click", '#create_popup', function () {
+        var key_code = $(this).attr('data-type');
+        $('.show_edit').css('display', 'none');
+        if (key_code) {
             $.ajax({
                 method: "GET",
-                url: url+'/return-user-code.html',
+                url: url + '/return-user-code.html',
                 data: "key_code=" + key_code,
                 success: function (response) {
                     if (response == 0) {
                         $('#modal-form').modal('hide');
                     }
-                    else{
-                        $( "#input_user_code" ).val(response);
-                        $( "#input_user_code" ).addClass('valid');
+                    else {
+                        $("#input_user_code").val(response);
+                        $("#input_user_code").addClass('valid');
                         document.getElementById("input_user_code").readOnly = true;
                     }
                 }
             });
-        }else{
+        } else {
             document.getElementById("input_user_code").readOnly = false;
         }
         $('#hidden_edit_pass').show();
         var output = document.getElementById('show_img_upload');
-        output.src = url+'/view/default/themes/images/no-image.jpg';
+        output.src = url + '/view/default/themes/images/no-image.jpg';
 
         document.getElementById("input_email_user").readOnly = false;
         document.getElementById("input_user_name").readOnly = false;
         document.getElementById("input_password").readOnly = false;
         document.getElementById("input_password_confirm").readOnly = false;
         resetForm("#submit_form");
-        $( "#input_check_edit" ).val('add');
-        $( "#title_form" ).html('Tạo mới thành viên');
+        $("#input_check_edit").val('add');
+        $("#title_form").html('Tạo mới thành viên');
 
     });
 
-    $('body').on('click','.edit_function', function () {
+    $('body').on('click', '.edit_function', function () {
         document.getElementById("input_user_code").readOnly = true;
         document.getElementById("input_email_user").readOnly = true;
         document.getElementById("input_user_name").readOnly = true;
@@ -160,64 +196,63 @@ jQuery(function ($) {
                 title: 'Lỗi',
                 content: 'Bạn vui lòng chọn bản ghi',
                 alertBtnText: 'Ok',
-                iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
                 alertHandler: function () {
                     $('#modal-form').modal('hide');
                 }
             });
-        }else{
-            if(lenght>1)
-            {
+        } else {
+            if (lenght > 1) {
                 lnv.alert({
                     title: 'Lỗi',
                     content: 'Bạn chỉ được chọn một bản ghi',
                     alertBtnText: 'Ok',
-                    iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                    iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
                     alertHandler: function () {
                         $('#modal-form').modal('hide');
                     }
                 });
-            }else{
-                $('.click_check_list:checked').each(function() {
+            } else {
+                $('.click_check_list:checked').each(function () {
                     var Id = $(this).attr("value");
                     var name = $(this).attr("name_record");
-                    show_edit_nhanvien(Id,name)
+                    show_edit_nhanvien(Id, name)
                 });
             }
         }
     });
 
-    $('body').on("input",'#input_password_old', function () {
+    $('body').on("input", '#input_password_old', function () {
         checkUserPasswordOldConfirm();
     });
-    $('body').on("keyup",'#input_password_old', function () {
+    $('body').on("keyup", '#input_password_old', function () {
         checkUserPasswordOldConfirm();
     });
 
-    $('body').on("click",'#submit_pass_action', function () {
-        var form_data=$("#submit_chang_pass").serializeArray();
-        var error_free=true;
-        for (var input in form_data){
-            var element=$("#input_"+form_data[input]['name']);
-            var error=$("#error_"+form_data[input]['name']);
-            var valid=element.hasClass("valid");
-            if (valid==false){
+    $('body').on("click", '#submit_pass_action', function () {
+        var form_data = $("#submit_chang_pass").serializeArray();
+        var error_free = true;
+        for (var input in form_data) {
+            var element = $("#input_" + form_data[input]['name']);
+            var error = $("#error_" + form_data[input]['name']);
+            var valid = element.hasClass("valid");
+            if (valid == false) {
                 element.addClass("input-error").removeClass("valid");
                 error.show();
-                error_free=false
+                error_free = false
             }
         }
-        if (error_free!=false){
-            var pass_old=$("#input_password_old").val();
-            var pass=$("#input_password").val();
-            var pass_confirm=$("#input_password_confirm").val();
-            if(pass_old!=''&&pass!=""&&pass_confirm!=""){
+        if (error_free != false) {
+            var pass_old = $("#input_password_old").val();
+            var pass = $("#input_password").val();
+            var pass_confirm = $("#input_password_confirm").val();
+            if (pass_old != '' && pass != "" && pass_confirm != "") {
                 var link = url + '/nhan-vien/update-pass';
                 $.ajax({
                     method: "POST",
                     url: link,
-                    data : { // Danh sách các thuộc tính sẽ gửi đi
-                        pass_old : pass_old,
+                    data: { // Danh sách các thuộc tính sẽ gửi đi
+                        pass_old: pass_old,
                         pass: pass,
                         pass_confirm: pass_confirm
                     },
@@ -227,18 +262,18 @@ jQuery(function ($) {
                                 title: '<label class="red">Lỗi</label>',
                                 content: response,
                                 alertBtnText: 'Ok',
-                                iconBtnText:'<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                                iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
                                 alertHandler: function () {
 
                                 }
                             });
                         }
-                        else{
+                        else {
                             lnv.alert({
                                 title: '<label class="green">Thông báo</label>',
                                 content: 'Cập nhật quyền thành công',
                                 alertBtnText: 'Ok',
-                                iconBtnText:'<i style="color: red;" class="ace-icon fa fa-check green"></i>',
+                                iconBtnText: '<i style="color: red;" class="ace-icon fa fa-check green"></i>',
                                 alertHandler: function () {
 
                                 }
@@ -247,9 +282,9 @@ jQuery(function ($) {
                                 title: '<label class="green">Thông báo</label>',
                                 content: 'Cập nhật quyền thành công, bạn có muốn đăng xuất ra khỏi hệ thống?',
                                 confirmBtnText: 'Ok',
-                                iconBtnText:'<i style="color: #669fc7;" class="ace-icon fa fa-check"></i>',
+                                iconBtnText: '<i style="color: #669fc7;" class="ace-icon fa fa-check"></i>',
                                 confirmHandler: function () {
-                                    window.location=url+"/dang-nhap.html";
+                                    window.location = url + "/dang-nhap.html";
                                 },
                                 cancelBtnText: 'Cancel',
                                 cancelHandler: function () {
@@ -260,135 +295,134 @@ jQuery(function ($) {
                         }
                     }
                 });
-            }else{
-                if(pass_old==''){
-                    var mess="Bạn vui lòng nhập mật khẩu cũ";
-                    showHiddenPasswordOldUser(0,mess)
+            } else {
+                if (pass_old == '') {
+                    var mess = "Bạn vui lòng nhập mật khẩu cũ";
+                    showHiddenPasswordOldUser(0, mess)
                 }
-                if(pass==''){
-                    var mess="Bạn vui lòng nhập mật khẩu mới";
-                    showHiddenPasswordUser(0,mess);
+                if (pass == '') {
+                    var mess = "Bạn vui lòng nhập mật khẩu mới";
+                    showHiddenPasswordUser(0, mess);
                 }
-                if(pass_confirm==''){
-                    var mess="Bạn vui lòng xác nhận mật khẩu";
-                    showHiddenPasswordConfirmUser(0,mess)
+                if (pass_confirm == '') {
+                    var mess = "Bạn vui lòng xác nhận mật khẩu";
+                    showHiddenPasswordConfirmUser(0, mess)
                 }
             }
         }
 
     });
 
-    $('body').on("click",'#next_edit_user', function () {
-      var stt=$('.steps .active').attr('data-step');
-      if(stt<4){
-          var error_free=true;
-          if(stt==2||stt==3){
-              $('#step_edit_'+stt+' input').each(function() {
-                  var name=$(this).attr("name");
-                  if(name!="mr"&&name!="file-format"&&name!="avatar"&&name!="user_role"&&name!=undefined)
-                  {
-                     var element=$("#input_"+name);
-                     var error=$("#error_"+name);
-                     var valid=element.hasClass("valid");
-                     if (valid==false){
-                         element.addClass("input-error").removeClass("valid");
-                         error.show();
-                         error_free=false
-                     }
-                 }
-              });
-          }
+    $('body').on("click", '#next_edit_user', function () {
+        var stt = $('.steps .active').attr('data-step');
+        if (stt < 4) {
+            var error_free = true;
+            if (stt == 2 || stt == 3) {
+                $('#step_edit_' + stt + ' input').each(function () {
+                    var name = $(this).attr("name");
+                    if (name != "mr" && name != "file-format" && name != "avatar" && name != "user_role" && name != undefined) {
+                        var element = $("#input_" + name);
+                        var error = $("#error_" + name);
+                        var valid = element.hasClass("valid");
+                        if (valid == false) {
+                            element.addClass("input-error").removeClass("valid");
+                            error.show();
+                            error_free = false
+                        }
+                    }
+                });
+            }
 
-          if(error_free==true){
-              var stt_before=parseInt(stt)+1;
-              $('#step_edit_'+stt).removeClass('active');
-              $('#step_edit_'+stt_before).addClass('active');
+            if (error_free == true) {
+                var stt_before = parseInt(stt) + 1;
+                $('#step_edit_' + stt).removeClass('active');
+                $('#step_edit_' + stt_before).addClass('active');
 
-              $('#step_tab_'+stt).removeClass('active');
-              $('#step_tab_'+stt).addClass('complete');
-              $('#step_tab_'+stt).attr('complete_value','complete');
+                $('#step_tab_' + stt).removeClass('active');
+                $('#step_tab_' + stt).addClass('complete');
+                $('#step_tab_' + stt).attr('complete_value', 'complete');
 
-              //$('#step_tab_'+stt_before).removeClass();
-              $('#step_tab_'+stt_before).addClass('active');
-              if(stt_before>1){
-                  $( "#prev_edit_user" ).prop( "disabled", false );
-              }
-          }
+                //$('#step_tab_'+stt_before).removeClass();
+                $('#step_tab_' + stt_before).addClass('active');
+                if (stt_before > 1) {
+                    $("#prev_edit_user").prop("disabled", false);
+                }
+            }
 
-      }
-        else{
-          $( "#submit_form_profile" ).submit();
-      }
+        }
+        else {
+            $("#submit_form_profile").submit();
+        }
     });
-    $('body').on("click",'#prev_edit_user', function () {
-        var stt=$('.step-content .active').attr('data-step');
-        if(stt>1){
-            var stt_after=parseInt(stt)-1;
-            $('#step_edit_'+stt).removeClass('active');
-            $('#step_edit_'+stt_after).addClass('active');
-            $('#step_edit_'+stt_after).removeClass('complete');
+    $('body').on("click", '#prev_edit_user', function () {
+        var stt = $('.step-content .active').attr('data-step');
+        if (stt > 1) {
+            var stt_after = parseInt(stt) - 1;
+            $('#step_edit_' + stt).removeClass('active');
+            $('#step_edit_' + stt_after).addClass('active');
+            $('#step_edit_' + stt_after).removeClass('complete');
 
-            $('#step_tab_'+stt).removeClass('active');
-            $('#step_tab_'+stt).removeClass('complete');
-            $('#step_tab_'+stt_after).removeClass('complete');
-            $('#step_tab_'+stt_after).addClass('active');
-            if(stt==2){
-                $( "#prev_edit_user" ).prop( "disabled", true );
+            $('#step_tab_' + stt).removeClass('active');
+            $('#step_tab_' + stt).removeClass('complete');
+            $('#step_tab_' + stt_after).removeClass('complete');
+            $('#step_tab_' + stt_after).addClass('active');
+            if (stt == 2) {
+                $("#prev_edit_user").prop("disabled", true);
             }
         }
-        else{
-            $( "#prev_edit_user" ).prop( "disabled", true );
-            $('#step_tab_'+stt).addClass('active');
-            $('#step_tab_'+stt).removeClass('complete');
+        else {
+            $("#prev_edit_user").prop("disabled", true);
+            $('#step_tab_' + stt).addClass('active');
+            $('#step_tab_' + stt).removeClass('complete');
         }
     });
-    $('body').on("click",'.hidden_tab_step', function () {
-        var complete=$(this).attr('complete_value');
-        if(complete==="complete"){
-            var stt=$(this).attr('data-step');
-            $(this).attr('complete_value','');
-            $('#step_tab_'+stt).removeClass('complete');
-            $('#step_tab_'+stt).addClass('active');
-            $('#step_edit_'+stt).addClass('active');
-            var stt_before=parseInt(stt)+1;
-            for(var i=stt_before; i<=4; i++){
-                $('#step_tab_'+i).removeClass('complete');
-                $('#step_tab_'+i).removeClass('active');
-                $('#step_tab_'+i).attr('complete_value','');
-                $('#step_edit_'+i).removeClass('active');
+    $('body').on("click", '.hidden_tab_step', function () {
+        var complete = $(this).attr('complete_value');
+        if (complete === "complete") {
+            var stt = $(this).attr('data-step');
+            $(this).attr('complete_value', '');
+            $('#step_tab_' + stt).removeClass('complete');
+            $('#step_tab_' + stt).addClass('active');
+            $('#step_edit_' + stt).addClass('active');
+            var stt_before = parseInt(stt) + 1;
+            for (var i = stt_before; i <= 4; i++) {
+                $('#step_tab_' + i).removeClass('complete');
+                $('#step_tab_' + i).removeClass('active');
+                $('#step_tab_' + i).attr('complete_value', '');
+                $('#step_edit_' + i).removeClass('active');
             }
         }
     });
     //$('i').ggtooltip();
 });
-function checkUserPasswordOldConfirm(){
+function checkUserPasswordOldConfirm() {
     var value = $("#input_password_old").val();
     var link = url + '/nhan-vien/check-pass-old';
-    if(value!=''){
+    if (value != '') {
         $.ajax({
             method: "GET",
             url: link,
             data: "value=" + value,
             success: function (response) {
                 if (response != 1) {
-                    var mess="Mật khẩu cũ không chính xác";
-                    showHiddenPasswordOldUser(0,mess)
+                    var mess = "Mật khẩu cũ không chính xác";
+                    showHiddenPasswordOldUser(0, mess)
                 }
-                else{
-                    var mess="";
-                    showHiddenPasswordOldUser(1,mess)
+                else {
+                    var mess = "";
+                    showHiddenPasswordOldUser(1, mess)
                 }
             }
         });
     }
-    else{
-        var mess="Bạn vui lòng nhập mật khẩu cũ";
-        showHiddenPasswordOldUser(0,mess)
+    else {
+        var mess = "Bạn vui lòng nhập mật khẩu cũ";
+        showHiddenPasswordOldUser(0, mess)
     }
 
 }
-function showHiddenPasswordOldUser(res,mess){
-    var error_password_old=$("#error_password_old" );
+function showHiddenPasswordOldUser(res, mess) {
+    var error_password_old = $("#error_password_old");
     if (res == 1) {
         error_password_old.hide();
         $('#error_icon_user_password_old').hide();
@@ -396,9 +430,8 @@ function showHiddenPasswordOldUser(res,mess){
         $('#input_password_old').removeClass("input-error").addClass("valid");
     }
     else {
-        if(res!=0)
-        {
-            mess=res;
+        if (res != 0) {
+            mess = res;
         }
         $('#error_icon_user_password_old').show();
         $('#user_password_old_success_icon').hide();
@@ -411,106 +444,126 @@ function showHiddenPasswordOldUser(res,mess){
 }
 
 
-function show_edit_nhanvien(Id,name){
-    $( "#title_form" ).html('Chỉnh sửa nhân viên "<b>'+name+'</b>"');
+function show_edit_nhanvien(Id, name) {
+    $("#title_form").html('Chỉnh sửa nhân viên "<b>' + name + '</b>"');
     resetForm("#submit_form");
-    $( "#input_check_edit" ).val('edit');
-    if(Id!=''){
-        jQuery.post(url+"/get-detail-ajax/",
+    $("#input_check_edit").val('edit');
+    if (Id != '') {
+        jQuery.post(url + "/get-detail-ajax/",
             {
                 id: Id,
-                table:'user'
+                table: 'user'
             }
             )
             .done(function (data) {
-                if(data!=0)
-                {
+                if (data != 0) {
                     var obj = jQuery.parseJSON(data);
                     var output = document.getElementById('show_img_upload');
-                    if(obj.avatar!=''){
-                        output.src = url+obj.avatar;
-                    }else{
-                        var no_ava=$('#show_img_upload').attr('no-avatar');
+                    if (obj.avatar != '') {
+                        output.src = url + obj.avatar;
+                    } else {
+                        var no_ava = $('#show_img_upload').attr('no-avatar');
                         output.src = no_ava;
                     }
-                    if(obj.user_code!=''){
+                    if (obj.user_code != '') {
                         $('#input_user_code').val(obj.user_code);
                         $('#input_user_code').removeClass("input-error").addClass("valid");
                     }
-                    else{
+                    else {
                         $('#input_user_code').addClass("input-error").removeClass("valid");
                     }
 
-                    if(obj.user_role==1)
-                    {
+                    if (obj.user_role == 1) {
                         $("#input_user_role").prop('checked', true);
-                    }else{
+                    } else {
                         $("#input_user_role").prop('checked', false);
                     }
-                    if(obj.name!=''){
+                    if (obj.name != '') {
                         $('#input_full_name').val(obj.name);
                         $('#input_full_name').removeClass("input-error").addClass("valid");
                     }
-                    else{
+                    else {
                         $('#input_full_name').addClass("input-error").removeClass("valid");
                     }
-                    var mr=obj.mr;
-                    if(mr!='')
-                    {
-                        $("#mr_user_select  span").html(mr);
+                    var mr = obj.mr;
+                    if (mr != '') {
+                        $(".mr_user_div  span").html(mr);
+                        $('.mr_user option').each(function() {
+                            if($(this).val() == mr) {
+                                $(this).attr('selected', true)
+                            }
+                        });
                     }
-                    var type_tiep_thi=obj.type_tiep_thi;
-                    if(type_tiep_thi!='')
-                    {
-                        switch(type_tiep_thi){
+                    var type_tiep_thi = obj.type_tiep_thi;
+                    if (type_tiep_thi != '') {
+                        switch (type_tiep_thi) {
                             case '1':
-                                type_tiep_thi='4 sao';
+                                type_tiep_thi = '4 sao';
                                 break;
                             case '2':
-                                type_tiep_thi='5 sao';
+                                type_tiep_thi = '5 sao';
                                 break;
                             case '3':
-                                type_tiep_thi='Đại lý';
+                                type_tiep_thi = 'Đại lý';
                                 break;
                             default:
-                                type_tiep_thi='3 sao';
+                                type_tiep_thi = '3 sao';
 
                         }
                         $("#type_user_select  span").html(type_tiep_thi);
                     }
-                    if(obj.birthday!=''){
+                    var truong_phong_name = obj.truong_phong_name;
+                    if(truong_phong_name!=''){
+                        $(".truong_phong_div  span").html(truong_phong_name);
+                        $('.truong_phong_div option').each(function() {
+                            if($(this).val() == obj.truong_phong_id) {
+                                $(this).attr('selected', true)
+                            }
+                        });
+                    }
+                    var phong_ban_name = obj.phong_ban_name;
+
+                    if(phong_ban_name!=''){
+                        $(".phong_ban_div  span").html(phong_ban_name);
+                        $('.phong_ban_div option').each(function() {
+                            if($(this).val() == obj.phong_ban) {
+                                $(this).attr('selected', true)
+                            }
+                        });
+                    }
+                    if (obj.birthday != '') {
                         $('#input_birthday').val(obj.birthday);
                         $('#input_birthday').removeClass("input-error").addClass("valid");
                     }
-                    else{
+                    else {
                         $('#input_birthday').addClass("input-error").removeClass("valid");
                     }
-                    if(obj.user_email!=''){
+                    if (obj.user_email != '') {
                         $('#input_email_user').val(obj.user_email);
                         $('#input_email_user').removeClass("input-error").addClass("valid");
                     }
-                    else{
+                    else {
                         $('#input_email_user').addClass("input-error").removeClass("valid");
                     }
-                    if(obj.address!=''){
+                    if (obj.address != '') {
                         $('#input_address_user').val(obj.address);
                         $('#input_address_user').removeClass("input-error").addClass("valid");
                     }
-                    else{
+                    else {
                         $('#input_address_user').addClass("input-error").removeClass("valid");
                     }
-                    if(obj.user_name!=''){
+                    if (obj.user_name != '') {
                         $('#input_user_name').val(obj.user_name);
                         $('#input_user_name').removeClass("input-error").addClass("valid");
                     }
-                    else{
+                    else {
                         $('#input_user_name').addClass("input-error").removeClass("valid");
                     }
-                    if(obj.phone!=''){
+                    if (obj.phone != '') {
                         $('#input_user_phone').val(obj.phone);
                         $('#input_user_phone').removeClass("input-error").addClass("valid");
                     }
-                    else{
+                    else {
                         $('#input_user_phone').addClass("input-error").removeClass("valid");
                     }
 
@@ -529,20 +582,20 @@ function show_edit_nhanvien(Id,name){
                     $('#input_bank').val(obj.bank);
                     $('#input_open_bank').val(obj.open_bank);
                     $('#input_date_range_cmnd').val(obj.date_range_cmnd);
-                    var gender=obj.gender;
+                    var gender = obj.gender;
 
-                        switch(gender){
-                            case '1':
-                                gender='Nam';
-                                break;
-                            case '2':
-                                gender='Nữ';
-                                break;
-                            default:
-                                gender='Chưa xác định';
+                    switch (gender) {
+                        case '1':
+                            gender = 'Nam';
+                            break;
+                        case '2':
+                            gender = 'Nữ';
+                            break;
+                        default:
+                            gender = 'Chưa xác định';
 
-                        }
-                        $("#gioi_tinh_user_select  span").html(gender);
+                    }
+                    $("#gioi_tinh_user_select  span").html(gender);
 
 
                     $('#input_password').val('code');
@@ -557,35 +610,34 @@ function show_edit_nhanvien(Id,name){
                 }
             });
     }
-    else{
+    else {
         alert('Ban không thể xem chi tiết nhân viên');
     }
 }
-function resetForm(form){
+function resetForm(form) {
     $(form).trigger('reset');
 }
 //check địa chỉ nhân viên
-function checkPhoneUser(){
+function checkPhoneUser() {
     var value = $("#input_user_phone").val();
-    if(value==''){
-        var mess='Bạn vui lòng nhập số điện thoại';
-        showHiddenPhoneUser(0,mess);
-    }else{
-        var mess='';
-        showHiddenPhoneUser(1,mess);
+    if (value == '') {
+        var mess = 'Bạn vui lòng nhập số điện thoại';
+        showHiddenPhoneUser(0, mess);
+    } else {
+        var mess = '';
+        showHiddenPhoneUser(1, mess);
     }
 }
-function showHiddenPhoneUser(res,mess){
-    var error_user_phone=$("#error_user_phone" );
+function showHiddenPhoneUser(res, mess) {
+    var error_user_phone = $("#error_user_phone");
     if (res == 1) {
         error_user_phone.hide();
         $('#error_icon_user_phone').hide();
         $('#input_user_phone').removeClass("input-error").addClass("valid");
     }
     else {
-        if(res!=0)
-        {
-            mess=res;
+        if (res != 0) {
+            mess = res;
         }
         $('#error_icon_user_phone').show();
         $('#input_user_phone').addClass("input-error").removeClass("valid");
@@ -598,20 +650,20 @@ function showHiddenPhoneUser(res,mess){
 
 
 // check pass confirm
-function checkUserPasswordConfirm(){
-    var error_password_confirm=$("#error_password_confirm" );
+function checkUserPasswordConfirm() {
+    var error_password_confirm = $("#error_password_confirm");
     var value = $("#input_password_confirm").val();
-    if(value==''){
-        var mess='Bạn vui lòng xác nhận mật khẩu';
-        showHiddenPasswordConfirmUser(0,mess);
-    }else{
-        var password_dangky=$('#input_password').val();
-        if(value==password_dangky){
+    if (value == '') {
+        var mess = 'Bạn vui lòng xác nhận mật khẩu';
+        showHiddenPasswordConfirmUser(0, mess);
+    } else {
+        var password_dangky = $('#input_password').val();
+        if (value == password_dangky) {
             error_password_confirm.hide();
             error_password_confirm.html('');
             $('#error_icon_user_pass_con').hide();
             $('#input_password_confirm').removeClass("input-error").addClass("valid");
-        }else{
+        } else {
             error_password_confirm.show();
             error_password_confirm.html('Hai mật khẩu không khớp');
             $('#error_icon_user_pass_con').show();
@@ -620,17 +672,16 @@ function checkUserPasswordConfirm(){
     }
 }
 
-function showHiddenPasswordConfirmUser(res,mess){
-    var error_password_confirm=$("#error_password_confirm" );
+function showHiddenPasswordConfirmUser(res, mess) {
+    var error_password_confirm = $("#error_password_confirm");
     if (res == 1) {
         error_password_confirm.hide();
         $('#error_icon_user_pass_con').hide();
         $('#input_password_confirm').removeClass("input-error").addClass("valid");
     }
     else {
-        if(res!=0)
-        {
-            mess=res;
+        if (res != 0) {
+            mess = res;
         }
         $('#error_icon_user_pass_con').show();
         $('#input_password_confirm').addClass("input-error").removeClass("valid");
@@ -643,21 +694,20 @@ function showHiddenPasswordConfirmUser(res,mess){
 
 
 // check password
-function checkUserPassword(){
-    var error_password_confirm=$("#error_password_confirm" );
+function checkUserPassword() {
+    var error_password_confirm = $("#error_password_confirm");
     var value = $("#input_password").val();
     var confirm_password_dangky = $('#input_password_confirm').val();
-    if(value==''){
-        var mess='Bạn vui lòng nhập mật khẩu';
-        showHiddenPasswordUser(0,mess);
-    }else{
-        if(confirm_password_dangky!=""){
-            if(value==confirm_password_dangky)
-            {
+    if (value == '') {
+        var mess = 'Bạn vui lòng nhập mật khẩu';
+        showHiddenPasswordUser(0, mess);
+    } else {
+        if (confirm_password_dangky != "") {
+            if (value == confirm_password_dangky) {
                 error_password_confirm.hide();
                 error_password_confirm.html('');
                 $('#input_password_confirm').removeClass("input-error").addClass("valid");
-            }else{
+            } else {
                 error_password_confirm.show();
                 error_password_confirm.html('Hai mật khẩu không khớp');
                 $('#input_password_confirm').addClass("input-error").removeClass("valid");
@@ -680,15 +730,15 @@ function checkUserPassword(){
 
         } else if (strongRegex.test(value)) {
             // If reg ex matches strong password
-            showHiddenPasswordValidUser('success_pass','Mật khẩu mạnh!');
+            showHiddenPasswordValidUser('success_pass', 'Mật khẩu mạnh!');
             //$('#power_pass').removeClass().addClass('success_pass').html('Mật khẩu mạnh!');
         } else if (mediumRegex.test(value)) {
             // If medium password matches the reg ex
-            showHiddenPasswordValidUser('medium_pass','Hãy khiến mật khẩu mạnh hơn với chữ in hoa, số, ký tự đặc biệt!');
+            showHiddenPasswordValidUser('medium_pass', 'Hãy khiến mật khẩu mạnh hơn với chữ in hoa, số, ký tự đặc biệt!');
             //$('#power_pass').removeClass().addClass('medium_pass').html('Hãy khiến mật khẩu mạnh hơn với chữ in hoa, số, ký tự đặc biệt!');
         } else {
             // If password is ok
-            showHiddenPasswordValidUser('weak_pass','Mật khẩu yếu, hãy sử dụng số và chữ hoa!');
+            showHiddenPasswordValidUser('weak_pass', 'Mật khẩu yếu, hãy sử dụng số và chữ hoa!');
             //$('#power_pass').removeClass().addClass('weak_pass').html('Mật khẩu yếu, hãy sử dụng số và chữ hoa.');
         }
 
@@ -696,23 +746,22 @@ function checkUserPassword(){
         //showHiddenPasswordUser(1,mess);
     }
 }
-function  showHiddenPasswordValidUser(res,mess){
+function showHiddenPasswordValidUser(res, mess) {
     $('#error_password').removeClass().addClass(res).html(mess);
     $('#input_password').removeClass("input-error").addClass("valid");
     $('#error_password').addClass('error-color-size');
     $('#error_icon_user_pass').hide();
 }
-function showHiddenPasswordUser(res,mess){
-    var error_password=$("#error_password" );
+function showHiddenPasswordUser(res, mess) {
+    var error_password = $("#error_password");
     if (res == 1) {
         error_password.hide();
         $('#error_icon_user_pass').hide();
         $('#input_password').removeClass("input-error").addClass("valid");
     }
     else {
-        if(res!=0)
-        {
-            mess=res;
+        if (res != 0) {
+            mess = res;
         }
         $('#error_icon_user_pass').show();
         $('#input_password').addClass("input-error").removeClass("valid");
@@ -725,8 +774,8 @@ function showHiddenPasswordUser(res,mess){
 
 
 // check tên đăng nhập
-function showHiddenUserName(res,mess){
-    var error_user_name=$("#error_user_name" );
+function showHiddenUserName(res, mess) {
+    var error_user_name = $("#error_user_name");
     if (res == 1) {
         error_user_name.hide();
         $('#error_icon_user_name').hide();
@@ -734,9 +783,8 @@ function showHiddenUserName(res,mess){
         $('#input_user_name').removeClass("input-error").addClass("valid");
     }
     else {
-        if(res!=0)
-        {
-            mess=res;
+        if (res != 0) {
+            mess = res;
         }
         $('#error_icon_user_name').show();
         $('#success_icon_user_name').hide();
@@ -747,52 +795,51 @@ function showHiddenUserName(res,mess){
         error_user_name.show();
     }
 }
-function checkUserName(){
+function checkUserName() {
     var value = $("#input_user_name").val();
     var link = url + '/check-login.html';
-    var input_check_edit=$("#input_check_edit").val();
-    if(input_check_edit=='add')
-    {
-    if(value!=''){
-        $.ajax({
-            method: "GET",
-            url: link,
-            data: "value=" + value + '&key=user_name',
-            success: function (response) {
-                var mess='Tên đăng nhập "'+value+'" đã tồn tại trong hệ thống';
-                showHiddenUserName(response,mess);
-            }
-        });
+    var input_check_edit = $("#input_check_edit").val();
+    if (input_check_edit == 'add') {
+        if (value != '') {
+            $.ajax({
+                method: "GET",
+                url: link,
+                data: "value=" + value + '&key=user_name',
+                success: function (response) {
+                    var mess = 'Tên đăng nhập "' + value + '" đã tồn tại trong hệ thống';
+                    showHiddenUserName(response, mess);
+                }
+            });
+        }
+        else {
+            var mess = 'Bạn vui lòng điền tên đăng nhập';
+            showHiddenUserName(0, mess);
+        }
     }
-    else{
-        var mess='Bạn vui lòng điền tên đăng nhập';
-        showHiddenUserName(0,mess);
-    }}
 }
 
 
 //check địa chỉ nhân viên
-function checkAddressUser(){
+function checkAddressUser() {
     var value = $("#input_address_user").val();
-    if(value==''){
-        var mess='Bạn vui lòng nhập địa chỉ';
-        showHiddenAddressUser(0,mess);
-    }else{
-        var mess='';
-        showHiddenAddressUser(1,mess);
+    if (value == '') {
+        var mess = 'Bạn vui lòng nhập địa chỉ';
+        showHiddenAddressUser(0, mess);
+    } else {
+        var mess = '';
+        showHiddenAddressUser(1, mess);
     }
 }
-function showHiddenAddressUser(res,mess){
-    var error_address_user=$("#error_address_user" );
+function showHiddenAddressUser(res, mess) {
+    var error_address_user = $("#error_address_user");
     if (res == 1) {
         error_address_user.hide();
         $('#error_icon_address_user').hide();
         $('#input_address_user').removeClass("input-error").addClass("valid");
     }
     else {
-        if(res!=0)
-        {
-            mess=res;
+        if (res != 0) {
+            mess = res;
         }
         $('#error_icon_address_user').show();
         $('#input_address_user').addClass("input-error").removeClass("valid");
@@ -805,8 +852,8 @@ function showHiddenAddressUser(res,mess){
 
 
 // check mã nhân viên
-function showHiddenUserEmail(res,mess){
-    var email_user_error=$("#error_email_user" );
+function showHiddenUserEmail(res, mess) {
+    var email_user_error = $("#error_email_user");
     if (res == 1) {
         email_user_error.hide();
         $('#email_user_error_icon').hide();
@@ -814,9 +861,8 @@ function showHiddenUserEmail(res,mess){
         $('#input_email_user').removeClass("input-error").addClass("valid");
     }
     else {
-        if(res!=0)
-        {
-            mess=res;
+        if (res != 0) {
+            mess = res;
         }
         $('#email_user_error_icon').show();
         $('#email_user_success_icon').hide();
@@ -827,77 +873,76 @@ function showHiddenUserEmail(res,mess){
         email_user_error.show();
     }
 }
-function checkEmailUser(){
+function checkEmailUser() {
     var value = $("#input_email_user").val();
     var link = url + '/check-login.html';
-    var input_check_edit=$("#input_check_edit").val();
-    if(input_check_edit=='add')
-    {
-    if(value!=''){
-        var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-        var is_email=re.test(value);
-        if(is_email){
-            $.ajax({
-                method: "GET",
-                url: link,
-                data: "value=" + value + '&key=user_email',
-                success: function (response) {
-                    var mess='Email "'+value+'" đã tồn tại trong hệ thống';
-                    showHiddenUserEmail(response,mess);
-                }
-            });
+    var input_check_edit = $("#input_check_edit").val();
+    if (input_check_edit == 'add') {
+        if (value != '') {
+            var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+            var is_email = re.test(value);
+            if (is_email) {
+                $.ajax({
+                    method: "GET",
+                    url: link,
+                    data: "value=" + value + '&key=user_email',
+                    success: function (response) {
+                        var mess = 'Email "' + value + '" đã tồn tại trong hệ thống';
+                        showHiddenUserEmail(response, mess);
+                    }
+                });
+            }
+            else {
+                var mess = 'Email không đúng định dạng';
+                showHiddenUserEmail(0, mess);
+            }
         }
-        else{
-            var mess='Email không đúng định dạng';
-            showHiddenUserEmail(0,mess);
+        else {
+            var mess = 'Bạn vui lòng nhập email';
+            showHiddenUserEmail(0, mess);
         }
     }
-    else{
-        var mess='Bạn vui lòng nhập email';
-        showHiddenUserEmail(0,mess);
-    }}
 }
 
 
 // check ngày sinh
-function checkBirthdayUser(){
+function checkBirthdayUser() {
     var value = $("#input_birthday").val();
-    if(value==''){
-        var mess='Bạn vui lòng nhập ngày tháng năm sinh';
-        showHiddenBirthdayUser(0,mess);
-    }else{
+    if (value == '') {
+        var mess = 'Bạn vui lòng nhập ngày tháng năm sinh';
+        showHiddenBirthdayUser(0, mess);
+    } else {
         var value_date = value.split("-");
         var value = new Date(value_date[2], value_date[1] - 1, value_date[0]);
-        var mess='';
-        var res=0;
+        var mess = '';
+        var res = 0;
         var eighteenYearsAgo = moment().subtract(18, "years");
         var birthday = moment(value);
 
         if (!birthday.isValid()) {
-            mess="Không đúng định dạng ngày tháng năm";
+            mess = "Không đúng định dạng ngày tháng năm";
         }
         else if (eighteenYearsAgo.isAfter(birthday)) {
-            mess='';
-            res=1;
+            mess = '';
+            res = 1;
         }
         else {
-            mess='Ngày sinh của bạn không đủ tuổi đăng ký';
+            mess = 'Ngày sinh của bạn không đủ tuổi đăng ký';
         }
         //var mess='';
-        showHiddenBirthdayUser(res,mess);
+        showHiddenBirthdayUser(res, mess);
     }
 }
-function showHiddenBirthdayUser(res,mess){
-    var birthday_user_error=$("#error_birthday" );
+function showHiddenBirthdayUser(res, mess) {
+    var birthday_user_error = $("#error_birthday");
     if (res == 1) {
         birthday_user_error.hide();
         $('#input_birthday').removeClass("input-error").addClass("valid");
         $('.date_icon').removeClass("error-color");
     }
     else {
-        if(res!=0)
-        {
-            mess=res;
+        if (res != 0) {
+            mess = res;
         }
         $('#input_birthday').addClass("input-error").removeClass("valid");
         $('.date_icon').addClass("error-color");
@@ -909,8 +954,8 @@ function showHiddenBirthdayUser(res,mess){
 }
 
 // check mã nhân viên
-function showHiddenUserCode(res,mess){
-    var error_user_code=$("#error_user_code" );
+function showHiddenUserCode(res, mess) {
+    var error_user_code = $("#error_user_code");
     if (res == 1) {
         error_user_code.hide();
         $('#user_code_error_icon').hide();
@@ -918,9 +963,8 @@ function showHiddenUserCode(res,mess){
         $('#input_user_code').removeClass("input-error").addClass("valid");
     }
     else {
-        if(res!=0)
-        {
-            mess=res;
+        if (res != 0) {
+            mess = res;
         }
         $('#user_code_error_icon').show();
         $('#user_code_success_icon').hide();
@@ -931,53 +975,51 @@ function showHiddenUserCode(res,mess){
         error_user_code.show();
     }
 }
-function ajaxCheckUserCode(){
+function ajaxCheckUserCode() {
     var value = $("#input_user_code").val();
     var link = url + '/check-login.html';
-    var input_check_edit=$("#input_check_edit").val();
-    if(input_check_edit=='add')
-    {
-        if(value!=''){
+    var input_check_edit = $("#input_check_edit").val();
+    if (input_check_edit == 'add') {
+        if (value != '') {
             $.ajax({
                 method: "GET",
                 url: link,
                 data: "value=" + value + '&key=user_code',
                 success: function (response) {
-                    var mess='Mã nhân viên "'+value+'" đã tồn tại trong hệ thống';
-                    showHiddenUserCode(response,mess);
+                    var mess = 'Mã nhân viên "' + value + '" đã tồn tại trong hệ thống';
+                    showHiddenUserCode(response, mess);
                 }
             });
         }
-        else{
-            var mess='Bạn vui lòng nhập mã nhân viên';
-            showHiddenUserCode(0,mess);
+        else {
+            var mess = 'Bạn vui lòng nhập mã nhân viên';
+            showHiddenUserCode(0, mess);
         }
     }
 
 }
 
 // check name user
-function checkNameUser(){
+function checkNameUser() {
     var value = $("#input_full_name").val();
-    if(value==''){
-        var mess='Bạn vui lòng chọn danh xưng và nhập tên';
-        showHiddenNameUser(0,mess);
-    }else{
-        var mess='';
-        showHiddenNameUser(1,mess);
+    if (value == '') {
+        var mess = 'Bạn vui lòng chọn danh xưng và nhập tên';
+        showHiddenNameUser(0, mess);
+    } else {
+        var mess = '';
+        showHiddenNameUser(1, mess);
     }
 }
-function showHiddenNameUser(res,mess){
-    var name_user_error=$("#error_full_name" );
+function showHiddenNameUser(res, mess) {
+    var name_user_error = $("#error_full_name");
     if (res == 1) {
         name_user_error.hide();
         $('#name_user_error_icon').hide();
         $('#input_full_name').removeClass("input-error").addClass("valid");
     }
     else {
-        if(res!=0)
-        {
-            mess=res;
+        if (res != 0) {
+            mess = res;
         }
         $('#name_user_error_icon').show();
         $('#input_full_name').addClass("input-error").removeClass("valid");
@@ -988,7 +1030,7 @@ function showHiddenNameUser(res,mess){
     }
 }
 
-function validate(date){
+function validate(date) {
     var eighteenYearsAgo = moment().subtract(18, "years");
     var birthday = moment(date);
 

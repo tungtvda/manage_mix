@@ -25,7 +25,7 @@ if(isset($_POST['username_login'])&&isset($_POST['password_login'])){
     $rememberme=_returnPostParamSecurity('rememberme');
     if($username_login!=''&&$password_login!=''){
         $Pass = hash_pass($password_login);
-        $dk_check_user = "user_email ='" . $username_login . "' and password='".$Pass."'";
+        $dk_check_user = "user_role=2 and user_email ='" . $username_login . "' and password='".$Pass."'";
         $data_check_exist_user = user_getByTop('', $dk_check_user, 'id desc');
         if(count($data_check_exist_user)>0){
             if($data_check_exist_user[0]->status==1){

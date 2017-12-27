@@ -81,7 +81,7 @@ if (isset($_POST['mail_create']) && isset($_POST['email_dangky']) && isset($_POS
                     $dangky->login_two_steps = 0;
                     $dangky->user_role = 2;
                     $subject = "Thông báo đăng ký tài khoản tại AZBOOKING.VN";
-//                    if (SendMail($user_email, $mail_create, $subject, 1, 'AZBOOKING.VN')) {
+                    if (SendMail($user_email, $mail_create, $subject, 1, 'AZBOOKING.VN')) {
                         $dangky->user_code = _randomBooking('az', 'user_count');
                         user_insert($dangky);
                         $array_res['success'] = 1;
@@ -100,7 +100,7 @@ if (isset($_POST['mail_create']) && isset($_POST['email_dangky']) && isset($_POS
             <td><a class="btn btn-danger">Chưa kích hoạt</a></td>
             <td>'._returnDateFormatConvert($dangky->created).'</td>';
                     }
-//                    }
+                    }
                 }else{
 
                 }

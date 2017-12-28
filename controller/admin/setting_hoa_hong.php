@@ -54,7 +54,7 @@ if(isset($_SESSION["Admin"]))
             header('Location: '.SITE_NAME.'/controller/admin/setting_hoa_hong.php');
         }
     }
-    if(isset($_POST["hoa_hong_3"])&&isset($_POST["hoa_hong_4"])&&isset($_POST["hoa_hong_5"])&&isset($_POST["hoa_hong_dai_ly"])&&isset($_POST["hoa_hong_gt_3"])&&isset($_POST["hoa_hong_gt_4"])&&isset($_POST["hoa_hong_gt_5_3"])&&isset($_POST["hoa_hong_gt_5_4"])&&isset($_POST["hoa_hong_gt_dl"])&&isset($_POST["muc_4_don_hang"])&&isset($_POST["muc_4_thanh_vien"])&&isset($_POST["muc_5_don_hang"])&&isset($_POST["muc_5_thanh_vien_3"])&&isset($_POST["muc_5_thanh_vien_4"]))
+    if(isset($_POST["hoa_hong_3"])&&isset($_POST["hoa_hong_4"])&&isset($_POST["hoa_hong_5"])&&isset($_POST["hoa_hong_dai_ly"])&&isset($_POST["hoa_hong_gt_f1"])&&isset($_POST["hoa_hong_gt_f2"])&&isset($_POST["hoa_hong_gt_f3"])&&isset($_POST["muc_4_don_hang"])&&isset($_POST["muc_4_thanh_vien"])&&isset($_POST["muc_5_don_hang"])&&isset($_POST["muc_5_thanh_vien_3"])&&isset($_POST["muc_5_thanh_vien_4"]))
     {
        $array=$_POST;
        if(!isset($array['id']))
@@ -67,16 +67,12 @@ if(isset($_SESSION["Admin"]))
        $array['hoa_hong_5']='0';
        if(!isset($array['hoa_hong_dai_ly']))
        $array['hoa_hong_dai_ly']='0';
-       if(!isset($array['hoa_hong_gt_3']))
-       $array['hoa_hong_gt_3']='0';
-       if(!isset($array['hoa_hong_gt_4']))
-       $array['hoa_hong_gt_4']='0';
-       if(!isset($array['hoa_hong_gt_5_3']))
-       $array['hoa_hong_gt_5_3']='0';
-       if(!isset($array['hoa_hong_gt_5_4']))
-       $array['hoa_hong_gt_5_4']='0';
-       if(!isset($array['hoa_hong_gt_dl']))
-       $array['hoa_hong_gt_dl']='0';
+       if(!isset($array['hoa_hong_gt_f1']))
+       $array['hoa_hong_gt_f1']='0';
+       if(!isset($array['hoa_hong_gt_f2']))
+       $array['hoa_hong_gt_f2']='0';
+       if(!isset($array['hoa_hong_gt_f3']))
+       $array['hoa_hong_gt_f3']='0';
        if(!isset($array['muc_4_don_hang']))
        $array['muc_4_don_hang']='0';
        if(!isset($array['muc_4_thanh_vien']))

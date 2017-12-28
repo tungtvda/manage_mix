@@ -1525,7 +1525,15 @@ function _returnConfirmTiepthi($data_check, $return = '', $return_array=0)
                     booking_update($new);
 //                $name_noti = $_SESSION['user_name'] . ' đã xác nhận hoa hồng đơn hàng "' . $data_check[0]->code_booking . '"';
                     $name_noti = 'AZBOOKING.VN đã xác nhận hoa hồng đơn hàng "' . $data_check[0]->code_booking . '"';
-                    _returnUpdateHoahong($data_user, $data_check[0]->price_tiep_thi, $data_check, $name_noti,$data_check[0]->user_tiep_thi_id);
+                    $price_hoa_hong=_returnUpdateHoahong($data_user, $data_check[0]->price_tiep_thi, $data_check, $name_noti,$data_check[0]->user_tiep_thi_id);
+                    // cộng tiền hoa hồng cho cấp 1
+                    if($price_hoa_hong>0 && $data_user[0]->user_gioi_thieu!=0){
+                        $data_user_level_1 = user_getById($data_check[0]->user_gioi_thieu);
+                        if($data_user_level_1){
+                            $name_noti = 'AZBOOKING.VN đã xác nhận hoa hồng giới thiệu thành viên cho đơn hàng "' . $data_check[0]->code_booking . '"';
+                            _returnUpdateHoahong($data_user_level_1, $data_check[0]->hoa_hong_gioi_thieu_4, $data_check, $name_noti,$data_check[0]->level_gioi_thieu_tiep_thi_4);
+                        }
+                    }
                     if ($data_check[0]->level_gioi_thieu_tiep_thi_4 && $data_check[0]->hoa_hong_gioi_thieu_4 != '') {
                         $data_user_4 = user_getById($data_check[0]->level_gioi_thieu_tiep_thi_4);
                         if (count($data_user_4)) {
@@ -1562,8 +1570,15 @@ function _returnConfirmTiepthi($data_check, $return = '', $return_array=0)
         return $string_return;
     }
 }
-function _returnUpdateHoahong($data_user, $price_ho_hong, $data_check,$name_noti,$user_tiep_thi_id){
-    $hoa_hong = $data_user[0]->hoa_hong + $price_ho_hong;
+function _returnUpdateHoahong($data_user, $price_ho_hong, $data_check,$name_noti,$user_tiep_thi_id, $tinh_hoa_hong=0){
+    if($tinh_hoa_hong==1){
+        $hoa_hong = $data_user[0]->hoa_hong + $price_ho_hong;
+    }else{
+        $songuoi=$data_check[0]->num_nguoi_lon+$data_check[0]->num_tre_em+$data_check[0]->num_tre_em_5;
+        $price_ho_hong=$price_ho_hong*$songuoi;
+        $hoa_hong = $data_user[0]->hoa_hong + $price_ho_hong;
+    }
+
     $array_user = (array)$data_user[0];
     $new_user = new user($array_user);
     $new_user->hoa_hong = $hoa_hong;
@@ -1572,82 +1587,71 @@ function _returnUpdateHoahong($data_user, $price_ho_hong, $data_check,$name_noti
     $link_noti = '/tiep-thi-lien-ket/don-hang/chi-tiet?noti=1&id=' . _return_mc_encrypt($data_check[0]->id, ENCRYPTION_KEY);
     _insertNotification($name_noti, $_SESSION['user_id'], $user_tiep_thi_id, $link_noti, 0, '');
     _insertLog($_SESSION['user_id'], 6, 6, 22, $data_check[0]->id, '', '', $name_noti);
+    return $price_ho_hong;
 
 }
 
 function _returnHoaHongBooking($booking_model, $data_user_tiep_thi, $price_tiep_thi_thuc_te)
 {
+    $songuoi=$booking_model->num_nguoi_lon+$booking_model->num_tre_em+$booking_model->num_tre_em_5;
+    if($songuoi=='' || $songuoi<=0){
+        $songuoi=0;
+    }
     $data_setting = _returnSettingHoaHong();
-    $hoa_hong_gioi_thieu_4='';
-    $hoa_hong_gioi_thieu_5_3='';
-    $hoa_hong_gioi_thieu_5_4='';
     switch ($data_user_tiep_thi[0]->type_tiep_thi) {
         case '1':
-            $price_tiep_thi = round(($price_tiep_thi_thuc_te * $data_setting['hoa_hong_4']) / 100);
-            $hoa_hong_gioi_thieu_5_4 = round(($price_tiep_thi * $data_setting['hoa_hong_gt_5_4']) / 100);
+            $price_tiep_thi = round(($price_tiep_thi_thuc_te * $data_setting['hoa_hong_4']) / 100)*$songuoi;
+            $booking_model->hoa_hong_tiep_thi = $data_setting['hoa_hong_4'];
+//            $hoa_hong_gioi_thieu_5_4 = round(($price_tiep_thi * $data_setting['hoa_hong_gt_5_4']) / 100);
             break;
         case '2':
-            $price_tiep_thi = round(($price_tiep_thi_thuc_te * $data_setting['hoa_hong_5']) / 100);
+            $price_tiep_thi = round(($price_tiep_thi_thuc_te * $data_setting['hoa_hong_5']) / 100)*$songuoi;
+            $booking_model->hoa_hong_tiep_thi = $data_setting['hoa_hong_5'];
             break;
         case '3':
-            $price_tiep_thi = round(($price_tiep_thi_thuc_te * $data_setting['hoa_hong_dai_ly']) / 100);;
+            $price_tiep_thi = round(($price_tiep_thi_thuc_te * $data_setting['hoa_hong_dai_ly']) / 100)*$songuoi;
+            $booking_model->hoa_hong_tiep_thi = $data_setting['hoa_hong_dai_ly'];
             break;
         default;
-            $price_tiep_thi = round(($price_tiep_thi_thuc_te * $data_setting['hoa_hong_3']) / 100);
-            $hoa_hong_gioi_thieu_4=round(($price_tiep_thi * $data_setting['hoa_hong_gt_4']) / 100);
-            $hoa_hong_gioi_thieu_5_4=round(($hoa_hong_gioi_thieu_4 * $data_setting['hoa_hong_gt_5_4']) / 100);
-            $hoa_hong_gioi_thieu_5_3=round(($price_tiep_thi * $data_setting['hoa_hong_gt_5_3']) / 100);
+            $price_tiep_thi = round(($price_tiep_thi_thuc_te * $data_setting['hoa_hong_3']) / 100)*$songuoi;
+            $booking_model->hoa_hong_tiep_thi = $data_setting['hoa_hong_3'];
     }
     $booking_model->price_tiep_thi = $price_tiep_thi;
     $booking_model->level_tiep_thi = $data_user_tiep_thi[0]->type_tiep_thi;
-    if ($data_user_tiep_thi[0]->user_gioi_thieu != 0 && $data_user_tiep_thi[0]->type_tiep_thi!=2 && $data_user_tiep_thi[0]->type_tiep_thi!=3) {
-            $data_user_gioithieu = user_getById($data_user_tiep_thi[0]->user_gioi_thieu);
-            if ($data_user_gioithieu) {
-                switch ($data_user_gioithieu[0]->type_tiep_thi) {
-                    case '1':
-                        $booking_model->level_gioi_thieu_tiep_thi_4 = $data_user_tiep_thi[0]->user_gioi_thieu;
-                        if($data_user_tiep_thi[0]->type_tiep_thi<$data_user_gioithieu[0]->type_tiep_thi && $hoa_hong_gioi_thieu_4!=''){
-                            $booking_model->hoa_hong_gioi_thieu_4=$hoa_hong_gioi_thieu_4;
-                        }
-                        if($data_user_gioithieu[0]->user_gioi_thieu){
-                            $data_user_gioithieu_c1 = user_getById($data_user_gioithieu[0]->user_gioi_thieu);
-                            if($data_user_gioithieu_c1){
-                                if($data_user_gioithieu_c1[0]->type_tiep_thi==2){
-                                    $booking_model->level_gioi_thieu_tiep_thi_5 = $data_user_gioithieu[0]->user_gioi_thieu;
-                                    if($data_user_gioithieu_c1[0]->type_tiep_thi>$data_user_gioithieu[0]->type_tiep_thi && $hoa_hong_gioi_thieu_5_4!=''){
-                                        $booking_model->hoa_hong_gioi_thieu_5=$hoa_hong_gioi_thieu_5_4;
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                    case '2':
-                        $booking_model->level_gioi_thieu_tiep_thi_5 = $data_user_tiep_thi[0]->user_gioi_thieu;
-                        if($data_user_tiep_thi[0]->type_tiep_thi<$data_user_gioithieu[0]->type_tiep_thi){
-                            if($data_user_tiep_thi[0]->type_tiep_thi==0 && $hoa_hong_gioi_thieu_5_3!=''){
-                                $booking_model->hoa_hong_gioi_thieu_5=$hoa_hong_gioi_thieu_5_3;
-                            }
-                            if($data_user_tiep_thi[0]->type_tiep_thi==1 && $hoa_hong_gioi_thieu_5_4!=''){
-                                $booking_model->hoa_hong_gioi_thieu_5=$hoa_hong_gioi_thieu_5_4;
-                            }
 
+    // Tính tiền hoa hồng cho user giới thiệu cấp 1
+    if($data_user_tiep_thi[0]->user_gioi_thieu!=0 && $price_tiep_thi!='' && $price_tiep_thi>0){
+        $data_user_gioithieu_c1 = user_getById($data_user_tiep_thi[0]->user_gioi_thieu);
+        if(count($data_user_gioithieu_c1)>0){
+            $price_gioi_thieu_c1=round(($price_tiep_thi * $data_setting['hoa_hong_gt_f1']) / 100);
+            $booking_model->price_gioi_thieu_c1 = $price_gioi_thieu_c1;
+            $booking_model->user_gioi_thieu_c1=$data_user_tiep_thi[0]->user_gioi_thieu;
+            $booking_model->hoa_hong_gioi_thieu_c1=$data_setting['hoa_hong_gt_f1'];
+
+            // Tính tiền hoa hồng cho user giới thiệu cấp 2
+            if($data_user_gioithieu_c1[0]->user_gioi_thieu!=0 && $price_gioi_thieu_c1!='' && $price_gioi_thieu_c1>0){
+                $data_user_gioithieu_c2 = user_getById($data_user_gioithieu_c1[0]->user_gioi_thieu);
+                if(count($data_user_gioithieu_c2)>0){
+                    $price_gioi_thieu_c2=round(($price_gioi_thieu_c1 * $data_setting['hoa_hong_gt_f2']) / 100);
+                    $booking_model->price_gioi_thieu_c2 =$price_gioi_thieu_c2;
+                    $booking_model->user_gioi_thieu_c2=$data_user_gioithieu_c2[0]->user_gioi_thieu;
+                    $booking_model->hoa_hong_gioi_thieu_c2=$data_setting['hoa_hong_gt_f2'];
+
+                    // Tính tiền hoa hồng cho user giới thiệu cấp 3
+                    if($data_user_gioithieu_c2[0]->user_gioi_thieu!=0 && $price_gioi_thieu_c2!='' && $price_gioi_thieu_c2>0){
+                        $data_user_gioithieu_c3 = user_getById($data_user_gioithieu_c2[0]->user_gioi_thieu);
+                        if(count($data_user_gioithieu_c3)>0){
+                            $price_gioi_thieu_c3=round(($price_gioi_thieu_c2 * $data_setting['hoa_hong_gt_f3']) / 100);
+                            $booking_model->price_gioi_thieu_c3 =$price_gioi_thieu_c3;
+                            $booking_model->user_gioi_thieu_c3=$data_user_gioithieu_c3[0]->user_gioi_thieu;
+                            $booking_model->hoa_hong_gioi_thieu_c3=$data_setting['hoa_hong_gt_f3'];
                         }
-                        break;
-                    default;
-                        $booking_model->level_gioi_thieu_tiep_thi_3 = $data_user_tiep_thi[0]->user_gioi_thieu;
-                        if($data_user_gioithieu[0]->user_gioi_thieu){
-                            $data_user_gioithieu_c1 = user_getById($data_user_gioithieu[0]->user_gioi_thieu);
-                            if($data_user_gioithieu_c1){
-                                if($data_user_gioithieu_c1[0]->type_tiep_thi==2){
-                                    $booking_model->level_gioi_thieu_tiep_thi_5 = $data_user_gioithieu[0]->user_gioi_thieu;
-                                }
-                                if($data_user_gioithieu_c1[0]->type_tiep_thi==1){
-                                    $booking_model->level_gioi_thieu_tiep_thi_4 = $data_user_gioithieu[0]->user_gioi_thieu;
-                                }
-                            }
-                        }
+                    }
                 }
             }
+
+
+        }
     }
     return $booking_model;
 }
@@ -1668,11 +1672,9 @@ function _returnSettingHoaHong()
             'hoa_hong_4' => '50',
             'hoa_hong_5' => '70',
             'hoa_hong_dai_ly' => '100',
-            'hoa_hong_gt_3' => '0',
-            'hoa_hong_gt_4' => '10',
-            'hoa_hong_gt_5_3' => '5',
-            'hoa_hong_gt_5_4' => '10',
-            'hoa_hong_gt_dl' => '0',
+            'hoa_hong_gt_f1' => '20',
+            'hoa_hong_gt_f2' => '10',
+            'hoa_hong_gt_f3' => '5',
             'muc_4_don_hang' => '20',
             'muc_4_thanh_vien' => '10',
             'muc_5_don_hang' => '10',

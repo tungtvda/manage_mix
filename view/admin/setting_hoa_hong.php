@@ -29,7 +29,7 @@ function view_setting_hoa_hong($data)
 //
 function showTableHeader()
 {
-    return '<th>id</th><th>hoa_hong_3</th><th>hoa_hong_4</th><th>hoa_hong_5</th><th>hoa_hong_dai_ly</th><th>hoa_hong_gt_3</th><th>hoa_hong_gt_4</th><th>hoa_hong_gt_5_3</th><th>hoa_hong_gt_5_4</th><th>hoa_hong_gt_dl</th><th>muc_4_don_hang</th><th>muc_4_thanh_vien</th><th>muc_5_don_hang</th><th>muc_5_thanh_vien_3</th><th>muc_5_thanh_vien_4</th>';
+    return '<th>id</th><th>hoa_hong_3</th><th>hoa_hong_4</th><th>hoa_hong_5</th><th>hoa_hong_dai_ly</th><th>hoa_hong_gt_f1</th><th>hoa_hong_gt_f2</th><th>hoa_hong_gt_f3</th><th>muc_4_don_hang</th><th>muc_4_thanh_vien</th><th>muc_5_don_hang</th><th>muc_5_thanh_vien_3</th><th>muc_5_thanh_vien_4</th>';
 }
 //
 function showTableBody($data)
@@ -43,11 +43,9 @@ function showTableBody($data)
         $TableBody.="<td>".$obj->hoa_hong_4."</td>";
         $TableBody.="<td>".$obj->hoa_hong_5."</td>";
         $TableBody.="<td>".$obj->hoa_hong_dai_ly."</td>";
-        $TableBody.="<td>".$obj->hoa_hong_gt_3."</td>";
-        $TableBody.="<td>".$obj->hoa_hong_gt_4."</td>";
-        $TableBody.="<td>".$obj->hoa_hong_gt_5_3."</td>";
-        $TableBody.="<td>".$obj->hoa_hong_gt_5_4."</td>";
-        $TableBody.="<td>".$obj->hoa_hong_gt_dl."</td>";
+        $TableBody.="<td>".$obj->hoa_hong_gt_f1."</td>";
+        $TableBody.="<td>".$obj->hoa_hong_gt_f2."</td>";
+        $TableBody.="<td>".$obj->hoa_hong_gt_f3."</td>";
         $TableBody.="<td>".$obj->muc_4_don_hang."</td>";
         $TableBody.="<td>".$obj->muc_4_thanh_vien."</td>";
         $TableBody.="<td>".$obj->muc_5_don_hang."</td>";
@@ -68,11 +66,9 @@ function showFrom($form,$ListKey=array())
     $str_from.='<p><label>hoa_hong_4</label><input class="text-input small-input" type="text"  name="hoa_hong_4" value="'.(($form!=false)?$form->hoa_hong_4:'').'" /></p>';
     $str_from.='<p><label>hoa_hong_5</label><input class="text-input small-input" type="text"  name="hoa_hong_5" value="'.(($form!=false)?$form->hoa_hong_5:'').'" /></p>';
     $str_from.='<p><label>hoa_hong_dai_ly</label><input class="text-input small-input" type="text"  name="hoa_hong_dai_ly" value="'.(($form!=false)?$form->hoa_hong_dai_ly:'').'" /></p>';
-    $str_from.='<p><label>hoa_hong_gt_3</label><input class="text-input small-input" type="text"  name="hoa_hong_gt_3" value="'.(($form!=false)?$form->hoa_hong_gt_3:'').'" /></p>';
-    $str_from.='<p><label>hoa_hong_gt_4</label><input class="text-input small-input" type="text"  name="hoa_hong_gt_4" value="'.(($form!=false)?$form->hoa_hong_gt_4:'').'" /></p>';
-    $str_from.='<p><label>hoa_hong_gt_5_3</label><input class="text-input small-input" type="text"  name="hoa_hong_gt_5_3" value="'.(($form!=false)?$form->hoa_hong_gt_5_3:'').'" /></p>';
-    $str_from.='<p><label>hoa_hong_gt_5_4</label><input class="text-input small-input" type="text"  name="hoa_hong_gt_5_4" value="'.(($form!=false)?$form->hoa_hong_gt_5_4:'').'" /></p>';
-    $str_from.='<p><label>hoa_hong_gt_dl</label><input class="text-input small-input" type="text"  name="hoa_hong_gt_dl" value="'.(($form!=false)?$form->hoa_hong_gt_dl:'').'" /></p>';
+    $str_from.='<p><label>hoa_hong_gt_f1</label><input class="text-input small-input" type="text"  name="hoa_hong_gt_f1" value="'.(($form!=false)?$form->hoa_hong_gt_f1:'').'" /></p>';
+    $str_from.='<p><label>hoa_hong_gt_f2</label><input class="text-input small-input" type="text"  name="hoa_hong_gt_f2" value="'.(($form!=false)?$form->hoa_hong_gt_f2:'').'" /></p>';
+    $str_from.='<p><label>hoa_hong_gt_f3</label><input class="text-input small-input" type="text"  name="hoa_hong_gt_f3" value="'.(($form!=false)?$form->hoa_hong_gt_f3:'').'" /></p>';
     $str_from.='<p><label>muc_4_don_hang</label><input class="text-input small-input" type="text"  name="muc_4_don_hang" value="'.(($form!=false)?$form->muc_4_don_hang:'').'" /></p>';
     $str_from.='<p><label>muc_4_thanh_vien</label><input class="text-input small-input" type="text"  name="muc_4_thanh_vien" value="'.(($form!=false)?$form->muc_4_thanh_vien:'').'" /></p>';
     $str_from.='<p><label>muc_5_don_hang</label><input class="text-input small-input" type="text"  name="muc_5_don_hang" value="'.(($form!=false)?$form->muc_5_don_hang:'').'" /></p>';

@@ -1,7 +1,7 @@
 <?php
 class booking
 {
-    public $id,$code_booking,$id_tour,$tour_custom,$name_tour,$code_tour,$price_tour, $price_tiep_thi,$price_tiep_thi_thuc_te,$level_tiep_thi,$level_gioi_thieu_tiep_thi_3,$level_gioi_thieu_tiep_thi_4,$level_gioi_thieu_tiep_thi_5,$hoa_hong_gioi_thieu_4,$hoa_hong_gioi_thieu_5,$status_tiep_thi,$confirm_admin_tiep_thi,$price_11,$price_5,$price_new,$price_11_new,$price_5_new,$vat,$nguon_tour,$tien_te,$ty_gia,$ngay_bat_dau,$han_thanh_toan,$loai_khach_hang,$hinh_thuc_thanh_toan,$id_customer,$diem_don,$diem_tra,$ngay_khoi_hanh,$ngay_ket_thuc,$phuong_tien,$num_nguoi_lon,$num_tre_em,$num_tre_em_5,$price_number,$price_number_2,$price_number_3,$name_price,$name_price_2,$name_price_3,$total_price,$tien_thanh_toan,$user_id,$dieuhanh_id,$user_tiep_thi_id,$status,$confirm_admin, $confirm_dieuhanh, $confirm_sales,$created_by,$updated_by,$created,$updated,$note;
+    public $id,$code_booking,$id_tour,$tour_custom,$name_tour,$code_tour,$price_tour, $price_tiep_thi,$price_tiep_thi_thuc_te,$level_tiep_thi,$hoa_hong_tiep_thi,$user_gioi_thieu_c1,$user_gioi_thieu_c2,$user_gioi_thieu_c3,$hoa_hong_gioi_thieu_c1,$hoa_hong_gioi_thieu_c2,$hoa_hong_gioi_thieu_c3,$price_gioi_thieu_c1,$price_gioi_thieu_c2,$price_gioi_thieu_c3,$status_tiep_thi,$confirm_admin_tiep_thi,$price_11,$price_5,$price_new,$price_11_new,$price_5_new,$vat,$nguon_tour,$tien_te,$ty_gia,$ngay_bat_dau,$han_thanh_toan,$loai_khach_hang,$hinh_thuc_thanh_toan,$id_customer,$diem_don,$diem_tra,$ngay_khoi_hanh,$ngay_ket_thuc,$phuong_tien,$num_nguoi_lon,$num_tre_em,$num_tre_em_5,$price_number,$price_number_2,$price_number_3,$name_price,$name_price_2,$name_price_3,$total_price,$tien_thanh_toan,$user_id,$dieuhanh_id,$user_tiep_thi_id,$status,$confirm_admin, $confirm_dieuhanh, $confirm_sales,$created_by,$updated_by,$created,$updated,$note;
     public function booking($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
@@ -14,11 +14,16 @@ class booking
     $this->price_tiep_thi=isset($data['price_tiep_thi'])?$data['price_tiep_thi']:'';
     $this->price_tiep_thi_thuc_te=isset($data['price_tiep_thi_thuc_te'])?$data['price_tiep_thi_thuc_te']:'';
     $this->level_tiep_thi=isset($data['level_tiep_thi'])?$data['level_tiep_thi']:'';
-    $this->level_gioi_thieu_tiep_thi_3=isset($data['level_gioi_thieu_tiep_thi_3'])?$data['level_gioi_thieu_tiep_thi_3']:'';
-    $this->level_gioi_thieu_tiep_thi_4=isset($data['level_gioi_thieu_tiep_thi_4'])?$data['level_gioi_thieu_tiep_thi_4']:'';
-    $this->level_gioi_thieu_tiep_thi_5=isset($data['level_gioi_thieu_tiep_thi_4'])?$data['level_gioi_thieu_tiep_thi_5']:'';
-    $this->hoa_hong_gioi_thieu_4=isset($data['hoa_hong_gioi_thieu_4'])?$data['hoa_hong_gioi_thieu_4']:'';
-    $this->hoa_hong_gioi_thieu_5=isset($data['hoa_hong_gioi_thieu_5'])?$data['hoa_hong_gioi_thieu_5']:'';
+    $this->hoa_hong_tiep_thi=isset($data['hoa_hong_tiep_thi'])?$data['hoa_hong_tiep_thi']:'';
+    $this->user_gioi_thieu_c1=isset($data['user_gioi_thieu_c1'])?$data['user_gioi_thieu_c1']:'';
+    $this->user_gioi_thieu_c2=isset($data['user_gioi_thieu_c2'])?$data['user_gioi_thieu_c2']:'';
+    $this->user_gioi_thieu_c3=isset($data['user_gioi_thieu_c3'])?$data['user_gioi_thieu_c3']:'';
+    $this->hoa_hong_gioi_thieu_c1=isset($data['hoa_hong_gioi_thieu_c1'])?$data['hoa_hong_gioi_thieu_c1']:'';
+    $this->hoa_hong_gioi_thieu_c2=isset($data['hoa_hong_gioi_thieu_c2'])?$data['hoa_hong_gioi_thieu_c2']:'';
+    $this->hoa_hong_gioi_thieu_c3=isset($data['hoa_hong_gioi_thieu_c3'])?$data['hoa_hong_gioi_thieu_c3']:'';
+    $this->price_gioi_thieu_c1=isset($data['price_gioi_thieu_c1'])?$data['price_gioi_thieu_c1']:'';
+    $this->price_gioi_thieu_c2=isset($data['price_gioi_thieu_c2'])?$data['price_gioi_thieu_c2']:'';
+    $this->price_gioi_thieu_c3=isset($data['price_gioi_thieu_c3'])?$data['price_gioi_thieu_c3']:'';
     $this->status_tiep_thi=isset($data['status_tiep_thi'])?$data['status_tiep_thi']:'';
     $this->confirm_admin_tiep_thi=isset($data['confirm_admin_tiep_thi'])?$data['confirm_admin_tiep_thi']:'';
     $this->price_11=isset($data['price_11'])?$data['price_11']:'';
@@ -77,11 +82,16 @@ class booking
             $this->price_tiep_thi=addslashes($this->price_tiep_thi);
             $this->price_tiep_thi_thuc_te=addslashes($this->price_tiep_thi_thuc_te);
             $this->level_tiep_thi=addslashes($this->level_tiep_thi);
-            $this->level_gioi_thieu_tiep_thi_3=addslashes($this->level_gioi_thieu_tiep_thi_3);
-            $this->level_gioi_thieu_tiep_thi_4=addslashes($this->level_gioi_thieu_tiep_thi_4);
-            $this->level_gioi_thieu_tiep_thi_5=addslashes($this->level_gioi_thieu_tiep_thi_5);
-            $this->hoa_hong_gioi_thieu_4=addslashes($this->hoa_hong_gioi_thieu_4);
-            $this->hoa_hong_gioi_thieu_5=addslashes($this->hoa_hong_gioi_thieu_5);
+            $this->hoa_hong_tiep_thi=addslashes($this->hoa_hong_tiep_thi);
+            $this->user_gioi_thieu_c1=addslashes($this->user_gioi_thieu_c1);
+            $this->user_gioi_thieu_c2=addslashes($this->user_gioi_thieu_c2);
+            $this->user_gioi_thieu_c3=addslashes($this->user_gioi_thieu_c3);
+            $this->hoa_hong_gioi_thieu_c1=addslashes($this->hoa_hong_gioi_thieu_c1);
+            $this->hoa_hong_gioi_thieu_c2=addslashes($this->hoa_hong_gioi_thieu_c2);
+            $this->hoa_hong_gioi_thieu_c3=addslashes($this->hoa_hong_gioi_thieu_c3);
+            $this->price_gioi_thieu_c1=addslashes($this->price_gioi_thieu_c1);
+            $this->price_gioi_thieu_c2=addslashes($this->price_gioi_thieu_c2);
+            $this->price_gioi_thieu_c3=addslashes($this->price_gioi_thieu_c3);
             $this->status_tiep_thi=addslashes($this->status_tiep_thi);
             $this->confirm_admin_tiep_thi=addslashes($this->confirm_admin_tiep_thi);
             $this->price_11=addslashes($this->price_11);
@@ -139,11 +149,16 @@ class booking
             $this->price_tiep_thi=stripslashes($this->price_tiep_thi);
             $this->price_tiep_thi_thuc_te=stripslashes($this->price_tiep_thi_thuc_te);
             $this->level_tiep_thi=stripslashes($this->level_tiep_thi);
-            $this->level_gioi_thieu_tiep_thi_3=stripslashes($this->level_gioi_thieu_tiep_thi_3);
-            $this->level_gioi_thieu_tiep_thi_4=stripslashes($this->level_gioi_thieu_tiep_thi_4);
-            $this->level_gioi_thieu_tiep_thi_5=stripslashes($this->level_gioi_thieu_tiep_thi_5);
-            $this->hoa_hong_gioi_thieu_4=stripslashes($this->hoa_hong_gioi_thieu_4);
-            $this->hoa_hong_gioi_thieu_5=stripslashes($this->hoa_hong_gioi_thieu_5);
+            $this->hoa_hong_tiep_thi=stripslashes($this->hoa_hong_tiep_thi);
+            $this->user_gioi_thieu_c1=stripslashes($this->user_gioi_thieu_c1);
+            $this->user_gioi_thieu_c2=stripslashes($this->user_gioi_thieu_c2);
+            $this->user_gioi_thieu_c3=stripslashes($this->user_gioi_thieu_c3);
+            $this->hoa_hong_gioi_thieu_c1=stripslashes($this->hoa_hong_gioi_thieu_c1);
+            $this->hoa_hong_gioi_thieu_c2=stripslashes($this->hoa_hong_gioi_thieu_c2);
+            $this->hoa_hong_gioi_thieu_c3=stripslashes($this->hoa_hong_gioi_thieu_c3);
+            $this->price_gioi_thieu_c1=stripslashes($this->price_gioi_thieu_c1);
+            $this->price_gioi_thieu_c2=stripslashes($this->price_gioi_thieu_c2);
+            $this->price_gioi_thieu_c3=stripslashes($this->price_gioi_thieu_c3);
             $this->status_tiep_thi=stripslashes($this->status_tiep_thi);
             $this->confirm_admin_tiep_thi=stripslashes($this->confirm_admin_tiep_thi);
             $this->price_11=stripslashes($this->price_11);

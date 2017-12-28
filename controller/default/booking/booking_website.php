@@ -106,6 +106,9 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
             }
         }
         $booking_model=new booking();
+        $booking_model->num_nguoi_lon=$num_nguoi_lon;
+        $booking_model->num_tre_em=$num_tre_em;
+        $booking_model->num_tre_em_5=$num_tre_em_5;
         if($key_user!=''&&$key_user!=0){
             $data_user_tiep_thi=user_getById($key_user);
             if(count($data_user_tiep_thi)==0){
@@ -139,9 +142,7 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
         $booking_model->diem_tra=$diem_don;
         $booking_model->ngay_khoi_hanh=date("Y-m-d", strtotime($ngay_khoi_hanh));
         $booking_model->phuong_tien=$phuong_tien;
-        $booking_model->num_nguoi_lon=$num_nguoi_lon;
-        $booking_model->num_tre_em=$num_tre_em;
-        $booking_model->num_tre_em_5=$num_tre_em_5;
+
         $booking_model->total_price=$tol;
         $booking_model->tien_thanh_toan='';
         $booking_model->user_id=0;

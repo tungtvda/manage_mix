@@ -29,7 +29,7 @@ function view_setting_hoa_hong($data)
 //
 function showTableHeader()
 {
-    return '<th>id</th><th>hoa_hong_3</th><th>hoa_hong_4</th><th>hoa_hong_5</th><th>hoa_hong_dai_ly</th><th>hoa_hong_gt_f1</th><th>hoa_hong_gt_f2</th><th>hoa_hong_gt_f3</th><th>muc_4_don_hang</th><th>muc_4_thanh_vien</th><th>muc_5_don_hang</th><th>muc_5_thanh_vien_3</th><th>muc_5_thanh_vien_4</th>';
+    return '<th>id</th><th>hoa_hong_3</th><th>hoa_hong_4</th><th>hoa_hong_5</th><th>hoa_hong_dai_ly</th><th>hoa_hong_gt_f1</th><th>hoa_hong_gt_f2</th><th>hoa_hong_gt_f3</th>';
 }
 //
 function showTableBody($data)
@@ -46,13 +46,13 @@ function showTableBody($data)
         $TableBody.="<td>".$obj->hoa_hong_gt_f1."</td>";
         $TableBody.="<td>".$obj->hoa_hong_gt_f2."</td>";
         $TableBody.="<td>".$obj->hoa_hong_gt_f3."</td>";
-        $TableBody.="<td>".$obj->muc_4_don_hang."</td>";
-        $TableBody.="<td>".$obj->muc_4_thanh_vien."</td>";
-        $TableBody.="<td>".$obj->muc_5_don_hang."</td>";
-        $TableBody.="<td>".$obj->muc_5_thanh_vien_3."</td>";
-        $TableBody.="<td>".$obj->muc_5_thanh_vien_4."</td>";
+//        $TableBody.="<td>".$obj->muc_4_don_hang."</td>";
+//        $TableBody.="<td>".$obj->muc_4_thanh_vien."</td>";
+//        $TableBody.="<td>".$obj->muc_5_don_hang."</td>";
+//        $TableBody.="<td>".$obj->muc_5_thanh_vien_3."</td>";
+//        $TableBody.="<td>".$obj->muc_5_thanh_vien_4."</td>";
         $TableBody.="<td><a href=\"?action=edit&id=".$obj->id."\" title=\"Edit\"><img src=\"".SITE_NAME."/view/admin/Themes/images/pencil.png\" alt=\"Edit\"></a>";
-        $TableBody.="<a href=\"?action=delete&id=".$obj->id."\" title=\"Delete\" onClick=\"return confirm('Bạn có chắc chắc muốn xóa?')\"><img src=\"".SITE_NAME."/view/admin/Themes/images/cross.png\" alt=\"Delete\"></a> ";
+//        $TableBody.="<a href=\"?action=delete&id=".$obj->id."\" title=\"Delete\" onClick=\"return confirm('Bạn có chắc chắc muốn xóa?')\"><img src=\"".SITE_NAME."/view/admin/Themes/images/cross.png\" alt=\"Delete\"></a> ";
         $TableBody.="</td>";
         $TableBody.="</tr>";
     }
@@ -62,17 +62,17 @@ function showTableBody($data)
 function showFrom($form,$ListKey=array())
 {
     $str_from='';
-    $str_from.='<p><label>hoa_hong_3</label><input class="text-input small-input" type="text"  name="hoa_hong_3" value="'.(($form!=false)?$form->hoa_hong_3:'').'" /></p>';
-    $str_from.='<p><label>hoa_hong_4</label><input class="text-input small-input" type="text"  name="hoa_hong_4" value="'.(($form!=false)?$form->hoa_hong_4:'').'" /></p>';
-    $str_from.='<p><label>hoa_hong_5</label><input class="text-input small-input" type="text"  name="hoa_hong_5" value="'.(($form!=false)?$form->hoa_hong_5:'').'" /></p>';
-    $str_from.='<p><label>hoa_hong_dai_ly</label><input class="text-input small-input" type="text"  name="hoa_hong_dai_ly" value="'.(($form!=false)?$form->hoa_hong_dai_ly:'').'" /></p>';
-    $str_from.='<p><label>hoa_hong_gt_f1</label><input class="text-input small-input" type="text"  name="hoa_hong_gt_f1" value="'.(($form!=false)?$form->hoa_hong_gt_f1:'').'" /></p>';
-    $str_from.='<p><label>hoa_hong_gt_f2</label><input class="text-input small-input" type="text"  name="hoa_hong_gt_f2" value="'.(($form!=false)?$form->hoa_hong_gt_f2:'').'" /></p>';
-    $str_from.='<p><label>hoa_hong_gt_f3</label><input class="text-input small-input" type="text"  name="hoa_hong_gt_f3" value="'.(($form!=false)?$form->hoa_hong_gt_f3:'').'" /></p>';
-    $str_from.='<p><label>muc_4_don_hang</label><input class="text-input small-input" type="text"  name="muc_4_don_hang" value="'.(($form!=false)?$form->muc_4_don_hang:'').'" /></p>';
-    $str_from.='<p><label>muc_4_thanh_vien</label><input class="text-input small-input" type="text"  name="muc_4_thanh_vien" value="'.(($form!=false)?$form->muc_4_thanh_vien:'').'" /></p>';
-    $str_from.='<p><label>muc_5_don_hang</label><input class="text-input small-input" type="text"  name="muc_5_don_hang" value="'.(($form!=false)?$form->muc_5_don_hang:'').'" /></p>';
-    $str_from.='<p><label>muc_5_thanh_vien_3</label><input class="text-input small-input" type="text"  name="muc_5_thanh_vien_3" value="'.(($form!=false)?$form->muc_5_thanh_vien_3:'').'" /></p>';
-    $str_from.='<p><label>muc_5_thanh_vien_4</label><input class="text-input small-input" type="text"  name="muc_5_thanh_vien_4" value="'.(($form!=false)?$form->muc_5_thanh_vien_4:'').'" /></p>';
+    $str_from.='<p><label>Hoa hồng 3 sao</label><input class="text-input small-input" type="text"  name="hoa_hong_3" value="'.(($form!=false)?$form->hoa_hong_3:'').'" /></p>';
+    $str_from.='<p><label>Hoa hồng 4 sao</label><input class="text-input small-input" type="text"  name="hoa_hong_4" value="'.(($form!=false)?$form->hoa_hong_4:'').'" /></p>';
+    $str_from.='<p><label>Hoa hồng 5 sao</label><input class="text-input small-input" type="text"  name="hoa_hong_5" value="'.(($form!=false)?$form->hoa_hong_5:'').'" /></p>';
+    $str_from.='<p><label>Hoa hồng đại lý</label><input class="text-input small-input" type="text"  name="hoa_hong_dai_ly" value="'.(($form!=false)?$form->hoa_hong_dai_ly:'').'" /></p>';
+    $str_from.='<p><label>Hoa hồng giới thiệu f1</label><input class="text-input small-input" type="text"  name="hoa_hong_gt_f1" value="'.(($form!=false)?$form->hoa_hong_gt_f1:'').'" /></p>';
+    $str_from.='<p><label>Hoa hồng giới thiệu f2</label><input class="text-input small-input" type="text"  name="hoa_hong_gt_f2" value="'.(($form!=false)?$form->hoa_hong_gt_f2:'').'" /></p>';
+    $str_from.='<p><label>Hoa hồng giới thiệu f3</label><input class="text-input small-input" type="text"  name="hoa_hong_gt_f3" value="'.(($form!=false)?$form->hoa_hong_gt_f3:'').'" /></p>';
+    $str_from.='<p><label>Điều kiện đơn hàng lên mức 4</label><input class="text-input small-input" type="text"  name="muc_4_don_hang" value="'.(($form!=false)?$form->muc_4_don_hang:'').'" /></p>';
+    $str_from.='<p><label>Điều kiện thành viên lên mức 4</label><input class="text-input small-input" type="text"  name="muc_4_thanh_vien" value="'.(($form!=false)?$form->muc_4_thanh_vien:'').'" /></p>';
+    $str_from.='<p><label>Điều kiện đơn hàng lên mức 5</label><input class="text-input small-input" type="text"  name="muc_5_don_hang" value="'.(($form!=false)?$form->muc_5_don_hang:'').'" /></p>';
+    $str_from.='<p><label>Điều kiện đơn hàng lên mức 5 khi giới thiệu thành viên 3 sao</label><input class="text-input small-input" type="text"  name="muc_5_thanh_vien_3" value="'.(($form!=false)?$form->muc_5_thanh_vien_3:'').'" /></p>';
+    $str_from.='<p><label>Điều kiện đơn hàng lên mức 5 khi giới thiệu thành viên 4 sao</label><input class="text-input small-input" type="text"  name="muc_5_thanh_vien_4" value="'.(($form!=false)?$form->muc_5_thanh_vien_4:'').'" /></p>';
     return $str_from;
 }

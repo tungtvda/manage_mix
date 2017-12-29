@@ -83,6 +83,7 @@
                         <li><a href="{SITE-NAME}/controller/admin/permison_action.php">Quyền action</a></li>
                     </ul>
                 </li>
+                <li class="" ><a href="{SITE-NAME}/controller/admin/setting_hoa_hong.php"><span class="icon-dollar"></span> Cài đặt hoa hồng</a></li>
                 <li class="{kichhoat_chucvu_nhanvien}" ><a href="{SITE-NAME}/controller/admin/user_chucvu.php"><span class="icon-user"></span> Chức vụ nhân viên</a></li>
                 <li class="{kichhoat_phongban_nhanvien}" ><a href="{SITE-NAME}/controller/admin/user_phongban.php"><span class="icon-user"></span> Phòng ban nhân viên</a></li>
                 <li class="dropdown {kichhoat_thucdon}" ><a href="#"><span class="icon-wrench"></span> Quản lý khách  hàng</a>

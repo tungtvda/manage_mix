@@ -4,6 +4,7 @@ require_once DIR . '/model/bookingService.php';
 require_once DIR . '/model/notificationService.php';
 require_once DIR . '/model/logService.php';
 require_once DIR . '/model/userService.php';
+require_once DIR . '/model/setting_hoa_hongService.php';
 if(!isset($_SESSION['user_id'])){
     echo 'Bạn không thể cập nhật dữ liệu';
     exit;

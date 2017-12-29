@@ -159,3 +159,56 @@ function user_getByTopCustomField($file='*',$top,$where,$order)
 {
     return user_Get("select ".$file." from user ".(($where!='')?(' where '.$where):'').(($order!='')?" Order By ".$order:'').(($top!='')?' limit '.$top:''));
 }
+
+function user_az_getByPaging($CurrentPage, $PageSize,$Order,$where)
+{
+    $query="
+SELECT us.* ,
+us1.id as user_id_1,us1.name as name_user_1, us1.user_role as type_user_1, us1.user_code as user_code_1, us1.phone as user_phone_1,
+us2.id as user_id_2,us2.name as name_user_2, us2.user_role as type_user_2, us2.user_code as user_code_2, us2.phone as user_phone_2
+FROM  
+user as us
+LEFT JOIN user us1 on us.user_gioi_thieu = us1.id
+LEFT JOIN user us2 on us1.user_gioi_thieu = us2.id
+".(($where!='')?(' where '.$where):'')." Order By ".$Order." Limit ".(($CurrentPage-1)*$PageSize)." , ".$PageSize;
+
+    $result=mysqli_query(ConnectSql(),$query);
+    $array_result=array();
+    if($result!=false)while($row=mysqli_fetch_array($result))
+    {
+
+        $new_obj=new user($row);
+        if($new_obj->avatar=="")
+        {
+            $avatar=SITE_NAME.'/view/default/themes/images/no-avatar.png';
+        }
+        else{
+            $avatar=SITE_NAME.$new_obj->avatar;
+        }
+        $item=array(
+            'name'=>$new_obj->name,
+            'user_email'=>$new_obj->user_email,
+            'avatar'=>$avatar,
+            'phone'=>$new_obj->phone,
+            'status'=>$new_obj->status,
+            'type_tiep_thi'=>$new_obj->type_tiep_thi,
+            'mobi'=>$new_obj->mobi,
+            'address'=>$new_obj->address,
+            'skype'=>$new_obj->skype,
+            'facebook'=>$new_obj->facebook,
+            'created'=>$new_obj->created,
+            'user_id_1'=>$row['user_id_1'],
+            'type_user_1'=>$row['type_user_1'],
+            'name_user_1'=>$row['name_user_1'],
+            'user_code_1'=>$row['user_code_1'],
+            'user_phone_1'=>$row['user_phone_1'],
+            'user_id_2'=>$row['user_id_2'],
+            'type_user_2'=>$row['type_user_2'],
+            'name_user_2'=>$row['name_user_2'],
+            'user_code_2'=>$row['user_code_2'],
+            'user_phone_2'=>$row['user_phone_2'],
+        );
+        array_push($array_result,$item);
+    }
+    return $array_result;
+}

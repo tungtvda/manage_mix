@@ -1523,42 +1523,45 @@ function _returnConfirmTiepthi($data_check, $return = '', $return_array=0)
                     $new->status_tiep_thi = 1;
                     $new->updated = _returnGetDateTime();
                     booking_update($new);
-//                $name_noti = $_SESSION['user_name'] . ' đã xác nhận hoa hồng đơn hàng "' . $data_check[0]->code_booking . '"';
                     $name_noti = 'AZBOOKING.VN đã xác nhận hoa hồng đơn hàng "' . $data_check[0]->code_booking . '"';
-                    $price_hoa_hong=_returnUpdateHoahong($data_user, $data_check[0]->price_tiep_thi, $data_check, $name_noti,$data_check[0]->user_tiep_thi_id);
+                    _returnUpdateHoahong($data_user, $data_check[0]->price_tiep_thi, $data_check, $name_noti,$data_check[0]->user_tiep_thi_id);
+
                     // cộng tiền hoa hồng cho cấp 1
-                    if($price_hoa_hong>0 && $data_user[0]->user_gioi_thieu!=0){
-                        $data_user_level_1 = user_getById($data_check[0]->user_gioi_thieu);
+                    if($data_check[0]->user_gioi_thieu_c1>0&& $data_check[0]->price_gioi_thieu_c1!=''){
+                        $data_user_level_1 = user_getById($data_check[0]->user_gioi_thieu_c1);
                         if($data_user_level_1){
-                            $name_noti = 'AZBOOKING.VN đã xác nhận hoa hồng giới thiệu thành viên cho đơn hàng "' . $data_check[0]->code_booking . '"';
-                            _returnUpdateHoahong($data_user_level_1, $data_check[0]->hoa_hong_gioi_thieu_4, $data_check, $name_noti,$data_check[0]->level_gioi_thieu_tiep_thi_4);
-                        }
-                    }
-                    if ($data_check[0]->level_gioi_thieu_tiep_thi_4 && $data_check[0]->hoa_hong_gioi_thieu_4 != '') {
-                        $data_user_4 = user_getById($data_check[0]->level_gioi_thieu_tiep_thi_4);
-                        if (count($data_user_4)) {
-                            $name_noti = 'AZBOOKING.VN đã xác nhận hoa hồng giới thiệu thành viên cho đơn hàng "' . $data_check[0]->code_booking . '"';
-                            _returnUpdateHoahong($data_user_4, $data_check[0]->hoa_hong_gioi_thieu_4, $data_check, $name_noti,$data_check[0]->level_gioi_thieu_tiep_thi_4);
-                        }
-                    }
-                    if ($data_check[0]->level_gioi_thieu_tiep_thi_5 && $data_check[0]->hoa_hong_gioi_thieu_5 != '') {
-                        $data_user_5 = user_getById($data_check[0]->level_gioi_thieu_tiep_thi_5);
-                        if (count($data_user_5)) {
-                            $name_noti = 'AZBOOKING.VN đã xác nhận hoa hồng giới thiệu thành viên cho đơn hàng "' . $data_check[0]->code_booking . '"';
-                            _returnUpdateHoahong($data_user_5, $data_check[0]->hoa_hong_gioi_thieu_4, $data_check, $name_noti,$data_check[0]->level_gioi_thieu_tiep_thi_5);
+                            $name_noti = 'Chúc mừng bạn đã nhận được hoa hồng giới thiệu cấp 1, từ thành viên "' . $data_user[0]->name . '" - đơn hàng "'.$data_check[0]->code_booking.'"';
+                            _returnUpdateHoahong($data_user_level_1, $data_check[0]->price_gioi_thieu_c1, $data_check, $name_noti,$data_check[0]->user_gioi_thieu_c1);
+                            // cộng tiền hoa hồng cho cấp 2
+                            if($data_check[0]->user_gioi_thieu_c2>0&& $data_check[0]->price_gioi_thieu_c2!=''){
+                                $data_user_level_2 = user_getById($data_check[0]->user_gioi_thieu_c2);
+                                if($data_user_level_2){
+                                    $name_noti = 'Chúc mừng bạn đã nhận được hoa hồng giới thiệu cấp 2, từ thành viên "' . $data_user_level_1[0]->name . '" - đơn hàng "'.$data_check[0]->code_booking.'"';
+                                    _returnUpdateHoahong($data_user_level_2, $data_check[0]->price_gioi_thieu_c2, $data_check, $name_noti,$data_check[0]->user_gioi_thieu_c2);
+
+                                    // cộng tiền hoa hồng cho cấp 3
+                                    if($data_check[0]->user_gioi_thieu_c3>0&& $data_check[0]->price_gioi_thieu_c3!=''){
+                                        $data_user_level_3 = user_getById($data_check[0]->user_gioi_thieu_c3);
+                                        if($data_user_level_3){
+                                            $name_noti = 'Chúc mừng bạn đã nhận được hoa hồng giới thiệu cấp 3, từ thành viên "' . $data_user_level_2[0]->name . '" - đơn hàng "'.$data_check[0]->code_booking.'"';
+                                            _returnUpdateHoahong($data_user_level_3, $data_check[0]->price_gioi_thieu_c3, $data_check, $name_noti,$data_check[0]->user_gioi_thieu_c3);
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                     if($return_array==1){
                         return $new;
                     }
                     $string_return = 1;
+                    _returnUpdateTypeTiepThi(array(), $data_check[0]->user_tiep_thi_id);
                 } else {
                     $string_return = 'Đơn hàng không có hoa hồng';
                 }
             } else {
                 $string_return = 'Thành viên không có quyền nhận hoa hồng';
             }
-            _returnUpdateTypeTiepThi(array(), $data_check[0]->user_tiep_thi_id);
 
         } else {
             $string_return = 'Sales không tồn tại trong hệ thống';
@@ -1570,15 +1573,8 @@ function _returnConfirmTiepthi($data_check, $return = '', $return_array=0)
         return $string_return;
     }
 }
-function _returnUpdateHoahong($data_user, $price_ho_hong, $data_check,$name_noti,$user_tiep_thi_id, $tinh_hoa_hong=0){
-    if($tinh_hoa_hong==1){
-        $hoa_hong = $data_user[0]->hoa_hong + $price_ho_hong;
-    }else{
-        $songuoi=$data_check[0]->num_nguoi_lon+$data_check[0]->num_tre_em+$data_check[0]->num_tre_em_5;
-        $price_ho_hong=$price_ho_hong*$songuoi;
-        $hoa_hong = $data_user[0]->hoa_hong + $price_ho_hong;
-    }
-
+function _returnUpdateHoahong($data_user, $price_ho_hong, $data_check,$name_noti,$user_tiep_thi_id){
+    $hoa_hong = $data_user[0]->hoa_hong + $price_ho_hong;
     $array_user = (array)$data_user[0];
     $new_user = new user($array_user);
     $new_user->hoa_hong = $hoa_hong;
@@ -1625,7 +1621,7 @@ function _returnHoaHongBooking($booking_model, $data_user_tiep_thi, $price_tiep_
         if(count($data_user_gioithieu_c1)>0){
             $price_gioi_thieu_c1=round(($price_tiep_thi * $data_setting['hoa_hong_gt_f1']) / 100);
             $booking_model->price_gioi_thieu_c1 = $price_gioi_thieu_c1;
-            $booking_model->user_gioi_thieu_c1=$data_user_tiep_thi[0]->user_gioi_thieu;
+            $booking_model->user_gioi_thieu_c1=$data_user_gioithieu_c1[0]->id;
             $booking_model->hoa_hong_gioi_thieu_c1=$data_setting['hoa_hong_gt_f1'];
 
             // Tính tiền hoa hồng cho user giới thiệu cấp 2
@@ -1634,7 +1630,7 @@ function _returnHoaHongBooking($booking_model, $data_user_tiep_thi, $price_tiep_
                 if(count($data_user_gioithieu_c2)>0){
                     $price_gioi_thieu_c2=round(($price_gioi_thieu_c1 * $data_setting['hoa_hong_gt_f2']) / 100);
                     $booking_model->price_gioi_thieu_c2 =$price_gioi_thieu_c2;
-                    $booking_model->user_gioi_thieu_c2=$data_user_gioithieu_c2[0]->user_gioi_thieu;
+                    $booking_model->user_gioi_thieu_c2=$data_user_gioithieu_c2[0]->id;
                     $booking_model->hoa_hong_gioi_thieu_c2=$data_setting['hoa_hong_gt_f2'];
 
                     // Tính tiền hoa hồng cho user giới thiệu cấp 3
@@ -1643,7 +1639,7 @@ function _returnHoaHongBooking($booking_model, $data_user_tiep_thi, $price_tiep_
                         if(count($data_user_gioithieu_c3)>0){
                             $price_gioi_thieu_c3=round(($price_gioi_thieu_c2 * $data_setting['hoa_hong_gt_f3']) / 100);
                             $booking_model->price_gioi_thieu_c3 =$price_gioi_thieu_c3;
-                            $booking_model->user_gioi_thieu_c3=$data_user_gioithieu_c3[0]->user_gioi_thieu;
+                            $booking_model->user_gioi_thieu_c3=$data_user_gioithieu_c3[0]->id;
                             $booking_model->hoa_hong_gioi_thieu_c3=$data_setting['hoa_hong_gt_f3'];
                         }
                     }

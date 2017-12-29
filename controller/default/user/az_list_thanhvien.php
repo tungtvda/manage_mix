@@ -34,46 +34,46 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['user_email']) 
         $data['pagesize']=isset($_POST['pagesize'])?_returnPostParamSecurity('pagesize'):'10';
         $data['site_name']=isset($_POST['site_name'])?_returnPostParamSecurity('site_name'):SITE_NAME;
         $link='/tiep-thi-lien-ket/users?type='.$type;
-        $dk ='(user_gioi_thieu='.$id.') ';
+        $dk ='(us.user_gioi_thieu='.$id.') ';
         switch($type){
             case '0':
-                $dk .=' and  type_tiep_thi=0';
+                $dk .=' and  us.type_tiep_thi=0';
                 break;
             case '1':
-                $dk .=' and type_tiep_thi=1';
+                $dk .=' and us.type_tiep_thi=1';
                 break;
             case '2':
-                $dk .=' and type_tiep_thi=2';
+                $dk .=' and us.type_tiep_thi=2';
                 break;
         }
 
         $data['count']=user_count($dk);
-        $res['danhsach']=user_getByPaging($data['current'],$data['pagesize'],'id desc',$dk);
-        $data_res=array();
-        foreach($res['danhsach'] as $row){
-            if($row->avatar=="")
-            {
-                $avatar=SITE_NAME.'/view/default/themes/images/no-avatar.png';
-            }
-            else{
-                $avatar=SITE_NAME.$row->avatar;
-            }
-            $item=array(
-                'name'=>$row->name,
-                'user_email'=>$row->user_email,
-                'avatar'=>$avatar,
-                'phone'=>$row->phone,
-                'status'=>$row->status,
-                'type_tiep_thi'=>$row->type_tiep_thi,
-                'mobi'=>$row->mobi,
-                'address'=>$row->address,
-                'skype'=>$row->skype,
-                'facebook'=>$row->facebook,
-                'created'=>$row->created,
-            );
-            array_push($data_res,$item);
-        }
-        $res['danhsach']=$data_res;
+        $res['danhsach']=user_az_getByPaging($data['current'],$data['pagesize'],'id desc',$dk);
+//        $data_res=array();
+//        foreach($res['danhsach'] as $row){
+//            if($row->avatar=="")
+//            {
+//                $avatar=SITE_NAME.'/view/default/themes/images/no-avatar.png';
+//            }
+//            else{
+//                $avatar=SITE_NAME.$row->avatar;
+//            }
+//            $item=array(
+//                'name'=>$row->name,
+//                'user_email'=>$row->user_email,
+//                'avatar'=>$avatar,
+//                'phone'=>$row->phone,
+//                'status'=>$row->status,
+//                'type_tiep_thi'=>$row->type_tiep_thi,
+//                'mobi'=>$row->mobi,
+//                'address'=>$row->address,
+//                'skype'=>$row->skype,
+//                'facebook'=>$row->facebook,
+//                'created'=>$row->created,
+//            );
+//            array_push($data_res,$item);
+//        }
+//        $res['danhsach']=$res['danhsach'];
         $res['PAGING'] = showPagingAtLinkTiepThi($data['count'], $data['pagesize'], $data['current'], '' .  $data['site_name'] . $link);
     }
 }

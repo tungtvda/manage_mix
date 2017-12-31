@@ -411,12 +411,12 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 ">
                         <h3 class="row header smaller lighter blue">
                             <i class="ace-icon fa fa-plane fa-plane blue bigger-125"></i>
-                            Thông tin tour
+                            Thông tin - bảng giá Tour
                         </h3>
                         <div class="row col-xs-12 div_content">
-                            <div style="background-color: #EDF3F4;float: left;width: 100%;">
-                                <h5>Loại tour <span
-                                        style="color: red; font-size: 12px">*</span></h5>
+                            <div style="background-color: #EDF3F4;float: left;width: 100%;padding-left: 15px;padding-right: 15px">
+                                <h4> <i class="ace-icon fa fa-plane fa-plane blue bigger-125"></i> Loại tour <span
+                                        style="color: red; font-size: 12px">*</span></h4>
 
                                 <div style="float: left;width: 100%; margin-bottom: 20px" >
                                     <select <?php echo $readonly_type_tour?> name="type_tour" class="chosen-select form-control type_tour"
@@ -452,7 +452,7 @@
                                            <div class="profile-info-name">
                                                <p>Chương trình <span style="color: red; font-size: 12px">*</span></p>
                                                </br>
-                                               <p>Đơn giá <span style="color: red; font-size: 12px">*</span></p>
+                                               <p hidden>Đơn giá <span style="color: red; font-size: 12px">*</span></p>
                                            </div>
                                            <div class="profile-info-value">
                                                <div class="row col-xs-12">
@@ -461,7 +461,7 @@
                                                     <label style="display: none" class="error-color  error-color-size" id="error_chuong_trinh">Bạn vui lòng nhập chương trình tour</label>
                                                     </span>
                                                </div>
-                                               <div class="row col-xs-12">
+                                               <div hidden class="row col-xs-12">
                                                    <span class="input-icon width_100">
                                                 <input <?php echo $readonly_tour_custom?> id="input_chuong_trinh_price" type="text" name="chuong_trinh_price" value="<?php echo $chuong_trinh_price?>" class="valid input_price_cus" placeholder="Đơn giá chương trình ..." >
                                                  <i class="ace-icon fa fa-dollar blue"></i>
@@ -473,7 +473,7 @@
                                        <div class="profile-info-row">
                                            <div class="profile-info-name">
                                                <p>Thời gian <span style="color: red; font-size: 12px">*</span></p>
-                                               <p>Đơn giá <span style="color: red; font-size: 12px">*</span></p>
+                                               <p hidden>Đơn giá <span style="color: red; font-size: 12px">*</span></p>
                                            </div>
                                            <div class="profile-info-value">
                                                <div class="row col-xs-12">
@@ -483,7 +483,7 @@
                                                      <label style="display: none" class="error-color  error-color-size" id="error_thoi_gian">Bạn vui lòng nhập thời gian tour</label>
                                                  </span>
                                                </div>
-                                               <div class="row col-xs-12" style="padding-top: 5px">
+                                               <div hidden class="row col-xs-12" style="padding-top: 5px">
                                                   <span class="input-icon width_100">
                                                     <input <?php echo $readonly_tour_custom?> id="input_thoi_gian_price" type="text" name="thoi_gian_price" value="<?php echo $thoi_gian_price?>" class="valid input_price_cus" placeholder="Đơn giá thời gian ..." >
                                                      <i class="ace-icon fa fa-dollar blue"></i>
@@ -495,7 +495,7 @@
                                        <div class="profile-info-row">
                                            <div class="profile-info-name">
                                                <p>Số người <span style="color: red; font-size: 12px">*</span></p>
-                                               <p>Đơn giá <span style="color: red; font-size: 12px">*</span></p>
+                                               <p hidden>Đơn giá <span style="color: red; font-size: 12px">*</span></p>
                                            </div>
                                            <div class="profile-info-value form-group">
                                                <div class="row col-xs-12">
@@ -518,7 +518,7 @@
                                                           class="error-color  error-color-size"
                                                           id="error_so_nguoi_cus">Bạn vui lòng nhập số người lớn</label>
                                                </div>
-                                               <div class="row col-xs-12" style="padding-top: 5px">
+                                               <div hidden class="row col-xs-12" style="padding-top: 5px">
                                                   <span class="input-icon width_100">
                                                     <input <?php echo $readonly_tour_custom?> id="input_so_nguoi_price" type="text" name="so_nguoi_price" value="<?php echo $so_nguoi_price?>" class="valid input_price_cus" placeholder="Đơn giá số người ..." >
                                                      <i class="ace-icon fa fa-dollar blue"></i>
@@ -531,7 +531,7 @@
                                        <div class="profile-info-row">
                                            <div class="profile-info-name">
                                                <p>Khởi hành <span style="color: red; font-size: 12px">*</span></p>
-                                               <p>Đơn giá <span style="color: red; font-size: 12px">*</span></p>
+                                               <p hidden>Đơn giá <span style="color: red; font-size: 12px">*</span></p>
                                            </div>
                                            <div class="profile-info-value">
                                                <div class="row col-xs-12">
@@ -546,7 +546,7 @@
                                                      <label style="display: none" class="error-color  error-color-size" id="error_ngay_khoi_hanh_cus">Bạn vui lòng nhập ngày khởi hàng</label>
                                                  </span>
                                                </div>
-                                               <div class="row col-xs-12" style="padding-top: 5px">
+                                               <div hidden class="row col-xs-12" style="padding-top: 5px">
                                                   <span class="input-icon width_100">
                                                     <input <?php echo $readonly_tour_custom?> id="input_ngay_khoi_hanh_price" type="text" name="ngay_khoi_hanh_price" value="<?php echo $ngay_khoi_hanh_price?>" class="valid input_price_cus" placeholder="Đơn giá ngày khởi hành ..." >
                                                      <i class="ace-icon fa fa-dollar blue"></i>
@@ -558,7 +558,7 @@
                                        <div class="profile-info-row">
                                            <div class="profile-info-name">
                                                <p>Khách sạn </p>
-                                               <p>Đơn giá </p>
+                                               <p hidden>Đơn giá </p>
                                            </div>
                                            <div class="profile-info-value">
                                                <div class="row col-xs-12">
@@ -567,7 +567,7 @@
                                                     <i class="ace-icon fa fa-home  blue"></i>
                                                  </span>
                                                </div>
-                                               <div class="row col-xs-12" style="padding-top: 5px">
+                                               <div hidden class="row col-xs-12" style="padding-top: 5px">
                                                   <span class="input-icon width_100">
                                                     <input <?php echo $readonly_tour_custom?> id="input_khach_san_price" type="text" name="khach_san_price" value="<?php echo $khach_san_price?>" class="valid input_price_cus" placeholder="Đơn giá khách sạn ..." >
                                                      <i class="ace-icon fa fa-dollar blue"></i>
@@ -581,8 +581,8 @@
 
                                        <div class="profile-info-row">
                                            <div class="profile-info-name">
-                                               <p>Hãng bay</p>
-                                               <p>Đơn giá </p>
+                                               <p>Phương tiện</p>
+                                               <p hidden>Đơn giá </p>
                                            </div>
                                            <div class="profile-info-value">
                                                <div class="row col-xs-12">
@@ -591,7 +591,7 @@
                                                     <i class="ace-icon fa fa-plane  blue"></i>
                                                  </span>
                                                </div>
-                                               <div class="row col-xs-12" style="padding-top: 5px">
+                                               <div hidden class="row col-xs-12" style="padding-top: 5px">
                                                   <span class="input-icon width_100">
                                                     <input <?php echo $readonly_tour_custom?> id="input_hang_bay_price" type="text" name="hang_bay_price" value="<?php echo $hang_bay_price?>" class="valid input_price_cus" placeholder="Đơn giá hãng hàng không ..." >
                                                      <i class="ace-icon fa fa-dollar blue"></i>
@@ -604,7 +604,7 @@
                                            <div class="profile-info-name">
                                                <p>Dịch vụ khác</p>
                                                </br>
-                                               <p>Đơn giá</p>
+                                               <p hidden>Đơn giá</p>
                                            </div>
                                            <div class="profile-info-value">
                                                <div class="row col-xs-12">
@@ -612,7 +612,7 @@
                                                     <textarea <?php echo $readonly_tour_custom?> class="valid" name="khac" id="input_khac" placeholder="Dịch vụ khác" style="width: 100%"><?php echo $khac?></textarea>
                                                     </span>
                                                </div>
-                                               <div class="row col-xs-12">
+                                               <div hidden class="row col-xs-12">
                                                    <span class="input-icon width_100">
                                                 <input <?php echo $readonly_tour_custom?> id="input_khac_price" type="text" name="khac_price" value="<?php echo $khac_price?>" class="valid input_price_cus" placeholder="Đơn giá dịch vụ khác ..." >
                                                  <i class="ace-icon fa fa-dollar blue"></i>
@@ -666,6 +666,61 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div style="background-color: #abbac3;float: left;width: 100%;padding-left: 15px;padding-right: 15px">
+                                <h4> <i class="ace-icon fa fa-plane fa-dollar blue bigger-125"></i> Bảng giá tour <span
+                                        style="color: red; font-size: 12px">*</span></h4>
+                            </div>
+                            <div  class=" form-group border-sloid-1-x" style="float: left; width: 100%;background: #ffffff;  margin-left: 0px;margin-right: 0px;">
+                                <style>
+                                    .table_tour thead tr th{
+                                        padding: 10px;
+                                    }
+                                    .table_tour tr td {
+                                        padding: 5px;
+                                    }
+                                </style>
+                                <div class="col-xs-12" style=" overflow-x: auto;">
+                                    <table class="table_tour">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Tên dịch vụ</th>
+                                            <th>Loại dịch vụ</th>
+                                            <th>Đơn giá</th>
+                                            <th>Số lượng</th>
+                                            <th>Thành tiền</th>
+                                            <th>Ghi chú</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td><input style="height: 30px" value="" name="name_dichvu[]" id="input_name_dichvu_1" type="text" class="valid input_table"></td>
+                                            <td>
+                                                <select>
+                                                    <option value="">Loại dịch vụ</option>
+                                                    <option value="">Vận chuyển</option>
+                                                    <option value="">Landtour</option>
+                                                    <option value="">CP DV khác</option>
+                                                    <option value="">CP quà tặng</option>
+                                                </select>
+                                            </td>
+                                            <td><input style="height: 30px" value="" name="price_dichvu[]" id="input_price_dichvu_1" type="text" class="valid input_table"></td>
+                                            <td><input style="height: 30px; width:100%" value="" name="soluong_dichvu[]" id="input_soluong_dichvu_1" type="text" class="valid input_table"></td>
+                                            <td><input style="height: 30px" value="" name="thanhtien_dichvu[]" id="input_thanhtien_dichvu_1" type="text" class="valid input_table"></td>
+                                            <td><input style="height: 30px" value="" name="ghichu_dichvu[]" id="input_ghichu_dichvu_1" type="text" class="valid input_table"></td>
+                                            <td><a style="padding: 0px 5px;" href="" class="red btn  btn-danger"><i class="fa fa-trash-o"></i></if></a></td>
+
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+
                             <table class="table table-striped table-bordered">
                                 <thead>
                                 <tr>
@@ -741,6 +796,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-xs-12 col-sm-12 col-md-12 ">
                         <h3 class="row header smaller lighter green">
                             <i class="ace-icon fa fa-dollar green bigger-125"></i>

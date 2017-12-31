@@ -703,7 +703,7 @@
                                                     <option value="">Loại dịch vụ</option>
                                                     <option value="">Vận chuyển</option>
                                                     <option value="">Landtour</option>
-                                                    <option value="">CP DV khác</option>
+                                                    <option value="">CP DV khác</option>git <chec> </chec>
                                                     <option value="">CP quà tặng</option>
                                                 </select>
                                             </td>

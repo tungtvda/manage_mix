@@ -657,6 +657,16 @@ function show_booking_themmoi($data = array())
     }
 
     $user_current = $_SESSION['user_id'];
+
+    // danh sách danh mục dịch vụ
+    $data_danhmuc_dichvu=danhmuc_dichvu_getByTop('','','position asc');
+    $list_danhmuc_dichvu='';
+    if($data_danhmuc_dichvu){
+        foreach($data_danhmuc_dichvu as $row_dm){
+            $list_danhmuc_dichvu .='<option value="'.$row_dm->id.'">'.$row_dm->name.'</option>';
+        }
+    }
+
     require_once DIR . '/view/default/template/module/booking/themmoi.php';
 }
 

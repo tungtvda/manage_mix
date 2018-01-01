@@ -1305,18 +1305,60 @@ jQuery(function ($) {
     var currentDate = new Date();
     $("#created_giaodich").datepicker("setDate",currentDate);
 
-    // $('form').on('focus', '.spinbox-input', function (e) {
-    //     $(this).on('mousewheel.disableScroll', function (e) {
-    //         e.preventDefault()
-    //     })
-    // })
-    // $('form').on('blur', '.spinbox-input', function (e) {
-    //     $(this).off('mousewheel.disableScroll')
-    // })
+    //$( "li" ).each(function( index ) {
+    //    console.log( index + ": " + $( this ).text() );
+    //});
+    $('body').on("click", '.remove_item_dichvu', function () {
+        var id=$(this).attr('data-remove');
+        $('#item_dichvu_'+id).remove();
+        $( ".item_dichvu" ).each(function( index ) {
+            var n=index+1;
+            var id=$(this).attr('data-value');
+            $('#stt_dichvu_td_'+id).html(n).attr('id','stt_dichvu_td_'+n);
+            $( this ).attr('id','item_dichvu_'+n);
+            $( this ).attr('data-value',n);
+            $('#input_name_dichvu_'+id).attr('id','input_name_dichvu_'+n);
+            $('#input_type_dichvu_'+id).attr('id','input_type_dichvu_'+n);
+            $('#input_soluong_dichvu_'+id).attr('id','input_soluong_dichvu_'+n);
+            $('#input_ghichu_dichvu_'+id).attr('id','input_ghichu_dichvu_'+n);
+            $('#remove_item_dichvu_'+id).attr('id','remove_item_dichvu_'+n);
+            $('#remove_item_dichvu_'+id).attr('data-remove',n);
+        });
+    });
+    $('body').on("click", '#add_dichvu', function () {
+        var n = $( ".item_dichvu" ).length;
+        n=n+1;
+        var list=$('#danhmuc_dichvu_select').html();
+        var item=' <tr id="item_dichvu_'+n+'" data-value="'+n+'" class="item_dichvu">' +
+                '<td id="stt_dichvu_td_'+n+'">'+n+'</td>'+
+                '<td id="name_dichvu_td"><input style="height: 30px" value="" name="name_dichvu[]" id="input_name_dichvu_'+n+'" type="text" class="valid input_table"></td>'+
+                '<td> <select name="type_dichvu[]" id="input_type_dichvu_'+n+'">'+list+'</select></td>'+
+                '<td><input style="height: 30px" value="0" data-value="'+n+'" name="price_dichvu[]" id="input_price_dichvu_'+n+'" type="text" class="valid input_table input_price_dichvu"></td>'+
+                '<td><input  style="height: 30px; width:100%" data-value="'+n+'" value="1" name="soluong_dichvu[]" min="1" id="input_soluong_dichvu_'+n+'" type="number" class="valid input_table"></td>'+
+                '<td><input readonly style="height: 30px" value="" name="thanhtien_dichvu[]" id="input_thanhtien_dichvu_'+n+'" type="text" class="valid input_table"></td>'+
+                '<td><input  style="height: 30px" value="" name="ghichu_dichvu[]" id="input_ghichu_dichvu_'+n+'" type="text" class="valid input_table"></td>'+
+                '<td><a style="padding: 0px 5px;" href="javascript:void(0)" id="remove_item_dichvu_'+n+'" data-remove="'+n+'" class="red btn  btn-danger remove_item_dichvu"><i class="fa fa-trash-o"></i></a></td>'+
+            '</tr>';
+        $('#list_dichvu').append(item);
+    });
+    $('body').on("input", '.input_price_dichvu', function () {
+        var price = $(this).val();
+        var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
 
-
-
+        if (numberRegex.test(price)) {
+            var price_format = price.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + ' vnđ';
+        }
+        else {
+            $(this).val(0);
+            price=0;
+        }
+    });
 });
+function total_price_dich_vu(price,item){
+    if(price>=0&&item>0){
+        
+    }
+}
 function show_info_cost(Id, name) {
     $("#title_form").html('Thôn tin chi tiết "<b>' + name + '</b>"');
     $("#input_check_edit").val('edit');

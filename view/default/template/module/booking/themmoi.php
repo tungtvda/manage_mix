@@ -694,27 +694,34 @@
                                             <th></th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>1</td>
+                                        <tbody id="list_dichvu">
+                                        <tr id="item_dichvu_1" data-value="1" class="item_dichvu">
+                                            <td id="stt_dichvu_td_1">1</td>
                                             <td><input style="height: 30px" value="" name="name_dichvu[]" id="input_name_dichvu_1" type="text" class="valid input_table"></td>
                                             <td>
-                                                <select>
-                                                    <option value="">Loại dịch vụ</option>
-                                                    <option value="">Vận chuyển</option>git <chec> </chec>
-                                                    <option value="">Landtour</option>
-                                                    <option value="">CP DV khác</option>git <chec> </chec>
-                                                    <option value="">CP quà tặng</option>
+                                                <select name="type_dichvu[]" id="input_type_dichvu_1">
+                                                    <?php echo $list_danhmuc_dichvu?>
                                                 </select>
                                             </td>
-                                            <td><input style="height: 30px" value="" name="price_dichvu[]" id="input_price_dichvu_1" type="text" class="valid input_table"></td>
-                                            <td><input style="height: 30px; width:100%" value="" name="soluong_dichvu[]" id="input_soluong_dichvu_1" type="text" class="valid input_table"></td>
-                                            <td><input style="height: 30px" value="" name="thanhtien_dichvu[]" id="input_thanhtien_dichvu_1" type="text" class="valid input_table"></td>
+                                            <td>
+                                                <input data-value="1" style="height: 30px" value="0" name="price_dichvu[]" id="input_price_dichvu_1" type="text" class="valid input_table input_price_dichvu">
+
+                                            </td>
+                                            <td><input data-value="1"  style="height: 30px; width:100%" value="1" name="soluong_dichvu[]" min="1"
+id="input_soluong_dichvu_1" type="number" class="valid input_table"></td>
+                                            <td><input readonly style="height: 30px" value="" name="thanhtien_dichvu[]" id="input_thanhtien_dichvu_1" type="text" class="valid input_table"></td>
                                             <td><input style="height: 30px" value="" name="ghichu_dichvu[]" id="input_ghichu_dichvu_1" type="text" class="valid input_table"></td>
-                                            <td><a style="padding: 0px 5px;" href="" class="red btn  btn-danger"><i class="fa fa-trash-o"></i></if></a></td>
+                                            <td><a id="remove_item_dichvu_1" data-remove="1" style="padding: 0px 5px;" href="javascript:void(0)" class="red btn  btn-danger remove_item_dichvu"><i class="fa fa-trash-o"></i></if></a></td>
 
                                         </tr>
 
+                                        </tbody>
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td><a href="javascript:void(0)" id="add_dichvu" class="btn btn-success"><i class="fa fa-plus"></i>Thêm dịch vụ</a></td>
+                                                <td hidden id="danhmuc_dichvu_select"><?php echo $list_danhmuc_dichvu?></td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>

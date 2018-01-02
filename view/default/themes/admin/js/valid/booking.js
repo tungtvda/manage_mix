@@ -1696,13 +1696,10 @@ function price_tre_em_m1(total) {
     var price_pax_m1 = parseFloat(price_pax_m1);
     price_pax_m1 = Math.round(price_pax_m1 * 1000) / 1000;
     if (price_pax_m1 % 2 == 0) {
-        var price_pax_m1_format = price_pax_m1.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' vnđ';
+        var price_pax_m1_format = price_pax_m1.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
     } else {
-        var price_pax_m1_format =
-            price_pax_m1
-                .toFixed(2)
-                .toString()
-                .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' vnđ';
+        var price_pax_m1_format = price_pax_m1.toFixed(2).replace('.', ',');
+        var price_pax_m1_format = price_pax_m1_format.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
     }
     $('#input_don_gia_net_m1').val(price_pax_m1_format);
     var loi_nhuan_m1 = $('#input_loi_nhuan_m1').val();
@@ -1714,13 +1711,10 @@ function price_tre_em_m1(total) {
     var giaban_m1 = parseFloat(loi_nhuan_m1) + price_pax_m1;
     giaban_m1 = Math.round(giaban_m1 * 1000) / 1000;
     if (giaban_m1 % 2 == 0) {
-        var giaban_format_m1 = giaban_m1.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' vnđ';
+        var giaban_format_m1 = giaban_m1.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
     } else {
-        var giaban_format_m1 =
-            giaban_m1
-                .toFixed(2)
-                .toString()
-                .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' vnđ';
+        var giaban_format_m1 = giaban_m1.toFixed(2).replace('.', ',');
+        var giaban_format_m1 = giaban_format_m1.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
     }
     $('#input_gia_ban_m1').val(giaban_format_m1);
     return giaban_m1;
@@ -1744,13 +1738,10 @@ function price_tre_em_m2(total) {
     var price_pax_m2 = parseFloat(price_pax_m2);
     price_pax_m2 = Math.round(price_pax_m2 * 1000) / 1000;
     if (price_pax_m2 % 2 == 0) {
-        var price_pax_m2_format = price_pax_m2.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' vnđ';
+        var price_pax_m2_format = price_pax_m2.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
     } else {
-        var price_pax_m2_format =
-            price_pax_m2
-                .toFixed(2)
-                .toString()
-                .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' vnđ';
+        var price_pax_m2_format = price_pax_m2.toFixed(2).replace('.', ',');
+        var price_pax_m2_format = price_pax_m2_format.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
     }
     $('#input_don_gia_net_m2').val(price_pax_m2_format);
     var loi_nhuan_m2 = $('#input_loi_nhuan_m2').val();
@@ -1762,13 +1753,10 @@ function price_tre_em_m2(total) {
     var giaban_m2 = parseFloat(loi_nhuan_m2) + price_pax_m2;
     giaban_m2 = Math.round(giaban_m2 * 1000) / 1000;
     if (giaban_m2 % 2 == 0) {
-        var giaban_format_m2 = giaban_m2.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' vnđ';
+        var giaban_format_m2 = giaban_m2.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
     } else {
-        var giaban_format_m2 =
-            giaban_m2
-                .toFixed(2)
-                .toString()
-                .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' vnđ';
+        var giaban_format_m2 = giaban_m2.toFixed(2).replace('.', ',');
+        var giaban_format_m2 = giaban_format_m2.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
     }
     $('#input_gia_ban_m2').val(giaban_format_m2);
     return giaban_m2;
@@ -1792,13 +1780,10 @@ function price_tre_em_m3(total) {
     var price_pax_m3 = parseFloat(price_pax_m3);
     price_pax_m3 = Math.round(price_pax_m3 * 1000) / 1000;
     if (price_pax_m3 % 2 == 0) {
-        var price_pax_m3_format = price_pax_m3.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' vnđ';
+        var price_pax_m3_format = price_pax_m3.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
     } else {
-        var price_pax_m3_format =
-            price_pax_m3
-                .toFixed(2)
-                .toString()
-                .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' vnđ';
+        var price_pax_m3_format = price_pax_m3.toFixed(2).replace('.', ',');
+        var price_pax_m3_format = price_pax_m3_format.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
     }
     $('#input_don_gia_net_m3').val(price_pax_m3_format);
     var loi_nhuan_m3 = $('#input_loi_nhuan_m3').val();
@@ -1810,13 +1795,10 @@ function price_tre_em_m3(total) {
     var giaban_m3 = parseFloat(loi_nhuan_m3) + price_pax_m3;
     giaban_m3 = Math.round(giaban_m3 * 1000) / 1000;
     if (giaban_m3 % 2 == 0) {
-        var giaban_format_m3 = giaban_m3.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' vnđ';
+        var giaban_format_m3 = giaban_m3.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
     } else {
-        var giaban_format_m3 =
-            giaban_m3
-                .toFixed(2)
-                .toString()
-                .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' vnđ';
+        var giaban_format_m3 = giaban_m3.toFixed(2).replace('.', ',');
+        var giaban_format_m3 = giaban_format_m3.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
     }
     $('#input_gia_ban_m3').val(giaban_format_m3);
     return giaban_m3;

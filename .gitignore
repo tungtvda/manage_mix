@@ -2,3 +2,4 @@
 /.idea/
 config.php
 /common/Mail.php
+.vscode

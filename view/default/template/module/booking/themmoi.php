@@ -222,6 +222,22 @@
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
+                                        <div class="profile-info-name"> Khởi hành <span
+                                                style="color: red; font-size: 12px">*</span></div>
+
+                                        <div class="profile-info-value form-group">
+                                            <?php echo _returnInputDate('ngay_khoi_hanh', $ngay_khoi_hanh, $ngay_khoi_hanh_valid, '', 'Bạn vui lòng chọn ngày khởi hành', '',$readonly_info_order) ?>
+                                        </div>
+                                    </div>
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name"> Kết thúc <span
+                                                style="color: red; font-size: 12px">*</span></div>
+
+                                        <div class="profile-info-value form-group">
+                                            <?php echo _returnInputDate('ngay_ket_thuc', $ngay_ket_thuc, $ngay_ket_thuc_valid, '', 'Bạn vui lòng chọn ngày kết thúc', '',$readonly_info_order) ?>
+                                        </div>
+                                    </div>
+                                    <div class="profile-info-row">
                                         <div class="profile-info-name"> Tình trạng</div>
 
                                         <div class="profile-info-value form-group">
@@ -241,45 +257,7 @@
                                                 toán</label>
                                         </div>
                                     </div>
-                                    <div class="profile-info-row">
-                                        <div class="profile-info-name"> Số người <span
-                                                style="color: red; font-size: 12px">*</span></div>
-
-                                        <div class="profile-info-value form-group">
-                                            <style>
-                                                .spinbox-input  {
-                                                    width: 32% !important;
-                                                    float: left;
-                                                }
-
-                                                .check_div label {
-                                                    margin-bottom: 0px;
-                                                    margin-top: 5px;
-                                                }
-                                            </style>
-
-                                            <input name="num_nguoi_lon" min="1" value="<?php echo $num_nguoi_lon ?>" type="number" <?php echo $readonly_info_order?>
-                                                   id="input_num_nguoi_lon"
-                                                   title="Số người lớn"
-                                                   class="spinbox-input form-control text-center valid"
-                                                   placeholder="Người lớn">
-                                            <input name="num_tre_em" type="number" min="0" id="input_num_tre_em" <?php echo $readonly_info_order?>
-                                                   value="<?php echo $num_tre_em ?>"
-                                                   title="Số trẻ em từ 5 đến 11 tuổi"
-                                                   class="spinbox-input form-control text-center valid"
-                                                   placeholder="Trẻ em  5-11 tuổi">
-                                            <input name="num_tre_em_5" min="0" type="number" id="input_num_tre_em_5" <?php echo $readonly_info_order?>
-                                                   value="<?php echo $num_tre_em_5 ?>"
-                                                   title="Số trẻ em dưới 5 tuổi"
-                                                   class="spinbox-input form-control text-center valid"
-                                                   placeholder="Trẻ em dưới 5 tuổi">
-                                            <label style="display: none"
-                                                   class="error-color  error-color-size"
-                                                   id="error_so_nguoi">Bạn vui lòng nhập số người lớn</label>
-                                        </div>
-
-
-                                    </div>
+                                    
                                     <div class="profile-info-row check_div">
                                         <div class="profile-info-name"> Thuế VAT(10%)</div>
 
@@ -373,21 +351,85 @@
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
-                                        <div class="profile-info-name"> Khởi hành <span
+                                        <div class="profile-info-name">Người lớn <span
                                                 style="color: red; font-size: 12px">*</span></div>
 
                                         <div class="profile-info-value form-group">
-                                            <?php echo _returnInputDate('ngay_khoi_hanh', $ngay_khoi_hanh, $ngay_khoi_hanh_valid, '', 'Bạn vui lòng chọn ngày khởi hành', '',$readonly_info_order) ?>
+                                            <style>
+                                                .spinbox-input  {
+                                                    width: 50% !important;
+                                                    float: left;
+                                                }
+
+                                                .check_div label {
+                                                    margin-bottom: 0px;
+                                                    margin-top: 5px;
+                                                }
+                                            </style>
+                                            <input name="do_tuoi_nguoi_lon" type="text"  id="input_do_tuoi_nguoi_lon"
+                                                   value=""
+                                                   title="Độ tuổi người lớn"
+                                                   class="spinbox-input form-control text-center valid"
+                                                   placeholder="Độ tuổi người lớn">
+                                            <input name="num_nguoi_lon" min="1" value="<?php echo $num_nguoi_lon ?>" type="number" <?php echo $readonly_info_order?>
+                                                   id="input_num_nguoi_lon"
+                                                   title="Số người lớn"
+                                                   class="spinbox-input form-control text-center valid"
+                                                   placeholder="Người lớn">
+                                            <label style="display: none"
+                                                   class="error-color  error-color-size"
+                                                   id="error_so_nguoi">Bạn vui lòng nhập số người lớn</label>
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
-                                        <div class="profile-info-name"> Kết thúc <span
-                                                style="color: red; font-size: 12px">*</span></div>
+                                        <div class="profile-info-name">Trẻ em m1 </div>
 
                                         <div class="profile-info-value form-group">
-                                            <?php echo _returnInputDate('ngay_ket_thuc', $ngay_ket_thuc, $ngay_ket_thuc_valid, '', 'Bạn vui lòng chọn ngày kết thúc', '',$readonly_info_order) ?>
+                                            <input name="do_tuoi_tre_em_m1" type="text"  id="input_do_tuoi_tre_em_m1"
+                                                   value=""
+                                                   title="Độ tuổi trẻ em mức 1"
+                                                   class="spinbox-input form-control text-center valid"
+                                                   placeholder="Độ tuổi trẻ em mức 1">
+                                            <input name="num_tre_em_m1" min="0" value="0" type="number"
+                                                   id="input_num_tre_em_m1"
+                                                   title="Số trẻ em mức 1"
+                                                   class="spinbox-input form-control text-center valid"
+                                                   placeholder="Số trẻ em mức 1">
                                         </div>
                                     </div>
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name">Trẻ em m2 </div>
+
+                                        <div class="profile-info-value form-group">
+                                            <input name="do_tuoi_tre_em_m2" type="text"  id="input_do_tuoi_tre_em_m2"
+                                                   value=""
+                                                   title="Độ tuổi trẻ em mức 2"
+                                                   class="spinbox-input form-control text-center valid"
+                                                   placeholder="Độ tuổi trẻ em mức 2">
+                                            <input name="num_tre_em_m2" min="0" value="0" type="number"
+                                                   id="input_num_tre_em_m2"
+                                                   title="Số trẻ em mức 2"
+                                                   class="spinbox-input form-control text-center valid"
+                                                   placeholder="Số trẻ em mức 2">
+                                        </div>
+                                    </div>
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name">Trẻ em m3 </div>
+
+                                        <div class="profile-info-value form-group">
+                                            <input name="do_tuoi_tre_em_m3" type="text"  id="input_do_tuoi_tre_em_m3"
+                                                   value=""
+                                                   title="Độ tuổi trẻ em mức 3"
+                                                   class="spinbox-input form-control text-center valid"
+                                                   placeholder="Độ tuổi trẻ em mức 3">
+                                            <input name="num_tre_em_m3" min="0" value="0" type="number"
+                                                   id="input_num_tre_em_m3"
+                                                   title="Số trẻ em mức 3"
+                                                   class="spinbox-input form-control text-center valid"
+                                                   placeholder="Số trẻ em mức 3">
+                                        </div>
+                                    </div>
+                                
                                 </div>
                             </div>
                         </div>
@@ -492,7 +534,7 @@
                                                </div>
                                            </div>
                                        </div>
-                                       <div class="profile-info-row">
+                                       <!-- <div class="profile-info-row">
                                            <div class="profile-info-name">
                                                <p>Số người <span style="color: red; font-size: 12px">*</span></p>
                                                <p hidden>Đơn giá <span style="color: red; font-size: 12px">*</span></p>
@@ -527,7 +569,7 @@
                                                </div>
 
                                            </div>
-                                       </div>
+                                       </div> -->
                                        <div class="profile-info-row">
                                            <div class="profile-info-name">
                                                <p>Khởi hành <span style="color: red; font-size: 12px">*</span></p>
@@ -697,37 +739,83 @@
                                         <tbody id="list_dichvu">
                                         <tr id="item_dichvu_1" data-value="1" class="item_dichvu">
                                             <td id="stt_dichvu_td_1">1</td>
-                                            <td><input style="height: 30px" value="" name="name_dichvu[]" id="input_name_dichvu_1" type="text" class="valid input_table"></td>
+                                            <td><input style="height: 30px;     width: 100%;" value="" name="name_dichvu[]" id="input_name_dichvu_1" type="text" class="valid input_table"></td>
                                             <td>
-                                                <select name="type_dichvu[]" id="input_type_dichvu_1">
+                                                <select style="width: 100%;" name="type_dichvu[]" id="input_type_dichvu_1">
                                                     <?php echo $list_danhmuc_dichvu?>
                                                 </select>
                                             </td>
                                             <td>
-                                                <input data-value="1" style="height: 30px" value="0" name="price_dichvu[]" id="input_price_dichvu_1" type="text" class="valid input_table input_price_dichvu">
-
+                                                <input data-value="1" style="height: 30px;width: 88%;" value="0" name="price_dichvu[]" id="input_price_dichvu_1" type="text" class="valid input_table input_price_dichvu">
+                                                <div class="btn-group" style="width: 10%;">
+                                                    <button style="padding: 4px 5px;margin-top: 0px; margin-bottom: 3px;" data-toggle="dropdown" class="btn btn-sm btn-danger dropdown-toggle btn-action-gird" aria-expanded="false"> <i class="fa fa-usd" aria-hidden="true"></i></button>
+                                                    <ul class="dropdown-menu dropdown-danger"> <li> <a role="button" data-toggle="modal" class="edit_function">Đơn giá: <b id="price_dichvu_format_1">0 vnđ</span></a> </li> </ul>
+                                                </div>
                                             </td>
-                                            <td><input data-value="1"  style="height: 30px; width:100%" value="1" name="soluong_dichvu[]" min="1"
-id="input_soluong_dichvu_1" type="number" class="valid input_table"></td>
-                                            <td><input readonly style="height: 30px" value="" name="thanhtien_dichvu[]" id="input_thanhtien_dichvu_1" type="text" class="valid input_table"></td>
-                                            <td><input style="height: 30px" value="" name="ghichu_dichvu[]" id="input_ghichu_dichvu_1" type="text" class="valid input_table"></td>
+                                            <td>
+                                                <input data-value="1"  style="height: 30px; width:100%" value="1" name="soluong_dichvu[]" min="1" id="input_soluong_dichvu_1" type="number" class="valid input_table input_soluong_dichvu">
+                                            </td>
+                                            <td><input readonly style="height: 30px; width: 100%;" value="" name="thanhtien_dichvu[]" id="input_thanhtien_dichvu_1" type="text" class="valid input_table "></td>
+                                            <td><input style="height: 30px; width: 100%;" value="" name="ghichu_dichvu[]" id="input_ghichu_dichvu_1" type="text" class="valid input_table"></td>
                                             <td><a id="remove_item_dichvu_1" data-remove="1" style="padding: 0px 5px;" href="javascript:void(0)" class="red btn  btn-danger remove_item_dichvu"><i class="fa fa-trash-o"></i></if></a></td>
 
                                         </tr>
+                                        
 
                                         </tbody>
                                         <tbody>
-                                            <tr>
+                                            <tr >
                                                 <td></td>
                                                 <td><a href="javascript:void(0)" id="add_dichvu" class="btn btn-success"><i class="fa fa-plus"></i>Thêm dịch vụ</a></td>
-                                                <td hidden id="danhmuc_dichvu_select"><?php echo $list_danhmuc_dichvu?></td>
                                             </tr>
+                                            <tr style="background:#EDF3F4; margin-top:20px">
+                                                <td></td>
+                                                <td><b>Đơn giá người lớn</b></td>
+                                                <td>Tổng <i class="fa fa-dollar"></i>:&nbsp; <input readonly name="tong_tien_nguoi_lon" id="input_tong_tien_nguoi_lon" style="height: 30px" value="0"  type="text" class="valid input_table"></td>
+                                                <td>SL khách: <input readonly name="total_khach" id="input_total_khach" style="height: 30px" value="1"  type="text" class="valid input_table"></td>
+                                                <td>Giá NET/pax: <input readonly name="don_gia_net" id="input_don_gia_net" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                                <td>Lợi nhuận: <input  name="loi_nhuan" id="input_loi_nhuan" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                                <td>Giá bán: <input readonly name="gia_ban" id="input_gia_ban" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                                <td></td>
+                                            </tr>
+
+                                            <tr style="background:#f2fbfd; margin-top:20px">
+                                                <td></td>
+                                                <td><b>Đơn giá trẻ em m1</b></td>
+                                                <td>Tỷ lệ %: <input  name="tyle_m1" id="input_tyle_m1" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                                <td>SL khách: <input readonly name="total_khach_m1" id="input_total_khach_m1" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                                <td>Giá NET/pax: <input readonly name="don_gia_net_m1" id="input_don_gia_net_m1" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                                <td>Lợi nhuận: <input  name="loi_nhuan_m1" id="input_loi_nhuan_m1" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                                <td>Giá bán: <input readonly name="gia_ban_m1" id="input_gia_ban_m1" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr style="background:#edf3f4; margin-top:20px">
+                                                <td></td>
+                                                <td><b>Đơn giá trẻ em m2</b></td>
+                                                <td>Tỷ lệ %: <input  name="tyle_m2" id="input_tyle_m2" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                                <td>SL khách: <input readonly name="total_khach_m2" id="input_total_khach_m2" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                                <td>Giá NET/pax: <input readonly name="don_gia_net_m2" id="input_don_gia_net_m2" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                                <td>Lợi nhuận: <input  name="loi_nhuan_m2" id="input_loi_nhuan_m2" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                                <td>Giá bán: <input readonly name="gia_ban_m2" id="input_gia_ban_m2" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr style="background:#f2fbfd; margin-top:20px">
+                                                <td></td>
+                                                <td><b>Đơn giá trẻ em m3</b></td>
+                                                <td>Tỷ lệ %: <input  name="tyle_m3" id="input_tyle_m3" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                                <td>SL khách: <input readonly name="total_khach_m3" id="input_total_khach_m3" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                                <td>Giá NET/pax: <input readonly name="don_gia_net_m3" id="input_don_gia_net_m3" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                                <td>Lợi nhuận: <input  name="loi_nhuan_m3" id="input_loi_nhuan_m3" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                                <td>Giá bán: <input readonly name="gia_ban_m3" id="input_gia_ban_m3" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                                <td></td>
+                                            </tr>
+                                            
                                         </tbody>
                                     </table>
                                 </div>
 
                             </div>
-
+                            <div hidden id="danhmuc_dichvu_select"><?php echo $list_danhmuc_dichvu?></div>
                             <table class="table table-striped table-bordered">
                                 <thead>
                                 <tr>

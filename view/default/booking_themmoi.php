@@ -481,25 +481,56 @@ function show_booking_themmoi($data = array())
         $show_add_tour = 'hidden';
     }
 
-    $table_tour .= '</td>
-        <td><span id="price_format_span_511">' . $price_11_new_format . '</span>';
+    // $table_tour .= '</td>
+    //     <td><span id="price_format_span_511">' . $price_11_new_format . '</span>';
 
-    $table_tour .= '<input hidden="" title="giá sửa" id="input_price_511" value="' . $price_11_new . '"> <input hidden="" id="input_price_511_old" title="giá cũ" value="' . $price_11_new . '">';
+    // $table_tour .= '<input hidden="" title="giá sửa" id="input_price_511" value="' . $price_11_new . '"> <input hidden="" id="input_price_511_old" title="giá cũ" value="' . $price_11_new . '">';
+    // if ($_SESSION['user_role'] == 1 || (isset($data['data_user'][0]->dieuhanh_id)&& $data['data_user'][0]->dieuhanh_id==$_SESSION['user_id']) ) {
+    //     $table_tour .= '| <a id="edit_price_511" href="javascript:void(0)">
+    //     <i class="fa fa-edit" title="Sửa đơn giá"></i></a>
+    //     <a id="reset_price_511" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a>';
+    // }
+
+    // trẻ em mức 1
+    $table_tour .= '</td>
+    <td><span id="price_format_span_tre_em_m1">' . $price_11_new_format . '</span>';
+    $table_tour .= '<input hidden="" title="giá sửa" id="input_price_tre_em_m1" value="' . $price_11_new . '"> <input hidden="" id="input_price_tre_em_m1_old" title="giá cũ" value="' . $price_11_new . '">';
     if ($_SESSION['user_role'] == 1 || (isset($data['data_user'][0]->dieuhanh_id)&& $data['data_user'][0]->dieuhanh_id==$_SESSION['user_id']) ) {
-        $table_tour .= '| <a id="edit_price_511" href="javascript:void(0)">
+        $table_tour .= '| <a id="edit_price_tre_em_m1" href="javascript:void(0)">
         <i class="fa fa-edit" title="Sửa đơn giá"></i></a>
-        <a id="reset_price_511" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a>';
+        <a id="reset_price_tre_em_m1" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a>';
     }
-    $table_tour .= '</td>
-        <td><span id="price_format_span_5">' . $price_5_new_format . '</span>';
 
-    $table_tour .= '<input hidden="" title="giá sửa" id="input_price_5" value="' . $price_5_new . '"> <input hidden="" id="input_price_5_old" title="giá cũ" value="' . $price_5_new . '"> ';
-    if ($_SESSION['user_role'] == 1 || (isset($data['data_user'][0]->dieuhanh_id)&& $data['data_user'][0]->dieuhanh_id==$_SESSION['user_id']) ) {
-        $table_tour .= '| <a id="edit_price_5" href="javascript:void(0)">
-        <i class="fa fa-edit" title="Sửa đơn giá"></i></a><a id="reset_price_5" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a>';
-    }
-    $table_tour .= '</td>
-        <td>' . $departure_name . '</td> <td style="color:red">' . $so_cho . '</td></tr>';
+     // trẻ em mức 2
+     $table_tour .= '</td>
+     <td><span id="price_format_span_tre_em_m2">' . $price_11_new_format . '</span>';
+     $table_tour .= '<input hidden="" title="giá sửa" id="input_price_tre_em_m2" value="' . $price_11_new . '"> <input hidden="" id="input_price_tre_em_m2_old" title="giá cũ" value="' . $price_11_new . '">';
+     if ($_SESSION['user_role'] == 1 || (isset($data['data_user'][0]->dieuhanh_id)&& $data['data_user'][0]->dieuhanh_id==$_SESSION['user_id']) ) {
+         $table_tour .= '| <a id="edit_price_tre_em_m2" href="javascript:void(0)">
+         <i class="fa fa-edit" title="Sửa đơn giá"></i></a>
+         <a id="reset_price_tre_em_m2" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a>';
+     }
+
+     // trẻ em mức 3
+     $table_tour .= '</td>
+     <td><span id="price_format_span_tre_em_m3">' . $price_11_new_format . '</span>';
+     $table_tour .= '<input hidden="" title="giá sửa" id="input_price_tre_em_m3" value="' . $price_11_new . '"> <input hidden="" id="input_price_tre_em_m3_old" title="giá cũ" value="' . $price_11_new . '">';
+     if ($_SESSION['user_role'] == 1 || (isset($data['data_user'][0]->dieuhanh_id)&& $data['data_user'][0]->dieuhanh_id==$_SESSION['user_id']) ) {
+         $table_tour .= '| <a id="edit_price_tre_em_m3" href="javascript:void(0)">
+         <i class="fa fa-edit" title="Sửa đơn giá"></i></a>
+         <a id="reset_price_tre_em_m3" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a>';
+     }
+ 
+
+    // $table_tour .= '</td>
+    //     <td><span id="price_format_span_5">' . $price_5_new_format . '</span>';
+
+    // $table_tour .= '<input hidden="" title="giá sửa" id="input_price_5" value="' . $price_5_new . '"> <input hidden="" id="input_price_5_old" title="giá cũ" value="' . $price_5_new . '"> ';
+    // if ($_SESSION['user_role'] == 1 || (isset($data['data_user'][0]->dieuhanh_id)&& $data['data_user'][0]->dieuhanh_id==$_SESSION['user_id']) ) {
+    //     $table_tour .= '| <a id="edit_price_5" href="javascript:void(0)">
+    //     <i class="fa fa-edit" title="Sửa đơn giá"></i></a><a id="reset_price_5" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a>';
+    // }
+    $table_tour .= '</td> <td style="color:red">' . $so_cho . '</td></tr>';
 
     $total = 0;
     if (is_numeric($num_nguoi_lon) && is_numeric($price_new)) {

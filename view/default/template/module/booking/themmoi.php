@@ -709,11 +709,11 @@
                                 </div>
                             </div>
 
-                            <div style="background-color: #abbac3;float: left;width: 100%;padding-left: 15px;padding-right: 15px">
+                            <div hidden class="show_hide_bang_gia" style="background-color: #abbac3;float: left;width: 100%;padding-left: 15px;padding-right: 15px;">
                                 <h4> <i class="ace-icon fa fa-plane fa-dollar blue bigger-125"></i> Bảng giá tour <span
                                         style="color: red; font-size: 12px">*</span></h4>
                             </div>
-                            <div  class=" form-group border-sloid-1-x" style="float: left; width: 100%;background: #ffffff;  margin-left: 0px;margin-right: 0px;">
+                            <div hidden  class=" form-group border-sloid-1-x show_hide_bang_gia"  style="float: left; width: 100%;background: #ffffff;  margin-left: 0px;margin-right: 0px;">
                                 <style>
                                     .table_tour thead tr th{
                                         padding: 10px;
@@ -746,7 +746,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <input data-value="1" style="height: 30px;width: 88%;" value="0" name="price_dichvu[]" id="input_price_dichvu_1" type="text" class="valid input_table input_price_dichvu">
+                                                <input data-value="1" style="height: 30px;width: 88%;" value="0" name="price_dichvu[]" id="input_price_dichvu_1" type="number" class="valid input_table input_price_dichvu">
                                                 <div class="btn-group" style="width: 10%;">
                                                     <button style="padding: 4px 5px;margin-top: 0px; margin-bottom: 3px;" data-toggle="dropdown" class="btn btn-sm btn-danger dropdown-toggle btn-action-gird" aria-expanded="false"> <i class="fa fa-usd" aria-hidden="true"></i></button>
                                                     <ul class="dropdown-menu dropdown-danger"> <li> <a role="button" data-toggle="modal" class="edit_function">Đơn giá: <b id="price_dichvu_format_1">0 vnđ</span></a> </li> </ul>
@@ -774,7 +774,8 @@
                                                 <td>Tổng <i class="fa fa-dollar"></i>:&nbsp; <input readonly name="tong_tien_nguoi_lon" id="input_tong_tien_nguoi_lon" style="height: 30px" value="0"  type="text" class="valid input_table"></td>
                                                 <td>SL khách: <input readonly name="total_khach" id="input_total_khach" style="height: 30px" value="1"  type="text" class="valid input_table"></td>
                                                 <td>Giá NET/pax: <input readonly name="don_gia_net" id="input_don_gia_net" style="height: 30px" value=""  type="text" class="valid input_table"></td>
-                                                <td>Lợi nhuận: <input  name="loi_nhuan" id="input_loi_nhuan" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                                <td>Lợi nhuận <i title="0 vnđ" id="price_loinhuan_format" class="fa fa-dollar"></i>: <input  name="loi_nhuan" min="0" id="input_loi_nhuan" style="height: 30px" value=""  type="number" class="valid input_table">
+                                                </td>
                                                 <td>Giá bán: <input readonly name="gia_ban" id="input_gia_ban" style="height: 30px" value=""  type="text" class="valid input_table"></td>
                                                 <td></td>
                                             </tr>
@@ -782,30 +783,30 @@
                                             <tr style="background:#f2fbfd; margin-top:20px">
                                                 <td></td>
                                                 <td><b>Đơn giá trẻ em m1</b></td>
-                                                <td>Tỷ lệ %: <input  name="tyle_m1" id="input_tyle_m1" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                                <td>Tỷ lệ %: <input  name="tyle_m1" min="0"  id="input_tyle_m1" style="height: 30px" value=""  type="number" class="valid input_table"></td>
                                                 <td>SL khách: <input readonly name="total_khach_m1" id="input_total_khach_m1" style="height: 30px" value=""  type="text" class="valid input_table"></td>
                                                 <td>Giá NET/pax: <input readonly name="don_gia_net_m1" id="input_don_gia_net_m1" style="height: 30px" value=""  type="text" class="valid input_table"></td>
-                                                <td>Lợi nhuận: <input  name="loi_nhuan_m1" id="input_loi_nhuan_m1" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                                <td>Lợi nhuận <i title="0 vnđ" id="price_loinhuan_format_1" class="fa fa-dollar"></i>: <input  name="loi_nhuan_m1" min="0" id="input_loi_nhuan_m1" style="height: 30px" value=""  type="number" class="valid input_table"></td>
                                                 <td>Giá bán: <input readonly name="gia_ban_m1" id="input_gia_ban_m1" style="height: 30px" value=""  type="text" class="valid input_table"></td>
                                                 <td></td>
                                             </tr>
                                             <tr style="background:#edf3f4; margin-top:20px">
                                                 <td></td>
                                                 <td><b>Đơn giá trẻ em m2</b></td>
-                                                <td>Tỷ lệ %: <input  name="tyle_m2" id="input_tyle_m2" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                                <td>Tỷ lệ %: <input  name="tyle_m2" min="0" id="input_tyle_m2" style="height: 30px" value=""  type="number" class="valid input_table"></td>
                                                 <td>SL khách: <input readonly name="total_khach_m2" id="input_total_khach_m2" style="height: 30px" value=""  type="text" class="valid input_table"></td>
                                                 <td>Giá NET/pax: <input readonly name="don_gia_net_m2" id="input_don_gia_net_m2" style="height: 30px" value=""  type="text" class="valid input_table"></td>
-                                                <td>Lợi nhuận: <input  name="loi_nhuan_m2" id="input_loi_nhuan_m2" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                                <td>Lợi nhuận <i title="0 vnđ" id="price_loinhuan_format_2" class="fa fa-dollar"></i>: <input  min="0"  name="loi_nhuan_m2" id="input_loi_nhuan_m2" style="height: 30px" value=""  type="number" class="valid input_table"></td>
                                                 <td>Giá bán: <input readonly name="gia_ban_m2" id="input_gia_ban_m2" style="height: 30px" value=""  type="text" class="valid input_table"></td>
                                                 <td></td>
                                             </tr>
                                             <tr style="background:#f2fbfd; margin-top:20px">
                                                 <td></td>
                                                 <td><b>Đơn giá trẻ em m3</b></td>
-                                                <td>Tỷ lệ %: <input  name="tyle_m3" id="input_tyle_m3" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                                <td>Tỷ lệ %: <input  name="tyle_m3" min="0" id="input_tyle_m3" style="height: 30px" value=""  type="number" class="valid input_table"></td>
                                                 <td>SL khách: <input readonly name="total_khach_m3" id="input_total_khach_m3" style="height: 30px" value=""  type="text" class="valid input_table"></td>
                                                 <td>Giá NET/pax: <input readonly name="don_gia_net_m3" id="input_don_gia_net_m3" style="height: 30px" value=""  type="text" class="valid input_table"></td>
-                                                <td>Lợi nhuận: <input  name="loi_nhuan_m3" id="input_loi_nhuan_m3" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                                <td>Lợi nhuận <i title="0 vnđ" id="price_loinhuan_format_3" class="fa fa-dollar"></i>: <input min="0" name="loi_nhuan_m3" id="input_loi_nhuan_m3" style="height: 30px" value=""  type="number" class="valid input_table"></td>
                                                 <td>Giá bán: <input readonly name="gia_ban_m3" id="input_gia_ban_m3" style="height: 30px" value=""  type="text" class="valid input_table"></td>
                                                 <td></td>
                                             </tr>
@@ -822,9 +823,9 @@
                                     <th class="center">#</th>
                                     <th>Tên tour</th>
                                     <th id="name_price_nguoi_lon">Đơn giá người lớn</th>
-                                    <th id="name_price_tre_em_511">Đơn giá 5-11 tuổi</th>
-                                    <th id="name_price_tre_em_5">Đơn giá dưới 5 tuổi</th>
-                                    <th>Khởi hành</th>
+                                    <th id="name_price_tre_em_m1">Đơn giá trẻ em m1</th>
+                                    <th id="name_price_tre_em_m2">Đơn giá trẻ em m2</th>
+                                    <th id="name_price_tre_em_m3">Đơn giá trẻ em m3</th>
                                     <th>Số chỗ</th>
                                 </tr>
                                 </thead>
@@ -838,9 +839,11 @@
                             </div>
                             <input hidden="" class="valid" id="input_price_submit" name="price_submit"
                                    value="<?php echo $price_new ?>">
-                            <input hidden="" class="valid" id="input_price_511_submit" name="price_511_submit"
+                            <input hidden="" class="valid" id="input_price_m1_submit" name="price_m1_submit"
                                    value="<?php echo $price_11_new ?>">
-                            <input hidden="" class="valid" id="input_price_5_submit" name="price_5_submit"
+                            <input hidden="" class="valid" id="input_price_m2_submit" name="price_m2_submit"
+                                   value="<?php echo $price_5_new ?>">
+                                   <input hidden="" class="valid" id="input_price_m3_submit" name="price_m3_submit"
                                    value="<?php echo $price_5_new ?>">
                             <div class="hr hr8 hr-double hr-dotted"></div>
                             <div class="row">

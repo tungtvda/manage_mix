@@ -2598,10 +2598,11 @@ function returnDatCoc() {
         } else {
             $('#input_dat_coc').val(0);
             $('#dat_coc_format').html('');
-            value=0;
+            value = 0;
         }
     }
-    var type_tour=$('.type_tour').val();
+    console.log();
+    var type_tour = $('.type_tour').val();
     tinh_tong_tien(type_tour);
 }
 function checkDiemDon() {

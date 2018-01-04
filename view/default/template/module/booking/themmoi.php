@@ -916,6 +916,7 @@
                                                     style="width:100%;max-width:600px;outline:0" autocomplete="off">
                                                  <i class="ace-icon fa fa-user blue"></i>
                                              </span>
+                                             <label class="error-color  error-color-size" id="error_name_thanh_vien">(Trong trường hợp không tìm thấy thành viên, input sẽ là tên mới của thành viên)</label>
                                             <input class="valid" hidden id="input_id_user_tt" type="text"
                                                    name="id_user_tt" value="<?php echo $id_user_tt?>">
                                         </div>
@@ -927,7 +928,7 @@
                                                             <input  name="name_thanh_vien" type="text" id="input_name_thanh_vien" class="width_100 valid" >
                                                             <i class="ace-icon fa fa-user blue"></i>
                                                         </span>
-                                                        <label style="display: none" class="error-color  error-color-size" id="error_email_user">Bạn vui lòng nhập tên thành viên</label>
+                                                        <label style="display: none" class="error-color  error-color-size" id="error_name_thanh_vien">Bạn vui lòng nhập tên thành viên</label>
                                                     </div>
                                             </div>
                                             <div class="col-xs-4">

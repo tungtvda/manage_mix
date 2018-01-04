@@ -55,8 +55,7 @@ jQuery(function($) {
             if ($('#input_id_user_tt').val() != '') {
                 $('#input_name_thanh_vien')
                     .val('')
-                    .removeClass('valid')
-                    .removeAttr('disabled');
+                    .removeClass('valid');
                 $('#input_email_thanh_vien')
                     .val('')
                     .removeClass('valid')
@@ -88,8 +87,7 @@ jQuery(function($) {
             $('#input_id_user_tt').val('');
             $('#input_name_thanh_vien')
                 .val('')
-                .addClass('valid')
-                .removeAttr('disabled');
+                .addClass('valid');
             $('#input_email_thanh_vien')
                 .val('')
                 .addClass('valid')

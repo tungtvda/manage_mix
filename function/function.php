@@ -1091,8 +1091,8 @@ function _returnDataAutoCompleteTour()
             $id = $row_kh->id;
             $name = $row_kh->name;
             if ($row_kh->price == 0 || $row_kh->price == '') {
-                $price_format = 'Liên hệ';
-                $price = 'Liên hệ';
+                $price_format = '0 vnđ';
+                $price = '0';
             } else {
                 $price_format = number_format((int)$row_kh->price, 0, ",", ".") . ' vnđ';
                 $price = $row_kh->price;
@@ -1111,29 +1111,33 @@ function _returnDataAutoCompleteTour()
                 $price_3_format = number_format((int)$row_kh->price_3, 0, ",", ".") . ' vnđ';
                 $price_3 = $row_kh->price_3;
             }
+            if ($row_kh->price_4== '') {
+                $price_4_format = $price_format;
+                $price_4 = $price;
+            } else {
+                $price_4_format = number_format((int)$row_kh->price_4, 0, ",", ".") . ' vnđ';
+                $price_4 = $row_kh->price_4;
+            }
             $so_cho = $row_kh->so_cho;
-//            $price_number= $row_kh->price_number;
-//            $price_number_2= $row_kh->price_number_2;
-//            $price_number_3= $row_kh->price_number_3;
-
-//            $list_price_nguoi_lon=json_encode(returnInput_price($price_number,'price_nguoi_lon_'));
-//            $list_price_tre_em_511=returnInput_price($price_number_2,'price_tre_em_511_');
-//            $list_price_tre_em_5=returnInput_price($price_number_3,'price_tre_em_5_');
             $price_tiep_thi_format = '';
             if ($row_kh->price_tiep_thi != '' && $row_kh->price_tiep_thi > 0) {
                 $price_tiep_thi_format = number_format((int)$row_kh->price_tiep_thi, 0, ",", ".") . ' vnđ';
             }
-            $name_price = 'Giá người lớn';
-            $name_price_2 = 'Giá trẻ em 5-11 tuổi';
-            $name_price_3 = 'Giá trẻ em dưới 5 tuổi';
+            $name_price = 'Đơn giá người lớn';
+            $name_price_2 = 'Đơn giá trẻ em mức 1';
+            $name_price_3 = 'Đơn giá trẻ em mức 2';
+            $name_price_4 = 'Đơn giá trẻ em mức 3';
             if ($row_kh->name_price != '') {
-                $name_price = $row_kh->name_price;
+                $name_price = 'Đơn giá người lớn '.$row_kh->name_price;
             }
             if ($row_kh->name_price_2 != '') {
-                $name_price_2 = $row_kh->name_price_2;
+                $name_price_2 ='Đơn giá trẻ em '. $row_kh->name_price_2;
             }
             if ($row_kh->name_price_3 != '') {
-                $name_price_3 = $row_kh->name_price_3;
+                $name_price_3 ='Đơn giá trẻ em '. $row_kh->name_price_3;
+            }
+            if ($row_kh->name_price_4 != '') {
+                $name_price_4 ='Đơn giá trẻ em '. $row_kh->name_price_4;
             }
 
             $durations = $row_kh->durations;
@@ -1147,7 +1151,7 @@ function _returnDataAutoCompleteTour()
                     $departure_id = $data_departure[0]->id;
                 }
             }
-            $string_data .= "['" . $id . "','" . $name . "','" . $price_format . "','" . $durations . "','" . $vehicle . "','" . $departure_id . "','" . $departure_name . "','" . $price . "','" . $name_price . "','" . $price_2 . "','" . $price_2_format . "','" . $name_price_2 . "','" . $price_3 . "','" . $price_3_format . "','" . $name_price_3 . "','" . $so_cho . "','" . $price_tiep_thi_format . "','".$row_kh->price_tiep_thi."'],";
+            $string_data .= "['" . $id . "','" . $name . "','" . $price_format . "','" . $durations . "','" . $vehicle . "','" . $departure_id . "','" . $departure_name . "','" . $price . "','" . $name_price . "','" . $price_2 . "','" . $price_2_format . "','" . $name_price_2 . "','" . $price_3 . "','" . $price_3_format . "','" . $name_price_3 . "','" . $so_cho . "','" . $price_tiep_thi_format . "','".$row_kh->price_tiep_thi."','".$price_4."','".$price_4_format."','".$name_price_4."'],";
         }
     }
     $string_data .= '];';

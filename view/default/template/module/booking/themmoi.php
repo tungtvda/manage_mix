@@ -823,9 +823,9 @@
                                     <th class="center">#</th>
                                     <th>Tên tour</th>
                                     <th id="name_price_nguoi_lon">Đơn giá người lớn</th>
-                                    <th id="name_price_tre_em_m1">Đơn giá trẻ em m1</th>
-                                    <th id="name_price_tre_em_m2">Đơn giá trẻ em m2</th>
-                                    <th id="name_price_tre_em_m3">Đơn giá trẻ em m3</th>
+                                    <th id="name_price_tre_em_m1">Đơn giá trẻ em mức 1</th>
+                                    <th id="name_price_tre_em_m2">Đơn giá trẻ em mức 2</th>
+                                    <th id="name_price_tre_em_m3">Đơn giá trẻ em mức 3</th>
                                     <th>Số chỗ</th>
                                 </tr>
                                 </thead>
@@ -847,10 +847,11 @@
                                    value="<?php echo $price_5_new ?>">
                             <div class="hr hr8 hr-double hr-dotted"></div>
                             <div class="row">
-                                <div class="col-sm-4" style="text-align: right"><a title="Tính tiền" id="tinh_tien"
+                                <div class="col-sm-4" style="text-align: right">
+                                <!-- <a title="Tính tiền" id="tinh_tien"
                                                                                    href="javascript:void(0)"><img
                                             class="tinh_tien"
-                                            src="<?php echo SITE_NAME ?>/view/default/themes/images/tinhtien.png"></a>
+                                            src="<?php echo SITE_NAME ?>/view/default/themes/images/tinhtien.png"></a> -->
                                 </div>
                                 <div class="col-sm-8 pull-right">
                                     <div class="profile-user-info profile-user-info-striped">

@@ -36,7 +36,9 @@ jQuery(function($) {
             removeValueDieuhanh();
         }
     });
-
+    $('body').on('input', '#input_email_thanh_vien', function() {
+        removeInfoTiepthi();
+    });
     $('body').on('input', '#input_name_user_tiepthi', function() {
         removeInfoTiepthi();
     });
@@ -86,31 +88,49 @@ jQuery(function($) {
             $('#input_id_user_tt').val('');
             $('#input_name_thanh_vien')
                 .val('')
-                .addClass('valid');
+                .addClass('valid')
+                .removeAttr('disabled');
             $('#input_email_thanh_vien')
                 .val('')
-                .addClass('valid');
+                .addClass('valid')
+                .removeAttr('disabled');
             $('#input_phone_thanh_vien')
                 .val('')
-                .addClass('valid');
+                .addClass('valid')
+                .removeAttr('disabled');
             $('.required_label').hide();
             $('#error_email_thanh_vien')
                 .hide()
                 .html('Bạn vui lòng nhập email');
         }
     }
-
+    
     function checkEmailThanhVien() {
         var value = $('#input_email_thanh_vien').val();
         if (value != '') {
             var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
             var is_email = re.test(value);
-            console.log(is_email);
             if (is_email) {
-                $('#error_email_thanh_vien')
-                    .hide()
-                    .html('Bạn vui lòng nhập email');
-                $('#input_email_thanh_vien').addClass('valid');
+                link = url + '/check-login.html';
+                var key = 'user_email';
+                $.ajax({
+                    method: 'GET',
+                    url: link,
+                    data: 'value=' + value + '&key=' + key,
+                    success: function(response) {
+                        if (response == 1) {
+                            $('#error_email_thanh_vien')
+                                .hide()
+                                .html('Bạn vui lòng nhập email');
+                            $('#input_email_thanh_vien').addClass('valid');
+                        } else {
+                            $('#error_email_thanh_vien')
+                                .show()
+                                .html('Email đã tồn tại trong hệ thống');
+                            $('#input_email_thanh_vien').removeClass('valid');
+                        }
+                    }
+                });
             } else {
                 $('#error_email_thanh_vien')
                     .show()
@@ -141,22 +161,30 @@ jQuery(function($) {
             .show()
             .html(price_format);
     });
-    $('body').on('click', '#reset_price_511', function() {
-        var price_old = $('#input_price_511_old').val();
+    $('body').on('click', '#reset_price_tre_em_m1', function() {
+        var price_old = $('#input_price_tre_em_m1_old').val();
         var price_format = price_old.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
-        $('#input_price_511').val(price_old);
-        $('#input_price_511').hide();
-        $('#price_format_span_511')
+        $('#input_price_tre_em_m1').val(price_old);
+        $('#input_price_tre_em_m1').hide();
+        $('#price_format_span_tre_em_m1')
             .show()
             .html(price_format);
     });
-
-    $('body').on('click', '#reset_price_5', function() {
-        var price_old = $('#input_price_5_old').val();
+    $('body').on('click', '#reset_price_tre_em_m2', function() {
+        var price_old = $('#input_price_tre_em_m2_old').val();
         var price_format = price_old.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
-        $('#input_price_5').val(price_old);
-        $('#input_price_5').hide();
-        $('#price_format_span_5')
+        $('#input_price_tre_em_m2').val(price_old);
+        $('#input_price_tre_em_m2').hide();
+        $('#price_format_span_tre_em_m2')
+            .show()
+            .html(price_format);
+    });
+    $('body').on('click', '#reset_price_tre_em_m3', function() {
+        var price_old = $('#input_price_tre_em_m3_old').val();
+        var price_format = price_old.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
+        $('#input_price_tre_em_m3').val(price_old);
+        $('#input_price_tre_em_m3').hide();
+        $('#price_format_span_tre_em_m3')
             .show()
             .html(price_format);
     });
@@ -176,12 +204,14 @@ jQuery(function($) {
         $('#price_format_span_tre_em_m1').hide();
     });
     $('body').on('click', '#input_vat', function() {
-        $('#tong_cong').html('');
-        $('#tong_cong').html('');
-        $('#vat').html('');
+        // $('#tong_cong').html('');
+        // $('#tong_cong').html('');
+        // $('#vat').html('');
         //$('#dat_coc_format').html('');
-        $('#con_lai').html('');
+        // $('#con_lai').html('');
         //$('#input_dat_coc').val('');
+        var type_tour = $('.type_tour').val();
+        tinh_tong_tien(type_tour);
     });
 
     $('body').on('click', '#edit_price_tre_em_m2', function() {
@@ -217,6 +247,7 @@ jQuery(function($) {
             .show()
             .html(price_format);
         checkSoNguoi();
+        tinh_tong_tien(0);
     });
     $('body').on('blur', '#input_price_tre_em_m1', function() {
         var price = $(this).val();
@@ -236,6 +267,7 @@ jQuery(function($) {
             .show()
             .html(price_format);
         checkSoNguoi();
+        tinh_tong_tien(0);
     });
     $('body').on('blur', '#input_price_tre_em_m2', function() {
         var price = $(this).val();
@@ -255,6 +287,7 @@ jQuery(function($) {
             .show()
             .html(price_format);
         checkSoNguoi();
+        tinh_tong_tien(0);
     });
     $('body').on('blur', '#input_price_tre_em_m3', function() {
         var price = $(this).val();
@@ -274,6 +307,7 @@ jQuery(function($) {
             .show()
             .html(price_format);
         checkSoNguoi();
+        tinh_tong_tien(0);
     });
 
     $('body').on('click', '.btn_add_customer_bk', function() {
@@ -345,25 +379,7 @@ jQuery(function($) {
         }
     });
     $('body').on('click', '.btn_add_customer', function() {
-        var price = $('#input_price_submit').val();
-        var price_2 = $('#input_price_511_submit').val();
-        var price_3 = $('#input_price_5_submit').val();
-        if (price != '') {
-            returnGenDanhSachDoan(price, price_2, price_3);
-        } else {
-            lnv.alert({
-                title: 'Lỗi',
-                content: 'Bạn vui lòng chọn tour',
-                alertBtnText: 'Ok',
-                iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
-                alertHandler: function() {
-                    $('#input_name_tour')
-                        .show()
-                        .focus()
-                        .select();
-                }
-            });
-        }
+        returnGenDanhSachDoan();
     });
     $('body').on('click', '.btn_remove_customer', function() {
         var deleteid = $(this).attr('deleteid');
@@ -1328,7 +1344,13 @@ jQuery(function($) {
                 name_input != 'tuoi_number_customer[]' &&
                 name_input != 'tuoi_customer[]' &&
                 name_input != 'date_passport_customer[]' &&
-                name_input != 'passport_customer[]'
+                name_input != 'passport_customer[]' &&
+                name_input != 'name_dichvu[]' &&
+                name_input != 'type_dichvu[]' &&
+                name_input != 'soluong_dichvu[]' &&
+                name_input != 'thanhtien_dichvu[]' &&
+                name_input != 'ghichu_dichvu[]' &&
+                name_input != 'price_dichvu[]'
             ) {
                 var element = $('#input_' + name_input);
                 var error = $('#error_' + name_input);
@@ -1866,6 +1888,10 @@ jQuery(function($) {
             $(this).val(0);
             price = 0;
         }
+        if (price <= 0) {
+            price = 0;
+            $(this).val(0);
+        }
         total_price_dich_vu(price, id);
     });
     $('body').on('input', '.input_soluong_dichvu', function() {
@@ -1930,103 +1956,103 @@ function total_price_dich_vu(price, item, soluong_dichvu) {
     tinh_tong_tien(type_tour);
 }
 function tinh_tong_tien(type_tour) {
-    if (type_tour == 1) {
-        var input_price = $('#input_price').val();
-        if (input_price == '') {
-            input_price = 0;
-            $('#input_price').val(0);
-        }
-        var input_price_tre_em_m1 = $('#input_price_tre_em_m1').val();
-        if (input_price_tre_em_m1 == '') {
-            input_price_tre_em_m1 = 0;
-            $('#input_price_tre_em_m1').val(0);
-        }
-        var input_price_tre_em_m2 = $('#input_price_tre_em_m2').val();
-        if (input_price_tre_em_m2 == '') {
-            input_price_tre_em_m2 = 0;
-            $('#input_price_tre_em_m2').val(0);
-        }
-        var input_price_tre_em_m3 = $('#input_price_tre_em_m3').val();
-        if (input_price_tre_em_m3 == '') {
-            input_price_tre_em_m3 = 0;
-            $('#input_price_tre_em_m3').val(0);
-        }
-        var input_num_nguoi_lon = $('#input_num_nguoi_lon').val();
-        if (input_num_nguoi_lon == '' || input_num_nguoi_lon <= 0) {
-            input_num_nguoi_lon = 1;
-            $('#input_num_nguoi_lon').val(1);
-        }
-        var input_num_tre_em_m1 = $('#input_num_tre_em_m1').val();
-        if (input_num_tre_em_m1 == '' || input_num_tre_em_m1 < 0) {
-            input_num_tre_em_m1 = 0;
-            $('#input_num_tre_em_m1').val(0);
-        }
-        var input_num_tre_em_m2 = $('#input_num_tre_em_m2').val();
-        if (input_num_tre_em_m2 == '' || input_num_tre_em_m2 < 0) {
-            input_num_tre_em_m2 = 0;
-            $('#input_num_tre_em_m2').val(0);
-        }
-        var input_num_tre_em_m3 = $('#input_num_tre_em_m3').val();
-        if (input_num_tre_em_m3 == '' || input_num_tre_em_m3 < 0) {
-            input_num_tre_em_m3 = 0;
-            $('#input_num_tre_em_m3').val(0);
-        }
-        var total_price =
-            input_price * input_num_nguoi_lon +
-            input_price_tre_em_m1 * input_num_tre_em_m1 +
-            input_price_tre_em_m2 * input_num_tre_em_m2 +
-            input_price_tre_em_m3 * input_num_tre_em_m3;
-
-        if (parseInt(total_price) == total_price) {
-            var total_price_format = total_price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
-        } else {
-            var total_price_format = total_price.toFixed(2).replace('.', ',');
-            total_price_format = total_price_format.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
-        }
-        $('#tong_cong').html(total_price_format);
-        var vat = 0;
-        if ($('#input_vat').is(':checked')) {
-            var vat = parseFloat(total_price * 0.1);
-            vat = Math.round(vat * 1000) / 1000;
-        }
-        if (parseInt(vat) == vat) {
-            var price_vat_format = vat.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
-        } else {
-            var price_vat_format = vat.toFixed(2).replace('.', ',');
-            price_vat_format = price_vat_format.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
-        }
-        $('#vat').html(price_vat_format);
-        total_price = total_price + vat;
-
-        var dat_coc = $('#input_dat_coc').val();
-        if (dat_coc != '' && dat_coc > 0) {
-            dat_coc = dat_coc.toString().split(',');
-            // dat_coc = dat_coc.toString().split('.');
-            if (parseFloat(dat_coc) > total_price) {
-                dat_coc = total_price;
-                $('#input_dat_coc').val(total_price);
-                if (parseInt(dat_coc) == dat_coc) {
-                    var dat_coc_format = dat_coc.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
-                } else {
-                    var dat_coc_format = dat_coc.toFixed(2).replace('.', ',');
-                    dat_coc_format = dat_coc_format.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
-                }
-                $('#dat_coc_format').html(dat_coc_format);
-            }
-        } else {
-            dat_coc = 0;
-        }
-        dat_coc = parseFloat(dat_coc);
-        total_price = total_price - dat_coc;
-
-        if (parseInt(total_price) == total_price) {
-            var total_price = total_price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
-        } else {
-            var total_price = total_price.toFixed(2).replace('.', ',');
-            total_price = total_price.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
-        }
-        $('#con_lai').html(total_price);
+    // if (type_tour == 1) {
+    var input_price = $('#input_price_submit').val();
+    if (input_price == '') {
+        input_price = 0;
+        $('#input_price_submit').val(0);
     }
+    var input_price_tre_em_m1 = $('#input_price_m1_submit').val();
+    if (input_price_tre_em_m1 == '') {
+        input_price_tre_em_m1 = 0;
+        $('#input_price_m1_submit').val(0);
+    }
+    var input_price_tre_em_m2 = $('#input_price_m2_submit').val();
+    if (input_price_tre_em_m2 == '') {
+        input_price_tre_em_m2 = 0;
+        $('#input_price_m2_submit').val(0);
+    }
+    var input_price_tre_em_m3 = $('#input_price_m3_submit').val();
+    if (input_price_tre_em_m3 == '') {
+        input_price_tre_em_m3 = 0;
+        $('#input_price_m3_submit').val(0);
+    }
+    var input_num_nguoi_lon = $('#input_num_nguoi_lon').val();
+    if (input_num_nguoi_lon == '' || input_num_nguoi_lon <= 0) {
+        input_num_nguoi_lon = 1;
+        $('#input_num_nguoi_lon').val(1);
+    }
+    var input_num_tre_em_m1 = $('#input_num_tre_em_m1').val();
+    if (input_num_tre_em_m1 == '' || input_num_tre_em_m1 < 0) {
+        input_num_tre_em_m1 = 0;
+        $('#input_num_tre_em_m1').val(0);
+    }
+    var input_num_tre_em_m2 = $('#input_num_tre_em_m2').val();
+    if (input_num_tre_em_m2 == '' || input_num_tre_em_m2 < 0) {
+        input_num_tre_em_m2 = 0;
+        $('#input_num_tre_em_m2').val(0);
+    }
+    var input_num_tre_em_m3 = $('#input_num_tre_em_m3').val();
+    if (input_num_tre_em_m3 == '' || input_num_tre_em_m3 < 0) {
+        input_num_tre_em_m3 = 0;
+        $('#input_num_tre_em_m3').val(0);
+    }
+    var total_price =
+        input_price * input_num_nguoi_lon +
+        input_price_tre_em_m1 * input_num_tre_em_m1 +
+        input_price_tre_em_m2 * input_num_tre_em_m2 +
+        input_price_tre_em_m3 * input_num_tre_em_m3;
+
+    if (parseInt(total_price) == total_price) {
+        var total_price_format = total_price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
+    } else {
+        var total_price_format = total_price.toFixed(2).replace('.', ',');
+        total_price_format = total_price_format.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
+    }
+    $('#tong_cong').html(total_price_format);
+    var vat = 0;
+    if ($('#input_vat').is(':checked')) {
+        var vat = parseFloat(total_price * 0.1);
+        vat = Math.round(vat * 1000) / 1000;
+    }
+    if (parseInt(vat) == vat) {
+        var price_vat_format = vat.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
+    } else {
+        var price_vat_format = vat.toFixed(2).replace('.', ',');
+        price_vat_format = price_vat_format.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
+    }
+    $('#vat').html(price_vat_format);
+    total_price = total_price + vat;
+
+    var dat_coc = $('#input_dat_coc').val();
+    if (dat_coc != '' && dat_coc > 0) {
+        dat_coc = dat_coc.toString().split(',');
+        // dat_coc = dat_coc.toString().split('.');
+        if (parseFloat(dat_coc) > total_price) {
+            dat_coc = total_price;
+            $('#input_dat_coc').val(total_price);
+            if (parseInt(dat_coc) == dat_coc) {
+                var dat_coc_format = dat_coc.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
+            } else {
+                var dat_coc_format = dat_coc.toFixed(2).replace('.', ',');
+                dat_coc_format = dat_coc_format.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
+            }
+            $('#dat_coc_format').html(dat_coc_format);
+        }
+    } else {
+        dat_coc = 0;
+    }
+    dat_coc = parseFloat(dat_coc);
+    total_price = total_price - dat_coc;
+
+    if (parseInt(total_price) == total_price) {
+        var total_price = total_price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
+    } else {
+        var total_price = total_price.toFixed(2).replace('.', ',');
+        total_price = total_price.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
+    }
+    $('#con_lai').html(total_price);
+    // }
 }
 function price_nguoi_lon(total, type_tour) {
     var soluong_nguoi_lon = $('#input_num_nguoi_lon').val();
@@ -2065,6 +2091,7 @@ function price_nguoi_lon(total, type_tour) {
         $('#price_format_span').html(giaban_format);
         $('#input_price_format').val(giaban_format);
         $('#input_price').val(giaban);
+        $('#input_price_submit').val(giaban);
         $('#input_price_old').val(giaban);
         $('#edit_price').hide();
         $('#reset_price').hide();
@@ -2119,6 +2146,7 @@ function price_tre_em_m1(total, type_tour) {
         $('#price_format_span_tre_em_m1').html(giaban_format_m1);
         $('#input_price_tre_em_m1').val(giaban_m1);
         $('#input_price_tre_em_m1_old').val(giaban_m1);
+        $('#input_price_m1_submit').val(giaban_m1);
         $('#edit_price_tre_em_m1').hide();
         $('#reset_price_tre_em_m1').hide();
     }
@@ -2172,6 +2200,7 @@ function price_tre_em_m2(total, type_tour) {
         $('#price_format_span_tre_em_m2').html(giaban_format_m2);
         $('#input_price_tre_em_m2').val(giaban_m2);
         $('#input_price_tre_em_m2_old').val(giaban_m2);
+        $('#input_price_m2_submit').val(giaban_m2);
         $('#edit_price_tre_em_m2').hide();
         $('#reset_price_tre_em_m2').hide();
     }
@@ -2225,6 +2254,7 @@ function price_tre_em_m3(total, type_tour) {
         $('#price_format_span_tre_em_m3').html(giaban_format_m3);
         $('#input_price_tre_em_m3').val(giaban_m3);
         $('#input_price_tre_em_m3_old').val(giaban_m3);
+        $('#input_price_m3_submit').val(giaban_m3);
         $('#edit_price_tre_em_m3').hide();
         $('#reset_price_tre_em_m3').hide();
     }
@@ -2418,12 +2448,7 @@ function showHiddenNameGia(res, mess) {
 }
 
 function checkSoNguoi() {
-    var price = $('#input_price_submit').val();
-    var price_2 = $('#input_price_511_submit').val();
-    var price_3 = $('#input_price_5_submit').val();
-    if (price != '') {
-        returnGenDanhSachDoan(price, price_2, price_3);
-    }
+    returnGenDanhSachDoan();
 }
 function show_booking(Id, name) {
     $('#title_form').html('Thôn tin chi tiết đơn hàng "<b>' + name + '</b>"');
@@ -2590,18 +2615,15 @@ function show_booking(Id, name) {
 }
 function returnDatCoc() {
     var value = $('#input_dat_coc').val();
-    if (value != '') {
-        var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
-        if (numberRegex.test(value)) {
-            var value_format = value.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
-            $('#dat_coc_format').html(value_format);
-        } else {
-            $('#input_dat_coc').val(0);
-            $('#dat_coc_format').html('');
-            value = 0;
-        }
+    var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
+    if (numberRegex.test(value)) {
+        var price_format = value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
+    } else {
+        $('#input_dat_coc').val(0);
+        value = 0;
+        price_format = '0 vnđ';
     }
-    console.log();
+    $('#dat_coc_format').html(price_format);
     var type_tour = $('.type_tour').val();
     tinh_tong_tien(type_tour);
 }
@@ -2997,9 +3019,10 @@ function removeValueTour() {
     $('#dat_coc_format').html('');
     $('#con_lai').html('');
     $('#input_dat_coc').val('');
-    $('#input_price_submit').val('');
-    $('#input_price_511_submit').val('');
-    $('#input_price_5_submit').val('');
+    $('#input_price_submit').val(0);
+    $('#input_price_m1_submit').val(0);
+    $('#input_price_m2_submit').val(0);
+    $('#input_price_m3_submit').val(0);
     $('.price_tiep_thi').html('');
     $('#input_id_tour')
         .removeClass('valid')
@@ -3015,13 +3038,21 @@ function removeValueTour() {
 
     //$('.table_booking_tour').html('');
     $('#input_price').val(0);
-    $('#input_price_511').val(0);
-    $('#input_price_5').val(0);
+    $('#input_price_format').val('0 vnđ');
+    $('#input_price_tre_em_m1').val(0);
+    $('#input_price_tre_em_m2').val(0);
+    $('#input_price_tre_em_m3').val(0);
+    $('#input_price_old').val(0);
+    $('#input_price_tre_em_m1_old').val(0);
+    $('#input_price_tre_em_m2_old').val(0);
+    $('#input_price_tre_em_m1_old').val(0);
+
     $('#price_format_span').html('0 vnđ');
-    $('#input_price_format').html('0 vnđ');
-    $('#price_format_span_511').html('0 vnđ');
-    $('#price_format_span_5').html('0 vnđ');
+    $('#price_format_span_tre_em_m1').html('0 vnđ');
+    $('#price_format_span_tre_em_m2').html('0 vnđ');
+    $('#price_format_span_tre_em_m3').html('0 vnđ');
     $('#name_tour_table').html('');
+    tinh_tong_tien(type_tour);
 }
 function removeValueUser() {
     $('.table_booking_user').html('');
@@ -3435,23 +3466,42 @@ function returnDanhSachDoan() {
     }
 }
 
-function returnGenDanhSachDoan(price, price_2, price_3) {
+function returnGenDanhSachDoan() {
+    var price = $('#input_price_submit').val();
+    if (price == '') {
+        price = 0;
+        $('#input_price_submit').val(0);
+    }
+    var price_2 = $('#input_price_m1_submit').val();
+    if (price_2 == '') {
+        price_2 = 0;
+        $('#input_price_m1_submit').val(0);
+    }
+    var price_3 = $('#input_price_m2_submit').val();
+    if (price_3 == '') {
+        price_3 = 0;
+        $('#input_price_m2_submit').val(0);
+    }
+    var price_4 = $('#input_price_m3_submit').val();
+    if (price_4 == '') {
+        price_4 = 0;
+        $('#input_price_m3_submit').val(0);
+    }
+
     var numbe_1 = parseInt($('#input_num_nguoi_lon').val());
-    var numbe_2 = parseInt($('#input_num_tre_em').val());
-    var numbe_3 = parseInt($('#input_num_tre_em_5').val());
+    var numbe_2 = parseInt($('#input_num_tre_em_m1').val());
+    var numbe_3 = parseInt($('#input_num_tre_em_m2').val());
+    var numbe_4 = parseInt($('#input_num_tre_em_m3').val());
 
     //var id=$(id_field).attr('id_title');
-    var name_1 = $('#name_price_nguoi_lon').html();
-    var name_2 = $('#name_price_tre_em_511').html();
-    var name_3 = $('#name_price_tre_em_5').html();
-    if (numbe_1 == 0) {
-        numbe_1 = 1;
-        $('#input_num_nguoi_lon').val(1);
-    }
+    var name_price_nguoi_lon = $('#name_price_nguoi_lon').html();
+    var name_price_tre_em_m1 = $('#name_price_tre_em_m1').html();
+    var name_price_tre_em_m2 = $('#name_price_tre_em_m2').html();
+    var name_price_tre_em_m3 = $('#name_price_tre_em_m3').html();
 
     var so_cho = $('#input_so_cho').val();
     var check_show_table = true;
-    var total = numbe_1 + numbe_2 + numbe_3;
+    var total = numbe_1 + numbe_2 + numbe_3 + numbe_4;
     //$('#input_total_num').val(total);
     if (so_cho != undefined) {
         so_cho = parseInt(so_cho);
@@ -3475,18 +3525,7 @@ function returnGenDanhSachDoan(price, price_2, price_3) {
     }
     var row = '';
     var stt = 1;
-    //var price= $('#input_price').val();
-    if (price === '' || price === 0) {
-        price === 'Liên hệ';
-    }
-    //var price_2= $('#input_price_511').val();
-    if (price_2 === '' || price_2 === 0) {
-        price_2 == price;
-    }
-    //var price_3= $('#input_price_5').val();
-    if (price_3 === '' || price_3 === 0) {
-        price_3 == price;
-    }
+
     if (check_show_table == true) {
         if (numbe_1 > 0) {
             if (price === 'Liên hệ') {
@@ -3520,7 +3559,7 @@ function returnGenDanhSachDoan(price, price_2, price_3) {
                     tuoi_customer = $('#input_tuoi_customer_' + stt).val();
                 }
                 if (tuoi_customer == '') {
-                    tuoi_customer = name_1;
+                    tuoi_customer = name_price_nguoi_lon;
                 }
                 var passport_customer = '';
                 if ($('#input_passport_customer_' + stt).length) {
@@ -3620,7 +3659,7 @@ function returnGenDanhSachDoan(price, price_2, price_3) {
                     tuoi_customer = $('#input_tuoi_customer_' + stt).val();
                 }
                 if (tuoi_customer == '') {
-                    tuoi_customer = name_2;
+                    tuoi_customer = name_price_tre_em_m1;
                 }
                 var passport_customer = '';
                 if ($('#input_passport_customer_' + stt).length) {
@@ -3720,7 +3759,7 @@ function returnGenDanhSachDoan(price, price_2, price_3) {
                     tuoi_customer = $('#input_tuoi_customer_' + stt).val();
                 }
                 if (tuoi_customer == '') {
-                    tuoi_customer = name_3;
+                    tuoi_customer = name_price_tre_em_m2;
                 }
                 var passport_customer = '';
                 if ($('#input_passport_customer_' + stt).length) {

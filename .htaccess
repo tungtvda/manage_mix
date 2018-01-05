@@ -112,6 +112,7 @@ RewriteRule ^booking-list-giao-dich.html$ controller/default/booking/list_giao_d
 RewriteRule ^booking-save-giao-dich.html$ controller/default/booking/save_giao_dich.php
 
 RewriteRule ^rut-tien/$ controller/default/rut_tien/rut_tien.php
+RewriteRule ^confirm-withdraw.html$ controller/default/rut_tien/az_confirm_withdraw.php
 
 RewriteRule ^return-input-price-booking/$ controller/default/booking/list_price_input.php
 

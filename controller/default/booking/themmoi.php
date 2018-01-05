@@ -82,151 +82,7 @@ $data['breadcrumbs'] = $url_bread;
 $data['module_valid'] = "booking";
 
 if (isset($_POST['code_booking'])) {
-
-    $name_user = _returnPostParamSecurity('name_user');
-    $name_dieuhanh = _returnPostParamSecurity('name_dieuhanh');
-    $id_user = _returnPostParamSecurity('id_user');
-    $dieuhanh_id = _returnPostParamSecurity('dieuhanh_id');
-    $code_booking = _returnPostParamSecurity('code_booking');
-    $tien_te = _returnPostParamSecurity('tien_te');
-    $ty_gia = '';
-    if ($tien_te != '') {
-        $data_ty_gia = tien_te_getById($tien_te);
-        if (count($data_ty_gia) > 0) {
-            $ty_gia = $data_ty_gia[0]->value;
-        }
-    }
-
-    $nguon_tour = _returnPostParamSecurity('nguon_tour');
-    $ngay_bat_dau = _returnPostParamSecurity('ngay_bat_dau');
-    $han_thanh_toan = _returnPostParamSecurity('han_thanh_toan');
-    $status = _returnPostParamSecurity('status');
-    $action_link = _returnLinkBooking($status);
-    $hinh_thuc_thanh_toan = _returnPostParamSecurity('hinh_thuc_thanh_toan');
-    $num_nguoi_lon = _returnPostParamSecurity('num_nguoi_lon');
-    $num_tre_em = _returnPostParamSecurity('num_tre_em');
-    $num_tre_em_5 = _returnPostParamSecurity('num_tre_em_5');
-    $vat = _returnPostParamSecurity('vat');
-    if ($vat == '') {
-        $vat = 0;
-    } else {
-        if ($vat === "on" || $vat === 1 || $vat === "On") {
-            $vat = 1;
-        } else {
-            $vat = 0;
-        }
-    }
-    $name_customer = _returnPostParamSecurity('name_customer');
-    $id_customer = _returnPostParamSecurity('id_customer');
-    $email = _returnPostParamSecurity('email');
-    $address = _returnPostParamSecurity('address');
-    $phone = _returnPostParamSecurity('phone');
-    $fax = _returnPostParamSecurity('fax');
-    $nhom_khach_hang = _returnPostParamSecurity('nhom_khach_hang');
-    $diem_don = _returnPostParamSecurity('diem_don');
-    $ngay_khoi_hanh = _returnPostParamSecurity('ngay_khoi_hanh');
-    $ngay_ket_thuc = _returnPostParamSecurity('ngay_ket_thuc');
-    $name_tour = _returnPostParamSecurity('name_tour');
-    $id_tour = _returnPostParamSecurity('id_tour');
-    $dat_coc = _returnPostParamSecurity('dat_coc');
-    $price_submit = _returnPostParamSecurity('price_submit');
-    $price_511_submit = _returnPostParamSecurity('price_511_submit');
-    $price_5_submit = _returnPostParamSecurity('price_5_submit');
-    $check_edit = _returnPostParamSecurity('check_edit');
-    $id_edit = _returnPostParamSecurity('id_edit');
-    $note = _returnPostParamSecurity('note');
-    $user_tiep_thi_id = _returnPostParamSecurity('id_user_tt');
-    $confirm_admin_tiep_thi = _returnPostParamSecurity('confirm_admin_tiep_thi');
-
-
-    $type_tour = _returnPostParamSecurity('type_tour');
-    $name_tour_cus = _returnPostParamSecurity('name_tour_cus');
-    $chuong_trinh = _returnPostParamSecurity('chuong_trinh');
-    $chuong_trinh_price = _returnPostParamSecurity('chuong_trinh_price');
-    $thoi_gian = _returnPostParamSecurity('thoi_gian');
-    $thoi_gian_price = _returnPostParamSecurity('thoi_gian_price');
-    $nguoi_lon = _returnPostParamSecurity('nguoi_lon');
-    $tre_em = _returnPostParamSecurity('tre_em');
-    $tre_em_5 = _returnPostParamSecurity('tre_em_5');
-    $so_nguoi_price = _returnPostParamSecurity('so_nguoi_price');
-    $khach_san = _returnPostParamSecurity('khach_san');
-    $khach_san_price = _returnPostParamSecurity('khach_san_price');
-    $ngay_khoi_hanh_cus = _returnPostParamSecurity('ngay_khoi_hanh_cus');
-    $ngay_khoi_hanh_price = _returnPostParamSecurity('ngay_khoi_hanh_price');
-    $hang_bay = _returnPostParamSecurity('hang_bay');
-    $hang_bay_price = _returnPostParamSecurity('hang_bay_price');
-    $khac = _returnPostParamSecurity('khac');
-    $khac_price = _returnPostParamSecurity('khac_price');
-    $note_cus = _returnPostParamSecurity('note_cus');
-     $confirm_dieuhanh = _returnPostParamSecurity('confirm_dieuhanh');
-    $confirm_sales = _returnPostParamSecurity('confirm_sales');
-    if ($confirm_admin_tiep_thi == '') {
-        $confirm_admin_tiep_thi = 0;
-    } else {
-        if ($confirm_admin_tiep_thi === "on" || $confirm_admin_tiep_thi === 1 || $confirm_admin_tiep_thi === "On") {
-            $confirm_admin_tiep_thi = 1;
-        } else {
-            $confirm_admin_tiep_thi = 0;
-        }
-    }
-    $price_submit = str_replace('.', '', $price_submit);
-    $price_submit = str_replace(',', '', $price_submit);
-    $price_511_submit = str_replace('.', '', $price_511_submit);
-    $price_511_submit = str_replace(',', '', $price_511_submit);
-    $price_5_submit = str_replace('.', '', $price_5_submit);
-    $price_5_submit = str_replace(',', '', $price_5_submit);
-
-    $name_customer_sub = array();
-    $email_customer_sub = array();
-    $phone_customer_sub = array();
-    $address_customer_sub = array();
-    $tuoi_customer_sub = array();
-    $tuoi_number_customer_sub = array();
-    $birthday_customer_sub = array();
-    $passport_customer_sub = array();
-    $date_passport_customer_sub = array();
-
-    $total = 0;
-    if (is_numeric($num_nguoi_lon) && is_numeric($price_submit)) {
-        $total = $total + ($num_nguoi_lon * $price_submit);
-    }
-    if (is_numeric($num_tre_em) && is_numeric($price_511_submit)) {
-        $total = $total + ($num_tre_em * $price_511_submit);
-    }
-    if (is_numeric($num_tre_em_5) && is_numeric($price_5_submit)) {
-        $total = $total + ($num_tre_em_5 * $price_5_submit);
-    }
-    if ($vat == 1) {
-        $vat_price = ($total * 0.1);
-        $total = $total + $vat_price;
-    }
-    if (isset($_POST['name_customer_sub'])) {
-        $name_customer_sub = $_POST['name_customer_sub'];
-    }
-    if (isset($_POST['email_customer'])) {
-        $email_customer_sub = $_POST['email_customer'];
-    }
-    if (isset($_POST['phone_customer'])) {
-        $phone_customer_sub = $_POST['phone_customer'];
-    }
-    if (isset($_POST['address_customer'])) {
-        $address_customer_sub = $_POST['address_customer'];
-    }
-    if (isset($_POST['tuoi_customer'])) {
-        $tuoi_customer_sub = $_POST['tuoi_customer'];
-    }
-    if (isset($_POST['tuoi_number_customer'])) {
-        $tuoi_number_customer_sub = $_POST['tuoi_number_customer'];
-    }
-    if (isset($_POST['birthday_customer'])) {
-        $birthday_customer_sub = $_POST['birthday_customer'];
-    }
-    if (isset($_POST['passport_customer'])) {
-        $passport_customer_sub = $_POST['passport_customer'];
-    }
-    if (isset($_POST['date_passport_customer'])) {
-        $date_passport_customer_sub = $_POST['date_passport_customer'];
-    }
+    include 'getParamBooking.php';
     if (isset($_POST['check_edit']) && $_POST['check_edit'] == 'edit' && isset($_POST['id_edit']) && $_POST['id_edit'] != '') {
         $string_value_old = '';
         $string_value_new = '';
@@ -651,6 +507,16 @@ if (isset($_POST['code_booking'])) {
             $check_data_khach_hang = customer_getByTop('1', 'email="' . $email . '"', 'id desc');
             if (count($check_data_khach_hang) > 0) {
                 $id_customer = $check_data_khach_hang[0]->id;
+                // update thông tin khách hàng
+                $update_cus = new customer((array)$check_data_khach_hang[0]);
+                $update_cus->name=$name_customer;
+                $update_cus->address=$address;
+                $update_cus->phone=$phone;
+                $update_cus->fax=$fax;
+                if($nhom_khach_hang!=''){
+                    $update_cus->category=$nhom_khach_hang;
+                }
+                customer_update($update_cus);
             } else {
                 $dangky = new customer();
                 $dangky->name = $name_customer;
@@ -679,6 +545,23 @@ if (isset($_POST['code_booking'])) {
             $price_old = 0;
             $price_tiep_thi = 0;
             $booking_model = new booking();
+            $booking_model->price_new = $price_submit;
+            $booking_model->price_tre_em_m1_new = $price_m1_submit;
+            $booking_model->price_tre_em_m2_new = $price_m2_submit;
+            $booking_model->price_tre_em_m3_new = $price_m3_submit;
+            $booking_model->ty_le_m1 = $tyle_m1;
+            $booking_model->ty_le_m2 = $tyle_m2;
+            $booking_model->ty_le_m3 = $tyle_m3;
+            $booking_model->loi_nhuan = $loi_nhuan;
+            $booking_model->loi_nhuan_m1 = $loi_nhuan_m1;
+            $booking_model->loi_nhuan_m2 = $loi_nhuan_m2;
+            $booking_model->loi_nhuan_m3 = $loi_nhuan_m3;
+
+            $booking_model->num_nguoi_lon = $num_nguoi_lon;
+            $booking_model->num_tre_em_m1 = $num_tre_em_m1;
+            $booking_model->num_tre_em_m2 = $num_tre_em_m2;
+            $booking_model->num_tre_em_m3 = $num_tre_em_m3;
+
             // type tour
             if ($type_tour == 1 || $type_tour == 0) {
                 if ($type_tour == 1) {
@@ -716,10 +599,11 @@ if (isset($_POST['code_booking'])) {
                     $booking_model->id_tour = $data_check_tour_custom[0]->id;
                     $booking_model->name_tour = $data_check_tour_custom[0]->name;
                     $booking_model->code_tour = $data_check_tour_custom[0]->code;
-                    $booking_model->price_tour = $price_submit;
-                    $booking_model->price_11 = $price_511_submit;
-                    $booking_model->price_5 = $price_5_submit;
                     $booking_model->phuong_tien = $hang_bay;
+                    $booking_model->price_tour = $price_submit;
+                    $booking_model->price_tre_em_m1 = $price_m1_submit;
+                    $booking_model->price_tre_em_m2 = $price_m2_submit;
+                    $booking_model->price_tre_em_m3 = $price_m3_submit;
                     $booking_model->tour_custom = 1;
 
                 } else {
@@ -734,9 +618,22 @@ if (isset($_POST['code_booking'])) {
                     $booking_model->id_tour = $id_tour;
                     $booking_model->name_tour = $check_data_tour[0]->name;
                     $booking_model->code_tour = $check_data_tour[0]->code;
+                    if(!is_numeric($check_data_tour[0]->price)){
+                        $check_data_tour[0]->price=0;
+                    }
+                    if(!is_numeric($check_data_tour[0]->price_2)){
+                        $check_data_tour[0]->price_2=0;
+                    }
+                    if(!is_numeric($check_data_tour[0]->price_3)){
+                        $check_data_tour[0]->price_3=0;
+                    }
+                    if(!is_numeric($check_data_tour[0]->price_4)){
+                        $check_data_tour[0]->price_4=0;
+                    }
                     $booking_model->price_tour = $check_data_tour[0]->price;
-                    $booking_model->price_11 = $check_data_tour[0]->price_2;
-                    $booking_model->price_5 = $check_data_tour[0]->price_3;
+                    $booking_model->price_tre_em_m1 = $check_data_tour[0]->price_2;
+                    $booking_model->price_tre_em_m2 = $check_data_tour[0]->price_3;
+                    $booking_model->price_tre_em_m3 = $check_data_tour[0]->price_4;
                     $booking_model->phuong_tien = $check_data_tour[0]->vehicle;
                     if ($check_data_tour[0]->so_cho >= 0) {
                         $update_tour = new tour((array)$check_data_tour[0]);
@@ -773,9 +670,7 @@ if (isset($_POST['code_booking'])) {
             if ($dieuhanh_id == $_SESSION['user_id']) {
                 $booking_model->confirm_dieuhanh = 1;
             }
-            $booking_model->price_new = $price_submit;
-            $booking_model->price_11_new = $price_511_submit;
-            $booking_model->price_5_new = $price_5_submit;
+
             $booking_model->nguon_tour = $nguon_tour;
             $booking_model->tien_te = $tien_te;
             $booking_model->ty_gia = $ty_gia;
@@ -788,10 +683,6 @@ if (isset($_POST['code_booking'])) {
             $booking_model->diem_tra = $diem_don;
             $booking_model->ngay_khoi_hanh = date("Y-m-d", strtotime($ngay_khoi_hanh));
             $booking_model->ngay_ket_thuc = date("Y-m-d", strtotime($ngay_ket_thuc));
-
-            $booking_model->num_nguoi_lon = $num_nguoi_lon;
-            $booking_model->num_tre_em = $num_tre_em;
-            $booking_model->num_tre_em_5 = $num_tre_em_5;
             $booking_model->total_price = $total;
             $booking_model->tien_thanh_toan = $dat_coc;
             $booking_model->user_id = $id_user;
@@ -805,6 +696,31 @@ if (isset($_POST['code_booking'])) {
                     $booking_model = _returnHoaHongBooking($booking_model, $check_data_user_tt, $price_tiep_thi);
                     $booking_model->user_tiep_thi_id = $user_tiep_thi_id;
                     $save_tiepthi = 1;
+                }
+            }else{
+                if($name_user_tiepthi!='' && $email_thanh_vien!='' && $phone_thanh_vien!='' ){
+                    $check_data_user_tt = user_getByTop('','user_email="'.$email_thanh_vien.'"','');
+                    if(count($check_data_user_tt)>0){
+                        $booking_model = _returnHoaHongBooking($booking_model, $check_data_user_tt, $price_tiep_thi);
+                        $booking_model->user_tiep_thi_id = $check_data_user_tt[0]->id;
+                        $save_tiepthi = 1;
+                    }else{
+                        $create_user=new user();
+                        $create_user->name=$name_user_tiepthi;
+                        $create_user->user_email=$email_thanh_vien;
+                        $create_user->user_name=$email_thanh_vien;
+                        $create_user->phone=$phone_thanh_vien;
+                        $create_user->login_two_steps = 0;
+                        $create_user->user_role = 2;
+                        $create_user->user_code = _randomBooking('az_sales', 'user_count');
+                        user_insert($create_user);
+                        $check_data_user_tt = user_getByTop('','user_code="'.$create_user->user_code.'"',1);
+                        if(count($check_data_user_tt)>0){
+                            $booking_model = _returnHoaHongBooking($booking_model, $check_data_user_tt, $price_tiep_thi);
+                            $booking_model->user_tiep_thi_id = $check_data_user_tt[0]->id;
+                            $save_tiepthi = 1;
+                        }
+                    }
                 }
             }
             if ($status == '') {
@@ -830,7 +746,11 @@ if (isset($_POST['code_booking'])) {
             if (count($data_booking) > 0) {
                 $id_booking = $data_booking[0]->id;
             }
+            // cập nhật danh sách đoàn
             _updateCustomerBooking($name_customer_sub, $email_customer_sub, $phone_customer_sub, $address_customer_sub, $tuoi_customer_sub, $tuoi_number_customer_sub, $birthday_customer_sub, $passport_customer_sub, $date_passport_customer_sub, $id_booking, $_SESSION['user_id']);
+
+            // Danh sách bảng giá dịch vụ
+            _updateDanhSachBangGia($name_dichvu,$type_dichvu,$price_dichvu,$soluong_dichvu,$thanhtien_dichvu,$ghichu_dichvu, $id_booking);
 
             // tiep thi lien ket
             if (isset($save_tiepthi) && $save_tiepthi == 1) {

@@ -916,7 +916,7 @@
                                                     style="width:100%;max-width:600px;outline:0" autocomplete="off">
                                                  <i class="ace-icon fa fa-user blue"></i>
                                              </span>
-                                             <label class="error-color  error-color-size" id="error_name_thanh_vien">(Trong trường hợp không tìm thấy thành viên, input sẽ là tên mới của thành viên)</label>
+                                             <label class="error-color  error-color-size">(Trong trường hợp không tìm thấy thành viên, input sẽ là tên của thành viên)</label>
                                             <input class="valid" hidden id="input_id_user_tt" type="text"
                                                    name="id_user_tt" value="<?php echo $id_user_tt?>">
                                         </div>
@@ -925,7 +925,7 @@
                                                     <label for="form-field-select-3">Họ tên <span style="color: red; display: none" class="required_label">*</span></label>
                                                     <div>
                                                        <span class="input-icon width_100">
-                                                            <input  name="name_thanh_vien" type="text" id="input_name_thanh_vien" class="width_100 valid" >
+                                                            <input readonly name="name_thanh_vien" type="text" id="input_name_thanh_vien" class="width_100 valid" >
                                                             <i class="ace-icon fa fa-user blue"></i>
                                                         </span>
                                                         <label style="display: none" class="error-color  error-color-size" id="error_name_thanh_vien">Bạn vui lòng nhập tên thành viên</label>
@@ -959,12 +959,13 @@
                                     <div class="profile-info-value">
 
                                          <span class="input-icon width_50">
-                                                            <input name="hoa_hong_thanh_vien" type="number" id="input_hoa_hong_thanh_vien" class="width_100 valid">
+                                                            <input disabled name="hoa_hong_thanh_vien" type="number" id="input_hoa_hong_thanh_vien" class="width_100 valid">
+                                                            <input disabled hidden name="hoa_hong_thanh_vien_hidden" type="number" id="input_hoa_hong_thanh_vien_hidden" class="width_100 valid">
                                                             <i class="ace-icon fa fa-dollar blue"></i>
                                                         </span>
-                                        <span class="editable editable-click price_tiep_thi">
+                                        <label class="editable editable-click price_tiep_thi">
                                             <?php echo $price_tiep_thi?>
-                                        </span>
+                                        </label>
                                     </div>
                                 </div>
                                 <div class="profile-info-row">

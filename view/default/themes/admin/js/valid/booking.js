@@ -1,109 +1,189 @@
-jQuery(function($) {
+jQuery(function ($) {
     url = $('#url_input').val();
 
-    $('body').on('input', '#input_name_customer', function() {
+    $('body').on('input', '#input_name_customer', function () {
         removeValueCustomer();
         checkNameCustomer();
     });
-    $('body').on('keyup', '#input_name_customer', function() {
+    $('body').on('keyup', '#input_name_customer', function () {
         removeValueCustomer();
         checkNameCustomer();
     });
 
-    $('body').on('input', '#input_name_tour', function() {
+    $('body').on('input', '#input_name_tour', function () {
         removeValueTour();
     });
-    $('body').on('keyup', '#input_name_tour', function(event) {
+    $('body').on('keyup', '#input_name_tour', function (event) {
         if (event.keyCode != '13') {
             removeValueTour();
         }
     });
 
-    $('body').on('input', '#input_name_user', function() {
+    $('body').on('input', '#input_name_user', function () {
         removeValueUser();
     });
-    $('body').on('keyup', '#input_name_user', function(event) {
+    $('body').on('keyup', '#input_name_user', function (event) {
         if (event.keyCode != '13') {
             removeValueUser();
         }
     });
 
-    $('body').on('input', '#input_name_dieuhanh', function() {
+    $('body').on('input', '#input_name_dieuhanh', function () {
         removeValueDieuhanh();
     });
-    $('body').on('keyup', '#input_name_dieuhanh', function(event) {
+    $('body').on('keyup', '#input_name_dieuhanh', function (event) {
         if (event.keyCode != '13') {
             removeValueDieuhanh();
         }
     });
-    $('body').on('input', '#input_email_thanh_vien', function() {
+    $('body').on('input', '#input_email_thanh_vien', function () {
         removeInfoTiepthi();
     });
-    $('body').on('input', '#input_name_user_tiepthi', function() {
-        removeInfoTiepthi();
+    $('body').on('input', '#input_name_user_tiepthi', function () {
+        var value = $('#input_name_user_tiepthi').val();
+        $('#input_name_thanh_vien').val(value);
+        checkUserTiepThi();
     });
-    $('body').on('keyup', '#input_name_user_tiepthi', function(event) {
+    $('body').on('keyup', '#input_name_user_tiepthi', function (event) {
         if (event.keyCode != '13') {
-            removeInfoTiepthi();
+            var value = $('#input_name_user_tiepthi').val();
+            $('#input_name_thanh_vien').val(value);
+            checkUserTiepThi();
         }
     });
-    // $('body').on("blur", '#input_name_user_tiepthi', function (event) {
-    //     removeInfoTiepthi()
-    // });
-    function removeInfoTiepthi() {
+    $('body').on('input', '#input_phone_thanh_vien', function () {
+        removeInfoTiepthi();
+    });
+
+    function checkUserTiepThi() {
         if ($('#input_name_user_tiepthi').val() != '') {
             if ($('#input_id_user_tt').val() != '') {
+                $('#input_id_user_tt').val('');
                 $('#input_name_thanh_vien')
                     .val('')
-                    .removeClass('valid');
+                    .addClass('valid')
+                    .removeClass('input-error');
                 $('#input_email_thanh_vien')
                     .val('')
-                    .removeClass('valid')
-                    .removeAttr('disabled');
+                    .addClass('valid')
+                    .removeAttr('disabled')
+                    .removeClass('input-error');
                 $('#input_phone_thanh_vien')
                     .val('')
-                    .removeClass('valid')
-                    .removeAttr('disabled');
+                    .addClass('valid')
+                    .removeAttr('disabled')
+                    .removeClass('input-error');
+                $('.required_label').hide();
+                $('#error_email_thanh_vien')
+                    .hide()
+                    .html('Bạn vui lòng nhập email');
+                $('#error_name_thanh_vien').hide();
+                $('#error_phone_thanh_vien').hide();
+                returnDefaultPriceTiepThi()
             } else {
-                if ($('#input_name_thanh_vien').val() != '') {
-                    $('#input_name_thanh_vien').addClass('valid');
-                } else {
-                    $('#input_name_thanh_vien').removeClass('valid');
-                }
-                if ($('#input_email_thanh_vien').val() != '') {
-                    checkEmailThanhVien();
-                } else {
-                    $('#input_email_thanh_vien').removeClass('valid');
-                }
-                if ($('#input_phone_thanh_vien') != '') {
-                    $('#input_phone_thanh_vien').addClass('valid');
-                } else {
-                    $('#input_phone_thanh_vien').removeClass('valid');
-                }
+                removeInfoTiepthi();
             }
-            $('#input_id_user_tt').val('');
-            $('.required_label').show();
+            $('#error_name_thanh_vien').hide();
+            $('#input_name_thanh_vien')
+                .addClass('valid')
+                .removeClass('input-error');
         } else {
             $('#input_id_user_tt').val('');
             $('#input_name_thanh_vien')
                 .val('')
-                .addClass('valid');
+                .addClass('valid')
+                .removeClass('input-error');
             $('#input_email_thanh_vien')
                 .val('')
                 .addClass('valid')
-                .removeAttr('disabled');
+                .removeAttr('disabled')
+                .removeClass('input-error');
             $('#input_phone_thanh_vien')
                 .val('')
                 .addClass('valid')
-                .removeAttr('disabled');
+                .removeAttr('disabled')
+                .removeClass('input-error');
             $('.required_label').hide();
             $('#error_email_thanh_vien')
                 .hide()
                 .html('Bạn vui lòng nhập email');
+            $('#error_name_thanh_vien').hide();
+            $('#error_phone_thanh_vien').hide();
+
+            returnDefaultPriceTiepThi();
+
         }
     }
-    
-    function checkEmailThanhVien() {
+
+    function removeInfoTiepthi() {
+        var success = 0;
+        if (
+            $('#input_name_user_tiepthi').val() == '' &&
+            $('#input_phone_thanh_vien').val() == '' &&
+            $('#input_email_thanh_vien').val() == ''
+        ) {
+            $('#input_name_thanh_vien')
+                .addClass('valid')
+                .removeClass('input-error');
+            $('#input_email_thanh_vien')
+                .addClass('valid')
+                .removeClass('input-error');
+            $('#input_phone_thanh_vien')
+                .addClass('valid')
+                .removeClass('input-error');
+            returnDefaultPriceTiepThi();
+        } else {
+            var success_phone = 0;
+            if ($('#input_phone_thanh_vien').val() != '') {
+                $('#input_phone_thanh_vien')
+                    .addClass('valid')
+                    .removeClass('input-error');
+                $('#error_phone_thanh_vien').hide();
+                success_phone = 1;
+            } else {
+                $('#input_phone_thanh_vien')
+                    .removeClass('valid')
+                    .addClass('input-error');
+                $('#error_phone_thanh_vien').show();
+            }
+
+
+            var success_name = 0;
+            if ($('#input_name_user_tiepthi').val() != '') {
+                success_name = 1;
+            } else {
+                $('#error_name_thanh_vien').show();
+                $('#input_name_thanh_vien')
+                    .removeClass('valid')
+                    .addClass('input-error');
+            }
+
+            var success_email = 0;
+            if ($('#input_email_thanh_vien').val() != '') {
+                checkEmailThanhVien(success_name, success_phone);
+            } else {
+                $('#error_email_thanh_vien')
+                    .show()
+                    .html('Bạn vui lòng nhập email');
+                $('#input_email_thanh_vien')
+                    .removeClass('valid')
+                    .addClass('input-error');
+                returnDefaultPriceTiepThi()
+            }
+
+        }
+    }
+
+    function returnDefaultPriceTiepThi() {
+        if ($('#input_hoa_hong_thanh_vien_hidden').val() == '') {
+            $('#input_hoa_hong_thanh_vien')
+                .val('')
+                .attr('disabled', 'disabled');
+            $('#price_tiep_thi').html('');
+        }
+    }
+
+    function checkEmailThanhVien(success_name, success_phone) {
         var value = $('#input_email_thanh_vien').val();
         if (value != '') {
             var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -115,42 +195,50 @@ jQuery(function($) {
                     method: 'GET',
                     url: link,
                     data: 'value=' + value + '&key=' + key,
-                    success: function(response) {
+                    success: function (response) {
+                        var res = 0;
                         if (response == 1) {
                             $('#error_email_thanh_vien')
                                 .hide()
                                 .html('Bạn vui lòng nhập email');
-                            $('#input_email_thanh_vien').addClass('valid');
+                            $('#input_email_thanh_vien')
+                                .addClass('valid')
+                                .removeClass('input-error');
+                            if (success_name && success_phone) {
+                                $('#input_hoa_hong_thanh_vien').removeAttr('disabled');
+                            }
                         } else {
                             $('#error_email_thanh_vien')
                                 .show()
                                 .html('Email đã tồn tại trong hệ thống');
-                            $('#input_email_thanh_vien').removeClass('valid');
+                            $('#input_email_thanh_vien')
+                                .removeClass('valid')
+                                .addClass('input-error');
+                            returnDefaultPriceTiepThi()
                         }
+
                     }
                 });
             } else {
                 $('#error_email_thanh_vien')
                     .show()
                     .html('Email không đúng định dạng');
-                $('#input_email_thanh_vien').removeClass('valid');
+                $('#input_email_thanh_vien')
+                    .removeClass('valid')
+                    .addClass('input-error');
+                returnDefaultPriceTiepThi()
             }
-        } else {
-            $('#error_email_thanh_vien')
-                .show()
-                .html('Bạn vui lòng nhập email');
-            $('#input_email_thanh_vien').removeClass('valid');
         }
     }
 
-    $('body').on('input', '#input_dat_coc', function() {
+    $('body').on('input', '#input_dat_coc', function () {
         returnDatCoc();
     });
-    $('body').on('keyup', '#input_dat_coc', function(event) {
+    $('body').on('keyup', '#input_dat_coc', function (event) {
         returnDatCoc();
     });
 
-    $('body').on('click', '#reset_price', function() {
+    $('body').on('click', '#reset_price', function () {
         var price_old = $('#input_price_old').val();
         var price_format = $('#input_price_format').val();
         $('#input_price').val(price_old);
@@ -159,7 +247,7 @@ jQuery(function($) {
             .show()
             .html(price_format);
     });
-    $('body').on('click', '#reset_price_tre_em_m1', function() {
+    $('body').on('click', '#reset_price_tre_em_m1', function () {
         var price_old = $('#input_price_tre_em_m1_old').val();
         var price_format = price_old.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
         $('#input_price_tre_em_m1').val(price_old);
@@ -168,7 +256,7 @@ jQuery(function($) {
             .show()
             .html(price_format);
     });
-    $('body').on('click', '#reset_price_tre_em_m2', function() {
+    $('body').on('click', '#reset_price_tre_em_m2', function () {
         var price_old = $('#input_price_tre_em_m2_old').val();
         var price_format = price_old.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
         $('#input_price_tre_em_m2').val(price_old);
@@ -177,7 +265,7 @@ jQuery(function($) {
             .show()
             .html(price_format);
     });
-    $('body').on('click', '#reset_price_tre_em_m3', function() {
+    $('body').on('click', '#reset_price_tre_em_m3', function () {
         var price_old = $('#input_price_tre_em_m3_old').val();
         var price_format = price_old.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
         $('#input_price_tre_em_m3').val(price_old);
@@ -187,21 +275,21 @@ jQuery(function($) {
             .html(price_format);
     });
 
-    $('body').on('click', '#edit_price', function() {
+    $('body').on('click', '#edit_price', function () {
         $('#input_price')
             .show()
             .focus()
             .select();
         $('#price_format_span').hide();
     });
-    $('body').on('click', '#edit_price_tre_em_m1', function() {
+    $('body').on('click', '#edit_price_tre_em_m1', function () {
         $('#input_price_tre_em_m1')
             .show()
             .focus()
             .select();
         $('#price_format_span_tre_em_m1').hide();
     });
-    $('body').on('click', '#input_vat', function() {
+    $('body').on('click', '#input_vat', function () {
         // $('#tong_cong').html('');
         // $('#tong_cong').html('');
         // $('#vat').html('');
@@ -212,21 +300,21 @@ jQuery(function($) {
         tinh_tong_tien(type_tour);
     });
 
-    $('body').on('click', '#edit_price_tre_em_m2', function() {
+    $('body').on('click', '#edit_price_tre_em_m2', function () {
         $('#input_price_tre_em_m2')
             .show()
             .focus()
             .select();
         $('#price_format_span_tre_em_m2').hide();
     });
-    $('body').on('click', '#edit_price_tre_em_m3', function() {
+    $('body').on('click', '#edit_price_tre_em_m3', function () {
         $('#input_price_tre_em_m3')
             .show()
             .focus()
             .select();
         $('#price_format_span_tre_em_m3').hide();
     });
-    $('body').on('blur', '#input_price', function() {
+    $('body').on('blur', '#input_price', function () {
         var price = $(this).val();
         var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
 
@@ -247,7 +335,7 @@ jQuery(function($) {
         checkSoNguoi();
         tinh_tong_tien(0);
     });
-    $('body').on('blur', '#input_price_tre_em_m1', function() {
+    $('body').on('blur', '#input_price_tre_em_m1', function () {
         var price = $(this).val();
         var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
         if (numberRegex.test(price)) {
@@ -267,7 +355,7 @@ jQuery(function($) {
         checkSoNguoi();
         tinh_tong_tien(0);
     });
-    $('body').on('blur', '#input_price_tre_em_m2', function() {
+    $('body').on('blur', '#input_price_tre_em_m2', function () {
         var price = $(this).val();
         var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
         if (numberRegex.test(price)) {
@@ -287,7 +375,7 @@ jQuery(function($) {
         checkSoNguoi();
         tinh_tong_tien(0);
     });
-    $('body').on('blur', '#input_price_tre_em_m3', function() {
+    $('body').on('blur', '#input_price_tre_em_m3', function () {
         var price = $(this).val();
         var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
         if (numberRegex.test(price)) {
@@ -308,7 +396,7 @@ jQuery(function($) {
         tinh_tong_tien(0);
     });
 
-    $('body').on('click', '.btn_add_customer_bk', function() {
+    $('body').on('click', '.btn_add_customer_bk', function () {
         var check_number_member = 0;
         var lenght = $('.table_add_customer > tbody  > tr').length;
         var input_num_nguoi_lon = $('#input_num_nguoi_lon').val();
@@ -338,11 +426,11 @@ jQuery(function($) {
                 content: mess,
                 alertBtnText: 'Ok',
                 iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
-                alertHandler: function() {}
+                alertHandler: function () {}
             });
         } else {
             var i = 1;
-            $('.table_add_customer > tbody  > tr').each(function() {
+            $('.table_add_customer > tbody  > tr').each(function () {
                 var tds = $(this).find('td.stt_cus');
                 tds.eq(0).text(i);
                 i = i + 1;
@@ -376,14 +464,14 @@ jQuery(function($) {
             $('.table_add_customer').append(row);
         }
     });
-    $('body').on('click', '.btn_add_customer', function() {
+    $('body').on('click', '.btn_add_customer', function () {
         returnGenDanhSachDoan();
     });
-    $('body').on('click', '.btn_remove_customer', function() {
+    $('body').on('click', '.btn_remove_customer', function () {
         var deleteid = $(this).attr('deleteid');
         $('#row_customer_' + deleteid).remove();
         var i = 1;
-        $('.table_add_customer > tbody  > tr').each(function() {
+        $('.table_add_customer > tbody  > tr').each(function () {
             var tds = $(this).find('td.stt_cus');
             var id_current = tds.eq(0).text();
             tds.eq(0).text(i);
@@ -397,7 +485,7 @@ jQuery(function($) {
             i = i + 1;
         });
     });
-    $('body').on('click', '#tinh_tien', function() {
+    $('body').on('click', '#tinh_tien', function () {
         var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
         var price_nguoi_lon = $('#input_price').val();
         var price_tre_em_511 = $('#input_price_511').val();
@@ -418,7 +506,7 @@ jQuery(function($) {
                         content: 'Bạn vui lòng chọn tour',
                         alertBtnText: 'Ok',
                         iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
-                        alertHandler: function() {
+                        alertHandler: function () {
                             $('#input_name_tour')
                                 .show()
                                 .focus()
@@ -454,9 +542,8 @@ jQuery(function($) {
                                 title: 'Lỗi',
                                 content: 'Tiền đặt cọc đã vượt quá số tiền phải thanh toán, vui lòng nhập lại',
                                 alertBtnText: 'Ok',
-                                iconBtnText:
-                                    '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
-                                alertHandler: function() {
+                                iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                                alertHandler: function () {
                                     $('#input_dat_coc')
                                         .show()
                                         .focus()
@@ -481,7 +568,7 @@ jQuery(function($) {
                     content: 'Bạn vui lòng nhập số người trước khi tính tiền',
                     alertBtnText: 'Ok',
                     iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
-                    alertHandler: function() {}
+                    alertHandler: function () {}
                 });
             }
         } else {
@@ -490,7 +577,7 @@ jQuery(function($) {
                 content: 'Bạn vui lòng kiểm tra đơn giá',
                 alertBtnText: 'Ok',
                 iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
-                alertHandler: function() {
+                alertHandler: function () {
                     $('#input_name_tour')
                         .show()
                         .focus()
@@ -500,97 +587,97 @@ jQuery(function($) {
         }
     });
     // check
-    $('body').on('input', '#input_ngay_bat_dau', function() {
+    $('body').on('input', '#input_ngay_bat_dau', function () {
         checkNgayBatDau();
     });
-    $('body').on('keyup', '#input_ngay_bat_dau', function() {
+    $('body').on('keyup', '#input_ngay_bat_dau', function () {
         checkNgayBatDau();
     });
-    $('body').on('change', '#input_ngay_bat_dau', function() {
+    $('body').on('change', '#input_ngay_bat_dau', function () {
         checkNgayBatDau();
     });
 
     // check
-    $('body').on('input', '#input_han_thanh_toan', function() {
+    $('body').on('input', '#input_han_thanh_toan', function () {
         checkHanThanhToan();
     });
-    $('body').on('keyup', '#input_han_thanh_toan', function() {
+    $('body').on('keyup', '#input_han_thanh_toan', function () {
         checkHanThanhToan();
     });
-    $('body').on('change', '#input_han_thanh_toan', function() {
+    $('body').on('change', '#input_han_thanh_toan', function () {
         checkHanThanhToan();
     });
 
     // check
-    $('body').on('input', '#input_ngay_khoi_hanh', function() {
+    $('body').on('input', '#input_ngay_khoi_hanh', function () {
         checkNgayKhoiHanh();
     });
-    $('body').on('keyup', '#input_ngay_khoi_hanh', function() {
+    $('body').on('keyup', '#input_ngay_khoi_hanh', function () {
         checkNgayKhoiHanh();
     });
-    $('body').on('change', '#input_ngay_khoi_hanh', function() {
+    $('body').on('change', '#input_ngay_khoi_hanh', function () {
         checkNgayKhoiHanh();
     });
 
     // check
-    $('body').on('input', '#input_ngay_ket_thuc', function() {
+    $('body').on('input', '#input_ngay_ket_thuc', function () {
         checkNgayKetThuc();
     });
-    $('body').on('keyup', '#input_ngay_ket_thuc', function() {
+    $('body').on('keyup', '#input_ngay_ket_thuc', function () {
         checkNgayKetThuc();
     });
-    $('body').on('change', '#input_ngay_ket_thuc', function() {
+    $('body').on('change', '#input_ngay_ket_thuc', function () {
         checkNgayKetThuc();
     });
 
-    $('body').on('input', '#input_email', function() {
+    $('body').on('input', '#input_email', function () {
         checkEmailCustomer();
     });
-    $('body').on('keyup', '#input_email', function() {
+    $('body').on('keyup', '#input_email', function () {
         checkEmailCustomer();
     });
-    $('body').on('change', '#input_email', function() {
+    $('body').on('change', '#input_email', function () {
         checkEmailCustomer();
     });
 
-    $('body').on('input', '#input_address', function() {
+    $('body').on('input', '#input_address', function () {
         checkAddressCustomer();
     });
-    $('body').on('keyup', '#input_address', function() {
+    $('body').on('keyup', '#input_address', function () {
         checkAddressCustomer();
     });
-    $('body').on('change', '#input_address', function() {
+    $('body').on('change', '#input_address', function () {
         checkAddressCustomer();
     });
 
-    $('body').on('input', '#input_phone', function() {
+    $('body').on('input', '#input_phone', function () {
         checkPhoneCustomer();
     });
-    $('body').on('keyup', '#input_phone', function() {
+    $('body').on('keyup', '#input_phone', function () {
         checkPhoneCustomer();
     });
-    $('body').on('change', '#input_phone', function() {
+    $('body').on('change', '#input_phone', function () {
         checkPhoneCustomer();
     });
 
-    $('body').on('change', '.hinh_thuc_thanh_toan', function() {
+    $('body').on('change', '.hinh_thuc_thanh_toan', function () {
         $('#error_hinh_thuc_thanh_toan').hide();
     });
-    $('body').on('change', '.status', function() {
+    $('body').on('change', '.status', function () {
         $('#error_status').hide();
     });
 
-    $('body').on('input', '#input_diem_don', function() {
+    $('body').on('input', '#input_diem_don', function () {
         checkDiemDon();
     });
-    $('body').on('keyup', '#input_diem_don', function() {
+    $('body').on('keyup', '#input_diem_don', function () {
         checkDiemDon();
     });
-    $('body').on('change', '#input_diem_don', function() {
+    $('body').on('change', '#input_diem_don', function () {
         checkDiemDon();
     });
 
-    $('body').on('change', '.type_tour', function() {
+    $('body').on('change', '.type_tour', function () {
         var value = $(this).val();
         $('.show_type_tour').hide();
         if (value == 1) {
@@ -669,6 +756,7 @@ jQuery(function($) {
         $('#price_format_span_tre_em_m3').html('0 vnđ');
         $('#price_format_span_5').html('0 vnđ');
         $('#input_name_tour').val('');
+
         $('#name_tour_table').html('');
         $('#error_type_tour').hide();
         $('#tong_cong').html('0 vnđ');
@@ -676,10 +764,9 @@ jQuery(function($) {
         $('#vat').html('0 vnđ');
         $('#input_dat_coc').val('');
         $('#input_hoa_hong_thanh_vien')
-            .val('')
-            .removeAttr('disabled');
+            .val('');
         $('.price_tiep_thi').html('');
-
+        $('#input_hoa_hong_thanh_vien_hidden').val('');
         $('#list_dichvu').html('');
         $('.show_hide_bang_gia').show();
 
@@ -706,7 +793,7 @@ jQuery(function($) {
 
     //spinner
     var spinner = $('#spinner').spinner({
-        create: function(event, ui) {
+        create: function (event, ui) {
             //add custom classes and icons
             $(this)
                 .next()
@@ -719,35 +806,36 @@ jQuery(function($) {
             //larger buttons on touch devices
             if ('touchstart' in document.documentElement)
                 $(this)
-                    .closest('.ui-spinner')
-                    .addClass('ui-spinner-touch');
+                .closest('.ui-spinner')
+                .addClass('ui-spinner-touch');
         }
     });
-    $('form').on('focus', '.spinbox-input', function(e) {
-        $(this).on('mousewheel.disableScroll', function(e) {
+    $('form').on('focus', '.spinbox-input', function (e) {
+        $(this).on('mousewheel.disableScroll', function (e) {
             e.preventDefault();
         });
     });
-    $('form').on('blur', '.spinbox-input', function(e) {
+    $('form').on('blur', '.spinbox-input', function (e) {
         $(this).off('mousewheel.disableScroll');
     });
-    $('form').on('focus', '.input_table', function(e) {
-        $(this).on('mousewheel.disableScroll', function(e) {
+    $('form').on('focus', '.input_table', function (e) {
+        $(this).on('mousewheel.disableScroll', function (e) {
             e.preventDefault();
         });
     });
-    $('form').on('blur', '.input_table', function(e) {
+    $('form').on('blur', '.input_table', function (e) {
         $(this).off('mousewheel.disableScroll');
     });
-    $('body').on('click', '#input_tyle_m1', function() {
+    $('body').on('click', '#input_tyle_m1', function () {
         $(this).select();
     });
-    $('body').on('input', '#input_tyle_m1', function(e) {
+    $('body').on('input', '#input_tyle_m1', function (e) {
         input_tyle_1();
     });
-    $('body').on('blur', '#input_tyle_m1', function(e) {
+    $('body').on('blur', '#input_tyle_m1', function (e) {
         input_tyle_1();
     });
+
     function input_tyle_1() {
         var value = $('#input_tyle_m1').val();
         if (!$.isNumeric(value)) {
@@ -758,15 +846,16 @@ jQuery(function($) {
         }
         total_price_dich_vu(0, 0, 0);
     }
-    $('body').on('click', '#input_tyle_m2', function() {
+    $('body').on('click', '#input_tyle_m2', function () {
         $(this).select();
     });
-    $('body').on('input', '#input_tyle_m2', function(e) {
+    $('body').on('input', '#input_tyle_m2', function (e) {
         input_tyle_2();
     });
-    $('body').on('blur', '#input_tyle_m2', function(e) {
+    $('body').on('blur', '#input_tyle_m2', function (e) {
         input_tyle_2();
     });
+
     function input_tyle_2() {
         var value = $('#input_tyle_m2').val();
         if (!$.isNumeric(value)) {
@@ -777,15 +866,16 @@ jQuery(function($) {
         }
         total_price_dich_vu(0, 0, 0);
     }
-    $('body').on('click', '#input_tyle_m3', function() {
+    $('body').on('click', '#input_tyle_m3', function () {
         $(this).select();
     });
-    $('body').on('input', '#input_tyle_m3', function(e) {
+    $('body').on('input', '#input_tyle_m3', function (e) {
         input_tyle_3();
     });
-    $('body').on('blur', '#input_tyle_m3', function(e) {
+    $('body').on('blur', '#input_tyle_m3', function (e) {
         input_tyle_3();
     });
+
     function input_tyle_3() {
         var value = $('#input_tyle_m3').val();
         if (!$.isNumeric(value)) {
@@ -797,15 +887,16 @@ jQuery(function($) {
         total_price_dich_vu(0, 0, 0);
     }
 
-    $('body').on('click', '#input_loi_nhuan', function() {
+    $('body').on('click', '#input_loi_nhuan', function () {
         $(this).select();
     });
-    $('body').on('input', '#input_loi_nhuan', function(e) {
+    $('body').on('input', '#input_loi_nhuan', function (e) {
         input_loi_nhuan();
     });
-    $('body').on('blur', '#input_loi_nhuan', function(e) {
+    $('body').on('blur', '#input_loi_nhuan', function (e) {
         input_loi_nhuan();
     });
+
     function input_loi_nhuan() {
         var value = $('#input_loi_nhuan').val();
         var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
@@ -819,15 +910,16 @@ jQuery(function($) {
         total_price_dich_vu(0, 0, 0);
     }
 
-    $('body').on('click', '#input_loi_nhuan_m1', function() {
+    $('body').on('click', '#input_loi_nhuan_m1', function () {
         $(this).select();
     });
-    $('body').on('input', '#input_loi_nhuan_m1', function(e) {
+    $('body').on('input', '#input_loi_nhuan_m1', function (e) {
         input_loi_nhuan_1();
     });
-    $('body').on('blur', '#input_loi_nhuan_m1', function(e) {
+    $('body').on('blur', '#input_loi_nhuan_m1', function (e) {
         input_loi_nhuan_1();
     });
+
     function input_loi_nhuan_1() {
         var value = $('#input_loi_nhuan_m1').val();
         var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
@@ -841,15 +933,16 @@ jQuery(function($) {
         total_price_dich_vu(0, 0, 0);
     }
 
-    $('body').on('click', '#input_loi_nhuan_m2', function() {
+    $('body').on('click', '#input_loi_nhuan_m2', function () {
         $(this).select();
     });
-    $('body').on('input', '#input_loi_nhuan_m2', function(e) {
+    $('body').on('input', '#input_loi_nhuan_m2', function (e) {
         input_loi_nhuan_2();
     });
-    $('body').on('blur', '#input_loi_nhuan_m2', function(e) {
+    $('body').on('blur', '#input_loi_nhuan_m2', function (e) {
         input_loi_nhuan_2();
     });
+
     function input_loi_nhuan_2() {
         var value = $('#input_loi_nhuan_m2').val();
         var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
@@ -863,15 +956,16 @@ jQuery(function($) {
         total_price_dich_vu(0, 0, 0);
     }
 
-    $('body').on('click', '#input_loi_nhuan_m3', function() {
+    $('body').on('click', '#input_loi_nhuan_m3', function () {
         $(this).select();
     });
-    $('body').on('input', '#input_loi_nhuan_m3', function(e) {
+    $('body').on('input', '#input_loi_nhuan_m3', function (e) {
         input_loi_nhuan_3();
     });
-    $('body').on('blur', '#input_loi_nhuan_m3', function(e) {
+    $('body').on('blur', '#input_loi_nhuan_m3', function (e) {
         input_loi_nhuan_3();
     });
+
     function input_loi_nhuan_3() {
         var value = $('#input_loi_nhuan_m3').val();
         var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
@@ -885,10 +979,10 @@ jQuery(function($) {
         total_price_dich_vu(0, 0, 0);
     }
 
-    $('body').on('click', '#input_num_nguoi_lon', function() {
+    $('body').on('click', '#input_num_nguoi_lon', function () {
         $(this).select();
     });
-    $('body').on('change', '#input_num_nguoi_lon', function() {
+    $('body').on('change', '#input_num_nguoi_lon', function () {
         var error_so_nguoi = $('#error_so_nguoi');
         var value_get = $('#input_num_nguoi_lon').val();
         var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
@@ -905,10 +999,10 @@ jQuery(function($) {
         $('#input_total_khach').val(value_get);
         total_price_dich_vu(0, 0, 0);
     });
-    $('body').on('click', '#input_num_tre_em_m1', function() {
+    $('body').on('click', '#input_num_tre_em_m1', function () {
         $(this).select();
     });
-    $('body').on('input', '#input_num_tre_em_m1', function() {
+    $('body').on('input', '#input_num_tre_em_m1', function () {
         var value_get = $('#input_num_tre_em_m1').val();
         var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
         if (!numberRegex.test(value_get)) {
@@ -924,10 +1018,10 @@ jQuery(function($) {
         $('#input_total_khach_m1').val(value_get);
         total_price_dich_vu(0, 0, 0);
     });
-    $('body').on('click', '#input_num_tre_em_m2', function() {
+    $('body').on('click', '#input_num_tre_em_m2', function () {
         $(this).select();
     });
-    $('body').on('input', '#input_num_tre_em_m2', function() {
+    $('body').on('input', '#input_num_tre_em_m2', function () {
         var value_get = $('#input_num_tre_em_m2').val();
         var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
         if (!numberRegex.test(value_get)) {
@@ -942,10 +1036,10 @@ jQuery(function($) {
         $('#input_total_khach_m2').val(value_get);
         total_price_dich_vu(0, 0, 0);
     });
-    $('body').on('click', '#input_num_tre_em_m3', function() {
+    $('body').on('click', '#input_num_tre_em_m3', function () {
         $(this).select();
     });
-    $('body').on('input', '#input_num_tre_em_m3', function() {
+    $('body').on('input', '#input_num_tre_em_m3', function () {
         var value_get = $('#input_num_tre_em_m3').val();
         var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
         if (!numberRegex.test(value_get)) {
@@ -962,7 +1056,7 @@ jQuery(function($) {
         total_price_dich_vu(0, 0, 0);
     });
 
-    $('body').on('change', '#input_nguoi_lon', function() {
+    $('body').on('change', '#input_nguoi_lon', function () {
         var error_so_nguoi = $('#error_so_nguoi_cus');
         var value_get = $('#input_nguoi_lon').val();
         if (value_get < 1) {
@@ -975,13 +1069,13 @@ jQuery(function($) {
             error_so_nguoi.hide();
         }
     });
-    $('body').on('change', '#input_tre_em', function() {
+    $('body').on('change', '#input_tre_em', function () {
         var value_get = $('#input_tre_em').val();
         if (value_get == '' || value_get < 0) {
             $('#input_tre_em').val(0);
         }
     });
-    $('body').on('change', '#input_tre_em_5', function() {
+    $('body').on('change', '#input_tre_em_5', function () {
         var value_get = $('#input_tre_em_5').val();
         if (value_get == '' || value_get < 0) {
             $('#input_tre_em_5').val(0);
@@ -998,7 +1092,7 @@ jQuery(function($) {
             btn_down_class: 'btn-info'
         })
         .closest('.ace-spinner')
-        .on('input.fu.spinbox', function() {
+        .on('input.fu.spinbox', function () {
             var error_so_nguoi = $('#error_so_nguoi');
             var value_get = $('#input_num_nguoi_lon').val();
             if (value_get < 1) {
@@ -1028,7 +1122,7 @@ jQuery(function($) {
             btn_down_class: 'btn-info'
         })
         .closest('.ace-spinner')
-        .on('changed.fu.spinbox', function() {
+        .on('changed.fu.spinbox', function () {
             //console.log($('#spinner1').val())
             checkSoNguoi();
         });
@@ -1042,7 +1136,7 @@ jQuery(function($) {
             btn_down_class: 'btn-info'
         })
         .closest('.ace-spinner')
-        .on('changed.fu.spinbox', function() {
+        .on('changed.fu.spinbox', function () {
             //console.log($('#spinner1').val())
             checkSoNguoi();
         });
@@ -1055,7 +1149,7 @@ jQuery(function($) {
             btn_down_class: 'btn-info'
         })
         .closest('.ace-spinner')
-        .on('input.fu.spinbox', function() {
+        .on('input.fu.spinbox', function () {
             var error_so_nguoi = $('#error_so_nguoi_cus');
             var value_get = $('#input_nguoi_lon').val();
             if (value_get < 1) {
@@ -1081,7 +1175,7 @@ jQuery(function($) {
             btn_down_class: 'btn-info'
         })
         .closest('.ace-spinner')
-        .on('changed.fu.spinbox', function() {});
+        .on('changed.fu.spinbox', function () {});
     $('#input_tre_em_bk')
         .ace_spinner({
             min: 0,
@@ -1091,9 +1185,9 @@ jQuery(function($) {
             btn_down_class: 'btn-info'
         })
         .closest('.ace-spinner')
-        .on('changed.fu.spinbox', function() {});
+        .on('changed.fu.spinbox', function () {});
 
-    $('body').on('change', '.select_status', function() {
+    $('body').on('change', '.select_status', function () {
         var id = $(this).attr('count_id');
         var code = $(this).attr('code');
         var status = $(this).val();
@@ -1107,7 +1201,7 @@ jQuery(function($) {
                 content: 'Các thông tin cập nhật không hợp lệ',
                 alertBtnText: 'Ok',
                 iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
-                alertHandler: function() {}
+                alertHandler: function () {}
             });
         } else {
             var value_old = $('#status_old_' + id).val();
@@ -1116,12 +1210,11 @@ jQuery(function($) {
                 content: 'Bạn chắc chắn rằng muốn cập nhật trạng thái của đơn hàng </br><b>"' + code + '"</b> ?',
                 confirmBtnText: 'Ok',
                 iconBtnText: '<i style="color: #669fc7;" class="ace-icon fa fa-question orange"></i>',
-                confirmHandler: function() {
+                confirmHandler: function () {
                     $.ajax({
                         method: 'GET',
                         url: link,
-                        data:
-                            'id=' +
+                        data: 'id=' +
                             id +
                             '&table=' +
                             table +
@@ -1131,15 +1224,14 @@ jQuery(function($) {
                             status +
                             '&action=' +
                             action,
-                        success: function(response) {
+                        success: function (response) {
                             if (response != 1) {
                                 lnv.alert({
                                     title: 'Lỗi',
                                     content: response,
                                     alertBtnText: 'Ok',
-                                    iconBtnText:
-                                        '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
-                                    alertHandler: function() {}
+                                    iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                                    alertHandler: function () {}
                                 });
                                 $('#status_' + id).val(value_old);
                             } else {
@@ -1149,14 +1241,14 @@ jQuery(function($) {
                     });
                 },
                 cancelBtnText: 'Cancel',
-                cancelHandler: function() {
+                cancelHandler: function () {
                     $('#status_' + id).val(value_old);
                 }
             });
         }
     });
 
-    $('body').on('click', '#confirm_order', function() {
+    $('body').on('click', '#confirm_order', function () {
         var id = $(this).attr('count_id');
         var code = $(this).attr('code');
         var link = url + '/booking/confirm-order';
@@ -1167,7 +1259,7 @@ jQuery(function($) {
                 content: 'Các thông tin cập nhật không hợp lệ',
                 alertBtnText: 'Ok',
                 iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
-                alertHandler: function() {}
+                alertHandler: function () {}
             });
         } else {
             lnv.confirm({
@@ -1175,20 +1267,19 @@ jQuery(function($) {
                 content: 'Bạn chắc chắn rằng muốn xác đơn hàng </br><b>"' + code + '"</b> ?',
                 confirmBtnText: 'Ok',
                 iconBtnText: '<i style="color: #669fc7;" class="ace-icon fa fa-question orange"></i>',
-                confirmHandler: function() {
+                confirmHandler: function () {
                     $.ajax({
                         method: 'GET',
                         url: link,
                         data: 'id=' + id,
-                        success: function(response) {
+                        success: function (response) {
                             if (response != 1) {
                                 lnv.alert({
                                     title: 'Lỗi',
                                     content: response,
                                     alertBtnText: 'Ok',
-                                    iconBtnText:
-                                        '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
-                                    alertHandler: function() {}
+                                    iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                                    alertHandler: function () {}
                                 });
                             } else {
                                 $('#confirm_order').remove();
@@ -1197,12 +1288,12 @@ jQuery(function($) {
                     });
                 },
                 cancelBtnText: 'Cancel',
-                cancelHandler: function() {}
+                cancelHandler: function () {}
             });
         }
     });
 
-    $('body').on('click', '.confirm_booking_list', function() {
+    $('body').on('click', '.confirm_booking_list', function () {
         var id_filed = $(this).attr('id_filed');
         var id = $(this).attr('count_id');
         var code = $(this).attr('code');
@@ -1214,7 +1305,7 @@ jQuery(function($) {
                 content: 'Các thông tin cập nhật không hợp lệ',
                 alertBtnText: 'Ok',
                 iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
-                alertHandler: function() {}
+                alertHandler: function () {}
             });
         } else {
             lnv.confirm({
@@ -1222,20 +1313,19 @@ jQuery(function($) {
                 content: 'Bạn chắc chắn rằng muốn xác đơn hàng </br><b>"' + code + '"</b> ?',
                 confirmBtnText: 'Ok',
                 iconBtnText: '<i style="color: #669fc7;" class="ace-icon fa fa-question orange"></i>',
-                confirmHandler: function() {
+                confirmHandler: function () {
                     $.ajax({
                         method: 'GET',
                         url: link,
                         data: 'id=' + id,
-                        success: function(response) {
+                        success: function (response) {
                             if (response != 1) {
                                 lnv.alert({
                                     title: 'Lỗi',
                                     content: response,
                                     alertBtnText: 'Ok',
-                                    iconBtnText:
-                                        '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
-                                    alertHandler: function() {
+                                    iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                                    alertHandler: function () {
                                         document.getElementById(field_check).checked = false;
                                     }
                                 });
@@ -1246,14 +1336,14 @@ jQuery(function($) {
                     });
                 },
                 cancelBtnText: 'Cancel',
-                cancelHandler: function() {
+                cancelHandler: function () {
                     document.getElementById(field_check).checked = false;
                 }
             });
         }
     });
 
-    $('body').on('click', '.confirm_tiep_thi', function() {
+    $('body').on('click', '.confirm_tiep_thi', function () {
         var id_filed = $(this).attr('id_filed');
         var id = $(this).attr('count_id');
         var code = $(this).attr('code');
@@ -1266,33 +1356,31 @@ jQuery(function($) {
                 content: 'Các thông tin cập nhật không hợp lệ',
                 alertBtnText: 'Ok',
                 iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
-                alertHandler: function() {}
+                alertHandler: function () {}
             });
         } else {
             lnv.confirm({
                 title: '<label class="orange">Xác nhận hoa hồng</label>',
-                content:
-                    'Bạn chắc chắn rằng muốn xác nhận hoa hồng đơn hàng <b>"' +
+                content: 'Bạn chắc chắn rằng muốn xác nhận hoa hồng đơn hàng <b>"' +
                     code +
                     '"</b> cho thành viên <b>"' +
                     user +
                     '"</b> ?',
                 confirmBtnText: 'Ok',
                 iconBtnText: '<i style="color: #669fc7;" class="ace-icon fa fa-question orange"></i>',
-                confirmHandler: function() {
+                confirmHandler: function () {
                     $.ajax({
                         method: 'GET',
                         url: link,
                         data: 'id=' + id,
-                        success: function(response) {
+                        success: function (response) {
                             if (response != 1) {
                                 lnv.alert({
                                     title: 'Lỗi',
                                     content: response,
                                     alertBtnText: 'Ok',
-                                    iconBtnText:
-                                        '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
-                                    alertHandler: function() {
+                                    iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                                    alertHandler: function () {
                                         document.getElementById(field_check).checked = false;
                                     }
                                 });
@@ -1305,13 +1393,13 @@ jQuery(function($) {
                     });
                 },
                 cancelBtnText: 'Cancel',
-                cancelHandler: function() {
+                cancelHandler: function () {
                     document.getElementById(field_check).checked = false;
                 }
             });
         }
     });
-    $('#submit_form').on('keyup keypress', function(e) {
+    $('#submit_form').on('keyup keypress', function (e) {
         var keyCode = e.keyCode || e.which;
         if (keyCode === 13) {
             e.preventDefault();
@@ -1319,7 +1407,7 @@ jQuery(function($) {
         }
     });
 
-    $('body').on('click', '#submit_form_action', function() {
+    $('body').on('click', '#submit_form_action', function () {
         var form_data = $('#submit_form').serializeArray();
         var error_free = true;
         var type_tour = $('.type_tour').val();
@@ -1394,18 +1482,18 @@ jQuery(function($) {
                 content: 'Bạn vui lòng điền đầy đủ thông tin bắt buộc',
                 alertBtnText: 'Ok',
                 iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
-                alertHandler: function() {}
+                alertHandler: function () {}
             });
         }
     });
 
-    $('body').on('click', '.view_popup_detail', function() {
+    $('body').on('click', '.view_popup_detail', function () {
         var Id = $(this).attr('countid');
         var code = $(this).attr('name_record');
         show_booking(Id, code);
     });
 
-    $('body').on('click', '#submit_form_tour_action', function() {
+    $('body').on('click', '#submit_form_tour_action', function () {
         var name_tour_add = $('#input_name_tour_add').val();
         var price_tour_add = $('#input_price_tour_add').val();
         var price_tour_511_add = $('#input_price_tour_511_add').val();
@@ -1417,7 +1505,7 @@ jQuery(function($) {
                 method: 'GET',
                 url: link,
                 data: 'value=' + name_tour_add + '&key=name&table=tour',
-                success: function(response) {
+                success: function (response) {
                     var error = true;
                     if (response == 1) {
                         $('#error_name_tour_add')
@@ -1467,7 +1555,7 @@ jQuery(function($) {
                                     price_tour_511_add: price_tour_511_add,
                                     price_tour_5_add: price_tour_5_add
                                 },
-                                success: function(response) {
+                                success: function (response) {
                                     if (numberRegex.test(response)) {
                                         var price_tour_add_format =
                                             price_tour_add.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
@@ -1529,9 +1617,8 @@ jQuery(function($) {
                                             title: 'Lỗi',
                                             content: response,
                                             alertBtnText: 'Ok',
-                                            iconBtnText:
-                                                '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
-                                            alertHandler: function() {}
+                                            iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                                            alertHandler: function () {}
                                         });
                                     }
                                 }
@@ -1580,7 +1667,7 @@ jQuery(function($) {
     //});
     //$('i').ggtooltip();
 
-    $('body').on('click', '#submit_form_action_cot', function() {
+    $('body').on('click', '#submit_form_action_cot', function () {
         var form_data = $('#submit_form_cot').serializeArray();
         var error_free = true;
         for (var input in form_data) {
@@ -1600,19 +1687,19 @@ jQuery(function($) {
             $('#submit_form_cot').submit();
         }
     });
-    $('body').on('input', '#input_name_gia', function() {
+    $('body').on('input', '#input_name_gia', function () {
         checkNameGia();
     });
-    $('body').on('input', '#input_price_cost', function() {
+    $('body').on('input', '#input_price_cost', function () {
         checkPriceCost();
     });
-    $('body').on('change', '#input_created', function() {
+    $('body').on('change', '#input_created', function () {
         checkNgayThanhToan();
     });
-    $('body').on('input', '#input_created', function() {
+    $('body').on('input', '#input_created', function () {
         checkNgayThanhToan();
     });
-    $('body').on('click', '#create_popup_cost', function() {
+    $('body').on('click', '#create_popup_cost', function () {
         $('#input_name_gia').val('');
         $('#input_price_cost').val('');
         $('#input_created').val('');
@@ -1623,14 +1710,14 @@ jQuery(function($) {
         $('#title_form').html('Thêm chi phí');
         $('.error-color').hide();
     });
-    $('body').on('click', '.view_popup_detail_cost', function() {
+    $('body').on('click', '.view_popup_detail_cost', function () {
         var Id = $(this).attr('countid');
         var code = $(this).attr('name_record');
         show_info_cost(Id, code);
     });
 
     // show lịch sử giao dịch
-    $('body').on('click', '.view_lich_su_giao_dich', function() {
+    $('body').on('click', '.view_lich_su_giao_dich', function () {
         $('#show_loading_giao_dich').show();
         $('#list_giao_dich')
             .html('')
@@ -1651,7 +1738,7 @@ jQuery(function($) {
                 method: 'GET',
                 url: link,
                 data: 'id=' + id,
-                success: function(response) {
+                success: function (response) {
                     if (response == 0) {
                         $('#show_red_none_giao_dich')
                             .show()
@@ -1669,7 +1756,7 @@ jQuery(function($) {
         }
     });
     // show hide text
-    $('body').on('click', '.show_content_full', function() {
+    $('body').on('click', '.show_content_full', function () {
         var Id = $(this).attr('countid');
         if (Id) {
             var hide = $(this).attr('data-hide');
@@ -1692,7 +1779,7 @@ jQuery(function($) {
     });
 
     // show hide text
-    $('body').on('click', '#save_giao_dich', function() {
+    $('body').on('click', '#save_giao_dich', function () {
         var value = $('#content_giaodich').val();
         var created = $('#created_giaodich').val();
         var time = $('.time_giaodich').val();
@@ -1715,22 +1802,23 @@ jQuery(function($) {
                         created: created,
                         time: time
                     },
-                    success: function(response) {
+                    success: function (response) {
                         if (response == 0) {
                             lnv.alert({
                                 title: 'Lỗi',
                                 content: 'Không thể thêm được giao dịch. Bạn vui lòng ctrl+f5 và thử lại',
                                 alertBtnText: 'Ok',
-                                iconBtnText:
-                                    '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
-                                alertHandler: function() {}
+                                iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                                alertHandler: function () {}
                             });
                         } else {
                             $('#list_giao_dich').html('');
                             $('#list_giao_dich')
                                 .html(response)
                                 .show();
-                            $('#back_to_top_giao_dich').animate({ scrollTop: 0 }, 1500);
+                            $('#back_to_top_giao_dich').animate({
+                                scrollTop: 0
+                            }, 1500);
                         }
                         var currentDate = new Date();
                         $('#created_giaodich').datepicker('setDate', currentDate);
@@ -1748,7 +1836,7 @@ jQuery(function($) {
                     content: 'Không thể thêm được giao dịch. Bạn vui lòng ctrl+f5 và thử lại',
                     alertBtnText: 'Ok',
                     iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
-                    alertHandler: function() {}
+                    alertHandler: function () {}
                 });
             }
         } else {
@@ -1764,12 +1852,12 @@ jQuery(function($) {
     var currentDate = new Date();
     $('#created_giaodich').datepicker('setDate', currentDate);
 
-    $('body').on('input', '#input_do_tuoi_nguoi_lon', function() {
+    $('body').on('input', '#input_do_tuoi_nguoi_lon', function () {
         var value = $(this).val();
         $('#name_price_nguoi_lon').html('Đơn giá người lớn ' + value);
     });
 
-    $('body').on('input', '#input_do_tuoi_tre_em_m1', function() {
+    $('body').on('input', '#input_do_tuoi_tre_em_m1', function () {
         var value = $(this).val();
         if (value == '') {
             value = 'm1';
@@ -1777,7 +1865,7 @@ jQuery(function($) {
         $('#name_price_tre_em_m1').html('Đơn giá trẻ em ' + value);
     });
 
-    $('body').on('input', '#input_do_tuoi_tre_em_m2', function() {
+    $('body').on('input', '#input_do_tuoi_tre_em_m2', function () {
         var value = $(this).val();
         if (value == '') {
             value = 'm2';
@@ -1785,7 +1873,7 @@ jQuery(function($) {
         $('#name_price_tre_em_m2').html('Đơn giá trẻ em ' + value);
     });
 
-    $('body').on('input', '#input_do_tuoi_tre_em_m3', function() {
+    $('body').on('input', '#input_do_tuoi_tre_em_m3', function () {
         var value = $(this).val();
         if (value == '') {
             value = 'm3';
@@ -1793,10 +1881,10 @@ jQuery(function($) {
         $('#name_price_tre_em_m3').html('Đơn giá trẻ em ' + value);
     });
 
-    $('body').on('click', '.remove_item_dichvu', function() {
+    $('body').on('click', '.remove_item_dichvu', function () {
         var id = $(this).attr('data-remove');
         $('#item_dichvu_' + id).remove();
-        $('.item_dichvu').each(function(index) {
+        $('.item_dichvu').each(function (index) {
             var n = index + 1;
             var id = $(this).attr('data-value');
             $('#stt_dichvu_td_' + id)
@@ -1813,7 +1901,7 @@ jQuery(function($) {
         });
         total_price_dich_vu(0, 0, 0);
     });
-    $('body').on('click', '#add_dichvu', function() {
+    $('body').on('click', '#add_dichvu', function () {
         var n = $('.item_dichvu').length;
         n = n + 1;
         var list = $('#danhmuc_dichvu_select').html();
@@ -1869,13 +1957,13 @@ jQuery(function($) {
     });
     $('[data-rel=tooltip]').tooltip();
     $('[data-toggle="tooltip"]').tooltip();
-    $('body').on('click', '.input_price_dichvu', function() {
+    $('body').on('click', '.input_price_dichvu', function () {
         $(this).select();
     });
-    $('body').on('click', '.input_soluong_dichvu', function() {
+    $('body').on('click', '.input_soluong_dichvu', function () {
         $(this).select();
     });
-    $('body').on('input', '.input_price_dichvu', function() {
+    $('body').on('input', '.input_price_dichvu', function () {
         var price = $(this).val();
         var id = $(this).attr('data-value');
         var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
@@ -1892,7 +1980,7 @@ jQuery(function($) {
         }
         total_price_dich_vu(price, id);
     });
-    $('body').on('input', '.input_soluong_dichvu', function() {
+    $('body').on('input', '.input_soluong_dichvu', function () {
         var soluong = $(this).val();
         var id = $(this).attr('data-value');
         var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
@@ -1904,6 +1992,7 @@ jQuery(function($) {
         total_price_dich_vu(0, id, soluong);
     });
 });
+
 function total_price_dich_vu(price, item, soluong_dichvu) {
     if (price >= 0 && item > 0) {
         var soluong = $('#input_soluong_dichvu_' + item).val();
@@ -1928,7 +2017,7 @@ function total_price_dich_vu(price, item, soluong_dichvu) {
         );
     }
     var total = 0;
-    $('.item_dichvu').each(function(index) {
+    $('.item_dichvu').each(function (index) {
         var n = index + 1;
         var id = $(this).attr('data-value');
         var soluong = $('#input_soluong_dichvu_' + id).val();
@@ -1953,6 +2042,7 @@ function total_price_dich_vu(price, item, soluong_dichvu) {
 
     tinh_tong_tien(type_tour);
 }
+
 function tinh_tong_tien(type_tour) {
     // if (type_tour == 1) {
     var input_price = $('#input_price_submit').val();
@@ -2052,6 +2142,7 @@ function tinh_tong_tien(type_tour) {
     $('#con_lai').html(total_price);
     // }
 }
+
 function price_nguoi_lon(total, type_tour) {
     var soluong_nguoi_lon = $('#input_num_nguoi_lon').val();
     if (soluong_nguoi_lon == '' || soluong_nguoi_lon <= 0) {
@@ -2097,6 +2188,7 @@ function price_nguoi_lon(total, type_tour) {
 
     return giaban;
 }
+
 function price_tre_em_m1(total, type_tour) {
     var tyle_m1 = $('#input_tyle_m1').val();
     if (tyle_m1 == '') {
@@ -2150,6 +2242,7 @@ function price_tre_em_m1(total, type_tour) {
     }
     return giaban_m1;
 }
+
 function price_tre_em_m2(total, type_tour) {
     var tyle_m2 = $('#input_tyle_m2').val();
     if (tyle_m2 == '') {
@@ -2204,6 +2297,7 @@ function price_tre_em_m2(total, type_tour) {
     }
     return giaban_m2;
 }
+
 function price_tre_em_m3(total, type_tour) {
     var tyle_m3 = $('#input_tyle_m3').val();
     if (tyle_m3 == '') {
@@ -2258,6 +2352,7 @@ function price_tre_em_m3(total, type_tour) {
     }
     return giaban_m3;
 }
+
 function show_info_cost(Id, name) {
     $('#title_form').html('Thôn tin chi tiết "<b>' + name + '</b>"');
     $('#input_check_edit').val('edit');
@@ -2267,7 +2362,7 @@ function show_info_cost(Id, name) {
                 id: Id,
                 table: 'booking_cost'
             })
-            .done(function(data) {
+            .done(function (data) {
                 if (data != 0) {
                     var obj = jQuery.parseJSON(data);
                     $('#input_id_edit').val(Id);
@@ -2309,7 +2404,7 @@ function show_info_cost(Id, name) {
                         content: 'Ban không thể xem chi tiết chi phí"' + name + '"',
                         alertBtnText: 'Ok',
                         iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
-                        alertHandler: function() {
+                        alertHandler: function () {
                             $('#modal-form').modal('hide');
                         }
                     });
@@ -2321,7 +2416,7 @@ function show_info_cost(Id, name) {
             content: 'Ban không thể xem chi tiết chi phí "' + name + '"',
             alertBtnText: 'Ok',
             iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
-            alertHandler: function() {
+            alertHandler: function () {
                 $('#modal-form').modal('hide');
             }
         });
@@ -2338,6 +2433,7 @@ function checkNgayThanhToan() {
         showHiddenNgayThanhToan(1, mess);
     }
 }
+
 function showHiddenNgayThanhToan(res, mess) {
     var error_created = $('#error_created');
     if (res == 1) {
@@ -2388,6 +2484,7 @@ function checkPriceCost() {
         }
     }
 }
+
 function showHiddenPriceCost(res, mess) {
     var error_price_cost = $('#error_price_cost');
     if (res == 1) {
@@ -2422,6 +2519,7 @@ function checkNameGia() {
         showHiddenNameGia(1, mess);
     }
 }
+
 function showHiddenNameGia(res, mess) {
     var error_name_gia = $('#error_name_gia');
     if (res == 1) {
@@ -2448,6 +2546,7 @@ function showHiddenNameGia(res, mess) {
 function checkSoNguoi() {
     returnGenDanhSachDoan();
 }
+
 function show_booking(Id, name) {
     $('#title_form').html('Thôn tin chi tiết đơn hàng "<b>' + name + '</b>"');
     $('#input_check_edit').val('edit');
@@ -2457,7 +2556,7 @@ function show_booking(Id, name) {
                 id: Id,
                 table: 'booking'
             })
-            .done(function(data) {
+            .done(function (data) {
                 if (data != 0) {
                     var obj = jQuery.parseJSON(data);
                     $('.user_name_link').html(obj.user_name_link);
@@ -2593,7 +2692,7 @@ function show_booking(Id, name) {
                         content: 'Ban không thể xem chi tiết đơn hàng "' + name + '"',
                         alertBtnText: 'Ok',
                         iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
-                        alertHandler: function() {
+                        alertHandler: function () {
                             $('#modal-form').modal('hide');
                         }
                     });
@@ -2605,12 +2704,13 @@ function show_booking(Id, name) {
             content: 'Ban không thể xem chi tiết đơn hàng "' + name + '"',
             alertBtnText: 'Ok',
             iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
-            alertHandler: function() {
+            alertHandler: function () {
                 $('#modal-form').modal('hide');
             }
         });
     }
 }
+
 function returnDatCoc() {
     var value = $('#input_dat_coc').val();
     var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
@@ -2625,6 +2725,7 @@ function returnDatCoc() {
     var type_tour = $('.type_tour').val();
     tinh_tong_tien(type_tour);
 }
+
 function checkDiemDon() {
     var value = $('#input_diem_don').val();
     if (value == '') {
@@ -2635,6 +2736,7 @@ function checkDiemDon() {
         showHiddenDiemDon(1, mess);
     }
 }
+
 function showHiddenDiemDon(res, mess) {
     var error_diem_don = $('#error_diem_don');
     if (res == 1) {
@@ -2668,6 +2770,7 @@ function checkPhoneCustomer() {
         showHiddenPhoneCustomer(1, mess);
     }
 }
+
 function showHiddenPhoneCustomer(res, mess) {
     var error_phone = $('#error_phone');
     if (res == 1) {
@@ -2702,6 +2805,7 @@ function checkAddressCustomer() {
         showHiddenAddressCustomer(1, mess);
     }
 }
+
 function showHiddenAddressCustomer(res, mess) {
     var error_address = $('#error_address');
     if (res == 1) {
@@ -2774,6 +2878,7 @@ function checkNameCustomer() {
         showHiddenNameCustomer(1, mess);
     }
 }
+
 function showHiddenNameCustomer(res, mess) {
     var error_name_customner = $('#error_name_customer');
     if (res == 1) {
@@ -2821,6 +2926,7 @@ function checkNgayKhoiHanh() {
         showHiddenNgayKhoiHanh(res, mess);
     }
 }
+
 function showHiddenNgayKhoiHanh(res, mess) {
     var error_ngay_khoi_hanh = $('#error_ngay_khoi_hanh');
     if (res == 1) {
@@ -2874,6 +2980,7 @@ function checkNgayKetThuc() {
         showHiddenNgayKetThuc(res, mess);
     }
 }
+
 function showHiddenNgayKetThuc(res, mess) {
     var error_ngay_ket_thuc = $('#error_ngay_ket_thuc');
     if (res == 1) {
@@ -2919,6 +3026,7 @@ function checkHanThanhToan() {
         showHiddenHanThanhToan(res, mess);
     }
 }
+
 function showHiddenHanThanhToan(res, mess) {
     var error_han_thanh_toan = $('#error_han_thanh_toan');
     if (res == 1) {
@@ -2966,6 +3074,7 @@ function checkNgayBatDau() {
         showHiddenNgayBatDau(res, mess);
     }
 }
+
 function showHiddenNgayBatDau(res, mess) {
     var error_ngay_bat_dau = $('#error_ngay_bat_dau');
     if (res == 1) {
@@ -3028,6 +3137,8 @@ function removeValueTour() {
     $('#input_name_tour')
         .removeClass('valid')
         .addClass('input-error');
+    $('#input_hoa_hong_thanh_vien_hidden').val('');
+    $('#input_hoa_hong_thanh_vien').val('');
     var error_name_tour = $('#error_name_tour');
     error_name_tour.removeClass('success-color');
     error_name_tour.addClass('error-color');
@@ -3052,6 +3163,7 @@ function removeValueTour() {
     $('#name_tour_table').html('');
     tinh_tong_tien(type_tour);
 }
+
 function removeValueUser() {
     $('.table_booking_user').html('');
     $('#input_id_user').val('');
@@ -3067,6 +3179,7 @@ function removeValueUser() {
     error_name_user.html('Bạn vui lòng nhập và chọn sales');
     error_name_user.show();
 }
+
 function removeValueDieuhanh() {
     $('.table_booking_dieuhanh').html('');
     $('#input_dieuhanh_id').val('');
@@ -3094,6 +3207,7 @@ function formatNumber(nStr, decSeperate, groupSeperate) {
     }
     return x1 + x2;
 }
+
 function returnDanhSachDoan() {
     var numbe_1 = parseInt($('#input_num_nguoi_lon').val());
     var numbe_2 = parseInt($('#input_num_tre_em').val());

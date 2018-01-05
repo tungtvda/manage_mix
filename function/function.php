@@ -1379,6 +1379,41 @@ function _updateCustomerBooking($name_customer_sub, $email_customer, $phone_cust
         }
     }
 }
+function _updateDanhSachBangGia($name_dichvu,$type_dichvu,$price_dichvu,$soluong_dichvu,$thanhtien_dichvu,$ghichu_dichvu, $id_booking){
+    if($name_dichvu && $type_dichvu && $price_dichvu && $soluong_dichvu && $thanhtien_dichvu && $ghichu_dichvu && $id_booking){
+        foreach ($name_dichvu as $key => $value) {
+            $name = $value;
+            $type = '';
+            if (isset($type_dichvu[$key])) {
+                $type = $type_dichvu[$key];
+            }
+            $price = 0;
+            if (isset($price_dichvu[$key])) {
+                $price = $price_dichvu[$key];
+            }
+            $soluong = 0;
+            if (isset($soluong_dichvu[$key])) {
+                $soluong = $soluong_dichvu[$key];
+            }
+            $thanhtien = '0 vnđ';
+            if (isset($thanhtien_dichvu[$key])) {
+                $thanhtien = $thanhtien_dichvu[$key];
+            }
+            $note = '';
+            if (isset($ghichu_dichvu[$key])) {
+                $note = $ghichu_dichvu[$key];
+            }
+            $dichvu=new booking_list_dichvu();
+            $dichvu->name=$name;
+            $dichvu->price=$price;
+            $dichvu->number=$soluong;
+            $dichvu->total=$thanhtien;
+            $dichvu->note=$note;
+            $dichvu->booking_id=$id_booking;
+            booking_list_dichvu_insert($dichvu);
+        }
+    }
+}
 
 function _updateStatusNoti()
 {

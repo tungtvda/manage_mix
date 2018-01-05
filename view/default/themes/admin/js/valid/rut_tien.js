@@ -68,6 +68,7 @@ jQuery(function ($) {
         if(id && code && name){
             var cmt_yeu_cau=$('#cmt_yeu_cau_'+id).val();
             var price_send_format=$('#price_send_format_'+id).val();
+
             var price_send=$('#price_send_'+id).val();
             var date_send=$('#date_send_'+id).val();
             $('#title_form_confirm').html('Xác nhận rút tiền cho thành viên "<span class="red">'+name+'</span>"');
@@ -75,6 +76,7 @@ jQuery(function ($) {
             $('#input_yeu_cau').html(cmt_yeu_cau);
             $('#input_price').val(price_send_format);
             $('#input_price_send').val(price_send);
+            $('#input_id_confirm').val(id);
             var currentDate = new Date();
             $("#input_date_confirm").datepicker("setDate",currentDate);
         }else{
@@ -82,14 +84,51 @@ jQuery(function ($) {
         }
     });
 
-    $('body').on("blur",'#input_price_confirm', function (e) {
+    // $('body').on("blur",'#input_price_confirm', function (e) {
+    //     var price_confirm=$(this).val();
+    //     var price_send=$('#input_price_send').val();
+    //     var mess_error='';
+    //     if(price_send!='' && price_send!=''){
+    //         var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
+    //         if (numberRegex.test(price_send)) {
+    //
+    //         }else{
+    //             mess_error='Bạn vui lòng ctrl+F5 để thử lại'
+    //         }
+    //     }else{
+    //         if(price_send==''){
+    //             mess_error='Bạn vui lòng ctrl+F5 để thử lại'
+    //         }
+    //         if(price_confirm==''){
+    //             mess_error='Bạn vui lòng xác nhận số tiền'
+    //         }
+    //     }
+    //     if(mess_error!=''){
+    //         lnv.alert({
+    //             title: 'Lỗi',
+    //             content: mess_error,
+    //             alertBtnText: 'Ok',
+    //             iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+    //             alertHandler: function () {
+    //             }
+    //         });
+    //     }
+    // });
+    $('body').on("input", '#input_price_confirm', function () {
         var price_confirm=$(this).val();
         var price_send=$('#input_price_send').val();
         var mess_error='';
         if(price_send!='' && price_send!=''){
             var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
             if (numberRegex.test(price_send)) {
-               console.log('Số');
+                $("#error_price_confirm").hide();
+                if(parseInt(price_confirm) > parseInt(price_send)){
+                    mess_error='Bạn vui lòng nhập giá nhỏ hơn giá yêu cầu ';
+                    $(this).val(price_send);
+                }else{
+
+                }
+
             }else{
                 mess_error='Bạn vui lòng ctrl+F5 để thử lại'
             }
@@ -112,7 +151,52 @@ jQuery(function ($) {
             });
         }
     });
+    $('body').on("click",'#submit_form_action', function (e) {
+        var price_confirm=$("#input_price_confirm").val();
+        var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
+        if (numberRegex.test(price_confirm)) {
+            var input_date_confirm = $("#input_date_confirm").val();
+            var timepicker = $("#timepicker1").val();
+            var input_mo_ta = $("#input_mo_ta").val();
+            var id_confirm = $('#input_id_confirm').val();
+            if(parseInt(price_confirm)>0){
+                $.ajax({
+                    method: "POST",
+                    url: url+'/confirm-withdraw.html',
+                    data: {
+                        id:id_confirm,
+                        number_confirm:price_confirm,
+                        input_date_confirm:input_date_confirm,
+                        timepicker:timepicker,
+                        input_mo_ta:input_mo_ta
+                    },
+                    success: function (response) {
+                        var data= (JSON.parse(response));
+                        if (data.success != 1) {
+                            lnv.alert({
+                                title: '<label class="red">Lỗi</label>',
+                                content: data.mess,
+                                alertBtnText: 'Ok',
+                                iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                                alertHandler: function () {
 
+                                }
+                            });
+                        }
+                        else {
+
+                        }
+                        $('#modal-form').modal('hide');
+                    }
+                });
+            }else{
+                $("#error_price_confirm").show();
+            }
+        }else{
+            $("#error_price_confirm").show();
+        }
+
+    });
 });
 
 

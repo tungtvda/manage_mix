@@ -1405,6 +1405,7 @@ function _updateDanhSachBangGia($name_dichvu,$type_dichvu,$price_dichvu,$soluong
             }
             $dichvu=new booking_list_dichvu();
             $dichvu->name=$name;
+            $dichvu->type=$type;
             $dichvu->price=$price;
             $dichvu->number=$soluong;
             $dichvu->total=$thanhtien;

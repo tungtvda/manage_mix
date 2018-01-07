@@ -178,8 +178,8 @@ jQuery(function ($) {
         if ($('#input_hoa_hong_thanh_vien_hidden').val() == '') {
             $('#input_hoa_hong_thanh_vien')
                 .val('')
-                .attr('disabled', 'disabled');
-            $('#price_tiep_thi').html('');
+                .removeAttr('disabled', 'disabled');
+            //$('#price_tiep_thi').html('');
         }
     }
 
@@ -764,7 +764,8 @@ jQuery(function ($) {
         $('#vat').html('0 vnđ');
         $('#input_dat_coc').val('');
         $('#input_hoa_hong_thanh_vien')
-            .val('');
+            .val('').removeAttr('disabled');
+        $('#price_tiep_thi').html('');
         $('.price_tiep_thi').html('');
         $('#input_hoa_hong_thanh_vien_hidden').val('');
         $('#list_dichvu').html('');
@@ -3138,7 +3139,8 @@ function removeValueTour() {
         .removeClass('valid')
         .addClass('input-error');
     $('#input_hoa_hong_thanh_vien_hidden').val('');
-    $('#input_hoa_hong_thanh_vien').val('');
+    $('#input_hoa_hong_thanh_vien').val('').removeAttr('disabled');
+    $('#price_tiep_thi').html('');
     var error_name_tour = $('#error_name_tour');
     error_name_tour.removeClass('success-color');
     error_name_tour.addClass('error-color');
@@ -3161,6 +3163,7 @@ function removeValueTour() {
     $('#price_format_span_tre_em_m2').html('0 vnđ');
     $('#price_format_span_tre_em_m3').html('0 vnđ');
     $('#name_tour_table').html('');
+    var type_tour=$('.type_tour').val();
     tinh_tong_tien(type_tour);
 }
 

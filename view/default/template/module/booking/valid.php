@@ -378,10 +378,10 @@ $string_data_user_tiep_thi=_returnDataAutoCompleteUserTiepThi();
                 $('#input_name_thanh_vien').val(item.data('user-name-tt')).attr('disabled','disabled').addClass('valid');
                 $('#input_email_thanh_vien').val(item.data('user-email-tt')).attr('disabled','disabled').addClass('valid');
                 $('#input_phone_thanh_vien').val(item.data('user-phone-tt')).attr('disabled','disabled').addClass('valid');
-                if( $('#input_hoa_hong_thanh_vien')!=''){
+                if( $('#input_hoa_hong_thanh_vien').val()!=''){
                     $('#input_hoa_hong_thanh_vien').attr('disabled','disabled');
                 }else{
-
+                    $('#input_hoa_hong_thanh_vien').removeAttr('disabled');
                 }
 
             }

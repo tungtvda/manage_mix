@@ -238,6 +238,13 @@ jQuery(function ($) {
         returnDatCoc();
     });
 
+    $('body').on('input', '#input_hoa_hong_thanh_vien', function () {
+        returnHoaHongThanhVien();
+    });
+    $('body').on('keyup', '#input_hoa_hong_thanh_vien', function (event) {
+        returnHoaHongThanhVien();
+    });
+
     $('body').on('click', '#reset_price', function () {
         var price_old = $('#input_price_old').val();
         var price_format = $('#input_price_format').val();
@@ -2140,6 +2147,8 @@ function tinh_tong_tien(type_tour) {
         var total_price = total_price.toFixed(2).replace('.', ',');
         total_price = total_price.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
     }
+
+    returnHoaHongThanhVien()
     $('#con_lai').html(total_price);
     // }
 }
@@ -2725,6 +2734,33 @@ function returnDatCoc() {
     $('#dat_coc_format').html(price_format);
     var type_tour = $('.type_tour').val();
     tinh_tong_tien(type_tour);
+}
+
+function returnHoaHongThanhVien() {
+    var value = $('#input_hoa_hong_thanh_vien').val();
+    var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;
+    if (numberRegex.test(value)) {
+        var price_format = value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
+        var price_submit=$('#input_price_submit').val();
+        price_submit=price_submit*0.1;
+        console.log(price_submit);
+        if(value>price_submit){
+            value = 0;
+            $('#input_hoa_hong_thanh_vien').val(0);
+            price_format = '0 vnđ';
+        }
+    } else {
+        $('#input_hoa_hong_thanh_vien').val(0);
+        value = 0;
+        price_format = '0 vnđ';
+    }
+    if(value<=0){
+        $('#input_hoa_hong_thanh_vien').val(0);
+        value = 0;
+        price_format = '0 vnđ';
+    }
+
+    $('.price_tiep_thi').html(price_format);
 }
 
 function checkDiemDon() {

@@ -1627,34 +1627,37 @@ function _returnUpdateHoahong($data_user, $price_ho_hong, $data_check,$name_noti
 
 }
 
-function _returnHoaHongBooking($booking_model, $data_user_tiep_thi, $price_tiep_thi_thuc_te)
+function _returnHoaHongBooking($booking_model, $data_user_tiep_thi, $price_tiep_thi_thuc_te,$sales_user=0)
 {
-    $songuoi=$booking_model->num_nguoi_lon+$booking_model->num_tre_em+$booking_model->num_tre_em_5;
+    $songuoi=$booking_model->num_nguoi_lon+$booking_model->num_tre_em_m1+$booking_model->num_tre_em_m2+$booking_model->num_tre_em_m3;
     if($songuoi=='' || $songuoi<=0){
         $songuoi=0;
     }
     $data_setting = _returnSettingHoaHong();
-    switch ($data_user_tiep_thi[0]->type_tiep_thi) {
-        case '1':
-            $price_tiep_thi = round(($price_tiep_thi_thuc_te * $data_setting['hoa_hong_4']) / 100)*$songuoi;
-            $booking_model->hoa_hong_tiep_thi = $data_setting['hoa_hong_4'];
-//            $hoa_hong_gioi_thieu_5_4 = round(($price_tiep_thi * $data_setting['hoa_hong_gt_5_4']) / 100);
-            break;
-        case '2':
-            $price_tiep_thi = round(($price_tiep_thi_thuc_te * $data_setting['hoa_hong_5']) / 100)*$songuoi;
-            $booking_model->hoa_hong_tiep_thi = $data_setting['hoa_hong_5'];
-            break;
-        case '3':
-            $price_tiep_thi = round(($price_tiep_thi_thuc_te * $data_setting['hoa_hong_dai_ly']) / 100)*$songuoi;
-            $booking_model->hoa_hong_tiep_thi = $data_setting['hoa_hong_dai_ly'];
-            break;
-        default;
-            $price_tiep_thi = round(($price_tiep_thi_thuc_te * $data_setting['hoa_hong_3']) / 100)*$songuoi;
-            $booking_model->hoa_hong_tiep_thi = $data_setting['hoa_hong_3'];
+    if($sales_user==1){
+        $price_tiep_thi = $price_tiep_thi_thuc_te*$songuoi;
+    }else{
+        switch ($data_user_tiep_thi[0]->type_tiep_thi) {
+            case '1':
+                $price_tiep_thi = round(($price_tiep_thi_thuc_te * $data_setting['hoa_hong_4']) / 100)*$songuoi;
+                $booking_model->hoa_hong_tiep_thi = $data_setting['hoa_hong_4'];
+                break;
+            case '2':
+                $price_tiep_thi = round(($price_tiep_thi_thuc_te * $data_setting['hoa_hong_5']) / 100)*$songuoi;
+                $booking_model->hoa_hong_tiep_thi = $data_setting['hoa_hong_5'];
+                break;
+            case '3':
+                $price_tiep_thi = round(($price_tiep_thi_thuc_te * $data_setting['hoa_hong_dai_ly']) / 100)*$songuoi;
+                $booking_model->hoa_hong_tiep_thi = $data_setting['hoa_hong_dai_ly'];
+                break;
+            default;
+                $price_tiep_thi = round(($price_tiep_thi_thuc_te * $data_setting['hoa_hong_3']) / 100)*$songuoi;
+                $booking_model->hoa_hong_tiep_thi = $data_setting['hoa_hong_3'];
+        }
     }
     $booking_model->price_tiep_thi = $price_tiep_thi;
+    $booking_model->price_tiep_thi_thuc_te = $price_tiep_thi_thuc_te;
     $booking_model->level_tiep_thi = $data_user_tiep_thi[0]->type_tiep_thi;
-
     // Tính tiền hoa hồng cho user giới thiệu cấp 1
     if($data_user_tiep_thi[0]->user_gioi_thieu!=0 && $price_tiep_thi!='' && $price_tiep_thi>0){
         $data_user_gioithieu_c1 = user_getById($data_user_tiep_thi[0]->user_gioi_thieu);

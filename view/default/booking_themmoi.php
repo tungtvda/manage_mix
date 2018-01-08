@@ -10,6 +10,14 @@ require_once DIR . '/common/cls_fast_template.php';
 function show_booking_themmoi($data = array())
 {
     $asign = array();
+    // danh sách danh mục dịch vụ
+    $data_danhmuc_dichvu=danhmuc_dichvu_getByTop('','','position asc');
+    $list_danhmuc_dichvu='';
+    if($data_danhmuc_dichvu){
+        foreach($data_danhmuc_dichvu as $row_dm){
+            $list_danhmuc_dichvu .='<option value="'.$row_dm->id.'">'.$row_dm->name.'</option>';
+        }
+    }
     $tieude = $data['title'];
     $action = $data['action'];
     $valid_name_user = "";
@@ -57,12 +65,50 @@ function show_booking_themmoi($data = array())
     $readonly_info_order='disabled';
     $table_tour = '';
     $price_new = '';
-    $price_11_new = '';
-    $price_5_new = '';
+    $price_tre_em_m1_new = '';
+    $price_tre_em_m2_new = '';
+    $price_tre_em_m3_new = '';
     $total = '';
     $total_format = '';
     $vat_format = '0 vnđ';
     $conlai_format = '';
+    $do_tuoi_nguoi_lon='';
+    $do_tuoi_tre_em_m1='';
+    $do_tuoi_tre_em_m2='';
+    $do_tuoi_tre_em_m3='';
+
+    $do_tuoi_tre_em_m1='';
+    $do_tuoi_tre_em_m2='';
+    $do_tuoi_tre_em_m3='';
+
+    $name_price_nguoi_lon='Đơn giá người lớn';
+    $name_price_tre_em_m1='Đơn giá trẻ em mức 1';
+    $name_price_tre_em_m2='Đơn giá trẻ em mức 2';
+    $name_price_tre_em_m3='Đơn giá trẻ em mức 3';
+
+    $total_dicvu_format='0 vnđ';
+    $total_khach='1';
+    $don_gia_net='0 vnđ';
+    $loi_nhuan='0';
+    $gia_ban='0 vnđ';
+
+    $tyle_m1='0';
+    $total_khach_m1='0';
+    $don_gia_net_m1='0 vnđ';
+    $loi_nhuan_m1='0';
+    $gia_ban_m1='0 vnđ';
+
+    $tyle_m2='0';
+    $total_khach_m2='0';
+    $don_gia_net_m2='0 vnđ';
+    $loi_nhuan_m2='0';
+    $gia_ban_m2='0 vnđ';
+
+    $tyle_m3='0';
+    $total_khach_m3='0';
+    $don_gia_net_m3='0 vnđ';
+    $loi_nhuan_m3='0';
+    $gia_ban_m3='0 vnđ';
 
     $chuong_trinh = '';
     $chuong_trinh_valid = '';
@@ -93,6 +139,24 @@ function show_booking_themmoi($data = array())
     $note_cus = '';
     $show_update_dieuhanh = '';
     $show_update_sales='';
+    $hidden_don_gia_dichvu='hidden';
+
+    $num_nguoi_lon = _returnDataEditAdd($data['data_user'], 'num_nguoi_lon');
+    if (!$num_nguoi_lon) {
+        $num_nguoi_lon = 1;
+    }
+    $num_tre_em_m1= _returnDataEditAdd($data['data_user'], 'num_tre_em_m1');
+    if (!$num_tre_em_m1) {
+        $num_tre_em_m1 = 0;
+    }
+    $num_tre_em_m2= _returnDataEditAdd($data['data_user'], 'num_tre_em_m2');
+    if (!$num_tre_em_m2) {
+        $num_tre_em_m2 = 0;
+    }
+    $num_tre_em_m3= _returnDataEditAdd($data['data_user'], 'num_tre_em_m3');
+    if (!$num_tre_em_m3) {
+        $num_tre_em_m3 = 0;
+    }
     if ($action == 2) {
         if ($_SESSION['user_role'] != 1) {
             $readonly_name_tour = 'disabled';
@@ -359,6 +423,121 @@ function show_booking_themmoi($data = array())
                 $so_cho = $data_tour[0]->so_cho;
             }
         }
+        $do_tuoi_nguoi_lon=$data['data_user'][0]->name_price;
+        $do_tuoi_tre_em_m1=$data['data_user'][0]->name_price_m1;
+        $do_tuoi_tre_em_m2=$data['data_user'][0]->name_price_m2;
+        $do_tuoi_tre_em_m3=$data['data_user'][0]->name_price_m2;
+
+        $name_price_nguoi_lon='Đơn giá người lớn '.$do_tuoi_nguoi_lon;
+        if($do_tuoi_tre_em_m1!=''){
+            $name_price_tre_em_m1='Đơn giá trẻ em '.$do_tuoi_tre_em_m1;
+        }
+        if($do_tuoi_tre_em_m2!=''){
+            $name_price_tre_em_m2='Đơn giá trẻ em '.$do_tuoi_tre_em_m2;
+        }
+        if($do_tuoi_tre_em_m3!=''){
+            $name_price_tre_em_m3='Đơn giá trẻ em '.$do_tuoi_tre_em_m3;
+        }
+        $hidden_don_gia_dichvu='';
+
+        // thông tin đơn giá dịch vụ
+        $loi_nhuan=$data['data_user'][0]->loi_nhuan;
+        if($loi_nhuan==''){
+            $loi_nhuan=0;
+        }
+
+
+        $tyle_m1=$data['data_user'][0]->ty_le_m1;
+        if($tyle_m1==''){
+            $tyle_m1=0;
+        }
+        $loi_nhuan_m1=$data['data_user'][0]->loi_nhuan_m1;
+        if($loi_nhuan_m1==''){
+            $loi_nhuan_m1=0;
+        }
+
+        $tyle_m2=$data['data_user'][0]->ty_le_m2;
+        if($tyle_m2==''){
+            $tyle_m2=0;
+        }
+        $loi_nhuan_m2=$data['data_user'][0]->loi_nhuan_m2;
+        if($loi_nhuan_m2==''){
+            $loi_nhuan_m2=0;
+        }
+
+        $tyle_m3=$data['data_user'][0]->ty_le_m3;
+        if($tyle_m3==''){
+            $tyle_m3=0;
+        }
+        $loi_nhuan_m3=$data['data_user'][0]->loi_nhuan_m3;
+        if($loi_nhuan_m3==''){
+            $loi_nhuan_m3=0;
+        }
+
+        $data_list_dichvu=booking_list_dichvu_getByTop('','booking_id='.$data['data_user'][0]->id,'id desc');
+        $list_dich_vu='';
+        $total_dicvu=0;
+        if($data_list_dichvu>0){
+            $count_dv=1;
+            foreach ($data_list_dichvu as $row_dv){
+                if($row_dv->price==''){
+                    $row_dv->price=0;
+                }
+                if($row_dv->number=='' || $row_dv->number==0){
+                    $row_dv->number=1;
+                }
+                $thanh_tien_dv=$row_dv->price*$row_dv->number;
+                $total_dicvu=$total_dicvu+$thanh_tien_dv;
+                $price_item_dv= number_format((float)$row_dv->price, 0, ",", ".") . ' vnđ';
+                $list_dich_vu.=' <tr id="item_dichvu_'.$count_dv.'" data-value="'.$count_dv.'" class="item_dichvu">
+                                            <td id="stt_dichvu_td_'.$count_dv.'">'.$count_dv.'</td>
+                                            <td><input style="height: 30px;     width: 100%;" value="'.$row_dv->name.'" name="name_dichvu[]" id="input_name_dichvu_'.$count_dv.'" type="text" class="valid input_table"></td>
+                                            <td>
+                                                <select style="width: 100%;" name="type_dichvu[]" id="input_type_dichvu_'.$count_dv.'">
+                                                    <?php echo $list_danhmuc_dichvu?>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input data-value="'.$count_dv.'" style="height: 30px;width: 88%;" value="'.$row_dv->price.'" name="price_dichvu[]" id="input_price_dichvu_'.$count_dv.'" type="number" class="valid input_table input_price_dichvu">
+                                                <div class="btn-group" style="width: 10%;">
+                                                    <button style="padding: 4px 5px;margin-top: 0px; margin-bottom: 3px;" data-toggle="dropdown" class="btn btn-sm btn-danger dropdown-toggle btn-action-gird" aria-expanded="false"> <i class="fa fa-usd" aria-hidden="true"></i></button>
+                                                    <ul class="dropdown-menu dropdown-danger"> <li> <a role="button" data-toggle="modal" class="edit_function">Đơn giá: <b id="price_dichvu_format_'.$count_dv.'">'.$price_item_dv.'</span></a> </li> </ul>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <input data-value="'.$count_dv.'"  style="height: 30px; width:100%" value="'.$row_dv->number.'" name="soluong_dichvu[]" min="1" id="input_soluong_dichvu_'.$count_dv.'" type="number" class="valid input_table input_soluong_dichvu">
+                                            </td>
+                                            <td><input readonly style="height: 30px; width: 100%;" value="'.$row_dv->total.'" name="thanhtien_dichvu[]" id="input_thanhtien_dichvu_'.$count_dv.'" type="text" class="valid input_table "></td>
+                                            <td><input style="height: 30px; width: 100%;" value="'.$row_dv->note.'" name="ghichu_dichvu[]" id="input_ghichu_dichvu_'.$count_dv.'" type="text" class="valid input_table"></td>
+                                            <td><a id="remove_item_dichvu_'.$count_dv.'" data-remove="'.$count_dv.'" style="padding: 0px 5px;" href="javascript:void(0)" class="red btn  btn-danger remove_item_dichvu"><i class="fa fa-trash-o"></i></if></a></td>
+
+                                        </tr>';
+                $count_dv++;
+            }
+        }
+        $total_dicvu_format=number_format((float)$total_dicvu, 0, ",", ".") . ' vnđ';
+        $don_gia_nguoi_lon=$total_dicvu/$num_nguoi_lon;
+        $don_gia_tre_em_m1=$total_dicvu*($tyle_m1/100);
+        $don_gia_tre_em_m2=$total_dicvu*($tyle_m2/100);
+        $don_gia_tre_em_m3=$total_dicvu*($tyle_m3/100);
+        $don_gia_net=number_format((float)round($don_gia_nguoi_lon,2), 0, ",", ".") . ' vnđ';
+        $don_gia_nguoi_lon=$loi_nhuan+$don_gia_nguoi_lon;
+        $gia_ban=number_format((float)round($don_gia_nguoi_lon,2), 0, ",", ".") . ' vnđ';
+
+        $don_gia_tre_em_m1=$don_gia_tre_em_m1/$num_tre_em_m1;
+        $don_gia_net_m1=number_format((float)round($don_gia_tre_em_m1,2), 0, ",", ".") . ' vnđ';
+        $don_gia_tre_em_m1=$loi_nhuan_m1+$don_gia_tre_em_m1;
+        $gia_ban_m1=number_format((float)round($don_gia_tre_em_m1,2), 0, ",", ".") . ' vnđ';
+
+        $don_gia_tre_em_m2=$don_gia_tre_em_m2/$num_tre_em_m2;
+        $don_gia_net_m2=number_format((float)round($don_gia_tre_em_m2,2), 0, ",", ".") . ' vnđ';
+        $don_gia_tre_em_m2=$loi_nhuan_m2+$don_gia_tre_em_m2;
+        $gia_ban_m2=number_format((float)round($don_gia_tre_em_m2,2), 0, ",", ".") . ' vnđ';
+
+        $don_gia_tre_em_m3=$don_gia_tre_em_m3/$num_tre_em_m3;
+        $don_gia_net_m3=number_format((float)round($don_gia_tre_em_m3,2), 0, ",", ".") . ' vnđ';
+        $don_gia_tre_em_m3=$loi_nhuan_m3+$don_gia_tre_em_m3;
+        $gia_ban_m3=number_format((float)round($don_gia_tre_em_m3,2), 0, ",", ".") . ' vnđ';
         if ($data['data_user'][0]->user_id == $_SESSION['user_id']) {
             $readonly_info_order='';
         }
@@ -384,12 +563,8 @@ function show_booking_themmoi($data = array())
         $Random = _randomBooking('#', 'booking_count');
     }
 
-    $num_nguoi_lon = _returnDataEditAdd($data['data_user'], 'num_nguoi_lon');
-    if (!$num_nguoi_lon) {
-        $num_nguoi_lon = 1;
-    }
-    $num_tre_em = _returnDataEditAdd($data['data_user'], 'num_tre_em');
-    $num_tre_em_5 = _returnDataEditAdd($data['data_user'], 'num_tre_em_5');
+
+
     $note = _returnDataEditAdd($data['data_user'], 'note');
     $diem_don = _returnDataEditAdd($data['data_user'], 'diem_don');
     $diem_don_customer_valid = '';
@@ -447,30 +622,37 @@ function show_booking_themmoi($data = array())
     $so_cho = '';
     $departure_name = '';
 
-    $price_new = _returnDataEditAdd($data['data_user'], 'price_new');
+
     $name_tour = _returnDataEditAdd($data['data_user'], 'name_tour');
     if ($name_tour != '') {
         $valid_name_tour = 'valid';
     }
     $id_tour = _returnDataEditAdd($data['data_user'], 'id_tour');
-    $price_new_format = number_format((int)$price_new, 0, ",", ".") . ' vnđ';
-    $price_11_new = _returnDataEditAdd($data['data_user'], 'price_11_new');
-    $price_11_new_format = number_format((int)$price_11_new, 0, ",", ".") . ' vnđ';
-    $price_5_new = _returnDataEditAdd($data['data_user'], 'price_5_new');
-    $price_5_new_format = number_format((int)$price_5_new, 0, ",", ".") . ' vnđ';
-
-    $table_tour = '<tr> <td class="center">1</td><td><a id="name_tour_table">' . $so_cho . '</a></td>
-        <td><span id="price_format_span">' . $price_new_format . '</span>';
-
+    $price_new = _returnDataEditAdd($data['data_user'], 'price_new');
+    $price_tre_em_m1_new = _returnDataEditAdd($data['data_user'], 'price_tre_em_m1_new');
+    $price_tre_em_m2_new = _returnDataEditAdd($data['data_user'], 'price_tre_em_m2_new');
+    $price_tre_em_m3_new = _returnDataEditAdd($data['data_user'], 'price_tre_em_m3_new');
     if ($price_new == '') {
         $price_new = 0;
     }
-    if ($price_11_new == '') {
-        $price_11_new = 0;
+    if ($price_tre_em_m1_new == '') {
+        $price_tre_em_m1_new = 0;
     }
-    if ($price_5_new == '') {
-        $price_5_new = 0;
+    if ($price_tre_em_m2_new == '') {
+        $price_tre_em_m2_new = 0;
     }
+    if ($price_tre_em_m3_new == '') {
+        $price_tre_em_m3_new = 0;
+    }
+    $price_new_format = number_format((int)$price_new, 0, ",", ".") . ' vnđ';
+    $price_tre_em_m1_new_format = number_format((int)$price_tre_em_m1_new, 0, ",", ".") . ' vnđ';
+    $price_tre_em_m2_new_format = number_format((int)$price_tre_em_m2_new, 0, ",", ".") . ' vnđ';
+    $price_tre_em_m3_new_format = number_format((int)$price_tre_em_m3_new, 0, ",", ".") . ' vnđ';
+
+    $table_tour = '<tr> <td class="center">1</td><td><a id="name_tour_table">' . $name_tour . '</a></td>
+        <td><span id="price_format_span">' . $price_new_format . '</span>';
+
+
     $table_tour .= '<input hidden="" id="input_price_format" value="' . $price_new_format . '">
         <input hidden="" title="giá sửa" id="input_price" value="' . $price_new . '">
         <input hidden="" id="input_price_old" title="giá cũ" value="' . $price_new . '"> ';
@@ -481,20 +663,10 @@ function show_booking_themmoi($data = array())
         $show_add_tour = 'hidden';
     }
 
-    // $table_tour .= '</td>
-    //     <td><span id="price_format_span_511">' . $price_11_new_format . '</span>';
-
-    // $table_tour .= '<input hidden="" title="giá sửa" id="input_price_511" value="' . $price_11_new . '"> <input hidden="" id="input_price_511_old" title="giá cũ" value="' . $price_11_new . '">';
-    // if ($_SESSION['user_role'] == 1 || (isset($data['data_user'][0]->dieuhanh_id)&& $data['data_user'][0]->dieuhanh_id==$_SESSION['user_id']) ) {
-    //     $table_tour .= '| <a id="edit_price_511" href="javascript:void(0)">
-    //     <i class="fa fa-edit" title="Sửa đơn giá"></i></a>
-    //     <a id="reset_price_511" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a>';
-    // }
-
     // trẻ em mức 1
     $table_tour .= '</td>
-    <td><span id="price_format_span_tre_em_m1">' . $price_11_new_format . '</span>';
-    $table_tour .= '<input hidden="" title="giá sửa" id="input_price_tre_em_m1" value="' . $price_11_new . '"> <input hidden="" id="input_price_tre_em_m1_old" title="giá cũ" value="' . $price_11_new . '">';
+    <td><span id="price_format_span_tre_em_m1">' . $price_tre_em_m1_new_format . '</span>';
+    $table_tour .= '<input hidden="" title="giá sửa" id="input_price_tre_em_m1" value="' . $price_tre_em_m1_new . '"> <input hidden="" id="input_price_tre_em_m1_old" title="giá cũ" value="' . $price_tre_em_m1_new . '">';
     if ($_SESSION['user_role'] == 1 || (isset($data['data_user'][0]->dieuhanh_id)&& $data['data_user'][0]->dieuhanh_id==$_SESSION['user_id']) ) {
         $table_tour .= '| <a id="edit_price_tre_em_m1" href="javascript:void(0)">
         <i class="fa fa-edit" title="Sửa đơn giá"></i></a>
@@ -503,8 +675,8 @@ function show_booking_themmoi($data = array())
 
      // trẻ em mức 2
      $table_tour .= '</td>
-     <td><span id="price_format_span_tre_em_m2">' . $price_11_new_format . '</span>';
-     $table_tour .= '<input hidden="" title="giá sửa" id="input_price_tre_em_m2" value="' . $price_11_new . '"> <input hidden="" id="input_price_tre_em_m2_old" title="giá cũ" value="' . $price_11_new . '">';
+     <td><span id="price_format_span_tre_em_m2">' . $price_tre_em_m2_new_format . '</span>';
+     $table_tour .= '<input hidden="" title="giá sửa" id="input_price_tre_em_m2" value="' . $price_tre_em_m2_new . '"> <input hidden="" id="input_price_tre_em_m2_old" title="giá cũ" value="' . $price_tre_em_m2_new . '">';
      if ($_SESSION['user_role'] == 1 || (isset($data['data_user'][0]->dieuhanh_id)&& $data['data_user'][0]->dieuhanh_id==$_SESSION['user_id']) ) {
          $table_tour .= '| <a id="edit_price_tre_em_m2" href="javascript:void(0)">
          <i class="fa fa-edit" title="Sửa đơn giá"></i></a>
@@ -513,35 +685,20 @@ function show_booking_themmoi($data = array())
 
      // trẻ em mức 3
      $table_tour .= '</td>
-     <td><span id="price_format_span_tre_em_m3">' . $price_11_new_format . '</span>';
-     $table_tour .= '<input hidden="" title="giá sửa" id="input_price_tre_em_m3" value="' . $price_11_new . '"> <input hidden="" id="input_price_tre_em_m3_old" title="giá cũ" value="' . $price_11_new . '">';
+     <td><span id="price_format_span_tre_em_m3">' . $price_tre_em_m3_new_format . '</span>';
+     $table_tour .= '<input hidden="" title="giá sửa" id="input_price_tre_em_m3" value="' . $price_tre_em_m3_new . '"> <input hidden="" id="input_price_tre_em_m3_old" title="giá cũ" value="' . $price_tre_em_m3_new . '">';
      if ($_SESSION['user_role'] == 1 || (isset($data['data_user'][0]->dieuhanh_id)&& $data['data_user'][0]->dieuhanh_id==$_SESSION['user_id']) ) {
          $table_tour .= '| <a id="edit_price_tre_em_m3" href="javascript:void(0)">
          <i class="fa fa-edit" title="Sửa đơn giá"></i></a>
          <a id="reset_price_tre_em_m3" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a>';
      }
- 
 
-    // $table_tour .= '</td>
-    //     <td><span id="price_format_span_5">' . $price_5_new_format . '</span>';
-
-    // $table_tour .= '<input hidden="" title="giá sửa" id="input_price_5" value="' . $price_5_new . '"> <input hidden="" id="input_price_5_old" title="giá cũ" value="' . $price_5_new . '"> ';
-    // if ($_SESSION['user_role'] == 1 || (isset($data['data_user'][0]->dieuhanh_id)&& $data['data_user'][0]->dieuhanh_id==$_SESSION['user_id']) ) {
-    //     $table_tour .= '| <a id="edit_price_5" href="javascript:void(0)">
-    //     <i class="fa fa-edit" title="Sửa đơn giá"></i></a><a id="reset_price_5" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a>';
-    // }
     $table_tour .= '</td> <td style="color:red">' . $so_cho . '</td></tr>';
+    $total=_returnDataEditAdd($data['data_user'], 'total_price');
+    if($total==''){
+        $total=0;
+    }
 
-    $total = 0;
-    if (is_numeric($num_nguoi_lon) && is_numeric($price_new)) {
-        $total = $total + ($num_nguoi_lon * $price_new);
-    }
-    if (is_numeric($num_tre_em) && is_numeric($price_11_new)) {
-        $total = $total + ($num_tre_em * $price_11_new);
-    }
-    if (is_numeric($num_tre_em_5) && is_numeric($price_5_new)) {
-        $total = $total + ($num_tre_em_5 * $price_5_new);
-    }
     $total_format = number_format((int)$total, 0, ",", ".") . ' vnđ';
     if ($vat == 1) {
         $vat_price = ($total * 0.1);
@@ -580,10 +737,10 @@ function show_booking_themmoi($data = array())
                 $price_item = $price_new_format;
             } else {
                 if ($row_sub_cus->do_tuoi_number == 2) {
-                    $price_item = $price_11_new_format;
+                    $price_item = '';
                 } else {
                     if ($row_sub_cus->do_tuoi_number == 3) {
-                        $price_item = $price_5_new_format;
+                        $price_item = '';
                     }
                 }
             }
@@ -689,14 +846,6 @@ function show_booking_themmoi($data = array())
 
     $user_current = $_SESSION['user_id'];
 
-    // danh sách danh mục dịch vụ
-    $data_danhmuc_dichvu=danhmuc_dichvu_getByTop('','','position asc');
-    $list_danhmuc_dichvu='';
-    if($data_danhmuc_dichvu){
-        foreach($data_danhmuc_dichvu as $row_dm){
-            $list_danhmuc_dichvu .='<option value="'.$row_dm->id.'">'.$row_dm->name.'</option>';
-        }
-    }
 
     require_once DIR . '/view/default/template/module/booking/themmoi.php';
 }

@@ -367,7 +367,7 @@
                                                 }
                                             </style>
                                             <input name="do_tuoi_nguoi_lon" type="text"  id="input_do_tuoi_nguoi_lon"
-                                                   value=""
+                                                   value="<?php echo $do_tuoi_nguoi_lon ?>" type="number" <?php echo $readonly_info_order?>
                                                    title="Độ tuổi người lớn"
                                                    class="spinbox-input form-control text-center valid"
                                                    placeholder="Độ tuổi người lớn">
@@ -386,11 +386,12 @@
 
                                         <div class="profile-info-value form-group">
                                             <input name="do_tuoi_tre_em_m1" type="text"  id="input_do_tuoi_tre_em_m1"
-                                                   value=""
+                                                   value="<?php echo $do_tuoi_tre_em_m1 ?>" type="number" <?php echo $readonly_info_order?>
                                                    title="Độ tuổi trẻ em mức 1"
                                                    class="spinbox-input form-control text-center valid"
                                                    placeholder="Độ tuổi trẻ em mức 1">
-                                            <input name="num_tre_em_m1" min="0" value="0" type="number"
+                                            <input name="num_tre_em_m1" min="0"
+                                                   value="<?php echo $num_tre_em_m1 ?>" type="number" <?php echo $readonly_info_order?>
                                                    id="input_num_tre_em_m1"
                                                    title="Số trẻ em mức 1"
                                                    class="spinbox-input form-control text-center valid"
@@ -402,11 +403,12 @@
 
                                         <div class="profile-info-value form-group">
                                             <input name="do_tuoi_tre_em_m2" type="text"  id="input_do_tuoi_tre_em_m2"
-                                                   value=""
+                                                   value="<?php echo $do_tuoi_tre_em_m2 ?>" type="number" <?php echo $readonly_info_order?>
                                                    title="Độ tuổi trẻ em mức 2"
                                                    class="spinbox-input form-control text-center valid"
                                                    placeholder="Độ tuổi trẻ em mức 2">
-                                            <input name="num_tre_em_m2" min="0" value="0" type="number"
+                                            <input name="num_tre_em_m2" min="0"
+                                                   value="<?php echo $num_tre_em_m2 ?>" type="number" <?php echo $readonly_info_order?>
                                                    id="input_num_tre_em_m2"
                                                    title="Số trẻ em mức 2"
                                                    class="spinbox-input form-control text-center valid"
@@ -418,11 +420,12 @@
 
                                         <div class="profile-info-value form-group">
                                             <input name="do_tuoi_tre_em_m3" type="text"  id="input_do_tuoi_tre_em_m3"
-                                                   value=""
+                                                   value="<?php echo $do_tuoi_tre_em_m3 ?>" type="number" <?php echo $readonly_info_order?>
                                                    title="Độ tuổi trẻ em mức 3"
                                                    class="spinbox-input form-control text-center valid"
                                                    placeholder="Độ tuổi trẻ em mức 3">
-                                            <input name="num_tre_em_m3" min="0" value="0" type="number"
+                                            <input name="num_tre_em_m3" min="0"
+                                                   value="<?php echo $num_tre_em_m3 ?>" type="number" <?php echo $readonly_info_order?>
                                                    id="input_num_tre_em_m3"
                                                    title="Số trẻ em mức 3"
                                                    class="spinbox-input form-control text-center valid"
@@ -713,7 +716,7 @@
                                 <h4> <i class="ace-icon fa fa-plane fa-dollar blue bigger-125"></i> Bảng giá tour <span
                                         style="color: red; font-size: 12px">*</span></h4>
                             </div>
-                            <div hidden  class=" form-group border-sloid-1-x show_hide_bang_gia"  style="float: left; width: 100%;background: #ffffff;  margin-left: 0px;margin-right: 0px;">
+                            <div <?php echo $hidden_don_gia_dichvu?>  class=" form-group border-sloid-1-x show_hide_bang_gia"  style="float: left; width: 100%;background: #ffffff;  margin-left: 0px;margin-right: 0px;">
                                 <style>
                                     .table_tour thead tr th{
                                         padding: 10px;
@@ -737,31 +740,7 @@
                                         </tr>
                                         </thead>
                                         <tbody id="list_dichvu">
-                                        <tr id="item_dichvu_1" data-value="1" class="item_dichvu">
-                                            <td id="stt_dichvu_td_1">1</td>
-                                            <td><input style="height: 30px;     width: 100%;" value="" name="name_dichvu[]" id="input_name_dichvu_1" type="text" class="valid input_table"></td>
-                                            <td>
-                                                <select style="width: 100%;" name="type_dichvu[]" id="input_type_dichvu_1">
-                                                    <?php echo $list_danhmuc_dichvu?>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <input data-value="1" style="height: 30px;width: 88%;" value="0" name="price_dichvu[]" id="input_price_dichvu_1" type="number" class="valid input_table input_price_dichvu">
-                                                <div class="btn-group" style="width: 10%;">
-                                                    <button style="padding: 4px 5px;margin-top: 0px; margin-bottom: 3px;" data-toggle="dropdown" class="btn btn-sm btn-danger dropdown-toggle btn-action-gird" aria-expanded="false"> <i class="fa fa-usd" aria-hidden="true"></i></button>
-                                                    <ul class="dropdown-menu dropdown-danger"> <li> <a role="button" data-toggle="modal" class="edit_function">Đơn giá: <b id="price_dichvu_format_1">0 vnđ</span></a> </li> </ul>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <input data-value="1"  style="height: 30px; width:100%" value="1" name="soluong_dichvu[]" min="1" id="input_soluong_dichvu_1" type="number" class="valid input_table input_soluong_dichvu">
-                                            </td>
-                                            <td><input readonly style="height: 30px; width: 100%;" value="" name="thanhtien_dichvu[]" id="input_thanhtien_dichvu_1" type="text" class="valid input_table "></td>
-                                            <td><input style="height: 30px; width: 100%;" value="" name="ghichu_dichvu[]" id="input_ghichu_dichvu_1" type="text" class="valid input_table"></td>
-                                            <td><a id="remove_item_dichvu_1" data-remove="1" style="padding: 0px 5px;" href="javascript:void(0)" class="red btn  btn-danger remove_item_dichvu"><i class="fa fa-trash-o"></i></if></a></td>
-
-                                        </tr>
-
-
+                                        <?php echo $list_dich_vu?>
                                         </tbody>
                                         <tbody>
                                         <tr >
@@ -771,43 +750,43 @@
                                         <tr style="background:#EDF3F4; margin-top:20px">
                                             <td></td>
                                             <td><b>Đơn giá người lớn</b></td>
-                                            <td>Tổng <i class="fa fa-dollar"></i>:&nbsp; <input readonly name="tong_tien_nguoi_lon" id="input_tong_tien_nguoi_lon" style="height: 30px" value="0"  type="text" class="valid input_table"></td>
-                                            <td>SL khách: <input readonly name="total_khach" id="input_total_khach" style="height: 30px" value="1"  type="text" class="valid input_table"></td>
-                                            <td>Giá NET/pax: <input readonly name="don_gia_net" id="input_don_gia_net" style="height: 30px" value=""  type="text" class="valid input_table"></td>
-                                            <td>Lợi nhuận <i title="0 vnđ" id="price_loinhuan_format" class="fa fa-dollar"></i>: <input  name="loi_nhuan" min="0" id="input_loi_nhuan" style="height: 30px" value=""  type="number" class="valid input_table">
+                                            <td>Tổng <i class="fa fa-dollar"></i>:&nbsp; <input readonly name="tong_tien_nguoi_lon" id="input_tong_tien_nguoi_lon" style="height: 30px" value="<?php echo $total_dicvu_format?>"  type="text" class="valid input_table"></td>
+                                            <td>SL khách: <input readonly name="total_khach" id="input_total_khach" style="height: 30px" value="<?php echo $num_nguoi_lon?>"  type="text" class="valid input_table"></td>
+                                            <td>Giá NET/pax: <input readonly name="don_gia_net" id="input_don_gia_net" style="height: 30px" value="<?php echo $don_gia_net?>"  type="text" class="valid input_table"></td>
+                                            <td>Lợi nhuận <i title="0 vnđ" id="price_loinhuan_format" class="fa fa-dollar"></i>: <input  name="loi_nhuan" min="0" id="input_loi_nhuan" style="height: 30px" value="<?php echo $loi_nhuan?>"  type="number" class="valid input_table">
                                             </td>
-                                            <td>Giá bán: <input readonly name="gia_ban" id="input_gia_ban" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                            <td>Giá bán: <input readonly name="gia_ban" id="input_gia_ban" style="height: 30px" value="<?php echo $gia_ban?>"  type="text" class="valid input_table"></td>
                                             <td></td>
                                         </tr>
 
                                         <tr style="background:#f2fbfd; margin-top:20px">
                                             <td></td>
                                             <td><b>Đơn giá trẻ em m1</b></td>
-                                            <td>Tỷ lệ %: <input  name="tyle_m1" min="0"  id="input_tyle_m1" style="height: 30px" value=""  type="number" class="valid input_table"></td>
-                                            <td>SL khách: <input readonly name="total_khach_m1" id="input_total_khach_m1" style="height: 30px" value=""  type="text" class="valid input_table"></td>
-                                            <td>Giá NET/pax: <input readonly name="don_gia_net_m1" id="input_don_gia_net_m1" style="height: 30px" value=""  type="text" class="valid input_table"></td>
-                                            <td>Lợi nhuận <i title="0 vnđ" id="price_loinhuan_format_1" class="fa fa-dollar"></i>: <input  name="loi_nhuan_m1" min="0" id="input_loi_nhuan_m1" style="height: 30px" value=""  type="number" class="valid input_table"></td>
-                                            <td>Giá bán: <input readonly name="gia_ban_m1" id="input_gia_ban_m1" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                            <td>Tỷ lệ %: <input  name="tyle_m1" min="0"  id="input_tyle_m1" style="height: 30px" value="<?php echo $tyle_m1?>"  type="number" class="valid input_table"></td>
+                                            <td>SL khách: <input readonly name="total_khach_m1" id="input_total_khach_m1" style="height: 30px" value="<?php echo $num_tre_em_m1?>"  type="text" class="valid input_table"></td>
+                                            <td>Giá NET/pax: <input readonly name="don_gia_net_m1" id="input_don_gia_net_m1" style="height: 30px" value="<?php echo $don_gia_net_m1?>"  type="text" class="valid input_table"></td>
+                                            <td>Lợi nhuận <i title="0 vnđ" id="price_loinhuan_format_1" class="fa fa-dollar"></i>: <input  name="loi_nhuan_m1" min="0" id="input_loi_nhuan_m1" style="height: 30px" value="<?php echo $loi_nhuan_m1?>"  type="number" class="valid input_table"></td>
+                                            <td>Giá bán: <input readonly name="gia_ban_m1" id="input_gia_ban_m1" style="height: 30px" value="<?php echo $gia_ban_m1?>"  type="text" class="valid input_table"></td>
                                             <td></td>
                                         </tr>
                                         <tr style="background:#edf3f4; margin-top:20px">
                                             <td></td>
                                             <td><b>Đơn giá trẻ em m2</b></td>
-                                            <td>Tỷ lệ %: <input  name="tyle_m2" min="0" id="input_tyle_m2" style="height: 30px" value=""  type="number" class="valid input_table"></td>
-                                            <td>SL khách: <input readonly name="total_khach_m2" id="input_total_khach_m2" style="height: 30px" value=""  type="text" class="valid input_table"></td>
-                                            <td>Giá NET/pax: <input readonly name="don_gia_net_m2" id="input_don_gia_net_m2" style="height: 30px" value=""  type="text" class="valid input_table"></td>
-                                            <td>Lợi nhuận <i title="0 vnđ" id="price_loinhuan_format_2" class="fa fa-dollar"></i>: <input  min="0"  name="loi_nhuan_m2" id="input_loi_nhuan_m2" style="height: 30px" value=""  type="number" class="valid input_table"></td>
-                                            <td>Giá bán: <input readonly name="gia_ban_m2" id="input_gia_ban_m2" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                            <td>Tỷ lệ %: <input  name="tyle_m2" min="0" id="input_tyle_m2" style="height: 30px" value="<?php echo $tyle_m2?>"  type="number" class="valid input_table"></td>
+                                            <td>SL khách: <input readonly name="total_khach_m2" id="input_total_khach_m2" style="height: 30px" value="<?php echo $num_tre_em_m2?>"  type="text" class="valid input_table"></td>
+                                            <td>Giá NET/pax: <input readonly name="don_gia_net_m2" id="input_don_gia_net_m2" style="height: 30px" value="<?php echo $don_gia_net_m2?>"  type="text" class="valid input_table"></td>
+                                            <td>Lợi nhuận <i title="0 vnđ" id="price_loinhuan_format_2" class="fa fa-dollar"></i>: <input  min="0"  name="loi_nhuan_m2" id="input_loi_nhuan_m2" style="height: 30px" value="<?php echo $loi_nhuan_m2?>"  type="number" class="valid input_table"></td>
+                                            <td>Giá bán: <input readonly name="gia_ban_m2" id="input_gia_ban_m2" style="height: 30px" value="<?php echo $gia_ban_m2?>"  type="text" class="valid input_table"></td>
                                             <td></td>
                                         </tr>
                                         <tr style="background:#f2fbfd; margin-top:20px">
                                             <td></td>
                                             <td><b>Đơn giá trẻ em m3</b></td>
-                                            <td>Tỷ lệ %: <input  name="tyle_m3" min="0" id="input_tyle_m3" style="height: 30px" value=""  type="number" class="valid input_table"></td>
-                                            <td>SL khách: <input readonly name="total_khach_m3" id="input_total_khach_m3" style="height: 30px" value=""  type="text" class="valid input_table"></td>
-                                            <td>Giá NET/pax: <input readonly name="don_gia_net_m3" id="input_don_gia_net_m3" style="height: 30px" value=""  type="text" class="valid input_table"></td>
-                                            <td>Lợi nhuận <i title="0 vnđ" id="price_loinhuan_format_3" class="fa fa-dollar"></i>: <input min="0" name="loi_nhuan_m3" id="input_loi_nhuan_m3" style="height: 30px" value=""  type="number" class="valid input_table"></td>
-                                            <td>Giá bán: <input readonly name="gia_ban_m3" id="input_gia_ban_m3" style="height: 30px" value=""  type="text" class="valid input_table"></td>
+                                            <td>Tỷ lệ %: <input  name="tyle_m3" min="0" id="input_tyle_m3" style="height: 30px" value="<?php echo $tyle_m3?>"  type="number" class="valid input_table"></td>
+                                            <td>SL khách: <input readonly name="total_khach_m3" id="input_total_khach_m3" style="height: 30px" value="<?php echo $num_tre_em_m3?>"  type="text" class="valid input_table"></td>
+                                            <td>Giá NET/pax: <input readonly name="don_gia_net_m3" id="input_don_gia_net_m3" style="height: 30px" value="<?php echo $don_gia_net_m3?>"  type="text" class="valid input_table"></td>
+                                            <td>Lợi nhuận <i title="0 vnđ" id="price_loinhuan_format_3" class="fa fa-dollar"></i>: <input min="0" name="loi_nhuan_m3" id="input_loi_nhuan_m3" style="height: 30px" value="<?php echo $loi_nhuan_m3?>"  type="number" class="valid input_table"></td>
+                                            <td>Giá bán: <input readonly name="gia_ban_m3" id="input_gia_ban_m3" style="height: 30px" value="<?php echo $gia_ban_m3?>"  type="text" class="valid input_table"></td>
                                             <td></td>
                                         </tr>
 
@@ -822,10 +801,10 @@
                                 <tr>
                                     <th class="center">#</th>
                                     <th>Tên tour</th>
-                                    <th id="name_price_nguoi_lon">Đơn giá người lớn</th>
-                                    <th id="name_price_tre_em_m1">Đơn giá trẻ em mức 1</th>
-                                    <th id="name_price_tre_em_m2">Đơn giá trẻ em mức 2</th>
-                                    <th id="name_price_tre_em_m3">Đơn giá trẻ em mức 3</th>
+                                    <th id="name_price_nguoi_lon"><?php echo $name_price_nguoi_lon?></th>
+                                    <th id="name_price_tre_em_m1"><?php echo $name_price_tre_em_m1?></th>
+                                    <th id="name_price_tre_em_m2"><?php echo $name_price_tre_em_m2?></th>
+                                    <th id="name_price_tre_em_m3"><?php echo $name_price_tre_em_m3?></th>
                                     <th>Số chỗ</th>
                                 </tr>
                                 </thead>
@@ -840,11 +819,11 @@
                             <input hidden="" class="valid" id="input_price_submit" name="price_submit"
                                    value="<?php echo $price_new ?>">
                             <input hidden="" class="valid" id="input_price_m1_submit" name="price_m1_submit"
-                                   value="<?php echo $price_11_new ?>">
+                                   value="<?php echo $price_tre_em_m1_new ?>">
                             <input hidden="" class="valid" id="input_price_m2_submit" name="price_m2_submit"
-                                   value="<?php echo $price_5_new ?>">
+                                   value="<?php echo $price_tre_em_m2_new ?>">
                             <input hidden="" class="valid" id="input_price_m3_submit" name="price_m3_submit"
-                                   value="<?php echo $price_5_new ?>">
+                                   value="<?php echo $price_tre_em_m3_new ?>">
                             <div class="hr hr8 hr-double hr-dotted"></div>
                             <div class="row">
                                 <div class="col-sm-4" style="text-align: right">
@@ -874,7 +853,7 @@
 
                                             <div class="profile-info-value form-group">
                                                      <span class="input-icon width_100">
-                                                        <input <?php echo $readonly_info_order?> class="valid" id="input_dat_coc" type="number"
+                                                        <input <?php echo $readonly_info_order?> class="valid input_table" id="input_dat_coc" type="number"
                                                                                                  name="dat_coc" value="<?php echo $dat_coc ?>">
                                                           <span class="red"
                                                                 id="dat_coc_format"><?php echo $dat_coc_format ?></span>
@@ -959,7 +938,7 @@
                                     <div class="profile-info-value">
 
                                          <span class="input-icon width_50">
-                                                            <input  name="hoa_hong_thanh_vien" type="number" id="input_hoa_hong_thanh_vien" class="width_100 valid">
+                                                            <input  name="hoa_hong_thanh_vien" type="number" id="input_hoa_hong_thanh_vien" class="width_100 valid input_table">
                                                             <input disabled hidden name="hoa_hong_thanh_vien_hidden" type="number" id="input_hoa_hong_thanh_vien_hidden" class="width_100 valid">
                                                             <i class="ace-icon fa fa-dollar blue"></i>
                                                         </span>

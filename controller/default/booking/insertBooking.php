@@ -74,11 +74,13 @@ $booking_model->name_price_m2 = $do_tuoi_tre_em_m2;
 $booking_model->name_price_m3 = $do_tuoi_tre_em_m3;
 
 // type tour
+$confirm_tien_hoa_hong=0;
 if ($type_tour == 1 || $type_tour == 0) {
     if ($type_tour == 1) {
-        if ($name_tour_cus == '' || $chuong_trinh == '' || $thoi_gian == '' || $nguoi_lon == '') {
+
+        if ($name_tour_cus == '' || $chuong_trinh == '' || $thoi_gian == '') {
             echo '<script>alert("Bạn vui lòng nhập thông tin tour")</script>';
-            exit;
+            echo 'window.location.href = "'.SITE_NAME.'/'.$action_link.'";';
         }
         // lưu lại thông tin tour theo yêu cầu khách hàng
         $tour_custom = new booking_tour_custom();
@@ -87,13 +89,10 @@ if ($type_tour == 1 || $type_tour == 0) {
         $tour_custom->chuong_trinh_price = $chuong_trinh_price;
         $tour_custom->thoi_gian = $thoi_gian;
         $tour_custom->thoi_gian_price = $thoi_gian_price;
-        $tour_custom->nguoi_lon = $nguoi_lon;
-        $tour_custom->tre_em = $tre_em;
-        $tour_custom->chuong_trinh = $tre_em_5;
         $tour_custom->so_nguoi_price = $so_nguoi_price;
         $tour_custom->khach_san = $khach_san;
         $tour_custom->khach_san_price = $khach_san_price;
-        $tour_custom->ngay_khoi_hanh_cus = date("d-m-Y", strtotime($ngay_khoi_hanh_cus));
+        $tour_custom->ngay_khoi_hanh_cus = date("Y-m-d", strtotime($ngay_khoi_hanh_cus));
         $tour_custom->ngay_khoi_hanh_price = $ngay_khoi_hanh_price;
         $tour_custom->hang_bay = $hang_bay;
         $tour_custom->hang_bay_price = $hang_bay_price;
@@ -101,6 +100,7 @@ if ($type_tour == 1 || $type_tour == 0) {
         $tour_custom->khac_price = $khac_price;
         $tour_custom->note = $note_cus;
         $tour_custom->code = _randomBooking('#', 'booking_tour_custom_count');
+
         booking_tour_custom_insert($tour_custom);
         $data_check_tour_custom = booking_tour_custom_getByTop(1, 'code="' . $tour_custom->code . '"', 'id desc');
         if (!$data_check_tour_custom) {
@@ -116,7 +116,7 @@ if ($type_tour == 1 || $type_tour == 0) {
         $booking_model->price_tre_em_m2 = $price_m2_submit;
         $booking_model->price_tre_em_m3 = $price_m3_submit;
         $booking_model->tour_custom = 1;
-
+        $confirm_tien_hoa_hong=1;
     } else {
         $check_data_tour = tour_getById($id_tour);
         if (count($check_data_tour) == 0) {
@@ -126,6 +126,9 @@ if ($type_tour == 1 || $type_tour == 0) {
         }
         $price_old = $check_data_tour[0]->price;
         $price_tiep_thi = $check_data_tour[0]->price_tiep_thi;
+        if(($check_data_tour[0]->price_tiep_thi='' || $check_data_tour[0]->price_tiep_thi<=0) && _returnPostParamSecurity('hoa_hong_thanh_vien')>0){
+            $confirm_tien_hoa_hong=1;
+        }
         $booking_model->id_tour = $id_tour;
         $booking_model->name_tour = $check_data_tour[0]->name;
         $booking_model->code_tour = $check_data_tour[0]->code;
@@ -212,11 +215,25 @@ $booking_model->user_id = $id_user;
 $booking_model->dieuhanh_id = $dieuhanh_id;
 $booking_model->note = $note;
 $booking_model->vat = $vat;
+
+if($price_tiep_thi =='' || $price_tiep_thi<=0){
+    $price_tiep_thi= _returnPostParamSecurity('hoa_hong_thanh_vien');
+    if($price_tiep_thi==''){
+        $price_tiep_thi=0;
+    }
+}
+
+
 $booking_model->price_tiep_thi = $price_tiep_thi;
 if ($user_tiep_thi_id != '') {
     $check_data_user_tt = user_getById($user_tiep_thi_id);
     if (count($check_data_user_tt) > 0 && $price_tiep_thi != '') {
-        $booking_model = _returnHoaHongBooking($booking_model, $check_data_user_tt, $price_tiep_thi);
+        if(strpos($check_data_user_tt[0]->user_code,'az_sa')!=''){
+            $booking_model = _returnHoaHongBooking($booking_model, $check_data_user_tt, $price_tiep_thi,1);
+        }else{
+            $booking_model = _returnHoaHongBooking($booking_model, $check_data_user_tt, $price_tiep_thi);
+        }
+
         $booking_model->user_tiep_thi_id = $user_tiep_thi_id;
         $save_tiepthi = 1;
     }
@@ -224,7 +241,12 @@ if ($user_tiep_thi_id != '') {
     if($name_user_tiepthi!='' && $email_thanh_vien!='' && $phone_thanh_vien!='' ){
         $check_data_user_tt = user_getByTop('','user_email="'.$email_thanh_vien.'"','');
         if(count($check_data_user_tt)>0){
-            $booking_model = _returnHoaHongBooking($booking_model, $check_data_user_tt, $price_tiep_thi);
+
+            if(strpos($check_data_user_tt[0]->user_code,'az_sa')>=0){
+                $booking_model = _returnHoaHongBooking($booking_model, $check_data_user_tt, $price_tiep_thi,1);
+            }else{
+                $booking_model = _returnHoaHongBooking($booking_model, $check_data_user_tt, $price_tiep_thi);
+            }
             $booking_model->user_tiep_thi_id = $check_data_user_tt[0]->id;
             $save_tiepthi = 1;
         }else{
@@ -235,11 +257,11 @@ if ($user_tiep_thi_id != '') {
             $create_user->phone=$phone_thanh_vien;
             $create_user->login_two_steps = 0;
             $create_user->user_role = 2;
-            $create_user->user_code = _randomBooking('az_sales', 'user_count');
+            $create_user->user_code = _randomBooking('az_sa', 'user_count');
             user_insert($create_user);
             $check_data_user_tt = user_getByTop('','user_code="'.$create_user->user_code.'"',1);
             if(count($check_data_user_tt)>0){
-                $booking_model = _returnHoaHongBooking($booking_model, $check_data_user_tt, $price_tiep_thi);
+                $booking_model = _returnHoaHongBooking($booking_model, $check_data_user_tt, $price_tiep_thi,1);
                 $booking_model->user_tiep_thi_id = $check_data_user_tt[0]->id;
                 $save_tiepthi = 1;
             }
@@ -264,11 +286,27 @@ if ($data_check_code > 0) {
     $code_booking = _randomBooking('#', 'booking_count', 'code_booking');
 }
 $booking_model->code_booking = $code_booking;
+
+// gửi thông bác xác nhận tiền hoa hồng cho thành viên của sales
+$send_noti_truong_phong=0;
+if($confirm_tien_hoa_hong==1 && $price_tiep_thi>0 && count($check_data_user)>0){
+    if($check_data_user[0]->truong_phong_id!=0){
+        $booking_model->confirm_admin_tiep_thi=$check_data_user[0]->truong_phong_id;
+        $send_noti_truong_phong=1;
+    }
+}
 booking_insert($booking_model);
 $data_booking = booking_getByTop('1', 'code_booking="' . $code_booking . '"', '');
 if (count($data_booking) > 0) {
     $id_booking = $data_booking[0]->id;
 }
+// gửi thông bác xác nhận tiền hoa hồng cho thành viên của sales
+if($send_noti_truong_phong==1){
+        $name_noti='Yêu cầu xác nhận hoa hồng từ nhân viên "'.$check_data_user[0]->name.'"';
+        $link_noti = SITE_NAME . '/' . $action_link . '/sua?noti=1&id=' . _return_mc_encrypt($id_booking, ENCRYPTION_KEY);
+        _insertNotification($name_noti,$check_data_user[0]->id, $check_data_user[0]->truong_phong_id, $link_noti, 0, '');
+}
+
 // cập nhật danh sách đoàn
 _updateCustomerBooking($name_customer_sub, $email_customer_sub, $phone_customer_sub, $address_customer_sub, $tuoi_customer_sub, $tuoi_number_customer_sub, $birthday_customer_sub, $passport_customer_sub, $date_passport_customer_sub, $id_booking, $_SESSION['user_id']);
 
@@ -276,7 +314,7 @@ _updateCustomerBooking($name_customer_sub, $email_customer_sub, $phone_customer_
 _updateDanhSachBangGia($name_dichvu,$type_dichvu,$price_dichvu,$soluong_dichvu,$thanhtien_dichvu,$ghichu_dichvu, $id_booking);
 
 // tiep thi lien ket
-if (isset($save_tiepthi) && $save_tiepthi == 1) {
+if (isset($save_tiepthi) && $save_tiepthi == 1 && $send_noti_truong_phong!=1) {
     print_r($save_tiepthi);
     $array_user['user_name'] = $check_data_user_tt[0]->name;
     $array_user['user_email'] = $check_data_user_tt[0]->user_email;

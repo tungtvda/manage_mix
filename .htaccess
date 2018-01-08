@@ -1,0 +1,155 @@
+#php_value upload_max_filesize 40M
+#php_value post_max_size 42M
+#Options +FollowSymLinks
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin *
+</IfModule>
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^.kzone.vn
+ErrorDocument 404 /404.php
+RewriteRule ^(.*)$ http://radio.kzone.vn/$1 [R=permanent,L]
+RewriteRule ^admin controller/admin/index.php
+RewriteRule ^login controller/admin/login.php
+RewriteRule ^dang-nhap.html controller/default/login.php
+RewriteRule ^dang-xuat.html controller/default/logout.php
+RewriteRule ^xac-nhan.html controller/default/confirm_login.php
+RewriteRule ^check-login.html controller/default/check_login.php
+RewriteRule ^check-validate.html controller/default/function_share/check_valid.php
+RewriteRule ^doi-mat-khau-login/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/$ controller/default/doimatkhau_login.php?param1=$1&param2=$2&param3=$3&param4=$4&param5=$5
+
+RewriteRule ^update-status/$ controller/default/function_share/update_status.php
+RewriteRule ^get-detail-ajax/$ controller/default/function_share/get_detail.php
+
+RewriteRule ^nhan-vien/$ controller/default/user/user.php
+RewriteRule ^nhan-vien/xoa$ controller/default/user/delete.php
+RewriteRule ^nhan-vien/them-moi controller/default/user/themmoi.php
+RewriteRule ^nhan-vien/sua controller/default/user/themmoi.php
+RewriteRule ^nhan-vien/phan-quyen$ controller/default/user/phanquyen.php
+RewriteRule ^nhan-vien/check-pass-old$ controller/default/user/check_pass_old.php
+RewriteRule ^nhan-vien/update-pass$ controller/default/user/update_pass.php
+RewriteRule ^tree-phan-quyen$ controller/default/user/tree.php
+RewriteRule ^update-phan-quyen$ controller/default/user/phanquyen_update.php
+RewriteRule ^profile.html$ controller/default/user/hoso.php
+RewriteRule ^return-user-code.html$ controller/default/user/returnCodeUser.php
+RewriteRule ^return-user-list-phong-ban.html controller/default/user/user_list_phong_ban.php
+
+RewriteRule ^thanh-vien/$ controller/default/thanhvien/user.php
+RewriteRule ^thanh-vien/xoa$ controller/default/user/delete.php
+RewriteRule ^thanh-vien/them-moi controller/default/user/themmoi.php
+RewriteRule ^thanh-vien/sua controller/default/user/themmoi.php
+RewriteRule ^thanh-vien/phan-quyen$ controller/default/user/phanquyen.php
+
+RewriteRule ^khach-hang/$ controller/default/customer/customer.php
+RewriteRule ^khach-hang/them-moi controller/default/customer/themmoi.php
+RewriteRule ^khach-hang/sua controller/default/customer/themmoi.php
+RewriteRule ^khach-hang/xoa$ controller/default/customer/delete.php
+
+
+RewriteRule ^booking-website/$ controller/default/booking/booking_website.php
+RewriteRule ^return-booking-website/$ controller/default/booking/return_booking_website.php
+RewriteRule ^booking/$ controller/default/booking/booking.php
+RewriteRule ^booking-new/$ controller/default/booking/booking.php
+RewriteRule ^booking-giao-dich/$ controller/default/booking/booking.php
+RewriteRule ^booking-tam-dung/$ controller/default/booking/booking.php
+RewriteRule ^booking-no-tien/$ controller/default/booking/booking.php
+RewriteRule ^booking-ket-thuc/$ controller/default/booking/booking.php
+RewriteRule ^booking-ban-nhap/$ controller/default/booking/booking.php
+
+RewriteRule ^booking/dat-tour$ controller/default/booking/themmoi.php
+RewriteRule ^booking-new/dat-tour$ controller/default/booking/themmoi.php
+RewriteRule ^booking-giao-dich/dat-tour$ controller/default/booking/themmoi.php
+RewriteRule ^booking-tam-dung/dat-tour$ controller/default/booking/themmoi.php
+RewriteRule ^booking-no-tien/dat-tour$ controller/default/booking/themmoi.php
+RewriteRule ^booking-ket-thuc/dat-tour$ controller/default/booking/themmoi.php
+RewriteRule ^booking-ban-nhap/dat-tour$ controller/default/booking/themmoi.php
+
+RewriteRule ^booking/xoa$ controller/default/booking/delete.php
+RewriteRule ^booking-new/xoa$ controller/default/booking/delete.php
+RewriteRule ^booking-giao-dich/xoa$ controller/default/booking/delete.php
+RewriteRule ^booking-tam-dung/xoa$ controller/default/booking/delete.php
+RewriteRule ^booking-no-tien/xoa$ controller/default/booking/delete.php
+RewriteRule ^booking-ket-thuc/xoa$ controller/default/booking/delete.php
+RewriteRule ^booking-ban-nhap/xoa$ controller/default/booking/delete.php
+
+
+RewriteRule ^get-detail-ajax-booking/$ controller/default/booking/get_detail_ajax.php
+RewriteRule ^booking/insert-tour$ controller/default/booking/themmoi_tour.php
+RewriteRule ^booking/sua$ controller/default/booking/themmoi.php
+RewriteRule ^booking-new/sua$ controller/default/booking/themmoi.php
+RewriteRule ^booking-giao-dich/sua$ controller/default/booking/themmoi.php
+RewriteRule ^booking-tam-dung/sua$ controller/default/booking/themmoi.php
+RewriteRule ^booking-no-tien/sua$ controller/default/booking/themmoi.php
+RewriteRule ^booking-ket-thuc/sua$ controller/default/booking/themmoi.php
+RewriteRule ^booking-ban-nhap/sua$ controller/default/booking/themmoi.php
+
+RewriteRule ^booking/confirm-order$ controller/default/booking/confirm_order.php
+RewriteRule ^booking/confirm-tiepthi$ controller/default/booking/confirm_tiepthi.php
+
+RewriteRule ^booking-new/confirm-order$ controller/default/booking/confirm_order.php
+RewriteRule ^booking-giao-dich/confirm-order$ controller/default/booking/confirm_order.php
+RewriteRule ^booking-tam-dung/confirm-order$ controller/default/booking/confirm_order.php
+RewriteRule ^booking-no-tien/confirm-order$ controller/default/booking/confirm_order.php
+RewriteRule ^booking-ket-thuc/confirm-order$ controller/default/booking/confirm_order.php
+RewriteRule ^booking-ban-nhap/confirm-order$ controller/default/booking/confirm_order.php
+
+RewriteRule ^booking/chi-phi$ controller/default/booking/chi_phi.php
+RewriteRule ^booking-new/chi-phi$ controller/default/booking/chi_phi.php
+RewriteRule ^booking-giao-dich/chi-phi$ controller/default/booking/chi_phi.php
+RewriteRule ^booking-tam-dung/chi-phi$ controller/default/booking/chi_phi.php
+RewriteRule ^booking-no-tien/chi-phi$ controller/default/booking/chi_phi.php
+RewriteRule ^booking-ket-thuc/chi-phi$ controller/default/booking/chi_phi.php
+RewriteRule ^booking-ban-nhap/chi-phi$ controller/default/booking/chi_phi.php
+
+RewriteRule ^booking/xoa-chi-phi$ controller/default/booking/delete_cost.php
+RewriteRule ^booking-new/xoa-chi-phi$ controller/default/booking/delete_cost.php
+RewriteRule ^booking-giao-dich/xoa-chi-phi$ controller/default/booking/delete_cost.php
+RewriteRule ^booking-tam-dung/xoa-chi-phi$ controller/default/booking/delete_cost.php
+RewriteRule ^booking-no-tien/xoa-chi-phi$ controller/default/booking/delete_cost.php
+RewriteRule ^booking-ket-thuc/xoa-chi-phi$ controller/default/booking/delete_cost.php
+RewriteRule ^booking-ban-nhap/xoa-chi-phi$ controller/default/booking/delete_cost.php
+
+RewriteRule ^booking-list-giao-dich.html$ controller/default/booking/list_giao_dich.php
+RewriteRule ^booking-save-giao-dich.html$ controller/default/booking/save_giao_dich.php
+
+RewriteRule ^rut-tien/$ controller/default/rut_tien/rut_tien.php
+RewriteRule ^confirm-withdraw.html$ controller/default/rut_tien/az_confirm_withdraw.php
+
+RewriteRule ^return-input-price-booking/$ controller/default/booking/list_price_input.php
+
+RewriteRule ^chuc-mung-sinh-nhat/send-sms-birthday/$ controller/default/email_marketing/send_sms.php
+RewriteRule ^cham-soc-khach-hang/$ controller/default/email_marketing/email_marketing.php
+RewriteRule ^cham-soc-khach-hang/them-moi controller/default/email_marketing/themmoi.php
+RewriteRule ^cham-soc-khach-hang/sua  controller/default/email_marketing/themmoi.php
+RewriteRule ^cham-soc-khach-hang/xoa  controller/default/email_marketing/delete.php
+RewriteRule ^chuc-mung-sinh-nhat/$ controller/default/email_marketing/email_marketing.php
+RewriteRule ^chuc-mung-sinh-nhat/them-moi controller/default/email_marketing/themmoi.php
+RewriteRule ^chuc-mung-sinh-nhat/sua  controller/default/email_marketing/themmoi.php
+RewriteRule ^chuc-mung-sinh-nhat/xoa  controller/default/email_marketing/delete.php
+RewriteRule ^cronjob-send-sms$ controller/default/email_marketing/cronjob_send_sms.php
+
+RewriteRule ^doanh-thu-don-hang/$ controller/default/thongke/doanh_thu_don_hang.php
+
+RewriteRule ^azbooking-dang-ky.html$ controller/default/user/az_dang_ky_ajax.php
+RewriteRule ^azbooking-confirm-email.html controller/default/user/check_confirm_email.php
+RewriteRule ^azbooking-reset-password.html controller/default/user/reset_pass_ajax.php
+RewriteRule ^azbooking-login.html controller/default/user/az_login.php
+RewriteRule ^azbooking-login-facebook.html controller/default/user/az_login_facebook.php
+RewriteRule ^azbooking-confirm-login.html controller/default/user/az_confirm_login.php
+RewriteRule ^azbooking-check-login.html controller/default/user/az_check_login.php
+RewriteRule ^return-list-notification.html controller/default/user/az_list_notification.php
+RewriteRule ^azbooking-hoso.html controller/default/user/az_hoso.php
+RewriteRule ^azbooking-update-hoso.html controller/default/user/az_update_hoso.php
+RewriteRule ^az-check-pass-old.html controller/default/user/az_check_pass_old.php
+RewriteRule ^az-update-pass.html controller/default/user/az_update_pass.php
+RewriteRule ^az-update-avatar.html controller/default/user/az_update_avatar.php
+RewriteRule ^az-rut-tien.html controller/default/user/az_rut_tien.php
+RewriteRule ^az-list-rut-tien.html controller/default/user/az_list_rut_tien.php
+RewriteRule ^azbooking-update-2buoc.html controller/default/user/az_update_2buoc.php
+RewriteRule ^update-notification.html controller/default/user/az_update_notification.php
+RewriteRule ^azbooking-get-dashboard.html controller/default/booking/az_list_dashboad.php
+RewriteRule ^azbooking-get-list-booking.html controller/default/booking/az_list_booking.php
+RewriteRule ^azbooking-get-list-thanhvien.html controller/default/user/az_list_thanhvien.php
+RewriteRule ^azbooking-get-list-chart.html controller/default/user/az_list_chart.php
+RewriteRule ^azbooking-get-detail-booking.html controller/default/booking/az_detail_booking.php
+RewriteRule ^return-hoa-hong.html controller/default/user/az_hoahong.php
+RewriteRule ^azbooking-list-dieu-hanh.html controller/default/user/az_list_dieu_hanh.php

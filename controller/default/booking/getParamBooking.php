@@ -25,6 +25,7 @@ if ($tien_te != '') {
 }
 
 $nguon_tour = _returnPostParamSecurity('nguon_tour');
+$link_bang_gia = _returnPostParamSecurity('link_bang_gia');
 $ngay_bat_dau = _returnPostParamSecurity('ngay_bat_dau');
 $han_thanh_toan = _returnPostParamSecurity('han_thanh_toan');
 $status = _returnPostParamSecurity('status');
@@ -192,7 +193,7 @@ if (is_numeric($num_tre_em_m3) && is_numeric($price_m3_submit)) {
 }
 if ($vat == 1) {
     $vat_price = ($total * 0.1);
-    $total = $total + $vat_price;
+//    $total = $total + $vat_price;
 }
 if (isset($_POST['name_customer_sub'])) {
     $name_customer_sub = $_POST['name_customer_sub'];
@@ -222,21 +223,27 @@ if (isset($_POST['date_passport_customer'])) {
     $date_passport_customer_sub = $_POST['date_passport_customer'];
 }
 
+$name_dichvu='';
 if (isset($_POST['name_dichvu'])) {
     $name_dichvu = $_POST['name_dichvu'];
 }
+$type_dichvu='';
 if (isset($_POST['type_dichvu'])) {
     $type_dichvu = $_POST['type_dichvu'];
 }
+$price_dichvu='';
 if (isset($_POST['price_dichvu'])) {
     $price_dichvu = $_POST['price_dichvu'];
 }
+$soluong_dichvu='';
 if (isset($_POST['soluong_dichvu'])) {
     $soluong_dichvu = $_POST['soluong_dichvu'];
 }
+$thanhtien_dichvu='';
 if (isset($_POST['thanhtien_dichvu'])) {
     $thanhtien_dichvu = $_POST['thanhtien_dichvu'];
 }
+$ghichu_dichvu='';
 if (isset($_POST['ghichu_dichvu'])) {
     $ghichu_dichvu = $_POST['ghichu_dichvu'];
 }

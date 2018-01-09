@@ -52,8 +52,11 @@ function show_booking_themmoi($data = array())
     $ngay_khoi_hanh_valid = '';
     $ngay_ket_thuc_valid = '';
     $email_customer_valid = '';
-    $name_user_tt = '';
+    $code_user_tt = '';
     $id_user_tt = '';
+    $name_user_tt = '';
+    $email_user_tt = '';
+    $phone_user_tt = '';
     $confirm_admin_tiep_thi = '';
     $confirm_admin_tiep_thi = '';
     $price_tiep_thi = '';
@@ -140,7 +143,11 @@ function show_booking_themmoi($data = array())
     $show_update_dieuhanh = '';
     $show_update_sales='';
     $hidden_don_gia_dichvu='hidden';
-
+    $hoa_hong_thanh_vien='';
+    $hoa_hong_thanh_vien_format='';
+    $link_bang_gia='';
+    $btn_link_bang_gia='';
+    $list_dich_vu='';
     $num_nguoi_lon = _returnDataEditAdd($data['data_user'], 'num_nguoi_lon');
     if (!$num_nguoi_lon) {
         $num_nguoi_lon = 1;
@@ -156,6 +163,16 @@ function show_booking_themmoi($data = array())
     $num_tre_em_m3= _returnDataEditAdd($data['data_user'], 'num_tre_em_m3');
     if (!$num_tre_em_m3) {
         $num_tre_em_m3 = 0;
+    }
+    $hoa_hong_thanh_vien= _returnDataEditAdd($data['data_user'], 'price_tiep_thi_thuc_te');
+    if (!$hoa_hong_thanh_vien) {
+        $hoa_hong_thanh_vien = 0;
+    }else{
+        $hoa_hong_thanh_vien_format = "<b class='red'>" . number_format((float)$hoa_hong_thanh_vien, 0, ",", ".") . ' vnđ </b>';
+    }
+    $link_bang_gia= _returnDataEditAdd($data['data_user'], 'link_bang_gia');
+    if ($link_bang_gia!='') {
+        $btn_link_bang_gia='<a title="Xem chi tiết link bảng giá" target="_blank" class="btn btn-success" style="padding: 2px 10px;" href="'.$link_bang_gia.'"><i class="fa fa-link"></i></a>';
     }
     if ($action == 2) {
         if ($_SESSION['user_role'] != 1) {
@@ -224,12 +241,15 @@ function show_booking_themmoi($data = array())
 
         $data_sales_tt = user_getById($data['data_user'][0]->user_tiep_thi_id);
         if (count($data_sales_tt) > 0) {
-            $name_user_tt = $data_sales_tt[0]->user_code;
+            $code_user_tt = $data_sales_tt[0]->user_code;
             $id_user_tt = $data_sales_tt[0]->id;
+            $name_user_tt = $data_sales_tt[0]->name;
+            $email_user_tt = $data_sales_tt[0]->user_email;
+            $phone_user_tt =  $data_sales_tt[0]->phone;;
         }
         $price_tiep_thi = _returnDataEditAdd($data['data_user'], 'price_tiep_thi');
         if (is_numeric($price_tiep_thi) && $price_tiep_thi > 0) {
-            $price_tiep_thi = "<b class='red'>" . number_format((int)$price_tiep_thi, 0, ",", ".") . ' vnđ </b>';
+            $price_tiep_thi = "<b class='red'>" . number_format((float)$price_tiep_thi, 0, ",", ".") . ' vnđ </b>';
         }
         $confirm_tiep_thi = _returnDataEditAdd($data['data_user'], 'confirm_admin_tiep_thi');
 
@@ -362,7 +382,7 @@ function show_booking_themmoi($data = array())
                 }
                 $chuong_trinh_price = _returnDataEditAdd($data_tour, 'chuong_trinh_price');
                 if (is_numeric($chuong_trinh_price) && $chuong_trinh_price > 0) {
-                    $chuong_trinh_price_format = number_format((int)$chuong_trinh_price, 0, ",", ".") . ' vnđ';
+                    $chuong_trinh_price_format = number_format((float)$chuong_trinh_price, 0, ",", ".") . ' vnđ';
                 }
                 $thoi_gian = _returnDataEditAdd($data_tour, 'thoi_gian');
                 if ($thoi_gian != '') {
@@ -370,19 +390,19 @@ function show_booking_themmoi($data = array())
                 }
                 $thoi_gian_price = _returnDataEditAdd($data_tour, 'thoi_gian_price');
                 if (is_numeric($thoi_gian_price) && $thoi_gian_price > 0) {
-                    $thoi_gian_price_format = number_format((int)$thoi_gian_price, 0, ",", ".") . ' vnđ';
+                    $thoi_gian_price_format = number_format((float)$thoi_gian_price, 0, ",", ".") . ' vnđ';
                 }
                 $nguoi_lon = _returnDataEditAdd($data_tour, 'nguoi_lon');
                 $tre_em = _returnDataEditAdd($data_tour, 'tre_em');
                 $tre_em_5 = _returnDataEditAdd($data_tour, 'tre_em_5');
                 $so_nguoi_price = _returnDataEditAdd($data_tour, 'so_nguoi_price');
                 if (is_numeric($so_nguoi_price) && $so_nguoi_price > 0) {
-                    $so_nguoi_price_format = number_format((int)$so_nguoi_price, 0, ",", ".") . ' vnđ';
+                    $so_nguoi_price_format = number_format((float)$so_nguoi_price, 0, ",", ".") . ' vnđ';
                 }
                 $khach_san = _returnDataEditAdd($data_tour, 'khach_san');
                 $khach_san_price = _returnDataEditAdd($data_tour, 'khach_san_price');
                 if (is_numeric($khach_san_price) && $khach_san_price > 0) {
-                    $khach_san_price_format = number_format((int)$khach_san_price, 0, ",", ".") . ' vnđ';
+                    $khach_san_price_format = number_format((float)$khach_san_price, 0, ",", ".") . ' vnđ';
                 }
                 $ngay_khoi_hanh_cus = date("d-m-Y", strtotime(_returnDataEditAdd($data_tour, 'ngay_khoi_hanh_cus')));
                 if ($ngay_khoi_hanh_cus != '') {
@@ -390,17 +410,17 @@ function show_booking_themmoi($data = array())
                 }
                 $ngay_khoi_hanh_price = _returnDataEditAdd($data_tour, 'ngay_khoi_hanh_price');
                 if (is_numeric($ngay_khoi_hanh_price) && $ngay_khoi_hanh_price > 0) {
-                    $ngay_khoi_hanh_price_format = number_format((int)$ngay_khoi_hanh_price, 0, ",", ".") . ' vnđ';
+                    $ngay_khoi_hanh_price_format = number_format((float)$ngay_khoi_hanh_price, 0, ",", ".") . ' vnđ';
                 }
                 $hang_bay = _returnDataEditAdd($data_tour, 'hang_bay');
                 $hang_bay_price = _returnDataEditAdd($data_tour, 'hang_bay_price');
                 if (is_numeric($hang_bay_price) && $hang_bay_price > 0) {
-                    $hang_bay_price_format = number_format((int)$hang_bay_price, 0, ",", ".") . ' vnđ';
+                    $hang_bay_price_format = number_format((float)$hang_bay_price, 0, ",", ".") . ' vnđ';
                 }
                 $khac = _returnDataEditAdd($data_tour, 'khac');
                 $khac_price = _returnDataEditAdd($data_tour, 'khac_price');
                 if (is_numeric($khac_price) && $khac_price > 0) {
-                    $khac_price_format = number_format((int)$khac_price, 0, ",", ".") . ' vnđ';
+                    $khac_price_format = number_format((float)$khac_price, 0, ",", ".") . ' vnđ';
                 }
                 $note_cus = _returnDataEditAdd($data_tour, 'note');
             }
@@ -474,8 +494,8 @@ function show_booking_themmoi($data = array())
             $loi_nhuan_m3=0;
         }
 
-        $data_list_dichvu=booking_list_dichvu_getByTop('','booking_id='.$data['data_user'][0]->id,'id desc');
-        $list_dich_vu='';
+        $data_list_dichvu=booking_list_dichvu_getByTop('','booking_id='.$data['data_user'][0]->id,'id asc');
+
         $total_dicvu=0;
         if($data_list_dichvu>0){
             $count_dv=1;
@@ -493,9 +513,18 @@ function show_booking_themmoi($data = array())
                                             <td id="stt_dichvu_td_'.$count_dv.'">'.$count_dv.'</td>
                                             <td><input style="height: 30px;     width: 100%;" value="'.$row_dv->name.'" name="name_dichvu[]" id="input_name_dichvu_'.$count_dv.'" type="text" class="valid input_table"></td>
                                             <td>
-                                                <select style="width: 100%;" name="type_dichvu[]" id="input_type_dichvu_'.$count_dv.'">
-                                                    <?php echo $list_danhmuc_dichvu?>
-                                                </select>
+                                                <select style="width: 100%;" name="type_dichvu[]" id="input_type_dichvu_'.$count_dv.'">';
+                if($data_danhmuc_dichvu){
+                    foreach($data_danhmuc_dichvu as $row_dm){
+                        $selected='';
+                        if($row_dv->type==$row_dm->id){
+                            $selected='selected="selected"';
+                        }
+                        $list_dich_vu .='<option '.$selected.' value="'.$row_dm->id.'">'.$row_dm->name.'</option>';
+                    }
+                }
+
+                $list_dich_vu.='</select>
                                             </td>
                                             <td>
                                                 <input data-value="'.$count_dv.'" style="height: 30px;width: 88%;" value="'.$row_dv->price.'" name="price_dichvu[]" id="input_price_dichvu_'.$count_dv.'" type="number" class="valid input_table input_price_dichvu">
@@ -615,7 +644,7 @@ function show_booking_themmoi($data = array())
     $dat_coc = _returnDataEditAdd($data['data_user'], 'tien_thanh_toan');
     $dat_coc_format = '';
     if (is_numeric($dat_coc) && $dat_coc > 0) {
-        $dat_coc_format = number_format((int)$dat_coc, 0, ",", ".") . ' vnđ';
+        $dat_coc_format = number_format((float)$dat_coc, 0, ",", ".") . ' vnđ';
     }
 
     $show_add_tour = '';
@@ -644,10 +673,10 @@ function show_booking_themmoi($data = array())
     if ($price_tre_em_m3_new == '') {
         $price_tre_em_m3_new = 0;
     }
-    $price_new_format = number_format((int)$price_new, 0, ",", ".") . ' vnđ';
-    $price_tre_em_m1_new_format = number_format((int)$price_tre_em_m1_new, 0, ",", ".") . ' vnđ';
-    $price_tre_em_m2_new_format = number_format((int)$price_tre_em_m2_new, 0, ",", ".") . ' vnđ';
-    $price_tre_em_m3_new_format = number_format((int)$price_tre_em_m3_new, 0, ",", ".") . ' vnđ';
+    $price_new_format = number_format((float)$price_new, 0, ",", ".") . ' vnđ';
+    $price_tre_em_m1_new_format = number_format((float)$price_tre_em_m1_new, 0, ",", ".") . ' vnđ';
+    $price_tre_em_m2_new_format = number_format((float)$price_tre_em_m2_new, 0, ",", ".") . ' vnđ';
+    $price_tre_em_m3_new_format = number_format((float)$price_tre_em_m3_new, 0, ",", ".") . ' vnđ';
 
     $table_tour = '<tr> <td class="center">1</td><td><a id="name_tour_table">' . $name_tour . '</a></td>
         <td><span id="price_format_span">' . $price_new_format . '</span>';
@@ -656,7 +685,7 @@ function show_booking_themmoi($data = array())
     $table_tour .= '<input hidden="" id="input_price_format" value="' . $price_new_format . '">
         <input hidden="" title="giá sửa" id="input_price" value="' . $price_new . '">
         <input hidden="" id="input_price_old" title="giá cũ" value="' . $price_new . '"> ';
-    if ($_SESSION['user_role'] == 1 || (isset($data['data_user'][0]->dieuhanh_id)&& $data['data_user'][0]->dieuhanh_id==$_SESSION['user_id']) ) {
+    if ($_SESSION['user_role'] == 1 || (isset($data['data_user'][0]->dieuhanh_id)&& $data['data_user'][0]->dieuhanh_id==$_SESSION['user_id'] && $tour_custom!=1) ) {
         $table_tour .= '| <a id="edit_price" href="javascript:void(0)"><i class="fa fa-edit" title="Sửa đơn giá"></i></a>
         <a id="reset_price" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a>';
     } else {
@@ -667,7 +696,7 @@ function show_booking_themmoi($data = array())
     $table_tour .= '</td>
     <td><span id="price_format_span_tre_em_m1">' . $price_tre_em_m1_new_format . '</span>';
     $table_tour .= '<input hidden="" title="giá sửa" id="input_price_tre_em_m1" value="' . $price_tre_em_m1_new . '"> <input hidden="" id="input_price_tre_em_m1_old" title="giá cũ" value="' . $price_tre_em_m1_new . '">';
-    if ($_SESSION['user_role'] == 1 || (isset($data['data_user'][0]->dieuhanh_id)&& $data['data_user'][0]->dieuhanh_id==$_SESSION['user_id']) ) {
+    if ($_SESSION['user_role'] == 1 || (isset($data['data_user'][0]->dieuhanh_id)&& $data['data_user'][0]->dieuhanh_id==$_SESSION['user_id']  && $tour_custom!=1) ) {
         $table_tour .= '| <a id="edit_price_tre_em_m1" href="javascript:void(0)">
         <i class="fa fa-edit" title="Sửa đơn giá"></i></a>
         <a id="reset_price_tre_em_m1" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a>';
@@ -677,7 +706,7 @@ function show_booking_themmoi($data = array())
      $table_tour .= '</td>
      <td><span id="price_format_span_tre_em_m2">' . $price_tre_em_m2_new_format . '</span>';
      $table_tour .= '<input hidden="" title="giá sửa" id="input_price_tre_em_m2" value="' . $price_tre_em_m2_new . '"> <input hidden="" id="input_price_tre_em_m2_old" title="giá cũ" value="' . $price_tre_em_m2_new . '">';
-     if ($_SESSION['user_role'] == 1 || (isset($data['data_user'][0]->dieuhanh_id)&& $data['data_user'][0]->dieuhanh_id==$_SESSION['user_id']) ) {
+     if ($_SESSION['user_role'] == 1 || (isset($data['data_user'][0]->dieuhanh_id)&& $data['data_user'][0]->dieuhanh_id==$_SESSION['user_id']  && $tour_custom!=1) ) {
          $table_tour .= '| <a id="edit_price_tre_em_m2" href="javascript:void(0)">
          <i class="fa fa-edit" title="Sửa đơn giá"></i></a>
          <a id="reset_price_tre_em_m2" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a>';
@@ -687,7 +716,7 @@ function show_booking_themmoi($data = array())
      $table_tour .= '</td>
      <td><span id="price_format_span_tre_em_m3">' . $price_tre_em_m3_new_format . '</span>';
      $table_tour .= '<input hidden="" title="giá sửa" id="input_price_tre_em_m3" value="' . $price_tre_em_m3_new . '"> <input hidden="" id="input_price_tre_em_m3_old" title="giá cũ" value="' . $price_tre_em_m3_new . '">';
-     if ($_SESSION['user_role'] == 1 || (isset($data['data_user'][0]->dieuhanh_id)&& $data['data_user'][0]->dieuhanh_id==$_SESSION['user_id']) ) {
+     if ($_SESSION['user_role'] == 1 || (isset($data['data_user'][0]->dieuhanh_id)&& $data['data_user'][0]->dieuhanh_id==$_SESSION['user_id']  && $tour_custom!=1) ) {
          $table_tour .= '| <a id="edit_price_tre_em_m3" href="javascript:void(0)">
          <i class="fa fa-edit" title="Sửa đơn giá"></i></a>
          <a id="reset_price_tre_em_m3" title="Lấy lại giá cũ" href="javascript:void(0)"> <i class="fa fa-refresh" title="Giá gốc"></i></a>';
@@ -699,16 +728,16 @@ function show_booking_themmoi($data = array())
         $total=0;
     }
 
-    $total_format = number_format((int)$total, 0, ",", ".") . ' vnđ';
+    $total_format = number_format((float)$total, 0, ",", ".") . ' vnđ';
     if ($vat == 1) {
         $vat_price = ($total * 0.1);
-        $vat_format = number_format((int)$vat_price, 0, ",", ".") . ' vnđ';
+        $vat_format = number_format((float)$vat_price, 0, ",", ".") . ' vnđ';
         $total = $total + $vat_price;
     }
     if (is_numeric($dat_coc) && $dat_coc > 0) {
         $total = $total - $dat_coc;
     }
-    $conlai_format = number_format((int)$total, 0, ",", ".") . ' vnđ';
+    $conlai_format = number_format((float)$total, 0, ",", ".") . ' vnđ';
 
     $booking_id = _returnDataEditAdd($data['data_user'], 'id');
     $string_cus_tommer = '';

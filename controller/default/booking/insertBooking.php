@@ -126,8 +126,12 @@ if ($type_tour == 1 || $type_tour == 0) {
         }
         $price_old = $check_data_tour[0]->price;
         $price_tiep_thi = $check_data_tour[0]->price_tiep_thi;
-        if(($check_data_tour[0]->price_tiep_thi='' || $check_data_tour[0]->price_tiep_thi<=0) && _returnPostParamSecurity('hoa_hong_thanh_vien')>0){
+        if(($check_data_tour[0]->price_tiep_thi=='' || $check_data_tour[0]->price_tiep_thi<=0) && _returnPostParamSecurity('hoa_hong_thanh_vien')>0){
             $confirm_tien_hoa_hong=1;
+        }
+        if($check_data_tour[0]->price_tiep_thi>0 && $user_tiep_thi_id != ''){
+            $booking_model->status_tiep_thi=1;
+            $booking_model->confirm_admin_tiep_thi=$_SESSION['user_id'];
         }
         $booking_model->id_tour = $id_tour;
         $booking_model->name_tour = $check_data_tour[0]->name;
@@ -198,6 +202,7 @@ if ($dieuhanh_id == $_SESSION['user_id']) {
 }
 
 $booking_model->nguon_tour = $nguon_tour;
+$booking_model->link_bang_gia = $link_bang_gia;
 $booking_model->tien_te = $tien_te;
 $booking_model->ty_gia = $ty_gia;
 $booking_model->ngay_bat_dau = date("Y-m-d", strtotime($ngay_bat_dau));
@@ -209,7 +214,7 @@ $booking_model->diem_don = $diem_don;
 $booking_model->diem_tra = $diem_don;
 $booking_model->ngay_khoi_hanh = date("Y-m-d", strtotime($ngay_khoi_hanh));
 $booking_model->ngay_ket_thuc = date("Y-m-d", strtotime($ngay_ket_thuc));
-$booking_model->total_price = $total;
+$booking_model->total_price = round($total,2);
 $booking_model->tien_thanh_toan = $dat_coc;
 $booking_model->user_id = $id_user;
 $booking_model->dieuhanh_id = $dieuhanh_id;

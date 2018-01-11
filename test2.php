@@ -24,8 +24,6 @@ $SampleXml = "<RQST>"
     . "</CUSTOMER>"
     . "</CONTACTS>"
     . "</RQST>";
-
-
 curl_setopt($ch, CURLOPT_URL,            "http://api.esms.vn/MainService.svc/xml/SendMultipleMessage_V2/" );
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1 );
 curl_setopt($ch, CURLOPT_POST,           1 );

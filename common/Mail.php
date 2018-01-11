@@ -5,7 +5,7 @@
  * @copyright 2013
  */
 
-require_once('class.phpmailer.php');  
+require_once('class.phpmailer.php');
 function SendMail($Sendto,$Body,$Subject, $return='', $title_mail='Hệ thống quản lý MIXTOURIST', $domain='mix')
 {
     $mail = new PHPMailer();
@@ -51,5 +51,5 @@ function SendMail($Sendto,$Body,$Subject, $return='', $title_mail='Hệ thống 
 //        echo "<script>alert('Quý khách đã đặt tour thành công, chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất, Xin cảm ơn!')</script>";
 
     }
-}  
+}
 ?>

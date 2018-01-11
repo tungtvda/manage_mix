@@ -42,4 +42,5 @@ if ($xml === false) {
 
 print "Ket qua goi API: " . $xml->CodeResult . "\n";
 
+
 ?>

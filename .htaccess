@@ -153,3 +153,4 @@ RewriteRule ^azbooking-get-list-chart.html controller/default/user/az_list_chart
 RewriteRule ^azbooking-get-detail-booking.html controller/default/booking/az_detail_booking.php
 RewriteRule ^return-hoa-hong.html controller/default/user/az_hoahong.php
 RewriteRule ^azbooking-list-dieu-hanh.html controller/default/user/az_list_dieu_hanh.php
+RewriteRule ^azbooking-list-type-dich-vu.html controller/default/booking/az_list_type_dich_vu.php

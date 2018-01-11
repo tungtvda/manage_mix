@@ -418,7 +418,7 @@ if($array_detail['status']!=5){
     _updateCustomerBooking($name_customer_sub, $email_customer_sub, $phone_customer_sub, $address_customer_sub, $tuoi_customer_sub, $tuoi_number_customer_sub, $birthday_customer_sub, $passport_customer_sub, $date_passport_customer_sub, $array_detail['id'], $_SESSION['user_id']);
     // Danh sách bảng giá dịch vụ
     // delete danh sách bảng giá dịch vụ
-    if($name_dichvu && $type_dichvu && $price_dichvu && $soluong_dichvu && $thanhtien_dichvu && $ghichu_dichvu){
+    if($name_dichvu && $type_dichvu && $price_dichvu && $soluong_dichvu && $thanhtien_dichvu && $ghichu_dichvu && ($_SESSION['user_id']== $booking_update->dieuhanh_id || $_SESSION['user_role']==1)){
         list_bang_gia_booking_delete($array_detail['id']);
         _updateDanhSachBangGia($name_dichvu,$type_dichvu,$price_dichvu,$soluong_dichvu,$thanhtien_dichvu,$ghichu_dichvu, $array_detail['id']);
     }
@@ -485,7 +485,7 @@ if($array_detail['status']!=5){
         $message_tt .= '<p style="text-align:center"><a href="' . SITE_NAME_AZ . '/tiep-thi-lien-ket/don-hang/chi-tiet?id=' . _return_mc_encrypt($booking_update->id, ENCRYPTION_KEY) . '" style="text-decoration:none;color:#ffffff;background-color:#f36f21;padding:10px 10px" >"Thông tin đơn hàng"</a></p>';
         SendMail($check_data_user_tt[0]->user_email, $message_tt, $subject, 'AZbOOKING.VN');
     }
-    $link_noti = '/' . $action_link . '/sua?noti=1&id=' . _return_mc_encrypt($data_detail[0]->id, ENCRYPTION_KEY);
+    $link_noti =SITE_NAME.'/' . $action_link . '/sua?noti=1&id=' . _return_mc_encrypt($data_detail[0]->id, ENCRYPTION_KEY);
     $name_noti = $_SESSION['user_name'] . ' đã thay đổi thông tin đơn hàng "' . $booking_update->code_booking . '"';
     if ($string_value_old != '' && $confirm_status_tiep_thi==0) {
         $arr_send_noti = array();
@@ -501,7 +501,7 @@ if($array_detail['status']!=5){
         }
     }else{
         if($confirm_status_tiep_thi==1){
-            $name_noti = $_SESSION['user_name'] . ' đã thay xác nhận hoa hồng cho đơn hàng "' . $booking_update->code_booking . '"';
+            $name_noti = $_SESSION['user_name'] . ' đã xác nhận hoa hồng cho đơn hàng "' . $booking_update->code_booking . '"';
             if($array_detail['dieuhanh_id']!=0){
                 _insertNotification($name_noti, $_SESSION['user_id'], $array_detail['dieuhanh_id'], $link_noti, 0, '');
             }

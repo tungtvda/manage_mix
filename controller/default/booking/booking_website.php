@@ -10,6 +10,7 @@ if (!defined('SITE_NAME')) {
 }
 require_once DIR . '/controller/default/public.php';
 $data = array();
+
 if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['phone'])&& isset($_POST['address'])&& isset($_POST['ngay_khoi_hanh'])&& isset($_POST['id_tour'])&& isset($_POST['name_tour'])&& isset($_POST['code_tour'])&& isset($_POST['ng_tour'])&& isset($_POST['n1'])&& isset($_POST['n2'])&& isset($_POST['n3'])&& isset($_POST['po1'])&& isset($_POST['po2'])&& isset($_POST['po3'])&& isset($_POST['pn1'])&& isset($_POST['pn2'])&& isset($_POST['pn3'])) {
     $name_customer = _return_mc_decrypt(_returnPostParamSecurity('name_customer'), '');
     $email = _return_mc_decrypt(_returnPostParamSecurity('email'), '');
@@ -26,20 +27,23 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
     $phuong_tien= _return_mc_decrypt(_returnPostParamSecurity('phuong_tien'), '');
 
     $price = _return_mc_decrypt(_returnPostParamSecurity('po1'), '');
-    $price_511 = _return_mc_decrypt(_returnPostParamSecurity('po2'), '');
-    $price_5 = _return_mc_decrypt(_returnPostParamSecurity('po3'), '');
+    $price_2 = _return_mc_decrypt(_returnPostParamSecurity('po2'), '');
+    $price_3 = _return_mc_decrypt(_returnPostParamSecurity('po3'), '');
+    $price_4 = _return_mc_decrypt(_returnPostParamSecurity('po4'), '');
 
     $price_new = _return_mc_decrypt(_returnPostParamSecurity('pn1'), '');
-    $price_511_new = _return_mc_decrypt(_returnPostParamSecurity('pn2'), '');
-    $price_5_new = _return_mc_decrypt(_returnPostParamSecurity('pn3'), '');
+    $price_new_2 = _return_mc_decrypt(_returnPostParamSecurity('pn2'), '');
+    $price_new_3 = _return_mc_decrypt(_returnPostParamSecurity('pn3'), '');
+    $price_new_4 = _return_mc_decrypt(_returnPostParamSecurity('pn4'), '');
 
     $httt = _return_mc_decrypt(_returnPostParamSecurity('httt'), '');
     $note = _return_mc_decrypt(_returnPostParamSecurity('note'), '');
     $ngay_khoi_hanh = _return_mc_decrypt(_returnPostParamSecurity('ngay_khoi_hanh'), '');
     $status=1;
     $num_nguoi_lon=_return_mc_decrypt(_returnPostParamSecurity('n1'), '');
-    $num_tre_em=_return_mc_decrypt(_returnPostParamSecurity('n2'), '');
-    $num_tre_em_5=_return_mc_decrypt(_returnPostParamSecurity('n3'), '');
+    $num_tre_em_m1=_return_mc_decrypt(_returnPostParamSecurity('n2'), '');
+    $num_tre_em_m2=_return_mc_decrypt(_returnPostParamSecurity('n3'), '');
+    $num_tre_em_m3=_return_mc_decrypt(_returnPostParamSecurity('n4'), '');
 
     $name_customer_sub=json_decode(_return_mc_decrypt(_returnPostParamSecurity('name_customer_sub'), ''));
     $email_customer_sub=json_decode(_return_mc_decrypt(_returnPostParamSecurity('email_customer_sub'), ''));
@@ -54,10 +58,12 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
     $name_price=_return_mc_decrypt(_returnPostParamSecurity('name_price'), '');
     $name_price_2=_return_mc_decrypt(_returnPostParamSecurity('name_price_2'), '');
     $name_price_3=_return_mc_decrypt(_returnPostParamSecurity('name_price_3'), '');
+    $name_price_4=_return_mc_decrypt(_returnPostParamSecurity('name_price_4'), '');
 
     $number=_return_mc_decrypt(_returnPostParamSecurity('number'), '');
     $number_2=_return_mc_decrypt(_returnPostParamSecurity('number_2'), '');
     $number_3=_return_mc_decrypt(_returnPostParamSecurity('number_3'), '');
+    $number_4=_return_mc_decrypt(_returnPostParamSecurity('number_4'), '');
     $gen=_return_mc_decrypt(_returnPostParamSecurity('gen'), '');
     $tol=_return_mc_decrypt(_returnPostParamSecurity('tol'), '');
     $key_user=_return_mc_decrypt(_returnPostParamSecurity('key_user'), '');
@@ -107,8 +113,9 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
         }
         $booking_model=new booking();
         $booking_model->num_nguoi_lon=$num_nguoi_lon;
-        $booking_model->num_tre_em=$num_tre_em;
-        $booking_model->num_tre_em_5=$num_tre_em_5;
+        $booking_model->num_tre_em_m1=$num_tre_em_m1;
+        $booking_model->num_tre_em_m2=$num_tre_em_m2;
+        $booking_model->num_tre_em_m3=$num_tre_em_m3;
         if($key_user!=''&&$key_user!=0){
             $data_user_tiep_thi=user_getById($key_user);
             if(count($data_user_tiep_thi)==0){
@@ -129,11 +136,13 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
         $booking_model->code_tour=$code_tour;
         $booking_model->price_tour=$price;
         $booking_model->price_tiep_thi_thuc_te=$price_tiep_thi_thuc_te;
-        $booking_model->price_11=$price_511;
-        $booking_model->price_5=$price_5;
+        $booking_model->price_tre_em_m1=$price_2;
+        $booking_model->price_tre_em_m2=$price_3;
+        $booking_model->price_tre_em_m3=$price_4;
         $booking_model->price_new=$price_new;
-        $booking_model->price_11_new=$price_511_new;
-        $booking_model->price_5_new=$price_5_new;
+        $booking_model->price_tre_em_m1_new=$price_new_2;
+        $booking_model->price_tre_em_m2_new=$price_new_3;
+        $booking_model->price_tre_em_m3_new=$price_new_4;
         $booking_model->nguon_tour=$nguon_tour_id;
         $booking_model->ngay_bat_dau=_returnGetDateTime();
         $booking_model->hinh_thuc_thanh_toan=$httt;
@@ -153,8 +162,14 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
         $booking_model->confirm_admin=0;
         $booking_model->created_by=0;
         $booking_model->name_price=$name_price;
-        $booking_model->name_price_2=$name_price_2;
-        $booking_model->name_price_3=$name_price_3;
+        $booking_model->name_price_m1=$name_price_2;
+        $booking_model->name_price_m2=$name_price_3;
+        $booking_model->name_price_m3=$name_price_4;
+
+        $booking_model->price_number=$number;
+        $booking_model->price_number_m1=$number_2;
+        $booking_model->price_number_m2=$number_3;
+        $booking_model->price_number_m3=$number_4;
         $booking_model->created=_returnGetDateTime();
         $booking_model->updated=_returnGetDateTime();
         $code_booking=_randomBooking('#','booking_count','code_booking');

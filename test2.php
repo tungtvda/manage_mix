@@ -3,7 +3,6 @@
 //� 2013 esms.vn
 //Website: http://esms.vn/
 //Hotline: 0902.435.340
-
 //Huong dan chi tiet cach su dung API: http://esms.vn/blog/3-buoc-de-co-the-gui-tin-nhan-tu-website-ung-dung-cua-ban-bang-sms-api-cua-esmsvn
 //De lay Key cac ban dang nhap eSMS.vn v� vao quan Quan li API
 $APIKey="4439A770776FF3D94879EEAE117B7B";

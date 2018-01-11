@@ -23,6 +23,9 @@ if ($tien_te != '') {
         $ty_gia = $data_ty_gia[0]->value;
     }
 }
+$thuong_hieu = _returnPostParamSecurity('thuong_hieu');
+$ma_doan = _returnPostParamSecurity('ma_doan');
+$cong_ty = _returnPostParamSecurity('cong_ty');
 
 $nguon_tour = _returnPostParamSecurity('nguon_tour');
 $link_bang_gia = _returnPostParamSecurity('link_bang_gia');
@@ -154,7 +157,9 @@ $khac = _returnPostParamSecurity('khac');
 $khac_price = _returnPostParamSecurity('khac_price');
 $note_cus = _returnPostParamSecurity('note_cus');
 $confirm_dieuhanh = _returnPostParamSecurity('confirm_dieuhanh');
+$ly_do_dieu_hanh = _returnPostParamSecurity('ly_do_dieu_hanh');
 $confirm_sales = _returnPostParamSecurity('confirm_sales');
+$ly_do_sales = _returnPostParamSecurity('ly_do_sales');
 
 
 

@@ -66,6 +66,11 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
     $number_4=_return_mc_decrypt(_returnPostParamSecurity('number_4'), '');
     $gen=_return_mc_decrypt(_returnPostParamSecurity('gen'), '');
     $tol=_return_mc_decrypt(_returnPostParamSecurity('tol'), '');
+    $list_dich_vu=_return_mc_decrypt(_returnPostParamSecurity('list_dich_vu'));
+    $array_list_dichvu=array();
+    if($list_dich_vu){
+        $array_list_dichvu=json_decode($list_dich_vu,true);
+    }
     $key_user=_return_mc_decrypt(_returnPostParamSecurity('key_user'), '');
     $nguon_tour_id=0;
     if($nguon_tour!=''){
@@ -179,6 +184,20 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
         $array_user=array();
         if(count($data_booking)>0){
             $id_booking=$data_booking[0]->id;
+            // cập nhật bảng giá dịch vụ
+            if($array_list_dichvu){
+                foreach ($array_list_dichvu as $row_list){
+                    $dichvu=new booking_list_dichvu();
+                    $dichvu->name=$row_list['name'];
+                    $dichvu->type=$row_list['type'];
+                    $dichvu->price=$row_list['price'];
+                    $dichvu->number=$row_list['number'];
+                    $dichvu->total=$row_list['total'];
+                    $dichvu->note=$row_list['note'];
+                    $dichvu->booking_id=$id_booking;
+                    booking_list_dichvu_insert($dichvu);
+                }
+            }
             if($key_user!=0){
                 $array_user['user_name']=$data_user_tiep_thi[0]->name;
                 $array_user['user_email']=$data_user_tiep_thi[0]->user_email;
@@ -192,17 +211,24 @@ if (isset($_POST['name_customer']) && isset($_POST['email'])&& isset($_POST['pho
         _updateCustomerBooking($name_customer_sub,$email_customer_sub,$phone_customer_sub,$address_customer_sub,$tuoi_customer_sub,$tuoi_number_customer_sub,$birthday_customer_sub,$passport_customer_sub,$date_passport_customer_sub,$id_booking);
         $message='';
         $name_noti='Khách hàng '.$name_customer.' đã thêm một đơn hàng từ '.$nguon_tour;
-        $link_noti='/booking-new/sua?noti=1&confirm=1&id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY);
+        $link_noti=SITE_NAME.'/booking-new/sua?noti=1&confirm=1&id='._return_mc_encrypt($id_booking, ENCRYPTION_KEY);
         $data_list_user_admin=user_getByTop('','user_role=1 and status=1','id desc');
         if(count($data_list_user_admin)>0){
             foreach($data_list_user_admin as $row_admin){
                 _insertNotification($name_noti,0,$row_admin->id,$link_noti,0,'');
             }
         }
+        if($dieuhanh_id){
+            $dieuhanh_data=user_getByTop(1,'id='.$dieuhanh_id.' and status=1 and user_role!=2','id desc');
+            if($dieuhanh_data){
+                $name_noti='Khách hàng '.$name_customer.' đã đặt một đơn hàng từ '.$nguon_tour.', bạn hãy xác nhận quyền điều hành của mình';
+                _insertNotification($name_noti,0,$dieuhanh_id,$link_noti,0,'');
+            }
+        }
         $subject='Xác nhận đơn hàng '.$code_booking;
-        $message.='<p>Khách hàng '.$name_customer.' đã thêm một đơn hàng từ '.$nguon_tour.'</p>';
+        $message.='<p>Khách hàng '.$name_customer.' đã đặt một đơn hàng từ '.$nguon_tour.'</p>';
         $message.='<a>Bạn vui lòng truy cập <a href="'.$link_noti.'">đường link</a> để xác nhận đơn hàng</p>';
-        SendMail(SEND_EMAIL, $message, $subject);
+        $res_email=SendMail(SEND_EMAIL, $message, $subject,1);
         $mess_log='Khách hàng '.$name_customer.' đã thêm một đơn hàng từ '.$nguon_tour;
         _insertLog(0,6,6,21,$id_booking,'','',$mess_log);
         $item_res=array(

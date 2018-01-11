@@ -1,11 +1,14 @@
 <?php
 class booking
 {
-    public $id,$code_booking,$id_tour,$tour_custom,$name_tour,$code_tour,$price_tour,$price_tre_em_m1,$price_tre_em_m2,$price_tre_em_m3,$price_tiep_thi,$price_tiep_thi_thuc_te,$level_tiep_thi,$hoa_hong_tiep_thi,$user_gioi_thieu_c1,$user_gioi_thieu_c2,$user_gioi_thieu_c3,$hoa_hong_gioi_thieu_c1,$hoa_hong_gioi_thieu_c2,$hoa_hong_gioi_thieu_c3,$price_gioi_thieu_c1,$price_gioi_thieu_c2,$price_gioi_thieu_c3,$status_tiep_thi,$confirm_admin_tiep_thi,$price_new,$price_tre_em_m1_new,$price_tre_em_m2_new,$price_tre_em_m3_new,$vat,$nguon_tour,$tien_te,$ty_gia,$ngay_bat_dau,$han_thanh_toan,$loai_khach_hang,$hinh_thuc_thanh_toan,$id_customer,$diem_don,$diem_tra,$ngay_khoi_hanh,$ngay_ket_thuc,$phuong_tien,$num_nguoi_lon,$num_tre_em_m1,$num_tre_em_m2,$num_tre_em_m3,$price_number,$price_number_m1,$price_number_m2,$price_number_m3,$name_price,$name_price_m1,$name_price_m2,$name_price_m3,$ty_le_m1,$ty_le_m2,$ty_le_m3,$loi_nhuan,$loi_nhuan_m1,$loi_nhuan_m2,$loi_nhuan_m3,$total_price,$tien_thanh_toan,$link_bang_gia,$user_id,$dieuhanh_id,$user_tiep_thi_id,$status,$confirm_admin,$confirm_dieuhanh,$confirm_sales,$created_by,$updated_by,$created,$updated,$note;
+    public $id,$code_booking,$ma_doan,$cong_ty,$thuong_hieu,$id_tour,$tour_custom,$name_tour,$code_tour,$price_tour,$price_tre_em_m1,$price_tre_em_m2,$price_tre_em_m3,$price_tiep_thi,$price_tiep_thi_thuc_te,$level_tiep_thi,$hoa_hong_tiep_thi,$user_gioi_thieu_c1,$user_gioi_thieu_c2,$user_gioi_thieu_c3,$hoa_hong_gioi_thieu_c1,$hoa_hong_gioi_thieu_c2,$hoa_hong_gioi_thieu_c3,$price_gioi_thieu_c1,$price_gioi_thieu_c2,$price_gioi_thieu_c3,$status_tiep_thi,$confirm_admin_tiep_thi,$price_new,$price_tre_em_m1_new,$price_tre_em_m2_new,$price_tre_em_m3_new,$vat,$nguon_tour,$tien_te,$ty_gia,$ngay_bat_dau,$han_thanh_toan,$loai_khach_hang,$hinh_thuc_thanh_toan,$id_customer,$diem_don,$diem_tra,$ngay_khoi_hanh,$ngay_ket_thuc,$phuong_tien,$num_nguoi_lon,$num_tre_em_m1,$num_tre_em_m2,$num_tre_em_m3,$price_number,$price_number_m1,$price_number_m2,$price_number_m3,$name_price,$name_price_m1,$name_price_m2,$name_price_m3,$ty_le_m1,$ty_le_m2,$ty_le_m3,$loi_nhuan,$loi_nhuan_m1,$loi_nhuan_m2,$loi_nhuan_m3,$total_price,$tien_thanh_toan,$link_bang_gia,$user_id,$dieuhanh_id,$user_tiep_thi_id,$status,$confirm_admin,$confirm_dieuhanh,$confirm_sales,$created_by,$updated_by,$created,$updated,$note;
     public function booking($data=array())
     {
         $this->id=isset($data['id'])?$data['id']:'';
         $this->code_booking=isset($data['code_booking'])?$data['code_booking']:'';
+        $this->ma_doan=isset($data['ma_doan'])?$data['ma_doan']:'';
+        $this->cong_ty=isset($data['cong_ty'])?$data['cong_ty']:'';
+        $this->thuong_hieu=isset($data['thuong_hieu'])?$data['thuong_hieu']:'';
         $this->id_tour=isset($data['id_tour'])?$data['id_tour']:'';
         $this->tour_custom=isset($data['tour_custom'])?$data['tour_custom']:'';
         $this->name_tour=isset($data['name_tour'])?$data['name_tour']:'';
@@ -87,6 +90,9 @@ class booking
     {
         $this->id=addslashes($this->id);
         $this->code_booking=addslashes($this->code_booking);
+        $this->ma_doan=addslashes($this->ma_doan);
+        $this->cong_ty=addslashes($this->cong_ty);
+        $this->thuong_hieu=addslashes($this->thuong_hieu);
         $this->id_tour=addslashes($this->id_tour);
         $this->tour_custom=addslashes($this->tour_custom);
         $this->name_tour=addslashes($this->name_tour);
@@ -167,6 +173,9 @@ class booking
     {
         $this->id=stripslashes($this->id);
         $this->code_booking=stripslashes($this->code_booking);
+        $this->ma_doan=stripslashes($this->ma_doan);
+        $this->cong_ty=stripslashes($this->cong_ty);
+        $this->thuong_hieu=stripslashes($this->thuong_hieu);
         $this->id_tour=stripslashes($this->id_tour);
         $this->tour_custom=stripslashes($this->tour_custom);
         $this->name_tour=stripslashes($this->name_tour);

@@ -99,13 +99,17 @@ if (isset($_POST['id']) && isset($_POST['table'])) {
                 $data_check[0]->num_nguoi_lon=0;
             }
 
-            if($data_check[0]->num_tre_em==''){
-                $data_check[0]->num_tre_em=0;
+            if($data_check[0]->num_tre_em_m1==''){
+                $data_check[0]->num_tre_em_m1=0;
             }
-            if($data_check[0]->num_tre_em_5==''){
-                $data_check[0]->num_tre_em_5=0;
+            if($data_check[0]->num_tre_em_m2==''){
+                $data_check[0]->num_tre_em_m2=0;
             }
-            $data_check[0]->so_nguoi=$data_check[0]->num_nguoi_lon.' người lớn | '.$data_check[0]->num_tre_em.' trẻ em 5-11 tuổi | '.$data_check[0]->num_tre_em_5.' dưới 5 tuổi';
+            if($data_check[0]->num_tre_em_m3==''){
+                $data_check[0]->num_tre_em_m3=0;
+            }
+            $data_check[0]->so_nguoi=0;
+//            $data_check[0]->so_nguoi=$data_check[0]->num_nguoi_lon.' người lớn | '.$data_check[0]->num_tre_em.' trẻ em 5-11 tuổi | '.$data_check[0]->num_tre_em_5.' dưới 5 tuổi';
             $checked_vat='';
             if($data_check[0]->vat==1){
                 $checked_vat='checked';
@@ -150,28 +154,35 @@ if (isset($_POST['id']) && isset($_POST['table'])) {
             }
             $data_check[0]->price_new_format='';
             if($data_check[0]->price_new!=''){
-                $data_check[0]->price_new_format=number_format((int)$data_check[0]->price_new,0,",",".").' vnđ';
+                $data_check[0]->price_new_format=number_format((float)$data_check[0]->price_new,0,",",".").' vnđ';
             }else{
                 $data_check[0]->price_new=0;
             }
 
-            $data_check[0]->price_5_new_format='';
-            if($data_check[0]->price_5_new!=''){
-                $data_check[0]->price_5_new_format=number_format((int)$data_check[0]->price_5_new,0,",",".").' vnđ';
+            $data_check[0]->price_tre_em_m1_new_format='';
+            if($data_check[0]->price_tre_em_m1_new!=''){
+                $data_check[0]->price_tre_em_m1_new_format=number_format((float)$data_check[0]->price_tre_em_m1_new,0,",",".").' vnđ';
             }else{
-                $data_check[0]->price_5_new=0;
+                $data_check[0]->price_tre_em_m1_new=0;
             }
 
-            $data_check[0]->price_11_new_format='';
-            if($data_check[0]->price_11_new!=''){
-                $data_check[0]->price_11_new_format=number_format((int)$data_check[0]->price_11_new,0,",",".").' vnđ';
+            $data_check[0]->price_tre_em_m2_new_format='';
+            if($data_check[0]->price_tre_em_m2_new!=''){
+                $data_check[0]->price_tre_em_m2_new_format=number_format((float)$data_check[0]->price_tre_em_m2_new,0,",",".").' vnđ';
             }else{
-                $data_check[0]->price_11_new=0;
+                $data_check[0]->price_tre_em_m2_new=0;
+            }
+
+            $data_check[0]->price_tre_em_m3_new_format='';
+            if($data_check[0]->price_tre_em_m3_new!=''){
+                $data_check[0]->price_tre_em_m3_new_format=number_format((float)$data_check[0]->price_tre_em_m3_new,0,",",".").' vnđ';
+            }else{
+                $data_check[0]->price_tre_em_m3_new=0;
             }
 
             $data_check[0]->tien_thanh_toan_format='';
             if($data_check[0]->tien_thanh_toan!=''){
-                $data_check[0]->tien_thanh_toan_format=number_format((int)$data_check[0]->tien_thanh_toan,0,",",".").' vnđ';
+                $data_check[0]->tien_thanh_toan_format=number_format((float)$data_check[0]->tien_thanh_toan,0,",",".").' vnđ';
             }
             else{
                 $data_check[0]->tien_thanh_toan=0;
@@ -183,27 +194,34 @@ if (isset($_POST['id']) && isset($_POST['table'])) {
                 $data_check[0]->num_nguoi_lon=0;
             }
 
-            if($data_check[0]->num_tre_em==''){
-                $data_check[0]->num_tre_em=0;
+            if($data_check[0]->num_tre_em_m1==''){
+                $data_check[0]->num_tre_em_m1=0;
             }
-            if($data_check[0]->num_tre_em_5==''){
-                $data_check[0]->num_tre_em_5=0;
+            if($data_check[0]->num_tre_em_m2==''){
+                $data_check[0]->num_tre_em_m2=0;
+            }
+            if($data_check[0]->num_tre_em_m3==''){
+                $data_check[0]->num_tre_em_m3=0;
             }
 
 
             if(is_numeric($data_check[0]->num_nguoi_lon)&&is_numeric($data_check[0]->price_new)){
                 $total=$total+($data_check[0]->num_nguoi_lon*$data_check[0]->price_new);
             }
-            if(is_numeric($data_check[0]->num_tre_em)&&is_numeric($data_check[0]->price_11_new)){
-                $total=$total+( $data_check[0]->num_tre_em*$data_check[0]->price_11_new);
+            if(is_numeric($data_check[0]->num_tre_em_m1)&&is_numeric($data_check[0]->price_tre_em_m1_new)){
+                $total=$total+( $data_check[0]->num_tre_em_m1*$data_check[0]->price_tre_em_m1_new);
             }
-            if(is_numeric($data_check[0]->num_tre_em_5)&&is_numeric($data_check[0]->price_5_new)){
-                $total=$total+($data_check[0]->num_tre_em_5*$data_check[0]->price_5_new);
+            if(is_numeric($data_check[0]->num_tre_em_m2)&&is_numeric($data_check[0]->price_tre_em_m2_new)){
+                $total=$total+( $data_check[0]->num_tre_em_m2*$data_check[0]->price_tre_em_m2_new);
             }
+            if(is_numeric($data_check[0]->num_tre_em_m3)&&is_numeric($data_check[0]->price_tre_em_m3_new)){
+                $total=$total+( $data_check[0]->num_tre_em_m3*$data_check[0]->price_tre_em_m3_new);
+            }
+
             $vat_price=0;
             if($data_check[0]->vat==1){
                 $vat_price=($total*0.1);
-                $total=$total+$vat_price;
+//                $total=$total+$vat_price;
             }
             $conlai=$total-$data_check[0]->tien_thanh_toan;
 

@@ -543,6 +543,20 @@
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
+                                            <div class="profile-info-name"> Ngày khởi hành</div>
+
+                                            <div class="profile-info-value">
+                                                <span class="editable editable-click ngay_khoi_hanh"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Ngày kết thúc</div>
+
+                                            <div class="profile-info-value">
+                                                <span class="editable editable-click ngay_ket_thuc"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
                                             <div class="profile-info-name"> Tình trạng</div>
                                             <div class="profile-info-value">
                                                 <span class="editable editable-click tinh_trang"></span>
@@ -552,12 +566,6 @@
                                             <div class="profile-info-name"> Httt</div>
                                             <div class="profile-info-value">
                                                 <span class="editable editable-click httt"></span>
-                                            </div>
-                                        </div>
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> Số người</div>
-                                            <div class="profile-info-value">
-                                                <span class="editable editable-click so_nguoi"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
@@ -632,18 +640,73 @@
                                                 <span class="editable editable-click diem_don"></span>
                                             </div>
                                         </div>
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> Ngày khởi hành</div>
+                                        <style>
+                                            .spinbox-input {
+                                                width: 50% !important;
+                                                float: left;
+                                            }
 
+                                            .check_div label {
+                                                margin-bottom: 0px;
+                                                margin-top: 5px;
+                                            }
+                                        </style>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Người lớn</div>
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click ngay_khoi_hanh"></span>
+                                                <input disabled  type="text" id="input_do_tuoi_nguoi_lon"
+                                                       value="" style="height: 30px;"
+                                                       title="Độ tuổi người lớn"
+                                                       class="spinbox-input form-control text-center valid"
+                                                       placeholder="Độ tuổi người lớn">
+                                                <input disabled  min="1"
+                                                       type="number" style="height: 30px;"
+                                                       id="input_num_nguoi_lon"
+                                                       title="Số người lớn"
+                                                       class="spinbox-input form-control text-center valid"
+                                                       placeholder="Người lớn">
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
-                                            <div class="profile-info-name"> Ngày kết thúc</div>
-
+                                            <div class="profile-info-name"> Trẻ em m1</div>
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click ngay_ket_thuc"></span>
+                                                <input type="text" id="input_do_tuoi_tre_em_m1" disabled
+                                                       title="Độ tuổi trẻ em mức 1" style="height: 30px;"
+                                                       class="spinbox-input form-control text-center valid"
+                                                       placeholder="Độ tuổi trẻ em mức 1">
+                                                <input  min="0" disabled
+                                                       id="input_num_tre_em_m1" style="height: 30px;"
+                                                       title="Số trẻ em mức 1"
+                                                       class="spinbox-input form-control text-center valid"
+                                                       placeholder="Số trẻ em mức 1">
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Trẻ em m2</div>
+                                            <div class="profile-info-value">
+                                                <input  type="text" id="input_do_tuoi_tre_em_m2" disabled
+                                                       title="Độ tuổi trẻ em mức 2" style="height: 30px;"
+                                                       class="spinbox-input form-control text-center valid"
+                                                       placeholder="Độ tuổi trẻ em mức 2">
+                                                <input  min="0" disabled
+                                                       id="input_num_tre_em_m2" style="height: 30px;"
+                                                       title="Số trẻ em mức 2"
+                                                       class="spinbox-input form-control text-center valid"
+                                                       placeholder="Số trẻ em mức 2">
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Trẻ em m3</div>
+                                            <div class="profile-info-value">
+                                                <input  type="text" id="input_do_tuoi_tre_em_m3" disabled
+                                                       title="Độ tuổi trẻ em mức 3" style="height: 30px;"
+                                                       class="spinbox-input form-control text-center valid"
+                                                       placeholder="Độ tuổi trẻ em mức 3">
+                                                <input min="0" disabled
+                                                       id="input_num_tre_em_m3" style="height: 30px;"
+                                                       title="Số trẻ em mức 3"
+                                                       class="spinbox-input form-control text-center valid"
+                                                       placeholder="Số trẻ em mức 3">
                                             </div>
                                         </div>
                                     </div>
@@ -676,15 +739,21 @@
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
-                                            <div class="profile-info-name"> Giá 5-11</div>
+                                            <div class="profile-info-name"> Giá trẻ em m1</div>
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click gia_tre_em_511"></span>
+                                                <span class="editable editable-click gia_tre_em_m1"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
-                                            <div class="profile-info-name"> Giá 5</div>
+                                            <div class="profile-info-name"> Giá trẻ em m2</div>
                                             <div class="profile-info-value">
-                                                <span class="editable editable-click gia_tre_em_5"></span>
+                                                <span class="editable editable-click gia_tre_em_m2"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> Giá trẻ em m3</div>
+                                            <div class="profile-info-value">
+                                                <span class="editable editable-click gia_tre_em_m3"></span>
                                             </div>
                                         </div>
                                     </div>

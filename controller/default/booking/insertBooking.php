@@ -201,6 +201,9 @@ if ($dieuhanh_id == $_SESSION['user_id']) {
     $booking_model->confirm_dieuhanh = 1;
 }
 
+$booking_model->thuong_hieu = $thuong_hieu;
+$booking_model->ma_doan = $ma_doan;
+$booking_model->cong_ty = $cong_ty;
 $booking_model->nguon_tour = $nguon_tour;
 $booking_model->link_bang_gia = $link_bang_gia;
 $booking_model->tien_te = $tien_te;

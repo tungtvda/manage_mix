@@ -16,9 +16,9 @@ $user_tiep_thi_id_old = $data_detail[0]->user_tiep_thi_id;
 $price_tiep_thi = $data_detail[0]->price_tiep_thi;
 $price_tiep_thi_thuc_te = $data_detail[0]->price_tiep_thi_thuc_te;
 $array_detail = ((array)$data_detail[0]);
-
 $booking_update = new booking($array_detail);
 if($array_detail['status']!=5){
+    // check xác nhận điều hành
     // thay đổi điều hành
     if($array_detail['confirm_dieuhanh']!=1 || $_SESSION['user_role']==1){
         if ($dieuhanh_id != $array_detail['dieuhanh_id'] && isset($_POST['dieuhanh_id']) ) {
@@ -249,7 +249,22 @@ if($array_detail['status']!=5){
             }
         }
     }
-    if ($tien_te != $array_detail['tien_te'] && isset($_POST['tien_te'])) {
+    if ($thuong_hieu != $array_detail['thuong_hieu'] && isset($_POST['thuong_hieu']) && $tien_te!=0) {
+        $booking_update->thuong_hieu = $tien_te;
+        $string_value_old .= ' Thương hiệu: "' . $array_detail['thuong_hieu'] . '" </br> ';
+        $string_value_new .= ' Thương hiệu mới: "' . $thuong_hieu . '" </br>';
+    }
+    if ($ma_doan != $array_detail['ma_doan'] && isset($_POST['ma_doan']) ) {
+        $booking_update->ma_doan = $ma_doan;
+        $string_value_old .= ' Mã đoàn: "' . $array_detail['ma_doan'] . '" </br> ';
+        $string_value_new .= ' Mã đoàn mới: "' . $ma_doan . '" </br>';
+    }
+    if ($cong_ty != $array_detail['cong_ty'] && isset($_POST['cong_ty']) ) {
+        $booking_update->cong_ty = $cong_ty;
+        $string_value_old .= ' Công ty khách hàng: "' . $array_detail['cong_ty'] . '" </br> ';
+        $string_value_new .= ' Công ty khách hàng mới: "' . $cong_ty . '" </br>';
+    }
+    if ($tien_te != $array_detail['tien_te'] && isset($_POST['tien_te']) && $tien_te!=0) {
         $booking_update->tien_te = $tien_te;
         $string_value_old .= ' Tiền tệ: "' . $array_detail['tien_te'] . '" </br> ';
         $string_value_new .= ' Tiền tệ mới: "' . $tien_te . '" </br>';
@@ -325,9 +340,10 @@ if($array_detail['status']!=5){
         $string_value_old .= ' VAT: "' . $array_detail['vat'] . '" </br> ';
         $string_value_new .= ' VAT mới: "' . $vat . '" </br> ';
     }
-    if($total!=$array_detail['total_price']){
-        $booking_update->total_price=$total;
-    }
+
+//    if($total!=$array_detail['total_price']){
+//        $booking_update->total_price=$total;
+//    }
     if ($price_submit != $array_detail['price_new'] && isset($_POST['price_submit'])) {
         $booking_update->price_new = $price_submit;
         $string_value_old .= ' Đơn giá người lớn: "' .number_format((float) $array_detail['price_new'], 0, ",", ".") . ' vnđ" </br> ';
@@ -400,7 +416,6 @@ if($array_detail['status']!=5){
         $string_value_old .= ' Tổng tiền: "' . number_format((float)$total_old, 0, ",", ".") . '" vnđ </br> ';
         $string_value_new .= ' Tổng tiền mới: "' . number_format((float)$total_new, 0, ",", ".") . '" vnđ </br> ';
     }
-
     // thêm hoa hồng cho đơn hàng
     if ($price_tiep_thi_thuc_te != '' && $user_tiep_thi_id_old == 0) {
         if ($user_tiep_thi_id != '') {
@@ -422,27 +437,58 @@ if($array_detail['status']!=5){
         list_bang_gia_booking_delete($array_detail['id']);
         _updateDanhSachBangGia($name_dichvu,$type_dichvu,$price_dichvu,$soluong_dichvu,$thanhtien_dichvu,$ghichu_dichvu, $array_detail['id']);
     }
-    if($confirm_dieuhanh=='on'||$confirm_dieuhanh=='1'){
+    if($_SESSION['user_id']==$dieuhanh_id){
+        $link_noti = SITE_NAME . '/' . $action_link . '/sua?noti=1&id=' . _return_mc_encrypt($array_detail['id'], ENCRYPTION_KEY);
         $check_data_dieuhanh = user_getById($dieuhanh_id);
         if (count($check_data_dieuhanh)> 0) {
-            $booking_update->confirm_dieuhanh=1;
-            $name_noti = $check_data_dieuhanh[0]->name . ' đã đã xác nhận điều hành đơn hàng "' . $booking_update->code_booking . '"';
-            $link_noti = SITE_NAME . '/' . $action_link . '/sua?noti=1&id=' . _return_mc_encrypt($array_detail['id'], ENCRYPTION_KEY);
-            _insertNotification($name_noti, $_SESSION['user_id'], $data_detail[0]->created_by, $link_noti, 0, $content_noti);
-        }
-    }
-    if($confirm_sales=='on'||$confirm_sales=='1'){
-        $check_data_user = user_getById($id_user);
-        if (count($check_data_user) > 0) {
-            $booking_update->confirm_sales=1;
-            if($_SESSION['user_id']!=$booking_update->created_by){
-                $name_noti = $check_data_user[0]->name . ' đã xác nhận sales đơn hàng "' . $booking_update->code_booking . '"';
-                $link_noti = SITE_NAME . '/' . $action_link . '/sua?noti=1&id=' . _return_mc_encrypt($array_detail['id'], ENCRYPTION_KEY);
-                _insertNotification($name_noti, $_SESSION['user_id'], $data_detail[0]->created_by, $link_noti, 0, $content_noti);
+            if(($confirm_dieuhanh==''||$confirm_dieuhanh=='1') &&  $booking_update->confirm_dieuhanh!=1){
+                    $booking_update->confirm_dieuhanh=1;
+                    $name_noti = $check_data_dieuhanh[0]->name . ' đã xác nhận quyền điều hành đơn hàng "' . $booking_update->code_booking . '"';
+                    _insertNotification($name_noti, $_SESSION['user_id'], $data_detail[0]->created_by, $link_noti, 0, '');
+                    _insertBookingTran($booking_update->id,0,$_SESSION['user_id'],'Xác nhận điều hành',$name_noti);
+
+            }else{
+                if($confirm_dieuhanh==0 &&  $booking_update->confirm_dieuhanh!=1){
+                    $booking_update->confirm_dieuhanh=0;
+                    $name_noti = $check_data_dieuhanh[0]->name . ' đã hủy quyền điều hành đơn hàng "' . $booking_update->code_booking . '"';
+                    _insertNotification($name_noti, $_SESSION['user_id'], $data_detail[0]->created_by, $link_noti, 0, '');
+                    if($ly_do_dieu_hanh!=''){
+                        $name_noti.='</br> Lý do: '.$ly_do_dieu_hanh;
+                    }
+                    _insertBookingTran($booking_update->id,0,$_SESSION['user_id'],'Hủy quyền điều hành',$name_noti);
+                }
             }
         }
+
     }
-    if($booking_update->created_by==0){
+    if($_SESSION['user_id']==$id_user){
+        $link_noti = SITE_NAME . '/' . $action_link . '/sua?noti=1&id=' . _return_mc_encrypt($array_detail['id'], ENCRYPTION_KEY);
+        $check_data_user = user_getById($id_user);
+        if (count($check_data_user) > 0) {
+            if(($confirm_sales==''||$confirm_sales=='1') && $booking_update->confirm_sales!=1){
+                $booking_update->confirm_sales=1;
+                if($_SESSION['user_id']!=$booking_update->created_by){
+                    $name_noti = $check_data_user[0]->name . ' đã xác nhận quyền sales đơn hàng "' . $booking_update->code_booking . '"';
+                    _insertNotification($name_noti, $_SESSION['user_id'], $data_detail[0]->created_by, $link_noti, 0, '');
+                    _insertBookingTran($booking_update->id,0,$_SESSION['user_id'],'Xác nhận sales',$name_noti);
+                }
+            }else{
+                if($confirm_sales==0 && $booking_update->confirm_sales!=1){
+                    $booking_update->confirm_sales=0;
+                    $name_noti = $check_data_user[0]->name . ' đã hủy quyền sales đơn hàng "' . $booking_update->code_booking . '"';
+                    _insertNotification($name_noti, $_SESSION['user_id'], $data_detail[0]->created_by, $link_noti, 0, '');
+                    if($ly_do_sales!=''){
+                        $name_noti.='</br> Lý do: '.$ly_do_sales;
+                    }
+                    _insertBookingTran($booking_update->id,0,$_SESSION['user_id'],'Hủy quyền sales',$name_noti);
+                }
+            }
+
+        }
+    }
+
+
+    if($booking_update->created_by==0 && $_SESSION['user_role']==1){
         $booking_update->created_by=$_SESSION['user_id'];
     }
     // xác nhận tiền hoa hồng
@@ -489,16 +535,18 @@ if($array_detail['status']!=5){
     $name_noti = $_SESSION['user_name'] . ' đã thay đổi thông tin đơn hàng "' . $booking_update->code_booking . '"';
     if ($string_value_old != '' && $confirm_status_tiep_thi==0) {
         $arr_send_noti = array();
-        $content_noti = '__________Gía trị cũ_________' . $string_value_old . '__________Gía trị mới_________' . $string_value_new;
-        if(!isset($edit_dieuhanh) && $array_detail['dieuhanh_id']!=0){
+        $content_noti = '__________Gía trị cũ_________</br>' . $string_value_old . '__________Gía trị mới_________</br>' . $string_value_new;
+        if(!isset($edit_dieuhanh) && $array_detail['dieuhanh_id']!=0 && $array_detail['dieuhanh_id']!=$_SESSION['user_id']){
             _insertNotification($name_noti, $_SESSION['user_id'], $array_detail['dieuhanh_id'], $link_noti, 0, $content_noti);
         }
-        if(!isset($edit_user) && $array_detail['user_id']!=0){
+        if(!isset($edit_user) && $array_detail['user_id']!=0 && $array_detail['user_id']!=$_SESSION['user_id']){
             _insertNotification($name_noti, $_SESSION['user_id'], $array_detail['user_id'], $link_noti, 0, $content_noti);
         }
-        if($data_detail[0]->created_by!=$array_detail['user_id']){
+        if($data_detail[0]->created_by!=$_SESSION['user_id']){
             _insertNotification($name_noti, $_SESSION['user_id'], $data_detail[0]->created_by, $link_noti, 0, $content_noti);
         }
+        $name_noti.='</br>'.$content_noti;
+        _insertBookingTran($booking_update->id,0,$_SESSION['user_id'],'Xác nhận sales',$name_noti);
     }else{
         if($confirm_status_tiep_thi==1){
             $name_noti = $_SESSION['user_name'] . ' đã xác nhận hoa hồng cho đơn hàng "' . $booking_update->code_booking . '"';
@@ -511,6 +559,7 @@ if($array_detail['status']!=5){
             if($array_detail['created_by']){
                 _insertNotification($name_noti, $_SESSION['user_id'], $data_detail[0]->created_by, $link_noti, 0, '');
             }
+            _insertBookingTran($booking_update->id,0,$_SESSION['user_id'],'Xác nhận sales',$name_noti);
         }
     }
     _insertLog($_SESSION['user_id'], 6, 6, 22, $data_detail[0]->id, $string_value_old, $string_value_new, 'Cập nhật đơn hàng "' . $data_detail[0]->code_booking . '"');

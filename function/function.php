@@ -1294,6 +1294,17 @@ function _insertNotification($name = '', $user_send_id = '', $user_id, $link = '
     $notification_model->created = _returnGetDateTime();
     notification_insert($notification_model);
 }
+function _insertBookingTran($booking_id,$customer_id=0,$user_id=0,$name='',$description='')
+{
+    $booking_transaction = new booking_transactions();
+    $booking_transaction->booking_id = $booking_id;
+    $booking_transaction->customer_id = $customer_id;
+    $booking_transaction->user_id = $user_id;
+    $booking_transaction->name = $name;
+    $booking_transaction->description = $description;
+    $booking_transaction->created = _returnGetDateTime();
+    booking_transactions_insert($booking_transaction);
+}
 
 function _insertLog($user_id, $module_id, $form_id, $action_id, $item_id, $value_old, $value_new, $description)
 {

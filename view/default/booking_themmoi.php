@@ -220,19 +220,28 @@ function show_booking_themmoi($data = array())
         }
 
         $Random = _returnDataEditAdd($data['data_user'], 'code_booking');
-        $ngay_bat_dau = date("d-m-Y", strtotime(_returnDataEditAdd($data['data_user'], 'ngay_bat_dau')));
+        if(_returnDataEditAdd($data['data_user'], 'ngay_bat_dau')!='0000-00-00'){
+            $ngay_bat_dau = date("d-m-Y", strtotime(_returnDataEditAdd($data['data_user'], 'ngay_bat_dau')));
+        }
+
         if ($ngay_bat_dau != '') {
             $ngay_bat_dau_valid = 'valid';
         }
-        $han_thanh_toan = date("d-m-Y", strtotime(_returnDataEditAdd($data['data_user'], 'han_thanh_toan')));
+        if(_returnDataEditAdd($data['data_user'], 'han_thanh_toan')!='0000-00-00'){
+            $han_thanh_toan = date("d-m-Y", strtotime(_returnDataEditAdd($data['data_user'], 'han_thanh_toan')));
+        }
         if ($han_thanh_toan != '') {
             $han_thanh_toan_valid = 'valid';
         }
-        $ngay_khoi_hanh = date("d-m-Y", strtotime(_returnDataEditAdd($data['data_user'], 'ngay_khoi_hanh')));
+        if(_returnDataEditAdd($data['data_user'], 'ngay_khoi_hanh')!='0000-00-00'){
+            $ngay_khoi_hanh = date("d-m-Y", strtotime(_returnDataEditAdd($data['data_user'], 'ngay_khoi_hanh')));
+        }
         if ($ngay_khoi_hanh != '') {
             $ngay_khoi_hanh_valid = 'valid';
         }
-        $ngay_ket_thuc = date("d-m-Y", strtotime(_returnDataEditAdd($data['data_user'], 'ngay_ket_thuc')));
+        if(_returnDataEditAdd($data['data_user'], 'ngay_ket_thuc')!='0000-00-00'){
+            $ngay_ket_thuc = date("d-m-Y", strtotime(_returnDataEditAdd($data['data_user'], 'ngay_ket_thuc')));
+        }
         if ($ngay_ket_thuc != '') {
             $ngay_ket_thuc_valid = 'valid';
         }
@@ -295,19 +304,19 @@ function show_booking_themmoi($data = array())
             }
             if ($confirm_dieuhanh == 2) {
 
-                $confirm_dieuhanh = '  <button filed="confirm_dieuhanh" class="btn btn-sm btn-danger confirm_booking">
+                $confirm_dieuhanh = '  <a filed="confirm_dieuhanh" class="btn btn-sm btn-danger confirm_booking">
                                         <i class="ace-icon fa fa-times bigger-110"></i>
                                         <span class="bigger-110 no-text-shadow">Đã hủy</span>
-                                    </button> ';
+                                    </a> ';
             } else {
                 $text_dieu_hanh='Đang đợi xác nhận';
                 if($data['data_user'][0]->dieuhanh_id==0){
                     $text_dieu_hanh='Chưa chọn điều hành';
                 }
-                $confirm_dieuhanh = '  <button filed="confirm_dieuhanh" class="btn btn-sm btn-warning confirm_booking">
+                $confirm_dieuhanh = '  <a filed="confirm_dieuhanh" class="btn btn-sm btn-warning confirm_booking">
                                         <i class="ace-icon fa fa-exclamation-triangle bigger-110"></i>
                                         <span class="bigger-110 no-text-shadow">'.$text_dieu_hanh.'</span>
-                                    </button>
+                                    </a>
                                     ';
             }
 
@@ -316,13 +325,13 @@ function show_booking_themmoi($data = array())
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Xác nhận</div>
                                             <div class="profile-info-value form-group">
-                                                <label><input
-                                                                            id="input_confirm_dieuhanh"
-                                                                            name="confirm_dieuhanh"
-                                                                            class="ace ace-switch ace-switch-6"
-                                                                            type="checkbox">
-                                                                        <span class="lbl"></span>
-                                                                    </label>
+                                              <select id="input_confirm_dieuhanh" name="confirm_dieuhanh">
+                                        <option  value="">Bạn hãy xác nhận quyền điều hành ...</option>
+                                        <option value="1">Xác nhận</option>
+                                        <option value="0">Từ chối</option>
+                                    </select>
+                                    <input hidden name="ly_do_dieu_hanh" id="input_ly_do_dieu_hanh" class="valid" style="height: 30px;border: 1px solid #d5d5d5;padding: 10px; width: 50%" placeholder="Lý do từ chối quyền điều hành...">
+                                            <p class="error-color  error-color-size" id="error_ly_do_dieu_hanh">Bạn vui lòng xác nhận quyền điều hành</p>
                                             </div>
                                         </div>
 ';
@@ -330,38 +339,38 @@ function show_booking_themmoi($data = array())
         }
         $confirm_sales = _returnDataEditAdd($data['data_user'], 'confirm_sales');
         if ($confirm_sales == 1) {
-            $confirm_sales = '<button class="btn btn-sm btn-success green">
+            $confirm_sales = '<a class="btn btn-sm btn-success green">
                                         <i class="ace-icon fa fa-check bigger-110"></i>
                                         <span class="bigger-110 no-text-shadow">Đã xác nhận</span>
-                                    </button>';
+                                    </a>';
         } else {
             if($confirm_sales==2){
-                $confirm_sales = ' <button filed="confirm_sales" class="btn btn-sm btn-danger confirm_booking">
+                $confirm_sales = ' <a filed="confirm_sales" class="btn btn-sm btn-danger confirm_booking">
                                         <i class="ace-icon fa fa-times bigger-110"></i>
                                         <span class="bigger-110 no-text-shadow">Đã hủy</span>
-                                    </button> ';
+                                    </a> ';
             }else{
                 $text_sales='Đang đợi xác nhận';
                 if($data['data_user'][0]->user_id==0){
                     $text_sales='Chưa chọn sales';
                 }
-                $confirm_sales = '  <button filed="confirm_sales" class="btn btn-sm btn-warning confirm_booking">
+                $confirm_sales = '  <a filed="confirm_sales" class="btn btn-sm btn-warning confirm_booking">
                                         <i class="ace-icon fa fa-exclamation-triangle bigger-110"></i>
                                         <span class="bigger-110 no-text-shadow">'.$text_sales.'</span>
-                                    </button>';
+                                    </a>';
             }
             if ($data['data_user'][0]->user_id == $_SESSION['user_id']) {
                 $show_update_sales = '
                                         <div class="profile-info-row">
                                             <div class="profile-info-name"> Xác nhận</div>
                                             <div class="profile-info-value form-group">
-                                                <label><input
-                                                                            id="input_confirm_dieuhanh"
-                                                                            name="confirm_sales"
-                                                                            class="ace ace-switch ace-switch-6"
-                                                                            type="checkbox">
-                                                                        <span class="lbl"></span>
-                                                                    </label>
+                                             <select id="input_confirm_sales" name="confirm_sales">
+                                        <option  value="">Bạn hãy xác nhận quyền sales ...</option>
+                                        <option value="1">Xác nhận</option>
+                                        <option value="0">Từ chối</option>
+                                    </select>
+                                    <input hidden name="ly_do_sales" id="input_ly_do_sales" class="valid" style="height: 30px;border: 1px solid #d5d5d5;padding: 10px; width: 50%" placeholder="Lý do từ chối quyền sales...">
+                                              <p class="error-color  error-color-size" id="error_ly_do_sales">Bạn vui lòng xác nhận quyền điều hành</p>
                                             </div>
                                         </div>
 ';
@@ -557,17 +566,23 @@ function show_booking_themmoi($data = array())
         $don_gia_nguoi_lon=$loi_nhuan+$don_gia_nguoi_lon;
         $gia_ban=number_format((float)round($don_gia_nguoi_lon,2), 0, ",", ".") . ' vnđ';
 
-        $don_gia_tre_em_m1=$don_gia_tre_em_m1/$num_tre_em_m1;
+        if($num_tre_em_m1>0){
+            $don_gia_tre_em_m1=$don_gia_tre_em_m1/$num_tre_em_m1;
+        }
         $don_gia_net_m1=number_format((float)round($don_gia_tre_em_m1,2), 0, ",", ".") . ' vnđ';
         $don_gia_tre_em_m1=$loi_nhuan_m1+$don_gia_tre_em_m1;
         $gia_ban_m1=number_format((float)round($don_gia_tre_em_m1,2), 0, ",", ".") . ' vnđ';
 
-        $don_gia_tre_em_m2=$don_gia_tre_em_m2/$num_tre_em_m2;
+        if($num_tre_em_m2>0){
+            $don_gia_tre_em_m2=$don_gia_tre_em_m2/$num_tre_em_m2;
+        }
         $don_gia_net_m2=number_format((float)round($don_gia_tre_em_m2,2), 0, ",", ".") . ' vnđ';
         $don_gia_tre_em_m2=$loi_nhuan_m2+$don_gia_tre_em_m2;
         $gia_ban_m2=number_format((float)round($don_gia_tre_em_m2,2), 0, ",", ".") . ' vnđ';
 
-        $don_gia_tre_em_m3=$don_gia_tre_em_m3/$num_tre_em_m3;
+        if($num_tre_em_m3>0){
+            $don_gia_tre_em_m3=$don_gia_tre_em_m3/$num_tre_em_m3;
+        }
         $don_gia_net_m3=number_format((float)round($don_gia_tre_em_m3,2), 0, ",", ".") . ' vnđ';
         $don_gia_tre_em_m3=$loi_nhuan_m3+$don_gia_tre_em_m3;
         $gia_ban_m3=number_format((float)round($don_gia_tre_em_m3,2), 0, ",", ".") . ' vnđ';
@@ -831,7 +846,8 @@ function show_booking_themmoi($data = array())
         }
     }
 
-
+    $ma_doan = _returnDataEditAdd($data['data_user'], 'ma_doan');
+    $cong_ty = _returnDataEditAdd($data['data_user'], 'cong_ty');
     $tien_te = _returnDataEditAdd($data['data_user'], 'tien_te');
     $data_tien_te = tien_te_getById($tien_te);
     $tien_te_name = '';
@@ -839,7 +855,13 @@ function show_booking_themmoi($data = array())
         $tien_te_name = $data_tien_te[0]->name;
     }
     $data_list_tien_tee = tien_te_getByTop('', '', 'position asc');
-
+    $thuong_hieu = _returnDataEditAdd($data['data_user'], 'thuong_hieu');
+    $data_thuong_hieu = tien_te_getById($thuong_hieu);
+    $thuong_hieu_name = '';
+    if (count($data_thuong_hieu) > 0) {
+        $thuong_hieu_name = $data_thuong_hieu[0]->name;
+    }
+    $data_list_thuong_hieu = thuong_hieu_getByTop('', 'active=1', 'name asc');
     $hinh_thuc_thanh_toan = _returnDataEditAdd($data['data_user'], 'hinh_thuc_thanh_toan');
     $data_httt = httt_getById($hinh_thuc_thanh_toan);
     $httt_name = '';

@@ -245,6 +245,44 @@ jQuery(function ($) {
         returnHoaHongThanhVien();
     });
 
+    $('body').on('change', '#input_confirm_dieuhanh', function () {
+        var value=$('#input_confirm_dieuhanh').val();
+        var role_valid=$('#role_valid').val()
+        if(role_valid!=1){
+            $('#input_id_user').addClass('valid')
+        }
+        $('#error_ly_do_dieu_hanh').hide();
+
+        if(value==1){
+            $('#input_ly_do_dieu_hanh').hide();
+        }else{
+            if(value==''){
+                $('#error_ly_do_dieu_hanh').show();
+                $('#input_ly_do_dieu_hanh').hide();
+            }else{
+                $('#input_ly_do_dieu_hanh').show().focus();
+            }
+        }
+    });
+    $('body').on('change', '#input_confirm_sales', function () {
+        var value=$('#input_confirm_sales').val();
+        var role_valid=$('#role_valid').val()
+        if(role_valid!=1){
+            $('#input_dieuhanh_id').addClass('valid')
+        }
+        $('#error_ly_do_sales').hide();
+        if(value==1){
+            $('#input_ly_do_sales').hide();
+        }else{
+
+            if(value==''){
+                $('#error_ly_do_sales').show();
+                $('#input_ly_do_sales').hide();
+            }else{
+                $('#input_ly_do_sales').show().focus();
+            }
+        }
+    });
     $('body').on('click', '#reset_price', function () {
         var price_old = $('#input_price_old').val();
         var price_format = $('#input_price_format').val();
@@ -1426,6 +1464,7 @@ jQuery(function ($) {
                 name_input != 'confirm_sales' &&
                 name_input != 'confirm_dieuhanh' &&
                 name_input != 'tien_te' &&
+                name_input != 'thuong_hieu' &&
                 name_input != 'note' &&
                 name_input != 'nguon_tour' &&
                 name_input != 'category' &&
@@ -2592,12 +2631,21 @@ function show_booking(Id, name) {
                     $('.ngay_ket_thuc').html(obj.ngay_ket_thuc);
                     $('.name_tour').html(obj.name_tour);
                     $('.gia_nguoi_lon').html(obj.price_new_format);
-                    $('.gia_tre_em_511').html(obj.price_11_new_format);
-                    $('.gia_tre_em_5').html(obj.price_5_new_format);
+                    $('.gia_tre_em_m1').html(obj.price_tre_em_m1_new_format);
+                    $('.gia_tre_em_m2').html(obj.price_tre_em_m2_new_format);
+                    $('.gia_tre_em_m3').html(obj.price_tre_em_m3_new_format);
                     $('.tong_cong').html(obj.total_format);
                     $('.vat_thanh_tien').html(obj.vat_price_format);
                     $('.dat_coc').html(obj.tien_thanh_toan_format);
                     $('.con_lai').html(obj.conlai_format);
+                    $('#input_num_nguoi_lon').val(obj.num_nguoi_lon);
+                    $('#input_do_tuoi_nguoi_lon').val(obj.name_price);
+                    $('#input_num_tre_em_m1').val(obj.num_tre_em_m1);
+                    $('#input_do_tuoi_tre_em_m1').val(obj.name_price_m1	);
+                    $('#input_num_tre_em_m2').val(obj.num_tre_em_m2);
+                    $('#input_do_tuoi_tre_em_m2').val(obj.name_price_m2);
+                    $('#input_num_tre_em_m3').val(obj.num_tre_em_m3);
+                    $('#input_do_tuoi_tre_em_m3').val(obj.name_price_m3);
 
                     if (obj.user_tiepthi != '') {
                         $('.name_tiepthi').html(obj.user_tiepthi);
@@ -2610,92 +2658,6 @@ function show_booking(Id, name) {
                         $('.status_tiep_thi').html('');
                         $('.price_tiep_thi').html('');
                     }
-
-                    //var output = document.getElementById('show_img_upload');
-                    //if(obj.avatar!=''){
-                    //    output.src = url+obj.avatar;
-                    //}else{
-                    //    var no_ava=$('#show_img_upload').attr('no-avatar');
-                    //    output.src = no_ava;
-                    //}
-                    //if(obj.user_code!=''){
-                    //    $('#input_user_code').val(obj.user_code);
-                    //    $('#input_user_code').removeClass("input-error").addClass("valid");
-                    //}
-                    //else{
-                    //    $('#input_user_code').addClass("input-error").removeClass("valid");
-                    //}
-                    //
-                    //if(obj.user_role==1)
-                    //{
-                    //    $("#input_user_role").prop('checked', true);
-                    //}else{
-                    //    $("#input_user_role").prop('checked', false);
-                    //}
-                    //if(obj.name!=''){
-                    //    $('#input_full_name').val(obj.name);
-                    //    $('#input_full_name').removeClass("input-error").addClass("valid");
-                    //}
-                    //else{
-                    //    $('#input_full_name').addClass("input-error").removeClass("valid");
-                    //}
-                    //var mr=obj.mr;
-                    //if(mr!='')
-                    //{
-                    //    $(".chosen-default span").html(mr);
-                    //    //$('.mr_user option').each(function() {
-                    //    //
-                    //    //    if($(this).val() == mr) {
-                    //    //        $(this).prop("selected", true);
-                    //    //    }
-                    //    //});
-                    //}
-                    //if(obj.birthday!=''){
-                    //    $('#input_birthday').val(obj.birthday);
-                    //    $('#input_birthday').removeClass("input-error").addClass("valid");
-                    //}
-                    //else{
-                    //    $('#input_birthday').addClass("input-error").removeClass("valid");
-                    //}
-                    //if(obj.user_email!=''){
-                    //    $('#input_email_user').val(obj.user_email);
-                    //    $('#input_email_user').removeClass("input-error").addClass("valid");
-                    //}
-                    //else{
-                    //    $('#input_email_user').addClass("input-error").removeClass("valid");
-                    //}
-                    //if(obj.address!=''){
-                    //    $('#input_address_user').val(obj.address);
-                    //    $('#input_address_user').removeClass("input-error").addClass("valid");
-                    //}
-                    //else{
-                    //    $('#input_address_user').addClass("input-error").removeClass("valid");
-                    //}
-                    //if(obj.user_name!=''){
-                    //    $('#input_user_name').val(obj.user_name);
-                    //    $('#input_user_name').removeClass("input-error").addClass("valid");
-                    //}
-                    //else{
-                    //    $('#input_user_name').addClass("input-error").removeClass("valid");
-                    //}
-                    //if(obj.phone!=''){
-                    //    $('#input_user_phone').val(obj.phone);
-                    //    $('#input_user_phone').removeClass("input-error").addClass("valid");
-                    //}
-                    //else{
-                    //    $('#input_user_phone').addClass("input-error").removeClass("valid");
-                    //}
-                    //$('#input_user_ngay_lam_viec').val(obj.ngay_lam_viec);
-                    //$('#input_user_ngay_chinh_thuc').val(obj.ngay_chinh_thuc);
-                    //
-                    //$('#input_password').val('code');
-                    //$('#input_password').removeClass("input-error").addClass("valid");
-                    //$('#input_password_confirm').val('code');
-                    //$('#input_password_confirm').removeClass("input-error").addClass("valid");
-                    //$('#hidden_edit_pass').hide();
-                    //$('#input_id_edit').val(Id);
-                    ////$('.mr_user').val(mr).prop('selected', true);
-                    ////$(".chosen-default span").val(mr);
                 } else {
                     lnv.alert({
                         title: 'Lỗi',

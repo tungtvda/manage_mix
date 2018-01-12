@@ -19,6 +19,7 @@ if (count($check_data_khach_hang) > 0) {
     $update_cus->address=$address;
     $update_cus->phone=$phone;
     $update_cus->fax=$fax;
+    $update_cus->company_name=$cong_ty;
     if($nhom_khach_hang!=''){
         $update_cus->category=$nhom_khach_hang;
     }
@@ -46,7 +47,6 @@ if (count($check_data_khach_hang) > 0) {
         echo '<script>alert("Khách hàng chưa được cập nhật vào hệ thống, bạn vui lòng thử lại")</script>';
         exit;
     }
-
 }
 $price_old = 0;
 $price_tiep_thi = 0;

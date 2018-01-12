@@ -1075,7 +1075,7 @@ function _returnDataAutoCompleteCustomer()
                     $cate_id = $data_cate[0]->id;
                 }
             }
-            $string_data .= "['" . $name_kh . "','" . $avatar_kh . "','" . $row_kh->id . "','" . $row_kh->email . "','" . $row_kh->phone . "','" . $row_kh->address . "','" . $row_kh->fax . "','" . $cate_id . "','" . $cate_name . "'],";
+            $string_data .= "['" . $name_kh . "','" . $avatar_kh . "','" . $row_kh->id . "','" . $row_kh->email . "','" . $row_kh->phone . "','" . $row_kh->address . "','" . $row_kh->fax . "','" . $cate_id . "','" . $cate_name . "','" . $row_kh->company_name . "'],";
         }
     }
     $string_data .= '];';

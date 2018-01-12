@@ -17,8 +17,49 @@ $price_tiep_thi = $data_detail[0]->price_tiep_thi;
 $price_tiep_thi_thuc_te = $data_detail[0]->price_tiep_thi_thuc_te;
 $array_detail = ((array)$data_detail[0]);
 $booking_update = new booking($array_detail);
+
 if($array_detail['status']!=5){
-    // check xác nhận điều hành
+    // cập nhật thông tin khách hàng
+    $check_data_khach_hang = customer_getByTop('1', 'email="' . $email . '"', 'id desc');
+    if (count($check_data_khach_hang) > 0) {
+        $id_customer = $check_data_khach_hang[0]->id;
+        // update thông tin khách hàng
+        $update_cus = new customer((array)$check_data_khach_hang[0]);
+
+        if ($name_customer != $check_data_khach_hang[0]->name) {
+            $update_cus->name=$name_customer;
+            $string_value_old .= ' Tên khách hàng: "' .$check_data_khach_hang[0]->name. '" </br> ';
+            $string_value_new .= ' Tên khách hàng mới: "' . $name_customer . '" </br> ';
+        }
+
+        if ($address != $check_data_khach_hang[0]->address) {
+            $update_cus->address=$address;
+            $string_value_old .= ' Địa chỉ khách hàng: "' .$check_data_khach_hang[0]->address. '" </br> ';
+            $string_value_new .= ' Địa chỉ khách hàng mới: "' . $address . '" </br> ';
+        }
+
+        if ($phone != $check_data_khach_hang[0]->phone) {
+            $update_cus->phone=$phone;
+            $string_value_old .= ' Điện thoại khách hàng: "' .$check_data_khach_hang[0]->phone. '" </br> ';
+            $string_value_new .= ' Điện thoại khách hàng mới: "' . $phone . '" </br> ';
+        }
+        if ($fax != $check_data_khach_hang[0]->fax) {
+            $update_cus->fax=$fax;
+            $string_value_old .= ' Số fax khách hàng: "' .$check_data_khach_hang[0]->fax. '" </br> ';
+            $string_value_new .= ' Số fax khách hàng mới: "' . $fax . '" </br> ';
+        }
+        if ($cong_ty != $check_data_khach_hang[0]->company_name) {
+            $update_cus->company_name=$cong_ty;
+            $string_value_old .= ' Công ty khách hàng: "' .$check_data_khach_hang[0]->company_name. '" </br> ';
+            $string_value_new .= ' Công ty khách hàng mới: "' . $cong_ty . '" </br> ';
+        }
+
+        if($nhom_khach_hang!=''){
+            $update_cus->category=$nhom_khach_hang;
+        }
+        customer_update($update_cus);
+    }
+
     // thay đổi điều hành
     if($array_detail['confirm_dieuhanh']!=1 || $_SESSION['user_role']==1){
         if ($dieuhanh_id != $array_detail['dieuhanh_id'] && isset($_POST['dieuhanh_id']) ) {

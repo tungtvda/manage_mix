@@ -366,16 +366,16 @@
                                         </div>
                                     </div>
                                     <div class="profile-info-row">
+                                        <div class="profile-info-name">Công ty</div>
+                                        <div class="profile-info-value form-group">
+                                            <?php echo _returnInput('cong_ty', $cong_ty, 'valid', 'home', $readonly_info_order, '', '') ?>
+                                        </div>
+                                    </div>
+                                    <div class="profile-info-row">
                                         <div class="profile-info-name"> Điểm đón <span
                                                     style="color: red; font-size: 12px">*</span></div>
                                         <div class="profile-info-value form-group">
                                             <?php echo _returnInput('diem_don', $diem_don, $diem_don_customer_valid, 'map-marker', $readonly_info_order, 'Bạn vui lòng nhập điểm đón', '') ?>
-                                        </div>
-                                    </div>
-                                    <div class="profile-info-row">
-                                        <div class="profile-info-name">Công ty</div>
-                                        <div class="profile-info-value form-group">
-                                            <?php echo _returnInput('cong_ty', $cong_ty, 'valid', 'home', $readonly_info_order, '', '') ?>
                                         </div>
                                     </div>
                                     <div class="profile-info-row">

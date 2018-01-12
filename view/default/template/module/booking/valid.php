@@ -39,7 +39,7 @@ $string_data_user_tiep_thi=_returnDataAutoCompleteUserTiepThi();
             renderItem: function (item, search) {
                 search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
                 var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
-                return '<div title="' + item[0] + '-'+item[3]+'-'+item[4]+'" class="autocomplete-suggestion" data-langname="' + item[0] + '" data-id="' + item[2] + '" data-phone="' + item[4] + '" data-fax="' + item[6] + '" data-cateid="' + item[7] + '" data-catename="' + item[8] + '" data-email="' + item[3] + '" data-address="' + item[5] + '" data-val="' + search + '"><img style="width: 40px; height: 40px" src="' + item[1] + '"> ' + item[0] + '-'+item[3]+'</div>';
+                return '<div title="' + item[0] + '-'+item[3]+'-'+item[4]+'" class="autocomplete-suggestion" data-langname="' + item[0] + '" data-id="' + item[2] + '" data-phone="' + item[4] + '" data-fax="' + item[6] + '" data-cateid="' + item[7] + '" data-catename="' + item[8] + '" data-email="' + item[3] + '" data-address="' + item[5] + '" data-company="' + item[9] + '" data-val="' + search + '"><img style="width: 40px; height: 40px" src="' + item[1] + '"> ' + item[0] + '-'+item[3]+'</div>';
             },
             onSelect: function (e, term, item) {
 //                console.log('Item "' + item.data('langname') + ' (' + item.data('lang') + ')" selected by ' + (e.type == 'keydown' ? 'pressing enter or tab' : 'mouse click') + '.');
@@ -75,6 +75,7 @@ $string_data_user_tiep_thi=_returnDataAutoCompleteUserTiepThi();
                 $('#input_phone').val(item.data('phone'));
                 $('#input_fax').val(item.data('fax'));
                 $('#input_email').val(item.data('email'));
+                $('#input_cong_ty').val(item.data('company'));
                 $(".nhom_khach_hang .chosen-default span").html(item.data('catename'));
                 $('#input_id_category').val(item.data('cateid'));
             }

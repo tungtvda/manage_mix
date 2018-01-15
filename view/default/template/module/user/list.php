@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="clearfix">
-                    <div class="col-md-6 col-sm-6 col-xs-12 pink" style="padding-left: 0px">
+                    <div class="col-md-8 col-sm-8 col-xs-12 pink" style="padding-left: 0px">
                         <?php if (_returnCheckAction(1) == 1) { ?>
                             <a href="#modal-form" role="button" data-toggle="modal" id="create_popup"
                                class="green btn btn-white btn-create btn-hover-white">
@@ -34,6 +34,20 @@
                                 <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
                             </a>
                         <?php } ?>
+                        <label id="input-import"  class="btn btn-white  btn-create-new-tab btn-create-new-tab-hover">  <i class="ace-icon fa fa-plus bigger-120 "> Import file   <i class="ace-icon fa fa-cloud-upload icon-on-right"></i>
+                                <input type="file" id="file-import"  size="60" >
+                        </label>
+                        <style>
+                            #input-import{
+                                padding: 10px;
+                                background: red;
+                                display: table;
+                                color: #fff;
+                            }
+                            #file-import[type="file"] {
+                                display: none;
+                            }
+                        </style>
                         <a href="" class="btn btn-white  btn-refresh">
                             <i class="ace-icon fa fa-refresh"></i>
                             Refresh
@@ -66,7 +80,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-6 col-xs-12 " style="padding-left: 0px">
+                    <div class="col-md-4 col-sm-4 col-xs-12 " style="padding-left: 0px">
                         <div class="pull-right tableTools-container"></div>
                     </div>
                 </div>

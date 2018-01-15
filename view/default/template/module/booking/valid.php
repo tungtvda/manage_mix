@@ -203,6 +203,22 @@ $string_data_user_tiep_thi=_returnDataAutoCompleteUserTiepThi();
                 }
                 var type_tour = $('.type_tour').val();
                 tinh_tong_tien(type_tour,input_num_nguoi_lon,input_num_tre_em_m1,input_num_tre_em_m2,input_num_tre_em_m3)
+                link = url + '/check-login.html';
+                var key = 'user_email';
+                $.ajax({
+                    method: 'GET',
+                    url: link,
+                    data: 'value=' + value + '&key=' + key,
+                    success: function (response) {
+                        var res = 0;
+                        if (response == 1) {
+
+                        } else {
+
+                        }
+
+                    }
+                });
             }
         });
         function tinh_tong_tien(type_tour,input_num_nguoi_lon,input_num_tre_em_m1,input_num_tre_em_m2,input_num_tre_em_m3) {

@@ -1,6 +1,7 @@
 <?php
 require_once '../../config.php';
 require_once DIR.'/model/tourService.php';
+require_once DIR . '/model/tour_list_dichvuService.php';
 require_once DIR.'/model/danhmuc_1Service.php';
 require_once DIR.'/model/danhmuc_2Service.php';
 require_once DIR.'/model/departureService.php';
@@ -22,10 +23,16 @@ if(isset($_POST['code_check_send_email']))
 if($code_check_send_email==1){
     if(isset($_POST['action'])){
         if(isset($_POST['id'])){
-            $new_obj= new tour();
-            $new_obj->id=$_POST["id"];
-            tour_delete($new_obj);
-            echo 1;
+            $data_detail=tour_getByTop('1','code_az_mix="'.$_POST['id'].'"',1);
+            if($data_detail) {
+                $new_obj= new tour();
+                $new_obj->id = $data_detail[0]->id;
+                list_bang_gia_tour_delete($data_detail[0]->id);
+                tour_delete($new_obj);
+                echo 1;
+            }else{
+                echo 0;
+            }
         }
         exit;
     }
@@ -105,16 +112,60 @@ if($code_check_send_email==1 && isset($_POST["DanhMuc1Id"])&&isset($_POST["DanhM
     if(!isset($array['exclusion']))
         $array['exclusion']='0';
     $array['updated']=date(DATETIME_FORMAT);
+    $name_dichvu = '';
+    if (isset($_POST['name_dichvu'])) {
+        $name_dichvu = json_decode($_POST['name_dichvu'],true);
+        unset($_POST['name_dichvu']);
+    }
+    $type_dichvu = '';
+    if (isset($_POST['type_dichvu'])) {
+        $type_dichvu =  json_decode($_POST['type_dichvu'],true);
+        unset($_POST['type_dichvu']);
+    }
+    $price_dichvu = '';
+    if (isset($_POST['price_dichvu'])) {
+        $price_dichvu =  json_decode($_POST['price_dichvu'],true);
+        unset($_POST['price_dichvu']);
+    }
+    $soluong_dichvu = '';
+    if (isset($_POST['soluong_dichvu'])) {
+        $soluong_dichvu =  json_decode($_POST['soluong_dichvu'],true);
+        unset($_POST['soluong_dichvu']);
+    }
+    $thanhtien_dichvu = '';
+    if (isset($_POST['thanhtien_dichvu'])) {
+        $thanhtien_dichvu =  json_decode($_POST['thanhtien_dichvu'],true);
+        unset($_POST['thanhtien_dichvu']);
+    }
+    $ghichu_dichvu = '';
+    if (isset($_POST['ghichu_dichvu'])) {
+        $ghichu_dichvu =  json_decode($_POST['ghichu_dichvu'],true);
+        unset($_POST['ghichu_dichvu']);
+    }
     $new_obj=new tour($array);
     if($array['id']==0)
     {
         tour_insert($new_obj);
-        echo 1;
+        $data_detail=tour_getByTop('1','code_az_mix="'.$array['code_az_mix'].'"',1);
+        if($data_detail){
+            _updateDanhSachDichVuTour($name_dichvu,$type_dichvu,$price_dichvu,$soluong_dichvu,$thanhtien_dichvu,$ghichu_dichvu, $data_detail[0]->id);
+            echo 1;
+        }else{
+            echo 0;
+        }
     }
     else
     {
-        $new_obj->id=$array['id'];
-        tour_update($new_obj);
-        echo 1;
+        $data_detail=tour_getByTop('1','code_az_mix="'.$array['code_az_mix'].'"',1);
+        if($data_detail){
+            $new_obj->id=$data_detail[0]->id;
+            tour_update($new_obj);
+            list_bang_gia_tour_delete($data_detail[0]->id);
+            _updateDanhSachDichVuTour($name_dichvu,$type_dichvu,$price_dichvu,$soluong_dichvu,$thanhtien_dichvu,$ghichu_dichvu, $data_detail[0]->id);
+            echo 1;
+        }else{
+            echo 0;
+        }
+
     }
 }

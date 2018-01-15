@@ -540,7 +540,7 @@ function show_booking_themmoi($data = array())
                 $list_dich_vu.='</select>
                                             </td>
                                             <td>
-                                                <input '.$readonly_bang_gia_dv.' data-value="'.$count_dv.'" style="height: 30px;width: 88%;" value="'.$row_dv->price.'" name="price_dichvu[]" id="input_price_dichvu_'.$count_dv.'" type="number" class="valid input_table input_price_dichvu">
+                                                <input '.$readonly_bang_gia_dv.' data-value="'.$count_dv.'" style="height: 30px;width: 86%;" value="'.$row_dv->price.'" name="price_dichvu[]" id="input_price_dichvu_'.$count_dv.'" type="number" class="valid input_table input_price_dichvu">
                                                 <div class="btn-group" style="width: 10%;">
                                                     <button style="padding: 4px 5px;margin-top: 0px; margin-bottom: 3px;" data-toggle="dropdown" class="btn btn-sm btn-danger dropdown-toggle btn-action-gird" aria-expanded="false"> <i class="fa fa-usd" aria-hidden="true"></i></button>
                                                     <ul class="dropdown-menu dropdown-danger"> <li> <a role="button" data-toggle="modal" class="edit_function">Đơn giá: <b id="price_dichvu_format_'.$count_dv.'">'.$price_item_dv.'</span></a> </li> </ul>

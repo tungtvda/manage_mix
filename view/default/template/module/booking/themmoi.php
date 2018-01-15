@@ -994,7 +994,7 @@
 
                             </div>
 
-                            <div <?php echo $hidden_don_gia_dichvu ?> class=" form-group border-sloid-1-x"
+                            <div  class=" form-group border-sloid-1-x"
                                                                       style="float: left; width: 100%;background: #ffffff;  margin-left: 0px;margin-right: 0px;">
                                 <div class="profile-user-info profile-user-info-striped">
                                     <div class="profile-info-row">

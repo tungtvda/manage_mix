@@ -835,6 +835,7 @@ jQuery(function ($) {
         $('#input_don_gia_net_m3').val('');
         $('#input_loi_nhuan_m3').val('');
         $('#input_gia_ban_m3').val('');
+
     });
 
     //spinner
@@ -1971,7 +1972,7 @@ jQuery(function ($) {
             '">' +
             list +
             '</select></td>' +
-            '<td><input style="height: 30px; width: 88%;" value="0" data-value="' +
+            '<td><input style="height: 30px; width: 86%;" value="0" data-value="' +
             n +
             '" name="price_dichvu[]" id="input_price_dichvu_' +
             n +

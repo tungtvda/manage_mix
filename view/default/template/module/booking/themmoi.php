@@ -890,7 +890,7 @@
                                                                     style="height: 30px"
                                                                     value="<?php echo $don_gia_net ?>" type="text"
                                                                     class="valid input_table"></td>
-                                            <td>Lợi nhuận <span  id="price_loinhuan_format" class="red"></span>
+                                            <td>Lợi nhuận <span  id="price_loinhuan_format" class="red"><?php echo $loi_nhuan_format?></span>
                                                 <input name="loi_nhuan" min="0"
                                                                                                id="input_loi_nhuan"
                                                                                                style="height: 30px"
@@ -918,7 +918,7 @@
                                                                     id="input_don_gia_net_m1" style="height: 30px"
                                                                     value="<?php echo $don_gia_net_m1 ?>" type="text"
                                                                     class="valid input_table"></td>
-                                            <td>Lợi nhuận <span  id="price_loinhuan_format_1" class="red"></span>
+                                            <td>Lợi nhuận <span  id="price_loinhuan_format_1" class="red"><?php echo $loi_nhuan_m1_format?></span>
                                                 <input name="loi_nhuan_m1"
                                                                                                min="0"
                                                                                                id="input_loi_nhuan_m1"
@@ -946,7 +946,7 @@
                                                                     id="input_don_gia_net_m2" style="height: 30px"
                                                                     value="<?php echo $don_gia_net_m2 ?>" type="text"
                                                                     class="valid input_table"></td>
-                                            <td>Lợi nhuận <span  id="price_loinhuan_format_2" class="red"></span>
+                                            <td>Lợi nhuận <span  id="price_loinhuan_format_2" class="red"><?php echo $loi_nhuan_m2_format?></span>
                                                 <input min="0"
                                                                                                name="loi_nhuan_m2"
                                                                                                id="input_loi_nhuan_m2"
@@ -974,7 +974,7 @@
                                                                     id="input_don_gia_net_m3" style="height: 30px"
                                                                     value="<?php echo $don_gia_net_m3 ?>" type="text"
                                                                     class="valid input_table"></td>
-                                            <td>Lợi nhuận <span  id="price_loinhuan_format_3" class="red"></span>
+                                            <td>Lợi nhuận <span  id="price_loinhuan_format_3" class="red"><?php echo $loi_nhuan_m3_format?></span>
                                                 <input min="0"
                                                                                                name="loi_nhuan_m3"
                                                                                                id="input_loi_nhuan_m3"

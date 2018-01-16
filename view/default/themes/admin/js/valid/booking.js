@@ -836,6 +836,8 @@ jQuery(function ($) {
         $('#input_loi_nhuan_m3').val('');
         $('#input_gia_ban_m3').val('');
 
+        _returnDefailBangGia();
+
     });
 
     //spinner
@@ -2042,7 +2044,30 @@ jQuery(function ($) {
         total_price_dich_vu(0, id, soluong);
     });
 });
-
+function _returnDefailBangGia() {
+    $('#don_gia_th').html('');
+    $('#price_loinhuan_format').html('');
+    $('#price_loinhuan_format_1').html('');
+    $('#price_loinhuan_format_2').html('');
+    $('#price_loinhuan_format_3').html('');
+    $('#input_tong_tien_nguoi_lon').val('');
+    $('#input_tyle_m1').val('');
+    $('#input_tyle_m2').val('');
+    $('#input_tyle_m3').val('');
+    $('#input_don_gia_net').val('');
+    $('#input_don_gia_net_m1').val('');
+    $('#input_don_gia_net_m2').val('');
+    $('#input_don_gia_net_m3').val('');
+    $('#input_loi_nhuan').val('');
+    $('#input_loi_nhuan_m1').val('');
+    $('#input_loi_nhuan_m2').val('');
+    $('#input_loi_nhuan_m3').val('');
+    $('#input_gia_ban').val('');
+    $('#input_gia_ban_m1').val('');
+    $('#input_gia_ban_m2').val('');
+    $('#input_gia_ban_m3').val('');
+    $('#list_dichvu').html('');
+}
 function total_price_dich_vu(price, item, soluong_dichvu) {
     if (price >= 0 && item > 0) {
         var soluong = $('#input_soluong_dichvu_' + item).val();
@@ -3165,6 +3190,7 @@ function removeValueTour() {
     $('#price_format_span_tre_em_m3').html('0 vnđ');
     $('#name_tour_table').html('');
     var type_tour=$('.type_tour').val();
+    _returnDefailBangGia();
     tinh_tong_tien(type_tour);
 }
 

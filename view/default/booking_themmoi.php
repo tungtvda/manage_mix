@@ -113,6 +113,11 @@ function show_booking_themmoi($data = array())
     $loi_nhuan_m3='0';
     $gia_ban_m3='0 vnđ';
 
+    $loi_nhuan_format='';
+    $loi_nhuan_m1_format='';
+    $loi_nhuan_m2_format='';
+    $loi_nhuan_m3_format='';
+
     $chuong_trinh = '';
     $chuong_trinh_valid = '';
     $chuong_trinh_price = 0;
@@ -502,7 +507,10 @@ function show_booking_themmoi($data = array())
         if($loi_nhuan_m3==''){
             $loi_nhuan_m3=0;
         }
-
+        $loi_nhuan_format=number_format((float)round($loi_nhuan,2), 0, ",", ".") . ' vnđ';
+        $loi_nhuan_m1_format=number_format((float)round($loi_nhuan_m1,2), 0, ",", ".") . ' vnđ';
+        $loi_nhuan_m2_format=number_format((float)round($loi_nhuan_m2,2), 0, ",", ".") . ' vnđ';
+        $loi_nhuan_m3_format=number_format((float)round($loi_nhuan_m3,2), 0, ",", ".") . ' vnđ';
         $data_list_dichvu=booking_list_dichvu_getByTop('','booking_id='.$data['data_user'][0]->id,'id asc');
         $readonly_bang_gia_dv='disabled';
         if($data['data_user'][0]->dieuhanh_id==$_SESSION['user_id'] || $_SESSION['user_role']==1)

@@ -952,7 +952,7 @@ jQuery(function ($) {
             value = 0;
         }
         var price_format = value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
-        $('#price_loinhuan_format').attr('title', price_format);
+        $('#price_loinhuan_format').html(price_format);
         $('#input_loi_nhuan').attr('title', price_format);
         total_price_dich_vu(0, 0, 0);
     }
@@ -975,7 +975,7 @@ jQuery(function ($) {
             value = 0;
         }
         var price_format = value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
-        $('#price_loinhuan_format_1').attr('title', price_format);
+        $('#price_loinhuan_format_1').html(price_format);
         $('#input_loi_nhuan_m1').attr('title', price_format);
         total_price_dich_vu(0, 0, 0);
     }
@@ -998,7 +998,7 @@ jQuery(function ($) {
             value = 0;
         }
         var price_format = value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
-        $('#price_loinhuan_format_2').attr('title', price_format);
+        $('#price_loinhuan_format_2').html(price_format);
         $('#input_loi_nhuan_m2').attr('title', price_format);
         total_price_dich_vu(0, 0, 0);
     }
@@ -1021,7 +1021,7 @@ jQuery(function ($) {
             value = 0;
         }
         var price_format = value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
-        $('#price_loinhuan_format_3').attr('title', price_format);
+        $('#price_loinhuan_format_3').html(price_format);
         $('#input_loi_nhuan_m3').attr('title', price_format);
         total_price_dich_vu(0, 0, 0);
     }
@@ -2018,9 +2018,11 @@ jQuery(function ($) {
 
         if (numberRegex.test(price)) {
             var price_format = price.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
+            $('#don_gia_th').html(price_format);
         } else {
             $(this).val(0);
             price = 0;
+            $('#don_gia_th').html('');
         }
         if (price <= 0) {
             price = 0;

@@ -855,7 +855,7 @@
                                             <th>#</th>
                                             <th>Tên dịch vụ</th>
                                             <th>Loại dịch vụ</th>
-                                            <th>Đơn giá</th>
+                                            <th>Đơn giá <span class="red" id="don_gia_th"></span></th>
                                             <th>Số lượng</th>
                                             <th>Thành tiền</th>
                                             <th>Ghi chú</th>
@@ -890,8 +890,8 @@
                                                                     style="height: 30px"
                                                                     value="<?php echo $don_gia_net ?>" type="text"
                                                                     class="valid input_table"></td>
-                                            <td>Lợi nhuận <i title="0 vnđ" id="price_loinhuan_format"
-                                                             class="fa fa-dollar"></i>: <input name="loi_nhuan" min="0"
+                                            <td>Lợi nhuận <span  id="price_loinhuan_format" class="red"></span>
+                                                <input name="loi_nhuan" min="0"
                                                                                                id="input_loi_nhuan"
                                                                                                style="height: 30px"
                                                                                                value="<?php echo $loi_nhuan ?>"
@@ -918,8 +918,8 @@
                                                                     id="input_don_gia_net_m1" style="height: 30px"
                                                                     value="<?php echo $don_gia_net_m1 ?>" type="text"
                                                                     class="valid input_table"></td>
-                                            <td>Lợi nhuận <i title="0 vnđ" id="price_loinhuan_format_1"
-                                                             class="fa fa-dollar"></i>: <input name="loi_nhuan_m1"
+                                            <td>Lợi nhuận <span  id="price_loinhuan_format_1" class="red"></span>
+                                                <input name="loi_nhuan_m1"
                                                                                                min="0"
                                                                                                id="input_loi_nhuan_m1"
                                                                                                style="height: 30px"
@@ -946,8 +946,8 @@
                                                                     id="input_don_gia_net_m2" style="height: 30px"
                                                                     value="<?php echo $don_gia_net_m2 ?>" type="text"
                                                                     class="valid input_table"></td>
-                                            <td>Lợi nhuận <i title="0 vnđ" id="price_loinhuan_format_2"
-                                                             class="fa fa-dollar"></i>: <input min="0"
+                                            <td>Lợi nhuận <span  id="price_loinhuan_format_2" class="red"></span>
+                                                <input min="0"
                                                                                                name="loi_nhuan_m2"
                                                                                                id="input_loi_nhuan_m2"
                                                                                                style="height: 30px"
@@ -974,8 +974,8 @@
                                                                     id="input_don_gia_net_m3" style="height: 30px"
                                                                     value="<?php echo $don_gia_net_m3 ?>" type="text"
                                                                     class="valid input_table"></td>
-                                            <td>Lợi nhuận <i title="0 vnđ" id="price_loinhuan_format_3"
-                                                             class="fa fa-dollar"></i>: <input min="0"
+                                            <td>Lợi nhuận <span  id="price_loinhuan_format_3" class="red"></span>
+                                                <input min="0"
                                                                                                name="loi_nhuan_m3"
                                                                                                id="input_loi_nhuan_m3"
                                                                                                style="height: 30px"

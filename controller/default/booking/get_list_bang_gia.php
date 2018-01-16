@@ -6,4 +6,5 @@ require_once DIR . '/model/htttService.php';
 require_once DIR . '/model/customerService.php';
 require_once DIR . '/model/customer_categoryService.php';
 require_once DIR . '/model/tourService.php';
-require_once DIR . '/model/	tour_list_dichvuService.php';
+require_once DIR . '/model/tour_list_dichvuService.php';
+echo $_GET['id'];

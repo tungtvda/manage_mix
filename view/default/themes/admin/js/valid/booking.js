@@ -1778,6 +1778,7 @@ jQuery(function ($) {
         $('#content_giaodich').val('');
         $('#show_mess_content').hide();
         var code = $(this).attr('data-code');
+        console.log('asdf');
         var id = $(this).attr('data-id');
         if (code && id) {
             $('#name-detail-code-booking').html(code);
@@ -3183,11 +3184,6 @@ function removeValueTour() {
     $('#input_price_tre_em_m1_old').val(0);
     $('#input_price_tre_em_m2_old').val(0);
     $('#input_price_tre_em_m1_old').val(0);
-
-    $('#price_format_span').html('0 vnđ');
-    $('#price_format_span_tre_em_m1').html('0 vnđ');
-    $('#price_format_span_tre_em_m2').html('0 vnđ');
-    $('#price_format_span_tre_em_m3').html('0 vnđ');
     $('#name_tour_table').html('');
     var type_tour=$('.type_tour').val();
     _returnDefailBangGia();

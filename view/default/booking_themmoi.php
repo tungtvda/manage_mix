@@ -18,6 +18,8 @@ function show_booking_themmoi($data = array())
             $list_danhmuc_dichvu .='<option value="'.$row_dm->id.'">'.$row_dm->name.'</option>';
         }
     }
+    $code_booking='';
+    $id_booking='';
     $tieude = $data['title'];
     $action = $data['action'];
     $valid_name_user = "";
@@ -37,6 +39,7 @@ function show_booking_themmoi($data = array())
     $readonly_name_tour = '';
     $readonly_name_customer = '';
     $readonly_name_dieuhanh = '';
+    $readonly_name_user = '';
     $readonly_name_user_tt = '';
     $readonly_type_tour = '';
     $readonly_tour_custom = '';
@@ -223,7 +226,8 @@ function show_booking_themmoi($data = array())
             $valid_id_dieuhanh = "valid";
             $table_dieuhanh = '<tr> <td class="center">1</td><td><a>' . $data_dieuhanh[0]->name . '</a></td><td><span>' . $data_dieuhanh[0]->user_email . '</span></td> <td><span>' . $data_dieuhanh[0]->phone . '</span></td><td><span>' . $phong_ban . '</span></td><td>' . $number_tour . '</td></tr>';
         }
-
+        $code_booking=_returnDataEditAdd($data['data_user'], 'code_booking');
+        $id_booking=_returnDataEditAdd($data['data_user'], 'id');
         $Random = _returnDataEditAdd($data['data_user'], 'code_booking');
         if(_returnDataEditAdd($data['data_user'], 'ngay_bat_dau')!='0000-00-00'){
             $ngay_bat_dau = date("d-m-Y", strtotime(_returnDataEditAdd($data['data_user'], 'ngay_bat_dau')));
@@ -617,6 +621,10 @@ function show_booking_themmoi($data = array())
         $readonly_info_order='';
         $readonly_tour_custom='';
         $Random = _randomBooking('#', 'booking_count');
+        if($_SESSION['user_role']!=1){
+            $name_user = $_SESSION['user_name'];
+            $readonly_name_user = 'disabled';
+        }
     }
 
 
@@ -908,6 +916,7 @@ function show_booking_themmoi($data = array())
     }
 
     $user_current = $_SESSION['user_id'];
+
 
 
     require_once DIR . '/view/default/template/module/booking/themmoi.php';

@@ -19,7 +19,7 @@ require_once (DIR . "/common/excel_reader2.php");
 $name='';
 if(isset($_FILES['file'])){
     $fileName = fopen($_FILES['file']['tmp_name'],'w') or die("can't open file");
-  //  print_r($_FILES['file']);
+    print_r($_FILES['file']);
     if($_FILES["file"]["size"] > 0)
     {
         $file = fopen($fileName, "w");

@@ -115,7 +115,7 @@
                                         <div class="profile-info-value form-group">
                                             <div style="float: left;width: 60%">
                                            <span class="input-icon width_100">
-                                                <input <?php echo $readonly_name_customer ?>
+                                                <input <?php echo $readonly_name_user ?>
                                                         class="<?php echo $valid_name_user ?>" id="input_name_user"
                                                         autofocus type="text" name="name_user"
                                                         value="<?php echo $name_user ?>"
@@ -819,16 +819,7 @@
                                     <label style="display: none" class="error-color  error-color-size"
                                            id="error_name_tour">Bạn vui lòng chọn tour</label>
                                 </div>
-                                <div <?php echo $show_add_tour ?> style="float: left;">
-                                    <div class="btn-group">
-                                        <a href="#modal-form" data-toggle="modal" role="button"
-                                           id="btn_add_customer_popup" style="padding: 7px 10px; "
-                                           class="green btn btn-xs btn-success" type="button">
-                                            <i class=" fa fa-plus bigger-120"></i>
-                                        </a>
 
-                                    </div>
-                                </div>
                             </div>
 
                             <div hidden class="show_hide_bang_gia"
@@ -855,7 +846,7 @@
                                             <th>#</th>
                                             <th>Tên dịch vụ</th>
                                             <th>Loại dịch vụ</th>
-                                            <th>Đơn giá</th>
+                                            <th>Đơn giá <span class="red" id="don_gia_th"></span></th>
                                             <th>Số lượng</th>
                                             <th>Thành tiền</th>
                                             <th>Ghi chú</th>
@@ -890,8 +881,8 @@
                                                                     style="height: 30px"
                                                                     value="<?php echo $don_gia_net ?>" type="text"
                                                                     class="valid input_table"></td>
-                                            <td>Lợi nhuận <i title="0 vnđ" id="price_loinhuan_format"
-                                                             class="fa fa-dollar"></i>: <input name="loi_nhuan" min="0"
+                                            <td>Lợi nhuận <span  id="price_loinhuan_format" class="red"><?php echo $loi_nhuan_format?></span>
+                                                <input name="loi_nhuan" min="0"
                                                                                                id="input_loi_nhuan"
                                                                                                style="height: 30px"
                                                                                                value="<?php echo $loi_nhuan ?>"
@@ -918,8 +909,8 @@
                                                                     id="input_don_gia_net_m1" style="height: 30px"
                                                                     value="<?php echo $don_gia_net_m1 ?>" type="text"
                                                                     class="valid input_table"></td>
-                                            <td>Lợi nhuận <i title="0 vnđ" id="price_loinhuan_format_1"
-                                                             class="fa fa-dollar"></i>: <input name="loi_nhuan_m1"
+                                            <td>Lợi nhuận <span  id="price_loinhuan_format_1" class="red"><?php echo $loi_nhuan_m1_format?></span>
+                                                <input name="loi_nhuan_m1"
                                                                                                min="0"
                                                                                                id="input_loi_nhuan_m1"
                                                                                                style="height: 30px"
@@ -946,8 +937,8 @@
                                                                     id="input_don_gia_net_m2" style="height: 30px"
                                                                     value="<?php echo $don_gia_net_m2 ?>" type="text"
                                                                     class="valid input_table"></td>
-                                            <td>Lợi nhuận <i title="0 vnđ" id="price_loinhuan_format_2"
-                                                             class="fa fa-dollar"></i>: <input min="0"
+                                            <td>Lợi nhuận <span  id="price_loinhuan_format_2" class="red"><?php echo $loi_nhuan_m2_format?></span>
+                                                <input min="0"
                                                                                                name="loi_nhuan_m2"
                                                                                                id="input_loi_nhuan_m2"
                                                                                                style="height: 30px"
@@ -974,8 +965,8 @@
                                                                     id="input_don_gia_net_m3" style="height: 30px"
                                                                     value="<?php echo $don_gia_net_m3 ?>" type="text"
                                                                     class="valid input_table"></td>
-                                            <td>Lợi nhuận <i title="0 vnđ" id="price_loinhuan_format_3"
-                                                             class="fa fa-dollar"></i>: <input min="0"
+                                            <td>Lợi nhuận <span  id="price_loinhuan_format_3" class="red"><?php echo $loi_nhuan_m3_format?></span>
+                                                <input min="0"
                                                                                                name="loi_nhuan_m3"
                                                                                                id="input_loi_nhuan_m3"
                                                                                                style="height: 30px"
@@ -1276,6 +1267,12 @@
                     <i class="ace-icon fa fa-times"></i>
                     Cancel
                 </button>
+                <?php if($action==2) { ?>
+                <button href="#modal-form-giaodich" data-code="<?php echo $code_booking ?>" data-id="<?php echo _return_mc_encrypt($id_booking, ENCRYPTION_KEY); ?>" data-toggle="modal" type="button" role="button" class="green btn btn-xs btn-success view_lich_su_giao_dich" >
+                    <i class="ace-icon fa fa-sliders bigger-130"></i>
+                    Lịch sử giao dịch
+                </button>
+                <?php } ?>
             </div>
         </form>
         <!-- PAGE CONTENT BEGINS -->
@@ -1291,75 +1288,96 @@
 <!--    }-->
 <!--</style>-->
 
-<div id="modal-form" class="modal" tabindex="-1">
+<!--        Lịch sử giao dịch-->
+<div id="modal-form-giaodich" class="modal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="blue bigger" id="title_form">Tạo tour mới</h4>
-
+                <h4 class="blue bigger" id="title_form">Lịch sử giao dịch đơn hàng "<b
+                            id="name-detail-code-booking" class="red"></b>"</h4>
             </div>
-            <form id="submit_form_tour" role="form" action="" method="post" enctype="multipart/form-data">
 
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12">
-                            <div class="form-group" style="float: left; width: 100%">
-                                <div>
-                                    <label for="form-field-select-3">Tên tour <span style="color: red">*</span></label>
-                                    <?php echo _returnInput('name_tour_add', '', '', 'plane', '', 'Bạn vui lòng nhập mã khách hàng', '') ?>
-                                </div>
-                            </div>
-                            <div class="space-4"></div>
-                        </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div id="show_loading_giao_dich" style="text-align: center">
+                        <img src="<?php echo SITE_NAME . '/view/default/themes/images/loading_1.gif' ?>">
                     </div>
-                    <div class="row">
-                        <div style="float: left; width: 100%">
-                            <div class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="form-group">
-                                    <label for="form-field-select-3">Giá người lớn<span
-                                                style="color: red">*</span></label>
-                                    <?php echo _returnInput('price_tour_add', '', '', 'usd', '', 'Bạn vui lòng kiểm giá người lớn', '') ?>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="form-group">
-                                    <label for="form-field-select-3">Giá trẻ em 5-11 tuổi<span
-                                                style="color: red">*</span></label>
-                                    <?php echo _returnInput('price_tour_511_add', '', '', 'usd', '', 'Bạn vui lòng kiểm tra email', '') ?>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="float: left; width: 100%">
-                            <div class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="form-group">
-                                    <label for="form-field-select-3">Giá trẻ em dưới 5 tuổi <span
-                                                style="color: red">*</span></label>
-                                    <?php echo _returnInput('price_tour_5_add', '', '', 'usd', '', 'Bạn vui lòng kiểm tra email', '') ?>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="form-group">
-                                    <label for="form-field-select-3">Điểm khởi hành </label>
-                                    <?php echo _returnInput('diem_khoi_hanh', '', '', 'map-marker', '', '', '') ?>
-                                </div>
-                            </div>
-                        </div>
+                    <div hidden id="show_red_none_giao_dich" style="text-align: center">
                     </div>
+                    <div id="show_list_giao_dich" class="col-xs-12">
+                        <div class="widget-box">
+                            <div class="widget-body">
+                                <div class="widget-main no-padding">
+                                    <div id="back_to_top_giao_dich">
+                                    </div>
+                                    <div class="dialogs" id="list_giao_dich"
+                                         style="height: 350px; overflow: scroll">
+                                    </div>
 
+                                    <form>
+                                        <div class="profile-user-info profile-user-info-striped" style="width: 100%;">
+                                            <div class="profile-info-row">
+                                                <div class="profile-info-name"> Ngày giao dịch <span
+                                                            style="color: red">*</span></div>
+                                                <div class="profile-info-value">
+                                                    <div class="input-group" style="">
+                                                        <input value=""
+                                                               class="form-control date-picker width_100 "
+                                                               id="created_giaodich" name="created"
+                                                               type="text" data-date-format="dd-mm-yyyy">
+                                                        <span class="input-group-addon date_icon">
+																		<i class="fa fa-calendar bigger-110"></i>
+																	</span>
+                                                        <input value=""
+                                                               class="form-control  width_100 time_giaodich"
+                                                               id="timepicker1" name="time"
+                                                               type="text" >
+                                                        <span class="input-group-addon date_icon">
+																		<i class="fa fa-clock-o bigger-110"></i>
+																	</span>
+                                                    </div>
+                                                    <label hidden
+                                                           class="error-color  error-color-size"
+                                                           id="error_created">Bạn vui lòng chọn ngày giao dịch</label>
+                                                </div>
+                                            </div>
+                                            <div class="profile-info-row">
+                                                <div class="profile-info-name"> Mô tả <span
+                                                            style="color: red">*</span></div>
+                                                <div class="profile-info-value">
+                                                            <textarea id="content_giaodich" class="form-control"
+                                                                      placeholder="Bạn hãy nhập nội dung giao dịch ..."></textarea>
+                                                    <p hidden id="show_mess_content" class="red">Bạn vui lòng nhập
+                                                        nội dung giao dịch</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div><!-- /.widget-main -->
+                            </div><!-- /.widget-body -->
+                        </div><!-- /.widget-box -->
+                    </div>
                 </div>
+            </div>
 
-                <div class="modal-footer">
-                    <button class="btn btn-sm btn-primary" id="submit_form_tour_action" type="button">
-                        <i class="ace-icon fa fa-check"></i>
-                        Save
-                    </button>
-                    <button type="reset" class="btn btn-sm" data-dismiss="modal" id="reset_form_tour_popup">
-                        <i class="ace-icon fa fa-times"></i>
-                        Cancel
-                    </button>
-                </div>
-            </form>
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-primary" id="save_giao_dich" data-id="" data-code=""
+                        type="button">
+                    <i class="ace-icon fa fa-check"></i>
+                    Save
+                </button>
+                <button style="display: none" class="btn btn-sm btn-primary" id="show_loading_btn"
+                        type="button">
+                    Loding...
+                </button>
+                <button type="reset" class="btn btn-sm" data-dismiss="modal" id="reset_form_popup">
+                    <i class="ace-icon fa fa-times"></i>
+                    Cancel
+                </button>
+            </div>
+
 
         </div>
     </div>

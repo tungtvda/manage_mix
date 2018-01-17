@@ -1,7 +1,7 @@
 <?php
 class tour
 {
-    public $id,$status,$dieuhanh_id,$code_az_mix,$tour_quoc_te,$DanhMuc1Id,$DanhMuc2Id,$danhmuc_multi,$promotion,$packages,$name,$name_url,$count_down,$code,$img,$price_tiep_thi,$price_sales,$price,$price_2,$price_3,$price_4,$price_5,$price_6,$price_number,$price_number_2,$price_number_3,$price_number_4,$price_number_5,$price_number_6,$name_price,$name_price_2,$name_price_3,$name_price_4,$name_price_5,$name_price_6,$so_cho,$durations,$departure,$destination,$departure_time,$vehicle,$hotel,$summary,$highlights,$schedule,$price_list,$content,$list_img,$title,$keyword,$description,$inclusion,$exclusion,$updated;
+    public $id,$status,$dieuhanh_id,$code_az_mix,$tour_quoc_te,$DanhMuc1Id,$DanhMuc2Id,$danhmuc_multi,$promotion,$packages,$name,$name_url,$count_down,$code,$img,$price_tiep_thi,$price_sales,$price,$price_2,$price_3,$price_4,$price_5,$price_6,$price_number,$price_number_2,$price_number_3,$price_number_4,$price_number_5,$price_number_6,$name_price,$name_price_2,$name_price_3,$name_price_4,$name_price_5,$name_price_6,$total_dichvu,$gia_net,$gia_net_m1,$gia_net_m2,$gia_net_m3,$ty_le_m1,$ty_le_m2,$ty_le_m3,$loi_nhuan,$loi_nhuan_m1,$loi_nhuan_m2,$loi_nhuan_m3,$so_cho,$durations,$departure,$destination,$departure_time,$vehicle,$hotel,$summary,$highlights,$schedule,$price_list,$content,$list_img,$title,$keyword,$description,$inclusion,$exclusion,$updated;
     public function tour($data=array())
     {
         $this->id=isset($data['id'])?$data['id']:'';
@@ -39,6 +39,18 @@ class tour
         $this->name_price_4=isset($data['name_price_4'])?$data['name_price_4']:'';
         $this->name_price_5=isset($data['name_price_5'])?$data['name_price_5']:'';
         $this->name_price_6=isset($data['name_price_6'])?$data['name_price_6']:'';
+        $this->total_dichvu=isset($data['total_dichvu'])?$data['total_dichvu']:'';
+        $this->gia_net=isset($data['gia_net'])?$data['gia_net']:'';
+        $this->gia_net_m1=isset($data['gia_net_m1'])?$data['gia_net_m1']:'';
+        $this->gia_net_m2=isset($data['gia_net_m2'])?$data['gia_net_m2']:'';
+        $this->gia_net_m3=isset($data['gia_net_m3'])?$data['gia_net_m3']:'';
+        $this->ty_le_m1=isset($data['ty_le_m1'])?$data['ty_le_m1']:'';
+        $this->ty_le_m2=isset($data['ty_le_m2'])?$data['ty_le_m2']:'';
+        $this->ty_le_m3=isset($data['ty_le_m3'])?$data['ty_le_m3']:'';
+        $this->loi_nhuan=isset($data['loi_nhuan'])?$data['loi_nhuan']:'';
+        $this->loi_nhuan_m1=isset($data['loi_nhuan_m1'])?$data['loi_nhuan_m1']:'';
+        $this->loi_nhuan_m2=isset($data['loi_nhuan_m2'])?$data['loi_nhuan_m2']:'';
+        $this->loi_nhuan_m3=isset($data['loi_nhuan_m3'])?$data['loi_nhuan_m3']:'';
         $this->so_cho=isset($data['so_cho'])?$data['so_cho']:'';
         $this->durations=isset($data['durations'])?$data['durations']:'';
         $this->departure=isset($data['departure'])?$data['departure']:'';
@@ -97,6 +109,18 @@ class tour
         $this->name_price_4=addslashes($this->name_price_4);
         $this->name_price_5=addslashes($this->name_price_5);
         $this->name_price_6=addslashes($this->name_price_6);
+        $this->total_dichvu=addslashes($this->total_dichvu);
+        $this->gia_net=addslashes($this->gia_net);
+        $this->gia_net_m1=addslashes($this->gia_net_m1);
+        $this->gia_net_m2=addslashes($this->gia_net_m2);
+        $this->gia_net_m3=addslashes($this->gia_net_m3);
+        $this->ty_le_m1=addslashes($this->ty_le_m1);
+        $this->ty_le_m2=addslashes($this->ty_le_m2);
+        $this->ty_le_m3=addslashes($this->ty_le_m3);
+        $this->loi_nhuan=addslashes($this->loi_nhuan);
+        $this->loi_nhuan_m1=addslashes($this->loi_nhuan_m1);
+        $this->loi_nhuan_m2=addslashes($this->loi_nhuan_m2);
+        $this->loi_nhuan_m3=addslashes($this->loi_nhuan_m3);
         $this->so_cho=addslashes($this->so_cho);
         $this->durations=addslashes($this->durations);
         $this->departure=addslashes($this->departure);
@@ -154,6 +178,18 @@ class tour
         $this->name_price_4=stripslashes($this->name_price_4);
         $this->name_price_5=stripslashes($this->name_price_5);
         $this->name_price_6=stripslashes($this->name_price_6);
+        $this->total_dichvu=stripslashes($this->total_dichvu);
+        $this->gia_net=stripslashes($this->gia_net);
+        $this->gia_net_m1=stripslashes($this->gia_net_m1);
+        $this->gia_net_m2=stripslashes($this->gia_net_m2);
+        $this->gia_net_m3=stripslashes($this->gia_net_m3);
+        $this->ty_le_m1=stripslashes($this->ty_le_m1);
+        $this->ty_le_m2=stripslashes($this->ty_le_m2);
+        $this->ty_le_m3=stripslashes($this->ty_le_m3);
+        $this->loi_nhuan=stripslashes($this->loi_nhuan);
+        $this->loi_nhuan_m1=stripslashes($this->loi_nhuan_m1);
+        $this->loi_nhuan_m2=stripslashes($this->loi_nhuan_m2);
+        $this->loi_nhuan_m3=stripslashes($this->loi_nhuan_m3);
         $this->so_cho=stripslashes($this->so_cho);
         $this->durations=stripslashes($this->durations);
         $this->departure=stripslashes($this->departure);

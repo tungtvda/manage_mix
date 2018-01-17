@@ -836,6 +836,8 @@ jQuery(function ($) {
         $('#input_loi_nhuan_m3').val('');
         $('#input_gia_ban_m3').val('');
 
+        _returnDefailBangGia();
+
     });
 
     //spinner
@@ -952,7 +954,7 @@ jQuery(function ($) {
             value = 0;
         }
         var price_format = value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
-        $('#price_loinhuan_format').attr('title', price_format);
+        $('#price_loinhuan_format').html(price_format);
         $('#input_loi_nhuan').attr('title', price_format);
         total_price_dich_vu(0, 0, 0);
     }
@@ -975,7 +977,7 @@ jQuery(function ($) {
             value = 0;
         }
         var price_format = value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
-        $('#price_loinhuan_format_1').attr('title', price_format);
+        $('#price_loinhuan_format_1').html(price_format);
         $('#input_loi_nhuan_m1').attr('title', price_format);
         total_price_dich_vu(0, 0, 0);
     }
@@ -998,7 +1000,7 @@ jQuery(function ($) {
             value = 0;
         }
         var price_format = value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
-        $('#price_loinhuan_format_2').attr('title', price_format);
+        $('#price_loinhuan_format_2').html(price_format);
         $('#input_loi_nhuan_m2').attr('title', price_format);
         total_price_dich_vu(0, 0, 0);
     }
@@ -1021,7 +1023,7 @@ jQuery(function ($) {
             value = 0;
         }
         var price_format = value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
-        $('#price_loinhuan_format_3').attr('title', price_format);
+        $('#price_loinhuan_format_3').html(price_format);
         $('#input_loi_nhuan_m3').attr('title', price_format);
         total_price_dich_vu(0, 0, 0);
     }
@@ -1776,6 +1778,7 @@ jQuery(function ($) {
         $('#content_giaodich').val('');
         $('#show_mess_content').hide();
         var code = $(this).attr('data-code');
+        console.log('asdf');
         var id = $(this).attr('data-id');
         if (code && id) {
             $('#name-detail-code-booking').html(code);
@@ -2018,9 +2021,11 @@ jQuery(function ($) {
 
         if (numberRegex.test(price)) {
             var price_format = price.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' vnđ';
+            $('#don_gia_th').html(price_format);
         } else {
             $(this).val(0);
             price = 0;
+            $('#don_gia_th').html('');
         }
         if (price <= 0) {
             price = 0;
@@ -2040,7 +2045,30 @@ jQuery(function ($) {
         total_price_dich_vu(0, id, soluong);
     });
 });
-
+function _returnDefailBangGia() {
+    $('#don_gia_th').html('');
+    $('#price_loinhuan_format').html('');
+    $('#price_loinhuan_format_1').html('');
+    $('#price_loinhuan_format_2').html('');
+    $('#price_loinhuan_format_3').html('');
+    $('#input_tong_tien_nguoi_lon').val('');
+    $('#input_tyle_m1').val('');
+    $('#input_tyle_m2').val('');
+    $('#input_tyle_m3').val('');
+    $('#input_don_gia_net').val('');
+    $('#input_don_gia_net_m1').val('');
+    $('#input_don_gia_net_m2').val('');
+    $('#input_don_gia_net_m3').val('');
+    $('#input_loi_nhuan').val('');
+    $('#input_loi_nhuan_m1').val('');
+    $('#input_loi_nhuan_m2').val('');
+    $('#input_loi_nhuan_m3').val('');
+    $('#input_gia_ban').val('');
+    $('#input_gia_ban_m1').val('');
+    $('#input_gia_ban_m2').val('');
+    $('#input_gia_ban_m3').val('');
+    $('#list_dichvu').html('');
+}
 function total_price_dich_vu(price, item, soluong_dichvu) {
     if (price >= 0 && item > 0) {
         var soluong = $('#input_soluong_dichvu_' + item).val();
@@ -3156,13 +3184,9 @@ function removeValueTour() {
     $('#input_price_tre_em_m1_old').val(0);
     $('#input_price_tre_em_m2_old').val(0);
     $('#input_price_tre_em_m1_old').val(0);
-
-    $('#price_format_span').html('0 vnđ');
-    $('#price_format_span_tre_em_m1').html('0 vnđ');
-    $('#price_format_span_tre_em_m2').html('0 vnđ');
-    $('#price_format_span_tre_em_m3').html('0 vnđ');
     $('#name_tour_table').html('');
     var type_tour=$('.type_tour').val();
+    _returnDefailBangGia();
     tinh_tong_tien(type_tour);
 }
 

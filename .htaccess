@@ -128,7 +128,7 @@ RewriteRule ^chuc-mung-sinh-nhat/xoa  controller/default/email_marketing/delete.
 RewriteRule ^cronjob-send-sms$ controller/default/email_marketing/cronjob_send_sms.php
 
 RewriteRule ^doanh-thu-don-hang/$ controller/default/thongke/doanh_thu_don_hang.php
-RewriteRule ^bang-gia--dich-vu$ controller/default/booking/get_list_bang_gia.php
+RewriteRule ^bang-gia-dich-vu.html$ controller/default/booking/get_list_bang_gia.php
 
 
 

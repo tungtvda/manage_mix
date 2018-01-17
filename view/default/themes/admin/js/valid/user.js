@@ -1067,6 +1067,7 @@ $('body').on("click", '#import-excel', function () {
 $("form#data-import").submit(function(e) {
     e.preventDefault();
     var formData = new FormData(this);
+    console.log(formData);
     $.ajax({
         url: url+'/import-user.html',
         type: 'POST',

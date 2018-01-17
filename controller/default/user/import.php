@@ -18,16 +18,18 @@ require_once (DIR . "/common/excel_reader2.php");
 //$data = new Spreadsheet_Excel_Reader("example.xls");
 $name='';
 if(isset($_FILES['file'])){
-    $fileName = $_FILES['file']['tmp_name'];
-
+    $fileName = fopen($_FILES['file']['tmp_name'],'w') or die("can't open file");
+  //  print_r($_FILES['file']);
     if($_FILES["file"]["size"] > 0)
     {
-        $file = fopen($fileName, "r");
-        while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE)
+        $file = fopen($fileName, "w");
+     //   while (($emapData = fgetcsv($file, 10, ",")) !== FALSE)
+        while(($emapData = fgetcsv($file)) !== FALSE)
         {
-           $user = new user();
-           $user->name=$emapData[0];
-           user_insert($user);
+           //$user = new user();
+           //$user->name=$emapData[0];
+          // user_insert($user);
+            print_r($emapData[0]);
 
         }
         fclose($file);

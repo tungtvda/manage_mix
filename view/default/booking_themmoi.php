@@ -624,6 +624,23 @@ function show_booking_themmoi($data = array())
         if($_SESSION['user_role']!=1){
             $name_user = $_SESSION['user_name'];
             $readonly_name_user = 'disabled';
+            $data_sales = user_getById($_SESSION['user_id']);
+            if (count($data_sales) > 0) {
+                if ($data_sales[0]->name != '') {
+                    $valid_name_user = 'valid';
+                    $name_user = $data_sales[0]->name;
+                }
+                $phong_ban = '';
+                $number_tour = 0;
+                $data_phongban = user_phongban_getByTop('', 'id=' . $data_sales[0]->phong_ban, '');
+                $number_tour = booking_count('user_id=' . $data_sales[0]->id . ' and status!=5');
+                if (count($data_phongban) > 0) {
+                    $phong_ban = $data_phongban[0]->name;
+                }
+                $id_user = $data_sales[0]->id;
+                $valid_id_user = "valid";
+                $table_user = '<tr> <td class="center">1</td><td><a>' . $name_user . '</a></td><td><span>' . $data_sales[0]->user_email . '</span></td> <td><span>' . $data_sales[0]->phone . '</span></td><td><span>' . $phong_ban . '</span></td><td>' . $number_tour . '</td></tr>';
+            }
         }
     }
 

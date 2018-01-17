@@ -1044,3 +1044,38 @@ function validate(date) {
         return "sorry, no";
     }
 }
+// check pass confirm
+$('body').on("click", '#import-excel', function () {
+    var file = $("#file-import").val();
+    if (file) {
+        $.ajax({
+            method: "POST",
+            url: url+'/import-user.html',
+            data: {
+                file:file
+            },
+            success: function (response) {
+                console.log(response);
+            }
+        });
+    }
+    else {
+        var mess = 'không có file';
+        showHiddenUserEmail(0, mess);
+    }
+});
+$("form#data-import").submit(function(e) {
+    e.preventDefault();
+    var formData = new FormData(this);
+    $.ajax({
+        url: url+'/import-user.html',
+        type: 'POST',
+        data: formData,
+        success: function (data) {
+           // alert(data)
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+});

@@ -18,8 +18,36 @@
         <!-- PAGE CONTENT BEGINS -->
         <div class="row">
             <div class="col-xs-12">
+                <form class="form-inline" enctype="multipart/form-data" id="data-import" method="post">
+                    <div class="form-group">
+                        <label id="input-import"  class="btn btn-white  btn-create-new-tab btn-create-new-tab-hover">  <i class="ace-icon fa fa-plus bigger-120 ">  </i>Import file
+                            <input type="file" id="file-import" name="file" size="60" >
+                        </label>
+                    </div>
+                    <div class="form-group">
+<!--                      <a class="btn btn-success" id="import-excel">Send</a>-->
+                        <button class="btn btn-success">send</button>
+                    </div>
+                    <script>
+
+                    </script>
+                    <style>
+                        /*#input-import{*/
+                            /*padding: 10px;*/
+                            /*background: red;*/
+                            /*display: table;*/
+                            /*color: #fff;*/
+                        /*}*/
+                        /*#file-import[type="file"] {*/
+                            /*display: none;*/
+                        /*}*/
+                    </style>
+
+                </form>
+            </div>
+            <div class="col-xs-12">
                 <div class="clearfix">
-                    <div class="col-md-6 col-sm-6 col-xs-12 pink" style="padding-left: 0px">
+                    <div class="col-md-8 col-sm-8 col-xs-12 pink" style="padding-left: 0px">
                         <?php if (_returnCheckAction(1) == 1) { ?>
                             <a href="#modal-form" role="button" data-toggle="modal" id="create_popup"
                                class="green btn btn-white btn-create btn-hover-white">
@@ -34,6 +62,7 @@
                                 <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
                             </a>
                         <?php } ?>
+
                         <a href="" class="btn btn-white  btn-refresh">
                             <i class="ace-icon fa fa-refresh"></i>
                             Refresh
@@ -66,7 +95,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-6 col-xs-12 " style="padding-left: 0px">
+                    <div class="col-md-4 col-sm-4 col-xs-12 " style="padding-left: 0px">
                         <div class="pull-right tableTools-container"></div>
                     </div>
                 </div>
@@ -314,6 +343,7 @@
                     </ul>
                 </div>
             </div>
+
         </div>
 
         <style>

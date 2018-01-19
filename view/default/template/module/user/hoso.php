@@ -1027,9 +1027,22 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-
                                                             <div class="space-6"></div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                                            <div class="profile-user-info profile-user-info-striped" style="width: 99%">
+                                                                <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Chữ ký email</div>
 
+                                                                    <div class="profile-info-value">
+                                                                        <script type="text/javascript"
+                                                                                src="<?php echo SITE_NAME ?>/view/admin/Themes/ckeditor/ckeditor.js"></script>
+                                                                        <textarea required style="width: 100% !important;" name="chu_ky_email" id="input_chu_ky_email"><?php echo $chu_ky_email?></textarea>
+                                                                        <script
+                                                                                type="text/javascript">CKEDITOR.replace('chu_ky_email'); </script>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
 
                                                         </div>
 

@@ -1,7 +1,7 @@
 <?php
 class user
 {
-    public $id, $truong_phong_id,$name,$user_role,$type_tiep_thi,$user_gioi_thieu,$permison_module,$permison_form,$permison_action,$mr,$hoa_hong,$address,$phone,$mobi,$user_name,$user_code,$user_email,$password,$login_two_steps,$code_login,$phong_ban,$chuc_vu,$nganh_nghe,$gender,$birthday,$avatar,$skype,$facebook,$ngay_lam_viec,$ngay_chinh_thuc,$guides,$guide_card_number,$tax_code,$cmnd,$date_range_cmnd,$issued_by_cmnd,$number_passport,$date_range_passport,$issued_by_passport,$expiration_date_passport,$dan_toc,$ho_khau_tt,$hon_nhan,$bang_cap,$language,$account_number_bank,$bank,$open_bank,$religion,$note,$status,$created,$token_code,$time_token,$memori_login,$updated,$created_by,$updated_by;
+    public $id, $truong_phong_id,$name,$user_role,$type_tiep_thi,$user_gioi_thieu,$permison_module,$permison_form,$permison_action,$mr,$hoa_hong,$address,$phone,$mobi,$user_name,$user_code,$user_email,$password,$login_two_steps,$code_login,$phong_ban,$chuc_vu,$nganh_nghe,$gender,$birthday,$avatar,$skype,$facebook,$ngay_lam_viec,$ngay_chinh_thuc,$guides,$guide_card_number,$tax_code,$cmnd,$date_range_cmnd,$issued_by_cmnd,$number_passport,$date_range_passport,$issued_by_passport,$expiration_date_passport,$dan_toc,$ho_khau_tt,$hon_nhan,$bang_cap,$language,$account_number_bank,$bank,$open_bank,$religion,$note,$status,$created,$token_code,$time_token,$memori_login, $chu_ky_email,$updated,$created_by,$updated_by;
     public function user($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
@@ -59,6 +59,7 @@ class user
     $this->token_code=isset($data['token_code'])?$data['token_code']:'';
     $this->time_token=isset($data['time_token'])?$data['time_token']:'';
     $this->memori_login=isset($data['memori_login'])?$data['memori_login']:'';
+    $this->chu_ky_email=isset($data['chu_ky_email'])?$data['chu_ky_email']:'';
     $this->updated=isset($data['updated'])?$data['updated']:'';
     $this->created_by=isset($data['created_by'])?$data['created_by']:'';
     $this->updated_by=isset($data['updated_by'])?$data['updated_by']:'';
@@ -121,6 +122,7 @@ class user
             $this->token_code=addslashes($this->token_code);
             $this->time_token=addslashes($this->time_token);
             $this->memori_login=addslashes($this->memori_login);
+            $this->chu_ky_email=addslashes($this->chu_ky_email);
             $this->updated=addslashes($this->updated);
             $this->created_by=addslashes($this->created_by);
             $this->updated_by=addslashes($this->updated_by);
@@ -182,6 +184,7 @@ class user
             $this->token_code=stripslashes($this->token_code);
             $this->time_token=stripslashes($this->time_token);
             $this->memori_login=stripslashes($this->memori_login);
+            $this->chu_ky_email=stripslashes($this->chu_ky_email);
             $this->updated=stripslashes($this->updated);
             $this->created_by=stripslashes($this->created_by);
             $this->updated_by=stripslashes($this->updated_by);

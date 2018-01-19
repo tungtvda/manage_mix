@@ -995,7 +995,7 @@
                                                            id="input_link_bang_gia" value="<?php echo $link_bang_gia?>"
                                                            class="width_100 valid">
                                                  <?php echo $btn_link_bang_gia?>
-                                            <a title="Gửi mail báo giá cho khách hàng" style="padding: 2px 10px;" class="red btn  btn-danger remove_item_dichvu"><i class="fa fa-envelope "></i></a>
+                                            <a title="Gửi mail báo giá cho khách hàng" style="padding: 2px 10px;" class="red btn  btn-danger" id="send_email_bao_gia"><i class="fa fa-envelope "></i></a>
                                         </div>
                                     </div>
                                 </div>

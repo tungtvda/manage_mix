@@ -1882,3 +1882,74 @@ function _returnInsertChiphiBooking($booking_id, $user_id, $name,$price,$descrip
     booking_cost_insert($obj);
     _insertLog($_SESSION['user_id'],6,6,33,0,'','',$mess_log);
 }
+
+function _returnFooterEmailTemplate(){
+    return '<div style="float: left; width: 100%">
+                                            <div style="float: left; width: 336px; text-align: center;">
+                                                <p>
+                                                   <a href="http://mixtourist.com.vn/"><img style="width: 60%" src="http://mixtourist.com.vn/view/admin/Themes/kcfinder/upload/images/cauhinh/logomix.png"></a>
+                                                </p>
+                                                <p style="font-family: \'Comic Sans MS\',sans-serif;color: #a50505;    font-size: 14px;">
+                                                    A member <a style="   color: rgb(89,143,222);" href="http://mixgroup.com.vn/">MIX GROUP</a>
+                                                </p>
+                                                <p>
+                                                    <a href="https://www.facebook.com/mixtourist/"><img style="width: 30px"
+                                                                    src="http://azbooking.vn/view/admin/Themes/kcfinder/upload/images/icon_email/facebook.png"></a>
+                                                    <a href="http://www.youtube.com/user/dulichmixtourist"><img style="width:30px"
+                                                                    src="http://azbooking.vn//view/admin/Themes/kcfinder/upload/images/icon_email/youtube.png"></a>
+                                                </p>
+                                            </div>
+                                            <div style="float: left; width: 504px">
+                                                <h1 style="font-size: 20px;color: #0061AB;    font-family: \'comic sans ms\', sans-serif; text-decoration: none">Công ty Du lịch Mix Tourist</h1>
+                                                <p style="color: #a50505;    font-size: 15px;font-family: \'comic sans ms\', sans-serif;">Bộ phận</p>
+                                                <div style="float: left; width: 100%">
+                                                    <div style="float: left; width: 30%; padding-right: 20px;">
+                                                        <img style="width: 30px;float: left; display: inline-block"
+                                                             src="http://azbooking.vn/view/admin/Themes/kcfinder/upload/images/icon_email/mobile.png">
+                                                        <a style="float: left; display: inline-block;padding-top: 7px;font-size: 13px;    padding-left: 10px;font-family: \'Comic Sans MS\',sans-serif;font-weight: normal;text-decoration: none;    color: #36495a;"
+                                                           href="tel:0943838222">094.3838.222</a>
+                                                    </div>
+                                                    <div style="float: left; width: 30%;padding-right: 20px;">
+                                                        <img style="width: 30px;float: left; display: inline-block"
+                                                             src="http://azbooking.vn/view/admin/Themes/kcfinder/upload/images/icon_email/phone.png">
+                                                        <a style="float: left; display: inline-block;padding-top: 7px;font-size: 13px;    padding-left: 10px;font-family: \'Comic Sans MS\',sans-serif;font-weight: normal;text-decoration: none;    color: #36495a;"
+                                                           href="tel:02462814340">024.6281.4340</a>
+                                                    </div>
+                                                    <div style="float: left; width: 31%">
+                                                        <img style="width: 30px;float: left; display: inline-block"
+                                                             src="http://azbooking.vn/view/admin/Themes/kcfinder/upload/images/icon_email/phone.png">
+                                                        <a style="float: left; display: inline-block;padding-top: 7px;font-size: 13px;    padding-left: 10px;font-family: \'Comic Sans MS\',sans-serif;font-weight: normal;text-decoration: none;    color: #36495a;"
+                                                           href="tel:02836205183">028.3620.5183</a>
+                                                    </div>
+                                                </div>
+                                                <div style="float: left; width: 100%; margin-top: 20px">
+                                                    <div style="float: left; width:45%; padding-right: 20px;">
+                                                        <img style="width: 30px;float: left; display: inline-block"
+                                                             src="http://azbooking.vn/view/admin/Themes/kcfinder/upload/images/icon_email/email.png">
+                                                        <a style="float: left; display: inline-block;padding-top: 7px;font-size: 13px;    padding-left: 10px;font-family: \'Comic Sans MS\',sans-serif;font-weight: normal;text-decoration: none;    color: #36495a;"
+                                                           href="mailto:info@mixtourist.com.vn">info@mixtourist.com.vn</a>
+                                                    </div>
+                                                    <div style="float: left; width:45%; padding-right: 20px;">
+                                                        <img style="width: 30px;float: left; display: inline-block"
+                                                             src="http://azbooking.vn/view/admin/Themes/kcfinder/upload/images/icon_email/email2.png">
+                                                        <a style="float: left; display: inline-block;padding-top: 7px;font-size: 13px;    padding-left: 10px;font-family: \'Comic Sans MS\',sans-serif;font-weight: normal;text-decoration: none;    color: #36495a;"
+                                                           href="http://mixtourist.com.vn/">www.mixtourist.com.vn</a>
+                                                    </div>
+                                                </div>
+                                                <div style="float: left; width: 100%; margin-top: 20px">
+                                                    <div style="float: left;width: 30px">
+                                                        <img style="width: 30px;float: left; display: inline-block"
+                                                             src="http://azbooking.vn/view/admin/Themes/kcfinder/upload/images/icon_email/map.png">
+                                                    </div>
+                                                    <div style="float: left;width: 90%">
+                                                        <a style="margin-bottom: 5px;float: left; display: inline-block;font-size: 12px;    padding-left: 10px;font-family: \'Comic Sans MS\',sans-serif;font-weight: normal;text-decoration: none;    color: #36495a;"
+                                                           href="https://www.google.com/maps/place/C%C3%B4ng+ty+du+l%E1%BB%8Bch+Mix+(Mix+Tourist)/@21.0347202,105.8240408,18.5z/data=!4m12!1m6!3m5!1s0x0:0x9303614cc7f3f410!2zQ8O0bmcgdHkgZHUgbOG7i2NoIE3hu7kgLSBNaXhUb3VyaXN0!8m2!3d21.0349824!4d105.8242537!3m4!1s0x0:0x657ec77517ed2d5b!8m2!3d21.034934!4d105.824255">HN: 3th Floor, No 173C Doi Can Street, Ba Dinh District,
+                                                            Hanoi city</a>
+                                                        <a style="float: left; display: inline-block;font-size: 12px;  padding-left: 10px; font-family: \'Comic Sans MS\',sans-serif;font-weight: normal;text-decoration: none;    color: #36495a;"
+                                                           href="https://www.google.com/maps/place/C%C3%B4ng+ty+Du+l%E1%BB%8Bch+MixTourist/@10.8077013,106.7134788,17z/data=!3m1!4b1!4m5!3m4!1s0x317528a24ea783c3:0xb67e765db396dffc!8m2!3d10.807696!4d106.7156675">HCM: 8th Floor, No 161 Ung Văn Khiem Street, Binh Thanh
+                                                            District, HCM city</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>';
+}

@@ -13,7 +13,7 @@ require_once DIR . '/common/locdautiengviet.php';
 require_once(DIR . "/common/hash_pass.php");
 require_once DIR . '/common/class.phpmailer.php';
 require_once(DIR . "/common/Mail.php");
-require_once (DIR . "/common/excel_reader2.php");
+require_once(DIR . "/common/excel_reader2.php");
 //$data = array();
 //$data = new Spreadsheet_Excel_Reader("example.xls");
 $name='';

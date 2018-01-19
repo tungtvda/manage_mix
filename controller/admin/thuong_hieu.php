@@ -54,7 +54,7 @@ if(isset($_SESSION["Admin"]))
             header('Location: '.SITE_NAME.'/controller/admin/thuong_hieu.php');
         }
     }
-    if(isset($_POST["name"])&&isset($_POST["logo"])&&isset($_POST["email"])&&isset($_POST["mat_khau_send_email"])&&isset($_POST["email_template"]))
+    if(isset($_POST["name"])&&isset($_POST["logo"])&&isset($_POST["icon"])&&isset($_POST["banner"])&&isset($_POST["link_banner"])&&isset($_POST["banner_qc"])&&isset($_POST["link_banner_qc"])&&isset($_POST["link_khoi_hanh"])&&isset($_POST["email"])&&isset($_POST["mat_khau_ung_dung"])&&isset($_POST["chu_ky_email"]))
     {
        $array=$_POST;
        if(!isset($array['id']))
@@ -65,12 +65,24 @@ if(isset($_SESSION["Admin"]))
        $array['name']='0';
        if(!isset($array['logo']))
        $array['logo']='0';
+       if(!isset($array['icon']))
+       $array['icon']='0';
+       if(!isset($array['banner']))
+       $array['banner']='0';
+       if(!isset($array['link_banner']))
+       $array['link_banner']='0';
+       if(!isset($array['banner_qc']))
+       $array['banner_qc']='0';
+       if(!isset($array['link_banner_qc']))
+       $array['link_banner_qc']='0';
+       if(!isset($array['link_khoi_hanh']))
+       $array['link_khoi_hanh']='0';
        if(!isset($array['email']))
        $array['email']='0';
-       if(!isset($array['mat_khau_send_email']))
-       $array['mat_khau_send_email']='0';
-       if(!isset($array['email_template']))
-       $array['email_template']='0';
+       if(!isset($array['mat_khau_ung_dung']))
+       $array['mat_khau_ung_dung']='0';
+       if(!isset($array['chu_ky_email']))
+       $array['chu_ky_email']='0';
       $new_obj=new thuong_hieu($array);
         if($insert)
         {

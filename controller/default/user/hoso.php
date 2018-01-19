@@ -134,6 +134,7 @@ if(isset($_POST['birthday'])&&isset($_POST['address_user'])&&isset($_POST['full_
         $new_obj->note=$note;
         $new_obj->updated = _returnGetDateTime();
         $new_obj->id = $_SESSION['user_id'];
+
         $new_obj->chu_ky_email = $chu_ky_email;
         $folder = LocDau($data_user_update[0]->user_email);
         $target_dir = _returnFolderRoot() . "/view/default/themes/uploads/users/" . $folder . '/';

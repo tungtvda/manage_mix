@@ -13,7 +13,7 @@ if(isset($_SESSION["Admin"]))
         {
             $new_obj= new thuong_hieu();
             $new_obj->id=$_GET["id"];
-            thuong_hieu_delete($new_obj);
+//            thuong_hieu_delete($new_obj);
             header('Location: '.SITE_NAME.'/controller/admin/thuong_hieu.php');
         }
         else if($_GET["action"]=="edit")
@@ -49,7 +49,7 @@ if(isset($_SESSION["Admin"]))
             $List_thuong_hieu=thuong_hieu_getByAll();
             foreach($List_thuong_hieu as $thuong_hieu)
             {
-                if(isset($_GET["check_".$thuong_hieu->id])) thuong_hieu_delete($thuong_hieu);
+//                if(isset($_GET["check_".$thuong_hieu->id])) thuong_hieu_delete($thuong_hieu);
             }
             header('Location: '.SITE_NAME.'/controller/admin/thuong_hieu.php');
         }

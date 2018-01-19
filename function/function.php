@@ -1885,7 +1885,7 @@ function _returnInsertChiphiBooking($booking_id, $user_id, $name,$price,$descrip
 
 function _returnFooterEmailTemplate(){
     return '<div style="float: left; width: 100%">
-                                            <div style="float: left; width: 336px; text-align: center;">
+                                            <div style="float: left; width: 330px; text-align: center;">
                                                 <p>
                                                    <a href="http://mixtourist.com.vn/"><img style="width: 60%" src="http://mixtourist.com.vn/view/admin/Themes/kcfinder/upload/images/cauhinh/logomix.png"></a>
                                                 </p>
@@ -1899,12 +1899,12 @@ function _returnFooterEmailTemplate(){
                                                                     src="http://azbooking.vn//view/admin/Themes/kcfinder/upload/images/icon_email/youtube.png"></a>
                                                 </p>
                                             </div>
-                                            <div style="float: left; width: 504px">
+                                            <div style="float: left; width: 510px">
                                                 <h1 style="font-size: 20px;color: #0061AB;    font-family: \'comic sans ms\', sans-serif; text-decoration: none">Công ty Du lịch Mix Tourist</h1>
                                                 <p style="color: #a50505;    font-size: 15px;font-family: \'comic sans ms\', sans-serif;">Bộ phận</p>
                                                 <div style="float: left; width: 100%">
                                                     <div style="float: left; width: 30%; padding-right: 20px;">
-                                                        <img style="width: 30px;float: left; display: inline-block"
+                                                        <img style="width: 40px;float: left; display: inline-block"
                                                              src="http://azbooking.vn/view/admin/Themes/kcfinder/upload/images/icon_email/mobile.png">
                                                         <a style="float: left; display: inline-block;padding-top: 7px;font-size: 13px;    padding-left: 10px;font-family: \'Comic Sans MS\',sans-serif;font-weight: normal;text-decoration: none;    color: #36495a;"
                                                            href="tel:0943838222">094.3838.222</a>

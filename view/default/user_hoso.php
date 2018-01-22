@@ -21,6 +21,12 @@ function show_user_hoso($data = array())
     {
         $avatar=SITE_NAME.'/view/default/themes/images/no-avatar.png';
     }
+    $chu_ky_email=_returnDataEditAdd($data['data_user'],'chu_ky_email');
+    if($chu_ky_email=='')
+    {
+        $chu_ky_email=_returnFooterEmailTemplate();
+    }
+
     $name=_returnDataEditAdd($data['data_user'],'name');
     $valid_name="valid";
     if($name==''){

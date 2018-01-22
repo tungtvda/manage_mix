@@ -94,6 +94,7 @@
                     </ul>
                 </li>
                 <li class="" ><a href="{SITE-NAME}/controller/admin/httt.php"><span class="icon-pencil"></span> Hình thức thanh toán</a></li>
+                <li class="" ><a href="{SITE-NAME}/controller/admin/thuong_hieu.php"><span class="icon-pencil"></span> Thương hiệu email</a></li>
                 <li class="" ><a href="{SITE-NAME}/controller/admin/tien_te.php"><span class="icon-pencil"></span> Tiền tệ</a></li>
                 <li class="" ><a href="{SITE-NAME}/controller/admin/nguon_tour.php"><span class="icon-pencil"></span> Nguồn tour</a></li>
                 <li class="" ><a href="{SITE-NAME}/controller/admin/danhmuc_dichvu.php"><span class="icon-pencil"></span> Danh mục bảng giá</a></li>

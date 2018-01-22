@@ -27,7 +27,8 @@ if(isset($_GET['id'])&&$_GET['id']!='')
 }
 else{
     $data['show_edit']=1;
-    $data_user_update=$data['data_user']=user_getById($_SESSION['user_id']);
+    $data['data_user']=user_getById($_SESSION['user_id']);
+    $data_user_update=$data['data_user'];
 }
 
 if(count($data['data_user'])==0){
@@ -78,6 +79,10 @@ if(isset($_POST['birthday'])&&isset($_POST['address_user'])&&isset($_POST['full_
     $ho_khau_tt = _returnPostParamSecurity('ho_khau_tt');
     $language = _returnPostParamSecurity('language');
     $note = _returnPostParamSecurity('note');
+    $chu_ky_email = addslashes($_POST['chu_ky_email']);
+    if($chu_ky_email==''){
+        $chu_ky_email=_returnFooterEmailTemplate();
+    }
     if ($full_name != '' && $birthday != '' && $address_user != '' && $user_phone != '' ) {
         $array = (array)$data_user_update[0];
         if($array['birthday']!='0000-00-00'){
@@ -129,6 +134,8 @@ if(isset($_POST['birthday'])&&isset($_POST['address_user'])&&isset($_POST['full_
         $new_obj->note=$note;
         $new_obj->updated = _returnGetDateTime();
         $new_obj->id = $_SESSION['user_id'];
+
+        $new_obj->chu_ky_email = $chu_ky_email;
         $folder = LocDau($data_user_update[0]->user_email);
         $target_dir = _returnFolderRoot() . "/view/default/themes/uploads/users/" . $folder . '/';
         $avatar = _returnUploadImg($target_dir, 'avatar', "/view/default/themes/uploads/users/" . $folder . '/');

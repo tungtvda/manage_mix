@@ -1778,7 +1778,6 @@ jQuery(function ($) {
         $('#content_giaodich').val('');
         $('#show_mess_content').hide();
         var code = $(this).attr('data-code');
-        console.log('asdf');
         var id = $(this).attr('data-id');
         if (code && id) {
             $('#name-detail-code-booking').html(code);
@@ -2043,6 +2042,21 @@ jQuery(function ($) {
             soluong = 1;
         }
         total_price_dich_vu(0, id, soluong);
+    });
+    // show lịch sử giao dịch
+    $('body').on('click', '#send_email_bao_gia', function () {
+        var id = $('.thuong_hieu').val();
+        if (id) {
+            var link = url + '/gui-bao-gia-booking.html';
+            $.ajax({
+                method: 'GET',
+                url: link,
+                data: 'id=' + id,
+                success: function (response) {
+                    console.log(response);
+                }
+            });
+        }
     });
 });
 function _returnDefailBangGia() {

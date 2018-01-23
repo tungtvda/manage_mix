@@ -2046,7 +2046,8 @@ jQuery(function ($) {
     // show lịch sử giao dịch
     $('body').on('click', '#send_email_bao_gia', function () {
         var id = $('.thuong_hieu').val();
-        if (id) {
+        var email = $('#input_email').val();
+        if (id && email) {
             var link = url + '/gui-bao-gia-booking.html';
             $.ajax({
                 method: 'GET',
@@ -2054,6 +2055,25 @@ jQuery(function ($) {
                 data: 'id=' + id,
                 success: function (response) {
                     console.log(response);
+                }
+            });
+        }else{
+            if(id=='' && email==''){
+                var mess='Bạn vui lòng chọn thương hiệu  và nhập email khách hàng';
+            }else{
+                if(id==''){
+                    var mess='Bạn vui lòng chọn thương hiệu';
+                }else{
+                    var mess='Bạn vui lòng nhập email khách hàng';
+                }
+            }
+            lnv.alert({
+                title: 'Lỗi',
+                content: mess,
+                alertBtnText: 'Ok',
+                iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                alertHandler: function () {
+
                 }
             });
         }

@@ -29,7 +29,7 @@ function view_thuong_hieu($data)
 //
 function showTableHeader()
 {
-    return '<th>active</th><th>name</th><th>logo</th><th>icon</th><th>banner</th><th>banner_qc</th><th>email</th>';
+    return '<th>active</th><th>name</th><th>domain</th><th>logo</th><th>icon</th><th>banner</th><th>banner_qc</th>';
 }
 //
 function showTableBody($data)
@@ -40,11 +40,11 @@ function showTableBody($data)
         $TableBody.="<tr><td><input type=\"checkbox\" name=\"check_".$obj->id."\"/></td>";
         $TableBody.="<td>".$obj->active."</td>";
         $TableBody.="<td>".$obj->name."</td>";
+        $TableBody.="<td>".$obj->domain."</td>";
         $TableBody.="<td><img src=\"".$obj->logo."\" width=\"50px\" height=\"50px\"/> </td>";
         $TableBody.="<td><img src=\"".$obj->icon."\" width=\"50px\" height=\"50px\"/> </td>";
         $TableBody.="<td><img src=\"".$obj->banner."\" width=\"50px\" height=\"50px\"/> </td>";
         $TableBody.="<td><img src=\"".$obj->banner_qc."\" width=\"50px\" height=\"50px\"/> </td>";
-        $TableBody.="<td>".$obj->email."</td>";
         $TableBody.="<td><a href=\"?action=edit&id=".$obj->id."\" title=\"Edit\"><img src=\"".SITE_NAME."/view/admin/Themes/images/pencil.png\" alt=\"Edit\"></a>";
 //        $TableBody.="<a href=\"?action=delete&id=".$obj->id."\" title=\"Delete\" onClick=\"return confirm('Bạn có chắc chắc muốn xóa?')\"><img src=\"".SITE_NAME."/view/admin/Themes/images/cross.png\" alt=\"Delete\"></a> ";
         $TableBody.="</td>";
@@ -58,6 +58,7 @@ function showFrom($form,$ListKey=array())
     $str_from='';
     $str_from.='<p><label>active</label><input  type="checkbox"  name="active" value="1" '.(($form!=false)?(($form->active=='1')?'checked':''):'').' /></p>';
     $str_from.='<p><label>name</label><input class="text-input small-input" type="text"  name="name" value="'.(($form!=false)?$form->name:'').'" /></p>';
+    $str_from.='<p><label>domain</label><input class="text-input small-input" type="text"  name="domain" value="'.(($form!=false)?$form->domain:'').'" /></p>';
     $str_from.='<p><label>logo</label><input class="text-input small-input" type="text"  name="logo" value="'.(($form!=false)?$form->logo:'').'"/><a class="button" onclick="openKcEditor(\'logo\');">Upload ảnh</a></p>';
     $str_from.='<p><label>icon</label><input class="text-input small-input" type="text"  name="icon" value="'.(($form!=false)?$form->icon:'').'"/><a class="button" onclick="openKcEditor(\'icon\');">Upload ảnh</a></p>';
     $str_from.='<p><label>banner</label><input class="text-input small-input" type="text"  name="banner" value="'.(($form!=false)?$form->banner:'').'"/><a class="button" onclick="openKcEditor(\'banner\');">Upload ảnh</a></p>';

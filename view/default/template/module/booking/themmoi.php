@@ -995,7 +995,10 @@
                                                            id="input_link_bang_gia" value="<?php echo $link_bang_gia?>"
                                                            class="width_100 valid">
                                                  <?php echo $btn_link_bang_gia?>
-                                            <a title="Gửi mail báo giá cho khách hàng" style="padding: 2px 10px;" class="red btn  btn-danger" id="send_email_bao_gia"><i class="fa fa-envelope "></i></a>
+                                            <button href="#modal-form-email-bao-gia" style="padding: 5px 10px;" data-toggle="modal" type="button" role="button" class="green btn btn-xs btn-success view_email_bao_gia" >
+                                                <i class="fa fa-envelope "></i>
+                                                Gửi email báo giá
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -1384,6 +1387,56 @@
 </div><!-- PAGE CONTENT ENDS -->
 
 <input hidden id="role_valid" class="valid" value="<?php echo $_SESSION['user_role']?>">
+
+<!--        Lịch sử giao dịch-->
+<div id="modal-form-email-bao-gia" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="blue bigger" id="title_form">Bảng báo giá</h4>
+            </div>
+
+
+            <div class="modal-body">
+                <div class="row">
+                    <div id="show_loading_giao_dich_email" style="text-align: center">
+                        <img src="<?php echo SITE_NAME . '/view/default/themes/images/loading_1.gif' ?>">
+                    </div>
+                    <div hidden id="show_red_none_giao_dich_email" style="text-align: center">
+                    </div>
+                    <div id="show_list_giao_dich" class="col-xs-12">
+                        <div class="widget-box">
+                            <div class="widget-body">
+                                <div class="widget-main no-padding">
+
+                                </div><!-- /.widget-main -->
+                            </div><!-- /.widget-body -->
+                        </div><!-- /.widget-box -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-primary" id="save_giao_dich" data-id="" data-code=""
+                        type="button">
+                    <i class="ace-icon fa fa-check"></i>
+                    Save
+                </button>
+                <button style="display: none" class="btn btn-sm btn-primary" id="show_loading_btn"
+                        type="button">
+                    Loding...
+                </button>
+                <button type="reset" class="btn btn-sm" data-dismiss="modal" id="reset_form_popup">
+                    <i class="ace-icon fa fa-times"></i>
+                    Cancel
+                </button>
+            </div>
+
+
+        </div>
+    </div>
+</div><!-- PAGE CONTENT ENDS -->
 
 
 

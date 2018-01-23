@@ -54,7 +54,7 @@ if(isset($_SESSION["Admin"]))
             header('Location: '.SITE_NAME.'/controller/admin/thuong_hieu.php');
         }
     }
-    if(isset($_POST["name"])&&isset($_POST["logo"])&&isset($_POST["icon"])&&isset($_POST["banner"])&&isset($_POST["link_banner"])&&isset($_POST["banner_qc"])&&isset($_POST["link_banner_qc"])&&isset($_POST["link_khoi_hanh"])&&isset($_POST["email"])&&isset($_POST["mat_khau_ung_dung"])&&isset($_POST["chu_ky_email"]))
+    if(isset($_POST["name"])&&isset($_POST["domain"])&&isset($_POST["logo"])&&isset($_POST["icon"])&&isset($_POST["banner"])&&isset($_POST["link_banner"])&&isset($_POST["banner_qc"])&&isset($_POST["link_banner_qc"])&&isset($_POST["link_khoi_hanh"])&&isset($_POST["email"])&&isset($_POST["mat_khau_ung_dung"])&&isset($_POST["chu_ky_email"]))
     {
        $array=$_POST;
        if(!isset($array['id']))
@@ -63,6 +63,8 @@ if(isset($_SESSION["Admin"]))
        $array['active']='0';
        if(!isset($array['name']))
        $array['name']='0';
+       if(!isset($array['domain']))
+       $array['domain']='0';
        if(!isset($array['logo']))
        $array['logo']='0';
        if(!isset($array['icon']))

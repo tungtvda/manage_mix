@@ -1882,7 +1882,29 @@ function _returnInsertChiphiBooking($booking_id, $user_id, $name,$price,$descrip
     booking_cost_insert($obj);
     _insertLog($_SESSION['user_id'],6,6,33,0,'','',$mess_log);
 }
-
+function returnCURL($param=array(), $link){
+    $res='_error_';
+    if(count($param)>0 && $link){
+        $count_param=1;
+        $string_param='';
+        foreach($param as $key=>$row){
+            if($count_param==1){
+                $string_param.=$key."=".$row;
+            }else{
+                $string_param.="&".$key."=".$row;
+            }
+            $count_param++;
+        }
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $link);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $string_param);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $res = curl_exec($ch);
+        curl_close($ch);
+    }
+    return $res;
+}
 function _returnFooterEmailTemplate(){
     return '<div style="float: left; width: 100%">
                                             <div style="float: left; width: 330px; text-align: center;">

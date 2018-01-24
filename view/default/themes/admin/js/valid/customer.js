@@ -553,8 +553,21 @@ $("form#data-import").submit(function(e) {
         url: url+'/import-user.html',
         type: 'POST',
         data: formData,
-        success: function (data) {
-            // alert(data)
+        success: function (response) {
+            var data= (JSON.parse(response));
+            if (data.success != 1) {
+                lnv.alert({
+                    title: '<label class="red">Lỗi</label>',
+                    content: data.mess,
+                    alertBtnText: 'Ok',
+                    iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                    alertHandler: function () {
+
+                    }
+                });
+            }else{
+                location.reload();
+            }
         },
         cache: false,
         contentType: false,

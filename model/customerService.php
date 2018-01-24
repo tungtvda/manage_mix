@@ -4,7 +4,8 @@ require_once DIR.'/model/sqlconnection.php';
 //
 function customer_Get($command)
 {
-            $array_result=array();
+
+    $array_result=array();
     $key=md5($command);
     if(CACHE)
     {
@@ -52,6 +53,7 @@ function customer_getByAll()
 //
 function customer_getByTop($top,$where,$order)
 {
+
     return customer_Get("select * from customer ".(($where!='')?(' where '.$where):'').(($order!='')?" Order By ".$order:'').(($top!='')?' limit '.$top:''));
 }
 //

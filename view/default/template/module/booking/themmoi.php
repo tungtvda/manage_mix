@@ -995,7 +995,7 @@
                                                            id="input_link_bang_gia" value="<?php echo $link_bang_gia?>"
                                                            class="width_100 valid">
                                                  <?php echo $btn_link_bang_gia?>
-                                            <button href="#modal-form-email-bao-gia" style="padding: 5px 10px;" data-toggle="modal" type="button" role="button" class="green btn btn-xs btn-success view_email_bao_gia" >
+                                            <button href="javascript:void(0)" style="padding: 5px 10px;" data-toggle="modal" type="button" role="button" class="green btn btn-xs btn-success view_email_bao_gia" >
                                                 <i class="fa fa-envelope "></i>
                                                 Gửi email báo giá
                                             </button>
@@ -1390,7 +1390,7 @@
 
 <!--        Lịch sử giao dịch-->
 <div id="modal-form-email-bao-gia" class="modal" tabindex="-1">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width: 980px">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -1405,14 +1405,12 @@
                     </div>
                     <div hidden id="show_red_none_giao_dich_email" style="text-align: center">
                     </div>
-                    <div id="show_list_giao_dich" class="col-xs-12">
-                        <div class="widget-box">
-                            <div class="widget-body">
-                                <div class="widget-main no-padding">
-
-                                </div><!-- /.widget-main -->
-                            </div><!-- /.widget-body -->
-                        </div><!-- /.widget-box -->
+                    <div  class="col-xs-12">
+                        <script type="text/javascript"
+                                src="<?php echo SITE_NAME ?>/view/admin/Themes/ckeditor/ckeditor.js"></script>
+                        <textarea id="content_bao_gia" style="width: 100% !important;" name="content_email"></textarea>
+                        <script
+                                type="text/javascript">CKEDITOR.replace('content_email'); </script>
                     </div>
                 </div>
             </div>

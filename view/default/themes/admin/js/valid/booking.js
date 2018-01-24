@@ -2044,7 +2044,7 @@ jQuery(function ($) {
         total_price_dich_vu(0, id, soluong);
     });
     // show lịch sử giao dịch
-    $('body').on('click', '#send_email_bao_gia', function () {
+    $('body').on('click', '.view_email_bao_gia', function () {
         var id = $('.thuong_hieu').val();
         var email = $('#input_email').val();
         if (id && email) {
@@ -2054,7 +2054,8 @@ jQuery(function ($) {
                 url: link,
                 data: 'id=' + id,
                 success: function (response) {
-                    console.log(response);
+                    $('#content_bao_gia').val(response);
+                    $('#modal-form-email-bao-gia').modal('show');
                 }
             });
         }else{

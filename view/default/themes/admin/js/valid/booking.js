@@ -2045,27 +2045,33 @@ jQuery(function ($) {
     });
     // show lịch sử giao dịch
     $('body').on('click', '.view_email_bao_gia', function () {
-        var id = $('.thuong_hieu').val();
+        var id = $(this).attr('data-id');
+        var thuong_hieu = $('.thuong_hieu').val();
         var email = $('#input_email').val();
-        if (id && email) {
+        if (id && email && thuong_hieu) {
             var link = url + '/gui-bao-gia-booking.html';
             $.ajax({
                 method: 'GET',
                 url: link,
-                data: 'id=' + id,
+                data: 'id=' + id+'&email='+email+'&thuong_hieu='+thuong_hieu,
                 success: function (response) {
-                    $('#content_bao_gia').val(response);
+                    $('#content_bao_gia').html(response);
+                    CKEDITOR.instances.content_bao_gia.setData(response);
                     $('#modal-form-email-bao-gia').modal('show');
                 }
             });
         }else{
-            if(id=='' && email==''){
+            if(thuong_hieu=='' && email=='' && id==''){
                 var mess='Bạn vui lòng chọn thương hiệu  và nhập email khách hàng';
             }else{
-                if(id==''){
+                if(thuong_hieu==''){
                     var mess='Bạn vui lòng chọn thương hiệu';
                 }else{
-                    var mess='Bạn vui lòng nhập email khách hàng';
+                    if(id==''){
+                        var mess='Không tồn tại id booking';
+                    }else{
+                        var mess='Bạn vui lòng nhập email khách hàng';
+                    }
                 }
             }
             lnv.alert({

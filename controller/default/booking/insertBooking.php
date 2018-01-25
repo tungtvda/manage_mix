@@ -51,6 +51,8 @@ if (count($check_data_khach_hang) > 0) {
 $price_old = 0;
 $price_tiep_thi = 0;
 $booking_model = new booking();
+print_r($price_submit);
+exit;
 $booking_model->price_new = $price_submit;
 $booking_model->price_tre_em_m1_new = $price_m1_submit;
 $booking_model->price_tre_em_m2_new = $price_m2_submit;

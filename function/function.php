@@ -1907,7 +1907,7 @@ function returnCURL($param=array(), $link){
 }
 function _returnFooterEmailTemplate(){
     return '<div style="float: left; width: 100%">
-                                            <div style="float: left; width: 330px; text-align: center;">
+                                            <div style="float: left; width: 325px; text-align: center;">
                                                 <p>
                                                    <a href="http://mixtourist.com.vn/"><img style="width: 60%" src="http://mixtourist.com.vn/view/admin/Themes/kcfinder/upload/images/cauhinh/logomix.png"></a>
                                                 </p>

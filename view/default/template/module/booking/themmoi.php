@@ -995,10 +995,12 @@
                                                            id="input_link_bang_gia" value="<?php echo $link_bang_gia?>"
                                                            class="width_100 valid">
                                                  <?php echo $btn_link_bang_gia?>
-                                            <button href="javascript:void(0)" style="padding: 5px 10px;" data-toggle="modal" type="button" role="button" class="green btn btn-xs btn-success view_email_bao_gia" >
+                                            <?php if($action==2) { ?>
+                                            <button href="javascript:void(0)" style="padding: 5px 10px;" data-id="<?php echo _return_mc_encrypt($id_booking, ENCRYPTION_KEY); ?>" data-toggle="modal" type="button" role="button" class="green btn btn-xs btn-success view_email_bao_gia" >
                                                 <i class="fa fa-envelope "></i>
                                                 Gửi email báo giá
                                             </button>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 </div>

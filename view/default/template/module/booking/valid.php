@@ -217,7 +217,6 @@ $string_data_user_tiep_thi = _returnDataAutoCompleteUserTiepThi();
                                 if (response.success == 1) {
                                     if(response.list_dich_vu!=''){
                                         $('#list_dichvu').html(response.list_dich_vu);
-                                        console.log(response.data);
                                         $('#input_loi_nhuan').val(response.data.loi_nhuan);
                                         $('#input_loi_nhuan_m1').val(response.data.loi_nhuan_m1);
                                         $('#input_loi_nhuan_m2').val(response.data.loi_nhuan_m2);

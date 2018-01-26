@@ -8,8 +8,6 @@
 require_once('class.phpmailer.php');
 function SendMail($Sendto,$Body,$Subject, $return='', $title_mail='Hệ thống quản lý MIXTOURIST', $domain='mix',$data=array())
 {
-    print_r($_FILES['file_attack']['tmp_name']);
-    exit;
     $mail = new PHPMailer();
     $mail->CharSet = "UTF-8";
 
@@ -39,6 +37,7 @@ function SendMail($Sendto,$Body,$Subject, $return='', $title_mail='Hệ thống 
     $mail->Subject = "" . $Subject . "";
     $mail->MsgHTML("" . $Body . "");
     $mail->AddAttachment($_FILES['file_attack']['tmp_name'],$_FILES['file_attack']['name']);
+    $mail->AddAttachment($_FILES['file_attack2']['tmp_name'],$_FILES['file_attack2']['name']);
     $mail->AltBody = "" . $Subject . "";
 
     if (!$mail->Send()) {

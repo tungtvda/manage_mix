@@ -1392,7 +1392,7 @@
 
 <!--        Lịch sử giao dịch-->
 <div id="modal-form-email-bao-gia" class="modal" tabindex="-1">
-    <div class="modal-dialog" style="width: 980px">
+    <div class="modal-dialog" style="width: 990px">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -1421,7 +1421,7 @@
                                     <div class="profile-info-value" id="email_cus_email">
 
                                     </div>
-                                    <input hidden name="email_cus_submit" value="">
+                                    <input hidden name="email_cus_submit" id="email_cus_submit" value="">
                                 </div>
                                 <div class="profile-info-row">
                                     <div class="profile-info-name">Điện thoại</div>
@@ -1451,20 +1451,15 @@
                                 <div class="profile-info-row">
                                     <div class="profile-info-name"> File báo giá</div>
                                     <div class="profile-info-value" id="">
-                                        <label   class="btn btn-white  btn-create-new-tab btn-create-new-tab-hover">  <i class="ace-icon fa fa-plus bigger-120 ">  </i>Import file
-                                            <input type="file" name="file_attack" size="60" >
-                                        </label>
-                                        <style>
-                                            #input-import{
-                                                padding: 10px;
-                                                background: red;
-                                                display: table;
-                                                color: #fff;
-                                            }
-                                            #file-import[type="file"] {
-                                                display: none;
-                                            }
-                                        </style>
+                                        <div class="div_file_email" style="    float: left;width: 100%;margin-bottom: 10px">
+                                            <input type="file" name="file_email[]" class="file_input"/>
+                                            <input type="file" name="file_email[]" class="file_input"/>
+                                            <input type="file" name="file_email[]" class="file_input"/>
+                                        </div>
+                                        <a class="btn btn-sm btn-success" id="add_file" href="javascript:void(0)">
+                                            <i class="ace-icon fa fa-file"></i>
+                                            Thêm file
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -1473,9 +1468,9 @@
                 </div>
             </div>
 
-            <div class="modal-footer">
-                <button class="btn btn-sm btn-primary" id="save_giao_dich" data-id="" data-code=""
-                        type="submit">
+            <div class="modal-footer" style="position: fixed; width: 99.8%;">
+                <button  class="btn btn-sm btn-primary" id="save_giao_dich"
+                        type="button">
                     <i class="ace-icon fa fa-check"></i>
                     Save
                 </button>

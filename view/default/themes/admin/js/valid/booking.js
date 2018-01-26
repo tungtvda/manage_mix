@@ -1830,6 +1830,11 @@ jQuery(function ($) {
 
     // show hide text
     $('body').on('click', '#save_giao_dich', function () {
+        var email=$('#email_cus_submit').val();
+    });
+
+    // show hide text
+    $('body').on('click', '#save_giao_dich', function () {
         var value = $('#content_giaodich').val();
         var created = $('#created_giaodich').val();
         var time = $('.time_giaodich').val();
@@ -2005,6 +2010,16 @@ jQuery(function ($) {
             '</tr>';
         $('#list_dichvu').append(item);
     });
+    $('body').on('click', '#add_file', function () {
+        $('.div_file_email').append('<input type="file" name="file_email[]" class="file_input"/>');
+        $('.file_input').ace_file_input({
+            no_file: 'No File ...',
+            btn_choose: 'Choose',
+            btn_change: 'Change',
+            droppable: false,
+            onchange: null,
+        });
+    });
     $('[data-rel=tooltip]').tooltip();
     $('[data-toggle="tooltip"]').tooltip();
     $('body').on('click', '.input_price_dichvu', function () {
@@ -2063,7 +2078,7 @@ jQuery(function ($) {
                     $('#show_loading_giao_dich_email').hide();
                     $('#name_cus_email').html($('#input_name_customer').val());
                     $('#email_cus_email').html($('#input_email').val());
-                    $('#email_cus_submit').html($('#input_email').val());
+                    $('#email_cus_submit').val($('#input_email').val());
                     $('#address_cus_email').html($('#input_address').val());
                     $('#phone_cus_email').html($('#input_phone').val());
                     $('#content_email_bao_gia').show();

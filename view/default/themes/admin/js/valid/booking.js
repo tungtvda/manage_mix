@@ -2045,19 +2045,30 @@ jQuery(function ($) {
     });
     // show lịch sử giao dịch
     $('body').on('click', '.view_email_bao_gia', function () {
+
         var id = $(this).attr('data-id');
         var thuong_hieu = $('.thuong_hieu').val();
         var email = $('#input_email').val();
+        var code=$('#input_code_booking').val();
+        $('#title_form_email').html('Bảng báo giá cho đơn hàng "'+code+'"');
         if (id && email && thuong_hieu) {
+            $('#show_loading_giao_dich_email').show();
+            $('#modal-form-email-bao-gia').modal('show');
             var link = url + '/gui-bao-gia-booking.html';
             $.ajax({
                 method: 'GET',
                 url: link,
                 data: 'id=' + id+'&email='+email+'&thuong_hieu='+thuong_hieu,
                 success: function (response) {
+                    $('#show_loading_giao_dich_email').hide();
+                    $('#name_cus_email').html($('#input_name_customer').val());
+                    $('#email_cus_email').html($('#input_email').val());
+                    $('#email_cus_submit').html($('#input_email').val());
+                    $('#address_cus_email').html($('#input_address').val());
+                    $('#phone_cus_email').html($('#input_phone').val());
+                    $('#content_email_bao_gia').show();
                     $('#content_bao_gia').html(response);
                     CKEDITOR.instances.content_bao_gia.setData(response);
-                    $('#modal-form-email-bao-gia').modal('show');
                 }
             });
         }else{

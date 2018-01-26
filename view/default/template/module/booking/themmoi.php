@@ -1396,8 +1396,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="blue bigger" id="title_form">Bảng báo giá</h4>
+                <h4 class="blue bigger" id="title_form_email">Bảng báo giá</h4>
             </div>
+
+            <form enctype="multipart/form-data" id="send_email_bao_gia_form" method="post" >
 
 
             <div class="modal-body">
@@ -1405,21 +1407,75 @@
                     <div id="show_loading_giao_dich_email" style="text-align: center">
                         <img src="<?php echo SITE_NAME . '/view/default/themes/images/loading_1.gif' ?>">
                     </div>
-                    <div hidden id="show_red_none_giao_dich_email" style="text-align: center">
-                    </div>
-                    <div  class="col-xs-12">
-                        <script type="text/javascript"
-                                src="<?php echo SITE_NAME ?>/view/admin/Themes/ckeditor/ckeditor.js"></script>
-                        <textarea id="content_bao_gia" style="width: 100% !important;" name="content_email"></textarea>
-                        <script
-                                type="text/javascript">CKEDITOR.replace('content_email'); </script>
+                    <div  id="content_email_bao_gia" class="col-xs-12">
+                        <div class="form-group" style="float: left; width: 100%">
+                            <label for="form-field-select-3">Thông tin khách hàng</label>
+                            <div class="profile-user-info profile-user-info-striped" style="width: 100%;">
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Tên khách hàng</div>
+                                    <div class="profile-info-value" id="name_cus_email">
+                                    </div>
+                                </div>
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name">Email</div>
+                                    <div class="profile-info-value" id="email_cus_email">
+
+                                    </div>
+                                    <input hidden name="email_cus_submit" value="">
+                                </div>
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name">Điện thoại</div>
+                                    <div class="profile-info-value" id="phone_cus_email">
+
+                                    </div>
+                                </div>
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name">Dịa chỉ</div>
+                                    <div class="profile-info-value" id="address_cus_email">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" style="float: left; width: 100%">
+                            <label for="form-field-select-3">Nội dung email</label>
+                            <script type="text/javascript"
+                                    src="<?php echo SITE_NAME ?>/view/admin/Themes/ckeditor/ckeditor.js"></script>
+                            <textarea id="content_bao_gia" style="width: 100% !important;" name="content_email"></textarea>
+                            <script
+                                    type="text/javascript">CKEDITOR.replace('content_email'); </script>
+                        </div>
+                        <div class="form-group" style="float: left; width: 100%">
+                            <label for="form-field-select-3">Import file</label>
+                            <div class="profile-user-info profile-user-info-striped" style="width: 100%;">
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> File báo giá</div>
+                                    <div class="profile-info-value" id="">
+                                        <label   class="btn btn-white  btn-create-new-tab btn-create-new-tab-hover">  <i class="ace-icon fa fa-plus bigger-120 ">  </i>Import file
+                                            <input type="file" name="file_attack" size="60" >
+                                        </label>
+                                        <style>
+                                            #input-import{
+                                                padding: 10px;
+                                                background: red;
+                                                display: table;
+                                                color: #fff;
+                                            }
+                                            #file-import[type="file"] {
+                                                display: none;
+                                            }
+                                        </style>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="modal-footer">
                 <button class="btn btn-sm btn-primary" id="save_giao_dich" data-id="" data-code=""
-                        type="button">
+                        type="submit">
                     <i class="ace-icon fa fa-check"></i>
                     Save
                 </button>
@@ -1432,7 +1488,7 @@
                     Cancel
                 </button>
             </div>
-
+            </form>
 
         </div>
     </div>

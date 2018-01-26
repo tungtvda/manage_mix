@@ -51,8 +51,6 @@ if (count($check_data_khach_hang) > 0) {
 $price_old = 0;
 $price_tiep_thi = 0;
 $booking_model = new booking();
-print_r($price_submit);
-exit;
 $booking_model->price_new = $price_submit;
 $booking_model->price_tre_em_m1_new = $price_m1_submit;
 $booking_model->price_tre_em_m2_new = $price_m2_submit;
@@ -157,7 +155,7 @@ if ($type_tour == 1 || $type_tour == 0) {
         $booking_model->phuong_tien = $check_data_tour[0]->vehicle;
         if ($check_data_tour[0]->so_cho >= 0) {
             $update_tour = new tour((array)$check_data_tour[0]);
-            $con_lai = $check_data_tour[0]->so_cho - ($num_nguoi_lon + $num_tre_em + $num_tre_em_5);
+            $con_lai = $check_data_tour[0]->so_cho - ($num_nguoi_lon + $num_tre_em_m1 + $num_tre_em_m2+$num_tre_em_m3);
             if ($con_lai < 0) {
                 $con_lai = 0;
             }

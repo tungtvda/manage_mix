@@ -60,9 +60,9 @@ if(isset($_GET['id'])){
                 $price_item_dv= number_format((float)$row_dv->price, 0, ",", ".") . ' vnđ';
                 $list_dich_vu.=' <tr id="item_dichvu_'.$count_dv.'" data-value="'.$count_dv.'" class="item_dichvu">
                                             <td id="stt_dichvu_td_'.$count_dv.'">'.$count_dv.'</td>
-                                            <td><input disabled style="height: 30px;     width: 100%;" value="'.$row_dv->name.'" name="name_dichvu[]" id="input_name_dichvu_'.$count_dv.'" type="text" class="valid input_table"></td>
+                                            <td><input  style="height: 30px;     width: 100%;" value="'.$row_dv->name.'" name="name_dichvu[]" id="input_name_dichvu_'.$count_dv.'" type="text" class="valid input_table"></td>
                                             <td>
-                                                <select disabled  style="width: 100%;" name="type_dichvu[]" id="input_type_dichvu_'.$count_dv.'">';
+                                                <select   style="width: 100%;" name="type_dichvu[]" id="input_type_dichvu_'.$count_dv.'">';
                 if($data_danhmuc_dichvu){
                     foreach($data_danhmuc_dichvu as $row_dm){
                         $selected='';
@@ -75,17 +75,17 @@ if(isset($_GET['id'])){
                 $list_dich_vu.='</select>
                                             </td>
                                             <td>
-                                                <input disabled data-value="'.$count_dv.'" style="height: 30px;width: 86%;" value="'.$row_dv->price.'" name="price_dichvu[]" id="input_price_dichvu_'.$count_dv.'" type="number" class="valid input_table input_price_dichvu">
+                                                <input readonly data-value="'.$count_dv.'" style="height: 30px;width: 86%;" value="'.$row_dv->price.'" name="price_dichvu[]" id="input_price_dichvu_'.$count_dv.'" type="number" class="valid input_table input_price_dichvu">
                                                 <div class="btn-group" style="width: 10%;">
                                                     <button style="padding: 4px 5px;margin-top: 0px; margin-bottom: 3px;" data-toggle="dropdown" class="btn btn-sm btn-danger dropdown-toggle btn-action-gird" aria-expanded="false"> <i class="fa fa-usd" aria-hidden="true"></i></button>
                                                     <ul class="dropdown-menu dropdown-danger"> <li> <a role="button" data-toggle="modal" class="edit_function">Đơn giá: <b id="price_dichvu_format_'.$count_dv.'">'.$price_item_dv.'</span></a> </li> </ul>
                                                 </div>
                                             </td>
                                             <td>
-                                                <input disabled data-value="'.$count_dv.'"  style="height: 30px; width:100%" value="'.$row_dv->number.'" name="soluong_dichvu[]" min="1" id="input_soluong_dichvu_'.$count_dv.'" type="number" class="valid input_table input_soluong_dichvu">
+                                                <input  data-value="'.$count_dv.'"  style="height: 30px; width:100%" value="'.$row_dv->number.'" name="soluong_dichvu[]" min="1" id="input_soluong_dichvu_'.$count_dv.'" type="number" class="valid input_table input_soluong_dichvu">
                                             </td>
-                                            <td><input disabled style="height: 30px; width: 100%;" value="'.$row_dv->total.'" name="thanhtien_dichvu[]" id="input_thanhtien_dichvu_'.$count_dv.'" type="text" class="valid input_table "></td>
-                                            <td><input disabled style="height: 30px; width: 100%;" value="'.$row_dv->note.'" name="ghichu_dichvu[]" id="input_ghichu_dichvu_'.$count_dv.'" type="text" class="valid input_table"></td>
+                                            <td><input  style="height: 30px; width: 100%;" value="'.$row_dv->total.'" name="thanhtien_dichvu[]" id="input_thanhtien_dichvu_'.$count_dv.'" type="text" class="valid input_table "></td>
+                                            <td><input  style="height: 30px; width: 100%;" value="'.$row_dv->note.'" name="ghichu_dichvu[]" id="input_ghichu_dichvu_'.$count_dv.'" type="text" class="valid input_table"></td>
                                             <td><a  id="remove_item_dichvu_'.$count_dv.'" data-remove="'.$count_dv.'" style="padding: 0px 5px;" href="javascript:void(0)" class="red btn  btn-danger remove_item_dichvu"><i class="fa fa-trash-o"></i></if></a></td>
 
                                         </tr>';
@@ -147,6 +147,10 @@ if(isset($_GET['id'])){
             'gia_ban_m1'=>'',
             'gia_ban_m2'=>'',
             'gia_ban_m3'=>'',
+            'name_price'=>$data_tour[0]->name_price,
+            'name_price_2'=>$data_tour[0]->name_price_2,
+            'name_price_3'=>$data_tour[0]->name_price_3,
+            'name_price_4'=>$data_tour[0]->name_price_4,
         );
         $res=array(
             'success'=>1,

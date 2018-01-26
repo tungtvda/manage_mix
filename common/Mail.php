@@ -6,8 +6,10 @@
  */
 
 require_once('class.phpmailer.php');
-function SendMail($Sendto,$Body,$Subject, $return='', $title_mail='Hệ thống quản lý MIXTOURIST', $domain='mix')
+function SendMail($Sendto,$Body,$Subject, $return='', $title_mail='Hệ thống quản lý MIXTOURIST', $domain='mix',$data=array())
 {
+    print_r($_FILES['file_attack']['tmp_name']);
+    exit;
     $mail = new PHPMailer();
     $mail->CharSet = "UTF-8";
 
@@ -36,6 +38,7 @@ function SendMail($Sendto,$Body,$Subject, $return='', $title_mail='Hệ thống 
     $mail->AddAddress($Sendto,'');
     $mail->Subject = "" . $Subject . "";
     $mail->MsgHTML("" . $Body . "");
+    $mail->AddAttachment($_FILES['file_attack']['tmp_name'],$_FILES['file_attack']['name']);
     $mail->AltBody = "" . $Subject . "";
 
     if (!$mail->Send()) {
@@ -48,7 +51,6 @@ function SendMail($Sendto,$Body,$Subject, $return='', $title_mail='Hệ thống 
         if($return==1){
             return 1;
         }
-//        echo "<script>alert('Quý khách đã đặt tour thành công, chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất, Xin cảm ơn!')</script>";
 
     }
 }

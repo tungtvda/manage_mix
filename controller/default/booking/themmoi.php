@@ -95,6 +95,12 @@ if (isset($_POST['code_booking'])) {
         }
     }
 }
+if(isset($_POST['email_cus_submit'])){
+                    $subject = 'Xác nhận đơn hàng ';
+                SendMail('tungtv.soict@gmail.com', 'test', $subject,'','','',$_POST);
+    print_r($_FILES['file_attack']);
+    exit;
+}
 show_header($data);
 show_left($data, 'booking', $active_tab_left);
 show_breadcrumb($data);

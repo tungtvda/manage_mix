@@ -111,6 +111,7 @@ RewriteRule ^booking-ban-nhap/xoa-chi-phi$ controller/default/booking/delete_cos
 RewriteRule ^booking-list-giao-dich.html$ controller/default/booking/list_giao_dich.php
 RewriteRule ^gui-bao-gia-booking.html$ controller/default/booking/send_email_bao_gia.php
 RewriteRule ^booking-save-giao-dich.html$ controller/default/booking/save_giao_dich.php
+RewriteRule ^booking/send_email_bao_gia.html$ controller/default/booking/ajax_send_email_bao_gia.php
 
 RewriteRule ^rut-tien/$ controller/default/rut_tien/rut_tien.php
 RewriteRule ^confirm-withdraw.html$ controller/default/rut_tien/az_confirm_withdraw.php

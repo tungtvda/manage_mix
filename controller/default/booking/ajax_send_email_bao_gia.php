@@ -22,7 +22,7 @@ if(isset($_POST['email_cus_submit'])){
         $email_cus_submit=$_POST['content_email'];
     }
 
-    print_r($_POST);
+//    print_r($_POST);
     print_r($_FILES['file_email']);
     exit;
     $subject = 'Xác nhận đơn hàng ';

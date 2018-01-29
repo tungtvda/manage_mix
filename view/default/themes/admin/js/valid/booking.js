@@ -1831,6 +1831,32 @@ jQuery(function ($) {
     // show hide text
     $('body').on('click', '#save_giao_dich', function () {
         var email=$('#email_cus_submit').val();
+        if(email!=''){
+            var link = url + '/booking/send_email_bao_gia.html';
+            var form = $('#send_email_bao_gia_form')[0];
+            // Create an FormData object
+            var data = new FormData(form);
+            $.ajax({
+                method: 'POST',
+                url: link,
+                enctype: 'multipart/form-data',
+                processData: false,  // Important!
+                contentType: false,
+                cache: false,
+                data:  data,
+                success: function (response) {
+                   console.log(response);
+                }
+            });
+        }else{
+            lnv.alert({
+                title: 'Lỗi',
+                content: 'Bạn vui lòng nhập email báo gi',
+                alertBtnText: 'Ok',
+                iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                alertHandler: function () {}
+            });
+        }
     });
 
     // show hide text

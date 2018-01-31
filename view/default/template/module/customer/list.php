@@ -18,32 +18,40 @@
         <!-- PAGE CONTENT BEGINS -->
         <div class="row">
             <div class="col-xs-12">
-                <form class="form-inline" enctype="multipart/form-data" id="data-import" method="post">
-                    <div class="form-group">
-                        <label id="input-import"  class="btn btn-white  btn-create-new-tab btn-create-new-tab-hover">  <i class="ace-icon fa fa-plus bigger-120 ">  </i>Import file
-                            <input type="file" id="file-import" name="file" size="60" >
-                        </label>
-                    </div>
-                    <div class="form-group">
-                        <!--                      <a class="btn btn-success" id="import-excel">Send</a>-->
-                        <button class="btn btn-success" >send</button>
-                    </div>
-                    <script>
 
-                    </script>
-                    <style>
-                        #input-import{
-                        padding: 10px;
-                        background: red;
-                        display: table;
-                        color: #fff;
-                        }
-                        #file-import[type="file"] {
-                        display: none;
-                        }
-                    </style>
+                    <button class="btn btn-warning export-data">Export      <i class="ace-icon fa fa-arrow-right icon-on-right"></i></button> ||
+                    <form class="form-inline" enctype="multipart/form-data" id="data-import" method="post">
 
-                </form>
+                        <div class="form-group">
+                            <label id="input-import"  class="btn btn-white  btn-create-new-tab btn-create-new-tab-hover">  <i class="ace-icon fa fa-plus bigger-120 ">  </i>Import file
+                                <input type="file" id="file-import" name="file" size="60" >
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <!--                      <a class="btn btn-success" id="import-excel">Send</a>-->
+                            <button class="btn btn-success" >send</button>
+                        </div>
+                        <script>
+
+                        </script>
+                        <style>
+                            #data-import{
+                                margin-bottom: 5px;
+                                display: inline-block;
+                            }
+                            #input-import{
+                                padding: 10px;
+                                background: red;
+                                display: table;
+                                color: #fff;
+                            }
+                            #file-import[type="file"] {
+                                display: none;
+                            }
+                        </style>
+
+                    </form>
+
             </div>
             <div class="col-xs-12">
                 <div class="clearfix">

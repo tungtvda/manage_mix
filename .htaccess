@@ -160,3 +160,6 @@ RewriteRule ^azbooking-list-dieu-hanh.html controller/default/user/az_list_dieu_
 RewriteRule ^azbooking-list-type-dich-vu.html controller/default/booking/az_list_type_dich_vu.php
 
 RewriteRule ^import-user.html controller/default/customer/import.php
+RewriteRule ^export-user.html controller/default/customer/export.php
+
+RewriteRule ^export-user/?$ controller/default/customer/exports

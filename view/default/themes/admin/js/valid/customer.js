@@ -548,7 +548,6 @@ function UnPopIt()  { /* nothing to return */ }
 $("form#data-import").submit(function(e) {
     e.preventDefault();
     var formData = new FormData(this);
-    console.log(formData);
     $.ajax({
         url: url+'/import-user.html',
         type: 'POST',
@@ -574,3 +573,28 @@ $("form#data-import").submit(function(e) {
         processData: false
     });
 });
+$('.export-data').click(function () {
+    $.ajax({
+        url: url+'/export-user.html',
+        type: 'POST',
+      //  data: formData,
+        success: function (response) {
+            var data= (JSON.parse(response));
+            if (data.success != 1) {
+                lnv.alert({
+                    title: '<label class="red">Lỗi</label>',
+                    content: data.mess,
+                    alertBtnText: 'Ok',
+                    iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                    alertHandler: function () {
+                    }
+                });
+            }else{
+                window.location.href=data.url;
+            }
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+})

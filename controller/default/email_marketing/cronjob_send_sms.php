@@ -160,11 +160,12 @@ function returnStringReplace($title_email,$array_customer,$data_short_code_cus, 
 
     }
     $new=new sms_email((array)$row);
-    if($count_success_email>0||$count_success_sms>0){
-        $new->status=2;
-    }else{
-        $new->status=1;
-    }
+    $new->status=2;
+//    if($count_success_email>0||$count_success_sms>0){
+//        $new->status=2;
+//    }else{
+//        $new->status=1;
+//    }
     $new->count_success_sms=$count_success_sms;
     $new->count_success_email=$count_success_email;
     $new->cus_false_sms=$cus_false_sms;

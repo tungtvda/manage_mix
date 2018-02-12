@@ -149,7 +149,12 @@ jQuery(function ($) {
                                         if(type==0){
                                             var link_re = url + '/cham-soc-khach-hang/';
                                         }else{
-                                            var link_re = url + '/chuc-mung-sinh-nhat/?type=1';
+                                            if(type==2){
+                                                var link_re = url + '/chuc-mung-sinh-nhat/?type=2';
+                                            }else{
+                                                var link_re = url + '/chuc-mung-sinh-nhat/?type=1';
+                                            }
+
                                         }
                                         window.location=link_re;
                                     }

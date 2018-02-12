@@ -27,16 +27,22 @@ if (isset($_POST['message_birthday']) && isset($_POST['customer_birthday'])) {
     }else{
         $date_send =_returnGetDateTime();
     }
-    $arr_cus = $_POST['customer_birthday'];
-    if($title==''){
-        $title="Chúc mừng sinh nhật khách hàng";
-    }
-
     // type =0 là chăm sóc khách hàng
     // type =1 là chúc mừng sinh nhật
+    // type =1 là thanh viên tiếp thị
     $type=0;
     if (isset($_POST['type'])) {
         $type = _returnPostParamSecurity('type');
+    }
+    $arr_cus = $_POST['customer_birthday'];
+
+    if($title==''){
+        if($type==2){
+            $title="Chăm sóc thành viên tiếp thị";
+        }else{
+            $title="Chúc mừng sinh nhật khách hàng";
+        }
+
     }
 
     $status = 0;
@@ -44,7 +50,11 @@ if (isset($_POST['message_birthday']) && isset($_POST['customer_birthday'])) {
         $status = _returnPostParamSecurity('status');
     }
     if (count($arr_cus) == 0) {
-        echo 'Bạn vui lòng chọn khách hàng';
+        if($type==2){
+            echo 'Bạn vui lòng chọn thành viên tiếp thị';
+        }else{
+            echo 'Bạn vui lòng chọn khách hàng';
+        }
         exit;
     } else {
         $string_cus = '';
@@ -54,7 +64,12 @@ if (isset($_POST['message_birthday']) && isset($_POST['customer_birthday'])) {
         $array_check_push=array();
         foreach ($arr_cus as $row) {
             $id = addslashes(strip_tags(trim($row)));
-            $cus_data = customer_getById($id);
+            if($type==2){
+                $cus_data = user_getById($id);
+            }else{
+                $cus_data = customer_getById($id);
+            }
+
             if (count($cus_data) > 0) {
                 if(!in_array($cus_data[0]->id,$array_check_push)){
                     //                $name = $cus_data[0]->name;
@@ -100,7 +115,11 @@ if (isset($_POST['message_birthday']) && isset($_POST['customer_birthday'])) {
 
         $insert->user = '';
         $insert->type = $type;
-        $insert->customer =$string_cus;
+        if($type==2){
+            $insert->user =$string_cus;
+        }else{
+            $insert->customer =$string_cus;
+        }
         $insert->title = $title;
         $insert->content_sms = $message_sms;
         $insert->content_email = addslashes($content_email);

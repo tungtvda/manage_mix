@@ -127,6 +127,13 @@ RewriteRule ^chuc-mung-sinh-nhat/$ controller/default/email_marketing/email_mark
 RewriteRule ^chuc-mung-sinh-nhat/them-moi controller/default/email_marketing/themmoi.php
 RewriteRule ^chuc-mung-sinh-nhat/sua  controller/default/email_marketing/themmoi.php
 RewriteRule ^chuc-mung-sinh-nhat/xoa  controller/default/email_marketing/delete.php
+
+RewriteRule ^cham-soc-thanh-vien/$ controller/default/email_marketing/email_marketing.php
+RewriteRule ^cham-soc-thanh-vien/them-moi controller/default/email_marketing/themmoi.php
+RewriteRule ^cham-soc-thanh-vien/sua  controller/default/email_marketing/themmoi.php
+RewriteRule ^cham-soc-thanh-vien/xoa  controller/default/email_marketing/delete.php
+
+
 RewriteRule ^cronjob-send-sms$ controller/default/email_marketing/cronjob_send_sms.php
 
 RewriteRule ^doanh-thu-don-hang/$ controller/default/thongke/doanh_thu_don_hang.php

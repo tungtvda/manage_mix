@@ -1905,6 +1905,43 @@ function returnCURL($param=array(), $link){
     }
     return $res;
 }
+function _returnReplaceEmailTem($email_tem){
+    $thuong_hieu = _returnGetParamSecurity('thuong_hieu');
+    if(!$thuong_hieu){
+        $thuong_hieu=1;
+    }
+    $data_thuong_hieu = thuong_hieu_getById($thuong_hieu);
+    $doman = 'mixtourrist.com.vn';
+    $name_thuong_hieu = 'Công ty Du lịch Mix Tourist';
+    if ($data_thuong_hieu) {
+        $doman = $data_thuong_hieu[0]->domain;
+        $name_thuong_hieu = $data_thuong_hieu[0]->name;
+    }
+    if (!strpos($doman, "http")) {
+        $doman = 'http://' . $doman;
+    }
+    $array_check_noti = array(
+        'domain' => $doman,
+    );
+    $content_noti = returnCURL($array_check_noti, $doman . '/noi-dung-email/danh-sach-tour-giam-gia.html');
+    $email_tem = str_replace('{{TOUR_NOI_BAT}}', $content_noti, $email_tem);
+    $email_tem = str_replace('{{DATE_NOW}}', _returnGetDateTime(), $email_tem);
+    $email_tem = str_replace('{{WEBSITE}}', $data_thuong_hieu[0]->name, $email_tem);
+    $email_tem = str_replace('{{NAME}}', $data_thuong_hieu[0]->name, $email_tem);
+    $email_tem = str_replace('{{LINK_WEBSITE}}', $doman, $email_tem);
+    $email_tem = str_replace('{{LOGO}}', $data_thuong_hieu[0]->logo, $email_tem);
+    $email_tem = str_replace('{{BANNER}}', $data_thuong_hieu[0]->banner, $email_tem);
+    $email_tem = str_replace('{{BANNER_QC}}', $data_thuong_hieu[0]->banner_qc, $email_tem);
+    $email_tem = str_replace('{{LINK_BANNER_QC}}', $data_thuong_hieu[0]->link_banner_qc, $email_tem);
+    $email_tem = str_replace('{{LINK_KHOI_HANH}}', $data_thuong_hieu[0]->link_khoi_hanh, $email_tem);
+    $user_data = user_getById($_SESSION['user_id']);
+    $footer = $data_thuong_hieu[0]->chu_ky_email;
+    if ($user_data) {
+        $footer = $user_data[0]->chu_ky_email;
+    }
+    $email_tem = str_replace('{{FOOTER}}', $footer, $email_tem);
+    return $email_tem;
+}
 function _returnFooterEmailTemplate(){
     return '<div style="float: left; width: 100%">
                                             <div style="float: left; width: 325px; text-align: center;">

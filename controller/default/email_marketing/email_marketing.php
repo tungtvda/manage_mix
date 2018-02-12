@@ -11,12 +11,13 @@ if(!defined('SITE_NAME'))
 }
 require_once DIR.'/controller/default/public.php';
 $data=array();
-_returnCheckPermison(7,14);
+
 $_SESSION['link_redict']='http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 // $action_link=str_replace('manage_mix','',$_SERVER['REQUEST_URI']);
 //$action_link=str_replace('/','',$action_link);
 
 if(isset($_GET['type'])&&$_GET['type']==1){
+    _returnCheckPermison(7,13);
     $action_link='chuc-mung-sinh-nhat';
     $data['type']=1;
     $active_tab_left='chuc_mung_sinh_nhat';
@@ -30,17 +31,34 @@ if(isset($_GET['type'])&&$_GET['type']==1){
     $data['action_xoa']=27;
 }
 else{
-    $action_link='cham-soc-khach-hang';
-    $data['type']=0;
-    $active_tab_left='cham_soc_khach_hang';
-    $name_bread="Email - SMS chăm sóc khách hàng";
-    $data_dk_fill='type=0';
-    $data['title']='Danh sách email-sms chăm sóc khách hàng ';
-    $data['form']=14;
-    $data['action_list']=28;
-    $data['action_them']=29;
-    $data['action_sua']=30;
-    $data['action_xoa']=31;
+    if(isset($_GET['type'])&&$_GET['type']==2){
+        _returnCheckPermison(7,18);
+        $action_link='cham-soc-thanh-vien';
+        $data['type']=2;
+        $active_tab_left='cham_soc_thanh_vien';
+        $name_bread="Email - SMS chăm sóc thành viên tiếp thị liên kết";
+        $data_dk_fill='type=2';
+        $data['title']='Danh sách email-sms thành viên tiếp thị liên kết ';
+        $data['form']=18;
+        $data['action_list']=45;
+        $data['action_them']=46;
+        $data['action_sua']=47;
+        $data['action_xoa']=48;
+    }else{
+        _returnCheckPermison(7,14);
+        $action_link='cham-soc-khach-hang';
+        $data['type']=0;
+        $active_tab_left='cham_soc_khach_hang';
+        $name_bread="Email - SMS chăm sóc khách hàng";
+        $data_dk_fill='type=0';
+        $data['title']='Danh sách email-sms chăm sóc khách hàng ';
+        $data['form']=14;
+        $data['action_list']=28;
+        $data['action_them']=29;
+        $data['action_sua']=30;
+        $data['action_xoa']=31;
+    }
+
 }
 
 

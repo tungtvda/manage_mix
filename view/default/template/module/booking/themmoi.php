@@ -827,6 +827,59 @@
                                 <h4><i class="ace-icon fa fa-plane fa-dollar blue bigger-125"></i> Bảng giá tour <span
                                             style="color: red; font-size: 12px">*</span></h4>
                             </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="widget-box transparent" id="recent-box">
+                                        <div class="widget-header">
+                                            <div class="widget-toolbar no-border">
+                                                <ul class="nav nav-tabs" id="recent-tab">
+                                                    <li class="active">
+                                                        <a data-toggle="tab" href="#task-tab">Hôm nay</a>
+                                                    </li>
+
+                                                    <li>
+                                                        <a data-toggle="tab" href="#member-tab">Trong Tuần</a>
+                                                    </li>
+
+                                                    <li>
+                                                        <a data-toggle="tab" href="#comment-tab">Trong Tháng</a>
+                                                    </li>
+                                                    <li>
+                                                        <a data-toggle="tab" href="#comment-tab">Trong Tháng</a>
+                                                    </li>
+                                                    <li>
+                                                        <a data-toggle="tab" href="#comment-tab">Trong Tháng</a>
+                                                    </li>
+                                                    <li>
+                                                        <a data-toggle="tab" href="#comment-tab">Trong Tháng</a>
+                                                    </li>
+                                                    <li>
+                                                        <a data-toggle="tab" href="#comment-tab">Trong Tháng</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="widget-body">
+                                            <div class="widget-main padding-4">
+                                                <div class="tab-content padding-8">
+                                                    <div id="task-tab" class="tab-pane active">
+                                                      dfgdfg
+                                                    </div>
+
+                                                    <div id="member-tab" class="tab-pane">
+                                                       ffghfgh
+                                                    </div><!-- /.#member-tab -->
+
+                                                    <div id="comment-tab" class="tab-pane">
+                                                        ẻgdf
+                                                    </div>
+                                                </div>
+                                            </div><!-- /.widget-main -->
+                                        </div><!-- /.widget-body -->
+                                    </div><!-- /.widget-box -->
+                                </div><!-- /.col -->
+                            </div><!-- /.row -->
                             <div <?php echo $hidden_don_gia_dichvu ?>
                                     class=" form-group border-sloid-1-x show_hide_bang_gia"
                                     style="float: left; width: 100%;background: #ffffff;  margin-left: 0px;margin-right: 0px;">

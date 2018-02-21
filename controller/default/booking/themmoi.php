@@ -23,21 +23,27 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
 }
 switch ($action_link) {
     case 'booking-new':
+        // báo giá khách hàng
         $active_tab_left = 'booking_new';
         break;
     case 'booking-giao-dich':
+        //Ký hợp đồng
         $active_tab_left = 'booking_giao_dich';
         break;
     case 'booking-tam-dung':
+        //Tạm dừng
         $active_tab_left = 'booking_tam_dung';
         break;
-    case 'booking-no-tien':
-        $active_tab_left = 'booking_no_tien';
+    case 'booking-thanh-ly':
+        //Thanh lý hợp đồng
+        $active_tab_left = 'booking_thanh_ly';
         break;
     case 'booking-ket-thuc':
+        //Giao dịch thành công
         $active_tab_left = 'booking_ket_thuc';
         break;
     case 'booking-ban-nhap':
+        // Hủy
         $active_tab_left = 'booking_ban_nhap';
         break;
     default:

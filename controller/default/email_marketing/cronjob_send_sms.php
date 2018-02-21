@@ -41,6 +41,9 @@ if(count($data_email)>0){
     }
 }
 function returnStringReplace($title_email,$array_customer,$data_short_code_cus, $type_user=0,$content_email,$content_sms,$row){
+    $new=new sms_email((array)$row);
+    $new->status=2;
+    sms_email_update($new);
     // type_user=0 là khách hàng
     // type_user=1 là user
     $count_success_sms=0;

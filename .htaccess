@@ -51,7 +51,7 @@ RewriteRule ^booking/$ controller/default/booking/booking.php
 RewriteRule ^booking-new/$ controller/default/booking/booking.php
 RewriteRule ^booking-giao-dich/$ controller/default/booking/booking.php
 RewriteRule ^booking-tam-dung/$ controller/default/booking/booking.php
-RewriteRule ^booking-no-tien/$ controller/default/booking/booking.php
+RewriteRule ^booking-thanh-ly/$ controller/default/booking/booking.php
 RewriteRule ^booking-ket-thuc/$ controller/default/booking/booking.php
 RewriteRule ^booking-ban-nhap/$ controller/default/booking/booking.php
 
@@ -59,7 +59,7 @@ RewriteRule ^booking/dat-tour$ controller/default/booking/themmoi.php
 RewriteRule ^booking-new/dat-tour$ controller/default/booking/themmoi.php
 RewriteRule ^booking-giao-dich/dat-tour$ controller/default/booking/themmoi.php
 RewriteRule ^booking-tam-dung/dat-tour$ controller/default/booking/themmoi.php
-RewriteRule ^booking-no-tien/dat-tour$ controller/default/booking/themmoi.php
+RewriteRule ^booking-thanh-ly/dat-tour$ controller/default/booking/themmoi.php
 RewriteRule ^booking-ket-thuc/dat-tour$ controller/default/booking/themmoi.php
 RewriteRule ^booking-ban-nhap/dat-tour$ controller/default/booking/themmoi.php
 
@@ -67,7 +67,7 @@ RewriteRule ^booking/xoa$ controller/default/booking/delete.php
 RewriteRule ^booking-new/xoa$ controller/default/booking/delete.php
 RewriteRule ^booking-giao-dich/xoa$ controller/default/booking/delete.php
 RewriteRule ^booking-tam-dung/xoa$ controller/default/booking/delete.php
-RewriteRule ^booking-no-tien/xoa$ controller/default/booking/delete.php
+RewriteRule ^booking-thanh-ly/xoa$ controller/default/booking/delete.php
 RewriteRule ^booking-ket-thuc/xoa$ controller/default/booking/delete.php
 RewriteRule ^booking-ban-nhap/xoa$ controller/default/booking/delete.php
 
@@ -78,7 +78,7 @@ RewriteRule ^booking/sua$ controller/default/booking/themmoi.php
 RewriteRule ^booking-new/sua$ controller/default/booking/themmoi.php
 RewriteRule ^booking-giao-dich/sua$ controller/default/booking/themmoi.php
 RewriteRule ^booking-tam-dung/sua$ controller/default/booking/themmoi.php
-RewriteRule ^booking-no-tien/sua$ controller/default/booking/themmoi.php
+RewriteRule ^booking-thanh-ly/sua$ controller/default/booking/themmoi.php
 RewriteRule ^booking-ket-thuc/sua$ controller/default/booking/themmoi.php
 RewriteRule ^booking-ban-nhap/sua$ controller/default/booking/themmoi.php
 
@@ -88,7 +88,7 @@ RewriteRule ^booking/confirm-tiepthi$ controller/default/booking/confirm_tiepthi
 RewriteRule ^booking-new/confirm-order$ controller/default/booking/confirm_order.php
 RewriteRule ^booking-giao-dich/confirm-order$ controller/default/booking/confirm_order.php
 RewriteRule ^booking-tam-dung/confirm-order$ controller/default/booking/confirm_order.php
-RewriteRule ^booking-no-tien/confirm-order$ controller/default/booking/confirm_order.php
+RewriteRule ^booking-thanh-ly/confirm-order$ controller/default/booking/confirm_order.php
 RewriteRule ^booking-ket-thuc/confirm-order$ controller/default/booking/confirm_order.php
 RewriteRule ^booking-ban-nhap/confirm-order$ controller/default/booking/confirm_order.php
 
@@ -96,7 +96,7 @@ RewriteRule ^booking/chi-phi$ controller/default/booking/chi_phi.php
 RewriteRule ^booking-new/chi-phi$ controller/default/booking/chi_phi.php
 RewriteRule ^booking-giao-dich/chi-phi$ controller/default/booking/chi_phi.php
 RewriteRule ^booking-tam-dung/chi-phi$ controller/default/booking/chi_phi.php
-RewriteRule ^booking-no-tien/chi-phi$ controller/default/booking/chi_phi.php
+RewriteRule ^booking-thanh-ly/chi-phi$ controller/default/booking/chi_phi.php
 RewriteRule ^booking-ket-thuc/chi-phi$ controller/default/booking/chi_phi.php
 RewriteRule ^booking-ban-nhap/chi-phi$ controller/default/booking/chi_phi.php
 
@@ -104,7 +104,7 @@ RewriteRule ^booking/xoa-chi-phi$ controller/default/booking/delete_cost.php
 RewriteRule ^booking-new/xoa-chi-phi$ controller/default/booking/delete_cost.php
 RewriteRule ^booking-giao-dich/xoa-chi-phi$ controller/default/booking/delete_cost.php
 RewriteRule ^booking-tam-dung/xoa-chi-phi$ controller/default/booking/delete_cost.php
-RewriteRule ^booking-no-tien/xoa-chi-phi$ controller/default/booking/delete_cost.php
+RewriteRule ^booking-thanh-ly/xoa-chi-phi$ controller/default/booking/delete_cost.php
 RewriteRule ^booking-ket-thuc/xoa-chi-phi$ controller/default/booking/delete_cost.php
 RewriteRule ^booking-ban-nhap/xoa-chi-phi$ controller/default/booking/delete_cost.php
 

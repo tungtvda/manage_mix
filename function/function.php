@@ -1489,7 +1489,7 @@ function _returnLinkBooking($status)
             $action_link = 'booking-tam-dung';
             break;
         case '4':
-            $action_link = 'booking-no-tien';
+            $action_link = 'booking-thanh-ly';
             break;
         case '5':
             $action_link = 'booking-ket-thuc';
@@ -1911,28 +1911,29 @@ function _returnReplaceEmailTem($email_tem){
         $thuong_hieu=1;
     }
     $data_thuong_hieu = thuong_hieu_getById($thuong_hieu);
-    $doman = 'mixtourrist.com.vn';
+    $domain = 'mixtourrist.com.vn';
+    $domain_img = 'mixtourrist.com.vn';
     $name_thuong_hieu = 'Công ty Du lịch Mix Tourist';
     if ($data_thuong_hieu) {
-        $doman = $data_thuong_hieu[0]->domain;
+        $domain_img=$domain = $data_thuong_hieu[0]->domain;
         $name_thuong_hieu = $data_thuong_hieu[0]->name;
     }
-    if (!strpos($doman, "http")) {
-        $doman = 'http://' . $doman;
+    if (!strpos($domain, "http")) {
+        $domain = 'http://' . $domain;
     }
     $array_check_noti = array(
-        'domain' => $doman,
+        'domain' => $domain,
     );
-    $content_noti = returnCURL($array_check_noti, $doman . '/noi-dung-email/danh-sach-tour-giam-gia.html');
+    $content_noti = returnCURL($array_check_noti, $domain . '/noi-dung-email/danh-sach-tour-giam-gia.html');
     $email_tem = str_replace('{{TOUR_NOI_BAT}}', $content_noti, $email_tem);
     $email_tem = str_replace('{{DATE_NOW}}', _returnGetDateTime(), $email_tem);
     $email_tem = str_replace('{{WEBSITE}}', $data_thuong_hieu[0]->name, $email_tem);
     $email_tem = str_replace('{{NAME}}', $data_thuong_hieu[0]->name, $email_tem);
-    $email_tem = str_replace('{{LINK_WEBSITE}}', $doman, $email_tem);
-    $email_tem = str_replace('{{LOGO}}', $data_thuong_hieu[0]->logo, $email_tem);
-    $email_tem = str_replace('{{BANNER}}', $data_thuong_hieu[0]->banner, $email_tem);
-    $email_tem = str_replace('{{BANNER_QC}}', $data_thuong_hieu[0]->banner_qc, $email_tem);
-    $email_tem = str_replace('{{LINK_BANNER_QC}}', $data_thuong_hieu[0]->link_banner_qc, $email_tem);
+    $email_tem = str_replace('{{LINK_WEBSITE}}', $domain, $email_tem);
+    $email_tem = str_replace('{{LOGO}}', SITE_NAME.$data_thuong_hieu[0]->logo, $email_tem);
+    $email_tem = str_replace('{{BANNER}}', SITE_NAME.$data_thuong_hieu[0]->banner, $email_tem);
+    $email_tem = str_replace('{{BANNER_QC}}', SITE_NAME.$data_thuong_hieu[0]->banner_qc, $email_tem);
+    $email_tem = str_replace('{{LINK_BANNER_QC}}', SITE_NAME.$data_thuong_hieu[0]->link_banner_qc, $email_tem);
     $email_tem = str_replace('{{LINK_KHOI_HANH}}', $data_thuong_hieu[0]->link_khoi_hanh, $email_tem);
     $user_data = user_getById($_SESSION['user_id']);
     $footer = $data_thuong_hieu[0]->chu_ky_email;

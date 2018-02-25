@@ -24,7 +24,15 @@
                             <li id="step_tab_1" data-step="1" class="active hidden_tab_step"
                                 complete_value="">
                                 <span class="step">1</span>
-                                <span class="title">Chọn danh sách khách hàng</span>
+                                <span class="title">
+                                    <?php if( $data['type']==2)
+                                    {
+                                        echo ' Chọn danh sách thành viên';
+                                    }else{
+                                        echo ' Chọn danh sách khách hàng';
+                                    } ?>
+
+                                </span>
                             </li>
 
                             <li id="step_tab_2" data-step="2" class="hidden_tab_step" complete_value="">
@@ -76,7 +84,7 @@
                                             </thead>
 
                                             <tbody>
-                                            <?php if (count($list) > 0 && _returnCheckAction(16) == 1) { ?>
+                                            <?php if (count($list) > 0) { ?>
                                                 <?php $dem = 1; ?>
                                                 <?php foreach ($list as $row) { ?>
                                                     <?php
@@ -88,17 +96,33 @@
                                                         $checked='checked';
                                                         $success='success';
                                                         $success_edit='success_edit';
-                                                        $list_customer.='<tbody id="row_email_'.$row->id.'"><tr> <td>'.$row->email.'</td> </tr></tbody>';
+                                                        if($type==2){
+                                                            $email_edit=$row->user_email;
+                                                        }else{
+                                                            $email_edit=$row->email;
+                                                        }
+                                                        $list_customer.='<tbody id="row_email_'.$row->id.'"><tr> <td>'.$email_edit.'</td> </tr></tbody>';
                                                     }
 
                                                     ?>
                                                     <tr class="row_<?php echo $row->id ?> row_tr_click <?php echo $success.' '.$success_edit?>"
                                                         value="<?php echo $row->id ?>"
-                                                        email_record="<?php echo $row->email ?>">
+                                                        email_record="<?php if( $data['type']==2)
+                                                        {
+                                                            echo $row->user_email;
+                                                        }else{
+                                                            echo $row->email;
+                                                        } ?>">
                                                         <td class="center ">
                                                             <label class="pos-rel">
                                                                 <input type="checkbox" <?php echo $checked?> class="ace click_check_list"
-                                                                       email_record="<?php echo $row->email ?>"
+                                                                       email_record="<?php
+                                                                       if( $data['type']==2)
+                                                                       {
+                                                                           echo $row->user_email;
+                                                                       }else{
+                                                                           echo $row->email;
+                                                                       } ?>"
                                                                        id="check_<?php echo $dem ?>"
                                                                        name="customer_birthday[]"
                                                                        value="<?php echo $row->id ?>"/>
@@ -109,8 +133,13 @@
                                                             <?php echo $dem; ?>
                                                         </td>
                                                         <td>
-                                                            <a target="_blank"
-                                                               href="<?php echo SITE_NAME ?>/khach-hang/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"><?php echo $row->name . ' - ' . $row->code ?></a>
+                                                            <?php if( $data['type']==2) { ?>
+                                                            <a target="_blank"><?php echo $row->name . ' - ' . $row->user_code ?></a>
+                                                            <?php } ?>
+                                                            <?php if( $data['type']!=2) { ?>
+                                                                <a target="_blank"
+                                                                   href="<?php echo SITE_NAME ?>/khach-hang/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"><?php echo $row->name . ' - ' . $row->code ?></a>
+                                                            <?php } ?>
                                                         </td>
                                                         <td style="text-align: center">
                                                             <?php
@@ -124,7 +153,15 @@
                                                                  src="<?php echo $link_ava ?>"><label
                                                                 style="display: none"><?php echo $row->name ?></label>
                                                         </td>
-                                                        <td><?php echo $row->email ?></td>
+                                                        <td><?php
+                                                            if( $data['type']==2)
+                                                            {
+                                                                echo $row->user_email;
+                                                            }else{
+                                                                echo $row->email;
+                                                            }
+                                                            ?>
+                                                        </td>
                                                         <td><?php echo $row->phone ?></td>
                                                         <td><?php echo $row->mobi ?></td>
 

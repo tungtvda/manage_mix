@@ -217,7 +217,6 @@ $string_data_user_tiep_thi = _returnDataAutoCompleteUserTiepThi();
                                 if (response.success == 1) {
                                     if(response.list_dich_vu!=''){
                                         $('#list_dichvu').html(response.list_dich_vu);
-                                        console.log(response.data);
                                         $('#input_loi_nhuan').val(response.data.loi_nhuan);
                                         $('#input_loi_nhuan_m1').val(response.data.loi_nhuan_m1);
                                         $('#input_loi_nhuan_m2').val(response.data.loi_nhuan_m2);
@@ -229,6 +228,19 @@ $string_data_user_tiep_thi = _returnDataAutoCompleteUserTiepThi();
                                         $('#input_tyle_m1').val(response.data.ty_le_m1);
                                         $('#input_tyle_m2').val(response.data.ty_le_m2);
                                         $('#input_tyle_m3').val(response.data.ty_le_m3);
+                                        if($('#input_do_tuoi_nguoi_lon').val()==''){
+                                            $('#input_do_tuoi_nguoi_lon').val(response.data.name_price);
+                                        }
+                                        if($('#input_do_tuoi_tre_em_m1').val()==''){
+                                            $('#input_do_tuoi_tre_em_m1').val(response.data.name_price_2);
+                                        }
+                                        if($('#input_do_tuoi_tre_em_m2').val()==''){
+                                            $('#input_do_tuoi_tre_em_m2').val(response.data.name_price_3);
+                                        }
+                                        if($('#input_do_tuoi_tre_em_m3').val()==''){
+                                            $('#input_do_tuoi_tre_em_m3').val(response.data.name_price_4);
+                                        }
+
                                         total_price_dich_vu(0, 0, 0);
                                     }
                                 }

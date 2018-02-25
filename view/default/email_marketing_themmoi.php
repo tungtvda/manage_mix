@@ -13,6 +13,7 @@ function show_email_marketing_themmoi($data = array())
     $tieude=$data['title'];
     $action=$data['action'];
     $array_customer=array();
+    $type=$data['type'];
     $list_customer='';
     if($action==2){
         $action_name='edit';
@@ -21,9 +22,12 @@ function show_email_marketing_themmoi($data = array())
         $valid_pass="valid";
         $show_phone="";
         $disabled='disabled';
-        $customer=trim(_returnDataEditAdd($data['data_user'],'customer'),',');
+        if($type==2){
+            $customer=trim(_returnDataEditAdd($data['data_user'],'user'),',');
+        }else{
+            $customer=trim(_returnDataEditAdd($data['data_user'],'customer'),',');
+        }
         $array_customer=explode(',',$customer);
-
     }else{
         $action_name='add';
         $readonly="readonly";
@@ -34,7 +38,6 @@ function show_email_marketing_themmoi($data = array())
     }
     $list=$data['list'];
     $list_short_code='';
-    $type=$data['type'];
     $title=_returnDataEditAdd($data['data_user'],'title');
     $date_time_send=_returnDataEditAdd($data['data_user'],'date_time_send');
     $date_send='';
@@ -45,6 +48,9 @@ function show_email_marketing_themmoi($data = array())
     }
     $content_sms=_returnDataEditAdd($data['data_user'],'content_sms');
     $content_email=_returnDataEditAdd($data['data_user'],'content_email');
+    if($content_email==''){
+        $content_email=$data['email_tem'];
+    }
     $id=_returnDataEditAdd($data['data_user'],'id');
     $status=_returnDataEditAdd($data['data_user'],'status');
 

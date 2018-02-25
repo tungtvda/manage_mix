@@ -1489,7 +1489,7 @@ function _returnLinkBooking($status)
             $action_link = 'booking-tam-dung';
             break;
         case '4':
-            $action_link = 'booking-no-tien';
+            $action_link = 'booking-thanh-ly';
             break;
         case '5':
             $action_link = 'booking-ket-thuc';
@@ -1882,10 +1882,70 @@ function _returnInsertChiphiBooking($booking_id, $user_id, $name,$price,$descrip
     booking_cost_insert($obj);
     _insertLog($_SESSION['user_id'],6,6,33,0,'','',$mess_log);
 }
-
+function returnCURL($param=array(), $link){
+    $res='_error_';
+    if(count($param)>0 && $link){
+        $count_param=1;
+        $string_param='';
+        foreach($param as $key=>$row){
+            if($count_param==1){
+                $string_param.=$key."=".$row;
+            }else{
+                $string_param.="&".$key."=".$row;
+            }
+            $count_param++;
+        }
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $link);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $string_param);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $res = curl_exec($ch);
+        curl_close($ch);
+    }
+    return $res;
+}
+function _returnReplaceEmailTem($email_tem){
+    $thuong_hieu = _returnGetParamSecurity('thuong_hieu');
+    if(!$thuong_hieu){
+        $thuong_hieu=1;
+    }
+    $data_thuong_hieu = thuong_hieu_getById($thuong_hieu);
+    $domain = 'mixtourrist.com.vn';
+    $domain_img = 'mixtourrist.com.vn';
+    $name_thuong_hieu = 'Công ty Du lịch Mix Tourist';
+    if ($data_thuong_hieu) {
+        $domain_img=$domain = $data_thuong_hieu[0]->domain;
+        $name_thuong_hieu = $data_thuong_hieu[0]->name;
+    }
+    if (!strpos($domain, "http")) {
+        $domain = 'http://' . $domain;
+    }
+    $array_check_noti = array(
+        'domain' => $domain,
+    );
+    $content_noti = returnCURL($array_check_noti, $domain . '/noi-dung-email/danh-sach-tour-giam-gia.html');
+    $email_tem = str_replace('{{TOUR_NOI_BAT}}', $content_noti, $email_tem);
+    $email_tem = str_replace('{{DATE_NOW}}', _returnGetDateTime(), $email_tem);
+    $email_tem = str_replace('{{WEBSITE}}', $data_thuong_hieu[0]->name, $email_tem);
+    $email_tem = str_replace('{{NAME}}', $data_thuong_hieu[0]->name, $email_tem);
+    $email_tem = str_replace('{{LINK_WEBSITE}}', $domain, $email_tem);
+    $email_tem = str_replace('{{LOGO}}', SITE_NAME.$data_thuong_hieu[0]->logo, $email_tem);
+    $email_tem = str_replace('{{BANNER}}', SITE_NAME.$data_thuong_hieu[0]->banner, $email_tem);
+    $email_tem = str_replace('{{BANNER_QC}}', SITE_NAME.$data_thuong_hieu[0]->banner_qc, $email_tem);
+    $email_tem = str_replace('{{LINK_BANNER_QC}}', SITE_NAME.$data_thuong_hieu[0]->link_banner_qc, $email_tem);
+    $email_tem = str_replace('{{LINK_KHOI_HANH}}', $data_thuong_hieu[0]->link_khoi_hanh, $email_tem);
+    $user_data = user_getById($_SESSION['user_id']);
+    $footer = $data_thuong_hieu[0]->chu_ky_email;
+    if ($user_data) {
+        $footer = $user_data[0]->chu_ky_email;
+    }
+    $email_tem = str_replace('{{FOOTER}}', $footer, $email_tem);
+    return $email_tem;
+}
 function _returnFooterEmailTemplate(){
     return '<div style="float: left; width: 100%">
-                                            <div style="float: left; width: 330px; text-align: center;">
+                                            <div style="float: left; width: 325px; text-align: center;">
                                                 <p>
                                                    <a href="http://mixtourist.com.vn/"><img style="width: 60%" src="http://mixtourist.com.vn/view/admin/Themes/kcfinder/upload/images/cauhinh/logomix.png"></a>
                                                 </p>

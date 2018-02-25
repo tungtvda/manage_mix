@@ -1,12 +1,13 @@
 <?php
 class thuong_hieu
 {
-    public $id,$active,$name,$logo,$icon,$banner,$link_banner,$banner_qc,$link_banner_qc,$link_khoi_hanh,$email,$mat_khau_ung_dung,$chu_ky_email;
+    public $id,$active,$name,$domain,$logo,$icon,$banner,$link_banner,$banner_qc,$link_banner_qc,$link_khoi_hanh,$email,$mat_khau_ung_dung,$chu_ky_email;
     public function thuong_hieu($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
     $this->active=isset($data['active'])?$data['active']:'';
     $this->name=isset($data['name'])?$data['name']:'';
+    $this->domain=isset($data['domain'])?$data['domain']:'';
     $this->logo=isset($data['logo'])?$data['logo']:'';
     $this->icon=isset($data['icon'])?$data['icon']:'';
     $this->banner=isset($data['banner'])?$data['banner']:'';
@@ -24,6 +25,7 @@ class thuong_hieu
             $this->id=addslashes($this->id);
             $this->active=addslashes($this->active);
             $this->name=addslashes($this->name);
+            $this->domain=addslashes($this->domain);
             $this->logo=addslashes($this->logo);
             $this->icon=addslashes($this->icon);
             $this->banner=addslashes($this->banner);
@@ -40,6 +42,7 @@ class thuong_hieu
             $this->id=stripslashes($this->id);
             $this->active=stripslashes($this->active);
             $this->name=stripslashes($this->name);
+            $this->domain=stripslashes($this->domain);
             $this->logo=stripslashes($this->logo);
             $this->icon=stripslashes($this->icon);
             $this->banner=stripslashes($this->banner);

@@ -827,6 +827,59 @@
                                 <h4><i class="ace-icon fa fa-plane fa-dollar blue bigger-125"></i> Bảng giá tour <span
                                             style="color: red; font-size: 12px">*</span></h4>
                             </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="widget-box transparent" id="recent-box">
+                                        <div class="widget-header">
+                                            <div class="widget-toolbar no-border">
+                                                <ul class="nav nav-tabs" id="recent-tab">
+                                                    <li class="active">
+                                                        <a data-toggle="tab" href="#task-tab">Hôm nay</a>
+                                                    </li>
+
+                                                    <li>
+                                                        <a data-toggle="tab" href="#member-tab">Trong Tuần</a>
+                                                    </li>
+
+                                                    <li>
+                                                        <a data-toggle="tab" href="#comment-tab">Trong Tháng</a>
+                                                    </li>
+                                                    <li>
+                                                        <a data-toggle="tab" href="#comment-tab">Trong Tháng</a>
+                                                    </li>
+                                                    <li>
+                                                        <a data-toggle="tab" href="#comment-tab">Trong Tháng</a>
+                                                    </li>
+                                                    <li>
+                                                        <a data-toggle="tab" href="#comment-tab">Trong Tháng</a>
+                                                    </li>
+                                                    <li>
+                                                        <a data-toggle="tab" href="#comment-tab">Trong Tháng</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="widget-body">
+                                            <div class="widget-main padding-4">
+                                                <div class="tab-content padding-8">
+                                                    <div id="task-tab" class="tab-pane active">
+                                                      dfgdfg
+                                                    </div>
+
+                                                    <div id="member-tab" class="tab-pane">
+                                                       ffghfgh
+                                                    </div><!-- /.#member-tab -->
+
+                                                    <div id="comment-tab" class="tab-pane">
+                                                        ẻgdf
+                                                    </div>
+                                                </div>
+                                            </div><!-- /.widget-main -->
+                                        </div><!-- /.widget-body -->
+                                    </div><!-- /.widget-box -->
+                                </div><!-- /.col -->
+                            </div><!-- /.row -->
                             <div <?php echo $hidden_don_gia_dichvu ?>
                                     class=" form-group border-sloid-1-x show_hide_bang_gia"
                                     style="float: left; width: 100%;background: #ffffff;  margin-left: 0px;margin-right: 0px;">
@@ -995,7 +1048,12 @@
                                                            id="input_link_bang_gia" value="<?php echo $link_bang_gia?>"
                                                            class="width_100 valid">
                                                  <?php echo $btn_link_bang_gia?>
-                                            <a title="Gửi mail báo giá cho khách hàng" style="padding: 2px 10px;" class="red btn  btn-danger" id="send_email_bao_gia"><i class="fa fa-envelope "></i></a>
+                                            <?php if($action==2) { ?>
+                                            <button href="javascript:void(0)" style="padding: 5px 10px;" data-id="<?php echo _return_mc_encrypt($id_booking, ENCRYPTION_KEY); ?>" data-toggle="modal" type="button" role="button" class="green btn btn-xs btn-success view_email_bao_gia" >
+                                                <i class="fa fa-envelope "></i>
+                                                Gửi email báo giá
+                                            </button>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -1384,6 +1442,105 @@
 </div><!-- PAGE CONTENT ENDS -->
 
 <input hidden id="role_valid" class="valid" value="<?php echo $_SESSION['user_role']?>">
+
+<!--        Lịch sử giao dịch-->
+<div id="modal-form-email-bao-gia" class="modal" tabindex="-1">
+    <div class="modal-dialog" style="width: 990px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="blue bigger" id="title_form_email">Bảng báo giá</h4>
+            </div>
+
+            <form enctype="multipart/form-data" id="send_email_bao_gia_form" method="post" >
+
+
+            <div class="modal-body">
+                <div class="row">
+                    <div id="show_loading_giao_dich_email" style="text-align: center">
+                        <img src="<?php echo SITE_NAME . '/view/default/themes/images/loading_1.gif' ?>">
+                    </div>
+                    <div  id="content_email_bao_gia" class="col-xs-12">
+                        <div class="form-group" style="float: left; width: 100%">
+                            <label for="form-field-select-3">Thông tin khách hàng</label>
+                            <div class="profile-user-info profile-user-info-striped" style="width: 100%;">
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> Tên khách hàng</div>
+                                    <div class="profile-info-value" id="name_cus_email">
+                                    </div>
+                                </div>
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name">Email</div>
+                                    <div class="profile-info-value" id="email_cus_email">
+
+                                    </div>
+                                    <input hidden name="email_cus_submit" id="email_cus_submit" value="">
+                                </div>
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name">Điện thoại</div>
+                                    <div class="profile-info-value" id="phone_cus_email">
+
+                                    </div>
+                                </div>
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name">Dịa chỉ</div>
+                                    <div class="profile-info-value" id="address_cus_email">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" style="float: left; width: 100%">
+                            <label for="form-field-select-3">Nội dung email</label>
+                            <script type="text/javascript"
+                                    src="<?php echo SITE_NAME ?>/view/admin/Themes/ckeditor/ckeditor.js"></script>
+                            <textarea id="content_bao_gia" style="width: 100% !important;" name="content_email"></textarea>
+                            <script
+                                    type="text/javascript">CKEDITOR.replace('content_email'); </script>
+                        </div>
+                        <div class="form-group" style="float: left; width: 100%">
+                            <label for="form-field-select-3">Import file</label>
+                            <div class="profile-user-info profile-user-info-striped" style="width: 100%;">
+                                <div class="profile-info-row">
+                                    <div class="profile-info-name"> File báo giá</div>
+                                    <div class="profile-info-value" id="">
+                                        <div class="div_file_email" style="    float: left;width: 100%;margin-bottom: 10px">
+                                            <input type="file" name="file_email[]" class="file_input"/>
+                                            <input type="file" name="file_email[]" class="file_input"/>
+                                            <input type="file" name="file_email[]" class="file_input"/>
+                                        </div>
+                                        <a class="btn btn-sm btn-success" id="add_file" href="javascript:void(0)">
+                                            <i class="ace-icon fa fa-file"></i>
+                                            Thêm file
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer" style="position: fixed; width: 99.8%;">
+                <button  class="btn btn-sm btn-primary" id="save_giao_dich"
+                        type="button">
+                    <i class="ace-icon fa fa-check"></i>
+                    Save
+                </button>
+                <button style="display: none" class="btn btn-sm btn-primary" id="show_loading_btn"
+                        type="button">
+                    Loding...
+                </button>
+                <button type="reset" class="btn btn-sm" data-dismiss="modal" id="reset_form_popup">
+                    <i class="ace-icon fa fa-times"></i>
+                    Cancel
+                </button>
+            </div>
+            </form>
+
+        </div>
+    </div>
+</div><!-- PAGE CONTENT ENDS -->
 
 
 

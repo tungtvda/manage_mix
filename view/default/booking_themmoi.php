@@ -464,7 +464,7 @@ function show_booking_themmoi($data = array())
         $do_tuoi_nguoi_lon=$data['data_user'][0]->name_price;
         $do_tuoi_tre_em_m1=$data['data_user'][0]->name_price_m1;
         $do_tuoi_tre_em_m2=$data['data_user'][0]->name_price_m2;
-        $do_tuoi_tre_em_m3=$data['data_user'][0]->name_price_m2;
+        $do_tuoi_tre_em_m3=$data['data_user'][0]->name_price_m3;
 
         $name_price_nguoi_lon='Đơn giá người lớn '.$do_tuoi_nguoi_lon;
         if($do_tuoi_tre_em_m1!=''){

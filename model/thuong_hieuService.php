@@ -62,17 +62,17 @@ function thuong_hieu_getByPaging($CurrentPage, $PageSize,$Order,$where)
 //
 function thuong_hieu_getByPagingReplace($CurrentPage, $PageSize,$Order,$where)
 {
-   return thuong_hieu_Get("SELECT thuong_hieu.id, thuong_hieu.active, thuong_hieu.name, thuong_hieu.logo, thuong_hieu.icon, thuong_hieu.banner, thuong_hieu.link_banner, thuong_hieu.banner_qc, thuong_hieu.link_banner_qc, thuong_hieu.link_khoi_hanh, thuong_hieu.email, thuong_hieu.mat_khau_ung_dung, thuong_hieu.chu_ky_email FROM  thuong_hieu ".(($where!='')?(' where '.$where):'')." Order By ".$Order." Limit ".(($CurrentPage-1)*$PageSize)." , ".$PageSize);
+   return thuong_hieu_Get("SELECT thuong_hieu.id, thuong_hieu.active, thuong_hieu.name, thuong_hieu.domain, thuong_hieu.logo, thuong_hieu.icon, thuong_hieu.banner, thuong_hieu.link_banner, thuong_hieu.banner_qc, thuong_hieu.link_banner_qc, thuong_hieu.link_khoi_hanh, thuong_hieu.email, thuong_hieu.mat_khau_ung_dung, thuong_hieu.chu_ky_email FROM  thuong_hieu ".(($where!='')?(' where '.$where):'')." Order By ".$Order." Limit ".(($CurrentPage-1)*$PageSize)." , ".$PageSize);
 }
 //
 function thuong_hieu_insert($obj)
 {
-    return exe_query("insert into thuong_hieu (active,name,logo,icon,banner,link_banner,banner_qc,link_banner_qc,link_khoi_hanh,email,mat_khau_ung_dung,chu_ky_email) values ('$obj->active','$obj->name','$obj->logo','$obj->icon','$obj->banner','$obj->link_banner','$obj->banner_qc','$obj->link_banner_qc','$obj->link_khoi_hanh','$obj->email','$obj->mat_khau_ung_dung','$obj->chu_ky_email')",'thuong_hieu');
+    return exe_query("insert into thuong_hieu (active,name,domain,logo,icon,banner,link_banner,banner_qc,link_banner_qc,link_khoi_hanh,email,mat_khau_ung_dung,chu_ky_email) values ('$obj->active','$obj->name','$obj->domain','$obj->logo','$obj->icon','$obj->banner','$obj->link_banner','$obj->banner_qc','$obj->link_banner_qc','$obj->link_khoi_hanh','$obj->email','$obj->mat_khau_ung_dung','$obj->chu_ky_email')",'thuong_hieu');
 }
 //
 function thuong_hieu_update($obj)
 {
-    return exe_query("update thuong_hieu set active='$obj->active',name='$obj->name',logo='$obj->logo',icon='$obj->icon',banner='$obj->banner',link_banner='$obj->link_banner',banner_qc='$obj->banner_qc',link_banner_qc='$obj->link_banner_qc',link_khoi_hanh='$obj->link_khoi_hanh',email='$obj->email',mat_khau_ung_dung='$obj->mat_khau_ung_dung',chu_ky_email='$obj->chu_ky_email' where id=$obj->id",'thuong_hieu');
+    return exe_query("update thuong_hieu set active='$obj->active',name='$obj->name',domain='$obj->domain',logo='$obj->logo',icon='$obj->icon',banner='$obj->banner',link_banner='$obj->link_banner',banner_qc='$obj->banner_qc',link_banner_qc='$obj->link_banner_qc',link_khoi_hanh='$obj->link_khoi_hanh',email='$obj->email',mat_khau_ung_dung='$obj->mat_khau_ung_dung',chu_ky_email='$obj->chu_ky_email' where id=$obj->id",'thuong_hieu');
 }
 //
 function thuong_hieu_delete($obj)

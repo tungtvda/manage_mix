@@ -1830,6 +1830,37 @@ jQuery(function ($) {
 
     // show hide text
     $('body').on('click', '#save_giao_dich', function () {
+        var email=$('#email_cus_submit').val();
+        if(email!=''){
+            var link = url + '/booking/send_email_bao_gia.html';
+            var form = $('#send_email_bao_gia_form')[0];
+            // Create an FormData object
+            var data = new FormData(form);
+            $.ajax({
+                method: 'POST',
+                url: link,
+                enctype: 'multipart/form-data',
+                processData: false,  // Important!
+                contentType: false,
+                cache: false,
+                data:  data,
+                success: function (response) {
+                   console.log(response);
+                }
+            });
+        }else{
+            lnv.alert({
+                title: 'Lỗi',
+                content: 'Bạn vui lòng nhập email báo gi',
+                alertBtnText: 'Ok',
+                iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                alertHandler: function () {}
+            });
+        }
+    });
+
+    // show hide text
+    $('body').on('click', '#save_giao_dich', function () {
         var value = $('#content_giaodich').val();
         var created = $('#created_giaodich').val();
         var time = $('.time_giaodich').val();
@@ -2005,6 +2036,16 @@ jQuery(function ($) {
             '</tr>';
         $('#list_dichvu').append(item);
     });
+    $('body').on('click', '#add_file', function () {
+        $('.div_file_email').append('<input type="file" name="file_email[]" class="file_input"/>');
+        $('.file_input').ace_file_input({
+            no_file: 'No File ...',
+            btn_choose: 'Choose',
+            btn_change: 'Change',
+            droppable: false,
+            onchange: null,
+        });
+    });
     $('[data-rel=tooltip]').tooltip();
     $('[data-toggle="tooltip"]').tooltip();
     $('body').on('click', '.input_price_dichvu', function () {
@@ -2044,16 +2085,54 @@ jQuery(function ($) {
         total_price_dich_vu(0, id, soluong);
     });
     // show lịch sử giao dịch
-    $('body').on('click', '#send_email_bao_gia', function () {
-        var id = $('.thuong_hieu').val();
-        if (id) {
+    $('body').on('click', '.view_email_bao_gia', function () {
+
+        var id = $(this).attr('data-id');
+        var thuong_hieu = $('.thuong_hieu').val();
+        var email = $('#input_email').val();
+        var code=$('#input_code_booking').val();
+        $('#title_form_email').html('Bảng báo giá cho đơn hàng "'+code+'"');
+        if (id && email && thuong_hieu) {
+            $('#show_loading_giao_dich_email').show();
+            $('#modal-form-email-bao-gia').modal('show');
             var link = url + '/gui-bao-gia-booking.html';
             $.ajax({
                 method: 'GET',
                 url: link,
-                data: 'id=' + id,
+                data: 'id=' + id+'&email='+email+'&thuong_hieu='+thuong_hieu,
                 success: function (response) {
-                    console.log(response);
+                    $('#show_loading_giao_dich_email').hide();
+                    $('#name_cus_email').html($('#input_name_customer').val());
+                    $('#email_cus_email').html($('#input_email').val());
+                    $('#email_cus_submit').val($('#input_email').val());
+                    $('#address_cus_email').html($('#input_address').val());
+                    $('#phone_cus_email').html($('#input_phone').val());
+                    $('#content_email_bao_gia').show();
+                    $('#content_bao_gia').html(response);
+                    CKEDITOR.instances.content_bao_gia.setData(response);
+                }
+            });
+        }else{
+            if(thuong_hieu=='' && email=='' && id==''){
+                var mess='Bạn vui lòng chọn thương hiệu  và nhập email khách hàng';
+            }else{
+                if(thuong_hieu==''){
+                    var mess='Bạn vui lòng chọn thương hiệu';
+                }else{
+                    if(id==''){
+                        var mess='Không tồn tại id booking';
+                    }else{
+                        var mess='Bạn vui lòng nhập email khách hàng';
+                    }
+                }
+            }
+            lnv.alert({
+                title: 'Lỗi',
+                content: mess,
+                alertBtnText: 'Ok',
+                iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                alertHandler: function () {
+
                 }
             });
         }

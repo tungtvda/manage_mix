@@ -155,7 +155,7 @@ if ($type_tour == 1 || $type_tour == 0) {
         $booking_model->phuong_tien = $check_data_tour[0]->vehicle;
         if ($check_data_tour[0]->so_cho >= 0) {
             $update_tour = new tour((array)$check_data_tour[0]);
-            $con_lai = $check_data_tour[0]->so_cho - ($num_nguoi_lon + $num_tre_em + $num_tre_em_5);
+            $con_lai = $check_data_tour[0]->so_cho - ($num_nguoi_lon + $num_tre_em_m1 + $num_tre_em_m2+$num_tre_em_m3);
             if ($con_lai < 0) {
                 $con_lai = 0;
             }

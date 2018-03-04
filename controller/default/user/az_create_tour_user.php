@@ -123,9 +123,9 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['name_tour']
                     }
 
                     //send email to admin
-//                $body='Thành viên  '.$data_user[0]->name.' đã tạo tour "'.$name_tour.'", bạn hãy  <a href="'.$link_noti.'">truy cập vào đây</a> xác nhận tour theo yêu cầu này';
-//                $subject='Xác nhận yêu cầu tạo tour thừ thành viên tiếp thị liên kết';
-//                if (SendMail('tungtv.soist@gmail.com', $body, $subject, 1,'Hệ thống tiếp thị liên kết Azbooking.vn', 'az')) {}
+                $body='Thành viên  '.$data_user[0]->name.' đã tạo tour "'.$name_tour.'", bạn hãy  <a href="'.$link_noti.'">truy cập vào đây</a> xác nhận tour theo yêu cầu này';
+                $subject='Xác nhận yêu cầu tạo tour thừ thành viên tiếp thị liên kết';
+                if (SendMail('tungtv.soist@gmail.com', $body, $subject, 1,'Hệ thống tiếp thị liên kết Azbooking.vn', 'az')) {}
                     $array_res['success'] = 1;
                     $array_res['mess'] = 'Tạo tour <b>' . $name_tour . '</b> thành công, chúng tôi sẽ liên hệ với khách hàng và xác nhận tour trong thời gian sớm nhất';
                 }
@@ -190,7 +190,7 @@ function returnHtmlGen($row){
 
 
     $danhsach = '<tr id="tr-tour-'.$row['id'].'">
-            <td >#</td>
+            <td class="td_stt">#</td>
              <td class="lienhe_thanhvien">' . $tour . '</td>
             <td class="lienhe_thanhvien">' . $lien_he . '</td>
             <td>' . _returnDateFormatConvert($row['created']) . '</td>
@@ -198,7 +198,7 @@ function returnHtmlGen($row){
             <td>
             <a data-name="' . $row['name_tour'] . '" data-id="' . $row['id'] . '" rel="tooltip" data-original-title="Xem chi tiết"  style="margin-right: 5px; padding: 10px 9px; background-color: #337ab7;border-color: #2e6da4;" class="btn btn-primary view-tour-user">
             <i data-name="' . $row['name_tour'] . '" data-id="' . $row['id'] . '" style="background:none" class="fa fa-eye"></i></a>
-            <a rel="tooltip" data-original-title="Xóa" href="javascript:void(0)" class="btn btn-danger">
+           <a data-name="'.$row['name_tour'].'" data-id="'.$row['id'].'"  rel="tooltip" data-original-title="Xóa" href="javascript:void(0)" class="btn btn-danger delete-tour-user">
                 <i style="background:none" class="fa fa-trash"></i>
             </a>
             </td>

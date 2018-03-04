@@ -74,7 +74,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['name_tour']
                 $tour->phone_cus = $phone;
                 $tour->name_tour = $name_tour;
                 $tour->time_tour = $time_tour;
-                $tour->date_tour = date("Y-m-d", strtotime($khoi_hanh_date));;
+                $tour->date_tour = date("Y-m-d", strtotime($khoi_hanh_date));
                 $tour->address_tour = $khoi_hanh_address;
                 $tour->note_tour = $note;
                 tour_create_user_update($tour);
@@ -98,7 +98,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['name_tour']
                 $tour->phone_cus = $phone;
                 $tour->name_tour = $name_tour;
                 $tour->time_tour = $time_tour;
-                $tour->date_tour = $khoi_hanh_date;
+                $tour->date_tour = date("Y-m-d", strtotime($khoi_hanh_date));
                 $tour->address_tour = $khoi_hanh_address;
                 $tour->created = _returnGetDateTime();
                 $tour->note_tour = $note;
@@ -114,7 +114,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['name_tour']
                     // send noti
 
                     $name_noti = 'Thành viên  ' . $data_user[0]->name . ' đã tạo tour "' . $name_tour . '", bạn hãy xác nhận tour theo yêu cầu này';
-                    $link_noti = '/tour-user/sua?noti=1&confirm=1&id=' . _return_mc_encrypt($id_edit, ENCRYPTION_KEY);
+                    $link_noti = '/tour-yeu-cau/sua?noti=1&confirm=1&id=' . _return_mc_encrypt($id_edit, ENCRYPTION_KEY);
                     $data_list_user_admin = user_getByTop('', 'user_role=1 and status=1', 'id desc');
                     if (count($data_list_user_admin) > 0) {
                         foreach ($data_list_user_admin as $row_admin) {
@@ -123,9 +123,8 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['name_tour']
                     }
 
                     //send email to admin
-                $body='Thành viên  '.$data_user[0]->name.' đã tạo tour "'.$name_tour.'", bạn hãy  <a href="'.$link_noti.'">truy cập vào đây</a> xác nhận tour theo yêu cầu này';
-                $subject='Xác nhận yêu cầu tạo tour thừ thành viên tiếp thị liên kết';
-                if (SendMail('tungtv.soist@gmail.com', $body, $subject, 1,'Hệ thống tiếp thị liên kết Azbooking.vn', 'az')) {}
+                $body='Thành viên  '.$data_user[0]->name.' đã tạo tour "'.$name_tour.'", bạn hãy  <a href="'.SITE_NAME.$link_noti.'">truy cập vào đây</a> xác nhận tour theo yêu cầu này';
+                if (SendMail('thanhtuyen@mixmedia.vn', $body, $subject, 1,'Hệ thống tiếp thị liên kết Azbooking.vn', 'az')) {}
                     $array_res['success'] = 1;
                     $array_res['mess'] = 'Tạo tour <b>' . $name_tour . '</b> thành công, chúng tôi sẽ liên hệ với khách hàng và xác nhận tour trong thời gian sớm nhất';
                 }

@@ -171,3 +171,4 @@ RewriteRule ^import-user.html controller/default/customer/import.php
 RewriteRule ^export-user.html controller/default/customer/export.php
 
 RewriteRule ^export-user/?$ controller/default/customer/exports
+RewriteRule ^giao-dich-khach-hang/$ controller/default/transaction/transaction.php

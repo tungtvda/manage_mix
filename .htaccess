@@ -166,6 +166,9 @@ RewriteRule ^azbooking-get-detail-booking.html controller/default/booking/az_det
 RewriteRule ^return-hoa-hong.html controller/default/user/az_hoahong.php
 RewriteRule ^azbooking-list-dieu-hanh.html controller/default/user/az_list_dieu_hanh.php
 RewriteRule ^azbooking-list-type-dich-vu.html controller/default/booking/az_list_type_dich_vu.php
+RewriteRule ^azbooking-create-tour.html controller/default/user/az_create_tour_user.php
+RewriteRule ^azbooking-get-list-tour-yeu-cau.html controller/default/user/az_list_tour_user.php
+RewriteRule ^azbooking-delete-tour-yeu-cau.html controller/default/user/az_delete_tour_user.php
 
 RewriteRule ^import-user.html controller/default/customer/import.php
 RewriteRule ^export-user.html controller/default/customer/export.php

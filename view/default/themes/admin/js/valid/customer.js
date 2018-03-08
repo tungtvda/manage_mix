@@ -30,8 +30,24 @@ jQuery(function ($) {
     $('body').on("keyup", '#input_address', function () {
         checkAddressUser();
     });
-
-    // check address
+    //check date
+    $('body').on("input", '#input_created', function () {
+        checkDate();
+    });
+    $('body').on("keyup", '#input_created', function () {
+        checkDate();
+    });
+    $('body').on("change", '#input_created', function () {
+        checkDate();
+    });
+    //check content
+    $('body').on("input", '#input_content', function () {
+        checkContent();
+    });
+    $('body').on("keyup", '#input_content', function () {
+        checkContent();
+    });
+    // check phone
     $('body').on("input", '#input_phone', function () {
         checkPhoneUser();
     });
@@ -51,11 +67,12 @@ jQuery(function ($) {
         var error_free = true;
         for (var input in form_data) {
             var name_input=form_data[input]['name'];
-            if (name_input != "mr"&&name_input != "resources_to"&&name_input!='category'&&name_input!='nganh_nghe'&&name_input!='chuc_vu'&&name_input!='phong_ban'&&name_input!='note') {
+            if (name_input != "mr"&&name_input != "resources_to"&&name_input!='category'&&name_input!='nganh_nghe'&&name_input!='chuc_vu'&&name_input!='phong_ban'&&name_input!='note' && name_input!='time') {
                 var element = $("#input_" + form_data[input]['name']);
                 var error = $("#error_" + form_data[input]['name']);
                 var valid = element.hasClass("valid");
                 if (valid == false) {
+                    console.log(element);
                     element.addClass("input-error").removeClass("valid");
                     error.show();
                     error_free = false
@@ -289,7 +306,29 @@ function showHiddenMobiUser(res, mess) {
     }
 }
 
+//check date
+function checkDate() {
+    var value = $("#input_created").val();
+    if (value == '') {
+        var mess = 'Bạn vui lòng chọn ngày';
+        showHiddenDate(0, mess);
+    } else {
+        var mess = '';
+        showHiddenDate(1, mess);
+    }
+}
 
+//check content
+function checkContent() {
+    var value = $("#input_content").val();
+    if (value == '') {
+        var mess = 'Bạn vui lòng nhập nội dung';
+        showHiddenContent(0, mess);
+    } else {
+        var mess = '';
+        showHiddenContent(1, mess);
+    }
+}
 //check địa chỉ nhân viên
 function checkAddressUser() {
     var value = $("#input_address").val();
@@ -321,6 +360,45 @@ function showHiddenAddressUser(res, mess) {
     }
 }
 
+function showHiddenDate(res, mess) {
+    var error_date = $("#error_created");
+    if (res == 1) {
+        error_date.hide();
+        $('#icon_error_created').hide();
+        $('#input_created').removeClass("input-error").addClass("valid");
+    }
+    else {
+        if (res != 0) {
+            mess = res;
+        }
+        $('#icon_error_created').show();
+        $('#input_created').addClass("input-error").removeClass("valid");
+        error_date.removeClass("success-color");
+        error_date.addClass("error-color");
+        error_date.html(mess);
+        error_date.show();
+    }
+}
+
+function showHiddenContent(res, mess) {
+    var error_content = $("#error_content");
+    if (res == 1) {
+        error_content.hide();
+        $('#icon_error_content').hide();
+        $('#input_content').removeClass("input-error").addClass("valid");
+    }
+    else {
+        if (res != 0) {
+            mess = res;
+        }
+        $('#icon_error_content').show();
+        $('#input_content').addClass("input-error").removeClass("valid");
+        error_content.removeClass("success-color");
+        error_content.addClass("error-color");
+        error_content.html(mess);
+        error_content.show();
+    }
+}
 
 // check mã nhân viên
 function showHiddenUserEmail(res, mess) {

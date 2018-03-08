@@ -25,6 +25,9 @@ function view_valid_form($data = array())
         case 'ruttien':
             require_once DIR . '/view/default/template/module/ruttien/valid.php';
             break;
+        case 'transaction':
+            require_once DIR . '/view/default/template/module/transaction/valid.php';
+            break;
     }
 
 }

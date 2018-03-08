@@ -21,8 +21,8 @@ $data['list']=transaction_getByAll();
 foreach ($data['list'] as $item){
     $item->customer= customer_getById($item->customer_id)[0];
 }
-
-$data['module_valid'] = "Khách hàng";
+$data['customerList']=customer_getByAll();
+$data['module_valid'] = "transaction";
 $data['title_print'] = 'Giao dịch khách hàng';
 $data['title']='Giao dịch khách hàng';
 show_header($data);

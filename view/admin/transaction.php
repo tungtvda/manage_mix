@@ -29,7 +29,7 @@ function view_transaction($data)
 //
 function showTableHeader()
 {
-    return '<th>id</th><th>customer_id</th><th>created_at</th>';
+    return '<th>id</th><th>customer_id</th><th>created_at</th><th>updated_at</th><th>created_by</th>';
 }
 //
 function showTableBody($data)
@@ -41,6 +41,8 @@ function showTableBody($data)
         $TableBody.="<td>".$obj->id."</td>";
         $TableBody.="<td>".$obj->customer_id."</td>";
         $TableBody.="<td>".$obj->created_at."</td>";
+        $TableBody.="<td>".$obj->updated_at."</td>";
+        $TableBody.="<td>".$obj->created_by."</td>";
         $TableBody.="<td><a href=\"?action=edit&id=".$obj->id."\" title=\"Edit\"><img src=\"".SITE_NAME."/view/admin/Themes/images/pencil.png\" alt=\"Edit\"></a>";
         $TableBody.="<a href=\"?action=delete&id=".$obj->id."\" title=\"Delete\" onClick=\"return confirm('Bạn có chắc chắc muốn xóa?')\"><img src=\"".SITE_NAME."/view/admin/Themes/images/cross.png\" alt=\"Delete\"></a> ";
         $TableBody.="</td>";
@@ -52,10 +54,9 @@ function showTableBody($data)
 function showFrom($form,$ListKey=array())
 {
     $str_from='';
-    $str_from.='<p><label>created_by</label><input class="text-input small-input" type="text"  name="created_by" value="'.(($form!=false)?$form->created_by:'').'" /></p>';
     $str_from.='<p><label>customer_id</label><input class="text-input small-input" type="text"  name="customer_id" value="'.(($form!=false)?$form->customer_id:'').'" /></p>';
     $str_from.='<p><label>created_at</label><input class="text-input small-input" type="text"  name="created_at" value="'.(($form!=false)?$form->created_at:'').'" /></p>';
     $str_from.='<p><label>updated_at</label><input class="text-input small-input" type="text"  name="updated_at" value="'.(($form!=false)?$form->updated_at:'').'" /></p>';
-    $str_from.='<p><label>updated_by</label><input class="text-input small-input" type="text"  name="updated_by" value="'.(($form!=false)?$form->updated_by:'').'" /></p>';
+    $str_from.='<p><label>created_by</label><input class="text-input small-input" type="text"  name="created_by" value="'.(($form!=false)?$form->created_by:'').'" /></p>';
     return $str_from;
 }

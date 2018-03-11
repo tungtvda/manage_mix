@@ -373,7 +373,20 @@
         }).next().on(ace.click_event, function () {
             $(this).prev().focus();
         });
-
+        $('#timepicker2').timepicker({
+            minuteStep: 1,
+            showSeconds: true,
+            showMeridian: false,
+            disableFocus: true,
+            icons: {
+                up: 'fa fa-chevron-up',
+                down: 'fa fa-chevron-down'
+            }
+        }).on('focus', function () {
+            $('#timepicker2').timepicker('showWidget');
+        }).next().on(ace.click_event, function () {
+            $(this).prev().focus();
+        });
 
         if (!ace.vars['old_ie']) $('#date-timepicker1').datetimepicker({
             //format: 'MM/DD/YYYY h:mm:ss A',//use this option to display seconds

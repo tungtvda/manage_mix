@@ -54,7 +54,7 @@ if(isset($_SESSION["Admin"]))
             header('Location: '.SITE_NAME.'/controller/admin/customer_transaction.php');
         }
     }
-    if(isset($_POST["transaction_id"])&&isset($_POST["title"])&&isset($_POST["description"])&&isset($_POST["created_at"])&&isset($_POST["update_at"])&&isset($_POST["created_by"])&&isset($_POST["updated_by"]))
+    if(isset($_POST["transaction_id"])&&isset($_POST["title"])&&isset($_POST["description"])&&isset($_POST["created_at"])&&isset($_POST["update_at"])&&isset($_POST["created_by"])&&isset($_POST["updated_by"])&&isset($_POST["date"])&&isset($_POST["time"])&&isset($_POST["customer_id"]))
     {
        $array=$_POST;
        if(!isset($array['id']))
@@ -73,6 +73,12 @@ if(isset($_SESSION["Admin"]))
        $array['created_by']='0';
        if(!isset($array['updated_by']))
        $array['updated_by']='0';
+       if(!isset($array['date']))
+       $array['date']='0';
+       if(!isset($array['time']))
+       $array['time']='0';
+       if(!isset($array['customer_id']))
+       $array['customer_id']='0';
       $new_obj=new customer_transaction($array);
         if($insert)
         {

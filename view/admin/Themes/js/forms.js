@@ -91,5 +91,6 @@ jQuery(document).ready(function(){
 	});
 	
 	jQuery('#timepicker1').timepicker();
-	
+	jQuery('#timepicker2').timepicker();
+
 });

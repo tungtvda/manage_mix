@@ -40,12 +40,31 @@ jQuery(function ($) {
     $('body').on("change", '#input_created', function () {
         checkDate();
     });
+
     //check content
     $('body').on("input", '#input_content', function () {
         checkContent();
     });
     $('body').on("keyup", '#input_content', function () {
         checkContent();
+    });
+    //check date trans
+    $('body').on("input", '#input_created_trans', function () {
+        checkDateTrans();
+    });
+    $('body').on("keyup", '#input_created_trans', function () {
+        checkDateTrans();
+    });
+    $('body').on("change", '#input_created_trans', function () {
+        checkDateTrans();
+    });
+
+    //check content trans
+    $('body').on("input", '#input_content_trans', function () {
+        checkContentTrans();
+    });
+    $('body').on("keyup", '#input_content_trans', function () {
+        checkContentTrans();
     });
     // check phone
     $('body').on("input", '#input_phone', function () {
@@ -72,7 +91,6 @@ jQuery(function ($) {
                 var error = $("#error_" + form_data[input]['name']);
                 var valid = element.hasClass("valid");
                 if (valid == false) {
-                    console.log(element);
                     element.addClass("input-error").removeClass("valid");
                     error.show();
                     error_free = false
@@ -84,7 +102,27 @@ jQuery(function ($) {
         }
 
     });
+    $('body').on("click", '#submit_form_action_trans', function () {
+        var form_data = $("#submit_form_trans").serializeArray();
+        var error_free = true;
+        for (var input in form_data) {
+            var name_input=form_data[input]['name'];
+            if (name_input!='user_trans' && name_input!='time_trans') {
+                var element = $("#input_" + form_data[input]['name']);
+                var error = $("#error_" + form_data[input]['name']);
+                var valid = element.hasClass("valid");
+                if (valid == false) {
+                    element.addClass("input-error").removeClass("valid");
+                    error.show();
+                    error_free = false
+                }
+            }
+        }
+        if (error_free != false) {
+            $("#submit_form_trans").submit();
+        }
 
+    });
     $('body').on("click", '.view_popup_detail', function () {
         var Id = $(this).attr("countid");
         var name = $(this).attr("name_record");
@@ -317,7 +355,17 @@ function checkDate() {
         showHiddenDate(1, mess);
     }
 }
-
+//check date
+function checkDateTrans() {
+    var value = $("#input_created_trans").val();
+    if (value == '') {
+        var mess = 'Bạn vui lòng chọn ngày';
+        showHiddenDateTrans(0, mess);
+    } else {
+        var mess = '';
+        showHiddenDateTrans(1, mess);
+    }
+}
 //check content
 function checkContent() {
     var value = $("#input_content").val();
@@ -327,6 +375,17 @@ function checkContent() {
     } else {
         var mess = '';
         showHiddenContent(1, mess);
+    }
+}
+//check content
+function checkContentTrans() {
+    var value = $("#input_content_trans").val();
+    if (value == '') {
+        var mess = 'Bạn vui lòng nhập nội dung';
+        showHiddenContentTrans(0, mess);
+    } else {
+        var mess = '';
+        showHiddenContentTrans(1, mess);
     }
 }
 //check địa chỉ nhân viên
@@ -379,6 +438,25 @@ function showHiddenDate(res, mess) {
         error_date.show();
     }
 }
+function showHiddenDateTrans(res, mess) {
+    var error_date = $("#error_created_trans");
+    if (res == 1) {
+        error_date.hide();
+        $('#icon_error_created_trans').hide();
+        $('#input_created_trans').removeClass("input-error").addClass("valid");
+    }
+    else {
+        if (res != 0) {
+            mess = res;
+        }
+        $('#icon_error_created_trans').show();
+        $('#input_created_trans').addClass("input-error").removeClass("valid");
+        error_date.removeClass("success-color");
+        error_date.addClass("error-color");
+        error_date.html(mess);
+        error_date.show();
+    }
+}
 
 function showHiddenContent(res, mess) {
     var error_content = $("#error_content");
@@ -399,7 +477,25 @@ function showHiddenContent(res, mess) {
         error_content.show();
     }
 }
-
+function showHiddenContentTrans(res, mess) {
+    var error_content = $("#error_content_trans");
+    if (res == 1) {
+        error_content.hide();
+        $('#icon_error_content_trans').hide();
+        $('#input_content_trans').removeClass("input-error").addClass("valid");
+    }
+    else {
+        if (res != 0) {
+            mess = res;
+        }
+        $('#icon_error_content_trans').show();
+        $('#input_content_trans').addClass("input-error").removeClass("valid");
+        error_content.removeClass("success-color");
+        error_content.addClass("error-color");
+        error_content.html(mess);
+        error_content.show();
+    }
+}
 // check mã nhân viên
 function showHiddenUserEmail(res, mess) {
     var email_user_error = $("#error_email");

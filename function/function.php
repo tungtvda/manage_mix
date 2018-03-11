@@ -1870,6 +1870,62 @@ function _returnListGiaodich($id){
     }
 }
 
+function _returnListTrans($id){
+    $data=customer_transaction_getByTop('','transaction_id='.$id,'Id DESC');
+    if($data){
+        $array_data=array();
+        $string_res='';
+        $count=0;
+        foreach($data as $row){
+            $content=$row->description;
+            $hidde_btn_show='display: none!important;';
+
+            if (strlen($content) > 100) {
+                $ten1=strip_tags($content);
+                $ten = substr($ten1, 0, 100);
+                $name = substr($ten, 0, strrpos($ten, ' ')) . "...";
+                $content=$name;
+                $hidde_btn_show='';
+            }
+            $backgroup='';
+            if($count%2==0){
+                $backgroup='background: #f1f9ee;';
+            }
+            $string_res.='<div class="itemdiv dialogdiv">
+                                                        <div class="user" style="">
+                                                             <span class="orange">'._returnDateFormatConvertVN($row->created_at).'</span>
+                                                        </div>
+                                                         
+                                                        <div style="'.$backgroup.'" class="body">
+                                                            <div class="text" id="short_text_'.$row->id.'">'.$content.'</div>
+                                                            <div hidden id="long_text_'.$row->id.'">
+                                                               '.$row->description.'
+                                                            </div>
+                                                            <div style="display:block; '.$hidde_btn_show.'" class="tools">
+                                                                <a title="Xem chi tiết" href="javascript:void(0)" countid="'.$row->id.'" data-hide="show" class="show_content_full">
+                                                                    <i id="icon_show_hide_'.$row->id.'" class="icon-only ace-icon fa fa-expand"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>';
+            $item=array(
+                'id'=>$row->id,
+                'transaction_id'=>$row->transaction_id,
+                'description'=>$row->description,
+                'created_at'=>$row->created_at
+            );
+            array_push($array_data,$item);
+            $count++;
+        }
+        if($array_data){
+            return $string_res;
+        }else{
+            return 1;
+        }
+    }else{
+        return 1;
+    }
+}
 function _returnInsertChiphiBooking($booking_id, $user_id, $name,$price,$description,$created, $mess_log){
     $obj = new booking_cost();
     $obj->booking_id = $booking_id;

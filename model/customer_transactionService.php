@@ -62,17 +62,17 @@ function customer_transaction_getByPaging($CurrentPage, $PageSize,$Order,$where)
 //
 function customer_transaction_getByPagingReplace($CurrentPage, $PageSize,$Order,$where)
 {
-   return customer_transaction_Get("SELECT customer_transaction.id, customer_transaction.transaction_id, customer_transaction.title, customer_transaction.description, customer_transaction.created_at, customer_transaction.update_at, customer_transaction.created_by, customer_transaction.updated_by FROM  customer_transaction ".(($where!='')?(' where '.$where):'')." Order By ".$Order." Limit ".(($CurrentPage-1)*$PageSize)." , ".$PageSize);
+   return customer_transaction_Get("SELECT customer_transaction.id, customer_transaction.transaction_id, customer_transaction.title, customer_transaction.description, customer_transaction.created_at, customer_transaction.update_at, customer_transaction.created_by, customer_transaction.updated_by, customer_transaction.date, customer_transaction.time, customer_transaction.customer_id FROM  customer_transaction ".(($where!='')?(' where '.$where):'')." Order By ".$Order." Limit ".(($CurrentPage-1)*$PageSize)." , ".$PageSize);
 }
 //
 function customer_transaction_insert($obj)
 {
-    return exe_query("insert into customer_transaction (transaction_id,title,description,created_at,update_at,created_by,updated_by) values ('$obj->transaction_id','$obj->title','$obj->description','$obj->created_at','$obj->update_at','$obj->created_by','$obj->updated_by')",'customer_transaction');
+    return exe_query("insert into customer_transaction (transaction_id,title,description,created_at,update_at,created_by,updated_by,date,time,customer_id) values ('$obj->transaction_id','$obj->title','$obj->description','$obj->created_at','$obj->update_at','$obj->created_by','$obj->updated_by','$obj->date','$obj->time','$obj->customer_id')",'customer_transaction');
 }
 //
 function customer_transaction_update($obj)
 {
-    return exe_query("update customer_transaction set transaction_id='$obj->transaction_id',title='$obj->title',description='$obj->description',created_at='$obj->created_at',update_at='$obj->update_at',created_by='$obj->created_by',updated_by='$obj->updated_by' where id=$obj->id",'customer_transaction');
+    return exe_query("update customer_transaction set transaction_id='$obj->transaction_id',title='$obj->title',description='$obj->description',created_at='$obj->created_at',update_at='$obj->update_at',created_by='$obj->created_by',updated_by='$obj->updated_by',date='$obj->date',time='$obj->time',customer_id='$obj->customer_id' where id=$obj->id",'customer_transaction');
 }
 //
 function customer_transaction_delete($obj)

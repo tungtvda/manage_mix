@@ -22,7 +22,7 @@
                 <div class="clearfix">
                     <div class="col-md-6 col-sm-6 col-xs-12 pink" style="padding-left: 0px">
                         <?php if (_returnCheckAction(17) == 1) { ?>
-                            <a href="#modal-form" role="button" data-toggle="modal" id="create_popup"
+                            <a href="#modal-form" role="button" data-toggle="modal" id="create_popup1"
                                class="green btn btn-white btn-create btn-hover-white">
                                 <i class="ace-icon fa fa-plus bigger-120 "></i>
                                 Create
@@ -120,31 +120,33 @@
                                         </td>
                                         <td style="text-align: center">
                                             <?php
-                                            $row = $row->customer;
-                                            if ($row->avatar == '') {
+                                            $row1 = $row->customer;
+                                            if ($row1->avatar == '') {
                                                 $link_ava = SITE_NAME . '/view/default/themes/images/no-avatar.png';
                                             } else {
-                                                $link_ava = SITE_NAME . $row->avatar;
+                                                $link_ava = SITE_NAME . $row1->avatar;
                                             }
                                             ?>
-                                            <img title="<?php echo $row->name ?>" style="width: 50px"
+                                            <img title="<?php echo $row1->name ?>" style="width: 50px"
                                                  src="<?php echo $link_ava ?>"><label
-                                                    style="display: none"><?php echo $row->name ?></label>
+                                                    style="display: none"><?php echo $row1->name ?></label>
                                         </td>
-                                        <td><?php echo $row->email ?></td>
-                                        <td><?php echo $row->phone ?></td>
-                                        <td><?php echo $row->mobi ?></td>
-                                        <td><?php echo $row->skype ?></td>
+                                        <td><?php echo $row1->email ?></td>
+                                        <td><?php echo $row1->phone ?></td>
+                                        <td><?php echo $row1->mobi ?></td>
+                                        <td><?php echo $row1->skype ?></td>
                                         <td >
-                                            <?php echo $row->address ?>
+                                            <?php echo $row1->address ?>
                                         </td>
 
-                                        <!--                                        <td>-->
-                                        <?php //echo _returnDateFormatConvert($row->created) ?><!--</td>-->
+                                                                                <td>
+                                        <?php echo _returnDateFormatConvert($row->created_at) ?></td>
                                         <td>
 
-                                            <a title="Lịch sử giao dịch" class="red view_lich_su_giao_dich"
+                                            <a title="Lịch sử giao dịch" class="red view_lich_su_giao_dich_trans"
                                                href="#modal-form-giaodich" role="button" data-toggle="modal"
+                                               data-code="<?php echo $row1->code ?>"
+                                               data-customer="<?php echo $row1->id ?>"
                                                data-id="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
                                             >
                                                 <i class="ace-icon fa fa-sliders bigger-130"></i>
@@ -277,14 +279,14 @@
                     </ul>
                     <div class="tab-content">
                         <div id="createTransaction" class="tab-pane fade in active">
-                            <form id="submit_tran">
+                            <form id="submit_form_trans" method="post" action="">
 
                                 <div class="profile-user-info profile-user-info-striped" style="width: 100%;">
                                     <div class="profile-info-row">
                                         <div class="profile-info-name"> User <span
                                                     style="color: red">*</span></div>
                                         <div class="profile-info-value">
-                                            <select name="mr" class=" form-control valid">
+                                            <select name="user_trans" class=" form-control valid">
                                                 <?php foreach ($customerList as $user) {?>
                                                   <option value="<?php echo $user->id ?>"><?php echo $user->name ?></option>;
                                                 <?php } ?>
@@ -298,14 +300,14 @@
                                             <div class="input-group" style="">
                                                 <input value=""
                                                        class="form-control date-picker width_100 "
-                                                       id="created_giaodich_trans" name="created"
+                                                       id="input_created_trans" name="created_trans"
                                                        type="text" data-date-format="dd-mm-yyyy">
                                                 <span class="input-group-addon date_icon">
 																		<i class="fa fa-calendar bigger-110"></i>
 																	</span>
                                                 <input value=""
-                                                       class="form-control  width_100 time_giaodich_trans"
-                                                       id="timepicker1_trans" name="time"
+                                                       class="form-control  width_100 time_trans"
+                                                       id="timepicker2" name="time_trans"
                                                        type="text" >
                                                 <span class="input-group-addon date_icon">
 																		<i class="fa fa-clock-o bigger-110"></i>
@@ -320,11 +322,11 @@
                                         <div class="profile-info-name"> Mô tả <span
                                                     style="color: red">*</span></div>
                                         <div class="profile-info-value">
-                                                            <textarea id="content_giaodich_trans" class="form-control"
+                                                            <textarea id="input_content_trans" class="form-control" name="content_trans"
                                                                       placeholder="Bạn hãy nhập nội dung giao dịch ..."></textarea>
                                             <label hidden
                                                    class="error-color  error-color-size"
-                                                   id="show_mess_content_trans">Bạn vui lòng nhập
+                                                   id="error_content_trans">Bạn vui lòng nhập
                                                 nội dung giao dịch</label>
 <!--                                            <p hidden id="show_mess_content_trans" class="red">Bạn vui lòng nhập-->
 <!--                                                nội dung giao dịch</p>-->
@@ -525,7 +527,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="blue bigger" id="title_form">Lịch sử giao dịch đơn hàng "<b
+                <h4 class="blue bigger" id="title_form">Lịch sử giao dịch khách hàng "<b
                             id="name-detail-code-booking" class="red"></b>"</h4>
             </div>
 
@@ -594,7 +596,7 @@
             </div>
 
             <div class="modal-footer">
-                <button class="btn btn-sm btn-primary" id="save_giao_dich" data-id="" data-code=""
+                <button class="btn btn-sm btn-primary" id="save_giao_dich" data-id="" data-code="" data-customer=""
                         type="button">
                     <i class="ace-icon fa fa-check"></i>
                     Save

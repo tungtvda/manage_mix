@@ -1,7 +1,7 @@
 <?php
 class customer_transaction
 {
-    public $id,$transaction_id,$title,$description,$created_at,$update_at,$created_by,$updated_by;
+    public $id,$transaction_id,$title,$description,$created_at,$update_at,$created_by,$updated_by,$date,$time,$customer_id;
     public function customer_transaction($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
@@ -12,6 +12,9 @@ class customer_transaction
     $this->update_at=isset($data['update_at'])?$data['update_at']:'';
     $this->created_by=isset($data['created_by'])?$data['created_by']:'';
     $this->updated_by=isset($data['updated_by'])?$data['updated_by']:'';
+    $this->date=isset($data['date'])?$data['date']:'';
+    $this->time=isset($data['time'])?$data['time']:'';
+    $this->customer_id=isset($data['customer_id'])?$data['customer_id']:'';
           $this->encode();
     }
     public function encode()
@@ -24,6 +27,9 @@ class customer_transaction
             $this->update_at=addslashes($this->update_at);
             $this->created_by=addslashes($this->created_by);
             $this->updated_by=addslashes($this->updated_by);
+            $this->date=addslashes($this->date);
+            $this->time=addslashes($this->time);
+            $this->customer_id=addslashes($this->customer_id);
         }
     public function decode()
         {
@@ -35,5 +41,8 @@ class customer_transaction
             $this->update_at=stripslashes($this->update_at);
             $this->created_by=stripslashes($this->created_by);
             $this->updated_by=stripslashes($this->updated_by);
+            $this->date=stripslashes($this->date);
+            $this->time=stripslashes($this->time);
+            $this->customer_id=stripslashes($this->customer_id);
         }
 }

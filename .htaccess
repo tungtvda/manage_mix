@@ -175,3 +175,4 @@ RewriteRule ^export-user.html controller/default/customer/export.php
 
 RewriteRule ^export-user/?$ controller/default/customer/exports
 RewriteRule ^giao-dich-khach-hang/$ controller/default/transaction/transaction.php
+RewriteRule ^customer-save-transaction.html$ controller/default/transaction/list_transaction.php

@@ -92,8 +92,8 @@
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Mobile</th>
-                                <th>Skype</th>
                                 <th>Address</th>
+                                <th>Created</th>
                                 <th>Lịch sử giao dịch</th>
                                 <th>Action</th>
 
@@ -134,7 +134,6 @@
                                         <td><?php echo $row1->email ?></td>
                                         <td><?php echo $row1->phone ?></td>
                                         <td><?php echo $row1->mobi ?></td>
-                                        <td><?php echo $row1->skype ?></td>
                                         <td >
                                             <?php echo $row1->address ?>
                                         </td>
@@ -156,18 +155,10 @@
                                         <td>
                                             <div class="hidden-sm hidden-xs action-buttons">
 
-                                                <?php if (_returnCheckAction(18) == 1) { ?>
-
-
-                                                    <a title="Sửa tab mới" class="green"
-                                                       href="<?php echo SITE_NAME ?>/khach-hang/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
-                                                        <i class="ace-icon fa fa-pencil bigger-130"></i>
-                                                    </a>
-                                                <?php } ?>
                                                 <?php if (_returnCheckAction(19) == 1) { ?>
                                                     <a title="Xóa" class="red delete_record" href="javascript:void(0)"
                                                        deleteid="<?php echo $row->id ?>"
-                                                       name_record_delete="<?php echo $row->name ?>"
+                                                       name_record_delete="<?php echo $row1->name ?>"
                                                        url_delete="<?php echo SITE_NAME ?>/giao-dich-khach-hang/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>">
                                                         <i class="ace-icon fa fa-trash-o bigger-130"></i>
                                                     </a>
@@ -183,31 +174,13 @@
 
                                                     <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 
-                                                        <?php if (_returnCheckAction(18) == 1) { ?>
-                                                            <li>
-                                                                <a class="blue view_popup_detail" role="button" name_record="<?php echo $row->name ?>" data-toggle="modal" table="customer" countid="<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
-                                                                   href="#modal-form"
-                                                                   title="Chi tiết">
-                                                                    <i class="ace-icon fa fa-eye-slash bigger-130"></i>
-                                                                </a>
-                                                            </li>
 
-                                                            <li>
-                                                                <a href="<?php echo SITE_NAME ?>/khach-hang/sua?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
-                                                                   class="tooltip-success" data-rel="tooltip"
-                                                                   title="Sửa tab mới">
-																				<span class="">
-																					<i class="ace-icon fa fa-pencil bigger-120"></i>
-																				</span>
-                                                                </a>
-                                                            </li>
-                                                        <?php } ?>
                                                         <?php if (_returnCheckAction(19) == 1) { ?>
                                                             <li>
                                                                 <a href="javascript:void(0)"
                                                                    deleteid="<?php echo $row->id ?>"
                                                                    name_record_delete="<?php echo $row->customer->name ?>"
-                                                                   url_delete="<?php echo SITE_NAME ?>/nhan-vien/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
+                                                                   url_delete="<?php echo SITE_NAME ?>/giao-dich-khach-hang/xoa?id=<?php echo _return_mc_encrypt($row->id, ENCRYPTION_KEY); ?>"
                                                                    class="tooltip-error delete_record" title="Xóa">
 																				<span class="red">
 																					<i class="ace-icon fa fa-trash-o bigger-120"></i>

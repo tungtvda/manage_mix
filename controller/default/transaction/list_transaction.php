@@ -3,7 +3,7 @@ if (!defined('DIR')) require_once '../../../config.php';
 require_once DIR . '/model/customer_transactionService.php';
 require_once DIR . '/model/customerService.php';
 require_once DIR . '/model/transactionService.php';
-//_returnCheckPermison(6, 6);
+//_returnCheckPermison(6, 6);;
 if (isset($_GET['id'])) {
     $id = _return_mc_decrypt(addslashes(strip_tags(trim($_GET['id']))), ENCRYPTION_KEY);
     echo _returnListTrans($id);

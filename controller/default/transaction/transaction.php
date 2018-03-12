@@ -15,7 +15,7 @@ _returnCheckPermison(6,6);
 
 $url_bread='<li class="active">Khách hàng</li>';
 $data['breadcrumbs']=$url_bread;
-$count=13;
+$count=9;
 
 
 if (isset($_POST['name']) && isset($_POST['code']) && isset($_POST['mr']) && isset($_POST['birthday']) && isset($_POST['email']) && isset($_POST['address']) && isset($_POST['phone']) && isset($_POST['mobi'])) {

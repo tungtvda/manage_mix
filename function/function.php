@@ -239,7 +239,7 @@ function _returnRandString($length)
     return $str;
 }
 
-function _returnLogin($data_arr, $user_update)
+function _returnLogin($data_arr, $user_update, $return=0)
 {
     $_SESSION["user_id"] = $data_arr['user_id'];
     $_SESSION["user_role"] = $data_arr['user_role'];
@@ -257,11 +257,16 @@ function _returnLogin($data_arr, $user_update)
     if (isset($_SESSION['show_id'])) {
         unset($_SESSION['show_id']);
     }
-    if (isset($_SESSION["link_redict"])) {
-        redict($_SESSION["link_redict"]);
-    } else {
-        redict(SITE_NAME);
+    if($return){
+        return $data_arr;
+    }else{
+        if (isset($_SESSION["link_redict"])) {
+            redict($_SESSION["link_redict"]);
+        } else {
+            redict(SITE_NAME);
+        }
     }
+
 
 }
 

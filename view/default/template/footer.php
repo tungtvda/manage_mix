@@ -83,7 +83,21 @@
 <script src="<?php echo SITE_NAME?>/view/default/themes/admin/js/myjs.js"></script>
 <script src="<?php echo SITE_NAME?>/view/default/themes/admin/js/ggtooltip.js"></script>
 <script type="text/javascript" src="<?php echo SITE_NAME?>/view/default/themes/admin/js/jquery.easyui.min.js"></script>
+<script src="<?php echo SITE_NAME?>/view/default/themes/admin/js/socket.io.js"></script>
+<script>
+    var socket=io("<?php echo SERVER_SOCKET?>");
+    socket.on("returnNoti",function(data){
+        var count =0;
+        var countCurrent=$('.badge-important').text();
 
+        if(countCurrent>=0){
+            count=parseInt(countCurrent)+3;
+        }
+        $('.badge-important').html(count);
+        var title=document.title;
+        document.title="("+count+") "+title
+    });
+</script>
 
 
 

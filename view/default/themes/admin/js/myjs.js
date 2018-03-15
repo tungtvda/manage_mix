@@ -593,9 +593,11 @@ jQuery(function ($) {
     $('body').on("click", '.readNoti', function () {
         var count = $('.count-notification').text();
         var title = document.title;
+        var count_update='';
         if (count) {
             var strfind = "(" + count + ")";
             title = title.slice(strfind.length);
+            count_update="&count=1";
         }
         document.title = title;
         $('.count-notification').text('').hide();
@@ -605,11 +607,12 @@ jQuery(function ($) {
         $.ajax({
             method: "GET",
             url: link,
-            data: "user_id=" + $('#user_id').val(),
+            data: "user_id=" + $('#user_id').val()+"&update=1"+count_update,
             success: function (response) {
                 response = $.parseJSON(response);
                 if(response.success==1){
                     $('.list-notification-nav').html(response.string_noti);
+                    $('#countUnread').text()
                 }
             }
         });

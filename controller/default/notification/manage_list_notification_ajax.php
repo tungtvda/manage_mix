@@ -18,12 +18,14 @@ $res = array(
 if (isset($_GET['user_id'])) {
     if($_GET['user_id']==$_SESSION['user_id']){
         $res['success']=1;
-        $notification_obj = new notification();
-        $notification_obj->status = 2;
-        notification_update_list($notification_obj, 'user_id=' . $_SESSION['user_id'] . ' and status=0');
+        if(isset($_GET['update']) && isset($_GET['count'])){
+            $notification_obj = new notification();
+            $notification_obj->status = 2;
+            notification_update_list($notification_obj, 'user_id=' . $_SESSION['user_id'] . ' and status=0');
+        }
 
-        $count_active=notification_count('status=0 and user_id='.$_SESSION['user_id']);
-        $count_un_read=notification_count('status=2 and user_id='.$_SESSION['user_id']);
+//        $count_active=notification_count('status=0 and user_id='.$_SESSION['user_id']);
+//        $count_un_read=notification_count('status=2 and user_id='.$_SESSION['user_id']);
         $current=isset($_GET['pages'])?$_GET['pages']:1;
         $pagesize=5;
         $data_noti=notification_getByPaging($current,$pagesize,'id desc','user_id='.$_SESSION['user_id']);
@@ -66,8 +68,8 @@ if (isset($_GET['user_id'])) {
                                     </a>
                                 </li>';
         }
-        $res['count_active']=$count_active;
-        $res['count_un_read']=$count_un_read;
+//        $res['count_active']=$count_active;
+//        $res['count_un_read']=$count_un_read;
         $res['data_noti']=$data_noti;
         if(count($data_noti)>0){
             $res['current']=$current+1;

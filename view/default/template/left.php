@@ -130,15 +130,13 @@
                     <ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
                         <li class="dropdown-header">
                             <i class="ace-icon fa fa-exclamation-triangle"></i>
-                            <?php echo $count_noti?> Thông báo
+                            <span  id="countUnread"><?php echo $count_noti_unread?></span> Thông báo chưa đọc
                         </li>
 
                         <li class="dropdown-content">
-                            <div class="scroll-content content_ul_li scroll_noti">
                                 <ul class="dropdown-menu dropdown-navbar navbar-pink list-notification-nav">
                                     <!--                               --><?php //echo $string_noti?>
                                 </ul>
-                            </div>
                         </li>
 
                         <li class="dropdown-footer">

@@ -111,10 +111,20 @@
                     </ul>
                 </li>
 
-                <li class="purple">
+                <li class="purple readNoti">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <i class="ace-icon fa fa-bell icon-animated-bell"></i>
-                        <span class="badge badge-important"><?php echo $count_noti?></span>
+                        <?php if($count_noti>0) { ?>
+                        <span class="badge badge-important count-notification"><?php echo $count_noti?></span>
+                        <?php } else { ?>
+                            <span class="badge badge-important count-notification" hidden></span>
+                        <?php } ?>
+                        <?php if($count_noti) { ?>
+                        <script>
+                            var title= document.title;
+                            document.title="(<?php echo $count_noti?>) "+title;
+                        </script>
+                        <?php } ?>
                     </a>
 
                     <ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
@@ -124,9 +134,11 @@
                         </li>
 
                         <li class="dropdown-content">
-                            <ul class="dropdown-menu dropdown-navbar navbar-pink">
-                               <?php echo $string_noti?>
-                            </ul>
+                            <div class="scroll-content content_ul_li scroll_noti">
+                                <ul class="dropdown-menu dropdown-navbar navbar-pink list-notification-nav">
+                                    <!--                               --><?php //echo $string_noti?>
+                                </ul>
+                            </div>
                         </li>
 
                         <li class="dropdown-footer">

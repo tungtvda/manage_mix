@@ -176,4 +176,7 @@ RewriteRule ^export-user.html controller/default/customer/export.php
 RewriteRule ^export-user/?$ controller/default/customer/exports
 RewriteRule ^giao-dich-khach-hang/$ controller/default/transaction/transaction.php
 RewriteRule ^customer-save-transaction.html$ controller/default/transaction/list_transaction.php
-RewriteRule ^giao-dich-khach-hang/xoa  controller/default/transaction/delete.php
+RewriteRule ^giao-dich-khach-hang/xoa$  controller/default/transaction/delete.php
+
+
+RewriteRule ^notification/list-notification-ajax.html$  controller/default/notification/manage_list_notification_ajax.php

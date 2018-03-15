@@ -30,7 +30,8 @@
     </div>
 </div>
 <input hidden value="<?php echo SITE_NAME?>" id="url_input">
-
+<input hidden value="<?php echo $_SESSION['user_id']?>" id="user_id">
+<input id="page_noti" name="page" value="1">
 <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
     <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
 </a>
@@ -78,28 +79,25 @@
 <script src="<?php echo SITE_NAME?>/view/default/themes/admin/assets/js/bootstrap-tag.min.js"></script>
 <script src="<?php echo SITE_NAME?>/view/default/themes/admin/assets/js/ace-elements.min.js"></script>
 <script src="<?php echo SITE_NAME?>/view/default/themes/admin/assets/js/ace.min.js"></script>
+<script type="text/javascript"
+        src="<?php echo SITE_NAME_AZ?>/view/default/themes/js/jquery.timeago.js"></script>
 <script src="<?php echo SITE_NAME?>/view/default/themes/admin/assets/js/myjs.js"></script>
 <script src="<?php echo SITE_NAME?>/view/default/themes/admin/js/dialog.js"></script>
 <script src="<?php echo SITE_NAME?>/view/default/themes/admin/js/myjs.js"></script>
 <script src="<?php echo SITE_NAME?>/view/default/themes/admin/js/ggtooltip.js"></script>
 <script type="text/javascript" src="<?php echo SITE_NAME?>/view/default/themes/admin/js/jquery.easyui.min.js"></script>
 <script src="<?php echo SITE_NAME?>/view/default/themes/admin/js/socket.io.js"></script>
+
 <script>
     var socket=io("<?php echo SERVER_SOCKET?>");
-    socket.on("returnNoti",function(data){
-        var count =0;
-        var countCurrent=$('.badge-important').text();
-
-        if(countCurrent>=0){
-            count=parseInt(countCurrent)+3;
-        }
-        $('.badge-important').html(count);
-        var title=document.title;
-        document.title="("+count+") "+title
-    });
+    var data=[
+        <?php echo $_SESSION['user_id']?>,
+        <?php echo $_SESSION['user_role']?>,
+        "<?php echo $_SESSION['user_name']?>"
+    ];
+    socket.emit('registerAdmin',data);
 </script>
-
-
+<script src="<?php echo SITE_NAME?>/view/default/themes/admin/js/read_socket_all.js"></script>
 
 
 

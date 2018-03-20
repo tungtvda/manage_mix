@@ -90,3 +90,25 @@ function tour_create_user_count($where)
     }
    else return false;
 }
+
+function tourUserAllDongHang($where){
+    $query="select ts.*, us.name as name_user, us.user_role as type_user, us.user_code ";
+    $query.=" FROM tour_create_user ts ";
+    $query.=" LEFT JOIN user us on ts.user_id = us.id";
+    if($where!=''){
+        $query.=' where '.$where;
+    }
+    $query.=" ORDER BY id desc";
+    $result=mysqli_query(ConnectSql(),$query);
+    $array_result=array();
+    if($result!=false)while($row=mysqli_fetch_array($result))
+    {
+        $new_obj=new tour_create_user($row);
+        $new_obj->name_user=$row['name_user'];
+        $new_obj->type_user=$row['type_user'];
+        $new_obj->user_code=$row['user_code'];
+        $new_obj->decode();
+        array_push($array_result,$new_obj);
+    }
+    return $array_result;
+}

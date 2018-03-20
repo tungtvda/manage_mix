@@ -28,6 +28,9 @@ function view_valid_form($data = array())
         case 'transaction':
             require_once DIR . '/view/default/template/module/transaction/valid.php';
             break;
+        case 'tour_create_user':
+            require_once DIR . '/view/default/template/module/tour_yeu_cau/valid.php';
+            break;
     }
 
 }

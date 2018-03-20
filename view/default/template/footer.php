@@ -31,7 +31,7 @@
 </div>
 <input hidden value="<?php echo SITE_NAME?>" id="url_input">
 <input hidden value="<?php echo $_SESSION['user_id']?>" id="user_id">
-<input id="page_noti" name="page" value="1">
+<input hidden id="page_noti" name="page" value="1">
 <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
     <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
 </a>

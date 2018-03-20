@@ -108,6 +108,11 @@ RewriteRule ^booking-thanh-ly/xoa-chi-phi$ controller/default/booking/delete_cos
 RewriteRule ^booking-ket-thuc/xoa-chi-phi$ controller/default/booking/delete_cost.php
 RewriteRule ^booking-ban-nhap/xoa-chi-phi$ controller/default/booking/delete_cost.php
 
+RewriteRule ^tour-yeu-cau/$ controller/default/tour_yeu_cau/tour_yeu_cau.php
+RewriteRule ^tour-yeu-cau/them-moi$ controller/default/tour_yeu_cau/themmoi.php
+RewriteRule ^tour-yeu-cau/sua$ controller/default/tour_yeu_cau/themmoi.php
+RewriteRule ^tour-yeu-cau/xoa$ controller/default/tour_yeu_cau/delete.php
+
 RewriteRule ^booking-list-giao-dich.html$ controller/default/booking/list_giao_dich.php
 RewriteRule ^gui-bao-gia-booking.html$ controller/default/booking/send_email_bao_gia.php
 RewriteRule ^booking-save-giao-dich.html$ controller/default/booking/save_giao_dich.php

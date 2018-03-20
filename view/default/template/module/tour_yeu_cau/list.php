@@ -314,10 +314,10 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <div class="profile-info-row">
+                                        <div  class="profile-info-row">
                                             <div class="profile-info-name"> Trạng thái</div>
-                                            <div class="profile-info-value">
-                                                <label> <input disabled  id="input_status" name="status" class="ace ace-switch ace-switch-6" type="checkbox"><span class="lbl"></span></label>
+                                            <div class="profile-info-value" id="input_status">
+
                                             </div>
                                         </div>
                                     </div>

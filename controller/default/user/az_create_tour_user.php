@@ -114,7 +114,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['name_tour']
                     // send noti
 
                     $name_noti = 'Thành viên  ' . $data_user[0]->name . ' đã tạo tour "' . $name_tour . '", bạn hãy xác nhận tour theo yêu cầu này';
-                    $link_noti = '/tour-yeu-cau/sua?noti=1&confirm=1&id=' . _return_mc_encrypt($id_edit, ENCRYPTION_KEY);
+                    $link_noti = '/tour-yeu-cau/?noti=1&confirm=1&id=' . _return_mc_encrypt($id_edit, ENCRYPTION_KEY);
                     $data_list_user_admin = user_getByTop('', 'user_role=1 and status=1', 'id desc');
                     if (count($data_list_user_admin) > 0) {
                         foreach ($data_list_user_admin as $row_admin) {

@@ -86,8 +86,17 @@ jQuery(function ($) {
                                     }
                                 });
                             }else{
-                                console.log('asdfasdf');
-                                $('change_status_'+idSelect).attr('disabled','disabled');
+                                $('#change_status_'+idSelect).attr('disabled','disabled');
+                                $('#change_status_'+idSelect).removeClass('chua_xac_nhan');
+                                if(value==1){
+                                    $('#change_status_'+idSelect).addClass('da_xac_nhan');
+                                }else{
+                                    if(value==2){
+                                        $('#change_status_'+idSelect).addClass('da_huy');
+                                    }else{
+                                        $('#change_status_'+idSelect).addClass('chua_xac_nhan');
+                                    }
+                                }
                             }
                         }
                     });

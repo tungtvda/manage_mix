@@ -27,6 +27,18 @@ if(isset($_POST['id'])&&isset($_POST['value'])&&isset($_POST['note_confirm'])){
     $new->note_confirm=$note_confirm;
     $new->admin_confirm=$_SESSION['user_id'];
     tour_create_user_update($new);
+
+    if($status==1 ||$status==2){
+        if($status==1){
+            $name_noti = 'Admin "'.$_SESSION['user_name'].'" đã xác nhận tour "' . $data_user[0]->name_tour . '"';
+        }else{
+            $name_noti = 'Admin "'.$_SESSION['user_name'].'" đã hủy tour "' . $data_user[0]->name_tour . '"';
+        }
+
+        $link_noti = SITE_NAME_AZ.'/tiep-thi-lien-ket/tour-yeu-cau?noti=1&confirm=1&id=' . _return_mc_encrypt($id, ENCRYPTION_KEY);
+        _insertNotification($name_noti, $_SESSION['user_id'], $data_user[0]->user_id, $link_noti, 0, '');
+    }
+
     echo 1;
 }
 else{

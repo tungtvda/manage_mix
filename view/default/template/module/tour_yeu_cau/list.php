@@ -147,14 +147,17 @@
                                         <td>
                                             <span hidden><?php echo (int)$row->status ?></span>
                                             <?php
+                                            $classSelect='chua_xac_nhan';
                                             $selected0='';
                                             $selected1='';
                                             $selected2='';
                                                 if($row->status==2){
                                                     $selected2='selected';
+                                                    $classSelect='da_huy';
                                                 }else{
                                                     if($row->status==1){
                                                         $selected1='selected';
+                                                        $classSelect='da_xac_nhan';
                                                     }else{
                                                         $selected0='selected';
                                                     }
@@ -164,7 +167,7 @@
                                                     $disabled='';
                                                 }
                                             ?>
-                                            <select id="change_status_<?php echo $row->id ?>" class="change_status_tour_user" name_khachhang="<?php echo $row->name_cus ?>" name_record="<?php echo $row->name_tour ?>" countid="<?php echo $row->id ?>" <?php echo $disabled?>>
+                                            <select id="change_status_<?php echo $row->id ?>" class="change_status_tour_user <?php echo $classSelect?>" name_khachhang="<?php echo $row->name_cus ?>" name_record="<?php echo $row->name_tour ?>" countid="<?php echo $row->id ?>" <?php echo $disabled?>>
                                                 <option <?php echo $selected0?> value="0">
                                                     Chưa xác nhận
                                                 </option>
@@ -175,26 +178,6 @@
                                                     Đã hủy
                                                 </option>
                                             </select>
-
-                                            <?php
-//                                                if()
-                                                $disabled='disabled';
-                                            ?>
-<!--                                            --><?php //if (_returnCheckAction(55) == 1 || $row->status==0) { ?>
-<!--                                                    <label>-->
-<!---->
-<!--                                                        <input --><?php //if ($row->status) echo 'checked' ?>
-<!--                                                            id="checkbox_status_--><?php //echo $row->id ?><!--"-->
-<!--                                                            countid="--><?php //echo $row->id ?><!--"-->
-<!--                                                            name_record="--><?php //echo $row->name_tour ?><!--" table="tour_create_user" field="status" action="tour_create_user_update"-->
-<!--                                                            class="ace ace-switch ace-switch-7 checkbox_status_tour_user" type="checkbox">-->
-<!--                                                        <span class="lbl"></span>-->
-<!--                                                    </label>-->
-<!--                                            --><?php //}else{?>
-<!---->
-<!--                                        --><?php //if ($row->status == 0) echo '<i  style="font-size: 20px;" class="fa fa-check-square-o "></i>' ?>
-<!--                                        --><?php //if ($row->status == 1) echo ' <i  style="font-size: 20px;color:green" class="fa fa-check-square-o "></i>' ?>
-<!--                                        --><?php //}?>
                                         </td>
                                         <td><a target="_blank" href="<?php echo SITE_NAME ?>/thanh-vien/sua?id=<?php echo _return_mc_encrypt($row->user_id, ENCRYPTION_KEY); ?>"><?php echo $row->name_user ?></a></td>
                                         <td>
@@ -455,5 +438,17 @@
         font-size: 15px;
         font-weight: bold;
         border-bottom: 0px;
+    }
+    .chua_xac_nhan{
+        background: #ff9603;
+        color: #ffffff;
+    }
+    .da_xac_nhan{
+        background: green;
+        color: #ffffff;
+    }
+    .da_huy{
+        background: #d15b47!important;
+        color: #ffffff;
     }
 </style>

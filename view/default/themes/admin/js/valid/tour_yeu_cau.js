@@ -97,6 +97,8 @@ jQuery(function ($) {
                                         $('#change_status_'+idSelect).addClass('chua_xac_nhan');
                                     }
                                 }
+                                var dataNoti = {domain:"az", modul:"tour_user", action:"create", admin:2};
+                                socket.emit('sendNotification',dataNoti);
                             }
                         }
                     });

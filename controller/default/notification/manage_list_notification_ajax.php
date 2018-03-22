@@ -47,7 +47,7 @@ if (isset($_GET['user_id'])) {
                 $bg=" background-color: #edf2fa;";
                 $icon='<i style="color:#4a96d9 !important;" title="Chưa đọc" class="ace-icon fa fa-sun-o"></i>';
             }
-            $time=_timeAgo(date("H:i:s", strtotime($row_noti_menu->created)));
+            $time=_timeAgo($row_noti_menu->created);
             $string_noti.='  <li style="position: relative; '.$bg.'">
                                     <a title="Chi tiết bài viết" href="'.$row_noti_menu->link.'&id_noti='._return_mc_encrypt($row_noti_menu->id, ENCRYPTION_KEY).'" class="clearfix">
                                         <img src="'.$avatar_noti.'" class="msg-photo" alt="'.$name_user_noti.'" />

@@ -32,7 +32,7 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['user_email']) 
         if(isset($_POST['top_5'])){
             $count_active=notification_count('status=0 and user_id='.$id);
             $count_un_read=notification_count('status=2 and user_id='.$id);
-            $current=isset($_POST['page'])?$_POST['page']:'1';;
+            $current=isset($_POST['page'])?$_POST['page']:1;
             $pagesize=5;
             $data_noti=notification_getByPaging($current,$pagesize,'id desc','user_id='.$id);
 
@@ -66,9 +66,35 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['user_email']) 
             }
 
             $data['count']=notification_count($dk);
-            $res['danhsach']=notification_getByPaging($data['current'],$data['pagesize'],'id desc',$dk);
+            $data_noti= $res['danhsach']=notification_getByPaging($data['current'],$data['pagesize'],'id desc',$dk);
             $res['PAGING'] = showPagingAtLinkTiepThi($data['count'], $data['pagesize'], $data['current'], '' .  $data['site_name'] . $link);
+
         }
+    }
+}
+$res['list_notifications']='';
+if(isset($_GET['html'])){
+    foreach($data_noti as $row_noti){
+
+        $row_color='';
+        $row_title_status='Đã đọc';
+        $row_icon_status='fa-check';
+        if($row_noti->status!=1){
+            $row_color='background-color: #edf2fa;';
+            $row_icon_status='fa-sun-o';
+            $row_title_status='Chưa đọc';
+        }
+        $date_show = date("d-m-Y H:i:s", strtotime($row_noti->created));
+        $time=_timeAgo($date_show);
+        $res['list_notifications'].='<li class="menu-item" style="'.$row_color.'"><a
+                                                        style="color: #4F99C6!important;"
+                                                       href="'.SITE_NAME_AZ.'/'.$row_noti->link.'&id_noti='._return_mc_encrypt($row_noti->id).'"
+                                                        class="clearfix"><span class="msg-body"><span
+                                                                class="msg-title">'.$row_noti->name.'</span><span
+                                                                 class="msg-time"><i
+                                                                    class="ace-icon fa fa-clock-o"></i> <span title="'.$date_show.'"> '.$time.' </span><span
+                                                                    style="float: right;color: #4F99C6!important;"><i title="'.$row_title_status.'" class="ace-icon fa '.$row_icon_status.'"></i> </span></span></span></a>
+                                            </li>';
     }
 }
 echo json_encode($res);

@@ -25,6 +25,27 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['user_email']) 
     $dk_check_user = "id=" . $id . " and user_email ='" . $user_email . "' and name='" . $name . "' and user_code='" . $user_code . "' and token_code ='" . $token_code . "'";
     $data_check_exist_user = user_getByTop('', $dk_check_user, 'id desc');
     if (count($data_check_exist_user) > 0) {
+        $dk_filter='';
+        if(isset($_POST['id_detail'])){
+            $id_detail=_returnPostParamSecurity('id_detail');
+            $dk_filter=' and id!='.$id_detail;
+            $data_detail_tour=tour_create_user_getById($id_detail);
+            if($data_detail_tour){
+                $res['detailTour']=$data_detail_tour[0];
+            }
+
+        }
+        // update noti detail
+        if(isset($_POST['update_noti'])){
+           $id_noti=_return_mc_decrypt(_returnPostParamSecurity('update_noti'));
+            $data_detail_noti=notification_getByTop(1,'user_id='.$id.' and status!=1','id desc');
+            if($data_detail_noti){
+                $update_noti_detail=new notification((array)$data_detail_noti[0]);
+                $update_noti_detail->status=1;
+                notification_update($update_noti_detail);
+            }
+        }
+
         if(isset($_POST['type'])){
             $type=_returnPostParamSecurity('type');
         }else{
@@ -48,7 +69,7 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['user_email']) 
         }
 
         $data['count']=tour_create_user_count($dk);
-        $res['danhsach']=tour_create_user_getByPaging($data['current'],$data['pagesize'],'id desc',$dk);
+        $res['danhsach']=tour_create_user_getByPaging($data['current'],$data['pagesize'],'id desc',$dk.$dk_filter);
         $res['PAGING'] = showPagingAtLinkTiepThi($data['count'], $data['pagesize'], $data['current'], '' .  $data['site_name'] . $link);
     }
 }

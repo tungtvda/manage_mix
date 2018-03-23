@@ -131,6 +131,7 @@
                                                 <input hidden id="date_tour_<?php echo $row->id?>" value="<?php echo $row->date_tour?>">
                                                 <input hidden id="address_tour_<?php echo $row->id?>" value="<?php echo $row->address_tour?>">
                                                 <input hidden id="note_tour_<?php echo $row->id?>" value="<?php echo $row->note_tour?>">
+                                                <input hidden id="note_confirm_<?php echo $row->id?>" value="<?php echo $row->note_confirm?>">
                                                 <input hidden id="user_id_<?php echo $row->id?>" value="<?php echo $row->user_id?>">
                                                 <input hidden id="user_id_mahoa_<?php echo $row->id?>" value="<?php echo _return_mc_encrypt($row->user_id, ENCRYPTION_KEY); ?>">
                                                 <input hidden id="user_name_<?php echo $row->id?>" value="<?php echo $row->name_user?>">
@@ -184,7 +185,7 @@
                                             <div class="hidden-sm hidden-xs action-buttons">
 
                                                 <?php if (_returnCheckAction(18) == 1) { ?>
-                                                    <a class="blue view_popup_detail" role="button" name_record="<?php echo $row->name ?>" data-toggle="modal" table="customer" countid="<?php echo $row->id; ?>"
+                                                    <a class="blue view_popup_detail" role="button" name_record="<?php echo $row->name_tour ?>" data-toggle="modal" table="customer" countid="<?php echo $row->id; ?>"
                                                        href="javascript:void(0)"
                                                        title="Chi tiết">
                                                         <i class="ace-icon fa fa-eye bigger-130"></i>
@@ -240,11 +241,10 @@
                                 <?php } ?>
                             <?php } ?>
                             </tbody>
-
-
                     </table>
                     </form>
                 </div>
+                <?php echo $tour_id_show_popup?>
                 <div class="hr hr-18 dotted hr-double"></div>
                 <div class="btn-groupn col-md-12" style="padding-left: 0px">
                     <button data-toggle="dropdown" class="btn btn-sm btn-danger dropdown-toggle btn-action-gird"
@@ -365,7 +365,7 @@
                                                 <div class="form-group">
                                                     <label for="form-field-select-3">Thời gian (VD: 3 ngày 2 đêm ) <span
                                                                 style="color: red">*</span></label>
-                                                    <?php echo _returnInput('time_tour', '', '', 'clock', 'readonly', 'Bạn vui lòng kiểm tra thời gian','') ?>
+                                                    <?php echo _returnInput('time_tour', '', '', 'clock-o', 'readonly', 'Bạn vui lòng kiểm tra thời gian','') ?>
                                                 </div>
                                             </div>
 
@@ -399,6 +399,16 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div style="float: left; width: 100%">
+                                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="form-field-select-3">Ghi chú xác nhận admin</label>
+                                                        <textarea readonly class="valid" name="note_confirm" id="input_note_confirm" style="width: 100%"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </fieldset>
                                 </div>
 
@@ -407,6 +417,50 @@
 
                         <div class="modal-footer">
                             <button type="reset" class="btn btn-sm" data-dismiss="modal" id="reset_form_popup">
+                                <i class="ace-icon fa fa-times"></i>
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div><!-- PAGE CONTENT ENDS -->
+
+        <div  id="modal-form-confirm" class="modal" tabindex="0">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close cancel_confirm" data-dismiss="modal">&times;</button>
+                        <h4 class="blue bigger" id="title_form_confirm">Tour theo yêu cầu khách hàng</h4>
+
+                    </div>
+                    <form id="submit_form_confirm" role="form" action="" method="post" enctype="multipart/form-data">
+
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="row">
+                                        <div style="float: left; width: 100%">
+                                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                                <div class="form-group">
+                                                    <label for="form-field-select-3">Ghi chú xác nhận admin</label>
+                                                    <textarea  class="valid" name="note_confirm"  style="width: 100%"></textarea>
+                                                    <label style="display: none" class="error-color  error-color-size" id="error_note_confirm">Bạn vui lòng nhập ghi chú</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-sm btn-primary" id="submit_form_action" type="button">
+                                <i class="ace-icon fa fa-check"></i>
+                                Save
+                            </button>
+                            <button type="reset" class="btn btn-sm cancel_confirm"  >
                                 <i class="ace-icon fa fa-times"></i>
                                 Cancel
                             </button>

@@ -591,6 +591,8 @@ jQuery(function ($) {
     });
 
     $('body').on("click", '.readNoti', function () {
+        $contentLoadTriggered=false;
+        $('#page_noti').val(1);
         var count = $('.count-notification').text();
         var title = document.title;
         var count_update='';
@@ -611,8 +613,21 @@ jQuery(function ($) {
             success: function (response) {
                 response = $.parseJSON(response);
                 if(response.success==1){
-                    $('.list-notification-nav').html(response.string_noti);
-                    $('#countUnread').text()
+                    if(response.count_all_active>0){
+                        $('.list-notification-nav').html(response.string_noti);
+                        $('.view_all_notification').show();
+                        if(response.count_un_read>0){
+                            $('#countUnread').html(response.count_un_read +' Thông báo chưa đọc');
+                        }else{
+                            $('#countUnread').html('Tất cả thông báo đã được đọc');
+                        }
+                    }else{
+                        $('.list-notification-nav').html('');
+                        $('#countUnread').html('Bạn không có thông báo nào');
+                        $('.view_all_notification').hide();
+                    }
+
+
                 }
             }
         });

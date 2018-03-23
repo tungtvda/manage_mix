@@ -28,16 +28,21 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['user_email']) 
     $dk_check_user = "id=" . $id . " and user_email ='" . $user_email . "' and name='" . $name . "' and user_code='" . $user_code . "' and token_code ='" . $token_code . "'";
     $data_check_exist_user = user_getByTop('', $dk_check_user, 'id desc');
     if (count($data_check_exist_user) > 0) {
+
+        if(isset($_GET['update'])){
+            $notification_obj = new notification();
+            $notification_obj->status = 2;
+            notification_update_list($notification_obj, 'user_id=' . $id . ' and status=0');
+        }
         $res['success']=1;
+        $count_all_active=notification_count('user_id='.$id);
+        $count_un_read=notification_count('status=2 and user_id='.$id);
+        $res['count_all_active']=$count_all_active;
+        $res['count_un_read']=$count_un_read;
         if(isset($_POST['top_5'])){
-            $count_active=notification_count('status=0 and user_id='.$id);
-            $count_un_read=notification_count('status=2 and user_id='.$id);
             $current=isset($_POST['page'])?$_POST['page']:1;
             $pagesize=5;
             $data_noti=notification_getByPaging($current,$pagesize,'id desc','user_id='.$id);
-
-            $res['count_active']=$count_active;
-            $res['count_un_read']=$count_un_read;
             $res['data_noti']=$data_noti;
             if(count($data_noti)>0){
                 $res['current']=$current+1;
@@ -73,9 +78,8 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['user_email']) 
     }
 }
 $res['list_notifications']='';
-if(isset($_GET['html'])){
+if(isset($_GET['html']) && isset($data_noti)){
     foreach($data_noti as $row_noti){
-
         $row_color='';
         $row_title_status='Đã đọc';
         $row_icon_status='fa-check';
@@ -86,9 +90,14 @@ if(isset($_GET['html'])){
         }
         $date_show = date("d-m-Y H:i:s", strtotime($row_noti->created));
         $time=_timeAgo($date_show);
+        if(strstr($row_noti->link,SITE_NAME_AZ)!=''){
+            $link=$row_noti->link;
+        }else{
+            $link=SITE_NAME_AZ.'/'.$row_noti->link;
+        }
         $res['list_notifications'].='<li class="menu-item" style="'.$row_color.'"><a
                                                         style="color: #4F99C6!important;"
-                                                       href="'.SITE_NAME_AZ.'/'.$row_noti->link.'&id_noti='._return_mc_encrypt($row_noti->id).'"
+                                                       href="'.$link.'&id_noti='._return_mc_encrypt($row_noti->id).'"
                                                         class="clearfix"><span class="msg-body"><span
                                                                 class="msg-title">'.$row_noti->name.'</span><span
                                                                  class="msg-time"><i

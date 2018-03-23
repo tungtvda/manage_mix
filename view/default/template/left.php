@@ -129,8 +129,8 @@
 
                     <ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
                         <li class="dropdown-header">
-                            <i class="ace-icon fa fa-exclamation-triangle"></i>
-                            <span  id="countUnread"><?php echo $count_noti_unread?></span> Thông báo chưa đọc
+
+                            <i class="ace-icon fa fa-exclamation-triangle"></i> <span id="countUnread"><?php echo $count_noti_unread?> Thông báo chưa đọc</span>
                         </li>
 
                         <li class="dropdown-content">
@@ -139,7 +139,7 @@
                                 </ul>
                         </li>
 
-                        <li class="dropdown-footer">
+                        <li class="dropdown-footer view_all_notification">
                             <a href="<?php echo SITE_NAME.'/notification/'?>">
                                 Xem tất cả
                                 <i class="ace-icon fa fa-arrow-right"></i>

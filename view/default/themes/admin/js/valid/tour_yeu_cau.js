@@ -76,9 +76,11 @@ jQuery(function ($) {
         $('#modal-form').modal('show');
     }
     $('body').on("change", '.change_status_tour_user', function () {
-
         var idSelect = $(this).attr('countid');
         var value = $(this).val();
+        $('#idSelectConfirm').val(idSelect);
+        $('#idValueConfirm').val(value);
+        $('#error_note_confirm').hide();
         var name_record = $(this).attr('name_record');
         var name_khachhang = $(this).attr('name_khachhang');
         if (value && idSelect && name_record && name_khachhang) {
@@ -90,67 +92,8 @@ jQuery(function ($) {
                     mess = '<p>Bạn chắc chắn muốn hủy tour </br><b>"' + name_record + '"</b> của khách hàng "' + name_khachhang + '" ?</p>';
                 }
             }
-            //mess = mess + '<p><label>Ghi chú</label><input id="testShow" value="123123">  <textarea class="valid" name="input_note_confirm" id="input_note_confirm" style="width: 100%"></textarea></p>';
             $('#title_form_confirm').html(mess);
             $('#modal-form-confirm').modal('show');
-            //lnv.confirm({
-            //    title: '<label class="orange">Xác nhận thay đổi trạng thái</label>',
-            //    content: mess,
-            //    confirmBtnText: 'Ok',
-            //    iconBtnText: '<i style="color: #669fc7;" class="ace-icon fa fa-question orange"></i>',
-            //    confirmHandler: function () {
-            //        var link=url+'/tour-yeu-cau/sua';
-            //        $.ajax({
-            //            method: "POST",
-            //            url: link,
-            //            data:{
-            //                id:idSelect,
-            //                value:value,
-            //                note_confirm:$('#input_note_confirm').val()
-            //            },
-            //            success: function (response) {
-            //                console.log($('#testShow').val());
-            //                if (response != 1) {
-            //                    lnv.alert({
-            //                        title: 'Lỗi',
-            //                        content: response,
-            //                        alertBtnText: 'Ok',
-            //                        iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
-            //                        alertHandler: function () {
-            //                            $('#change_status_' + idSelect + ' option').each(function () {
-            //                                if ($(this).val() == '0') {
-            //                                    $(this).prop("selected", true);
-            //                                }
-            //                            });
-            //                        }
-            //                    });
-            //                }else{
-            //                    $('#change_status_'+idSelect).attr('disabled','disabled');
-            //                    $('#change_status_'+idSelect).removeClass('chua_xac_nhan');
-            //                    if(value==1){
-            //                        $('#change_status_'+idSelect).addClass('da_xac_nhan');
-            //                    }else{
-            //                        if(value==2){
-            //                            $('#change_status_'+idSelect).addClass('da_huy');
-            //                        }else{
-            //                            $('#change_status_'+idSelect).addClass('chua_xac_nhan');
-            //                        }
-            //                    }
-            //                    var dataNoti = {domain:"az", modul:"tour_user", action:"create", admin:2};
-            //                    socket.emit('sendNotification',dataNoti);
-            //                }
-            //            }
-            //        });
-            //    },
-            //    cancelBtnText: 'Cancel',
-            //    cancelHandler: function () {
-            //        $('#change_status_' + idSelect + ' option').each(function () {
-            //            if ($(this).val() == '0') {
-            //                $(this).prop("selected", true);
-            //            }
-            //        });
-            //    }
-            //})
         } else {
             lnv.alert({
                 title: 'Lỗi',
@@ -161,66 +104,68 @@ jQuery(function ($) {
                 }
             });
         }
-        // lnv.confirm({
-        //     title: '<label class="orange">Xác nhận cập nhật trạng thái</label>',
-        //     content: '<p>Bạn chắc chắn rằng muốn cập nhật trạng thái của </br><b>"' + name_record + '"</b></p><p>  <textarea class="valid" name="input_note_confirm" id="input_note_confirm" style="width: 100%"></textarea></p> ?',
-        //     confirmBtnText: 'Ok',
-        //     iconBtnText: '<i style="color: #669fc7;" class="ace-icon fa fa-question orange"></i>',
-        //     confirmHandler: function () {
-        //         if (idSelect == '' || table == '' || field == '' || name_record == '' || link == '') {
-        //             lnv.alert({
-        //                 title: 'Lỗi',
-        //                 content: 'Các thông tin cập nhật không hợp lệ',
-        //                 alertBtnText: 'Ok',
-        //                 iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
-        //                 alertHandler: function () {
-        //
-        //                 }
-        //             });
-        //         }
-        //         else {
-        //             console.log($('#input_note_confirm').val());
-        //             $.ajax({
-        //                 method: "GET",
-        //                 url: link,
-        //                 data: "id=" + idSelect + '&table=' + table + '&field=' + field + '&status=' + status + '&action=' + action,
-        //                 success: function (response) {
-        //                     if (response != 1) {
-        //                         lnv.alert({
-        //                             title: 'Lỗi',
-        //                             content: response,
-        //                             alertBtnText: 'Ok',
-        //                             iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
-        //                             alertHandler: function () {
-        //
-        //                             }
-        //                         });
-        //                         if (status == 0) {
-        //                             document.getElementById(field_check).checked = true;
-        //
-        //                         }
-        //                         else {
-        //                             document.getElementById(field_check).checked = false;
-        //                         }
-        //                     }
-        //                 }
-        //             });
-        //         }
-        //
-        //     },
-        //     cancelBtnText: 'Cancel',
-        //     cancelHandler: function () {
-        //         if (status == 0) {
-        //             document.getElementById(field_check).checked = true;
-        //
-        //         }
-        //         else {
-        //             document.getElementById(field_check).checked = false;
-        //         }
-        //     }
-        // })
 
 
+
+    });
+    $('body').on("click",'#submit_form_confirm',function (){
+        var note=$('#input_note_confirm_popup').val();
+        var idSelect=$('#idSelectConfirm').val();
+        var value=$('#idValueConfirm').val();
+       if(note){
+           $('#error_note_confirm').hide();
+           var link=url+'/tour-yeu-cau/sua';
+           $.ajax({
+               method: "POST",
+               url: link,
+               data:{
+                   id:idSelect,
+                   value:value,
+                   note_confirm:note
+               },
+               success: function (response) {
+                   if (response != 1) {
+                       lnv.alert({
+                           title: 'Lỗi',
+                           content: response,
+                           alertBtnText: 'Ok',
+                           iconBtnText: '<i style="color: red;" class="ace-icon fa fa-exclamation-triangle red"></i>',
+                           alertHandler: function () {
+                               $('#change_status_' + idSelect + ' option').each(function () {
+                                   if ($(this).val() == '0') {
+                                       $(this).prop("selected", true);
+                                   }
+                               });
+                           }
+                       });
+                   }else{
+                       $('#change_status_'+idSelect).attr('disabled','disabled');
+                       $('#change_status_'+idSelect).removeClass('chua_xac_nhan');
+                       if(value==1){
+                           $('#change_status_'+idSelect).addClass('da_xac_nhan');
+                       }else{
+                           if(value==2){
+                               $('#change_status_'+idSelect).addClass('da_huy');
+                           }else{
+                               $('#change_status_'+idSelect).addClass('chua_xac_nhan');
+                           }
+                       }
+                       var dataNoti = {domain:"az", modul:"tour_user", action:"create", admin:2};
+                       socket.emit('sendNotification',dataNoti);
+                   }
+               }
+           });
+
+       }else{
+           $('#error_note_confirm').show();
+       }
+    });
+    $('body').on("click",'cancel_confirm',function(){
+        //        $('#change_status_' + idSelect + ' option').each(function () {
+        //            if ($(this).val() == '0') {
+        //                $(this).prop("selected", true);
+        //            }
+        //        });
     });
 });
 

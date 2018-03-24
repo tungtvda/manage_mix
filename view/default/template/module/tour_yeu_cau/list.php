@@ -435,8 +435,6 @@
                         <h4 class="blue bigger" id="title_form_confirm">Tour theo yêu cầu khách hàng</h4>
 
                     </div>
-                    <form id="submit_form_confirm" role="form" action="" method="post" enctype="multipart/form-data">
-
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-xs-12">
@@ -445,7 +443,9 @@
                                             <div class="col-xs-12 col-sm-12 col-md-12">
                                                 <div class="form-group">
                                                     <label for="form-field-select-3">Ghi chú xác nhận admin</label>
-                                                    <textarea  class="valid" name="note_confirm"  style="width: 100%"></textarea>
+                                                    <input hidden id="idSelectConfirm" value="">
+                                                    <input hidden id="idValueConfirm" value="">
+                                                    <textarea  class="valid" id="input_note_confirm_popup" name="note_confirm"  style="width: 100%"></textarea>
                                                     <label style="display: none" class="error-color  error-color-size" id="error_note_confirm">Bạn vui lòng nhập ghi chú</label>
                                                 </div>
                                             </div>
@@ -456,7 +456,7 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button class="btn btn-sm btn-primary" id="submit_form_action" type="button">
+                            <button class="btn btn-sm btn-primary" id="submit_form_confirm" type="button">
                                 <i class="ace-icon fa fa-check"></i>
                                 Save
                             </button>
@@ -465,8 +465,6 @@
                                 Cancel
                             </button>
                         </div>
-                    </form>
-
                 </div>
             </div>
         </div><!-- PAGE CONTENT ENDS -->

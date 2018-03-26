@@ -427,7 +427,7 @@
             </div>
         </div><!-- PAGE CONTENT ENDS -->
 
-        <div  id="modal-form-confirm" class="modal" tabindex="0">
+        <div  id="modal-form-confirm" class="modal cancel_confirm" tabindex="0">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -460,7 +460,7 @@
                                 <i class="ace-icon fa fa-check"></i>
                                 Save
                             </button>
-                            <button type="reset" class="btn btn-sm cancel_confirm"  >
+                            <button type="reset" class="btn btn-sm cancel_confirm" data-dismiss="modal" >
                                 <i class="ace-icon fa fa-times"></i>
                                 Cancel
                             </button>

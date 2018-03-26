@@ -160,13 +160,26 @@ jQuery(function ($) {
            $('#error_note_confirm').show();
        }
     });
-    $('body').on("click",'cancel_confirm',function(){
-        //        $('#change_status_' + idSelect + ' option').each(function () {
-        //            if ($(this).val() == '0') {
-        //                $(this).prop("selected", true);
-        //            }
-        //        });
+    $('body').on("click",'.cancel_confirm',function(){
+        var idSelect=$('#idSelectConfirm').val();
+        returDefaultStatus(idSelect)
     });
+    $('body').on("click",'.modal-dialog',function(){
+       var  idSelect=$('#idSelectConfirm').val();
+        returDefaultStatus(idSelect)
+    });
+    //$('#modal-form-confirm').on('hidden.bs.modal', function() {
+    //    $('.cancel_confirm').trigger('click');
+    //    idSelect=$('#idSelectConfirm').val();
+    //    returDefaultStatus(idSelect)
+    //});
+    function returDefaultStatus(idSelect){
+                $('#change_status_' + idSelect + ' option').each(function () {
+                    if ($(this).val() == '0') {
+                        $(this).prop("selected", true);
+                    }
+                });
+    }
 });
 
 

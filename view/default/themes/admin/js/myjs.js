@@ -626,8 +626,8 @@ jQuery(function ($) {
                         $('#countUnread').html('Bạn không có thông báo nào');
                         $('.view_all_notification').hide();
                     }
-
-
+                    var dataNoti = {domain:"az", modul:"tour_user", action:"create", admin:2};
+                    socket.emit('readNoti',dataNoti);
                 }
             }
         });

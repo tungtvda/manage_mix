@@ -152,6 +152,12 @@ jQuery(function ($) {
                        }
                        var dataNoti = {domain:"az", modul:"tour_user", action:"create", admin:2};
                        socket.emit('sendNotification',dataNoti);
+                       $('#change_status_' + idSelect + ' option').each(function () {
+                           if ($(this).val() == value) {
+                               $(this).prop("selected", true);
+                           }
+                       });
+                       $('#modal-form-confirm').modal('hide');
                    }
                }
            });
@@ -159,20 +165,19 @@ jQuery(function ($) {
        }else{
            $('#error_note_confirm').show();
        }
+        $('#note_confirm').val('');
     });
     $('body').on("click",'.cancel_confirm',function(){
         var idSelect=$('#idSelectConfirm').val();
         returDefaultStatus(idSelect)
     });
-    $('body').on("click",'.modal-dialog',function(){
-       var  idSelect=$('#idSelectConfirm').val();
-        returDefaultStatus(idSelect)
+    $('#modal-form-confirm').on('hidden.bs.modal', function() {
+        $('.cancel_confirm').trigger('click');
+       var idSelect=$('#idSelectConfirm').val();
+        if(idSelect){
+            returDefaultStatus(idSelect)
+        }
     });
-    //$('#modal-form-confirm').on('hidden.bs.modal', function() {
-    //    $('.cancel_confirm').trigger('click');
-    //    idSelect=$('#idSelectConfirm').val();
-    //    returDefaultStatus(idSelect)
-    //});
     function returDefaultStatus(idSelect){
                 $('#change_status_' + idSelect + ' option').each(function () {
                     if ($(this).val() == '0') {

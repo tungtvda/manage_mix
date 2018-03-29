@@ -14,8 +14,6 @@ $data = array();
 $res = array(
     'success' => 0,
 );
-//echo json_encode($_POST);
-//exit;
 if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['user_email']) && isset($_POST['user_code']) && isset($_POST['token_code'])) {
     $id = _return_mc_decrypt(_returnPostParamSecurity('id'));
     $name = _return_mc_decrypt(_returnPostParamSecurity('name'));
@@ -26,7 +24,7 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['user_email']) 
     $data_check_exist_user = user_getByTop('', $dk_check_user, 'id desc');
     if (count($data_check_exist_user) > 0) {
         $dk_filter='';
-        if(isset($_POST['id_detail'])){
+        if(isset($_POST['id_detail']) && $_POST['id_detail']!=''){
             $id_detail=_returnPostParamSecurity('id_detail');
             $dk_filter=' and id!='.$id_detail;
             $data_detail_tour=tour_create_user_getById($id_detail);
@@ -67,8 +65,7 @@ if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['user_email']) 
                 $dk .=' and status=2';
                 break;
         }
-
-        $data['count']=tour_create_user_count($dk);
+        $data['count']=tour_create_user_count($dk.$dk_filter);
         $res['danhsach']=tour_create_user_getByPaging($data['current'],$data['pagesize'],'id desc',$dk.$dk_filter);
         $res['PAGING'] = showPagingAtLinkTiepThi($data['count'], $data['pagesize'], $data['current'], '' .  $data['site_name'] . $link);
     }

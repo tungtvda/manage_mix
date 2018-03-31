@@ -98,6 +98,7 @@
     socket.emit('registerAdmin',data);
 </script>
 <script src="<?php echo SITE_NAME?>/view/default/themes/admin/js/read_socket_all.js"></script>
+<script src="<?php echo SITE_NAME?>/view/default/themes/admin/js/show_confirm_noti.js"></script>
 
 
 

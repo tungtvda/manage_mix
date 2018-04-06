@@ -1,0 +1,72 @@
+<?php
+class review_tour
+{
+    public $id,$customer_id,$tour_id,$tour_name,$tour_code,$domain,$status,$program,$tour_guide_full,$tour_guide_local,$hotel,$restaurant,$transportation,$comment,$show_coment,$upcoming_tour,$created,$updated,$updated_by;
+    public function review_tour($data=array())
+    {
+    $this->id=isset($data['id'])?$data['id']:'';
+    $this->customer_id=isset($data['customer_id'])?$data['customer_id']:'';
+    $this->tour_id=isset($data['tour_id'])?$data['tour_id']:'';
+    $this->tour_name=isset($data['tour_name'])?$data['tour_name']:'';
+    $this->tour_code=isset($data['tour_code'])?$data['tour_code']:'';
+    $this->domain=isset($data['domain'])?$data['domain']:'';
+    $this->status=isset($data['status'])?$data['status']:'';
+    $this->program=isset($data['program'])?$data['program']:'';
+    $this->tour_guide_full=isset($data['tour_guide_full'])?$data['tour_guide_full']:'';
+    $this->tour_guide_local=isset($data['tour_guide_local'])?$data['tour_guide_local']:'';
+    $this->hotel=isset($data['hotel'])?$data['hotel']:'';
+    $this->restaurant=isset($data['restaurant'])?$data['restaurant']:'';
+    $this->transportation=isset($data['transportation'])?$data['transportation']:'';
+    $this->comment=isset($data['comment'])?$data['comment']:'';
+    $this->show_coment=isset($data['show_coment'])?$data['show_coment']:'';
+    $this->upcoming_tour=isset($data['upcoming_tour'])?$data['upcoming_tour']:'';
+    $this->created=isset($data['created'])?$data['created']:'';
+    $this->updated=isset($data['updated'])?$data['updated']:'';
+    $this->updated_by=isset($data['updated_by'])?$data['updated_by']:'';
+          $this->encode();
+    }
+    public function encode()
+        {
+            $this->id=addslashes($this->id);
+            $this->customer_id=addslashes($this->customer_id);
+            $this->tour_id=addslashes($this->tour_id);
+            $this->tour_name=addslashes($this->tour_name);
+            $this->tour_code=addslashes($this->tour_code);
+            $this->domain=addslashes($this->domain);
+            $this->status=addslashes($this->status);
+            $this->program=addslashes($this->program);
+            $this->tour_guide_full=addslashes($this->tour_guide_full);
+            $this->tour_guide_local=addslashes($this->tour_guide_local);
+            $this->hotel=addslashes($this->hotel);
+            $this->restaurant=addslashes($this->restaurant);
+            $this->transportation=addslashes($this->transportation);
+            $this->comment=addslashes($this->comment);
+            $this->show_coment=addslashes($this->show_coment);
+            $this->upcoming_tour=addslashes($this->upcoming_tour);
+            $this->created=addslashes($this->created);
+            $this->updated=addslashes($this->updated);
+            $this->updated_by=addslashes($this->updated_by);
+        }
+    public function decode()
+        {
+            $this->id=stripslashes($this->id);
+            $this->customer_id=stripslashes($this->customer_id);
+            $this->tour_id=stripslashes($this->tour_id);
+            $this->tour_name=stripslashes($this->tour_name);
+            $this->tour_code=stripslashes($this->tour_code);
+            $this->domain=stripslashes($this->domain);
+            $this->status=stripslashes($this->status);
+            $this->program=stripslashes($this->program);
+            $this->tour_guide_full=stripslashes($this->tour_guide_full);
+            $this->tour_guide_local=stripslashes($this->tour_guide_local);
+            $this->hotel=stripslashes($this->hotel);
+            $this->restaurant=stripslashes($this->restaurant);
+            $this->transportation=stripslashes($this->transportation);
+            $this->comment=stripslashes($this->comment);
+            $this->show_coment=stripslashes($this->show_coment);
+            $this->upcoming_tour=stripslashes($this->upcoming_tour);
+            $this->created=stripslashes($this->created);
+            $this->updated=stripslashes($this->updated);
+            $this->updated_by=stripslashes($this->updated_by);
+        }
+}

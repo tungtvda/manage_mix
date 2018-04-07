@@ -1,7 +1,7 @@
 <?php
 class review_tour
 {
-    public $id,$customer_id,$tour_id,$tour_name,$tour_code,$domain,$status,$program,$tour_guide_full,$tour_guide_local,$hotel,$restaurant,$transportation,$comment,$show_coment,$upcoming_tour,$created,$updated,$updated_by;
+    public $id,$customer_id,$tour_id,$tour_name,$tour_code,$domain,$status,$program,$show_program,$tour_guide_full,$show_tour_guide_full,$tour_guide_local,$show_tour_guide_local,$hotel,$show_hotel,$restaurant,$show_restaurant,$transportation,$show_transportation,$comment,$show_coment,$upcoming_tour,$created,$updated,$updated_by;
     public function review_tour($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
@@ -12,11 +12,17 @@ class review_tour
     $this->domain=isset($data['domain'])?$data['domain']:'';
     $this->status=isset($data['status'])?$data['status']:'';
     $this->program=isset($data['program'])?$data['program']:'';
+    $this->show_program=isset($data['show_program'])?$data['show_program']:'';
     $this->tour_guide_full=isset($data['tour_guide_full'])?$data['tour_guide_full']:'';
+    $this->show_tour_guide_full=isset($data['show_tour_guide_full'])?$data['show_tour_guide_full']:'';
     $this->tour_guide_local=isset($data['tour_guide_local'])?$data['tour_guide_local']:'';
+    $this->show_tour_guide_local=isset($data['show_tour_guide_local'])?$data['show_tour_guide_local']:'';
     $this->hotel=isset($data['hotel'])?$data['hotel']:'';
+    $this->show_hotel=isset($data['show_hotel'])?$data['show_hotel']:'';
     $this->restaurant=isset($data['restaurant'])?$data['restaurant']:'';
+    $this->show_restaurant=isset($data['show_restaurant'])?$data['show_restaurant']:'';
     $this->transportation=isset($data['transportation'])?$data['transportation']:'';
+    $this->show_transportation=isset($data['show_transportation'])?$data['show_transportation']:'';
     $this->comment=isset($data['comment'])?$data['comment']:'';
     $this->show_coment=isset($data['show_coment'])?$data['show_coment']:'';
     $this->upcoming_tour=isset($data['upcoming_tour'])?$data['upcoming_tour']:'';
@@ -35,11 +41,17 @@ class review_tour
             $this->domain=addslashes($this->domain);
             $this->status=addslashes($this->status);
             $this->program=addslashes($this->program);
+            $this->show_program=addslashes($this->show_program);
             $this->tour_guide_full=addslashes($this->tour_guide_full);
+            $this->show_tour_guide_full=addslashes($this->show_tour_guide_full);
             $this->tour_guide_local=addslashes($this->tour_guide_local);
+            $this->show_tour_guide_local=addslashes($this->show_tour_guide_local);
             $this->hotel=addslashes($this->hotel);
+            $this->show_hotel=addslashes($this->show_hotel);
             $this->restaurant=addslashes($this->restaurant);
+            $this->show_restaurant=addslashes($this->show_restaurant);
             $this->transportation=addslashes($this->transportation);
+            $this->show_transportation=addslashes($this->show_transportation);
             $this->comment=addslashes($this->comment);
             $this->show_coment=addslashes($this->show_coment);
             $this->upcoming_tour=addslashes($this->upcoming_tour);
@@ -57,11 +69,17 @@ class review_tour
             $this->domain=stripslashes($this->domain);
             $this->status=stripslashes($this->status);
             $this->program=stripslashes($this->program);
+            $this->show_program=stripslashes($this->show_program);
             $this->tour_guide_full=stripslashes($this->tour_guide_full);
+            $this->show_tour_guide_full=stripslashes($this->show_tour_guide_full);
             $this->tour_guide_local=stripslashes($this->tour_guide_local);
+            $this->show_tour_guide_local=stripslashes($this->show_tour_guide_local);
             $this->hotel=stripslashes($this->hotel);
+            $this->show_hotel=stripslashes($this->show_hotel);
             $this->restaurant=stripslashes($this->restaurant);
+            $this->show_restaurant=stripslashes($this->show_restaurant);
             $this->transportation=stripslashes($this->transportation);
+            $this->show_transportation=stripslashes($this->show_transportation);
             $this->comment=stripslashes($this->comment);
             $this->show_coment=stripslashes($this->show_coment);
             $this->upcoming_tour=stripslashes($this->upcoming_tour);

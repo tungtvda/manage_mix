@@ -29,7 +29,7 @@ function view_review_tour($data)
 //
 function showTableHeader()
 {
-    return '<th>id</th><th>customer_id</th><th>tour_id</th><th>tour_name</th><th>tour_code</th><th>domain</th><th>status</th><th>program</th><th>tour_guide_full</th><th>tour_guide_local</th><th>hotel</th><th>restaurant</th><th>transportation</th><th>comment</th><th>show_coment</th><th>upcoming_tour</th><th>created</th><th>updated</th><th>updated_by</th>';
+    return '<th>id</th><th>customer_id</th><th>tour_id</th><th>tour_name</th><th>tour_code</th><th>domain</th><th>status</th><th>program</th><th>show_program</th><th>tour_guide_full</th><th>show_tour_guide_full</th><th>tour_guide_local</th><th>show_tour_guide_local</th><th>hotel</th><th>show_hotel</th><th>restaurant</th><th>show_restaurant</th><th>transportation</th><th>show_transportation</th><th>comment</th><th>show_coment</th><th>upcoming_tour</th><th>created</th><th>updated</th><th>updated_by</th>';
 }
 //
 function showTableBody($data)
@@ -46,11 +46,17 @@ function showTableBody($data)
         $TableBody.="<td>".$obj->domain."</td>";
         $TableBody.="<td>".$obj->status."</td>";
         $TableBody.="<td>".$obj->program."</td>";
+        $TableBody.="<td>".$obj->show_program."</td>";
         $TableBody.="<td>".$obj->tour_guide_full."</td>";
+        $TableBody.="<td>".$obj->show_tour_guide_full."</td>";
         $TableBody.="<td>".$obj->tour_guide_local."</td>";
+        $TableBody.="<td>".$obj->show_tour_guide_local."</td>";
         $TableBody.="<td>".$obj->hotel."</td>";
+        $TableBody.="<td>".$obj->show_hotel."</td>";
         $TableBody.="<td>".$obj->restaurant."</td>";
+        $TableBody.="<td>".$obj->show_restaurant."</td>";
         $TableBody.="<td>".$obj->transportation."</td>";
+        $TableBody.="<td>".$obj->show_transportation."</td>";
         $TableBody.="<td>".$obj->comment."</td>";
         $TableBody.="<td>".$obj->show_coment."</td>";
         $TableBody.="<td>".$obj->upcoming_tour."</td>";
@@ -75,11 +81,17 @@ function showFrom($form,$ListKey=array())
     $str_from.='<p><label>domain</label><input class="text-input small-input" type="text"  name="domain" value="'.(($form!=false)?$form->domain:'').'" /></p>';
     $str_from.='<p><label>status</label><input class="text-input small-input" type="text"  name="status" value="'.(($form!=false)?$form->status:'').'" /></p>';
     $str_from.='<p><label>program</label><input class="text-input small-input" type="text"  name="program" value="'.(($form!=false)?$form->program:'').'" /></p>';
+    $str_from.='<p><label>show_program</label><input class="text-input small-input" type="text"  name="show_program" value="'.(($form!=false)?$form->show_program:'').'" /></p>';
     $str_from.='<p><label>tour_guide_full</label><input class="text-input small-input" type="text"  name="tour_guide_full" value="'.(($form!=false)?$form->tour_guide_full:'').'" /></p>';
+    $str_from.='<p><label>show_tour_guide_full</label><input class="text-input small-input" type="text"  name="show_tour_guide_full" value="'.(($form!=false)?$form->show_tour_guide_full:'').'" /></p>';
     $str_from.='<p><label>tour_guide_local</label><input class="text-input small-input" type="text"  name="tour_guide_local" value="'.(($form!=false)?$form->tour_guide_local:'').'" /></p>';
+    $str_from.='<p><label>show_tour_guide_local</label><input class="text-input small-input" type="text"  name="show_tour_guide_local" value="'.(($form!=false)?$form->show_tour_guide_local:'').'" /></p>';
     $str_from.='<p><label>hotel</label><input class="text-input small-input" type="text"  name="hotel" value="'.(($form!=false)?$form->hotel:'').'" /></p>';
+    $str_from.='<p><label>show_hotel</label><input class="text-input small-input" type="text"  name="show_hotel" value="'.(($form!=false)?$form->show_hotel:'').'" /></p>';
     $str_from.='<p><label>restaurant</label><input class="text-input small-input" type="text"  name="restaurant" value="'.(($form!=false)?$form->restaurant:'').'" /></p>';
+    $str_from.='<p><label>show_restaurant</label><input class="text-input small-input" type="text"  name="show_restaurant" value="'.(($form!=false)?$form->show_restaurant:'').'" /></p>';
     $str_from.='<p><label>transportation</label><input class="text-input small-input" type="text"  name="transportation" value="'.(($form!=false)?$form->transportation:'').'" /></p>';
+    $str_from.='<p><label>show_transportation</label><input class="text-input small-input" type="text"  name="show_transportation" value="'.(($form!=false)?$form->show_transportation:'').'" /></p>';
     $str_from.='<p><label>comment</label><textarea name="comment">'.(($form!=false)?$form->comment:'').'</textarea><script type="text/javascript">CKEDITOR.replace(\'comment\'); </script></p>';
     $str_from.='<p><label>show_coment</label><input class="text-input small-input" type="text"  name="show_coment" value="'.(($form!=false)?$form->show_coment:'').'" /></p>';
     $str_from.='<p><label>upcoming_tour</label><textarea name="upcoming_tour">'.(($form!=false)?$form->upcoming_tour:'').'</textarea><script type="text/javascript">CKEDITOR.replace(\'upcoming_tour\'); </script></p>';

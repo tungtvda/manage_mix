@@ -149,7 +149,13 @@ if (isset($_POST['user_trans']) && isset($_POST['content_trans']) && isset($_POS
 
 $data['list']=transaction_getByAll();
 foreach ($data['list'] as $item){
-    $item->customer= customer_getById($item->customer_id)[0];
+    $customer= customer_getById($item->customer_id);
+    if($customer){
+        $item->customer= $customer[0];
+    }else{
+        $item->customer=array();
+    }
+
 }
 $data['customerList']=customer_getByAll();
 

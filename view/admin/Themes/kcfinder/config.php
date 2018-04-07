@@ -18,7 +18,7 @@
 
 $_CONFIG = array(
 
-    'disabled' => false,
+    'disabled' => true,
     'denyZipDownload' => false,
     'denyUpdateCheck' => false,
     'denyExtensionRename' => false,

@@ -19,6 +19,9 @@
             {
                 if($result[0]->MatKhau==$Pass)
                 {
+                    $_SESSION['KCFINDER'] = array(
+                        'disabled' => false
+                    );
                     $_SESSION["username"]=$UserName;
                     $_SESSION["UserName"]=$result[0]->Full_name;
                     $_SESSION["UserId"]=$result[0]->Id;
@@ -30,16 +33,25 @@
                 }
                 else
                 {
+                    $_SESSION['KCFINDER'] = array(
+                        'disabled' => true
+                    );
                     echo "<script type=\"text/javascript\">alert(\"Bạn vui lòng kiểm tra lại thông tin đăng nhập\")</script>";
                 }
             }
             else
             {
+                $_SESSION['KCFINDER'] = array(
+                    'disabled' => true
+                );
                 echo "<script type=\"text/javascript\">alert(\"Bạn vui lòng kiểm tra lại thông tin đăng nhập\")</script>";
             }
         }
         else
         {
+            $_SESSION['KCFINDER'] = array(
+                'disabled' => true
+            );
             echo "<script type=\"text/javascript\">alert(\"Bạn vui lòng kiểm tra lại thông tin đăng nhập\")</script>";
         }
 

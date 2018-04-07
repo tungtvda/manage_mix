@@ -29,7 +29,7 @@ function view_review_tour($data)
 //
 function showTableHeader()
 {
-    return '<th>id</th><th>customer_id</th><th>tour_id</th><th>tour_name</th><th>tour_code</th><th>domain</th><th>status</th><th>program</th><th>show_program</th><th>tour_guide_full</th><th>show_tour_guide_full</th><th>tour_guide_local</th><th>show_tour_guide_local</th><th>hotel</th><th>show_hotel</th><th>restaurant</th><th>show_restaurant</th><th>transportation</th><th>show_transportation</th><th>comment</th><th>show_coment</th><th>upcoming_tour</th><th>created</th><th>updated</th><th>updated_by</th>';
+    return '<th>id</th><th>customer_id</th><th>tour_id</th><th>tour_name</th><th>tour_code</th><th>domain</th><th>content</th><th>departure</th><th>status</th><th>program</th><th>show_program</th><th>tour_guide_full</th><th>show_tour_guide_full</th><th>tour_guide_local</th><th>show_tour_guide_local</th><th>hotel</th><th>show_hotel</th><th>restaurant</th><th>show_restaurant</th><th>transportation</th><th>show_transportation</th><th>comment</th><th>show_coment</th><th>upcoming_tour</th><th>created</th><th>updated</th><th>updated_by</th>';
 }
 //
 function showTableBody($data)
@@ -44,6 +44,8 @@ function showTableBody($data)
         $TableBody.="<td>".$obj->tour_name."</td>";
         $TableBody.="<td>".$obj->tour_code."</td>";
         $TableBody.="<td>".$obj->domain."</td>";
+        $TableBody.="<td>".$obj->content."</td>";
+        $TableBody.="<td>".$obj->departure."</td>";
         $TableBody.="<td>".$obj->status."</td>";
         $TableBody.="<td>".$obj->program."</td>";
         $TableBody.="<td>".$obj->show_program."</td>";
@@ -79,6 +81,8 @@ function showFrom($form,$ListKey=array())
     $str_from.='<p><label>tour_name</label><input class="text-input small-input" type="text"  name="tour_name" value="'.(($form!=false)?$form->tour_name:'').'" /></p>';
     $str_from.='<p><label>tour_code</label><input class="text-input small-input" type="text"  name="tour_code" value="'.(($form!=false)?$form->tour_code:'').'" /></p>';
     $str_from.='<p><label>domain</label><input class="text-input small-input" type="text"  name="domain" value="'.(($form!=false)?$form->domain:'').'" /></p>';
+    $str_from.='<p><label>content</label><input class="text-input small-input" type="text"  name="content" value="'.(($form!=false)?$form->content:'').'" /></p>';
+    $str_from.='<p><label>departure</label><input class="text-input small-input" type="text"  name="departure" value="'.(($form!=false)?$form->departure:'').'" /></p>';
     $str_from.='<p><label>status</label><input class="text-input small-input" type="text"  name="status" value="'.(($form!=false)?$form->status:'').'" /></p>';
     $str_from.='<p><label>program</label><input class="text-input small-input" type="text"  name="program" value="'.(($form!=false)?$form->program:'').'" /></p>';
     $str_from.='<p><label>show_program</label><input class="text-input small-input" type="text"  name="show_program" value="'.(($form!=false)?$form->show_program:'').'" /></p>';

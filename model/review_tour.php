@@ -1,7 +1,7 @@
 <?php
 class review_tour
 {
-    public $id,$customer_id,$tour_id,$tour_name,$tour_code,$domain,$status,$program,$show_program,$tour_guide_full,$show_tour_guide_full,$tour_guide_local,$show_tour_guide_local,$hotel,$show_hotel,$restaurant,$show_restaurant,$transportation,$show_transportation,$comment,$show_coment,$upcoming_tour,$created,$updated,$updated_by;
+    public $id,$customer_id,$tour_id,$tour_name,$tour_code,$domain,$content,$departure,$status,$program,$show_program,$tour_guide_full,$show_tour_guide_full,$tour_guide_local,$show_tour_guide_local,$hotel,$show_hotel,$restaurant,$show_restaurant,$transportation,$show_transportation,$comment,$show_coment,$upcoming_tour,$created,$updated,$updated_by;
     public function review_tour($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
@@ -10,6 +10,8 @@ class review_tour
     $this->tour_name=isset($data['tour_name'])?$data['tour_name']:'';
     $this->tour_code=isset($data['tour_code'])?$data['tour_code']:'';
     $this->domain=isset($data['domain'])?$data['domain']:'';
+    $this->content=isset($data['content'])?$data['content']:'';
+    $this->departure=isset($data['departure'])?$data['departure']:'';
     $this->status=isset($data['status'])?$data['status']:'';
     $this->program=isset($data['program'])?$data['program']:'';
     $this->show_program=isset($data['show_program'])?$data['show_program']:'';
@@ -39,6 +41,8 @@ class review_tour
             $this->tour_name=addslashes($this->tour_name);
             $this->tour_code=addslashes($this->tour_code);
             $this->domain=addslashes($this->domain);
+            $this->content=addslashes($this->content);
+            $this->departure=addslashes($this->departure);
             $this->status=addslashes($this->status);
             $this->program=addslashes($this->program);
             $this->show_program=addslashes($this->show_program);
@@ -67,6 +71,8 @@ class review_tour
             $this->tour_name=stripslashes($this->tour_name);
             $this->tour_code=stripslashes($this->tour_code);
             $this->domain=stripslashes($this->domain);
+            $this->content=stripslashes($this->content);
+            $this->departure=stripslashes($this->departure);
             $this->status=stripslashes($this->status);
             $this->program=stripslashes($this->program);
             $this->show_program=stripslashes($this->show_program);

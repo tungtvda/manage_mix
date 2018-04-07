@@ -54,7 +54,7 @@ if(isset($_SESSION["Admin"]))
             header('Location: '.SITE_NAME.'/controller/admin/review_tour.php');
         }
     }
-    if(isset($_POST["customer_id"])&&isset($_POST["tour_id"])&&isset($_POST["tour_name"])&&isset($_POST["tour_code"])&&isset($_POST["domain"])&&isset($_POST["status"])&&isset($_POST["program"])&&isset($_POST["show_program"])&&isset($_POST["tour_guide_full"])&&isset($_POST["show_tour_guide_full"])&&isset($_POST["tour_guide_local"])&&isset($_POST["show_tour_guide_local"])&&isset($_POST["hotel"])&&isset($_POST["show_hotel"])&&isset($_POST["restaurant"])&&isset($_POST["show_restaurant"])&&isset($_POST["transportation"])&&isset($_POST["show_transportation"])&&isset($_POST["comment"])&&isset($_POST["show_coment"])&&isset($_POST["upcoming_tour"])&&isset($_POST["created"])&&isset($_POST["updated"])&&isset($_POST["updated_by"]))
+    if(isset($_POST["customer_id"])&&isset($_POST["tour_id"])&&isset($_POST["tour_name"])&&isset($_POST["tour_code"])&&isset($_POST["domain"])&&isset($_POST["content"])&&isset($_POST["departure"])&&isset($_POST["status"])&&isset($_POST["program"])&&isset($_POST["show_program"])&&isset($_POST["tour_guide_full"])&&isset($_POST["show_tour_guide_full"])&&isset($_POST["tour_guide_local"])&&isset($_POST["show_tour_guide_local"])&&isset($_POST["hotel"])&&isset($_POST["show_hotel"])&&isset($_POST["restaurant"])&&isset($_POST["show_restaurant"])&&isset($_POST["transportation"])&&isset($_POST["show_transportation"])&&isset($_POST["comment"])&&isset($_POST["show_coment"])&&isset($_POST["upcoming_tour"])&&isset($_POST["created"])&&isset($_POST["updated"])&&isset($_POST["updated_by"]))
     {
        $array=$_POST;
        if(!isset($array['id']))
@@ -69,6 +69,10 @@ if(isset($_SESSION["Admin"]))
        $array['tour_code']='0';
        if(!isset($array['domain']))
        $array['domain']='0';
+       if(!isset($array['content']))
+       $array['content']='0';
+       if(!isset($array['departure']))
+       $array['departure']='0';
        if(!isset($array['status']))
        $array['status']='0';
        if(!isset($array['program']))

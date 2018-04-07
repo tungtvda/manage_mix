@@ -239,7 +239,7 @@ function _returnRandString($length)
     return $str;
 }
 
-function _returnLogin($data_arr, $user_update)
+function _returnLogin($data_arr, $user_update, $return=0)
 {
     $_SESSION["user_id"] = $data_arr['user_id'];
     $_SESSION["user_role"] = $data_arr['user_role'];
@@ -257,11 +257,16 @@ function _returnLogin($data_arr, $user_update)
     if (isset($_SESSION['show_id'])) {
         unset($_SESSION['show_id']);
     }
-    if (isset($_SESSION["link_redict"])) {
-        redict($_SESSION["link_redict"]);
-    } else {
-        redict(SITE_NAME);
+    if($return){
+        return $data_arr;
+    }else{
+        if (isset($_SESSION["link_redict"])) {
+            redict($_SESSION["link_redict"]);
+        } else {
+            redict(SITE_NAME);
+        }
     }
+
 
 }
 
@@ -1293,6 +1298,7 @@ function _insertNotification($name = '', $user_send_id = '', $user_id, $link = '
     $notification_model->content = $content;
     $notification_model->created = _returnGetDateTime();
     notification_insert($notification_model);
+
 }
 function _insertBookingTran($booking_id,$customer_id=0,$user_id=0,$name='',$description='')
 {
@@ -2068,4 +2074,85 @@ function _returnFooterEmailTemplate(){
                                                 </div>
                                             </div>
                                         </div>';
+}
+
+
+function _timeAgo($time_ago)
+{
+    $time_ago = strtotime($time_ago);
+    $cur_time   = time();
+    $time_elapsed   = $cur_time - $time_ago;
+    $seconds    = $time_elapsed ;
+    $minutes    = round($time_elapsed / 60 );
+    $hours      = round($time_elapsed / 3600);
+    $days       = round($time_elapsed / 86400 );
+    $weeks      = round($time_elapsed / 604800);
+    $months     = round($time_elapsed / 2600640 );
+    $years      = round($time_elapsed / 31207680 );
+    // Seconds
+    if($seconds <= 60){
+//        return "just now";
+        return "vài giây trước";
+    }
+    //Minutes
+    else if($minutes <=60){
+        if($minutes==1){
+//            return "one minute ago";
+            return "khoảng một phút trước";
+        }
+        else{
+//            return "$minutes minutes ago";
+            return "$minutes phút trước";
+        }
+    }
+    //Hours
+    else if($hours <=24){
+        if($hours==1){
+//            return "an hour ago";
+            return "khoảng một giờ trước";
+        }else{
+//            return "$hours hrs ago";
+            return "$hours giờ trước";
+        }
+    }
+    //Days
+    else if($days <= 7){
+        if($days==1){
+            return "hôm qua";
+//            return "yesterday";
+        }else{
+//            return "$days days ago";
+            return "$days ngày trước";
+        }
+    }
+    //Weeks
+    else if($weeks <= 4.3){
+        if($weeks==1){
+            return "khoảng một tuần trước";
+//            return "a week ago";
+        }else{
+//            return "$weeks weeks ago";
+            return "$weeks tuần trước";
+        }
+    }
+    //Months
+    else if($months <=12){
+        if($months==1){
+//            return "a month ago";
+            return "khoảng một tháng trước";
+        }else{
+//            return "$months months ago";
+            return "$months tháng trước";
+        }
+    }
+    //Years
+    else{
+        if($years==1){
+//            return "one year ago";
+            return "1 năm trước";
+        }else{
+            return "$years năm trước";
+//            return "$years years ago";
+        }
+    }
 }

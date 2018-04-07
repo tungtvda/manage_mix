@@ -70,7 +70,7 @@ if(isset($_POST['login'])&&isset($_POST['username_login'])&&isset($_POST['passwo
                         'user_permison_module'=>$user_permison_module,
                         'time_token'=>_returnGetDateTime(),
                     );
-                    _returnLogin($data_arr,$user_update);
+                  _returnLogin($data_arr,$user_update);
 //
                 }
             }
@@ -473,6 +473,7 @@ if(isset($_SESSION['mess_login']))
 </script>
 
 <!-- inline scripts related to this page -->
+
 <script type="text/javascript">
     jQuery(function($) {
         $(document).on('click', '.toolbar a[data-target]', function(e) {
@@ -510,8 +511,10 @@ if(isset($_SESSION['mess_login']))
         });
 
     });
+
 </script>
+<script src="<?php echo SITE_NAME?>/view/default/themes/admin/js/socket.io.js"></script>
 <script src="<?php echo SITE_NAME?>/view/default/themes/admin/js/login.js"></script>
+
 </body>
 </html>
-

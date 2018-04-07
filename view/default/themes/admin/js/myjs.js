@@ -508,23 +508,23 @@ jQuery(function ($) {
     $('body').on("input", '.valid-input', function () {
         var name = $(this).attr('name');
         var valid = $(this).attr('data-valid');
-        if(valid=='required'){
-            var value=$(this).val();
-           if(value && name){
-               $('#error_'+name).hide();
-               $(this).addClass('valid');
-               $(this).removeClass('input-error');
-           }else{
-               $('#error_'+name).show();
-               $(this).removeClass('valid');
-           }
+        if (valid == 'required') {
+            var value = $(this).val();
+            if (value && name) {
+                $('#error_' + name).hide();
+                $(this).addClass('valid');
+                $(this).removeClass('input-error');
+            } else {
+                $('#error_' + name).show();
+                $(this).removeClass('valid');
+            }
         }
-        switch (name){
+        switch (name) {
             case 'name_tour_cus':
-                if(value!=''){
+                if (value != '') {
                     $('#name_tour_table').html(value)
                     $('#input_id_tour').addClass('valid');
-                }else{
+                } else {
                     $('#input_id_tour').removeClass('valid');
                 }
                 break;
@@ -533,30 +533,30 @@ jQuery(function ($) {
     $('body').on("change", '.valid-input', function () {
         var name = $(this).attr('name');
         var valid = $(this).attr('data-valid');
-        var value=$(this).val();
-        if(valid=='required'){
-            if(value && name){
-                $('#error_'+name).hide();
+        var value = $(this).val();
+        if (valid == 'required') {
+            if (value && name) {
+                $('#error_' + name).hide();
                 $(this).addClass('valid');
                 $(this).removeClass('input-error');
-            }else{
-                $('#error_'+name).show();
+            } else {
+                $('#error_' + name).show();
                 $(this).removeClass('valid');
             }
         }
-        switch (name){
+        switch (name) {
             case 'name_tour_cus':
-                if(value!=''){
+                if (value != '') {
                     $('#name_tour_table').html(value)
                     $('#input_id_tour').addClass('valid');
-                }else{
+                } else {
                     $('#input_id_tour').removeClass('valid');
                 }
                 break;
         }
     });
     $('body').on("click", '.input_price_cus', function () {
-       $(this).select();
+        $(this).select();
     });
     $('body').on("input", '.input_price_cus', function () {
         var name = $(this).attr('name');
@@ -568,15 +568,15 @@ jQuery(function ($) {
         }
         else {
             $(this).val(0);
-            price_format='0 vnđ';
+            price_format = '0 vnđ';
         }
-        $('#price_'+name).html(price_format);
-        var total_price=0;
-        $(".input_price_cus").each(function( index ) {
-          var value_price=parseInt($(this).val());
-            total_price=total_price+value_price;
+        $('#price_' + name).html(price_format);
+        var total_price = 0;
+        $(".input_price_cus").each(function (index) {
+            var value_price = parseInt($(this).val());
+            total_price = total_price + value_price;
         });
-        total_price=total_price.toString();
+        total_price = total_price.toString();
         $('#input_price').val(total_price);
         $('#input_price_511').val(total_price);
         $('#input_price_5').val(total_price);
@@ -589,6 +589,89 @@ jQuery(function ($) {
         $('#price_format_span_511').html(total_price);
         $('#price_format_span_5').html(total_price);
     });
+
+    $('body').on("click", '.readNoti', function () {
+        $contentLoadTriggered=false;
+        $('#page_noti').val(1);
+        var count = $('.count-notification').text();
+        var title = document.title;
+        var count_update='';
+        if (count) {
+            var strfind = "(" + count + ")";
+            title = title.slice(strfind.length);
+            count_update="&count=1";
+        }
+        document.title = title;
+        $('.count-notification').text('').hide();
+        var link = url + '/notification/list-notification-ajax.html';
+        // get list noti
+
+        $.ajax({
+            method: "GET",
+            url: link,
+            data: "user_id=" + $('#user_id').val()+"&update=1"+count_update,
+            success: function (response) {
+                response = $.parseJSON(response);
+                if(response.success==1){
+                    if(response.count_all_active>0){
+                        $('.list-notification-nav').html(response.string_noti);
+                        $('.view_all_notification').show();
+                        if(response.count_un_read>0){
+                            $('#countUnread').html(response.count_un_read +' Thông báo chưa đọc');
+                        }else{
+                            $('#countUnread').html('Tất cả thông báo đã được đọc');
+                        }
+                    }else{
+                        $('.list-notification-nav').html('');
+                        $('#countUnread').html('Bạn không có thông báo nào');
+                        $('.view_all_notification').hide();
+                    }
+                    var dataNoti = {domain:"az", modul:"tour_user", action:"create", admin:2};
+                    socket.emit('readNoti',dataNoti);
+                }
+            }
+        });
+    });
+
+    $contentLoadTriggered = false;
+    $(".content_ul_li").scroll(
+        function()
+        {
+            if($(".content_ul_li").scrollTop() >= ($(".content_ul_li").height() - $(".list-notification-nav").height()) && $contentLoadTriggered == false)
+            {
+                $contentLoadTriggered = true;
+                var page=$('#page_noti').val();
+                if(page==1){
+                    $('#page_noti').val(2);
+                    page=2;
+                }
+                var link = url + '/notification/list-notification-ajax.html';
+                $.ajax({
+                    method: "GET",
+                    url: link,
+                    data: "user_id=" + $('#user_id').val()+"&pages="+page,
+                    success: function (response) {
+                        response = $.parseJSON(response);
+                        if(response.success==1){
+                            $( ".list-notification-nav" ).append(response.string_noti);
+                            console.log(response.current);
+                            $('#page_noti').val(response.current);
+                            if(response.data_noti.length>0){
+                                $contentLoadTriggered =false;
+                            }else{
+                                $contentLoadTriggered =true;
+                            }
+
+                        }else{
+                            $contentLoadTriggered = true;
+                        }
+                    }
+                });
+
+
+            }
+        }
+    );
 
 // Select all tabs
 //    $('.nav-tabs a').click(function(){

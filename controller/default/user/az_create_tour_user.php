@@ -81,7 +81,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['name_tour']
                 $data_check_tour = tour_create_user_getById($id_edit);
                 if (count($data_check_tour) > 0) {
                     $row = (array)$data_check_tour[0];
-                    $array_res['danhsach']=returnHtmlGen($row);
+                    $array_res['danhsach'] = returnHtmlGen($row);
                     $array_res['success'] = 1;
                     $array_res['mess'] = 'Cập nhật tour "' . $name_tour . '" thành công';
                 }
@@ -110,23 +110,27 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['name_tour']
                 if (count($data_check_tour) > 0) {
                     $id_edit = $data_check_tour[0]->id;
                     $row = (array)$data_check_tour[0];
-                    $array_res['danhsach']=returnHtmlGen($row);
+                    $array_res['danhsach'] = returnHtmlGen($row);
                     // send noti
 
                     $name_noti = 'Thành viên  ' . $data_user[0]->name . ' đã tạo tour "' . $name_tour . '", bạn hãy xác nhận tour theo yêu cầu này';
-                    $link_noti = '/tour-yeu-cau/sua?noti=1&confirm=1&id=' . _return_mc_encrypt($id_edit, ENCRYPTION_KEY);
+                    $link_noti = '/tour-yeu-cau/?noti=1&confirm=1&id=' . _return_mc_encrypt($id_edit, ENCRYPTION_KEY);
                     $data_list_user_admin = user_getByTop('', 'user_role=1 and status=1', 'id desc');
                     if (count($data_list_user_admin) > 0) {
                         foreach ($data_list_user_admin as $row_admin) {
-                            _insertNotification($name_noti, 0, $row_admin->id, $link_noti, 0, '');
+                            _insertNotification($name_noti, $user_tiep_thi, $row_admin->id, $link_noti, 0, '');
                         }
                     }
 
                     //send email to admin
-                $body='Thành viên  '.$data_user[0]->name.' đã tạo tour "'.$name_tour.'", bạn hãy  <a href="'.SITE_NAME.$link_noti.'">truy cập vào đây</a> xác nhận tour theo yêu cầu này';
-                if (SendMail('thanhtuyen@mixmedia.vn', $body, $subject, 1,'Hệ thống tiếp thị liên kết Azbooking.vn', 'az')) {}
+                    $body = 'Thành viên  ' . $data_user[0]->name . ' đã tạo tour "' . $name_tour . '", bạn hãy  <a href="' . SITE_NAME . $link_noti . '">truy cập vào đây</a> xác nhận tour theo yêu cầu này';
+//                    if (SendMail('thanhtuyen@mixmedia.vn', $body, $subject, 1, 'Hệ thống tiếp thị liên kết Azbooking.vn', 'az')) {
+//                        $array_res['success'] = 1;
+//                        $array_res['mess'] = 'Tạo tour <b>' . $name_tour . '</b> thành công, chúng tôi sẽ liên hệ với khách hàng và xác nhận tour trong thời gian sớm nhất';
+//                    }
                     $array_res['success'] = 1;
                     $array_res['mess'] = 'Tạo tour <b>' . $name_tour . '</b> thành công, chúng tôi sẽ liên hệ với khách hàng và xác nhận tour trong thời gian sớm nhất';
+
                 }
 
             }
@@ -134,7 +138,8 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['name_tour']
     }
 }
 echo json_encode($array_res);
-function returnHtmlGen($row){
+function returnHtmlGen($row)
+{
     switch ($row['status']) {
         case '1':
             $status = '<a class="btn btn-success">Đã xác nhận</a>';
@@ -165,7 +170,7 @@ function returnHtmlGen($row){
     $lien_he .= ' <input hidden value="' . $row['name_cus'] . '" id="name_cus_hidden_' . $row['id'] . '">';
     $lien_he .= ' <input hidden value="' . $row['phone_cus'] . '" id="phone_cus_hidden_' . $row['id'] . '">';
     $lien_he .= ' <input hidden value="' . $row['address_cus'] . '" id="address_cus_hidden_' . $row['id'] . '">';
-    $lien_he.=' <input hidden value="'.$row['status'].'" id="status_update_hidden_'.$row['id'].'">';
+    $lien_he .= ' <input hidden value="' . $row['status'] . '" id="status_update_hidden_' . $row['id'] . '">';
     $tour = '';
     if ($row['name_tour'] != '') {
         $tour .= '<p rel="tooltip" data-original-title="Tour: ' . $row['name_tour'] . '"><i class="fa fa-plane" ></i> ' . $row['name_tour'] . '</p>';
@@ -188,7 +193,7 @@ function returnHtmlGen($row){
     $tour .= '<input hidden value="' . $row['note_tour'] . '" id="note_tour_hidden_' . $row['id'] . '">';
 
 
-    $danhsach = '<tr id="tr-tour-'.$row['id'].'">
+    $danhsach = '<tr id="tr-tour-' . $row['id'] . '">
             <td class="td_stt">#</td>
              <td class="lienhe_thanhvien">' . $tour . '</td>
             <td class="lienhe_thanhvien">' . $lien_he . '</td>
@@ -197,7 +202,7 @@ function returnHtmlGen($row){
             <td>
             <a data-name="' . $row['name_tour'] . '" data-id="' . $row['id'] . '" rel="tooltip" data-original-title="Xem chi tiết"  style="margin-right: 5px; padding: 10px 9px; background-color: #337ab7;border-color: #2e6da4;" class="btn btn-primary view-tour-user">
             <i data-name="' . $row['name_tour'] . '" data-id="' . $row['id'] . '" style="background:none" class="fa fa-eye"></i></a>
-           <a data-name="'.$row['name_tour'].'" data-id="'.$row['id'].'"  rel="tooltip" data-original-title="Xóa" href="javascript:void(0)" class="btn btn-danger delete-tour-user">
+           <a data-name="' . $row['name_tour'] . '" data-id="' . $row['id'] . '"  rel="tooltip" data-original-title="Xóa" href="javascript:void(0)" class="btn btn-danger delete-tour-user">
                 <i style="background:none" class="fa fa-trash"></i>
             </a>
             </td>

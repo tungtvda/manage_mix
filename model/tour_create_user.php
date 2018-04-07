@@ -1,7 +1,7 @@
 <?php
 class tour_create_user
 {
-    public $id,$user_id,$customer_id,$status,$name_cus,$email_cus,$phone_cus,$address_cus,$code_tour,$name_tour,$time_tour,$date_tour,$address_tour,$note_tour,$created,$updated;
+    public $id,$user_id,$customer_id,$status,$name_cus,$email_cus,$phone_cus,$address_cus,$code_tour,$name_tour,$time_tour,$date_tour,$address_tour,$note_tour,$note_confirm,$admin_confirm,$created,$updated;
     public function tour_create_user($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
@@ -18,6 +18,8 @@ class tour_create_user
     $this->date_tour=isset($data['date_tour'])?$data['date_tour']:'';
     $this->address_tour=isset($data['address_tour'])?$data['address_tour']:'';
     $this->note_tour=isset($data['note_tour'])?$data['note_tour']:'';
+    $this->note_confirm=isset($data['note_confirm'])?$data['note_confirm']:'';
+    $this->admin_confirm=isset($data['admin_confirm'])?$data['admin_confirm']:'';
     $this->created=isset($data['created'])?$data['created']:'';
     $this->updated=isset($data['updated'])?$data['updated']:'';
           $this->encode();
@@ -38,6 +40,8 @@ class tour_create_user
             $this->date_tour=addslashes($this->date_tour);
             $this->address_tour=addslashes($this->address_tour);
             $this->note_tour=addslashes($this->note_tour);
+            $this->note_confirm=addslashes($this->note_confirm);
+            $this->admin_confirm=addslashes($this->admin_confirm);
             $this->created=addslashes($this->created);
             $this->updated=addslashes($this->updated);
         }
@@ -57,6 +61,8 @@ class tour_create_user
             $this->date_tour=stripslashes($this->date_tour);
             $this->address_tour=stripslashes($this->address_tour);
             $this->note_tour=stripslashes($this->note_tour);
+            $this->note_confirm=stripslashes($this->note_confirm);
+            $this->admin_confirm=stripslashes($this->admin_confirm);
             $this->created=stripslashes($this->created);
             $this->updated=stripslashes($this->updated);
         }

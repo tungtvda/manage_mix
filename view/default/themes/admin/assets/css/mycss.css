@@ -186,3 +186,10 @@ div.pop-up-table {
 .select-custom{
     width: 100% !important;
 }
+.dropdown-navbar{
+    width: 400px;
+}
+/*.scroll_noti {*/
+    /*overflow: scroll;*/
+    /*height: 265px;*/
+/*}*/

@@ -175,6 +175,8 @@ RewriteRule ^azbooking-create-tour.html controller/default/user/az_create_tour_u
 RewriteRule ^azbooking-get-list-tour-yeu-cau.html controller/default/user/az_list_tour_user.php
 RewriteRule ^azbooking-delete-tour-yeu-cau.html controller/default/user/az_delete_tour_user.php
 
+RewriteRule ^add-review.html controller/default/review/az_add_review_ajax.php
+
 RewriteRule ^import-user.html controller/default/customer/import.php
 RewriteRule ^export-user.html controller/default/customer/export.php
 

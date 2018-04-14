@@ -183,7 +183,9 @@ RewriteRule ^giao-dich-khach-hang/$ controller/default/transaction/transaction.p
 RewriteRule ^customer-save-transaction.html$ controller/default/transaction/list_transaction.php
 RewriteRule ^giao-dich-khach-hang/xoa$  controller/default/transaction/delete.php
 
-#response customer
-RewriteRule ^phan-hoi-khach-hang/$  controller/default/response/response_customer.php
 
 RewriteRule ^notification/list-notification-ajax.html$  controller/default/notification/manage_list_notification_ajax.php
+
+##response customer
+RewriteRule ^phan-hoi-khach-hang/$  controller/default/response/response_customer.php
+RewriteRule ^phan-hoi-khach-hang/sua controller/default/response/themmoi.php

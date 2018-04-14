@@ -90,3 +90,127 @@ function review_tour_count($where)
     }
    else return false;
 }
+
+function review_az_getByPaging($CurrentPage, $PageSize,$Order,$where)
+{
+    $query="
+SELECT rv.* ,
+cs.name as name_cus,cs.avatar as avatar
+FROM
+review_tour as rv
+LEFT JOIN customer cs on rv.customer_id = cs.id
+".(($where!='')?(' where '.$where):'')." Order By ".$Order." Limit ".(($CurrentPage-1)*$PageSize)." , ".$PageSize;
+
+    $result=mysqli_query(ConnectSql(),$query);
+    $array_result=array();
+    $string='';
+    if($result!=false)while($row=mysqli_fetch_array($result))
+    {
+
+        $new_obj=new review_tour($row);
+        if($row['avatar']=="")
+        {
+            $avatar=SITE_NAME.'/view/default/themes/images/no-avatar.png';
+        }
+        else{
+            $avatar=SITE_NAME.$row['avatar'];
+        }
+        $item=array(
+            'customer_id'=>$new_obj->customer_id,
+            'tour_id'=>$new_obj->tour_id,
+            'tour_name'=>$new_obj->tour_name,
+            'domain'=>$new_obj->domain,
+            'status'=>$new_obj->status,
+            'departure'=>$new_obj->departure,
+            'program'=>$new_obj->program,
+            'show_program'=>$new_obj->show_program,
+            'tour_guide_full'=>$new_obj->tour_guide_full,
+            'show_tour_guide_full'=>$new_obj->show_tour_guide_full,
+            'tour_guide_local'=>$new_obj->tour_guide_local,
+            'show_tour_guide_local'=>$new_obj->show_tour_guide_local,
+            'hotel'=>$new_obj->hotel,
+            'show_hotel'=>$new_obj->show_hotel,
+            'restaurant'=>$new_obj->restaurant,
+            'show_restaurant'=>$new_obj->show_restaurant,
+            'transportation'=>$new_obj->transportation,
+            'show_transportation'=>$new_obj->show_transportation,
+            'comment'=>$new_obj->comment,
+            'show_coment'=>$new_obj->show_coment,
+            'upcoming_tour'=>$new_obj->upcoming_tour,
+            'created'=>$new_obj->created,
+            'name_cus'=>$row['name_cus'],
+            'avatar'=>$avatar,
+        );
+        array_push($array_result,$item);
+        //Tính tổng điểm
+        $total_point=($new_obj->program+$new_obj->tour_guide_full+$new_obj->tour_guide_local+$new_obj->hotel+$new_obj->restaurant+$new_obj->transportation)/6;
+        $string.=' <li class="review_item clearfix review_featured  ">
+                                    <p class="review_item_date">
+                                        Ngày đánh giá: '.date("d-m-Y", strtotime($new_obj->created)).'
+                                    </p>
+                                    <div data-et-view="aRDPNZJKSXe:2"></div>
+                                    <div class="review_item_reviewer" style="text-align: center">
+                                        <div>
+                                            <img data-toggle="tooltip" data-placement="top" title="'.$row['name_cus'].'" style="display: initial;" class="avatar-mask ava-pad-bottom ava-default" src="'.$avatar.'" alt="">
+                                        </div>
+                                        <a  href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="'.$row['name_cus'].'" class="reviewer_country name_cus_list">
+                                       '.$row['name_cus'].'
+                                        </a>
+                                    </div><!-- .review_item_reviewer -->
+                                    <div class="review_item_review">
+                                        <div class="review_item_review_container lang_ltr">
+                                            <div class="review_item_review_header">
+                                                <div class="review_item_header_score_container">
+                                                    <span class=" review-score-widget review-score-widget__superb review-score-widget__score-only  review-score-widget__no-subtext    ">
+                                                        <span class="review-score-badge" role="link" aria-label="Scored 9.2 ">
+                                                            '.round($total_point, 1).'
+                                                         </span>
+                                                    </span>
+                                                </div>
+                                                <div class="review_item_header_content_container">
+                                                    <div class="review_item_header_content review_item_header_scoreword">
+                                                      '.$new_obj->content.'
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="review_item_review_content">
+                                                <p class="review_neg">
+                                                    <a href=""><i class="review_item_icon review_item_icon_default fa fa-plus-square" ></i></a>
+                                                    '.$new_obj->comment.'
+                                                <b class="icon_review_list">
+                                                    <a data-toggle="tooltip" data-placement="left" title="Chương trình tour: '.$new_obj->program.'" href="javascript:void(0)"><i class="fa fa-plane "></i></a>
+                                                    <a data-toggle="tooltip" data-placement="left" title="Hướng dẫn viên suốt tuyến: '.$new_obj->tour_guide_full.'" href="javascript:void(0)"><i class="fa fa-users"></i></a>
+                                                    <a data-toggle="tooltip" data-placement="left" title="Hướng dẫn viên địa phương: '.$new_obj->tour_guide_local.'" href="javascript:void(0)"><i class="fa fa-user "></i></a>
+                                                    <a data-toggle="tooltip" data-placement="left" title="Khách sạn: '.$new_obj->hotel.'" href="javascript:void(0)"><i class="fa fa-building"></i></a>
+                                                    <a data-toggle="tooltip" data-placement="left" title="Ăn uống: '.$new_obj->restaurant.'" href="javascript:void(0)"><i class="fa fa-cutlery  "></i></a>
+                                                    <a data-toggle="tooltip" data-placement="left" title="Vận chuyển: '.$new_obj->transportation.'" href="javascript:void(0)"><i class="fa fa-car  "></i></a>
+                                                </b>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>';
+    }
+    return $string;
+}
+
+function review_tour_sum($where, $filed='id')
+{
+    $result=mysqli_query(ConnectSql(),'select SUM('.$filed.') as sumPoint, COUNT(id) as countReview from review_tour '.(($where!='')?'where '.$where:''));
+    if($result!=false)
+    {
+        $row=mysqli_fetch_array($result);
+        return $row;
+    }
+    else return false;
+}
+function review_tour_count_statis($where, $filed='id')
+{
+    $result=mysqli_query(ConnectSql(),'select  COUNT(id) as countReview from review_tour '.(($where!='')?'where '.$where:''));
+    if($result!=false)
+    {
+        $row=mysqli_fetch_array($result);
+        return $row['countReview'];
+    }
+    else return false;
+}

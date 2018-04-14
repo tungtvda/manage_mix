@@ -29,7 +29,7 @@ function view_review_tour($data)
 //
 function showTableHeader()
 {
-    return '<th>id</th><th>tour_id</th><th>tour_name</th><th>tour_code</th><th>domain</th><th>content</th><th>departure</th><th>status</th><th>program</th><th>show_program</th><th>tour_guide_full</th><th>show_tour_guide_full</th><th>tour_guide_local</th><th>show_tour_guide_local</th><th>hotel</th><th>show_hotel</th><th>restaurant</th><th>show_restaurant</th><th>transportation</th><th>show_transportation</th><th>comment</th><th>show_coment</th><th>upcoming_tour</th>';
+    return '<th>id</th><th>customer_id</th><th>tour_id</th><th>tour_name</th><th>tour_code</th><th>domain</th><th>content</th><th>departure</th><th>status</th><th>program</th><th>show_program</th><th>tour_guide_full</th><th>show_tour_guide_full</th><th>tour_guide_local</th><th>show_tour_guide_local</th><th>hotel</th><th>show_hotel</th><th>restaurant</th><th>show_restaurant</th><th>total</th><th>transportation</th><th>show_transportation</th><th>comment</th><th>show_coment</th><th>upcoming_tour</th><th>created</th><th>updated</th><th>updated_by</th>';
 }
 //
 function showTableBody($data)
@@ -39,6 +39,7 @@ function showTableBody($data)
     {
         $TableBody.="<tr><td><input type=\"checkbox\" name=\"check_".$obj->id."\"/></td>";
         $TableBody.="<td>".$obj->id."</td>";
+        $TableBody.="<td>".$obj->customer_id."</td>";
         $TableBody.="<td>".$obj->tour_id."</td>";
         $TableBody.="<td>".$obj->tour_name."</td>";
         $TableBody.="<td>".$obj->tour_code."</td>";
@@ -56,11 +57,15 @@ function showTableBody($data)
         $TableBody.="<td>".$obj->show_hotel."</td>";
         $TableBody.="<td>".$obj->restaurant."</td>";
         $TableBody.="<td>".$obj->show_restaurant."</td>";
+        $TableBody.="<td>".$obj->total."</td>";
         $TableBody.="<td>".$obj->transportation."</td>";
         $TableBody.="<td>".$obj->show_transportation."</td>";
         $TableBody.="<td>".$obj->comment."</td>";
         $TableBody.="<td>".$obj->show_coment."</td>";
         $TableBody.="<td>".$obj->upcoming_tour."</td>";
+        $TableBody.="<td>".$obj->created."</td>";
+        $TableBody.="<td>".$obj->updated."</td>";
+        $TableBody.="<td>".$obj->updated_by."</td>";
         $TableBody.="<td><a href=\"?action=edit&id=".$obj->id."\" title=\"Edit\"><img src=\"".SITE_NAME."/view/admin/Themes/images/pencil.png\" alt=\"Edit\"></a>";
         $TableBody.="<a href=\"?action=delete&id=".$obj->id."\" title=\"Delete\" onClick=\"return confirm('Bạn có chắc chắc muốn xóa?')\"><img src=\"".SITE_NAME."/view/admin/Themes/images/cross.png\" alt=\"Delete\"></a> ";
         $TableBody.="</td>";
@@ -90,6 +95,7 @@ function showFrom($form,$ListKey=array())
     $str_from.='<p><label>show_hotel</label><input class="text-input small-input" type="text"  name="show_hotel" value="'.(($form!=false)?$form->show_hotel:'').'" /></p>';
     $str_from.='<p><label>restaurant</label><input class="text-input small-input" type="text"  name="restaurant" value="'.(($form!=false)?$form->restaurant:'').'" /></p>';
     $str_from.='<p><label>show_restaurant</label><input class="text-input small-input" type="text"  name="show_restaurant" value="'.(($form!=false)?$form->show_restaurant:'').'" /></p>';
+    $str_from.='<p><label>total</label><input class="text-input small-input" type="text"  name="total" value="'.(($form!=false)?$form->total:'').'" /></p>';
     $str_from.='<p><label>transportation</label><input class="text-input small-input" type="text"  name="transportation" value="'.(($form!=false)?$form->transportation:'').'" /></p>';
     $str_from.='<p><label>show_transportation</label><input class="text-input small-input" type="text"  name="show_transportation" value="'.(($form!=false)?$form->show_transportation:'').'" /></p>';
     $str_from.='<p><label>comment</label><textarea name="comment">'.(($form!=false)?$form->comment:'').'</textarea><script type="text/javascript">CKEDITOR.replace(\'comment\'); </script></p>';

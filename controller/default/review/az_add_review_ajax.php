@@ -72,6 +72,7 @@ if($tour_id!='' && $tour_name!='' && $domain!='' && $code_check_send_email!='' &
             if(!in_array($domain,$array_domain)){
                 $domain='azbooking.vn';
             }
+            $total=round(($program+$tour_guide_full+$tour_guide_local+$hotel+$restaurant+$transportation)/6,1);
             $review = new review_tour();
             $review->customer_id=$customer_id;
             $review->tour_id=$tour_id;
@@ -81,12 +82,13 @@ if($tour_id!='' && $tour_name!='' && $domain!='' && $code_check_send_email!='' &
             $review->content=$content;
             $review->departure=$departure;
             $review->status=0;
-            $review->program=$program;
-            $review->tour_guide_full=$tour_guide_full;
-            $review->tour_guide_local=$tour_guide_local;
-            $review->hotel=$hotel;
-            $review->restaurant=$restaurant;
-            $review->transportation=$transportation;
+            $review->program=checkPoint($program);
+            $review->tour_guide_full=checkPoint($tour_guide_full);
+            $review->tour_guide_local=checkPoint($tour_guide_local);
+            $review->hotel=checkPoint($hotel);
+            $review->restaurant=checkPoint($restaurant);
+            $review->transportation=checkPoint($transportation);
+            $review->total=checkPoint($total);
             $review->comment=$comment;
             $review->upcoming_tour=$upcoming_tour;
             $review->created=_returnGetDateTime();
@@ -101,3 +103,14 @@ if($tour_id!='' && $tour_name!='' && $domain!='' && $code_check_send_email!='' &
 
 }
 echo json_encode($array_res);
+
+function checkPoint($point){
+    if($point<=0){
+        $point=1;
+    }else{
+        if($point>10){
+            $point=10;
+        }
+    }
+    return $point;
+}

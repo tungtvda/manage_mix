@@ -1,7 +1,7 @@
 <?php
 class review_tour
 {
-    public $id,$customer_id,$tour_id,$tour_name,$tour_code,$domain,$content,$departure,$status,$program,$show_program,$tour_guide_full,$show_tour_guide_full,$tour_guide_local,$show_tour_guide_local,$hotel,$show_hotel,$restaurant,$show_restaurant,$transportation,$show_transportation,$comment,$show_coment,$upcoming_tour,$created,$updated,$updated_by;
+    public $id,$customer_id,$tour_id,$tour_name,$tour_code,$domain,$content,$departure,$status,$program,$show_program,$tour_guide_full,$show_tour_guide_full,$tour_guide_local,$show_tour_guide_local,$hotel,$show_hotel,$restaurant,$show_restaurant,$total,$transportation,$show_transportation,$comment,$show_coment,$upcoming_tour,$created,$updated,$updated_by;
     public function review_tour($data=array())
     {
     $this->id=isset($data['id'])?$data['id']:'';
@@ -23,6 +23,7 @@ class review_tour
     $this->show_hotel=isset($data['show_hotel'])?$data['show_hotel']:'';
     $this->restaurant=isset($data['restaurant'])?$data['restaurant']:'';
     $this->show_restaurant=isset($data['show_restaurant'])?$data['show_restaurant']:'';
+    $this->total=isset($data['total'])?$data['total']:'';
     $this->transportation=isset($data['transportation'])?$data['transportation']:'';
     $this->show_transportation=isset($data['show_transportation'])?$data['show_transportation']:'';
     $this->comment=isset($data['comment'])?$data['comment']:'';
@@ -54,6 +55,7 @@ class review_tour
             $this->show_hotel=addslashes($this->show_hotel);
             $this->restaurant=addslashes($this->restaurant);
             $this->show_restaurant=addslashes($this->show_restaurant);
+            $this->total=addslashes($this->total);
             $this->transportation=addslashes($this->transportation);
             $this->show_transportation=addslashes($this->show_transportation);
             $this->comment=addslashes($this->comment);
@@ -84,6 +86,7 @@ class review_tour
             $this->show_hotel=stripslashes($this->show_hotel);
             $this->restaurant=stripslashes($this->restaurant);
             $this->show_restaurant=stripslashes($this->show_restaurant);
+            $this->total=stripslashes($this->total);
             $this->transportation=stripslashes($this->transportation);
             $this->show_transportation=stripslashes($this->show_transportation);
             $this->comment=stripslashes($this->comment);

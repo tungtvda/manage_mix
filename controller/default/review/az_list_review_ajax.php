@@ -94,8 +94,30 @@ if($id_tour!='' && $domain!='' && $code_check_send_email!=''){
     $array_res['transportationPoint']=$transportation_point;
     $array_res['totalPoint']=round(($program_point+$tour_guide_full_point+$tour_guide_local_point+$hotel_point+$restaurant_point+$transportation_point)/6,1);
 
-//    // đếm số người đánh giá 1-3
-//    $count13=review_tour_sum('tour_id='.$id_tour.' and domain="'.$domain.'" and status!=0 ','transportation');
+   // đếm số người đánh giá 1-3
+    $array_res['count13']=review_tour_count_statis('tour_id='.$id_tour.' and domain="'.$domain.'" and status!=0 and total>=1 and total<=2.9');
+    // đếm số người đánh giá 3-5
+    $array_res['count35']=review_tour_count_statis('tour_id='.$id_tour.' and domain="'.$domain.'" and status!=0 and total>=3 and total<=3.9');
+    // đếm số người đánh giá 5-7
+    $array_res['count57']=review_tour_count_statis('tour_id='.$id_tour.' and domain="'.$domain.'" and status!=0 and total>=5 and total<=6.9');
+    // đếm số người đánh giá 7-9
+    $array_res['count79']=review_tour_count_statis('tour_id='.$id_tour.' and domain="'.$domain.'" and status!=0 and total>=7 and total<=7.9');
+    // đếm số người đánh giá 9-10
+    $array_res['count910']=review_tour_count_statis('tour_id='.$id_tour.' and domain="'.$domain.'" and status!=0 and total>=9');
+    $totalCountStatistics=($array_res['count13']+$array_res['count35']+$array_res['count57']+ $array_res['count79']+$array_res['count910']);
+//    $array_res['countPercent13']=0;
+//    $array_res['countPercent35']=0;
+//    $array_res['countPercent57']=0;
+//    $array_res['countPercent79']=0;
+//    $array_res['countPercent910']=0;
+    if($totalCountStatistics){
+        $array_res['countPercent13']=round((($array_res['count13']*100) / $totalCountStatistics));
+        $array_res['countPercent35']=round((($array_res['count35']*100) / $totalCountStatistics));
+        $array_res['countPercent57']=round((($array_res['count57']*100) / $totalCountStatistics));
+        $array_res['countPercent79']=round((($array_res['count79']*100) / $totalCountStatistics));
+        $array_res['countPercent910']=round((($array_res['count910']*100) / $totalCountStatistics));
+    }
+
 
 }
 echo json_encode($array_res);

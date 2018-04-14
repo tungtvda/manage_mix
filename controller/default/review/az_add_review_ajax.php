@@ -68,7 +68,7 @@ if($tour_id!='' && $tour_name!='' && $domain!='' && $code_check_send_email!='' &
                 $departure=   date("Y-m-d", strtotime($departure));
             }
             $tour_id=_return_mc_decrypt($tour_id);
-            $array_domain=['azbooking.vn','mixtourist.com.vn'];
+            $array_domain=array('azbooking.vn','mixtourist.com.vn');
             if(!in_array($domain,$array_domain)){
                 $domain='azbooking.vn';
             }

@@ -193,3 +193,24 @@ LEFT JOIN customer cs on rv.customer_id = cs.id
     }
     return $string;
 }
+
+function review_tour_sum($where, $filed='id')
+{
+    $result=mysqli_query(ConnectSql(),'select SUM('.$filed.') as sumPoint, COUNT(id) as countReview from review_tour '.(($where!='')?'where '.$where:''));
+    if($result!=false)
+    {
+        $row=mysqli_fetch_array($result);
+        return $row;
+    }
+    else return false;
+}
+function review_tour_count_statis($where, $filed='id')
+{
+    $result=mysqli_query(ConnectSql(),'select  COUNT(id) as countReview from review_tour '.(($where!='')?'where '.$where:''));
+    if($result!=false)
+    {
+        $row=mysqli_fetch_array($result);
+        return $row['countReview'];
+    }
+    else return false;
+}

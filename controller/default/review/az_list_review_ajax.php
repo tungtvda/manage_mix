@@ -59,25 +59,33 @@ if($id_tour!='' && $code_tour_review!='' && $domain!='' && $code_check_send_emai
                 $order=$review_sort[0].' '.$review_sort[1];
             }
         }
+        // kiểm tra start
+        $start=1;
+        $start_client=_returnPostParamSecurity('start');
+        if($start_client){
+            $start=$start_client;
+        }
 
         // kiểm tra limit
-        $limit=100;
-        $review_limit=$domain=_returnPostParamSecurity('review_limit');
+        $limit=10;
+        $review_limit=_returnPostParamSecurity('review_limit');
         if($review_limit){
             $limit=$review_limit;
         }
 
 
-        // Đếm tổng số đánh giá
-        $count_total_review=review_tour_count('tour_id='.$id_tour.' and domain="'.$domain.'"');
-        
         // Đếm tổng số đánh giá được xác nhận
         $count_total_review_access=review_tour_count('tour_id='.$id_tour.' and domain="'.$domain.'" and status!=0');
         // Đếm tổng số đánh giá chưa được xác nhận
         $count_total_review_no_access=review_tour_count('tour_id='.$id_tour.' and domain="'.$domain.'" and status=0');
 
+        // Đếm tổng số đánh giá
+        $count_total_review=$count_total_review_access+$count_total_review_no_access;
+        // lấy danh sách đánh giá
+        $data_res=review_az_getByPaging($start, $limit,$order,$dk);
 
-        $array_res['listReview']=review_az_getByPaging(1, $limit,$order,$dk);
+        $array_res['listReview']=$data_res['string'];
+        $array_res['countList']=$data_res['count'];
 
         $array_res['totalReview']=$count_total_review;
         $array_res['totalAccess']=$count_total_review_access;

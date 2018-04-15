@@ -102,11 +102,12 @@ LEFT JOIN customer cs on rv.customer_id = cs.id
 ".(($where!='')?(' where '.$where):'')." Order By ".$Order." Limit ".(($CurrentPage-1)*$PageSize)." , ".$PageSize;
 
     $result=mysqli_query(ConnectSql(),$query);
-    $array_result=array();
+
     $string='';
+    $count=0;
     if($result!=false)while($row=mysqli_fetch_array($result))
     {
-
+        $count++;
         $new_obj=new review_tour($row);
         if($row['avatar']=="")
         {
@@ -143,7 +144,7 @@ LEFT JOIN customer cs on rv.customer_id = cs.id
             'name_cus'=>$row['name_cus'],
             'avatar'=>$avatar,
         );
-        array_push($array_result,$item);
+//        array_push($array_result,$item);
         $textPoint='Tuyệt vời';
         if($new_obj->total>=1 &&$new_obj->total<=2.9){
             $textPoint='Rất kém';
@@ -233,7 +234,11 @@ LEFT JOIN customer cs on rv.customer_id = cs.id
                                     </div>
                                 </li>';
     }
-    return $string;
+    $array_result=array(
+        'string'=>$string,
+        'count'=>$count,
+    );
+    return $array_result;
 }
 
 function review_tour_sum($where, $filed='id')

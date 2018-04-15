@@ -15,6 +15,7 @@ $array_res = array(
     'mess' => 'Đánh giá thất bại, bạn vui lòng kiểm tra thông tin đánh giá',
 );
 $code_check_send_email=_returnPostParamSecurity('code_check_send_email');
+$code_tour_review=_returnPostParamSecurity('code_tour_review');
 $program=_returnPostParamSecurity('program');
 $tour_guide_full=_returnPostParamSecurity('tour_guide_full');
 $tour_guide_local=_returnPostParamSecurity('tour_guide_local');
@@ -33,10 +34,10 @@ $tour_name=_returnPostParamSecurity('tour_name');
 $tour_code=_returnPostParamSecurity('tour_code');
 $domain=_returnPostParamSecurity('domain');
 
-if($tour_id!='' && $tour_name!='' && $domain!='' && $code_check_send_email!='' && $tour_guide_full!='' && $tour_guide_local!='' && $hotel!='' && $restaurant!='' && $transportation!='' && $name!='' && $name!='' && $email!='' && $phone!=''){
+if($tour_id!='' && $tour_name!='' && $code_tour_review!='' && $domain!='' && $code_check_send_email!='' && $tour_guide_full!='' && $hotel!='' && $restaurant!='' && $transportation!='' && $name!='' && $name!='' && $email!='' && $phone!=''){
     $code_check_send_email=_return_mc_decrypt($code_check_send_email);
     $array_check_submit=explode('_',$code_check_send_email);
-    if(isset($array_check_submit[0]) && isset($array_check_submit[1]) && isset($array_check_submit[2]) && $array_check_submit[0]=='azmix' && $array_check_submit[2]=='tungtv.soict@gmail.com' && is_numeric($array_check_submit[1])){
+    if(isset($array_check_submit[0]) && isset($array_check_submit[1]) && isset($array_check_submit[2]) && $array_check_submit[0]=='azmix' && $array_check_submit[2]=='tungtv.soict@gmail.com' && is_numeric($array_check_submit[1]) && $array_check_submit[1]==$code_tour_review){
         $pattern = '/^[a-zA-Z0-9._]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/';
         if (preg_match($pattern, $email)) {
             $customer_id = 0;
@@ -72,7 +73,7 @@ if($tour_id!='' && $tour_name!='' && $domain!='' && $code_check_send_email!='' &
             if(!in_array($domain,$array_domain)){
                 $domain='azbooking.vn';
             }
-            $total=round(($program+$tour_guide_full+$tour_guide_local+$hotel+$restaurant+$transportation)/6,1);
+            $total=round(($program+$tour_guide_full+$hotel+$restaurant+$transportation)/5,1);
             $review = new review_tour();
             $review->customer_id=$customer_id;
             $review->tour_id=$tour_id;
@@ -84,7 +85,7 @@ if($tour_id!='' && $tour_name!='' && $domain!='' && $code_check_send_email!='' &
             $review->status=0;
             $review->program=checkPoint($program);
             $review->tour_guide_full=checkPoint($tour_guide_full);
-            $review->tour_guide_local=checkPoint($tour_guide_local);
+//            $review->tour_guide_local=checkPoint($tour_guide_local);
             $review->hotel=checkPoint($hotel);
             $review->restaurant=checkPoint($restaurant);
             $review->transportation=checkPoint($transportation);

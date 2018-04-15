@@ -110,10 +110,12 @@ LEFT JOIN customer cs on rv.customer_id = cs.id
         $new_obj=new review_tour($row);
         if($row['avatar']=="")
         {
-            $avatar=SITE_NAME.'/view/default/themes/images/no-avatar.png';
+            $arrayColor=array('#f09960','#325e98','#7cbe65','#ea6b6b','#39b4e8');
+            $avatar='<b data-toggle="tooltip" data-placement="top" title="'.$row['name_cus'].'" class="noavatart" style="background:'.$arrayColor[array_rand($arrayColor)].';">'.strtoupper(substr( $row['name_cus'],  0,1)).'</b>';
         }
         else{
-            $avatar=SITE_NAME.$row['avatar'];
+            $img=SITE_NAME.$row['avatar'];
+            $avatar=' <img data-toggle="tooltip" data-placement="top" title="'.$row['name_cus'].'" style="display: initial;" class="avatar-mask ava-pad-bottom ava-default" src="'.$img.'" alt="">';
         }
         $item=array(
             'customer_id'=>$new_obj->customer_id,
@@ -157,12 +159,13 @@ LEFT JOIN customer cs on rv.customer_id = cs.id
         }
         $string.=' <li class="review_item clearfix review_featured  ">
                                     <p class="review_item_date">
-                                        Ngày đánh giá: '.date("d-m-Y", strtotime($new_obj->created)).'
+                                        Ngày đánh giá: '.date("d-m-Y H:i", strtotime($new_obj->created)).'
                                     </p>
                                     <div data-et-view="aRDPNZJKSXe:2"></div>
                                     <div class="review_item_reviewer" style="text-align: center">
                                         <div>
-                                            <img data-toggle="tooltip" data-placement="top" title="'.$row['name_cus'].'" style="display: initial;" class="avatar-mask ava-pad-bottom ava-default" src="'.$avatar.'" alt="">
+                                       '.$avatar.'
+
                                         </div>
                                         <a  href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="'.$row['name_cus'].'" class="reviewer_country name_cus_list">
                                        '.$row['name_cus'].'
@@ -185,10 +188,25 @@ LEFT JOIN customer cs on rv.customer_id = cs.id
                                                 </div>
                                             </div>
                                             <div class="review_item_review_content">
-                                                <p class="review_neg">
-                                                    <a href=""><i class="review_item_icon review_item_icon_default fa fa-plus-square" ></i></a>
-                                                    '.$new_obj->comment.'
-                                                <b class="icon_review_list">';
+                                                <div class="review_neg">';
+                                                    $comment=$new_obj->comment;
+                                                    if (strlen($comment) >180) {
+                                                        $comment1=strip_tags($comment);
+                                                        $comment2 = substr($comment1, 0, 180);
+                                                        $comment = substr($comment2, 0, strrpos($comment2, ' ')) . "...";
+                                                        $string.='<a  title="Xem thêm" class="show_full_comment" data-id="'.$new_obj->id.'" data-value="short" href="javascript:void(0)">
+                                                        <i id="icon_show_hide_review_'.$new_obj->id.'" class="review_item_icon review_item_icon_view fa fa-plus-circle" ></i>
+                                                        </a>';
+                                                    }else{
+                                                        if($comment!=''){
+                                                            $string.='<a href="javascript:void(0)"><i class="review_item_icon review_item_icon_default fa fa-minus-circle " ></i></a>';
+                                                        }
+                                                    }
+
+                                                    $string.=' <p class="long_comment" id="long_comment_'.$new_obj->id.'" hidden> '.$new_obj->comment.'</p>';
+                                                    $string.='<p class="short_comment" id="short_comment_'.$new_obj->id.'"> '.$comment.'</p>';
+
+                                                    $string.=' <p class="icon_review icon_review_list">';
                                                     if($new_obj->show_program){
                                                         $string.='<a data-toggle="tooltip" data-placement="left" title="Chương trình tour: '.$new_obj->program.'" href="javascript:void(0)"><i class="fa fa-plane "></i></a>';
                                                     }
@@ -207,8 +225,9 @@ LEFT JOIN customer cs on rv.customer_id = cs.id
                                                     if($new_obj->show_transportation){
                                                         $string.='<a data-toggle="tooltip" data-placement="left" title="Vận chuyển: '.$new_obj->transportation.'" href="javascript:void(0)"><i class="fa fa-car  "></i></a>';
                                                     }
-                                        $string.='</b>
-                                                </p>
+
+                                                $string.='</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

@@ -73,31 +73,50 @@ if($tour_id!='' && $tour_name!='' && $code_tour_review!='' && $domain!='' && $co
             if(!in_array($domain,$array_domain)){
                 $domain='azbooking.vn';
             }
-            $total=round(($program+$tour_guide_full+$hotel+$restaurant+$transportation)/5,1);
-            $review = new review_tour();
-            $review->customer_id=$customer_id;
-            $review->tour_id=$tour_id;
-            $review->tour_name=$tour_name;
-            $review->tour_code=$tour_code;
-            $review->domain=$domain;
-            $review->content=$content;
-            $review->departure=$departure;
-            $review->status=0;
-            $review->program=checkPoint($program);
-            $review->tour_guide_full=checkPoint($tour_guide_full);
+            // kiểm tra khách hàng đã đánh giá tour chưa
+            $data_tour_review=review_tour_count('customer_id='.$customer_id.' and tour_id='.$tour_id.' and domain="'.$domain.'"');
+            if($data_tour_review==0){
+                $total=round(($program+$tour_guide_full+$hotel+$restaurant+$transportation)/5,1);
+                $review = new review_tour();
+                $review->customer_id=$customer_id;
+                $review->tour_id=$tour_id;
+                $review->tour_name=$tour_name;
+                $review->tour_code=$tour_code;
+                $review->domain=$domain;
+                $review->content=$content;
+                $review->departure=$departure;
+                $review->status=0;
+                $review->program=checkPoint($program);
+                $review->tour_guide_full=checkPoint($tour_guide_full);
 //            $review->tour_guide_local=checkPoint($tour_guide_local);
-            $review->hotel=checkPoint($hotel);
-            $review->restaurant=checkPoint($restaurant);
-            $review->transportation=checkPoint($transportation);
-            $review->total=checkPoint($total);
-            $review->comment=$comment;
-            $review->upcoming_tour=$upcoming_tour;
-            $review->created=_returnGetDateTime();
-            review_tour_insert($review);
-            $array_res = array(
-                'success' => 1,
-                'mess' => mb_convert_case($domain, MB_CASE_UPPER, "UTF-8").' cảm ơn quý khách "'.$name.'" đã đánh giá về dịch vụ của chúng tôi, hệ thống sẽ xác nhận đánh giá phản hồi của bạn',
-            );
+                $review->hotel=checkPoint($hotel);
+                $review->restaurant=checkPoint($restaurant);
+                $review->transportation=checkPoint($transportation);
+                $review->total=checkPoint($total);
+                $review->comment=$comment;
+                $review->upcoming_tour=$upcoming_tour;
+                $review->created=_returnGetDateTime();
+                review_tour_insert($review);
+                $array_res = array(
+                    'success' => 1,
+                    'mess' => mb_convert_case($domain, MB_CASE_UPPER, "UTF-8").' cảm ơn quý khách "'.$name.'" đã đánh giá về dịch vụ của chúng tôi, hệ thống sẽ xác nhận đánh giá phản hồi của bạn',
+                );
+                $data_tour_review=review_tour_getByTop('1','customer_id='.$customer_id.' and tour_id='.$tour_id.' and domain="'.$domain.'"','id desc');
+                if($data_tour_review){
+                    $name_noti = 'Khách hàng  ' . $name . ' đã đánh giá tour "' . $tour_name . '", bạn hãy xác minh đánh giá này';
+                    $link_noti = '/phan-hoi-khach-hang/sua?noti=1&confirm=1&id=' . _return_mc_encrypt($data_tour_review[0]->id, ENCRYPTION_KEY);
+                    $data_list_user_admin = user_getByTop('', 'user_role=1 and status=1', 'id desc');
+                    if (count($data_list_user_admin) > 0) {
+                        foreach ($data_list_user_admin as $row_admin) {
+                            _insertNotification($name_noti, $user_tiep_thi, $row_admin->id, $link_noti, 0, '');
+                        }
+                    }
+                }
+
+            }else{
+                $array_res['mess']='Bạn đã từng đánh giá tour "'.$tour_name.'", bạn không thể đánh giá lại một lần nữa';
+            }
+
         }
 
     }

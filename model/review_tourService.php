@@ -112,7 +112,7 @@ LEFT JOIN customer cs on rv.customer_id = cs.id
         if($row['avatar']=="")
         {
             $arrayColor=array('#f09960','#325e98','#7cbe65','#ea6b6b','#39b4e8');
-            $avatar='<b data-toggle="tooltip" data-placement="top" title="'.$row['name_cus'].'" class="noavatart" style="background:'.$arrayColor[array_rand($arrayColor)].';">'.strtoupper(substr( $row['name_cus'],  0,1)).'</b>';
+            $avatar='<div data-toggle="tooltip" data-placement="top" title="'.$row['name_cus'].'" class="noavatart" style="background:'.$arrayColor[array_rand($arrayColor)].';">'.strtoupper(substr( $row['name_cus'],  0,1)).'</div>';
         }
         else{
             $img=SITE_NAME.$row['avatar'];
@@ -164,7 +164,7 @@ LEFT JOIN customer cs on rv.customer_id = cs.id
                                     </p>
                                     <div data-et-view="aRDPNZJKSXe:2"></div>
                                     <div class="review_item_reviewer" style="text-align: center">
-                                        <div>
+                                        <div style="display: inline-block;">
                                        '.$avatar.'
 
                                         </div>

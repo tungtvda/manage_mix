@@ -57,12 +57,12 @@ if($id_tour!='' && $code_tour_review!='' && $domain!='' && $code_check_send_emai
         }
 
         // kiểm tra order
-        $order='id desc';
+        $order='rv.id desc';
         $review_sort=_returnPostParamSecurity('review_sort');
         if($review_sort){
             $review_sort=explode('_',$review_sort);
             if(isset($review_sort[0]) && isset($review_sort[1])){
-                $order=$review_sort[0].' '.$review_sort[1];
+                $order='rv.'.$review_sort[0].' '.$review_sort[1];
             }
         }
         // kiểm tra start
@@ -91,10 +91,8 @@ if($id_tour!='' && $code_tour_review!='' && $domain!='' && $code_check_send_emai
         $count_total_review=$count_total_review_access+$count_total_review_no_access;
         // lấy danh sách đánh giá
         $data_res=review_az_getByPaging($start, $limit,$order,$dk);
-
         $array_res['listReview']=$data_res['string'];
         $array_res['countList']=$data_res['count'];
-
         $array_res['totalReview']=$count_total_review;
         $array_res['totalAccess']=$count_total_review_access;
         $array_res['totalAccessFilter']=$count_total_review_access;

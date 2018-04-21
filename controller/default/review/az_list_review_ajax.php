@@ -30,33 +30,39 @@ if($id_tour!='' && $code_tour_review!='' && $domain!='' && $code_check_send_emai
     if(isset($array_check_submit[0]) && isset($array_check_submit[1]) && isset($array_check_submit[2]) && $array_check_submit[0]=='azmix' && $array_check_submit[2]=='tungtv.soict@gmail.com' && is_numeric($array_check_submit[1]) && $array_check_submit[1]==$code_tour_review) {
         //Kiểm tra điều kiện
         $dk='rv.tour_id='.$id_tour.' and rv.domain="'.$domain.'" and rv.status!=0';
+        $dk_count='';
         $review_total=_returnPostParamSecurity('review_total');
         switch($review_total){
             case '9':
                 $dk.=' and total>=9 ';
+                $dk_count.=' and total>=9 ';
                 break;
             case '7':
                 $dk.=' and total>=7 and total<=7.9 ';
+                $dk_count.=' and total>=7 and total<=7.9 ';
                 break;
             case '5':
                 $dk.=' and total>=5 and total<=6.9 ';
+                $dk_count.=' and total>=5 and total<=6.9 ';
                 break;
             case '3':
                 $dk.=' and total>=3 and total<=4.9 ';
+                $dk_count.=' and total>=3 and total<=4.9 ';
                 break;
             case '1':
                 $dk.=' and total>=1 and total<=2.9 ';
+                $dk_count.=' and total>=1 and total<=2.9 ';
                 break;
 
         }
 
         // kiểm tra order
-        $order='id desc';
+        $order='rv.id desc';
         $review_sort=_returnPostParamSecurity('review_sort');
         if($review_sort){
             $review_sort=explode('_',$review_sort);
             if(isset($review_sort[0]) && isset($review_sort[1])){
-                $order=$review_sort[0].' '.$review_sort[1];
+                $order='rv.'.$review_sort[0].' '.$review_sort[1];
             }
         }
         // kiểm tra start
@@ -76,6 +82,8 @@ if($id_tour!='' && $code_tour_review!='' && $domain!='' && $code_check_send_emai
 
         // Đếm tổng số đánh giá được xác nhận
         $count_total_review_access=review_tour_count('tour_id='.$id_tour.' and domain="'.$domain.'" and status!=0');
+        // Đếm tổng số đánh giá được xác nhận theo điều kiện lọc
+        $count_total_review_access=review_tour_count('tour_id='.$id_tour.' and domain="'.$domain.'" and status!=0'.$dk_count);
         // Đếm tổng số đánh giá chưa được xác nhận
         $count_total_review_no_access=review_tour_count('tour_id='.$id_tour.' and domain="'.$domain.'" and status=0');
 
@@ -83,17 +91,25 @@ if($id_tour!='' && $code_tour_review!='' && $domain!='' && $code_check_send_emai
         $count_total_review=$count_total_review_access+$count_total_review_no_access;
         // lấy danh sách đánh giá
         $data_res=review_az_getByPaging($start, $limit,$order,$dk);
-
         $array_res['listReview']=$data_res['string'];
         $array_res['countList']=$data_res['count'];
-
         $array_res['totalReview']=$count_total_review;
         $array_res['totalAccess']=$count_total_review_access;
+        $array_res['totalAccessFilter']=$count_total_review_access;
         $array_res['totalNoAccess']=$count_total_review_no_access;
         if($count_total_review){
             $array_res['percentAccess']=round(($count_total_review_access*100)/$count_total_review);
         }
-
+        // kiểm tra phân trang
+        $array_res['showNext']=1;
+        $array_res['showPre']=0;
+        $array_res['showPageText']='Hiển thị '.$start.' - '.((($start-1)*$limit)+$array_res['countList']);
+        if($start>1){
+            $array_res['showPre']=1;
+        }
+        if(($start*$limit)>=$count_total_review_access || $array_res['countList']>=$count_total_review_access){
+            $array_res['showNext']=0;
+        }
         $show_statistics=1;
         // Đếm chương trình
         $program_point=0;

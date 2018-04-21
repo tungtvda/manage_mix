@@ -1,6 +1,7 @@
 <?php
 require_once DIR.'/model/review_tour.php';
 require_once DIR.'/model/sqlconnection.php';
+require_once DIR.'/common/locdautiengviet.php';
 //
 function review_tour_Get($command)
 {
@@ -112,38 +113,43 @@ LEFT JOIN customer cs on rv.customer_id = cs.id
         if($row['avatar']=="")
         {
             $arrayColor=array('#f09960','#325e98','#7cbe65','#ea6b6b','#39b4e8');
-            $avatar='<b data-toggle="tooltip" data-placement="top" title="'.$row['name_cus'].'" class="noavatart" style="background:'.$arrayColor[array_rand($arrayColor)].';">'.strtoupper(substr( $row['name_cus'],  0,1)).'</b>';
+            $name_cus='';
+            if($row['name_cus']!=''){
+                $name_cus= strtoupper(substr(LocDau($row['name_cus']),  0,1));
+            }
+            $avatar='<div data-toggle="tooltip" data-placement="top" title="'.$row['name_cus'].'" class="noavatart" style="background:'.$arrayColor[array_rand($arrayColor)].';">'.$name_cus.'</div>';
         }
         else{
             $img=SITE_NAME.$row['avatar'];
             $avatar=' <img data-toggle="tooltip" data-placement="top" title="'.$row['name_cus'].'" style="display: initial;" class="avatar-mask ava-pad-bottom ava-default" src="'.$img.'" alt="">';
         }
-        $item=array(
-            'customer_id'=>$new_obj->customer_id,
-            'tour_id'=>$new_obj->tour_id,
-            'tour_name'=>$new_obj->tour_name,
-            'domain'=>$new_obj->domain,
-            'status'=>$new_obj->status,
-            'departure'=>$new_obj->departure,
-            'program'=>$new_obj->program,
-            'show_program'=>$new_obj->show_program,
-            'tour_guide_full'=>$new_obj->tour_guide_full,
-            'show_tour_guide_full'=>$new_obj->show_tour_guide_full,
-            'tour_guide_local'=>$new_obj->tour_guide_local,
-            'show_tour_guide_local'=>$new_obj->show_tour_guide_local,
-            'hotel'=>$new_obj->hotel,
-            'show_hotel'=>$new_obj->show_hotel,
-            'restaurant'=>$new_obj->restaurant,
-            'show_restaurant'=>$new_obj->show_restaurant,
-            'transportation'=>$new_obj->transportation,
-            'show_transportation'=>$new_obj->show_transportation,
-            'comment'=>$new_obj->comment,
-            'show_coment'=>$new_obj->show_coment,
-            'upcoming_tour'=>$new_obj->upcoming_tour,
-            'created'=>$new_obj->created,
-            'name_cus'=>$row['name_cus'],
-            'avatar'=>$avatar,
-        );
+
+//        $item=array(
+//            'customer_id'=>$new_obj->customer_id,
+//            'tour_id'=>$new_obj->tour_id,
+//            'tour_name'=>$new_obj->tour_name,
+//            'domain'=>$new_obj->domain,
+//            'status'=>$new_obj->status,
+//            'departure'=>$new_obj->departure,
+//            'program'=>$new_obj->program,
+//            'show_program'=>$new_obj->show_program,
+//            'tour_guide_full'=>$new_obj->tour_guide_full,
+//            'show_tour_guide_full'=>$new_obj->show_tour_guide_full,
+//            'tour_guide_local'=>$new_obj->tour_guide_local,
+//            'show_tour_guide_local'=>$new_obj->show_tour_guide_local,
+//            'hotel'=>$new_obj->hotel,
+//            'show_hotel'=>$new_obj->show_hotel,
+//            'restaurant'=>$new_obj->restaurant,
+//            'show_restaurant'=>$new_obj->show_restaurant,
+//            'transportation'=>$new_obj->transportation,
+//            'show_transportation'=>$new_obj->show_transportation,
+//            'comment'=>$new_obj->comment,
+//            'show_coment'=>$new_obj->show_coment,
+//            'upcoming_tour'=>$new_obj->upcoming_tour,
+//            'created'=>$new_obj->created,
+//            'name_cus'=>$row['name_cus'],
+//            'avatar'=>$avatar,
+//        );
 //        array_push($array_result,$item);
         $textPoint='Tuyệt vời';
         if($new_obj->total>=1 &&$new_obj->total<=2.9){
@@ -164,7 +170,7 @@ LEFT JOIN customer cs on rv.customer_id = cs.id
                                     </p>
                                     <div data-et-view="aRDPNZJKSXe:2"></div>
                                     <div class="review_item_reviewer" style="text-align: center">
-                                        <div>
+                                        <div style="display: inline-block;">
                                        '.$avatar.'
 
                                         </div>

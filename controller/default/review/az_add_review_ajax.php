@@ -108,7 +108,7 @@ if($tour_id!='' && $tour_name!='' && $code_tour_review!='' && $domain!='' && $co
                     $data_list_user_admin = user_getByTop('', 'user_role=1 and status=1', 'id desc');
                     if (count($data_list_user_admin) > 0) {
                         foreach ($data_list_user_admin as $row_admin) {
-                            _insertNotification($name_noti, $user_tiep_thi, $row_admin->id, $link_noti, 0, '');
+                            _insertNotification($name_noti, 0, $row_admin->id, $link_noti, 0, '');
                         }
                     }
                 }

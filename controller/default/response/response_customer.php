@@ -17,7 +17,7 @@ $url_bread='<li class="active">Phản hồi</li>';
 $data['breadcrumbs']=$url_bread;
 $count=8;
 
-$data['list']=review_tour_getByAll();
+$data['list']=review_tour_getByTop('','','Id DESC');
 foreach ($data['list'] as $item){
     $customer= customer_getById($item->customer_id);
     if($customer){

@@ -196,22 +196,24 @@ LEFT JOIN customer cs on rv.customer_id = cs.id
                                             </div>
                                             <div class="review_item_review_content">
                                                 <div class="review_neg">';
-                                                    $comment=$new_obj->comment;
-                                                    if (strlen($comment) >180) {
-                                                        $comment1=strip_tags($comment);
-                                                        $comment2 = substr($comment1, 0, 180);
-                                                        $comment = substr($comment2, 0, strrpos($comment2, ' ')) . "...";
-                                                        $string.='<a  title="Xem thêm" class="show_full_comment" data-id="'.$new_obj->id.'" data-value="short" href="javascript:void(0)">
-                                                        <i id="icon_show_hide_review_'.$new_obj->id.'" class="review_item_icon review_item_icon_view fa fa-plus-circle" ></i>
-                                                        </a>';
-                                                    }else{
-                                                        if($comment!=''){
-                                                            $string.='<a href="javascript:void(0)"><i class="review_item_icon review_item_icon_default fa fa-minus-circle " ></i></a>';
+                                                    if($new_obj->show_coment){
+                                                        $comment=$new_obj->comment;
+                                                        if (strlen($comment) >150) {
+                                                            $comment1=strip_tags($comment);
+                                                            $comment2 = substr($comment1, 0, 150);
+                                                            $comment = substr($comment2, 0, strrpos($comment2, ' ')) . "...";
+                                                            $string.='<a  title="Xem thêm" class="show_full_comment" data-id="'.$new_obj->id.'" data-value="short" href="javascript:void(0)">
+                                                            <i id="icon_show_hide_review_'.$new_obj->id.'" class="review_item_icon review_item_icon_view fa fa-plus-circle" ></i>
+                                                            </a>';
+                                                        }else{
+                                                            if($comment!=''){
+                                                                $string.='<a href="javascript:void(0)"><i class="review_item_icon review_item_icon_default fa fa-minus-circle " ></i></a>';
+                                                            }
                                                         }
-                                                    }
 
-                                                    $string.=' <p class="long_comment" id="long_comment_'.$new_obj->id.'" hidden> '.$new_obj->comment.'</p>';
-                                                    $string.='<p class="short_comment" id="short_comment_'.$new_obj->id.'"> '.$comment.'</p>';
+                                                        $string.=' <p class="long_comment" id="long_comment_'.$new_obj->id.'" hidden> '.$new_obj->comment.'</p>';
+                                                        $string.='<p class="short_comment" id="short_comment_'.$new_obj->id.'"> '.$comment.'</p>';
+                                                    }
 
                                                     $string.=' <p class="icon_review icon_review_list">';
                                                     if($new_obj->show_program){

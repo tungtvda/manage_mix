@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: tungtv
+ * User: tholv
  * Date: 11/10/14
  * Time: 2:40 PM
  */
@@ -22,7 +22,6 @@ if(isset($_GET['id'])&&$_GET['id']!='')
     if (_returnCheckAction(2) == 0) {
         redict(_returnLinkDangNhap());
     }
-//    echo $_GET['id'];
      $id=_return_mc_decrypt(_returnGetParamSecurity('id'), ENCRYPTION_KEY);
     $data['data_user']=review_tour_getById($id);
 
@@ -38,6 +37,19 @@ if(isset($_GET['id'])&&$_GET['id']!='')
     redict(SITE_NAME.'/phan-hoi-khach-hang/');
 }
 
+//update read notification
+if (isset($_POST['id_noti'])) {
+    $id_noti = _return_mc_decrypt(_returnPostParamSecurity('id_noti'));
+    if($id_noti!=''){
+        $data_noti=notification_getById($id_noti);
+        if(count($data_noti)>0){
+            $noti=new notification((array)$data_noti[0]);
+            $noti->status=1;
+            notification_update($noti);
+        }
+    }
+}
+//update comment
 if(isset($_POST['id'])){
     $id=_return_mc_decrypt(_returnGetParamSecurity('id'), ENCRYPTION_KEY);
     $review = review_tour_getById($id);
@@ -55,15 +67,10 @@ if(isset($_POST['id'])){
         review_tour_update($new);
         redict(SITE_NAME.'/phan-hoi-khach-hang/');
     }
-
-
-
 }
 
 $_SESSION['link_redict'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-
 $data['breadcrumbs'] = $url_bread;
-
 $data['module_valid'] = "phan_hoi";
 $count = 8;
 show_header($data);

@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: tungtv
+ * User: tholv
  * Date: 11/10/14
  * Time: 2:40 PM
  */
@@ -16,7 +16,6 @@ _returnCheckPermison(6,6);
 $url_bread='<li class="active">Phản hồi</li>';
 $data['breadcrumbs']=$url_bread;
 $count=8;
-
 $data['list']=review_tour_getByTop('','','Id DESC');
 foreach ($data['list'] as $item){
     $customer= customer_getById($item->customer_id);
@@ -27,9 +26,8 @@ foreach ($data['list'] as $item){
     }
 
 }
-
+//update comment
 if(isset($_POST['id'])){
-
     $id=_return_mc_decrypt(_returnPostParamSecurity('id'), ENCRYPTION_KEY);
     $review = review_tour_getById($id);
     if($review){
@@ -45,8 +43,6 @@ if(isset($_POST['id'])){
         review_tour_update($new);
         redict(SITE_NAME.'/phan-hoi-khach-hang/');
     }
-
-
 
 }
 $data['module_valid'] = "phan_hoi";

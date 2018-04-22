@@ -233,7 +233,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Upcoming Tour </label>
                                         <div class="col-sm-9">
-											    <textarea name="upcoming_tour" disabled style="width: 100%;height: 200px" ><?php echo $upcoming_tour ?></textarea>
+											    <textarea name="upcoming_tour" disabled style="width: 100%;height: 70px" ><?php echo $upcoming_tour ?></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -247,6 +247,25 @@
                                             </label>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="space-4"></div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Comment </label>
+                                        <div class="col-sm-9">
+                                            <textarea name="comment" disabled style="width: 100%;height: 200px" ><?php echo $comment ?></textarea>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label class="inline">
+                                        <input <?php echo $show_coment?> name="show_coment" type="checkbox" class="ace input-lg">
+                                        <span class="lbl"> Show </span>
+                                    </label>
                                 </div>
                             </div>
                         </div>

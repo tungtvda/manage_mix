@@ -37,7 +37,6 @@ if(isset($_POST['id'])){
         $new->status=isset($_POST['status'])?1:0;
         $new->show_program=isset($_POST['show_program'])?1:0;
         $new->show_tour_guide_full=isset($_POST['show_tour_guide_full'])?1:0;
-        $new->show_tour_guide_full=isset($_POST['show_tour_guide_full'])?1:0;
         $new->show_tour_guide_local=isset($_POST['show_tour_guide_local'])?1:0;
         $new->show_hotel=isset($_POST['show_hotel'])?1:0;
         $new->show_restaurant=isset($_POST['show_restaurant'])?1:0;

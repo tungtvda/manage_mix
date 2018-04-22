@@ -433,7 +433,7 @@
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Upcoming Tour </label>
                                                     <div class="col-sm-9">
-                                                        <textarea id="upcoming_tour" name="upcoming_tour" disabled style="width: 100%;height: 200px" ></textarea>
+                                                        <textarea id="upcoming_tour" name="upcoming_tour" disabled style="width: 100%;height: 70px" ></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -447,6 +447,25 @@
                                                         </label>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="space-4"></div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Comment </label>
+                                                    <div class="col-sm-9">
+                                                        <textarea name="comment" id="input_comment" disabled style="width: 100%;height: 200px" ></textarea>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label class="inline">
+                                                    <input name="show_coment" type="checkbox" class="ace input-lg">
+                                                    <span class="lbl"> Show </span>
+                                                </label>
                                             </div>
                                         </div>
                                     </div>
@@ -516,6 +535,8 @@
                             $('#input_transportation').val(obj.transportation);
                             $('#upcoming_tour').val(obj.upcoming_tour);
                             $('#input_customer').val(obj.customer.name);
+                            $('#input_comment').val(obj.comment);
+                            $( "input[name=show_coment]" ).prop( "checked", obj.show_coment=='1'?true:false );
                             $( "input[name=show_program]" ).prop( "checked", obj.show_program=='1'?true:false );
                             $( "input[name=show_hotel]" ).prop( "checked", obj.show_hotel=='1'?true:false );
                             $( "input[name=show_tour_guide_full]" ).prop( "checked", obj.show_tour_guide_full=='1'?true:false );

@@ -35,6 +35,9 @@ function show_response_themmoi($data = array())
     $show_program=_returnDataEditAdd($data['data_user'],'show_program')?'checked':'';
     $hotel=_returnDataEditAdd($data['data_user'],'hotel');
     $show_hotel=_returnDataEditAdd($data['data_user'],'show_hotel')?'checked':'';
+
+    $comment=_returnDataEditAdd($data['data_user'],'comment');
+    $show_coment=_returnDataEditAdd($data['data_user'],'show_coment')?'checked':'';
     $tour_guide_full=_returnDataEditAdd($data['data_user'],'tour_guide_full');
     $show_tour_guide_full=_returnDataEditAdd($data['data_user'],'show_tour_guide_full')?'checked':'';
     $tour_guide_local=_returnDataEditAdd($data['data_user'],'tour_guide_local');

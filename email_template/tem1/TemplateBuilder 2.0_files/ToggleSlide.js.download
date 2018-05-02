@@ -1,0 +1,80 @@
+(function($){
+	jQuery.fn.ToggleMenuSlide = function(options){
+	var defaults = {
+		textOn:"ON",
+		textOff:"OFF",
+		show:"on",
+		clickOn:function(){},
+		clickOff:function(){},
+		setShow:function(i){
+			return i;
+		}
+	}
+
+	$(this).ToggleMenuSlideSetShow();
+	settings = $.extend({}, defaults, options);
+	settings.show = settings.setShow(settings.show.toLowerCase());
+	
+
+	var $toggleMenu = '<div class="toggle-body">\
+						<div class="toggle-slide '+settings.show.toLowerCase()+'">\
+							<div class="toggle-inner">\
+								<div class="toggle-on active" >ON</div>\
+								<div class="toggle-blob"></div>\
+								<div class="toggle-off">OFF</div>\
+							</div>\
+						</div>\
+					</div>';
+
+	
+
+	return this.each(function(i){
+		
+		
+		var $originalElement = this;
+		
+		//window.console.log($(this).attr("class"));
+		
+		$(this).append($toggleMenu);
+		
+		$(this).find('.toggle-on').text(settings.textOn);
+		$(this).find('.toggle-off').text(settings.textOff);
+		
+
+		$(this).find('.toggle-slide').click(function(){
+			obj = this;
+			if($(this).is(".toggle-slide")){
+				if(!$(this).is(".on")){
+					$(this).removeClass("off");
+					$(this).addClass("on")
+					settings.clickOn("on",$originalElement)
+					//settings.clickOn.call(this);
+				}else{
+					$(this).removeClass("on");
+					$(this).addClass("off");
+					settings.clickOff("off",$originalElement);
+					///settings.clickOff.call(this);
+				}
+			}
+		})
+	
+		
+	})
+
+}
+
+})(jQuery);
+
+
+jQuery.fn.ToggleMenuSlideSetShow = function(set){
+	if(set == "on"){
+		this.find('.toggle-slide').removeClass("off");
+		this.find('.toggle-slide').addClass(set);
+	}else{
+		this.find('.toggle-slide').removeClass("on");
+		this.find('.toggle-slide').addClass(set);
+	}
+	
+}
+
+

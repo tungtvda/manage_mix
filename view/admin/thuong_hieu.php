@@ -66,8 +66,9 @@ function showFrom($form,$ListKey=array())
     $str_from.='<p><label>banner_qc</label><input class="text-input small-input" type="text"  name="banner_qc" value="'.(($form!=false)?$form->banner_qc:'').'"/><a class="button" onclick="openKcEditor(\'banner_qc\');">Upload ảnh</a></p>';
     $str_from.='<p><label>link_banner_qc</label><input class="text-input small-input" type="text"  name="link_banner_qc" value="'.(($form!=false)?$form->link_banner_qc:'').'" /></p>';
     $str_from.='<p><label>link_khoi_hanh</label><input class="text-input small-input" type="text"  name="link_khoi_hanh" value="'.(($form!=false)?$form->link_khoi_hanh:'').'" /></p>';
-    $str_from.='<p><label>email</label><input class="text-input small-input" type="text"  name="email" value="'.(($form!=false)?$form->email:'').'" /></p>';
-    $str_from.='<p><label>mat_khau_ung_dung</label><input class="text-input small-input" type="text"  name="mat_khau_ung_dung" value="'.(($form!=false)?$form->mat_khau_ung_dung:'').'" /></p>';
+    $str_from.='<p><label>email</label><input required class="text-input small-input" type="email"  name="email" value="'.(($form!=false)?$form->email:'').'" /></p>';
+    $str_from.='<p><label>mat_khau_ung_dung</label><input required class="text-input small-input" type="password"  name="mat_khau_ung_dung" value="'.(($form!=false)?$form->mat_khau_ung_dung:'').'" /></p>';
+    $str_from.='<p><label>email_reply</label><input required class="text-input small-input" type="email"  name="email_reply" value="'.(($form!=false)?$form->email_reply:'').'" /></p>';
     $str_from.='<p><label>chu_ky_email</label><textarea name="chu_ky_email">'.(($form!=false)?$form->chu_ky_email:'').'</textarea><script type="text/javascript">CKEDITOR.replace(\'chu_ky_email\'); </script></p>';
     return $str_from;
 }

@@ -13,6 +13,7 @@ require_once DIR . '/common/locdautiengviet.php';
 require_once(DIR . "/common/hash_pass.php");
 require_once DIR . '/common/class.phpmailer.php';
 require_once(DIR . "/common/Mail.php");
+require_once DIR . '/email_template/tem_01_2018/index.php';
 $data = array();
 $res =array(
     'success'=>0,
@@ -21,7 +22,6 @@ $res =array(
 if(isset($_POST['username_login'])&&isset($_POST['password_login'])){
     $username_login=_returnPostParamSecurity('username_login');
     $password_login=_returnPostParamSecurity('password_login');
-    $mail_confirm = _return_mc_decrypt(_returnPostParamSecurity('mail_confirm'), '');
     $rememberme=_returnPostParamSecurity('rememberme');
     if($username_login!=''&&$password_login!=''){
         $Pass = hash_pass($password_login);
@@ -37,9 +37,23 @@ if(isset($_POST['username_login'])&&isset($_POST['password_login'])){
                 if($data_check_exist_user[0]->login_two_steps==1){
                     $rand_string=_returnRandString(15);
                     $user_login->code_login=$rand_string;
-                    $mail_confirm = str_replace('[pass_code]', $rand_string, $mail_confirm);
+
+                    $email_tem = returnEmail01218();
+                    $email_tem = _returnReplaceEmailTem($email_tem);
+                    $email_tem = str_replace('{{TITLE}}', 'Mã đăng nhập vào hệ thống AZBOOKING.VN', $email_tem);
+                    $content = '  <div class="content_data" style="float: left; width: 100%">
+                                            <div style="float: left;width: 100%">
+                                                <p style="font-weight: normal">
+                                                <p style="font-weight: normal; line-height: 25px">Mã đăng nhập: <b style="color: #0091ea;"> ' . $rand_string . '</b></p>
+                                                <p>Bạn hãy nhập mã <b style="color: #0091ea;">' . $rand_string . '</b> để đăng nhập được vào hệ thống</p>
+                                                
+                                            </div>
+                                         
+                                          
+                                        </div>';
+                    $email_tem = str_replace('{{CONTENT}}', $content, $email_tem);
                     $subject = "Mã đăng nhập vào hệ thống AZBOOKING.VN";
-                    if (SendMail($data_check_exist_user[0]->user_email, $mail_confirm, $subject, 1, 'AZBOOKING.VN')) {
+                    if (SendMail($data_check_exist_user[0]->user_email, $email_tem, $subject, 1, 'AZBOOKING.VN')) {
                         user_update($user_login);
                         $res['success'] = 2;
                         $res['user_sec'] = array(

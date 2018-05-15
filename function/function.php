@@ -2011,11 +2011,15 @@ function _returnReplaceEmailTem($email_tem){
     $email_tem = str_replace('{{BANNER_QC}}', SITE_NAME.$data_thuong_hieu[0]->banner_qc, $email_tem);
     $email_tem = str_replace('{{LINK_BANNER_QC}}', SITE_NAME.$data_thuong_hieu[0]->link_banner_qc, $email_tem);
     $email_tem = str_replace('{{LINK_KHOI_HANH}}', $data_thuong_hieu[0]->link_khoi_hanh, $email_tem);
-    $user_data = user_getById($_SESSION['user_id']);
     $footer = $data_thuong_hieu[0]->chu_ky_email;
-    if ($user_data) {
-        $footer = $user_data[0]->chu_ky_email;
+    if(isset($_SESSION['user_id'])){
+        $user_data = user_getById($_SESSION['user_id']);
+
+        if ($user_data) {
+            $footer = $user_data[0]->chu_ky_email;
+        }
     }
+
     $email_tem = str_replace('{{FOOTER}}', $footer, $email_tem);
     return $email_tem;
 }

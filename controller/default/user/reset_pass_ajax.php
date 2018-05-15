@@ -18,16 +18,16 @@ $array_res = array(
     'success' => 0,
     'mess' => 'Reset mật khẩu lỗi, vui lòng thử lại'
 );
-if (isset($_POST['email_forget']) && isset($_POST['mail_confirm'])) {
+if (isset($_POST['email_forget']) && isset($_POST['value']) && isset($_POST['key'])) {
 
-    $mail_confirm = _return_mc_decrypt(_returnPostParamSecurity('mail_confirm'), '');
     $mail_send = _returnPostParamSecurity('email_forget');
+    $email = _returnPostParamSecurity('value');
+    $key = _returnPostParamSecurity('key');
 
-    if ($mail_confirm != '' && $mail_send != '' ) {
+    if ($mail_send != '' && $mail_send != '' &&  $key!='') {
         $dk_check_user = "user_email ='" . $mail_send . "'";
         $data_check_exist_user = user_getByTop('', $dk_check_user, 'id desc');
         if (count($data_check_exist_user) > 0) {
-
             $pas_word = _returnRandomString();
             $mail_confirm = str_replace('[username_dangky]', $data_check_exist_user[0]->name, $mail_confirm);
             $mail_confirm = str_replace('[pass_new]', $pas_word, $mail_confirm);

@@ -14,6 +14,7 @@ RewriteRule ^dang-nhap.html controller/default/login.php
 RewriteRule ^dang-xuat.html controller/default/logout.php
 RewriteRule ^xac-nhan.html controller/default/confirm_login.php
 RewriteRule ^check-login.html controller/default/check_login.php
+RewriteRule ^info-setting.html controller/default/config/info_setting.php
 RewriteRule ^check-validate.html controller/default/function_share/check_valid.php
 RewriteRule ^doi-mat-khau-login/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/$ controller/default/doimatkhau_login.php?param1=$1&param2=$2&param3=$3&param4=$4&param5=$5
 

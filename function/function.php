@@ -2023,6 +2023,36 @@ function _returnReplaceEmailTem($email_tem){
     $email_tem = str_replace('{{FOOTER}}', $footer, $email_tem);
     return $email_tem;
 }
+function _returnReplaceEmailTemHotel($email_tem){
+    $thuong_hieu = _returnGetParamSecurity('thuong_hieu');
+    if(!$thuong_hieu){
+        $thuong_hieu=1;
+    }
+    $data_thuong_hieu = thuong_hieu_getById($thuong_hieu);
+    $domain = 'azbooking.vn';
+    $domain_img = 'azbooking.vn';
+    $name_thuong_hieu = 'Trung tâm lữ hành AZbooking, Đội Cấn, Ba Đình, Hà Nội';
+    if ($data_thuong_hieu) {
+        $domain_img=$domain = $data_thuong_hieu[0]->domain;
+        $name_thuong_hieu = $data_thuong_hieu[0]->name;
+    }
+    if (!strpos($domain, "http")) {
+        $domain = 'http://' . $domain;
+    }
+    $email_tem = str_replace('{{DATE_NOW}}', _returnGetDateTime(), $email_tem);
+    $email_tem = str_replace('{{WEBSITE}}', $data_thuong_hieu[0]->name, $email_tem);
+    $email_tem = str_replace('{{NAME}}', $data_thuong_hieu[0]->name, $email_tem);
+    $email_tem = str_replace('{{THUONG_HIEU}}', $data_thuong_hieu[0]->name, $email_tem);
+    $email_tem = str_replace('{{LINK_WEBSITE}}', $domain, $email_tem);
+    $email_tem = str_replace('{{LOGO}}', SITE_NAME.$data_thuong_hieu[0]->logo, $email_tem);
+    $email_tem = str_replace('{{BANNER}}', SITE_NAME.$data_thuong_hieu[0]->banner, $email_tem);
+    $email_tem = str_replace('{{BANNER_QC}}', SITE_NAME.$data_thuong_hieu[0]->banner_qc, $email_tem);
+    $email_tem = str_replace('{{LINK_BANNER_QC}}', SITE_NAME.$data_thuong_hieu[0]->link_banner_qc, $email_tem);
+    $email_tem = str_replace('{{LINK_KHOI_HANH}}', $data_thuong_hieu[0]->link_khoi_hanh, $email_tem);
+    $footer = $data_thuong_hieu[0]->chu_ky_email;
+    $email_tem = str_replace('{{FOOTER}}', $footer, $email_tem);
+    return $email_tem;
+}
 function _returnFooterEmailTemplate(){
     return '<div style="float: left; width: 100%">
                                             <div style="float: left; width: 325px; text-align: center;">

@@ -180,6 +180,10 @@ RewriteRule ^hotel-azbooking-book.html controller/default/hotel/ajax_book.php
 RewriteRule ^add-review.html controller/default/review/az_add_review_ajax.php
 RewriteRule ^list-review.html controller/default/review/az_list_review_ajax.php
 
+RewriteRule ^add-hotel-review.html controller/default/review/hotel/az_add_hotel_review_ajax.php
+RewriteRule ^list-hotel-review.html controller/default/review/hotel/az_list_hotel_review_ajax.php
+
+
 RewriteRule ^import-user.html controller/default/customer/import.php
 RewriteRule ^export-user.html controller/default/customer/export.php
 

@@ -36,7 +36,8 @@ if (isset($_POST['email_dangky']) && isset($_POST['username_dangky']) && isset($
             if ($password != $password_confirm) {
                 $array_res['mess'] = 'Hai mật khẩu không khớp';
             } else {
-                $link_check = SITE_NAME_ADMIN_AZ . '/thanh-vien.html?type=xac-nhan&key=' . base64_encode(base64_encode(base64_encode(base64_encode(base64_encode($user_email)))));
+//                $link_check = SITE_NAME_ADMIN_AZ . '/thanh-vien.html?type=xac-nhan&key=' . base64_encode(base64_encode(base64_encode(base64_encode(base64_encode($user_email)))));
+                $link_check = SITE_NAME_AZ . '/tiep-thi-lien-ket/thanh-vien/?type=xac-nhan&key=' . base64_encode(base64_encode(base64_encode(base64_encode(base64_encode($user_email)))));
                 $dangky = new user();
                 $dangky->name = $name;
                 $dangky->user_email = $user_email;

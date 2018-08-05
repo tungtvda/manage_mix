@@ -175,6 +175,7 @@ RewriteRule ^azbooking-list-type-dich-vu.html controller/default/booking/az_list
 RewriteRule ^azbooking-create-tour.html controller/default/user/az_create_tour_user.php
 RewriteRule ^azbooking-get-list-tour-yeu-cau.html controller/default/user/az_list_tour_user.php
 RewriteRule ^azbooking-delete-tour-yeu-cau.html controller/default/user/az_delete_tour_user.php
+RewriteRule ^hotel-azbooking-book.html controller/default/hotel/ajax_book.php
 
 RewriteRule ^add-review.html controller/default/review/az_add_review_ajax.php
 RewriteRule ^list-review.html controller/default/review/az_list_review_ajax.php

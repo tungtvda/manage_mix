@@ -328,6 +328,20 @@ function _return_mc_decrypt($decrypt, $key = '', $code_key = '')
     return $decoded;
 }
 
+function _checkSecurityParamCurl($data){
+    $check=0;
+    $id_url=_returnPostParamSecurity('id_url');
+    if($id_url){
+        $dataPram=explode('__',_return_mc_decrypt($id_url,ENCRYPTION_KEY));
+      if(isset($dataPram[0]) && isset($dataPram[1]) && isset($dataPram[2]) && isset($dataPram[3])){
+          if($dataPram[1]==SITE_NAME && $dataPram[3]=='tungtv.soict@gmail.com' && is_numeric($dataPram[0]) && is_numeric($dataPram[2])){
+              $check= 1;
+          }
+      }
+    }
+    return $check;
+}
+
 function _returnQuyen($stt)
 {
     _returnCheckExitUser();
@@ -1973,9 +1987,9 @@ function _returnReplaceEmailTem($email_tem){
         $thuong_hieu=1;
     }
     $data_thuong_hieu = thuong_hieu_getById($thuong_hieu);
-    $domain = 'mixtourrist.com.vn';
-    $domain_img = 'mixtourrist.com.vn';
-    $name_thuong_hieu = 'Công ty Du lịch Mix Tourist';
+    $domain = 'azbooking.vn';
+    $domain_img = 'azbooking.vn';
+    $name_thuong_hieu = 'Trung tâm lữ hành AZbooking, Đội Cấn, Ba Đình, Hà Nội';
     if ($data_thuong_hieu) {
         $domain_img=$domain = $data_thuong_hieu[0]->domain;
         $name_thuong_hieu = $data_thuong_hieu[0]->name;
@@ -1997,11 +2011,45 @@ function _returnReplaceEmailTem($email_tem){
     $email_tem = str_replace('{{BANNER_QC}}', SITE_NAME.$data_thuong_hieu[0]->banner_qc, $email_tem);
     $email_tem = str_replace('{{LINK_BANNER_QC}}', SITE_NAME.$data_thuong_hieu[0]->link_banner_qc, $email_tem);
     $email_tem = str_replace('{{LINK_KHOI_HANH}}', $data_thuong_hieu[0]->link_khoi_hanh, $email_tem);
-    $user_data = user_getById($_SESSION['user_id']);
     $footer = $data_thuong_hieu[0]->chu_ky_email;
-    if ($user_data) {
-        $footer = $user_data[0]->chu_ky_email;
+    if(isset($_SESSION['user_id'])){
+        $user_data = user_getById($_SESSION['user_id']);
+
+        if ($user_data) {
+            $footer = $user_data[0]->chu_ky_email;
+        }
     }
+
+    $email_tem = str_replace('{{FOOTER}}', $footer, $email_tem);
+    return $email_tem;
+}
+function _returnReplaceEmailTemHotel($email_tem){
+    $thuong_hieu = _returnGetParamSecurity('thuong_hieu');
+    if(!$thuong_hieu){
+        $thuong_hieu=1;
+    }
+    $data_thuong_hieu = thuong_hieu_getById($thuong_hieu);
+    $domain = 'azbooking.vn';
+    $domain_img = 'azbooking.vn';
+    $name_thuong_hieu = 'Trung tâm lữ hành AZbooking, Đội Cấn, Ba Đình, Hà Nội';
+    if ($data_thuong_hieu) {
+        $domain_img=$domain = $data_thuong_hieu[0]->domain;
+        $name_thuong_hieu = $data_thuong_hieu[0]->name;
+    }
+    if (!strpos($domain, "http")) {
+        $domain = 'http://' . $domain;
+    }
+    $email_tem = str_replace('{{DATE_NOW}}', _returnGetDateTime(), $email_tem);
+    $email_tem = str_replace('{{WEBSITE}}', $data_thuong_hieu[0]->name, $email_tem);
+    $email_tem = str_replace('{{NAME}}', $data_thuong_hieu[0]->name, $email_tem);
+    $email_tem = str_replace('{{THUONG_HIEU}}', $data_thuong_hieu[0]->name, $email_tem);
+    $email_tem = str_replace('{{LINK_WEBSITE}}', $domain, $email_tem);
+    $email_tem = str_replace('{{LOGO}}', SITE_NAME.$data_thuong_hieu[0]->logo, $email_tem);
+    $email_tem = str_replace('{{BANNER}}', SITE_NAME.$data_thuong_hieu[0]->banner, $email_tem);
+    $email_tem = str_replace('{{BANNER_QC}}', SITE_NAME.$data_thuong_hieu[0]->banner_qc, $email_tem);
+    $email_tem = str_replace('{{LINK_BANNER_QC}}', SITE_NAME.$data_thuong_hieu[0]->link_banner_qc, $email_tem);
+    $email_tem = str_replace('{{LINK_KHOI_HANH}}', $data_thuong_hieu[0]->link_khoi_hanh, $email_tem);
+    $footer = $data_thuong_hieu[0]->chu_ky_email;
     $email_tem = str_replace('{{FOOTER}}', $footer, $email_tem);
     return $email_tem;
 }
@@ -2075,8 +2123,6 @@ function _returnFooterEmailTemplate(){
                                             </div>
                                         </div>';
 }
-
-
 function _timeAgo($time_ago)
 {
     $time_ago = strtotime($time_ago);
@@ -2155,4 +2201,11 @@ function _timeAgo($time_ago)
 //            return "$years years ago";
         }
     }
+}
+
+function _returnDomainUrlImage($domain,$image){
+    $image=str_replace($domain,'',$image);
+    $image=str_replace('/manage_mix','',$image);
+    $image=$domain.$image;
+  return $image;
 }

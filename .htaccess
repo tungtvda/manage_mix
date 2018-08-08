@@ -14,6 +14,7 @@ RewriteRule ^dang-nhap.html controller/default/login.php
 RewriteRule ^dang-xuat.html controller/default/logout.php
 RewriteRule ^xac-nhan.html controller/default/confirm_login.php
 RewriteRule ^check-login.html controller/default/check_login.php
+RewriteRule ^info-setting.html controller/default/config/info_setting.php
 RewriteRule ^check-validate.html controller/default/function_share/check_valid.php
 RewriteRule ^doi-mat-khau-login/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/$ controller/default/doimatkhau_login.php?param1=$1&param2=$2&param3=$3&param4=$4&param5=$5
 
@@ -174,9 +175,14 @@ RewriteRule ^azbooking-list-type-dich-vu.html controller/default/booking/az_list
 RewriteRule ^azbooking-create-tour.html controller/default/user/az_create_tour_user.php
 RewriteRule ^azbooking-get-list-tour-yeu-cau.html controller/default/user/az_list_tour_user.php
 RewriteRule ^azbooking-delete-tour-yeu-cau.html controller/default/user/az_delete_tour_user.php
+RewriteRule ^hotel-azbooking-book.html controller/default/hotel/ajax_book.php
 
 RewriteRule ^add-review.html controller/default/review/az_add_review_ajax.php
 RewriteRule ^list-review.html controller/default/review/az_list_review_ajax.php
+
+RewriteRule ^add-hotel-review.html controller/default/review/hotel/az_add_hotel_review_ajax.php
+RewriteRule ^list-hotel-review.html controller/default/review/hotel/az_list_hotel_review_ajax.php
+
 
 RewriteRule ^import-user.html controller/default/customer/import.php
 RewriteRule ^export-user.html controller/default/customer/export.php

@@ -109,6 +109,14 @@ if (isset($_POST['id']) && isset($_POST['table'])) {
                     }else{
                         $data_check[0]->customer=array();
                     }
+                case 'review_hotel':
+                    require_once DIR . '/model/customerService.php';
+                    $customer=customer_getById($data_check[0]->customer_id);
+                    if($customer){
+                        $data_check[0]->customer= $customer[0];
+                    }else{
+                        $data_check[0]->customer=array();
+                    }
             }
           echo $data=json_encode($data_check[0]);
         } else {

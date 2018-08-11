@@ -1959,6 +1959,7 @@ function _returnInsertChiphiBooking($booking_id, $user_id, $name,$price,$descrip
     _insertLog($_SESSION['user_id'],6,6,33,0,'','',$mess_log);
 }
 function returnCURL($param=array(), $link){
+
     $res='_error_';
     if(count($param)>0 && $link){
         $count_param=1;

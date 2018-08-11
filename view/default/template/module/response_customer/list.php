@@ -45,11 +45,7 @@
                                     </li>
                                 <?php } ?>
                                 <li class="divider"></li>
-                                <?php if (_returnCheckAction(1) == 1) { ?>
-                                    <li>
-                                        <a href="<?php echo SITE_NAME ?>/phan-hoi-khach-hang/them-moi">Thêm</a>
-                                    </li>
-                                <?php } ?>
+
                             </ul>
                         </div>
                     </div>

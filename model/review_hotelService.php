@@ -60,6 +60,11 @@ function review_hotel_getByPaging($CurrentPage, $PageSize,$Order,$where)
    return review_hotel_Get("SELECT * FROM  review_hotel ".(($where!='')?(' where '.$where):'')." Order By ".$Order." Limit ".(($CurrentPage-1)*$PageSize)." , ".$PageSize);
 }
 //
+function review_hotel_avg_getByTop($where)
+{
+    return review_hotel_Get("select total from review_hotel ".(($where!='')?(' where '.$where):''));
+}
+//
 function review_hotel_getByPagingReplace($CurrentPage, $PageSize,$Order,$where)
 {
    return review_hotel_Get("SELECT review_hotel.id, review_hotel.customer_id, review_hotel.hotel_id, review_hotel.hotel_name, review_hotel.hotel_code, review_hotel.domain, review_hotel.content, review_hotel.start_date, review_hotel.end_date, review_hotel.status, review_hotel.clear, review_hotel.show_clear, review_hotel.comfort, review_hotel.show_comfort, review_hotel.convenient, review_hotel.show_convenient, review_hotel.staff, review_hotel.show_staff, review_hotel.room, review_hotel.show_room, review_hotel.price, review_hotel.show_price, review_hotel.food, review_hotel.show_food, review_hotel.place, review_hotel.show_place, review_hotel.total, review_hotel.comment, review_hotel.show_coment, review_hotel.upcoming_tour, review_hotel.created, review_hotel.updated, review_hotel.updated_by FROM  review_hotel ".(($where!='')?(' where '.$where):'')." Order By ".$Order." Limit ".(($CurrentPage-1)*$PageSize)." , ".$PageSize);

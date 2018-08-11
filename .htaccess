@@ -198,6 +198,7 @@ RewriteRule ^notification/list-notification-ajax.html$  controller/default/notif
 ##response customer
 RewriteRule ^phan-hoi-khach-hang/$  controller/default/response/response_customer.php
 RewriteRule ^phan-hoi-khach-hang/sua controller/default/response/themmoi.php
+RewriteRule ^phan-hoi-khach-hang/xoa$ controller/default/user/delete_response_customer.php
 ##response hotel
 RewriteRule ^phan-hoi-khach-san/$  controller/default/response/response_hotel.php
 RewriteRule ^phan-hoi-khach-san/sua controller/default/response/hotel_action.php

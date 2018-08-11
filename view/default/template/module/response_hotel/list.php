@@ -45,11 +45,7 @@
                                     </li>
                                 <?php } ?>
                                 <li class="divider"></li>
-                                <?php if (_returnCheckAction(1) == 1) { ?>
-                                    <li>
-                                        <a href="">Thêm</a>
-                                    </li>
-                                <?php } ?>
+
                             </ul>
                         </div>
                     </div>

@@ -66,6 +66,20 @@ if(isset($_POST['id'])){
 
         review_tour_update($new);
         redict(SITE_NAME.'/phan-hoi-khach-hang/');
+        $review_list = review_hotel_avg_getByTop('status = 1 and hotel_id=' . $new->hotel_id);
+        $point = 0;
+        foreach ($review_list as $item) {
+            $point += $item->total;
+        }
+        if (count($review_list) > 0) {
+            $array_check_noti = array(
+                'id_hotel' => $new->hotel_id,
+                'review' => count($review_list),
+                'review_point' => round($point / count($review_list), 1)
+
+            );
+            $list_review = returnCURL($array_check_noti, SITE_NAME_KS . '/update-hotel-review.html');
+        }
     }
 }
 
